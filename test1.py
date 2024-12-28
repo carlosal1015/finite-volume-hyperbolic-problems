@@ -15,7 +15,7 @@ def U(x):
 
 x, Δx = np.linspace(start=0, stop=20, num=201, retstep=True)
 t, Δt = np.linspace(start=0, stop=1, num=51, retstep=True)
-c = -1.0
+c = -1
 
 fig, ax = plt.subplots(layout="constrained")
 ax.plot(x, U(x))
@@ -38,6 +38,9 @@ fig, ax = plt.subplots(layout="constrained")
     linestyle="dashed",
     linewidth=0.5,
 )
+ax.set_xlabel(xlabel=r"$x$")
+ax.set_xlim(left=x[0], right=x[-1])
+ax.set_ylim(bottom=0, top=1)
 
 
 def init():
