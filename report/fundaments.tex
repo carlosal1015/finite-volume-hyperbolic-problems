@@ -1,0 +1,366 @@
+\chapter{Fundamentos básicos}
+
+Presentamos la ley de conservación lineal escalar unidimensional.
+Se definen la solución asociada a un problema de Cauchy, que será
+empleado para medir el error de las soluciones aproximadas.
+Como problema modelo, se considera la ecuación de transporte escalar.
+
+\section{Ley de conservación}
+
+\begin{definition}
+  Sean
+  \begin{math}
+    \Omega\subset
+    \mathbb{R}
+  \end{math}
+  y
+  \begin{math}
+    f\colon\Omega\to
+    \mathbb{R}
+  \end{math}
+  una
+  función de clase
+  \begin{math}
+    \mathcal{C}^{1}
+    \left(\Omega\right)
+  \end{math}.
+  Una ley de conservación unidimensional es
+
+  \begin{equation}\label{eq:differentialconservationlaw}
+    u_{t}
+    \left(x,t\right)+
+    {f\left(u\left(x,t\right)\right)}_{x}=
+    0,
+  \end{equation}
+
+  donde la función
+
+  \begin{align*}
+    u\colon\mathbb{R}\times
+    \left[0,+\infty\right) &
+    \longrightarrow
+    \Omega                   \\
+    \left(x,t\right)       &
+    \longmapsto
+    u\left(x,t\right)
+  \end{align*}
+
+  se denomina variable conservativa, el conjunto $\Omega$ es el
+  conjunto de los estados y la función $f$ es la función flujo.
+\end{definition}
+
+\begin{remark}
+  La ecuación~\eqref{eq:differentialconservationlaw} se corresponde
+  con la forma diferencial de la ley de conservación.
+  La forma integral de la ley de conservación viene dada por la
+  ecuación~\eqref{eq:integralconservationlaw}.
+
+  \begin{equation}\label{eq:integralconservationlaw}
+    \diffp{}{t}
+    \int_{a}^{b}
+    u\left(x,t\right)\dl x=
+    F\left(a,t\right)-
+    F\left(b,t\right).
+  \end{equation}
+
+  Esta refleja la base de la conservación, la variación de unas
+  magnitudes en una región se debe solo a los flujos a través de los
+  puntos extremos.
+\end{remark}
+
+\section{Problema de Cauchy}
+
+Nos interesa estudiar la
+ecuación~\eqref{eq:differentialconservationlaw} definida en un
+dominio finito suplementada con una condición inicial que esté bien
+planteada, es garantizar la existencia, unicidad de solución y la
+continuidad con respecto a esta condición inicial.
+
+\begin{definition}
+  El problema de Cauchy consiste en encontrar una función
+
+  \begin{equation*}
+    u\colon\mathbb{R}\times
+    \left[0,+\infty\right)\longrightarrow
+    \Omega
+  \end{equation*}
+
+  que sea solución de la
+  ecuación~\eqref{eq:differentialconservationlaw} y que verifique la
+  condición inicial
+
+  \begin{equation*}
+    u\left(x,0\right)=
+    u_{0}\left(x\right),\quad
+    x\in\mathbb{R},
+  \end{equation*}
+
+  donde
+  \begin{math}
+    u_{0}\colon\mathbb{R}\to\Omega
+  \end{math}
+  es una función dada.
+\end{definition}
+
+Entonces, introducimos la solución al problema de Cauchy
+
+\begin{definition}
+  Una función
+  \begin{math}
+    u\colon\mathbb{R}\times
+    \left[0,+\infty\right)\to
+    \Omega
+  \end{math}
+  es una solución clásica del problema de valor inicial
+
+  \begin{equation}\label{eq:IVPconservationlaw}
+    \begin{cases}
+      u_{t}
+      \left(x,t\right)+
+      {f\left(u\left(x,t\right)\right)}_{x}=
+      0,              &
+      \left(x,t\right)\in
+      \mathbb{R}\times
+      \left(0,+\infty\right), \\
+      u\left(x,0\right)=
+      u_{0}
+      \left(x\right), &
+      x\in\mathbb{R},
+    \end{cases}
+  \end{equation}
+
+  si $u$ es una función de clase
+  \begin{math}
+    \mathcal{C}^{1}
+    \left(
+    \mathbb{R}\times
+    \left[0,+\infty\right)
+    \right)
+  \end{math}
+  que verifica el problema~\eqref{eq:IVPconservationlaw}
+  puntualmente.
+\end{definition}
+
+\begin{definition}
+  Sea
+  \begin{math}
+    u\in\mathcal{C}^{1}
+    \left(
+    \mathbb{R}\times
+    \left[0,+\infty\right)
+    \right)
+  \end{math}
+  una solución clásica.
+  Defnimos las curvas características en
+  \begin{math}
+    \mathbb{R}\times
+    \left[0,T\right]
+  \end{math}
+  como las curvas
+  \begin{math}
+    t\longmapsto
+    \left(
+    X\left(t\right),t
+    \right)
+  \end{math}
+  dadas por la ecuación diferencial
+
+  \begin{equation}\label{eq:characteristicsystem}
+    \diff{X\left(t\right)}{t}=
+    f^{\prime}
+    \left(
+    u\left(X\left(t\right),t\right)
+    \right).
+  \end{equation}
+\end{definition}
+
+Una de las particularidades de estas curvas características es que la
+solución $u$, denominada variable característica, es constante a lo
+largo de ellas ya que se tiene que
+
+\begin{align*}
+  \diff{
+    u
+    \left(
+    X\left(t\right),t
+    \right)
+  }{t} & =
+  u_{x}
+  \left(
+  X\left(t\right),t
+  \right)\cdot
+  X^{\prime}
+  \left(t\right)+
+  u_{t}
+  \left(
+  X\left(t\right),t
+  \right)  \\
+       & =
+  u_{x}
+  \left(
+  X\left(t\right),t
+  \right)\cdot
+  f^{\prime}
+  \left(
+  u\left(X\left(t\right),t\right)
+  \right)+
+  u_{t}
+  \left(
+  X\left(t\right),t
+  \right)  \\
+       & =
+  f_{x}
+  \left(
+  u\left(X\left(t\right),t\right)
+  \right)+
+  u_{t}
+  \left(
+  X\left(t\right),t
+  \right)=
+  0,
+\end{align*}
+
+por ser $u$ solución de~\eqref{eq:differentialconservationlaw}.
+
+En el caso lineal, la función flujo de la ley de conservación viene
+dada por $f\left(u\right)=cu$, con $c\in\mathbb{R}$.
+Por tanto, tenemos que $f^{\prime}\left(u\right)=c$ y de la
+ecuación~\eqref{eq:characteristicsystem} se deduce que las curvas
+características son rectas dadas por $X\left(t\right)=x_{0}+ct$.
+Como la solución $u$ es constante a lo largo de estas rectas, la
+solución en el punto $\left(x,t\right)$ es igual a la solución en el
+punto $\left(x_{0},0\right)$.
+De forma que
+\begin{math}
+  \left(x,t\right)=
+  \left(
+  X\left(t\right),t
+  \right)=
+  \left(x_0+ct,t\right)
+\end{math},
+de donde $x_{0}=x-ct$.
+Entonces, se obtiene
+
+\begin{equation*}
+  u\left(x,t\right)=
+  u\left(x_{0},0\right)=
+  u\left(x-ct,0\right)=
+  u_{0}\left(x-ct\right),
+\end{equation*}
+
+que es la única solución del problema~\eqref{eq:IVPconservationlaw}.
+Luego, para todos los valores iniciales existe una única solución que
+tiene la misma regularidad.
+A continuación, vemos un ejemplo de este tipo de problema.
+
+\begin{example}
+  Consideremos la siguiente ecuación en derivadas parciales
+
+  \begin{equation*}
+    u_{t}+
+    \lambda u_{x}=
+    0,
+  \end{equation*}
+
+  donde $x$ es la coordenada espacial y $t$ representa el tiempo.
+  Esta es la llamada ecuación de transporte o de advección en una
+  dimensión.
+  Asumimos que la velocidad de propagación es positiva, $\lambda>0$.
+  Como condición inicial, tomamos
+  \begin{math}
+    u\left(x,0\right)=
+    u_{0}\left(x\right)
+  \end{math}
+  para $x\in\mathbb{R}$.
+  Generalmente, se suele elegir para la condición inicial el instante
+  inicial, $t=0$.
+
+  La solución al problema de Cauchy
+
+  \begin{equation*}
+    \begin{cases}
+      u_{t}
+      \left(x,t\right)+
+      \lambda
+      u_{x}
+      \left(x,t\right)=
+      0,                   &
+      \left(x,t\right)\in
+      \mathbb{R}\times
+      \left(0,+\infty\right), \\
+      u\left(x,0\right)=
+      u_{0}\left(x\right), &
+      x\in\mathbb{R}.
+    \end{cases}
+  \end{equation*}
+\end{example}
+
+$u$ simplemente se transporta con velocidad constante $\lambda$ con
+la evolución del tiempo, como se muestra en la Figura~\ref{fig:1}.
+En este caso, se transporta hacia la derecha, puesto que
+anteriormente asumimos que $\lambda>0$.
+En particular, definimos $\lambda=1$ y la condición inicial dada por
+\begin{math}
+  u_{0}
+  \left(x\right)=
+  e^{-50{\left(x-0.3\right)}^{2}}
+\end{math}.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=.4\paperwidth]{figure1}
+  \caption{
+    Evolución de la solución de la ecuación de transporte con el
+    tiempo.
+  }
+  \label{fig:1}
+\end{figure}
+
+\section{Problema de Riemann}
+
+El problema de Cauchy correspondiente a una ley de conservación con
+una condición inicial dada por una función constante a trozos con una
+discontinuidad se conoce como problema de Riemann.
+
+\begin{definition}
+  El problema de Riemann consiste en encontrar una función
+
+  \begin{equation*}
+    u\colon\mathbb{R}\times
+    \left[0,+\infty\right)\longrightarrow
+    \Omega
+  \end{equation*}
+
+  solución de la ecuación~\eqref{eq:differentialconservationlaw} que
+  verifica la condición inicial
+
+  \begin{equation*}
+    u_{0}\left(x\right)=
+    \begin{cases}
+      u_{l}, &
+      \text{si } x<x_{0}, \\
+      u_{r}, &
+      \text{si } x>x_{0},
+    \end{cases}
+  \end{equation*}
+
+  donde $u_{l},u_{r}\in\mathbb{R}$ vienen~dados.
+  A este problema se le denota por
+  $\operatorname{PR}\left(u_{l},u_{r}\right)$ centrado en $x_{0}$.
+\end{definition}
+
+Para una ecuación unidimensional, $u_{t}+cu_{x}=0$, la solución al
+problema de Riemann centrado en el $x_{0}$ y con datos iniciales
+$\left(u_{l},u_{r}\right)$ viene dada por
+$u\left(x,t\right)=u_{0}\left(x-ct\right)$, es decir,
+
+\begin{equation*}
+  u
+  \left(x,t\right)=
+  \begin{cases}
+    u_{l}, &
+    \text{si } x-ct<x_{0}, \\
+    u_{r}, &
+    \text{si } x-ct>x_{0}.
+  \end{cases}
+\end{equation*}

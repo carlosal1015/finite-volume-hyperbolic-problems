@@ -1,0 +1,77 @@
+\chapter{Condición de salto Rankine-Hugoniot}
+
+\begin{theorem}
+  El salto $u_{r}-u_{l}$, a través de la discontinuidad, es un
+  múltiplo escalar del autovector asociado al autovalor $\lambda$ de
+  la ecuación $u_{t}+\lambda u_{x}=0$.
+\end{theorem}
+
+\begin{proof}
+  Sabemos que $\lambda$ es la velocidad con la que se propaga esta
+  discontinuidad, asumimos que es negativa.
+  Estudiémosla en el rectángulo de espacio y tiempo
+  \begin{math}
+    \left[x_{1},x_{1}+\Delta x\right]\times
+    \left[t_{1},t_{1}+\Delta t\right]
+  \end{math}.
+  Como se muestra en la Figura~\ref{fig:2}
+
+  \begin{figure}[ht!]
+    \centering
+    \includegraphics[width=.4\paperwidth]{figure2}
+    \caption{Región infinitesimal rectangular en el plano $xt$.}
+    \label{fig:2}
+  \end{figure}
+
+  Aplicamos la forma integral de la ley de
+  conservación~\eqref{eq:integralconservationlaw} a esta región,
+  entonces obtenemos
+
+  \begin{equation*}
+    \diffp{}{t}
+    \int_{x_{1}}^{x_{1}+\Delta x}
+    u\left(x,t\right)\dl x=
+    f\left(u\left(x_{1},t\right)\right)-
+    f\left(u\left(x_{1}+\Delta x,t\right)\right).
+  \end{equation*}
+
+  Integrando en tiempo en el intervalo
+  $\left[t_{1},t_{1}+\Delta t\right]$ tenemos
+  \begin{equation*}
+    \int_{x_{1}}^{x_{1}+\Delta x}
+    u\left(x,t_{1}+\Delta t\right)-
+    \int_{x_{1}}^{x_{1}+\Delta x}
+    u\left(x,t_{1}\right)=
+    \int_{t_{1}}^{t_{1}+\Delta t}
+    f\left(u\left(x_{1},t\right)\right)
+    \dl t-
+    \int_{t_{1}}^{t_{1}+\Delta t}
+    f\left(u\left(x_{1}+\Delta x,t\right)\right)
+    \dl t
+  \end{equation*}
+
+  Entonces, como la función flujo es lineal y $u$ es constante en
+  cada porción del plano,
+
+  \begin{equation}\label{eq:difference}
+    \Delta x u_{r}-
+    \Delta x u_{l}=
+    \Delta t f\left(u_{l}\right)-
+    \Delta t f\left(u_{r}\right).
+  \end{equation}
+
+  Dado que $\lambda$ es la velocidad de propagación, negativa,
+  entonces $\Delta x=-\lambda\Delta t$.
+  Dividiendo la igualdad~\eqref{eq:difference} entre $-\Delta t$, y
+  como $\Delta x=-\lambda\Delta t$, obtenemos
+
+  \begin{equation*}
+    \lambda\left(u_{r}-u_{l}\right)=
+    f\left(u_{r}\right)-
+    f\left(u_{l}\right),
+  \end{equation*}
+
+  y por lo tanto el salto $u_{r}-u_{l}$ es múltiplo del autovector
+  asociado a $\lambda$ como queríamos ver.
+  Esta ecuación se denomina condición de salto de Rankine-Hugoniot.
+\end{proof}

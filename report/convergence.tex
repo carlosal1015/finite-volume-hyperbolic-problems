@@ -1,0 +1,677 @@
+\chapter{Convergencia, precisión y estabilidad}
+
+El uso de un método numérico para resolver una ecuación diferencial
+conlleva el estudio de la precisión y las propiedades de convergencia
+del método.
+En esta sección, se realizará un análisis teórico centrándonos
+únicamente en el problema de Cauchy, esto es, sin considerar
+condiciones de contorno.
+Esto está por ejemplo justificado por el hecho de que consideramos
+dominios infinitos (y datos iniciales con soporte compacto).
+
+\section{Convergencia}
+
+Para valorar si un esquema numérico proporciona una buena
+aproximación de una ley de conservación, el método numérico
+resultante debe ser convergente.
+Tenemos que $u^{n}_{i}$ es una aproximación del valor medio de $u$
+sobre la celda $c_{i}$ en el tiempo $t_{n}$ y de ahora en adelante,
+denotaremos por
+
+\begin{equation*}
+  \widehat{u}^{n}_{i}\coloneqq
+  \frac{1}{\Delta x}
+  \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+  u\left(x,t_{n}\right)\dl x,
+\end{equation*}
+
+a la media de la solución exacta de la ecuación en derivadas
+parciales en la celda $c_{i}$ en el tiempo $t_{n}$.
+
+Usaremos $n$ para indicar el nivel de tiempo correspondiente al
+instante $t_{n}=n\Delta t$.
+En ese momento, para cada celda $c_{i}$, interesa conocer que tan bien $u^{n}_{i}$ aproxima a $\widehat{u}^{n}_{i}$.
+Entonces, definimos el siguiente concepto.
+
+\begin{definition}
+  El error global en el instante $t_{n}$ de un método numérico viene
+  dado por la diferencia
+  \begin{equation*}
+    E^{n}=u^{n}-\widehat{u}^{n}.
+  \end{equation*}
+  Para cuantificar el error en un instante de tiempo fijo, debemos elegir alguna norma.
+\end{definition}
+
+\begin{definition}
+  Sea $\Omega\subset\mathbb{R}^{n}$ un abierto.
+  Se define el conjunto
+  \begin{equation*}
+    L^{2}\left(\Omega\right)=
+    \left\{
+    f\colon\Omega\to\mathbb{R}\mid
+    f\text{ es medible y}
+    \int_{\Omega}\left|f\right|^{2}<\infty
+    \right\}.
+  \end{equation*}
+  Si $f\in L^{2}\left(\Omega\right)$ se define la norma
+  \begin{equation*}
+    {\left\|f\right\|}_{L^{2}\left(\Omega\right)}=
+      {\left(
+        \int_{\Omega}
+        \left|f\left(x\right)\right|^{2}
+        \right)}^{\frac{1}{2}}.
+  \end{equation*}
+\end{definition}
+
+Para funciones discretas, como el error $E^{n}$, introducimos la
+norma definida por
+
+\begin{equation*}
+  {\left\|E^{n}\right\|}_{2}=
+    {
+      \left(
+      \Delta x
+      \sum_{i=-\infty}^{\infty}
+      {\left|E^{n}_{i}\right|}^{2}
+      \right)
+    }^{\frac{1}{2}},
+\end{equation*}
+
+denominada la norma discreta $L^{2}$.
+Obsérvese que se introduce el factor $\Delta x$, permitiendo que la
+serie converja a medida que la malla se refine, esto es, a medida que
+$\Delta x$ disminuye.
+Este factor $\Delta x$ hace que ambas normas definidas (4.1) y (4.2)
+sean análogas.
+
+Con el objetivo de simplificar la notación, asumimos que $\Delta t$ y
+$\Delta x$ están relacionadas de manera fija.
+Para problemas hiperbólicos, es razonable asumir que la razón
+\begin{math}
+  \frac{\Delta x}{\Delta t}
+\end{math}
+es fija y de hecho es usual definir $\Delta t$ en función de $\Delta x$
+de forma que se verifique la condición CFL que estudiaremos en la sección 4.3.1.
+De esta forma, cuando $\Delta t\to 0$ nos referiremos a que la malla se refina.
+Entonces, introducimos el siguiente concepto.
+
+\begin{definition}
+  Se dice que el método numérico es convergente en el instante de
+  tiempo $t^{n}$ para la norma ${\left\|\cdot\right\|}_{2}$ si
+  \begin{equation*}
+    \lim_{\Delta t\to0}
+    {\left\|E^{n}\right\|}_{2}=
+    0.
+  \end{equation*}
+  Se dirá que tiene orden de convergencia $s$ si
+  \begin{equation*}
+    \left\|
+    E^{n}
+    \right\|_{2}=
+    \mathcal{O}
+    \left({\Delta t}^{s}\right),
+    \text{ cuando }
+    \Delta t\to 0.
+  \end{equation*}
+\end{definition}
+
+De forma general, después de una discretización en tiempo, es
+imposible obtener una expresión simple para el error global.
+Por tanto, en lugar de estudiar la convergencia de los métodos
+numéricos mediante el cálculo directo del error global, procederemos
+a estudiarla a partir de verificar las dos propiedades de los métodos
+numéricos que se enuncian a continuación.
+
+\begin{itemize}
+  \item
+
+        El método numérico debe ser consistente con la ecuación
+        diferencial.
+        En cada paso de tiempo, se estudia que existe una buena
+        aproximación local.
+
+  \item
+
+        El método numérico debe ser estable: los errores locales
+        que se producen en cada paso de tiempo no deben crecer
+        demasiado rápido en los pasos de tiempos posteriores.
+\end{itemize}
+
+
+El estudio de estas dos propiedades depende del tipo de ecuación y
+método.
+En los dos apartados siguientes, estudiaremos cada una de ellas de
+forma genérica y las analizaremos, siempre para la ecuación de
+transporte, para los esquemas numéricos presentados a continuación:
+
+\begin{align}
+  u^{n+1}_{i} & =
+  u^{n}_{i}-
+  c\frac{\Delta t}{\Delta x}
+  \left(
+  u^{n}_{i}-
+  u^{n}_{i-1}
+  \right)         \\
+  u^{n+1}_{i} & =
+  u^{n}_{i}-
+  c\frac{\Delta t}{\Delta x}
+  \left(
+  u^{n}_{i+1}-
+  u^{n}_{i}
+  \right)         \\
+  u^{n+1}_{i} & =
+  u^{n}_{i}-
+  c\frac{\Delta t}{2\Delta x}
+  \left(
+  u^{n}_{i+1}-u^{n}_{i-1}
+  \right)         \\
+  u^{n+1}_{i} & =
+  \frac{1}{2}
+  \left(
+  u^{n}_{i+1}+
+  u^{n}_{i-1}
+  \right)-
+  c\frac{\Delta t}{2\Delta x}
+  \left(
+  u^{n}_{i+1}-
+  u^{n}_{i-1}
+  \right)         \\
+  u^{n+1}_{i} & =
+  u^{n}_{i}-
+  c\frac{\Delta t}{2\Delta x}
+  \left(
+  u^{n}_{i+1}-
+  u^{n}_{i-1}
+  \right)+
+  c^{2}
+  \frac{{\Delta t}^{2}}{2{\Delta x}^{2}}
+  \left(
+  u^{n}_{i+1}-
+  2u^{n}_{i}+
+  u^{n}_{i-1}
+  \right)
+\end{align}
+
+Los esquemas (4.3) y (4.4) son métodos descentrados, upwind y downwind, respectivamente.
+El esquema numérico (4.5) veremos que es inestable y es a partir del
+cual se introdujo el esquema (4.6), denominado esquema de
+Lax-Friedrichs.
+Finalmente, el esquema numérico (4.7) es el conocido por
+Lax-Wendroff.
+
+En estos esquemas numéricos, la incógnita, $u^{n+1}$, se calcula
+mediante el valor conocido, $u^{n}$, asociado a un paso de tiempo previo.
+Este tipo de esquemas numéricos se denominan esquemas numéricos de un paso.
+Por tanto, podemos definir la solución numérica en el instante de
+tiempo $t_{n+1}$ como
+
+\begin{equation*}
+  u^{n+1}=
+  \mathcal{N}\left(u^{n}\right).
+\end{equation*}
+
+donde $\mathcal{N}\left(\cdot\right)$ representa el operador numérico
+que resulta la solución numérica en un instante de tiempo a partir
+del instante de tiempo previo.
+En esta memoria, nos centraremos en el estudio de este tipo de
+esquemas numéricos.
+
+\section{Error de truncamiento local y consistencia}
+
+Recordemos que $\widehat{u}^{n}$ y $u^{n}$ representan la media de la
+solución exacta de tiempo y de la solución aproximada de la ecuación diferencial,
+respectivamente, en el paso de tiempo $n$.
+Introducimos ahora conceptos necesarios para el estudio de la consistencia.
+
+\begin{definition}
+  El error de truncamiento local o de consistencia en el paso
+  $n$-ésimo de tiempo, $n=0,\dotsc,N-1$, es el número $\tau^{n}$ dado
+  por
+
+  \begin{equation*}
+    \tau^{n}=
+    \frac{1}{\Delta t}
+    \left(
+    \mathcal{N}\left(u^{n}\right)-
+    \widehat{u}^{n+1}
+    \right).
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Se dice que el método numérico es consistente si
+  \begin{equation*}
+    \lim_{\Delta t\to0}
+    \max_{0\leq n\leq N-1}
+    \left|\tau^{n}\right|
+    =0.
+  \end{equation*}
+  Se dirá que tiene orden de consistencia $s$ si
+  \begin{equation*}
+    \tau^{n}=
+    \mathcal{O}
+    \left({\Delta t}^{s}\right).
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  El error de consistencia indica la magnitud del error global
+  siempre que el método numérico sea estable
+  (concepto que introduciremos en la sección 4.3) y que no existan
+  errores iniciales o bien estos sean suficientemente pequeños.
+  Este tipo de razonamiento es usual en análisis numérico.
+\end{remark}
+
+En el siguiente ejemplo, estudiaremos la consistencia del método
+descentrado upwind para la ecuación de transporte.
+
+\begin{example}
+  Calculamos el error de consistencia del esquema descentrado upwind para la ecuación de transporte
+  \begin{math}
+    u_{t}+
+    cu_{x}=
+    0.
+  \end{math}
+  Dicho esquema viene dado por la expresión (3.8).
+  Teniendo en cuenta los desarrollos de Taylor correspondientes,
+  cancelando términos comunes y sabiendo que $u$ es la solución
+  exacta de la ecuación de transporte, es decir,
+  $u_{t}+cu_{x}=0$, el error de consistencia viene dado por
+
+  \begin{equation*}
+    \tau^{n}=
+    \frac{1}{2}
+    c\Delta x
+    u_{xx}
+    \left(x_{i},t_{n}\right)-
+    \frac{1}{2}\Delta t
+    u_{tt}
+    \left(x_{i},t_{n}\right)+
+    \mathcal{O}
+    \left(\Delta t^{2}\right).
+  \end{equation*}
+
+  Dado que $u_{t}+cu_{x}=0$, entonces
+  $u_{t}=-cu_{x}$ y derivando dicha igualdad con respecto a $t$
+  y a $x$, obtenemos que $u_{tt}=-cu_{xt}$ y $u_{tx}=-cu_{xx}$,
+  respectivamente.
+  De aquí, $u_{tt}=c^{2}u_{xx}$ y sustituyendo en el error de
+  consistencia (4.8), se tiene que
+  \begin{equation*}
+    \tau^{n}=
+    \frac{1}{2}
+    c\Delta x
+    \left(
+    1-c\frac{\Delta t}{\Delta x}
+    \right)
+    u_{xx}
+    \left(x_{i},t_{n}\right)+
+    \mathcal{O}
+    \left(\Delta t^{2}\right).
+  \end{equation*}
+
+  Asumiremos que $u\in\mathcal{C}^{2}\left(\mathbb{R}\times\mathbb{R}^{+}\right)$
+  y que $\diffp[2]{u}{x}$ está acotada.
+  Además, $\frac{\Delta t}{\Delta x}$ permanece constante.
+  Entonces tenemos que $\lim_{\Delta t\to0}\tau^{n}=0$, y así queda
+  probado que el esquema descentrado upwind para la
+  ecuación de transporte es consistente, siendo el orden de
+  convergencia $s=1$, pues el término de menor orden es $\Delta x$.
+\end{example}
+
+De forma similar, hallamos el error de consistencia del esquema (4.6),
+esquema de Lax-Friedrichs y del esquema (4.7), esquema de Lax-Wendroff,
+ambos, para la ecuación de transporte.
+Respectivamente, vienen dados por
+
+\begin{align*}
+  \tau^{n} & =
+  \frac{1}{2}
+  \left(
+  \frac{{\Delta x}^{2}}{\Delta t}-
+  c^{2}\Delta t
+  \right)
+  u_{xx}
+  \left(x_{i},t_{n}\right)+
+  \mathcal{O}
+  \left({\Delta t}^{2}\right), \\
+  \tau^{n} & =
+  \frac{1}{6}
+  c
+  \left(
+  c^{2}{\Delta t}^{2}-
+  {\Delta x}^{2}
+  \right)
+  u_{xxx}\left(x_{i},t_{n}\right)+
+  \mathcal{O}\left({\Delta t}^{3}\right).
+\end{align*}
+
+Observamos que ambos métodos son consistentes si la solución exacta
+es suficientemente regular.
+Además, se tiene que el orden de convergencia del método de
+Lax-Friedrichs es $s=1$ y el del método de Lax-Wendroff es $s=2$.
+
+\section{Estabilidad}
+
+El análisis de estabilidad es una evaluación fundamental del esquema
+numérico a ser estudiado.
+Si se determina que el esquema es inestable, debe buscarse otro
+método numérico alternativo como solución.
+Asumiendo que estamos estudiando leyes de conservación sin
+término fuente, esto es, tratamos problemas de valores iniciales
+homogéneos, introducimos el siguiente concepto de estabilidad.
+
+\begin{definition}
+  Un esquema numérico de un paso (3.6) para una ecuación en derivadas
+  parciales de primer orden es estable si existe una constante $K$
+  tal que
+
+  \begin{equation*}
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{n}_{i}\right|}^{2}\leq
+    K
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{0}_{i}\right|}^{2}.
+  \end{equation*}
+\end{definition}
+
+Multiplicando la desigualdad (4.9) por $\Delta x$ y aplicando la
+norma discreta $L^{2}$ dado por la expresión (4.2), tenemos que
+la definición anterior es equivalente a
+
+\begin{equation*}
+  {\left\|u^{n}\right\|}^{2}_{2}\leq
+  K
+  {\left\|u^{0}\right\|}^{2}_{2},
+\end{equation*}
+
+para alguna constante $K$.
+En particular, cada esquema numérico que estudiemos requerirá
+un análisis de estabalidad. En algunos casos podemos determinar
+condiciones suficientes que garantizan directamente la estabilidad a
+partir de la expresión (4.9).
+Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
+
+\begin{example}
+  Consideramos el esquema numérico downwind (4.4), esto es,
+
+  \begin{equation*}
+    u^{n+1}_{i}=
+    \left(
+    1+
+    c\frac{\Delta t}{\Delta x}
+    \right)
+    u^{n}_{i}-
+    c\frac{\Delta t}{\Delta x}
+    u^{n}_{i+1}.
+  \end{equation*}
+
+  Denotemos
+  \begin{math}
+    \alpha=
+    1+
+    c\frac{\Delta t}{\Delta x}
+  \end{math}
+  y
+  \begin{math}
+    \beta=
+    -c\frac{\Delta t}{\Delta x}
+  \end{math},
+  sustituyendo en la expresión (4.11) obtenemos que el esquema
+  numérico viene dado por
+
+  \begin{equation*}
+    u^{n+1}_{i}=
+    \alpha u^{n}_{i}+
+    \beta u^{n}_{i+1}.
+  \end{equation*}
+
+  A continuación, vamos a demostrar que el esquema numérico es estable si
+  \begin{math}
+    \left|\alpha\right|+
+    \left|\beta\right|\leq
+    1
+  \end{math}.
+
+  \begin{align*}
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{n+1}_{i}\right|}^{2} & =
+    \sum_{i=-\infty}^{+\infty}
+    {\left|\alpha u^{n}_{i}+\beta u^{n}_{i+1}\right|}^{2} \\
+                                   & =
+    \sum_{i=-\infty}^{+\infty}
+    \left|
+    \alpha^{2}
+    {\left(u^{n}_{i}\right)}^{2}+
+    2\alpha\beta
+    u^{n}_{i}
+    u^{n}_{i+1}+
+    \beta^{2}
+    {\left(u^{n}_{i+1}\right)}^{2}
+    \right|                                               \\
+                                   & \leq
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \alpha^{2}
+    {\left|u^{n}_{i}\right|}^{2}+
+    2\left|\alpha\right|
+    \left|\beta\right|
+    \left|u^{n}_{i}\right|
+    \left|u^{n}_{i+1}\right|+
+    \beta^{2}
+    {\left|u^{n}_{i+1}\right|}^{2}
+    \right).
+  \end{align*}
+
+  A continuación, vamos a aplicar la desigualdad
+  \begin{math}
+    2
+    \left|u^{n}_{i}\right|
+    \left|u^{n}_{i+1}\right|\leq
+    {\left|u^{n}_{i}\right|}^{2}+
+    {\left|u^{n}_{i+1}\right|}^{2}
+  \end{math}
+  para separar, por un lado, los sumandos con aproximación de la
+  solución en la celda $c_{i}$ y por otro lado, los sumandos con
+  aproximación de la solución en la celda $c_{i+1}$.
+  Finalmente, tomamos en todos los sumandos, la aproximación de la
+  solución en la celda $c_{i}$:
+
+  \begin{align*}
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{n+1}_{i}\right|}^{2} & \leq
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \alpha^{2}
+    {\left|u^{n}_{i}\right|}^{2}+
+    \left|\alpha\right|
+    \left|\beta\right|
+    \left(
+    \left|u^{n}_{i}\right|^{2}+
+    \left|u^{n}_{i+1}\right|^{2}
+    \right)+
+    \beta^{2}
+    {\left|u^{n}_{i+1}\right|}^{2}
+    \right)                               \\
+                                   & \leq
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \alpha^{2}
+    \left|u^{n}_{i}\right|^{2}+
+    |\alpha|
+    |\beta||u^{n}_{i}|^{2}
+    \right)+
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \left|\alpha\right|
+    \left|\beta\right|
+    {\left|u^{n}_{i+1}\right|}^{2}+
+    \beta^{2}
+    {\left|u^{n}_{i+1}\right|}^{2}
+    \right)=                              \\
+                                   & =
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \alpha^{2}
+    {\left|u^{n}_{i}\right|}^{2}+
+    \left|\alpha\right|
+    \left|\beta\right|
+    \left|u^{n}_{i}\right|^{2}
+    \right)+
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \left|\alpha\right|
+    \left|\beta\right|
+    \left|u^{n}_{i}\right|^{2}+
+    \beta^{2}
+    {\left|u^{n}_{i}\right|}^{2}
+    \right)=                              \\
+                                   & =
+    \sum_{i=-\infty}^{+\infty}
+    \left(
+    \alpha^{2}+
+    2\left|\alpha\right|
+    \left|\beta\right|+
+    \beta^{2}
+    \right)
+    \left|u^{n}_{i}\right|^{2}=
+      {\left(\left|\alpha\right|+\left|\beta\right|\right)}^{2}
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{n}_{i}\right|}^{2}.
+  \end{align*}
+
+  Eпtonces, hemos obtenido que
+
+  \begin{equation*}
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{n+1}_{i}\right|}^{2}\leq
+    {\left(\left|\alpha\right|+\left|\beta\right|\right)}^{2}
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{n}_{i}\right|}^{2}
+  \end{equation*}
+
+  De forma recursiva, concluimos que
+
+  \begin{equation*}
+    \sum_{i=-\infty}^{\infty}
+    {\left|u^{n+1}_{i}\right|}^{2}\leq
+    {
+      \left(\left|\alpha\right|+\left|\beta\right|\right)}^{2\left(n+1\right)
+    }
+    \sum_{i=-\infty}^{+\infty}
+    {\left|u^{0}_{i}\right|}^{2}
+  \end{equation*}
+
+  Por lo tanto, si $\left|\alpha\right|+\left|\beta\right|\leq 1$ entonces el esquema numérico es estable.
+  Sustituyendo los valores de $\alpha$ y $\beta$ y aplicando propiedades de la función valor absoluto,
+  concluimos que si
+  \begin{math}
+    -1\leq
+    c\frac{\Delta t}{\Delta x}\leq 0
+  \end{math}
+  entonces el esquema numérico (4.11) es estable, como queríamos ver.
+\end{example}
+
+Hemos visto que a partir de la definición de estabilidad podemos
+determinar condiciones suficientes que garantizan la estabilidad de un esquema numérico.
+A continuación, usaremos métodos del análisis de Fourier para
+demostrar que además son condiciones necesarias.
+En concreto, nos centramos en un procedimiento denominado el análisis
+de Von Neumann, a partir del cual determinar la estabilidad de un
+esquema numérico se reduce a consideraciones algebraicas.
+Pero antes, introducimos la condición CFL, condición necesaria que
+debe cumplirse en cualquier método de volumen finito si esperamos que
+sea estable y que converja a la solución de la ecuación en derivadas
+parciales a medida que se refine la malla.
+
+Sea $\left(x,t\right)$ un punto fijo en el espacio-tiempo.
+Como se vio en la expresión (2.10) la solución $u\left(x,t\right)$
+del problema de Cauchy depende solo del dato inicial $u_{0}$ en $x-ct$ siendo $c$
+la velocidad de propagación de la ecuación diferencial,
+originándose el siguiente concepto.
+
+\begin{definition}
+  El dominio de dependencia analítico o de una ecuación en derivadas parciales
+  en el punto $\left(x,t\right)$ está definido por el conjunto
+
+  \begin{equation*}
+    D\left(x,t\right)=
+    \left\{
+    \left(x_{0},t_{0}\right)\in\mathbb{R}^{2}:
+    x_{0}-ct_{0}=x-ct,
+    0\leq t_{0}<t
+    \right\}.
+  \end{equation*}
+\end{definition}
+
+Se considera la ecuación de transporte, $u_t+cu_x=0$, con $c>0$, y se aproxima su
+solución mediante un método explícito, por ejemplo, el método descentrado.
+Este esquema numérico viene dado por la ecuación (4.3), por tanto, cada nuevo valor
+$u^{n+1}_{i}$ se calcula en función de las aproximaciones de la solución asociadas
+a un paso de tiempo previo, todas estas dentro de una región.
+A esta región se le denomina el dominio de dependencia de un método numérico,
+definido como el conjunto de datos iniciales que pueden afectar a la solución
+numérica en el nivel de tiempo $n+1$.
+
+En esta memoria, estudiamos esquemas numéricos de un paso.
+Por lo tanto, la solución exacta que se traslada con velocidad
+positiva $c$, se propaga una distancia $c\Delta t$, en un solo paso de tiempo.
+Para que en el esquema inﬂuyan solo las celdas adyacentes, se tiene
+que cumplir que $c\Delta t\leq\Delta x$, esto es,
+$c\frac{\Delta t}{\Delta x}\leq 1$, que es condición necesaria para
+que la recta característica esté dentro del dominio de dependencia numérico.
+Además, incluyendo el caso en el que la velocidad de propagación sea
+negativa, $c<0$, se tiene que cumplir que
+
+\begin{equation*}
+  \left|
+  c\frac{\Delta t}{\Delta x}
+  \right|\leq
+  1,
+\end{equation*}
+
+donde
+\begin{math}
+  \left|
+  c\frac{\Delta t}{\Delta x}
+  \right|
+\end{math}
+se denomina número de Courant y mide la fracción de una celda de la
+malla por la que se propaga la información en un paso de tiempo.
+En general, veremos que una condición necesaria para la estabilidad
+de un método de volúmenes finitos es que el dominio de dependencia
+numérico contenga el dominio de dependencia analítico.
+Esto se traduce en que la estabilidad requerirá una condición CFL del tipo
+(4.12).
+Así, en el ejemplo 4.2 vimos que el esquema numérico considerado es estable si
+se verifica
+\begin{math}
+  -1\leq
+  c\frac{\Delta t}{\Delta x}\leq
+  0
+\end{math}.
+
+La condición CFL debe su nombre a los matemáticos Courant, Friedrichs
+y Lewy que la introdujeron en el transcurso de la demostración de la
+convergencia de un método numérico, en concreto, el método de diferencias finitas.
+
+\subsection{Análisis de la estabilidad de Von Neumann}
+
+En este apartado, emplearemos el subíndice $j$ para denotar
+$x_{j}=j\Delta x$ en lugar del subíndice $i$ para que no haya
+confusión con el número complejo $i=\sqrt{-1}$.
+En la celda $c_{j}$ y para el tiempo $t_{n}$, $u^{n}_{j}$ representa
+una función definida sobre una malla para el problema de Cauchy.
+Sea $\Delta x$ la longitud de las celdas de la malla,
+entonces su transformada de Fourier visto viene dada por
+
+\begin{equation*}
+  \overline{u}
+  \left(\xi\right)=
+  \frac{1}{\sqrt{2\pi}}
+  \sum_{j=-\infty}^{\infty}
+  e^{-i\xi j\Delta x}
+  u^{n}_{j}\Delta x,
+\end{equation*}
+
+donde

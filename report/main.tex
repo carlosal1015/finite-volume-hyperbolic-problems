@@ -1,0 +1,62 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'pdf', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+%! arara: bibtex
+%! arara: lualatex: {
+%! arara: --> shell: yes,
+%! arara: --> draft: no,
+%! arara: --> interaction: batchmode
+%! arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'toc']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\frontmatter
+
+\section*{Agradecimientos}
+
+Quiero agradecer a Dios por gozar de una buena salud, ayudándome a
+obrar de bien, constituir una gran familia y mmis hijos por su amor
+permanente y motivación para poder realizar este trabajo.
+Quiero agradecer al estudiante Carlos Aznarán por su apoyo en la
+elaboración de las animaciones.
+
+\begin{flushright}
+  \name \\
+  Lima, 2 de enero de 2025.
+\end{flushright}
+
+\mainmatter
+
+\input{introduction}
+\input{fundaments}
+\input{finitevolume}
+\input{convergence}
+\input{results}
+\input{conclusions}
+
+\backmatter
+
+\appendix
+
+\input{rankinehugoniot}
+\input{programs}
+
+\end{document}
