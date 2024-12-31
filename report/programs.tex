@@ -1,1 +1,65 @@
-\chapter{Códigos empleados}
+\chapter{Programas empleados}
+
+En este apéndice mostraremos los programas en el lenguaje de
+programación Python empleados para realizar las simulaciones
+numéricas del capítulo~\ref{ch:results}.
+
+\section{Test numéricos}
+
+Primero, veremos los programas correspondientes a los test numéricos
+de la sección 5.3.1.
+Para la resolución numérica se han empleado los métodos descentrados
+downwind para el problema de Cauchy, y upwind para el problema de
+Riemann.
+También se ha calculado la solución numérica de ambos problemas
+mediante el método de Lax-Friedrichs y el de Lax-Wendroff.
+Entonces, se presentan los programas de la resolución numérica
+para cada uno de estos métodos numéricos empleados.
+
+\subsection{Método descentrado upwind}
+
+En esta sección, encontraremos el programa empleado para la
+resolución numérica de la ecuación de transporte mediante el método
+descentrado upwind.
+
+\begin{listing}[ht!]
+    \footnotesize
+    \centering
+    \inputminted[firstline=3,lastline=4]{python}{figure1.py}
+\end{listing}
+
+\subsection{Método descentrado downwind}
+
+En esta sección, encontraremos el programa empleado para la
+resolución numérica de la ecuación de transporte mediante el método
+descentrado downwind.
+
+\begin{listing}[ht!]
+    \footnotesize
+    \centering
+    \inputminted[firstline=3,lastline=4]{python}{figure1.py}
+\end{listing}
+
+\subsection{Método de Lax-Friedrichs}
+
+En esta sección, encontraremos el programa empleado para la
+resolución numérica de la ecuación de transporte mediante el método
+de Lax-Friedrichs.
+
+\begin{listing}[ht!]
+    \footnotesize
+    \centering
+    \inputminted[firstline=3,lastline=4]{python}{figure1.py}
+\end{listing}
+
+\subsection{Método de Lax-Wendroff}
+
+En esta sección, encontraremos el programa empleado para la
+resolución numérica de la ecuación de transporte mediante el método
+de Lax-Wendroff.
+
+\begin{listing}[ht!]
+    \footnotesize
+    \centering
+    \inputminted[firstline=3,lastline=4]{python}{figure1.py}
+\end{listing}

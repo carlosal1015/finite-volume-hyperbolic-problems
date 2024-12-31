@@ -1,1 +1,40 @@
-\chapter{Conclusiones}
+\chapter{Conclusiones}\label{ch:conclusions}
+
+En este trabajo hemos estudiado el método de volúmenes finitos para
+problemas hiperbólicos.
+Para ello, en el capítulo 2, se ha definido el problema de Cauchy
+para una ley de conservación y de Riemann en particular.
+Para ambos problemas, se ha estudiado su solución.
+Posteriormente, en el capítulo 3, comenzamos con el estudio de los
+métodos de volúmenes finitos derivados de la forma integral de la ley
+de conservación, como punto de partida.
+Nos hemos centrado en los métodos de un paso para problemas
+hiperbólicos lineales.
+Más concretamente en los esquemas descentrados, deducidos por conocer
+el comportamiento de la solución del problema de Cauchy a lo largo de
+las curvas características.
+Además del método de Godunov, que nos permite también conectar con
+los resultados estudiados en el capítulo anterior, basado en la
+solución del problema de Riemann.
+Una vez estudiado el método de volúmenes finitos, se han introducido
+una variedad de esquemas numéricos y hemos estudiado con qué grado de
+precisión se aproximan a la solución de la ecuación de transporte,
+ley de conservación, para cada uno de ellos (capítulo 4).
+Entonces, se establecieron propiedades importantes que un método
+numérico eficiente debe verificar, como lo son el error de
+consistencia, la consistencia, la estabilidad y consecuentemente, la
+convergencia.
+Estas propiedades han sido de interés a la hora de realizar los
+distintos experimentos numéricos.
+Por último, una vez finalizado el marco teórico de este trabajo,
+comenzamos su aplicación práctica para resolver ciertos problemas.
+En primer lugar se resolvieron los esquemas numéricos, para la
+ecuación de transporte, que fueron introducidos en el capítulo 4.
+Todos estos experimentos numéricos son programados usando el lenguaje
+de programación Python.
+En los test numéricos presentados, comparamos la solución exacta de
+la ecuación de transporte y su solución numérica mediante cada uno de
+los esquemas numéricos estudiados.
+En el primer ejemplo, resolviendo un problema de Cauchy con dato
+inicial muy regular y en el segundo, un problema de Riemann, entonces
+se muestra la ventaja que tienen cada uno de los esquemas.

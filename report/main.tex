@@ -1,13 +1,13 @@
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'log', 'pdf', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'pdf', 'run.xml', 'toc']
 % arara: --> }
 % arara: lualatex: {
 % arara: --> shell: yes,
 % arara: --> draft: yes,
 % arara: --> interaction: batchmode
 % arara: --> }
-%! arara: bibtex
+% arara: biber
 %! arara: lualatex: {
 %! arara: --> shell: yes,
 %! arara: --> draft: no,
@@ -20,7 +20,7 @@
 % arara: --> }
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'log', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'run.xml', 'toc']
 % arara: --> }
 \input{preamble}
 
@@ -58,5 +58,6 @@ elaboración de las animaciones.
 
 \input{rankinehugoniot}
 \input{programs}
+\input{references}
 
 \end{document}

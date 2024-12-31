@@ -1,4 +1,4 @@
-\chapter{Método de Volúmenes Finitos}
+\chapter{Método de Volúmenes Finitos}\label{ch:finitevolume}
 
 En este capítulo estudiamos los métodos de volúmenes finitos para
 resolver leyes de conservación, derivados de su forma integral, como
@@ -15,7 +15,7 @@ dividir el dominio espacial en intervalos, los volúmenes finitos,
 también denominados celdas, y calcular en cada uno de ellos una
 aproximación de la integral de la variable conservativa $u$.
 En cada paso de tiempo, se actualizan estos valores utilizando
-aproximaciones del ﬂujo a través de las fronteras de los volúmenes
+aproximaciones del flujo a través de las fronteras de los volúmenes
 finitos.
 Por tanto, este método numérico permite la resolución de leyes de
 conservación haciendo uso de dicha conservación en las distintas
@@ -23,35 +23,36 @@ celdas en las que podemos dividir el dominio.
 En esta sección vamos a ver cómo se lleva a cabo este método
 numérico.
 
-Comenzamos definiendo una partición del espacio $\Omega\in\mathbb{R}$,
-es decir, se define un conjunto de celdas o volúmenes finitos
+Comenzamos definiendo una partición del espacio
+$\Omega\in\mathbb{R}$, es decir, se define un conjunto de celdas o
+volúmenes finitos
 
 \begin{equation*}
-    c_{i}=
-    \left(
-    x_{i-\frac{1}{2}},
-    x_{i+\frac{1}{2}}
-    \right),\quad i=1,\cdots,N_{x}
+  c_{i}=
+  \left(
+  x_{i-\frac{1}{2}},
+  x_{i+\frac{1}{2}}
+  \right),\quad i=1,\cdots,N_{x}
 \end{equation*}
 
 cuyos puntos extremos serían
 
 \begin{equation*}
-    x_{\frac{1}{2}}<
-    x_{1+\frac{1}{2}}<
-    \cdots<
-    x_{N_{x}-\frac{1}{2}}<
-    x_{N_{x}+\frac{1}{2}},
+  x_{\frac{1}{2}}<
+  x_{1+\frac{1}{2}}<
+  \cdots<
+  x_{N_{x}-\frac{1}{2}}<
+  x_{N_{x}+\frac{1}{2}},
 \end{equation*}
 
 y pertenecen al intervalo $\left(a,b\right)$.
 Por simplicidad, asumimos que la longitud de las celdas es constante,
 es decir,
 \begin{math}
-    \Delta x=
-    \left|c_{i}\right|=
-    x_{i+\frac{1}{2}}-
-    x_{i-\frac{1}{2}}
+  \Delta x=
+  \left|c_{i}\right|=
+  x_{i+\frac{1}{2}}-
+  x_{i-\frac{1}{2}}
 \end{math}.
 En la figura 3.1, se muestran dos ejemplos de celdas.
 
@@ -60,13 +61,13 @@ En esta memoria, denotamos por uni a la aproximación del valor medio
 de $u$ sobre la celda $c_{i}$ en el tiempo $t_{n}$, es decir:
 
 \begin{equation*}
-    u^{n}_{i}\approx
-    \frac{1}{\Delta x}
-    \int_{c_{i}}
-    u\left(x,t_{n}\right)\dl x=
-    \frac{1}{\Delta x}
-    \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
-    u\left(x,t_{n}\right)\dl x.
+  u^{n}_{i}\approx
+  \frac{1}{\Delta x}
+  \int_{c_{i}}
+  u\left(x,t_{n}\right)\dl x=
+  \frac{1}{\Delta x}
+  \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+  u\left(x,t_{n}\right)\dl x.
 \end{equation*}
 
 El hecho de centrarnos en estos valores promedios nos facilita
@@ -79,10 +80,10 @@ aproxima la integral de $u$ sobre el dominio espacial
 $\left[a,b\right]$, es decir,
 
 \begin{equation*}
-    \int_{a}^{b}
-    u\left(x,t_{n}\right)\dl x\approx
-    \sum_{i=1}^{N}
-    \Delta x\cdot u^{n}_{i}.
+  \int_{a}^{b}
+  u\left(x,t_{n}\right)\dl x\approx
+  \sum_{i=1}^{N}
+  \Delta x\cdot u^{n}_{i}.
 \end{equation*}
 
 Veremos que si expresamos un método numérico en la forma
@@ -98,11 +99,11 @@ Ahora podemos expresar la forma integral de la ley de conservación en
 la celda $c_{i}$ como
 
 \begin{equation*}
-    \diffp{}{x}
-    \int_{c_{i}}
-    u\left(x,t\right)\dl x=
-    f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
-    f\left(u\left(x_{i+\frac{1}{2}}\right),t\right).
+  \diffp{}{x}
+  \int_{c_{i}}
+  u\left(x,t\right)\dl x=
+  f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
+  f\left(u\left(x_{i+\frac{1}{2}}\right),t\right).
 \end{equation*}
 
 Una vez que se ha discretizado el dominio espacial, procedemos a
@@ -110,11 +111,11 @@ hacerlo con el temporal.
 Consideremos una partición uniforme en el tiempo,
 
 \begin{equation*}
-    0=t_{0}<
-    t_{1}<
-    \cdots<
-    t_{N_{t}}=
-    T,
+  0=t_{0}<
+  t_{1}<
+  \cdots<
+  t_{N_{t}}=
+  T,
 \end{equation*}
 
 siendo $\Delta t=t_{n+1}-t_{n}$.
@@ -123,37 +124,37 @@ Ahora, integramos la expresión (3.1) en cada intervalo de tiempo
 $\left[t_{n},t_{n+1}\right]$:
 
 \begin{equation*}
-    \int_{c_{i}}
-    u\left(x,t_{n+1}\right)\dl x-
-    \int_{c_{i}}
-    u\left(x,t_{n}\right)\dl x=
-    \int_{t_{n}}^{t_{n+1}}
-    \left[
-        f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
-        f\left(u\left(x_{i+\frac{1}{2}}\right),t\right)
-        \right]\dl t.
+  \int_{c_{i}}
+  u\left(x,t_{n+1}\right)\dl x-
+  \int_{c_{i}}
+  u\left(x,t_{n}\right)\dl x=
+  \int_{t_{n}}^{t_{n+1}}
+  \left[
+    f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
+    f\left(u\left(x_{i+\frac{1}{2}}\right),t\right)
+    \right]\dl t.
 \end{equation*}
 
 Dividiendo la expresión (3.2) entre $\Delta x$ y reordenando los
 términos, se obtiene
 
 \begin{gather*}
-    \begin{split}
-        \frac{1}{\Delta x}
-        \int_{c_{i}}
-        u\left(x,t_{n+1}\right)\dl x
-         & =
-        \frac{1}{\Delta x}
-        \int_{c_{i}}
-        u\left(x,t_{n}\right)\dl x \\
-         & -
-        \frac{1}{\Delta x}
-        \int_{t_{n}}^{t_{n+1}}
-        \left[
-            f\left(u\left(x_{i-\frac{1}{2}}\right)\right)-
-            f\left(u\left(x_{i+\frac{1}{2}}\right)\right)
-            \right]\dl t.
-    \end{split}
+  \begin{split}
+    \frac{1}{\Delta x}
+    \int_{c_{i}}
+    u\left(x,t_{n+1}\right)\dl x
+     & =
+    \frac{1}{\Delta x}
+    \int_{c_{i}}
+    u\left(x,t_{n}\right)\dl x \\
+     & -
+    \frac{1}{\Delta x}
+    \int_{t_{n}}^{t_{n+1}}
+    \left[
+      f\left(u\left(x_{i-\frac{1}{2}}\right)\right)-
+      f\left(u\left(x_{i+\frac{1}{2}}\right)\right)
+      \right]\dl t.
+  \end{split}
 \end{gather*}
 
 Debido a que, en general, no podemos evaluar exactamente las
@@ -163,13 +164,13 @@ tiempo a lo largo de cada lado de la celda, y a que no conocemos la
 solución exacta, vamos a estudiar métodos numéricos de la forma
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{\Delta t}{\Delta x}
-    \left(
-    F^{n}_{i+\frac{1}{2}}-
-    F^{n}_{i-\frac{1}{2}}
-    \right),
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{\Delta t}{\Delta x}
+  \left(
+  F^{n}_{i+\frac{1}{2}}-
+  F^{n}_{i-\frac{1}{2}}
+  \right),
 \end{equation*}
 
 donde $F^{n}_{i+\frac{1}{2}}$ es una aproximación del valor medio del
@@ -177,15 +178,15 @@ flujo en el plano $xt$ a lo largo de la recta $x=x_{i}+\frac{1}{2}$
 con $t$ variando entre $t_{n}$ y $t_{n+1}$,es decir,
 
 \begin{equation*}
-    F^{n}_{i+\frac{1}{2}}\approx
-    \frac{1}{\Delta t}
-    \int_{t_{n}}^{t_{n+1}}
-    f
-    \left(
-    u
-    \left(x_{i+\frac{1}{2}},t\right)
-    \right)
-    \dl t.
+  F^{n}_{i+\frac{1}{2}}\approx
+  \frac{1}{\Delta t}
+  \int_{t_{n}}^{t_{n+1}}
+  f
+  \left(
+  u
+  \left(x_{i+\frac{1}{2}},t\right)
+  \right)
+  \dl t.
 \end{equation*}
 
 Como se ha podido comprobar la expresión (3.1) ha sido utilizada para
@@ -199,9 +200,9 @@ Una consideración interesante es que, reordenando los términos en la
 expresión 3.4, obtenemos
 
 \begin{equation*}
-    \frac{u^{n+1}_{i}-u^{n}_{i}}{\Delta t}+
-    \frac{F^{n}_{i+\frac{1}{2}}-F^{n}_{i-\frac{1}{2}}}{\Delta x}=
-    0,
+  \frac{u^{n+1}_{i}-u^{n}_{i}}{\Delta t}+
+  \frac{F^{n}_{i+\frac{1}{2}}-F^{n}_{i-\frac{1}{2}}}{\Delta x}=
+  0,
 \end{equation*}
 
 de forma que este método puede verse como una aproximación en
@@ -217,12 +218,12 @@ $x_{i-\frac{1}{2}}$.
 Entonces, podríamos escribir
 
 \begin{equation*}
-    F^{n}_{i-\frac{1}{2}}=
-    \phi
-    \left(
-    u^{n}_{i-1},
-    u^{n}_{i}
-    \right),
+  F^{n}_{i-\frac{1}{2}}=
+  \phi
+  \left(
+  u^{n}_{i-1},
+  u^{n}_{i}
+  \right),
 \end{equation*}
 
 donde $\phi$ es una cierta función flujo numérico.
@@ -230,13 +231,13 @@ Por tanto, el esquema numérico (3.4) lo podemos expresar de la
 siguiente manera
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{\Delta t}{\Delta x}
-    \left(
-    \phi\left(u^{n}_{i},u^{n}_{i+1}\right)-
-    \phi\left(u^{n}_{i-1},u^{n}_{i}\right)
-    \right).
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{\Delta t}{\Delta x}
+  \left(
+  \phi\left(u^{n}_{i},u^{n}_{i+1}\right)-
+  \phi\left(u^{n}_{i-1},u^{n}_{i}\right)
+  \right).
 \end{equation*}
 
 En las secciones posteriores, se estudiarán distintos métodos
@@ -246,94 +247,97 @@ Algunas de las propiedades que deberían verificar este tipo de flujo
 numérico son las siguientes:
 
 \begin{itemize}
-    \item
+  \item
 
-          El flujo numérico debería proximar la integral (3.5).
-          En particular, si la variable conservativa es constante en
-          $x$, esto es, $u\left(x,t\right)\equiv\overline{u}$ con
-          $\overline{u}\in\mathbb{R}$, entonces la integral (3.5) se
-          reduce a $f\left(\overline{u}\right)$.
-          Por lo tanto, se tiene que
-          \begin{math}
-              \phi
-              \left(
-              \overline{u},
-              \overline{u}
-              \right)=
-              f\left(\overline{u}\right).
-          \end{math}
+        El flujo numérico debería proximar la integral (3.5).
+        En particular, si la variable conservativa es constante en
+        $x$, esto es, $u\left(x,t\right)\equiv\overline{u}$ con
+        $\overline{u}\in\mathbb{R}$, entonces la integral (3.5) se
+        reduce a $f\left(\overline{u}\right)$.
+        Por lo tanto, se tiene que
+        \begin{math}
+          \phi
+          \left(
+          \overline{u},
+          \overline{u}
+          \right)=
+          f\left(\overline{u}\right).
+        \end{math}
 
-    \item
+  \item
 
-          La función flujo numérico,
-          \begin{math}
-              \phi\left(u^{n}_{i},u^{n+1}_{i}\right)
-          \end{math}
-          tiene que ser continua en función de la
-          variación de $u^{n}_{i}$ y $u^{n+1}_{i}$,
-          esto es,
+        La función flujo numérico,
+        \begin{math}
+          \phi\left(u^{n}_{i},u^{n+1}_{i}\right)
+        \end{math}
+        tiene que ser continua en función de la
+        variación de $u^{n}_{i}$ y $u^{n+1}_{i}$,
+        esto es,
 
-          \begin{equation*}
-              \lim_{u^{n}_{i},u^{n+1}_{i}\overline{u}}
-              \phi\left(u^{n}_{i},u^{n+1}_{i}\right)=
-              f\left(\overline{u}\right).
-          \end{equation*}
+        \begin{equation*}
+          \lim_{u^{n}_{i},u^{n+1}_{i}\overline{u}}
+          \phi\left(u^{n}_{i},u^{n+1}_{i}\right)=
+          f\left(\overline{u}\right).
+        \end{equation*}
 \end{itemize}
 
 El principio básico de una ley de conservación es que la cantidad
-total de una variable conservada solamente cambia en función del ﬂujo
-en la frontera.
+total de una variable conservada solamente cambia en función del
+flujo en la frontera.
 A continuación, vamos a comprobar que los esquemas en forma
 conservativa también cumplen una propiedad análoga.
 Partiendo del esquema (3.4) sumemos $u^{n+1}_{i}$ sobre cualquier
 subconjunto de celdas $i=I,\dotsc,J$ y multipliquemos por $\Delta x$:
 
 \begin{equation*}
-    \Delta x
-    \sum_{i=I}^{J}
-    u^{n+1}_{i}=
-    \Delta x
-    \sum_{i=I}^{J}
-    u^{n}_{i}-
-    \Delta t
-    \left(
-    \sum_{i=I}^{J}
-    F^{n}_{i+\frac{1}{2}}-
-    \sum_{i=I}^{J}
-    F^{n}_{i-\frac{1}{2}}
-    \right).
+  \Delta x
+  \sum_{i=I}^{J}
+  u^{n+1}_{i}=
+  \Delta x
+  \sum_{i=I}^{J}
+  u^{n}_{i}-
+  \Delta t
+  \left(
+  \sum_{i=I}^{J}
+  F^{n}_{i+\frac{1}{2}}-
+  \sum_{i=I}^{J}
+  F^{n}_{i-\frac{1}{2}}
+  \right).
 \end{equation*}
 
 Como la suma de los flujos se cancela salvo los flujos extremos
 $x=x_{I-\frac{1}{2}}$ y $x=x_{J+\frac{1}{2}}$, obtenemos que
 
 \begin{equation*}
-    \Delta x
-    \sum_{i=I}^{J}
-    u^{n+1}_{i}=
-    \Delta x
-    \sum_{i=I}^{J}
-    u^{n}_{i}-
-    \Delta t
-    \left(
-    F^{n}_{J+\frac{1}{2}}-
-    F^{n}_{I-\frac{1}{2}}
-    \right),
+  \Delta x
+  \sum_{i=I}^{J}
+  u^{n+1}_{i}=
+  \Delta x
+  \sum_{i=I}^{J}
+  u^{n}_{i}-
+  \Delta t
+  \left(
+  F^{n}_{J+\frac{1}{2}}-
+  F^{n}_{I-\frac{1}{2}}
+  \right),
 \end{equation*}
 
-razón por la cual decimos que el método de volúmenes finitos es conservativo.
+razón por la cual decimos que el método de volúmenes finitos es
+conservativo.
 
 \section{Métodos descentrados}
 
-La solución del Problema de Valores Iniciales (2.8) es constante a lo largo de curvas
-características.
-En el caso lineal, a lo largo de rectas características, pudiéndose diferenciar
-dos casos en función del signo de la velocidad de propagación (figuras 3.2 y 3.3).
+La solución del Problema de Valores Iniciales (2.8) es constante a lo
+largo de curvas características.
+En el caso lineal, a lo largo de rectas características, pudiéndose
+diferenciar dos casos en función del signo de la velocidad de
+propagación (figuras 3.2 y 3.3).
 
 
 Las rectas características son usadas para determinar mejores
 funciones de flujo numérico, dando lugar a los métodos descentrados.
-Veamos un ejemplo de este tipo de método en la ecuación de transporte.
+Veamos un ejemplo de este tipo de método en la ecuación de
+transporte.
 
 \subsection*{Método descentrado para la ecuación de transporte}
 
@@ -347,8 +351,8 @@ Por tanto, el flujo numérico a lo largo de la recta
 $x=x_{i}-\frac{1}{2}$ se define como
 
 \begin{equation*}
-    F^{n}_{i-\frac{1}{2}}=
-    cu^{n}_{i-1}.
+  F^{n}_{i-\frac{1}{2}}=
+  cu^{n}_{i-1}.
 \end{equation*}
 
 En cambio, el flujo a través del extremo derecho de la celda $c_{i}$
@@ -357,242 +361,359 @@ Luego, el flujo numérico a lo largo de la recta $x=x_{i+\frac{1}{2}}$
 se define como
 
 \begin{equation*}
-    F^{n}_{i+\frac{1}{2}}=
-    cu^{n}_{i}.
+  F^{n}_{i+\frac{1}{2}}=
+  cu^{n}_{i}.
 \end{equation*}
 
-Sustituyendo en la ecuación (3.4), el método descentrado para la ecuación de transporte
-con velocidad de propagación positiva, $c>0$, viene dado por
+Sustituyendo en la ecuación (3.4), el método descentrado para la
+ecuación de transporte con velocidad de propagación positiva, $c>0$,
+viene dado por
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{c\Delta t}{\Delta x}
-    \left(
-    u^{n}_{i}-
-    u^{n}_{i-1}
-    \right).
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{c\Delta t}{\Delta x}
+  \left(
+  u^{n}_{i}-
+  u^{n}_{i-1}
+  \right).
 \end{equation*}
 
 denominado método descentrado upwind.
 
-Por otro lado, en el caso de que la información se propague con velocidad negativa
-$c<0$, como se muestra en la figura 3.3, siguiendo el mismo razonamiento que para el caso
-anterior, resulta que el método descentrado viene dado por el siguiente esquema numérico
-
+Por otro lado, en el caso de que la información se propague con
+velocidad negativa $c<0$, como se muestra en la figura 3.3, siguiendo
+el mismo razonamiento que para el caso anterior, resulta que el
+método descentrado viene dado por el siguiente esquema numérico
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{c\Delta t}{\Delta x}
-    \left(
-    u^{n}_{i+1}
-    u^{n}_{i}
-    \right),
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{c\Delta t}{\Delta x}
+  \left(
+  u^{n}_{i+1}-
+  u^{n}_{i}
+  \right),
 \end{equation*}
 
-donde $F^{n}_{i+\frac{1}{2}}=cu^{n}_{i+1}$ y $F^{n}_{i-\frac{1}{2}}=cu^{n}_{i}$
+donde
+\begin{math}
+  F^{n}_{i+\frac{1}{2}}=
+  cu^{n}_{i+1}
+\end{math}
+y
+\begin{math}
+  F^{n}_{i-\frac{1}{2}}=
+  cu^{n}_{i}
+\end{math}
 denominado método descentrado downwind.
 
-A medida que el tiempo evoluciona, como la solución es constante a lo largo de las rectas
-características, se tiene que
+A medida que el tiempo evoluciona, como la solución es constante a lo
+largo de las rectas características, se tiene que
 
 \begin{equation*}
-    u^{n+1}_{i}\approx
-    u
-    \left(x_{i},t_{n+1}\right)=
-    u
-    \left(
-    x_{i}-
-    c\left(t_{n+1}-t_{n}\right),
-    t_{n}
-    \right)=
-    u
-    \left(
-    x_{i}-
-    c\Delta t,t_{n}
-    \right).
+  u^{n+1}_{i}\approx
+  u
+  \left(x_{i},t_{n+1}\right)=
+  u
+  \left(
+  x_{i}-
+  c\left(t_{n+1}-t_{n}\right),
+  t_{n}
+  \right)=
+  u
+  \left(
+  x_{i}-
+  c\Delta t,t_{n}
+  \right).
 \end{equation*}
 
 Asumiendo que $c>0$, el salto
 \begin{math}
-    W_{i}-\frac{1}{2}\coloneqq
-    u^{n}_{i}-
-    u_{i-1}^{n}
+  W_{i}-\frac{1}{2}\coloneqq
+  u^{n}_{i}-
+  u_{i-1}^{n}
 \end{math}
-en cada uno de los bordes de las celdas, $c_{i}$, sera el mismo a medida que el tiempo
-evolucione pero desplazado una distancia $c\Delta t$ en cada paso de tiempo.
+en cada uno de los bordes de las celdas, $c_{i}$, sera el mismo a
+medida que el tiempo evolucione pero desplazado una distancia
+$c\Delta t$ en cada paso de tiempo.
 Por tanto, el esquema (3.8) se puede escribir de esta otra forma
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{c\Delta t}{\Delta x}
-    W_{i-\frac{1}{2}}.
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{c\Delta t}{\Delta x}
+  W_{i-\frac{1}{2}}.
 \end{equation*}
 
-Por otro lado, en el caso que $c<0$, defnimos el salto
-$W_{i+\frac{1}{2}}\coloneqq u^{n}_{i+1}-u^{n}_{i}$, resultando el esquema (3.9) como
+Por otro lado, en el caso que $c<0$, definimos el salto
+$W_{i+\frac{1}{2}}\coloneqq u^{n}_{i+1}-u^{n}_{i}$, resultando el
+esquema (3.9) como
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{c\Delta t}{\Delta x}
-    W_{i+\frac{1}{2}}.
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{c\Delta t}{\Delta x}
+  W_{i+\frac{1}{2}}.
 \end{equation*}
 
-En la figura 3.4, se muestra lo estudiado en esta sección asumiendo que $c>0$.
+En la figura 3.4, se muestra lo estudiado en esta sección asumiendo
+que $c>0$.
 Obsérvese que el uso de los mismos colores a medida que el tiempo
-evoluciona, representa la solución constante para cada celda considerada, esto es,
+evoluciona, representa la solución constante para cada celda
+considerada, esto es,
 \begin{math}
-    u
-    \left(
-    x_{i},
-    t_{n+1}
-    \right)=
-    u
-    \left(
-    x_{i}-c\Delta t,
-    t_{n}
-    \right)
+  u
+  \left(
+  x_{i},
+  t_{n+1}
+  \right)=
+  u
+  \left(
+  x_{i}-c\Delta t,
+  t_{n}
+  \right)
 \end{math}.
-Por tanto, el salto producido en cada borde entre celdas será el mismo en
-cada uno de los instantes de tiempo.
+Por tanto, el salto producido en cada borde entre celdas será el
+mismo en cada uno de los instantes de tiempo.
 
 \section{Método de Godunov}
 
-En esta sección, se presenta el método de Godunov en sus dos versiones y se explica
-detalladamente cómo puede aplicarse en el caso lineal. La particularidad de dicho método
-es el uso de la estructura de ondas determinada por la solución del problema de Riemann.
+En esta sección, se presenta el método de Godunov en sus dos
+versiones y se explica detalladamente cómo puede aplicarse en el
+caso lineal.
+La particularidad de dicho método es el uso de la estructura de ondas
+determinada por la solución del problema de Riemann.
 
 \subsection{Primera versión}
 
-Se describe el método en tres pasos, pudiéndose referenciar cada uno de ellos con una
-palabra, respectivamente: reconstruir, evolucionar y promediar.
+Se describe el método en tres pasos, pudiéndose referenciar cada uno
+de ellos con una palabra, respectivamente: reconstruir, evolucionar
+y promediar.
 
 \begin{description}
-    \item[Paso 1]
+  \item[Paso 1]
 
-          Se reconstruye una función constante a trozos deﬁnida por:
+        Se reconstruye una función constante a trozos definida por:
 
-          \begin{equation*}
-              \widetilde{u}
-              \left(x,t_{n}\right)=
-              u^{n}_{i},
-          \end{equation*}
+        \begin{equation*}
+          \widetilde{u}
+          \left(x,t_{n}\right)=
+          u^{n}_{i},
+        \end{equation*}
 
-          para $x$ en cada celda $c_{i}$ , entendiéndose como el promedio
-          de la solución en cada celda, en el tiempo $t_{n}$, como se muestra
-          en la figura 3.5.
+        para $x$ en cada celda $c_{i}$ , entendiéndose como el
+        promedio de la solución en cada celda, en el tiempo $t_{n}$,
+        como se muestra en la figura 3.5.
 
-    \item[Paso 2]
+  \item[Paso 2]
 
-          En el nivel de tiempo $n$, en cada frontera $x_{i+\frac{1}{2}}$ entre las
-          celdas $c_{i}$ y $c_{i+1}$, tenemos el problema local de
-          Riemann centrado en la frontera $x_{i+\frac{1}{2}}$ y con datos iniciales
-          $\left(u^{n}_{i},u^{n}_{i+1}\right)$.
-          El objetivo es encontrar la solución del problema global en un nivel de
-          tiempo posterior $n+1$, es decir, evolucionar en el tiempo.
-          Para ello, Godunov propone resolver dos problemas de Riemann locales, por un lado,
-          el problema de Riemann centrado en $x_{i-\frac{1}{2}}$ con datos iniciales
-          $\left(u^{n}_{i-1},u^{n}_{i}\right)$ y, por otro lado, el problema de Riemann
-          centrado en $x_{i+\frac{1}{2}}$ con datos soluciones iniciales $\left(u^{n}_{i},u^{n}_{i+1}\right)$.
-          Denotamos $\widetilde{u}\left(x_{i-\frac{1}{2}},t_{n+1}\right)$ y $\widetilde{u}\left(x_{i+\frac{1}{2}},t_{n+1}\right)$,
-          respectivamente, las soluciones citadas.
+        En el nivel de tiempo $n$, en cada frontera
+        $x_{i+\frac{1}{2}}$ entre las celdas $c_{i}$ y $c_{i+1}$,
+        tenemos el problema local de Riemann centrado en la frontera
+        $x_{i+\frac{1}{2}}$ y con datos iniciales
+        \begin{math}
+          \left(
+          u^{n}_{i},
+          u^{n}_{i+1}
+          \right)
+        \end{math}.
+        El objetivo es encontrar la solución del problema global en
+        un nivel de tiempo posterior $n+1$, es decir, evolucionar en
+        el tiempo.
+        Para ello, Godunov propone resolver dos problemas de Riemann
+        locales, por un lado, el problema de Riemann centrado en
+        $x_{i-\frac{1}{2}}$ con datos iniciales
+        \begin{math}
+          \left(
+          u^{n}_{i-1},u^{n}_{i}
+          \right)
+        \end{math}
+        y, por otro lado, el problema de Riemann centrado en
+        $x_{i+\frac{1}{2}}$ con datos soluciones iniciales
+        \begin{math}
+          \left(
+          u^{n}_{i},
+          u^{n}_{i+1}
+          \right)
+        \end{math}.
+        Denotamos
+        \begin{math}
+          \widetilde{u}
+          \left(
+          x_{i-\frac{1}{2}},
+          t_{n+1}
+          \right)
+        \end{math}
+        y
+        \begin{math}
+          \widetilde{u}
+          \left(
+          x_{i+\frac{1}{2}},
+          t_{n+1}
+          \right)
+        \end{math},
+        respectivamente, las soluciones citadas.
 
-    \item[Paso 3]
+  \item[Paso 3]
 
-          Se obtiene $u^{n+1}_{i}$ como el promedio de las soluciones de los problemas
-          de Riemann correspondientes en la celda $c_{i}$, es decir:
+        Se obtiene $u^{n+1}_{i}$ como el promedio de las soluciones
+        de los problemas de Riemann correspondientes en la celda
+        $c_{i}$, es decir:
 
-          \begin{equation*}
-              u^{n+1}_{i}=
-              \frac{1}{\Delta x}
-              \int_{x_{i-\frac{1}{2}}}^{x_{i}}
-              \widetilde{u}\left(x_{i-\frac{1}{2}},t_{n+1}\right)\dl x+
-              \frac{1}{\Delta x}
-              \int_{x_{i}}^{x_{i+\frac{1}{2}}}
-              \widetilde{u}\left(x_{i+\frac{1}{2}},t_{n+1}\right)\dl x.
-          \end{equation*}
+        \begin{equation*}
+          u^{n+1}_{i}=
+          \frac{1}{\Delta x}
+          \int_{x_{i-\frac{1}{2}}}^{x_{i}}
+          \widetilde{u}
+          \left(x_{i-\frac{1}{2}},t_{n+1}\right)
+          \dl x+
+          \frac{1}{\Delta x}
+          \int_{x_{i}}^{x_{i+\frac{1}{2}}}
+          \widetilde{u}
+          \left(
+          x_{i+\frac{1}{2}},t_{n+1}
+          \right)
+          \dl x.
+        \end{equation*}
 \end{description}
 
 Todo este proceso se repite en el siguiente paso de tiempo.
 Proceso correspondido a la primera versión del método de Godunov, en
-el cual se ha deﬁnido un nuevo valor promedio $u^{n+1}_{i}$ en el tiempo
-$t_{n+1}=t_{n}+\Delta t$ dentro de cada celda $c_{i}$.
+el cual se ha definido un nuevo valor promedio $u^{n+1}_{i}$ en el
+tiempo $t_{n+1}=t_{n}+\Delta t$ dentro de cada celda $c_{i}$.
 Pero para realizar el promedio, ninguna onda puede tener interación
-con otra dentro de cada celda $c_{i}$ en el tiempo $t\in\left[t_{n},t_{n+1}\right]$.
-Esto implica que el paso de tiempo $\Delta t$ sea lo suﬁcientemente pequeño para
-que las ondas de dos problemas de Riemann adyacentes no interactúen entre sí.
-Este es uno de los principales inconvenientes de esta versión debido a que
-la condición CFL, que estudiaremos en la sección 4.3.1, tiene que ser muy restringida,
-tomar $\Delta t$ muy pequeño.
-Además, tener que realizar la evaluación de las integrales (3.10), puede ser complicado.
-Luego, estas dos desventajas conllevan la introducción de una segunda versión del método.
+con otra dentro de cada celda $c_{i}$ en el tiempo
+$t\in\left[t_{n},t_{n+1}\right]$.
+Esto implica que el paso de tiempo $\Delta t$ sea lo suficientemente
+pequeño para que las ondas de dos problemas de Riemann adyacentes no
+interactúen entre sí.
+Este es uno de los principales inconvenientes de esta versión debido
+a que la condición CFL, que estudiaremos en la sección 4.3.1, tiene
+que ser muy restringida, tomar $\Delta t$ muy pequeño.
+Además, tener que realizar la evaluación de las integrales (3.10),
+puede ser complicado.
+Luego, estas dos desventajas conllevan la introducción de una segunda
+versión del método.
 
 \subsection{Segunda versión}
 
-En esta versión, se desarrolla un método de volúmenes ﬁnitos basado
+En esta versión, se desarrolla un método de volúmenes finitos basado
 en la función constante por partes reconstruida en el paso 1 de la
 versión anterior.
-Resulta fácil determinar la función ﬂujo numérico correspondiente al
+Resulta fácil determinar la función flujo numérico correspondiente al
 método de Godunov.
 
-Como ya sabemos $F^{n}_{i+\frac{1}{2}}$ es una aproximación del valor medio del ﬂujo
-en el plano $xt$ a lo largo de la recta $x=x_{i+\frac{1}{2}}$ con $t$
-variando entre $t_{n}$ y $t_{n+1}$, es decir,
+Como ya sabemos $F^{n}_{i+\frac{1}{2}}$ es una aproximación del valor
+medio del flujo en el plano $xt$ a lo largo de la recta
+$x=x_{i+\frac{1}{2}}$ con $t$ variando entre $t_{n}$ y $t_{n+1}$,
+es decir,
 
 \begin{equation*}
-    F^{n}_{i+\frac{1}{2}}\approx
-    \frac{1}{\Delta t}
-    \int_{t_{n}}^{t_{n+1}}
-    f\left(u\left(x_{i+\frac{1}{2}},t\right)\right)
-    \dl t.
+  F^{n}_{i+\frac{1}{2}}\approx
+  \frac{1}{\Delta t}
+  \int_{t_{n}}^{t_{n+1}}
+  f\left(u\left(x_{i+\frac{1}{2}},t\right)\right)
+  \dl t.
 \end{equation*}
 
-Ahora, se reemplaza $u\left(x,t\right)$ por en la función $\widetilde{u}\left(x,t_{n}\right)$,
-que era la reconstrucción constante por partes de Godunov, definida en el paso 1 de la versión anterior.
-De esta forma, el integrando $f\left(u\left(x_{i+\frac{1}{2}},t\right)\right)$ en cada frontera depende de la
-solución exacta $\widetilde{u}\left(x_{i+\frac{1}{2}},t\right)$ del problema de Riemann correspondiente en el
-intervalo de tiempo $\left[t_{n},t_{n+1}\right]$.
+Ahora, se reemplaza $u\left(x,t\right)$ por en la función
+$\widetilde{u}\left(x,t_{n}\right)$, que era la reconstrucción
+constante por partes de Godunov, definida en el paso 1 de la versión
+anterior.
+De esta forma, el integrando
+\begin{math}
+  f
+  \left(
+  u
+  \left(
+    x_{i+\frac{1}{2}},
+    t
+    \right)
+  \right)
+\end{math}
+en cada frontera depende de la solución exacta
+\begin{math}
+  \widetilde{u}
+  \left(
+  x_{i+\frac{1}{2}},t
+  \right)
+\end{math}
+del problema de Riemann correspondiente en el intervalo de tiempo
+\begin{math}
+  \left[
+    t_{n},
+    t_{n+1}
+    \right]
+\end{math}.
 Entonces, la solución se evalúa a lo largo del límite entre celdas.
 Si denotamos
 \begin{math}
-    u^{\downarrow}
-    \left(u_{i},u_{i+1}\right)\coloneqq
-    \widetilde{u}
-    \left(x_{i+\frac{1}{2}},t\right)
+  u^{\downarrow}
+  \left(u_{i},u_{i+1}\right)\coloneqq
+  \widetilde{u}
+  \left(
+  x_{i+\frac{1}{2}},
+  t
+  \right)
 \end{math},
 el flujo numérico $F^{n}_{i+\frac{1}{2}}$ viene dado por
 
 \begin{equation*}
-    F^{n}_{i+\frac{1}{2}}=
-    \frac{1}{\Delta t}
-    \int_{t_{n}}^{t_{n+1}}
-    f\left(u^{\downarrow}\left(u_{i},u_{i+1}\right)\right)\dl t=
-    f\left(u^{\downarrow}\left(u_{i},u_{i+1}\right)\right)
+  F^{n}_{i+\frac{1}{2}}=
+  \frac{1}{\Delta t}
+  \int_{t_{n}}^{t_{n+1}}
+  f
+  \left(
+  u^{\downarrow}
+  \left(u_{i},u_{i+1}\right)
+  \right)
+  \dl t=
+  f
+  \left(
+  u^{\downarrow}
+  \left(u_{i},u_{i+1}\right)
+  \right)
 \end{equation*}
 
-Razonando de igual forma, el flujo numérico $F^{n}_{i-\frac{1}{2}}$ viene dado por
+Razonando de igual forma, el flujo numérico $F^{n}_{i-\frac{1}{2}}$
+viene dado por
 
 \begin{equation*}
-    F_{i-\frac{1}{2}}^{n}=
-    \frac{1}{\Delta t}
-    \int_{t_{n}}^{t_{n+1}}
-    f\left(u^{\downarrow}\left(u_{i-1},u_{i}\right)\right)\dl t=
-    f\left(u^{\downarrow}\left(u_{i-1},u_{i}\right)\right).
+  F_{i-\frac{1}{2}}^{n}=
+  \frac{1}{\Delta t}
+  \int_{t_{n}}^{t_{n+1}}
+  f
+  \left(
+  u^{\downarrow}
+  \left(u_{i-1},u_{i}\right)
+  \right)
+  \dl t=
+  f
+  \left(
+  u^{\downarrow}
+  \left(u_{i-1},u_{i}\right)
+  \right).
 \end{equation*}
 
 Por tanto, el esquema numérico 3.4 para el método de Godunov resulta:
 
 \begin{equation*}
-    u^{n+1}_{i}=
-    u^{n}_{i}-
-    \frac{\Delta t}{\Delta x}
-    \left(
-    f\left(u^{\downarrow}\left(u_{i},u_{i+1}\right)\right)-
-    f\left(u^{\downarrow}\left(u_{i-1},u_{i}\right)\right)
-    \right).
+  u^{n+1}_{i}=
+  u^{n}_{i}-
+  \frac{\Delta t}{\Delta x}
+  \left(
+  f
+  \left(
+    u^{\downarrow}
+    \left(u_{i},u_{i+1}\right)
+    \right)-
+  f
+  \left(
+    u^{\downarrow}
+    \left(u_{i-1},u_{i}\right)
+    \right)
+  \right).
 \end{equation*}
 
 En esta última versión, han sido resueltos los problema de Riemann
@@ -600,7 +721,8 @@ centrados en $x_{i-\frac{1}{2}}$ y $x_{i+\frac{1}{2}}$ para obtener
 $u^{\downarrow}\left(u_{i-1},u_{i}\right)$ y
 $u^{\downarrow}\left(u_{i},u_{i+1}\right)$, respectivamente.
 Entonces, son definidos os flujos $F^{n}_{i-\frac{1}{2}}$ y
-$F^{n}_{i+\frac{1}{2}}$ por las expresiones (3.12) y (3.11) respectivamente,
-y se obtiene os flujos $F^{n}_{i-\frac{1}{2}}$ y $F^{n}_{i+\frac{1}{2}}$
-por las expresiones (3.12) y (3.11) respectivamente, y se obtiene
-$u^{n+1}_{i}$ mediante el esquema numérico 3.4.
+$F^{n}_{i+\frac{1}{2}}$ por las expresiones (3.12) y (3.11)
+respectivamente, y se obtiene os flujos $F^{n}_{i-\frac{1}{2}}$ y
+$F^{n}_{i+\frac{1}{2}}$ por las expresiones (3.12) y (3.11)
+respectivamente, y se obtiene $u^{n+1}_{i}$ mediante el esquema
+numérico 3.4.

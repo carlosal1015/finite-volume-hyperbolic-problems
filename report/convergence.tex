@@ -1,4 +1,4 @@
-\chapter{Convergencia, precisión y estabilidad}
+\chapter{Convergencia, precisión y estabilidad}\label{ch:convergence}
 
 El uso de un método numérico para resolver una ecuación diferencial
 conlleva el estudio de la precisión y las propiedades de convergencia
@@ -30,21 +30,28 @@ parciales en la celda $c_{i}$ en el tiempo $t_{n}$.
 
 Usaremos $n$ para indicar el nivel de tiempo correspondiente al
 instante $t_{n}=n\Delta t$.
-En ese momento, para cada celda $c_{i}$, interesa conocer que tan bien $u^{n}_{i}$ aproxima a $\widehat{u}^{n}_{i}$.
+En ese momento, para cada celda $c_{i}$, interesa conocer que tan
+bien $u^{n}_{i}$ aproxima a $\widehat{u}^{n}_{i}$.
 Entonces, definimos el siguiente concepto.
 
 \begin{definition}
   El error global en el instante $t_{n}$ de un método numérico viene
   dado por la diferencia
+
   \begin{equation*}
-    E^{n}=u^{n}-\widehat{u}^{n}.
+    E^{n}=
+    u^{n}-
+    \widehat{u}^{n}.
   \end{equation*}
-  Para cuantificar el error en un instante de tiempo fijo, debemos elegir alguna norma.
+
+  Para cuantificar el error en un instante de tiempo fijo, debemos
+  elegir alguna norma.
 \end{definition}
 
 \begin{definition}
   Sea $\Omega\subset\mathbb{R}^{n}$ un abierto.
   Se define el conjunto
+
   \begin{equation*}
     L^{2}\left(\Omega\right)=
     \left\{
@@ -53,7 +60,9 @@ Entonces, definimos el siguiente concepto.
     \int_{\Omega}\left|f\right|^{2}<\infty
     \right\}.
   \end{equation*}
-  Si $f\in L^{2}\left(\Omega\right)$ se define la norma
+
+  Si $f\in L^{2}\left(\Omega\right)$ se define la
+
   \begin{equation*}
     {\left\|f\right\|}_{L^{2}\left(\Omega\right)}=
       {\left(
@@ -98,12 +107,15 @@ Entonces, introducimos el siguiente concepto.
 \begin{definition}
   Se dice que el método numérico es convergente en el instante de
   tiempo $t^{n}$ para la norma ${\left\|\cdot\right\|}_{2}$ si
+
   \begin{equation*}
     \lim_{\Delta t\to0}
     {\left\|E^{n}\right\|}_{2}=
     0.
   \end{equation*}
+
   Se dirá que tiene orden de convergencia $s$ si
+
   \begin{equation*}
     \left\|
     E^{n}
@@ -192,7 +204,8 @@ transporte, para los esquemas numéricos presentados a continuación:
   \right)
 \end{align}
 
-Los esquemas (4.3) y (4.4) son métodos descentrados, upwind y downwind, respectivamente.
+Los esquemas (4.3) y (4.4) son métodos descentrados, upwind y
+downwind, respectivamente.
 El esquema numérico (4.5) veremos que es inestable y es a partir del
 cual se introdujo el esquema (4.6), denominado esquema de
 Lax-Friedrichs.
@@ -200,8 +213,10 @@ Finalmente, el esquema numérico (4.7) es el conocido por
 Lax-Wendroff.
 
 En estos esquemas numéricos, la incógnita, $u^{n+1}$, se calcula
-mediante el valor conocido, $u^{n}$, asociado a un paso de tiempo previo.
-Este tipo de esquemas numéricos se denominan esquemas numéricos de un paso.
+mediante el valor conocido, $u^{n}$, asociado a un paso de tiempo
+previo.
+Este tipo de esquemas numéricos se denominan esquemas numéricos de un
+paso.
 Por tanto, podemos definir la solución numérica en el instante de
 tiempo $t_{n+1}$ como
 
@@ -219,9 +234,10 @@ esquemas numéricos.
 \section{Error de truncamiento local y consistencia}
 
 Recordemos que $\widehat{u}^{n}$ y $u^{n}$ representan la media de la
-solución exacta de tiempo y de la solución aproximada de la ecuación diferencial,
-respectivamente, en el paso de tiempo $n$.
-Introducimos ahora conceptos necesarios para el estudio de la consistencia.
+solución exacta de tiempo y de la solución aproximada de la ecuación
+diferencial, respectivamente, en el paso de tiempo $n$.
+Introducimos ahora conceptos necesarios para el estudio de la
+consistencia.
 
 \begin{definition}
   El error de truncamiento local o de consistencia en el paso
@@ -240,13 +256,16 @@ Introducimos ahora conceptos necesarios para el estudio de la consistencia.
 
 \begin{definition}
   Se dice que el método numérico es consistente si
+
   \begin{equation*}
     \lim_{\Delta t\to0}
     \max_{0\leq n\leq N-1}
     \left|\tau^{n}\right|
     =0.
   \end{equation*}
+
   Se dirá que tiene orden de consistencia $s$ si
+
   \begin{equation*}
     \tau^{n}=
     \mathcal{O}
@@ -266,7 +285,8 @@ En el siguiente ejemplo, estudiaremos la consistencia del método
 descentrado upwind para la ecuación de transporte.
 
 \begin{example}
-  Calculamos el error de consistencia del esquema descentrado upwind para la ecuación de transporte
+  Calculamos el error de consistencia del esquema descentrado upwind
+  para la ecuación de transporte
   \begin{math}
     u_{t}+
     cu_{x}=
@@ -291,12 +311,12 @@ descentrado upwind para la ecuación de transporte.
     \left(\Delta t^{2}\right).
   \end{equation*}
 
-  Dado que $u_{t}+cu_{x}=0$, entonces
-  $u_{t}=-cu_{x}$ y derivando dicha igualdad con respecto a $t$
-  y a $x$, obtenemos que $u_{tt}=-cu_{xt}$ y $u_{tx}=-cu_{xx}$,
-  respectivamente.
+  Dado que $u_{t}+cu_{x}=0$, entonces $u_{t}=-cu_{x}$ y derivando
+  dicha igualdad con respecto a $t$ y a $x$, obtenemos que
+  $u_{tt}=-cu_{xt}$ y $u_{tx}=-cu_{xx}$, respectivamente.
   De aquí, $u_{tt}=c^{2}u_{xx}$ y sustituyendo en el error de
   consistencia (4.8), se tiene que
+
   \begin{equation*}
     \tau^{n}=
     \frac{1}{2}
@@ -310,7 +330,15 @@ descentrado upwind para la ecuación de transporte.
     \left(\Delta t^{2}\right).
   \end{equation*}
 
-  Asumiremos que $u\in\mathcal{C}^{2}\left(\mathbb{R}\times\mathbb{R}^{+}\right)$
+  Asumiremos que
+  \begin{math}
+    u\in
+    \mathcal{C}^{2}
+    \left(
+    \mathbb{R}\times
+    \mathbb{R}^{+}
+    \right)
+  \end{math}
   y que $\diffp[2]{u}{x}$ está acotada.
   Además, $\frac{\Delta t}{\Delta x}$ permanece constante.
   Entonces tenemos que $\lim_{\Delta t\to0}\tau^{n}=0$, y así queda
@@ -320,8 +348,8 @@ descentrado upwind para la ecuación de transporte.
 \end{example}
 
 De forma similar, hallamos el error de consistencia del esquema (4.6),
-esquema de Lax-Friedrichs y del esquema (4.7), esquema de Lax-Wendroff,
-ambos, para la ecuación de transporte.
+esquema de Lax-Friedrichs y del esquema (4.7), esquema de
+Lax-Wendroff, ambos, para la ecuación de transporte.
 Respectivamente, vienen dados por
 
 \begin{align*}
@@ -426,7 +454,8 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     \beta u^{n}_{i+1}.
   \end{equation*}
 
-  A continuación, vamos a demostrar que el esquema numérico es estable si
+  A continuación, vamos a demostrar que el esquema numérico es
+  estable si
   \begin{math}
     \left|\alpha\right|+
     \left|\beta\right|\leq
@@ -437,7 +466,10 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     \sum_{i=-\infty}^{+\infty}
     {\left|u^{n+1}_{i}\right|}^{2} & =
     \sum_{i=-\infty}^{+\infty}
-    {\left|\alpha u^{n}_{i}+\beta u^{n}_{i+1}\right|}^{2} \\
+    {
+    \left|\alpha u^{n}_{i}+
+    \beta u^{n}_{i+1}\right|
+    }^{2}.                                \\
                                    & =
     \sum_{i=-\infty}^{+\infty}
     \left|
@@ -448,7 +480,7 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     u^{n}_{i+1}+
     \beta^{2}
     {\left(u^{n}_{i+1}\right)}^{2}
-    \right|                                               \\
+    \right|.                              \\
                                    & \leq
     \sum_{i=-\infty}^{+\infty}
     \left(
@@ -498,8 +530,9 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     \left(
     \alpha^{2}
     \left|u^{n}_{i}\right|^{2}+
-    |\alpha|
-    |\beta||u^{n}_{i}|^{2}
+    \left|\alpha\right|
+    \left|\beta\right|
+    {\left|u^{n}_{i}\right|}^{2}
     \right)+
     \sum_{i=-\infty}^{+\infty}
     \left(
@@ -508,7 +541,7 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     {\left|u^{n}_{i+1}\right|}^{2}+
     \beta^{2}
     {\left|u^{n}_{i+1}\right|}^{2}
-    \right)=                              \\
+    \right)                               \\
                                    & =
     \sum_{i=-\infty}^{+\infty}
     \left(
@@ -525,7 +558,7 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     \left|u^{n}_{i}\right|^{2}+
     \beta^{2}
     {\left|u^{n}_{i}\right|}^{2}
-    \right)=                              \\
+    \right)                               \\
                                    & =
     \sum_{i=-\infty}^{+\infty}
     \left(
@@ -540,14 +573,17 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     {\left|u^{n}_{i}\right|}^{2}.
   \end{align*}
 
-  Eпtonces, hemos obtenido que
+  Entonces, hemos obtenido que
 
   \begin{equation*}
     \sum_{i=-\infty}^{+\infty}
     {\left|u^{n+1}_{i}\right|}^{2}\leq
-    {\left(\left|\alpha\right|+\left|\beta\right|\right)}^{2}
+    {
+      \left(\left|\alpha\right|+
+      \left|\beta\right|\right)
+    }^{2}
     \sum_{i=-\infty}^{+\infty}
-    {\left|u^{n}_{i}\right|}^{2}
+    {\left|u^{n}_{i}\right|}^{2}.
   \end{equation*}
 
   De forma recursiva, concluimos que
@@ -556,24 +592,35 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     \sum_{i=-\infty}^{\infty}
     {\left|u^{n+1}_{i}\right|}^{2}\leq
     {
-      \left(\left|\alpha\right|+\left|\beta\right|\right)}^{2\left(n+1\right)
-    }
+      \left(
+      \left|\alpha\right|+
+      \left|\beta\right|
+      \right)
+    }^{2\left(n+1\right)}
     \sum_{i=-\infty}^{+\infty}
-    {\left|u^{0}_{i}\right|}^{2}
+    {\left|u^{0}_{i}\right|}^{2}.
   \end{equation*}
 
-  Por lo tanto, si $\left|\alpha\right|+\left|\beta\right|\leq 1$ entonces el esquema numérico es estable.
-  Sustituyendo los valores de $\alpha$ y $\beta$ y aplicando propiedades de la función valor absoluto,
-  concluimos que si
+  Por lo tanto, si
+  \begin{math}
+    \left|\alpha\right|+
+    \left|\beta\right|\leq
+    1
+  \end{math}
+  entonces el esquema numérico es estable.
+  Sustituyendo los valores de $\alpha$ y $\beta$ y aplicando
+  propiedades de la función valor absoluto, concluimos que si
   \begin{math}
     -1\leq
-    c\frac{\Delta t}{\Delta x}\leq 0
+    c\frac{\Delta t}{\Delta x}\leq
+    0
   \end{math}
   entonces el esquema numérico (4.11) es estable, como queríamos ver.
 \end{example}
 
 Hemos visto que a partir de la definición de estabilidad podemos
-determinar condiciones suficientes que garantizan la estabilidad de un esquema numérico.
+determinar condiciones suficientes que garantizan la estabilidad de
+un esquema numérico.
 A continuación, usaremos métodos del análisis de Fourier para
 demostrar que además son condiciones necesarias.
 En concreto, nos centramos en un procedimiento denominado el análisis
@@ -586,13 +633,14 @@ parciales a medida que se refine la malla.
 
 Sea $\left(x,t\right)$ un punto fijo en el espacio-tiempo.
 Como se vio en la expresión (2.10) la solución $u\left(x,t\right)$
-del problema de Cauchy depende solo del dato inicial $u_{0}$ en $x-ct$ siendo $c$
-la velocidad de propagación de la ecuación diferencial,
-originándose el siguiente concepto.
+del problema de Cauchy depende solo del dato inicial $u_{0}$ en
+$x-ct$ siendo $c$ la velocidad de propagación de la ecuación
+diferencial, originándose el siguiente concepto.
 
 \begin{definition}
-  El dominio de dependencia analítico o de una ecuación en derivadas parciales
-  en el punto $\left(x,t\right)$ está definido por el conjunto
+  El dominio de dependencia analítico o de una ecuación en derivadas
+  parciales en el punto $\left(x,t\right)$ está definido por el
+  conjunto
 
   \begin{equation*}
     D\left(x,t\right)=
@@ -604,22 +652,26 @@ originándose el siguiente concepto.
   \end{equation*}
 \end{definition}
 
-Se considera la ecuación de transporte, $u_t+cu_x=0$, con $c>0$, y se aproxima su
-solución mediante un método explícito, por ejemplo, el método descentrado.
-Este esquema numérico viene dado por la ecuación (4.3), por tanto, cada nuevo valor
-$u^{n+1}_{i}$ se calcula en función de las aproximaciones de la solución asociadas
-a un paso de tiempo previo, todas estas dentro de una región.
-A esta región se le denomina el dominio de dependencia de un método numérico,
-definido como el conjunto de datos iniciales que pueden afectar a la solución
-numérica en el nivel de tiempo $n+1$.
+Se considera la ecuación de transporte, $u_t+cu_x=0$, con $c>0$, y se
+aproxima su solución mediante un método explícito, por ejemplo, el
+método descentrado.
+Este esquema numérico viene dado por la ecuación (4.3), por tanto,
+cada nuevo valor $u^{n+1}_{i}$ se calcula en función de las
+aproximaciones de la solución asociadas a un paso de tiempo previo,
+todas estas dentro de una región.
+A esta región se le denomina el dominio de dependencia de un método
+numérico, definido como el conjunto de datos iniciales que pueden
+afectar a la solución numérica en el nivel de tiempo $n+1$.
 
 En esta memoria, estudiamos esquemas numéricos de un paso.
 Por lo tanto, la solución exacta que se traslada con velocidad
-positiva $c$, se propaga una distancia $c\Delta t$, en un solo paso de tiempo.
+positiva $c$, se propaga una distancia $c\Delta t$, en un solo paso
+de tiempo.
 Para que en el esquema inﬂuyan solo las celdas adyacentes, se tiene
 que cumplir que $c\Delta t\leq\Delta x$, esto es,
 $c\frac{\Delta t}{\Delta x}\leq 1$, que es condición necesaria para
-que la recta característica esté dentro del dominio de dependencia numérico.
+que la recta característica esté dentro del dominio de dependencia
+numérico.
 Además, incluyendo el caso en el que la velocidad de propagación sea
 negativa, $c<0$, se tiene que cumplir que
 
@@ -641,10 +693,10 @@ malla por la que se propaga la información en un paso de tiempo.
 En general, veremos que una condición necesaria para la estabilidad
 de un método de volúmenes finitos es que el dominio de dependencia
 numérico contenga el dominio de dependencia analítico.
-Esto se traduce en que la estabilidad requerirá una condición CFL del tipo
-(4.12).
-Así, en el ejemplo 4.2 vimos que el esquema numérico considerado es estable si
-se verifica
+Esto se traduce en que la estabilidad requerirá una condición CFL del
+tipo (4.12).
+Así, en el ejemplo 4.2 vimos que el esquema numérico considerado es
+estable si se verifica
 \begin{math}
   -1\leq
   c\frac{\Delta t}{\Delta x}\leq
@@ -653,7 +705,8 @@ se verifica
 
 La condición CFL debe su nombre a los matemáticos Courant, Friedrichs
 y Lewy que la introdujeron en el transcurso de la demostración de la
-convergencia de un método numérico, en concreto, el método de diferencias finitas.
+convergencia de un método numérico, en concreto, el método de
+diferencias finitas.
 
 \subsection{Análisis de la estabilidad de Von Neumann}
 
