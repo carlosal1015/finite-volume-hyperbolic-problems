@@ -63,19 +63,19 @@ Entonces, definimos el siguiente concepto.
 
   Si $f\in L^{2}\left(\Omega\right)$ se define la
 
-  \begin{equation*}
+  \begin{equation}\label{eq:l2norm}
     {\left\|f\right\|}_{L^{2}\left(\Omega\right)}=
       {\left(
         \int_{\Omega}
         \left|f\left(x\right)\right|^{2}
         \right)}^{\frac{1}{2}}.
-  \end{equation*}
+  \end{equation}
 \end{definition}
 
 Para funciones discretas, como el error $E^{n}$, introducimos la
 norma definida por
 
-\begin{equation*}
+\begin{equation}\label{eq:l2normdiscrete}
   {\left\|E^{n}\right\|}_{2}=
     {
       \left(
@@ -84,14 +84,14 @@ norma definida por
       {\left|E^{n}_{i}\right|}^{2}
       \right)
     }^{\frac{1}{2}},
-\end{equation*}
+\end{equation}
 
 denominada la norma discreta $L^{2}$.
 Obsérvese que se introduce el factor $\Delta x$, permitiendo que la
 serie converja a medida que la malla se refine, esto es, a medida que
 $\Delta x$ disminuye.
-Este factor $\Delta x$ hace que ambas normas definidas (4.1) y (4.2)
-sean análogas.
+Este factor $\Delta x$ hace que ambas normas definidas~\eqref{eq:l2norm}
+y~\eqref{eq:l2normdiscrete} sean análogas.
 
 Con el objetivo de simplificar la notación, asumimos que $\Delta t$ y
 $\Delta x$ están relacionadas de manera fija.
@@ -165,20 +165,20 @@ transporte, para los esquemas numéricos presentados a continuación:
   \left(
   u^{n}_{i}-
   u^{n}_{i-1}
-  \right)         \\
+  \right)\label{eq:upwindscheme}         \\
   u^{n+1}_{i} & =
   u^{n}_{i}-
   c\frac{\Delta t}{\Delta x}
   \left(
   u^{n}_{i+1}-
   u^{n}_{i}
-  \right)         \\
+  \right)\label{eq:downwindscheme}         \\
   u^{n+1}_{i} & =
   u^{n}_{i}-
   c\frac{\Delta t}{2\Delta x}
   \left(
   u^{n}_{i+1}-u^{n}_{i-1}
-  \right)         \\
+  \right)\label{eq:ftcsscheme}         \\
   u^{n+1}_{i} & =
   \frac{1}{2}
   \left(
@@ -189,7 +189,7 @@ transporte, para los esquemas numéricos presentados a continuación:
   \left(
   u^{n}_{i+1}-
   u^{n}_{i-1}
-  \right)         \\
+  \right)\label{eq:laxfriedrichsscheme}         \\
   u^{n+1}_{i} & =
   u^{n}_{i}-
   c\frac{\Delta t}{2\Delta x}
@@ -203,10 +203,10 @@ transporte, para los esquemas numéricos presentados a continuación:
   u^{n}_{i+1}-
   2u^{n}_{i}+
   u^{n}_{i-1}
-  \right)
+  \right)\label{eq:laxwendroffscheme}
 \end{align}
 
-Los esquemas (4.3) y (4.4) son métodos descentrados, upwind y
+Los esquemas~\eqref{eq:upwindscheme} y~\eqref{eq:downwindscheme} son métodos descentrados, upwind y
 downwind, respectivamente.
 El esquema numérico (4.5) veremos que es inestable y es a partir del
 cual se introdujo el esquema (4.6), denominado esquema de
@@ -294,7 +294,7 @@ descentrado upwind para la ecuación de transporte.
     cu_{x}=
     0.
   \end{math}
-  Dicho esquema viene dado por la expresión (3.8).
+  Dicho esquema viene dado por la expresión~\eqref{eq:upwind}.
   Teniendo en cuenta los desarrollos de Taylor correspondientes,
   cancelando términos comunes y sabiendo que $u$ es la solución
   exacta de la ecuación de transporte, es decir,
@@ -392,9 +392,9 @@ término fuente, esto es, tratamos problemas de valores iniciales
 homogéneos, introducimos el siguiente concepto de estabilidad.
 
 \begin{definition}
-  Un esquema numérico de un paso (3.6) para una ecuación en derivadas
-  parciales de primer orden es estable si existe una constante $K$
-  tal que
+  Un esquema numérico de un paso~\eqref{eq:onestepscheme} para una
+  ecuación en derivadas parciales de primer orden es estable si
+  existe una constante $K$ tal que
 
   \begin{equation*}
     \sum_{i=-\infty}^{+\infty}
@@ -406,8 +406,9 @@ homogéneos, introducimos el siguiente concepto de estabilidad.
 \end{definition}
 
 Multiplicando la desigualdad (4.9) por $\Delta x$ y aplicando la
-norma discreta $L^{2}$ dado por la expresión (4.2), tenemos que
-la definición anterior es equivalente a
+norma discreta $L^{2}$ dado por la
+expresión~\eqref{eq:l2normdiscrete}, tenemos que la definición
+anterior es equivalente a
 
 \begin{equation*}
   {\left\|u^{n}\right\|}^{2}_{2}\leq
@@ -760,9 +761,10 @@ Y la transformada de Fourier inversa viene dada por
   \dl\xi.
 \end{equation*}
 
-Tomando la norma $L^{2}$ como fue definida en la expresión
-(4.1) para funciones continuas y en la expresión (4.2) para funciones
-discretas, se tiene el siguiente resultado.
+Tomando la norma $L^{2}$ como fue definida en la
+expresión~\eqref{eq:l2norm} para funciones continuas y en la
+expresión~\eqref{eq:l2normdiscrete} para funciones discretas, se
+tiene el siguiente resultado.
 
 \begin{theorem}[Identidad de Parseval]
   Sea

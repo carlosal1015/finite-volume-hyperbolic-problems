@@ -90,21 +90,21 @@ Veremos que si expresamos un método numérico en la forma
 conservativa, la suma discreta anterior,
 $\sum_{i=1}^{N}\Delta x\cdot u^{n}_{i}$, cambiará solamente debido a
 los valores en las fronteras $x=a$ y $x=b$.
-En concreto, la identidad (3.7) que aparece más adelante, cuando el
-rango de valores de celdas definido por $I$, $J$ recubre toda la
-partición, puede interpretarse como la conservación de la solución
-discreta.
+En concreto, la identidad~\eqref{eq:conservative} que aparece más
+adelante, cuando el rango de valores de celdas definido por $I$, $J$
+recubre toda la partición, puede interpretarse como la conservación
+de la solución discreta.
 
 Ahora podemos expresar la forma integral de la ley de conservación en
 la celda $c_{i}$ como
 
-\begin{equation*}
+\begin{equation}\label{eq:integralformcell}
   \diffp{}{x}
   \int_{c_{i}}
   u\left(x,t\right)\dl x=
   f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
   f\left(u\left(x_{i+\frac{1}{2}}\right),t\right).
-\end{equation*}
+\end{equation}
 
 Una vez que se ha discretizado el dominio espacial, procedemos a
 hacerlo con el temporal.
@@ -120,10 +120,10 @@ Consideremos una partición uniforme en el tiempo,
 
 siendo $\Delta t=t_{n+1}-t_{n}$.
 El paso en tiempo lo consideraremos constante.
-Ahora, integramos la expresión (3.1) en cada intervalo de tiempo
-$\left[t_{n},t_{n+1}\right]$:
+Ahora, integramos la expresión~\eqref{eq:integralformcell} en cada
+intervalo de tiempo $\left[t_{n},t_{n+1}\right]$:
 
-\begin{equation*}
+\begin{equation}\label{eq:integrationeachinterval}
   \int_{c_{i}}
   u\left(x,t_{n+1}\right)\dl x-
   \int_{c_{i}}
@@ -133,12 +133,12 @@ $\left[t_{n},t_{n+1}\right]$:
     f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
     f\left(u\left(x_{i+\frac{1}{2}}\right),t\right)
     \right]\dl t.
-\end{equation*}
+\end{equation}
 
-Dividiendo la expresión (3.2) entre $\Delta x$ y reordenando los
-términos, se obtiene
+Dividiendo la expresión~\eqref{eq:integrationeachinterval} entre
+$\Delta x$ y reordenando los términos, se obtiene
 
-\begin{gather*}
+\begin{gather}\label{eq:expressiondividedoverdeltax}
   \begin{split}
     \frac{1}{\Delta x}
     \int_{c_{i}}
@@ -155,15 +155,25 @@ términos, se obtiene
       f\left(u\left(x_{i+\frac{1}{2}}\right)\right)
       \right]\dl t.
   \end{split}
-\end{gather*}
+\end{gather}
 
 Debido a que, en general, no podemos evaluar exactamente las
-integrales del segundo miembro de la expresión (3.3), ya que
-$u\left(x_{i}+1,t\right)$ y $u\left(x_{i}-1,t\right)$ varían con el
+integrales del segundo miembro de la
+expresión~\eqref{eq:expressiondividedoverdeltax}, ya que
+\begin{math}
+  u
+  \left(x_{i}+1,t\right)
+\end{math}
+y
+\begin{math}
+  u
+  \left(x_{i}-1,t\right)
+\end{math}
+varían con el
 tiempo a lo largo de cada lado de la celda, y a que no conocemos la
 solución exacta, vamos a estudiar métodos numéricos de la forma
 
-\begin{equation*}
+\begin{equation}\label{eq:godunovscheme}
   u^{n+1}_{i}=
   u^{n}_{i}-
   \frac{\Delta t}{\Delta x}
@@ -171,13 +181,13 @@ solución exacta, vamos a estudiar métodos numéricos de la forma
   F^{n}_{i+\frac{1}{2}}-
   F^{n}_{i-\frac{1}{2}}
   \right),
-\end{equation*}
+\end{equation}
 
 donde $F^{n}_{i+\frac{1}{2}}$ es una aproximación del valor medio del
 flujo en el plano $xt$ a lo largo de la recta $x=x_{i}+\frac{1}{2}$
 con $t$ variando entre $t_{n}$ y $t_{n+1}$,es decir,
 
-\begin{equation*}
+\begin{equation}\label{eq:numericalflux}
   F^{n}_{i+\frac{1}{2}}\approx
   \frac{1}{\Delta t}
   \int_{t_{n}}^{t_{n+1}}
@@ -187,17 +197,18 @@ con $t$ variando entre $t_{n}$ y $t_{n+1}$,es decir,
   \left(x_{i+\frac{1}{2}},t\right)
   \right)
   \dl t.
-\end{equation*}
+\end{equation}
 
-Como se ha podido comprobar la expresión (3.1) ha sido utilizada para
-el desarrollo de un método explícito en tiempo: dado $u^{n}_{i}$, es
-decir, dadas las aproximaciones promedios en las celdas en el tiempo
-$t_{n}$, aproximamos $u^{n+1}_{i}$ que son los valores promedios en
-las celdas en el tiempo $t_{n+1}$,esto es, después de un paso de
-tiempo de longitud $\Delta t=t_{n+1}-t_{n}$.
+Como se ha podido comprobar la expresión~\eqref{eq:integralformcell}
+ha sido utilizada para el desarrollo de un método explícito en
+tiempo: dado $u^{n}_{i}$, es decir, dadas las aproximaciones
+promedios en las celdas en el tiempo $t_{n}$, aproximamos
+$u^{n+1}_{i}$ que son los valores promedios en las celdas en el
+tiempo $t_{n+1}$,esto es, después de un paso de tiempo de longitud
+$\Delta t=t_{n+1}-t_{n}$.
 
 Una consideración interesante es que, reordenando los términos en la
-expresión 3.4, obtenemos
+expresión~\eqref{eq:godunovscheme}, obtenemos
 
 \begin{equation*}
   \frac{u^{n+1}_{i}-u^{n}_{i}}{\Delta t}+
@@ -227,10 +238,10 @@ Entonces, podríamos escribir
 \end{equation*}
 
 donde $\phi$ es una cierta función flujo numérico.
-Por tanto, el esquema numérico (3.4) lo podemos expresar de la
-siguiente manera
+Por tanto, el esquema numérico~\eqref{eq:godunovscheme} lo podemos
+expresar de la siguiente manera
 
-\begin{equation*}
+\begin{equation}\label{eq:onestepscheme}
   u^{n+1}_{i}=
   u^{n}_{i}-
   \frac{\Delta t}{\Delta x}
@@ -238,7 +249,7 @@ siguiente manera
   \phi\left(u^{n}_{i},u^{n}_{i+1}\right)-
   \phi\left(u^{n}_{i-1},u^{n}_{i}\right)
   \right).
-\end{equation*}
+\end{equation}
 
 En las secciones posteriores, se estudiarán distintos métodos
 numéricos y se verá que todos ellos pueden expresarse según la
@@ -249,11 +260,12 @@ numérico son las siguientes:
 \begin{itemize}
   \item
 
-        El flujo numérico debería proximar la integral (3.5).
+        El flujo numérico debería proximar la integral~\eqref{eq:numericalflux}.
         En particular, si la variable conservativa es constante en
         $x$, esto es, $u\left(x,t\right)\equiv\overline{u}$ con
-        $\overline{u}\in\mathbb{R}$, entonces la integral (3.5) se
-        reduce a $f\left(\overline{u}\right)$.
+        $\overline{u}\in\mathbb{R}$, entonces la
+        integral~\eqref{eq:numericalflux} se reduce a
+        $f\left(\overline{u}\right)$.
         Por lo tanto, se tiene que
         \begin{math}
           \phi
@@ -286,8 +298,9 @@ total de una variable conservada solamente cambia en función del
 flujo en la frontera.
 A continuación, vamos a comprobar que los esquemas en forma
 conservativa también cumplen una propiedad análoga.
-Partiendo del esquema (3.4) sumemos $u^{n+1}_{i}$ sobre cualquier
-subconjunto de celdas $i=I,\dotsc,J$ y multipliquemos por $\Delta x$:
+Partiendo del esquema~\eqref{eq:godunovscheme} sumemos $u^{n+1}_{i}$
+sobre cualquier subconjunto de celdas $i=I,\dotsc,J$ y multipliquemos
+por $\Delta x$:
 
 \begin{equation*}
   \Delta x
@@ -308,7 +321,7 @@ subconjunto de celdas $i=I,\dotsc,J$ y multipliquemos por $\Delta x$:
 Como la suma de los flujos se cancela salvo los flujos extremos
 $x=x_{I-\frac{1}{2}}$ y $x=x_{J+\frac{1}{2}}$, obtenemos que
 
-\begin{equation*}
+\begin{equation}\label{eq:conservative}
   \Delta x
   \sum_{i=I}^{J}
   u^{n+1}_{i}=
@@ -320,7 +333,7 @@ $x=x_{I-\frac{1}{2}}$ y $x=x_{J+\frac{1}{2}}$, obtenemos que
   F^{n}_{J+\frac{1}{2}}-
   F^{n}_{I-\frac{1}{2}}
   \right),
-\end{equation*}
+\end{equation}
 
 razón por la cual decimos que el método de volúmenes finitos es
 conservativo.
@@ -365,11 +378,11 @@ se define como
   cu^{n}_{i}.
 \end{equation*}
 
-Sustituyendo en la ecuación (3.4), el método descentrado para la
-ecuación de transporte con velocidad de propagación positiva, $c>0$,
-viene dado por
+Sustituyendo en la ecuación~\eqref{eq:godunovscheme}, el método
+descentrado para la ecuación de transporte con velocidad de
+propagación positiva, $c>0$, viene dado por
 
-\begin{equation*}
+\begin{equation}\label{eq:upwind}
   u^{n+1}_{i}=
   u^{n}_{i}-
   \frac{c\Delta t}{\Delta x}
@@ -377,7 +390,7 @@ viene dado por
   u^{n}_{i}-
   u^{n}_{i-1}
   \right).
-\end{equation*}
+\end{equation}
 
 denominado método descentrado upwind.
 
@@ -386,7 +399,7 @@ velocidad negativa $c<0$, como se muestra en la figura 3.3, siguiendo
 el mismo razonamiento que para el caso anterior, resulta que el
 método descentrado viene dado por el siguiente esquema numérico
 
-\begin{equation*}
+\begin{equation}\label{eq:downwind}
   u^{n+1}_{i}=
   u^{n}_{i}-
   \frac{c\Delta t}{\Delta x}
@@ -394,7 +407,7 @@ método descentrado viene dado por el siguiente esquema numérico
   u^{n}_{i+1}-
   u^{n}_{i}
   \right),
-\end{equation*}
+\end{equation}
 
 donde
 \begin{math}
@@ -437,7 +450,8 @@ Asumiendo que $c>0$, el salto
 en cada uno de los bordes de las celdas, $c_{i}$, sera el mismo a
 medida que el tiempo evolucione pero desplazado una distancia
 $c\Delta t$ en cada paso de tiempo.
-Por tanto, el esquema (3.8) se puede escribir de esta otra forma
+Por tanto, el esquema~\eqref{eq:upwind} se puede escribir de esta
+otra forma
 
 \begin{equation*}
   u^{n+1}_{i}=
@@ -448,7 +462,7 @@ Por tanto, el esquema (3.8) se puede escribir de esta otra forma
 
 Por otro lado, en el caso que $c<0$, definimos el salto
 $W_{i+\frac{1}{2}}\coloneqq u^{n}_{i+1}-u^{n}_{i}$, resultando el
-esquema (3.9) como
+esquema~\eqref{eq:downwind} como
 
 \begin{equation*}
   u^{n+1}_{i}=
@@ -561,7 +575,7 @@ y promediar.
         de los problemas de Riemann correspondientes en la celda
         $c_{i}$, es decir:
 
-        \begin{equation*}
+        \begin{equation}\label{eq:godunovmean}
           u^{n+1}_{i}=
           \frac{1}{\Delta x}
           \int_{x_{i-\frac{1}{2}}}^{x_{i}}
@@ -575,7 +589,7 @@ y promediar.
           x_{i+\frac{1}{2}},t_{n+1}
           \right)
           \dl x.
-        \end{equation*}
+        \end{equation}
 \end{description}
 
 Todo este proceso se repite en el siguiente paso de tiempo.
@@ -591,8 +605,8 @@ interactúen entre sí.
 Este es uno de los principales inconvenientes de esta versión debido
 a que la condición CFL, que estudiaremos en la sección 4.3.1, tiene
 que ser muy restringida, tomar $\Delta t$ muy pequeño.
-Además, tener que realizar la evaluación de las integrales (3.10),
-puede ser complicado.
+Además, tener que realizar la evaluación de las
+integrales~\eqref{eq:godunovmean}, puede ser complicado.
 Luego, estas dos desventajas conllevan la introducción de una segunda
 versión del método.
 
@@ -659,7 +673,7 @@ Si denotamos
 \end{math},
 el flujo numérico $F^{n}_{i+\frac{1}{2}}$ viene dado por
 
-\begin{equation*}
+\begin{equation}\label{eq:godunovfluxright}
   F^{n}_{i+\frac{1}{2}}=
   \frac{1}{\Delta t}
   \int_{t_{n}}^{t_{n+1}}
@@ -674,12 +688,12 @@ el flujo numérico $F^{n}_{i+\frac{1}{2}}$ viene dado por
   u^{\downarrow}
   \left(u_{i},u_{i+1}\right)
   \right)
-\end{equation*}
+\end{equation}
 
 Razonando de igual forma, el flujo numérico $F^{n}_{i-\frac{1}{2}}$
 viene dado por
 
-\begin{equation*}
+\begin{equation}\label{eq:godunovfluxleft}
   F_{i-\frac{1}{2}}^{n}=
   \frac{1}{\Delta t}
   \int_{t_{n}}^{t_{n+1}}
@@ -694,9 +708,9 @@ viene dado por
   u^{\downarrow}
   \left(u_{i-1},u_{i}\right)
   \right).
-\end{equation*}
+\end{equation}
 
-Por tanto, el esquema numérico 3.4 para el método de Godunov resulta:
+Por tanto, el esquema numérico~\eqref{eq:godunovscheme} para el método de Godunov resulta:
 
 \begin{equation*}
   u^{n+1}_{i}=
@@ -720,9 +734,11 @@ En esta última versión, han sido resueltos los problema de Riemann
 centrados en $x_{i-\frac{1}{2}}$ y $x_{i+\frac{1}{2}}$ para obtener
 $u^{\downarrow}\left(u_{i-1},u_{i}\right)$ y
 $u^{\downarrow}\left(u_{i},u_{i+1}\right)$, respectivamente.
-Entonces, son definidos os flujos $F^{n}_{i-\frac{1}{2}}$ y
-$F^{n}_{i+\frac{1}{2}}$ por las expresiones (3.12) y (3.11)
+Entonces, son definidos los flujos $F^{n}_{i-\frac{1}{2}}$ y
+$F^{n}_{i+\frac{1}{2}}$ por las
+expresiones~\eqref{eq:godunovfluxleft} y~\eqref{eq:godunovfluxright}
 respectivamente, y se obtiene os flujos $F^{n}_{i-\frac{1}{2}}$ y
-$F^{n}_{i+\frac{1}{2}}$ por las expresiones (3.12) y (3.11)
+$F^{n}_{i+\frac{1}{2}}$ por las
+expresiones~\eqref{eq:godunovfluxleft} y~\eqref{eq:godunovfluxright}
 respectivamente, y se obtiene $u^{n+1}_{i}$ mediante el esquema
-numérico 3.4.
+numérico~\eqref{eq:godunovscheme}.

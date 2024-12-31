@@ -1,7 +1,9 @@
 \chapter{Programas empleados}
 
 En este apéndice mostraremos los programas en el lenguaje de
-programación Python empleados para realizar las simulaciones
+programación
+Python~\footnote{Las animaciones están disponible en \url{https://carlosal1015.github.io/finite-volume-hyperbolic-problems/notebook}}
+empleados para realizar las simulaciones
 numéricas del capítulo~\ref{ch:results}.
 
 \section{Test numéricos}
@@ -16,6 +18,7 @@ mediante el método de Lax-Friedrichs y el de Lax-Wendroff.
 Entonces, se presentan los programas de la resolución numérica
 para cada uno de estos métodos numéricos empleados.
 
+\clearpage
 \subsection{Método descentrado upwind}
 
 En esta sección, encontraremos el programa empleado para la
@@ -28,10 +31,14 @@ descentrado upwind.
     \inputminted[firstline=1,lastline=2]{python}{upwind.py}
     \inputminted[firstline=4,lastline=7]{python}{upwind.py}
     \inputminted[firstline=10,lastline=11]{python}{upwind.py}
+    \inputminted[firstline=14,lastline=33]{python}{upwind.py}
     \inputminted[firstline=35,lastline=35]{python}{upwind.py}
-    \inputminted[firstline=38,lastline=53]{python}{upwind.py}
+    \inputminted[firstline=38,lastline=42]{python}{upwind.py}
+    \inputminted[firstline=45,lastline=53]{python}{upwind.py}
+    \caption{\texttt{upwind.py}: método descentrado upwind}
 \end{listing}
 
+\clearpage
 \subsection{Método descentrado downwind}
 
 En esta sección, encontraremos el programa empleado para la
@@ -44,10 +51,14 @@ descentrado downwind.
     \inputminted[firstline=1,lastline=2]{python}{downwind.py}
     \inputminted[firstline=4,lastline=7]{python}{downwind.py}
     \inputminted[firstline=10,lastline=11]{python}{downwind.py}
+    \inputminted[firstline=14,lastline=33]{python}{downwind.py}
     \inputminted[firstline=35,lastline=35]{python}{downwind.py}
-    \inputminted[firstline=38,lastline=53]{python}{downwind.py}
+    \inputminted[firstline=38,lastline=42]{python}{downwind.py}
+    \inputminted[firstline=45,lastline=53]{python}{downwind.py}
+    \caption{\texttt{downwind.py}: método descentrado downwind}
 \end{listing}
 
+\clearpage
 \subsection{Método de Lax-Friedrichs}
 
 En esta sección, encontraremos el programa empleado para la
@@ -59,11 +70,15 @@ de Lax-Friedrichs.
     \centering
     \inputminted[firstline=1,lastline=2]{python}{laxfriedrichs.py}
     \inputminted[firstline=4,lastline=7]{python}{laxfriedrichs.py}
-    % \inputminted[firstline=10,lastline=11]{python}{laxfriedrichs.py}
-    % \inputminted[firstline=35,lastline=35]{python}{laxfriedrichs.py}
-    \inputminted[firstline=38,lastline=56]{python}{laxfriedrichs.py}
+    \inputminted[firstline=10,lastline=11]{python}{laxfriedrichs.py}
+    \inputminted[firstline=14,lastline=33]{python}{laxfriedrichs.py}
+    \inputminted[firstline=35,lastline=35]{python}{laxfriedrichs.py}
+    \inputminted[firstline=38,lastline=42]{python}{laxfriedrichs.py}
+    \inputminted[firstline=45,lastline=56]{python}{laxfriedrichs.py}
+    \caption{\texttt{laxfriedrichs.py}: método de Lax-Friedrichs}
 \end{listing}
 
+\clearpage
 \subsection{Método de Lax-Wendroff}
 
 En esta sección, encontraremos el programa empleado para la
@@ -75,7 +90,10 @@ de Lax-Wendroff.
     \centering
     \inputminted[firstline=1,lastline=2]{python}{laxwendroff.py}
     \inputminted[firstline=4,lastline=7]{python}{laxwendroff.py}
-    % \inputminted[firstline=10,lastline=11]{python}{laxwendroff.py}
-    % \inputminted[firstline=35,lastline=35]{python}{laxwendroff.py}
-    \inputminted[firstline=38,lastline=56]{python}{laxwendroff.py}
+    \inputminted[firstline=10,lastline=11]{python}{laxwendroff.py}
+    \inputminted[firstline=14,lastline=33]{python}{laxwendroff.py}
+    \inputminted[firstline=35,lastline=35]{python}{laxwendroff.py}
+    \inputminted[firstline=38,lastline=42]{python}{laxwendroff.py}
+    \inputminted[firstline=45,lastline=56]{python}{laxwendroff.py}
+    \caption{\texttt{laxwendroff.py}: método de Lax-Wendroff}
 \end{listing}
