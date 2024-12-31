@@ -6,7 +6,8 @@ en los capítulos anteriores.
 Introduciremos las condiciones iniciales que posteriormente serán
 empleadas para implementar estos experimentos numéricos, resueltos
 mediante simulaciones numéricas con el ordenador.
-Para ello, haremos uso del lenguaje de programación Python.
+Para ello, haremos uso del lenguaje de programación
+Python\footnote{\url{Disponible en https://carlosal1015.github.io/finite-volume-hyperbolic-problems/notebook}}.
 
 \section{Condiciones de contorno}
 
@@ -106,12 +107,11 @@ instante de tiempo considerado.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=.4\paperwidth]{example-image}
-    % \caption{
-    %   Evolución de la solución de la ecuación de transporte con el
-    %   tiempo.
-    % }
-    % \label{fig:1}
+    \includegraphics[width=.35\paperwidth]{../snapshots/downwindgaussian1d-2.png}
+    \includegraphics[width=.35\paperwidth]{../snapshots/lax-friedrichsgaussiana1d-2.png}
+    \includegraphics[width=.35\paperwidth]{../snapshots/lax-wendroffgaussiana1d-2.png}
+    \caption{Simulación numérica en el tiempo $t_{2}=2\Delta t$.}
+    \label{fig:example1t2}
 \end{figure}
 
 Observamos cómo, efectivamente, los resultados teóricos concuerdan
@@ -127,6 +127,15 @@ que proporciona una mejor aproximación de la solución de la ecuación
 Por otra parte, también es destacable resaltar el adelanto que
 presenta la solución numérica del método de Lax-Friedrichs respecto a
 la solución exacta en el instante de tiempo $t_{40}=0.8$.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=.35\paperwidth]{../snapshots/downwindgaussian1d-40.png}
+    \includegraphics[width=.35\paperwidth]{../snapshots/lax-friedrichsgaussiana1d-40.png}
+    \includegraphics[width=.35\paperwidth]{../snapshots/lax-wendroffgaussiana1d-40.png}
+    \caption{Simulación numérica en el tiempo $t_{40}=40\Delta t$.}
+    \label{fig:example1t2}
+\end{figure}
 
 \subsection*{Ejemplo $2$}
 
@@ -155,6 +164,15 @@ $t_{2}=0.04$ y $t_{10}=0.2$), para cada uno de los métodos nombrados
 junto con la solución exacta y para cada instante de tiempo
 considerado.
 
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=.3\paperwidth]{../snapshots/upwindheaviside1d-2.png}
+    \includegraphics[width=.3\paperwidth]{../snapshots/lax-friedrichsheaviside1d-2.png}
+    \includegraphics[width=.3\paperwidth]{../snapshots/lax-wendroffheaviside1d-2.png}
+    \caption{Simulación numérica en el tiempo $t_{2}=2\Delta t$.}
+    \label{fig:example1t2}
+\end{figure}
+
 En la figura 5.5 (experimento en el instante de tiempo $t_10=0.2$),
 se puede apreciar que el método aguas arriba aproxima bien la
 solución pero contiene una pequeña disipación numérica entorno a la
@@ -167,3 +185,12 @@ regiones próximas a la discontinuidad.
 Este hecho es bien conocido y está documentado en [12].
 Sin embargo, es más preciso en aquellos puntos donde la solución es
 más regular.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=.3\paperwidth]{../snapshots/upwindheaviside1d-40.png}
+    \includegraphics[width=.3\paperwidth]{../snapshots/lax-friedrichsheaviside1d-40.png}
+    \includegraphics[width=.3\paperwidth]{../snapshots/lax-wendroffheaviside1d-40.png}
+    \caption{Simulación numérica en el tiempo $t_{40}=40\Delta t$.}
+    \label{fig:example1t2}
+\end{figure}

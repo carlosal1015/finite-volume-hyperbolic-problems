@@ -99,9 +99,11 @@ Para problemas hiperbólicos, es razonable asumir que la razón
 \begin{math}
   \frac{\Delta x}{\Delta t}
 \end{math}
-es fija y de hecho es usual definir $\Delta t$ en función de $\Delta x$
-de forma que se verifique la condición CFL que estudiaremos en la sección 4.3.1.
-De esta forma, cuando $\Delta t\to 0$ nos referiremos a que la malla se refina.
+es fija y de hecho es usual definir $\Delta t$ en función de
+$\Delta x$ de forma que se verifique la condición CFL que
+estudiaremos en la sección 4.3.1.
+De esta forma, cuando $\Delta t\to 0$ nos referiremos a que la malla
+se refina.
 Entonces, introducimos el siguiente concepto.
 
 \begin{definition}
@@ -347,9 +349,9 @@ descentrado upwind para la ecuación de transporte.
   convergencia $s=1$, pues el término de menor orden es $\Delta x$.
 \end{example}
 
-De forma similar, hallamos el error de consistencia del esquema (4.6),
-esquema de Lax-Friedrichs y del esquema (4.7), esquema de
-Lax-Wendroff, ambos, para la ecuación de transporte.
+De forma similar, hallamos el error de consistencia del
+esquema (4.6), esquema de Lax-Friedrichs y del esquema (4.7),
+esquema de Lax-Wendroff, ambos, para la ecuación de transporte.
 Respectivamente, vienen dados por
 
 \begin{align*}
@@ -728,3 +730,766 @@ entonces su transformada de Fourier visto viene dada por
 \end{equation*}
 
 donde
+\begin{math}
+  \xi\in
+  \left[
+    -\frac{\pi}{\Delta x},
+    \frac{\pi}{\Delta x}
+    \right]
+\end{math}
+y
+\begin{math}
+  \overline{u}
+  \left(
+  -\frac{\pi}{\Delta x}
+  \right)=
+  \overline{u}^{n}
+  \left(
+  \frac{\pi}{\Delta x}
+  \right)
+\end{math}.
+Y la transformada de Fourier inversa viene dada por
+
+\begin{equation*}
+  u^{n}_{j}=
+  \frac{1}{\sqrt{2\pi}}
+  \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+  e^{i\xi j\Delta x}
+  \overline{u}^{n}
+  \left(\xi\right)
+  \dl\xi.
+\end{equation*}
+
+Tomando la norma $L^{2}$ como fue definida en la expresión
+(4.1) para funciones continuas y en la expresión (4.2) para funciones
+discretas, se tiene el siguiente resultado.
+
+\begin{theorem}[Identidad de Parseval]
+  Sea
+  \begin{math}
+    \overline{u}^{n}\colon
+    \left[
+      -\frac{\pi}{\Delta x},
+      \frac{\pi}{\Delta x}
+      \right]\to
+    \mathbb{R}
+  \end{math}
+  una función de periodo $\frac{2\pi}{\Delta x}$, dada por la serie (4.13)
+  con coeficientes $u^{n}_{j}$ dados por la igualdad (4.14).
+  Entonces
+
+  \begin{equation*}
+    {\left\|\overline{u}\left(\xi\right)\right\|}^{2}_{L^{2}\left(\mathbb{R}\right)}=
+    {\left\|u^{n}\right\|}^{2}_{2}.
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Apliquemos la norma $L^{2}\left(\mathbb{R}\right)$ a la función
+  periódica $\overline{u}^{n}$ en el sentido de la definición 4.2, y
+  usando propiedades de los números complejos, obtenemos
+  \begin{align*}
+    {\left\|
+      \overline{u}^{n}
+      \left(\xi\right)
+    \right\|}^{2}_{L^{2}\left(\mathbb{R}\right)} & =
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    {\left|
+      \overline{u}^{n}
+      \left(\xi\right)
+      \right|}^{2}
+    \dl\xi                                           \\
+                                                 & =
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    \overline{\overline{u}^{n}\left(\xi\right)}
+    \overline{u}^{n}
+    \left(\xi\right)
+    \dl\xi                                           \\
+                                                 & =
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    \overline{\overline{u}^{n}\left(\xi\right)}
+    \frac{1}{\sqrt{2\pi}}
+    \sum_{j=-\infty}^{+\infty}
+    e^{-i\xi j\Delta x}
+    u^{n}_{j}
+    \Delta x
+    \dl\xi                                           \\
+                                                 & =
+    \Delta x
+    \sum_{j=-\infty}^{+\infty}
+    \frac{1}{\sqrt{2\pi}}
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    e^{-i\xi j \Delta x}
+    \overline{\overline{u}^{n}\left(\xi\right)}
+    \dl\xi
+    u^{n}_{j}                                        \\
+                                                 & =
+    \Delta x
+    \sum_{j=-\infty}^{+\infty}
+    \frac{1}{\sqrt{2\pi}}
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    e^{i\xi j \Delta x}
+    \overline{u}^{n}
+    \left(\xi\right)
+    \dl\xi
+    u^{n}_{j}                                        \\
+                                                 & =
+    \Delta x
+    \sum_{j=-\infty}^{+\infty}
+    \overline{u^{n}_{j}}
+    u^{n}_{j}                                        \\
+                                                 & =
+    {\left\|\overline{u}^{n}\right\|}^{2}_{2}.
+  \end{align*}
+\end{proof}
+
+De esta forma, por la desigualdad (4.10) y por la identidad de
+Parseval (4.16), si se demuestra la estabilidad para la transformada
+de Fourier, inmediatamente, está demostrada para la función original.
+
+De forma genérica, sabemos que un esquema de volúmenes finitos de un
+paso se define como
+
+\begin{equation*}
+  u^{n+1}_{j}=
+  u^{n}_{j}-
+  c\frac{\Delta t}{\Delta x}
+  \left(
+  \phi\left(u^{n}_{j},u^{n}_{j+1}\right)-
+  \phi\left(u^{n}_{j-1},u^{n}_{j}\right)
+  \right).
+\end{equation*}
+
+Para simplificar notación, denotamos
+\begin{math}
+  \mu=
+  c\frac{\Delta t}{\Delta x}
+\end{math}.
+Centrándonos en nuestro estudio de problemas lineales podemos
+escribir el esquema (4.17) como sigue
+
+\begin{equation*}
+  u^{n+1}_{j}=
+  u^{n}_{j}-
+  \mu
+  \left(
+  \alpha u^{n}_{j-1}+
+  \beta u^{n}_{j}+
+  \gamma u^{n}_{j+1}
+  \right)=
+  \left(1-\mu\beta\right)
+  u_j^n-
+  \mu\alpha
+  u^{n}_{j-1}-
+  \mu\gamma
+  u^{n}_{j+1}
+\end{equation*}
+
+donde $\alpha,\beta,\gamma\in\mathbb{R}$, y sustituyendo la ecuación
+(4.14) en la expresión (4.18), se obtiene que
+
+\begin{equation*}
+  u^{n+1}_{j}=
+  \frac{1}{\sqrt{2\pi}}
+  \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+  e^{i\xi j\Delta x}
+  \left[
+    \left(1-\mu\beta\right)-
+    \mu\alpha
+    e^{-i\xi\Delta x}-
+    \mu\gamma
+    e^{i\xi\Delta x}
+    \right]
+  \overline{u}^{n}\left(\xi\right)
+  \dl\xi
+\end{equation*}
+
+Aplicando la definición de la transformada de Fourier inversa, dada
+por la ecuación (4.14), en el tiempo $t_{n+1}$, de la ecuación (4.19)
+resulta que
+
+\begin{align*}
+  \overline{u}^{n+1}
+  \left(\xi\right)=
+  \left[
+    \left(1-\mu\beta\right)-
+    \mu\alpha
+    e^{-i\xi\Delta x}-
+    \mu\gamma e^{i\xi\Delta x}
+    \right]
+  \overline{u}^{n}
+  \left(\xi\right)
+\end{align*}
+
+Denotando
+\begin{math}
+  g
+  \left(\xi\Delta x\right)=
+  \left(1-\mu\beta\right)-
+  \mu\alpha
+  e^{-i\xi\Delta x}-
+  \mu\gamma
+  e^{i\xi\Delta x}
+\end{math},
+entonces
+
+\begin{equation*}
+  \overline{u}^{n+1}
+  \left(\xi\right)=
+  g
+  \left(\xi\Delta x\right)
+  \overline{u}^{n}
+  \left(\xi\right).
+\end{equation*}
+
+La ecuación (4.20) muestra que para esquemas numéricos de un paso, la
+solución en un tiempo concreto es igual a multiplicar la solución en
+el instante de tiempo previo por un factor denominado factor de
+amplificación, que corresponde con la magnitud en la que avanza la
+solución en un paso de tiempo.
+De la ecuación (4.20) de forma recursiva, se obtiene que
+
+\begin{equation*}
+  \overline{u}^{n+1}
+  \left(\xi\right)=
+  {g\left(\xi\Delta x\right)}^{n}
+  \overline{u}^{0}
+  \left(\xi\right).
+\end{equation*}
+
+En esta memoria, el factor de amplificación $g$ es una función que
+depende de $\xi\Delta x$.
+Entonces, se tiene el siguiente teorema demostrado y visto con más
+detalle para métodos de diferencias finitas en [15], cuya demostración
+se podría extender a los esquemas de volúmenes finitos que estamos
+estudiando.
+
+\begin{theorem}
+  Un esquema de volúmenes finitos de un paso es estable si y solo si
+  \begin{math}
+    {\left|
+    {g\left(\xi\Delta x\right)}
+    \right|}^{n}\leq
+    1
+  \end{math}.
+\end{theorem}
+
+Este teorema muestra que para determinar la estabilidad de un esquema
+de volúmenes finitos de un paso, sólo se necesita considerar el
+correspondiente factor de amplificación.
+En ello consiste el análisis de la estabilidad de Von Neumann.
+
+Consideremos algunos ejemplos de esquemas numéricos para determinar
+su estabilidad mediante el análisis de Von Neumann.
+
+\begin{example}
+  Consideremos el esquema numérico (4.5).
+  Sustituimos la ecuación (4.14) en el esquema numérico considerado y
+  se obtiene que
+
+  \begin{equation*}
+    u^{n+1}_{j}=
+    \frac{1}{\sqrt{2\pi}}
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    e^{i\xi j \Delta x}
+    \left(
+    1-c\frac{\Delta t}{\Delta x}
+    e^{i \xi \Delta x}+
+    c\frac{\Delta t}{\Delta x}
+    e^{-i\xi\Delta x}\right)
+    \overline{u}^{n}
+    \left(\xi\right)
+    \dl\xi
+  \end{equation*}
+
+  Por tanto, resulta que
+
+  \begin{equation*}
+    \bar{u}^{n+1}
+    \left(\xi\right)=
+    \left(
+    1-
+    c\frac{\Delta t}{\Delta x}
+    e^{i\xi\Delta x}+
+    c\frac{\Delta t}{\Delta x}
+    e^{-i\xi\Delta x}
+    \right)
+    \overline{u}^{n}
+    \left(\xi\right),
+  \end{equation*}
+
+  donde el factor de amplificación viene dado por
+
+  \begin{align*}
+    g
+    \left(\xi\Delta x\right) & =
+    1-
+    c\frac{\Delta t}{\Delta x}
+    \left(
+    e^{i\xi\Delta x}-
+    e^{-i\xi\Delta x}
+    \right)                      \\
+                             & =
+    1-
+    c\frac{\Delta t}{\Delta x}
+    \left(
+    2i\sin
+    \left(\xi\Delta x\right)
+    \right)
+  \end{align*}
+
+  Como el factor de amplificación es un número complejo, consideremos
+  \begin{math}
+    {\left|
+      g\left(\xi\Delta x\right)
+      \right|}^{2},
+  \end{math}
+  esto es,
+
+  \begin{equation*}
+    \left|
+    g
+    \left(\xi\Delta x\right)
+    \right|^{2}=
+    1+
+    4c^{2}
+    \frac{{\Delta t}^{2}}{{\Delta x}^{2}}
+    \sin^{2}
+    \left(\xi\Delta x\right).
+  \end{equation*}
+
+  De donde, concluimos que
+  \begin{math}
+    \left|
+    g\left(\xi\Delta x\right)
+    \right|>
+    1
+  \end{math}
+  aún cumpliéndose la confición CFL.
+  Entonces, concluimos que este esquema numérico para la ecuación de
+  transporte es inestable.
+\end{example}
+
+
+En el siguiente ejemplo, consideramos el esquema numérico dado por la expresión (4.6).
+
+\begin{example}
+  Consideremos el esquema numérico de Lax-Friedrichs dado por la
+  expresión (4.6).
+  Sustituimos la ecuación (4.14) en el esquema numérico considerado y
+  se obtiene que
+
+  \begin{equation*}
+    u^{n+1}_{j}=
+    \frac{1}{\sqrt{2\pi}}
+    \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+    e^{i\xi j\Delta x}
+    \left[
+      \left(
+      \frac{1}{2}-
+      c\frac{\Delta t}{\Delta x}
+      \right)
+      e^{i\xi\Delta x}+
+      \left(
+      \frac{1}{2}+
+      c\frac{\Delta t}{\Delta x}
+      \right)
+      e^{-i\xi\Delta x}
+      \right]
+    \overline{u}^{n}
+    \left(\xi\right)
+    \dl\xi
+  \end{equation*}
+
+  Por tanto, resulta que
+
+  \begin{equation*}
+    \overline{u}^{n+1}
+    \left(\xi\right)=
+    \left[
+      \left(
+      \frac{1}{2}-
+      c\frac{\Delta t}{\Delta x}
+      \right)
+      e^{i\xi\Delta x}+
+      \left(
+      \frac{1}{2}+
+      c\frac{\Delta t}{\Delta x}
+      \right)
+      e^{-i\xi\Delta x}
+      \right]
+    \overline{u}^{n}
+    \left(\xi\right),
+  \end{equation*}
+
+  donde el factor de amplificación viene dado por
+
+  \begin{align*}
+    g
+    \left(
+    \xi\Delta x
+    \right) & =
+    \left(
+    \frac{1}{2}-
+    c\frac{\Delta t}{\Delta x}
+    \right)
+    e^{i \xi \Delta x}+
+    \left(
+    \frac{1}{2}+c \frac{\Delta t}{\Delta x}
+    \right)
+    e^{-i\xi\Delta x} \\
+            & =
+    \frac{1}{2}
+    \left(
+    e^{i\xi\Delta x}+
+    e^{-i\xi\Delta x}
+    \right)-
+    c\frac{\Delta t}{\Delta x}
+    \left(e^{i\xi\Delta x}-
+    e^{-i\xi\Delta x}
+    \right)           \\
+            & =
+    \cos\left(\xi\Delta x\right)-
+    c\frac{\Delta t}{\Delta x}
+    \left(
+    2i\sin
+    \left(\xi \Delta x\right)
+    \right).
+  \end{align*}
+  Como el factor de amplificación es un número complejo, consideremos
+  \begin{math}
+    {\left|g\left(\xi\Delta x\right)\right|}^{2}
+  \end{math},
+  esto es,
+
+  \begin{align*}
+    {\left|g\left(\xi\Delta x\right)\right|}^{2} & =
+    \cos^{2}
+    \left(\xi\Delta x\right)+
+    4c^{2}
+    \frac{{\Delta t}^{2}}{{\Delta x}^{2}}
+    \sin^{2}
+    \left(\xi\Delta x\right)                         \\
+                                                 & =
+    \left(
+    1-
+    \sin^{2}
+    \left(\xi\Delta x\right)
+    \right)+
+    4c^{2}
+    \frac{{\Delta t}^{2}}{{\Delta x}^{2}}
+    \sin^{2}\left(\xi\Delta x\right)                 \\
+                                                 & =
+    1+
+    \left(
+    4c^{2}
+    \frac{{\Delta t}^{2}}{{\Delta x}^{2}}-
+    1
+    \right)
+    \sin^{2}\left(\xi\Delta x\right).
+  \end{align*}
+
+  De donde deducimos que
+  \begin{math}
+    {\left|
+      g
+      \left(
+      \xi\Delta x
+      \right)
+      \right|}^{2}\leq
+    1
+  \end{math}
+  si y solo si
+  \begin{math}
+    4c^{2}
+    \frac{{\Delta t}^{2}}{{\Delta x}^{2}}\leq
+    1
+  \end{math}.
+  Luego, se concluye que el esquema de Lax-Friedrichs es estable si
+  y solo si
+
+  \begin{equation*}
+    -\frac{1}{4}\leq
+    c\frac{\Delta t}{\Delta x}\leq
+    \frac{1}{4}.
+  \end{equation*}
+\end{example}
+
+En el siguiente ejemplo estudiamos la estabilidad del esquema
+numérico de Lax-Wendroff dado por la expresión (4.7).
+
+\begin{example}
+  Consideremos el esquema numérico de Lax-Wendroff dado por la
+  expresión (4.7).
+  Sustituimos la ecuación (4.14) en el esquema numérico considerado
+  y se obtiene que
+
+  \begin{gather*}
+    \begin{split}
+      u^{n+1}_{j}
+       & =
+      \frac{1}{\sqrt{2\pi}}
+      \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+      e^{i\xi j\Delta x}
+      \left[
+        \left(
+        1-
+        \frac{c^{2}{\Delta t}^{2}}{{\Delta x}^{2}}
+        \right)+
+        \left(
+        \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}-
+        \frac{c\Delta t}{2\Delta x}
+        \right)
+      e^{i\xi\Delta x}\right. \\
+       & \phantom{=}
+        +\left.
+        \left(
+        \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}+
+        \frac{c\Delta t}{2\Delta x}
+        \right)
+        e^{-i\xi\Delta x}
+        \right]
+      \overline{u}^{n}
+      \left(\xi\right)\dl\xi.
+    \end{split}
+  \end{gather*}
+
+  Por tanto, resulta que
+
+  \begin{equation*}
+    \overline{u}^{n+1}
+    \left(\xi\right)=
+    \left[
+      \left(
+      1-
+      \frac{c^{2}{\Delta t}^{2}}{{\Delta x}^{2}}
+      \right)+
+      \left(
+      \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}-
+      \frac{c\Delta t}{2\Delta x}
+      \right)
+      e^{i\xi\Delta x}+
+      \left(
+      \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}+
+      \frac{c\Delta t}{2\Delta x}
+      \right)
+      e^{-i\xi\Delta x}
+      \right]
+    \overline{u}^{n}
+    \left(\xi\right)
+  \end{equation*}
+
+  donde el factor de amplificación viene dado por
+
+  \begin{align*}
+    g
+    \left(\xi\Delta x\right) & =
+    \left(
+    1-
+    \frac{c^{2}{\Delta t}^{2}}{{\Delta x}^{2}}
+    \right)+
+    \left(
+    \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}-
+    \frac{c\Delta t}{2\Delta x}
+    \right)
+    e^{i\xi\Delta x}+
+    \left(
+    \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}+
+    \frac{c\Delta t}{2\Delta x}
+    \right)
+    e^{-i\xi\Delta x}            \\
+                             & =
+    1-
+    \frac{c\Delta t}{2\Delta x}
+    \left(e^{i\xi\Delta x}-
+    e^{-i\xi\Delta x}\right)+
+    \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}
+    \left(e^{i\xi\Delta x}-
+    2+
+    e^{-i\xi\Delta x}\right)     \\
+                             & =
+    1-\frac{c\Delta t}{\Delta x}
+    \left(
+    i\sin
+    \left(\xi\Delta x\right)
+    \right)+
+    \frac{c^{2}{\Delta t}^{2}}{{\Delta x}^{2}}
+    \left(
+    \cos
+    \left(\xi\Delta x\right)-
+    1
+    \right)
+  \end{align*}
+
+  A continuación, denotamos
+  \begin{math}
+    r=
+    \frac{c\Delta t}{\Delta x}
+  \end{math},
+  luego, se obtiene que
+
+  \begin{equation*}
+    g
+    \left(\xi\Delta x\right)=
+    1-ir\sin
+    \left(\xi\Delta x\right)+
+    r^{2}
+    \left(
+    \cos
+    \left(
+      \xi\Delta x
+      \right)-1
+    \right)
+  \end{equation*}
+
+  Además, también denotamos
+
+  \begin{align*}
+    x & =
+    1+
+    r^{2}
+    \left(
+    \cos\left(\xi \Delta x\right)-
+    1
+    \right), \\
+    y & =
+    -r
+    \sin
+    \left(\xi\Delta x\right).
+  \end{align*}
+
+  De esta forma, el factor de amplificación viene dado por
+  \begin{math}
+    g\left(
+    \xi\Delta x
+    \right)=
+    x+iy
+  \end{math},
+  número complejo expresado en su forma binómica.
+  Luego, operando tenemos que
+
+  \begin{gather*}
+    \begin{split}
+      x^{2}+
+      r^{2}y-
+      2\left(1-r^{2}\right)x
+       & =
+      r^{4}\cos^{2}
+      \left(\xi\Delta x\right)+
+      2r^{2}
+      \left(1-r^{2}\right)
+      \cos\left(\xi\Delta x\right)+
+      {\left(1-r^{2}\right)}^{2}  \\
+       & \phantom{=}
+      +r^{4}
+      \sin^{2}
+      (\xi \Delta x)-
+      2r^{2}
+      \left(1-r^{2}\right)
+      \cos\left(\xi\Delta x\right)-
+      2{\left(1-r^{2}\right)}^{2} \\
+       & =
+      r^{4}-
+      {\left(1-r^{2}\right)}^{2},
+    \end{split}
+  \end{gather*}
+
+  esto es,
+
+  \begin{equation*}
+    x^{2}+
+    r^{2}y-
+    2\left(1-r^{2}\right)x-
+    r^{4}+
+    {\left(1-r^{2}\right)}^{2}=
+    0,
+  \end{equation*}
+
+  o equivalentemente,
+
+  \begin{equation*}
+    \frac{{\left(x-\left(1-r^{2}\right)\right)}^{2}}{r^{4}}+
+    \frac{y}{r^{2}}=
+    1
+  \end{equation*}
+
+  Así, hemos obtenido que la ecuación (4.21) es una elipse en el plano
+  complejo de centro $\left(1-r^2, 0\right)$, semieje en $x$ de
+  longitud $r^{2}$ y semieje en $y$ de longitud $\left|r\right|$.
+
+  Para garantizar la estabilidad del esquema numérico considerado se
+  tiene que cumplir que
+  \begin{math}
+    \left|
+    g
+    \left(
+    \xi\Delta x
+    \right)
+    \right|
+    \leq
+    1
+  \end{math}
+  y como el factor de amplificación es un número complejo,
+  consideramos
+  \begin{math}
+    {\left|
+      g
+      \left(\xi\Delta x\right)
+      \right|}^{2}\leq
+    1
+  \end{math},
+  esto es,
+  \begin{math}
+    x^{2}+
+    y^{2}\leq
+    1
+  \end{math}.
+  Entonces, para obtener la condición que garantiza la estabilidad
+  del esquema numérico, la elipse tiene que estar contenida en su
+  totalidad dentro de la circunferencia $x^{2}+y^{2}=1$.
+  Para ello, veamos en que puntos intersecan la elipse (4.21) y la
+  circunferencia de centro $\left(0,0\right)$ y radio $1$, es decir,
+  los puntos $\left(x,y\right)$ que satisfacen las dos ecuaciones
+  siguientes.
+
+  \begin{align*}
+    x^{2}+
+    r^{2}y-
+    2\left(1-r^{2}\right)x-
+    r^{4}+
+    {\left(1-r^{2}\right)}^{2}
+     & =
+    0,   \\
+    x^{2}+y^{2}
+     & =
+    1.
+  \end{align*}
+
+  Resolviendo, obtenemos una única raíz
+  \begin{math}
+    \left(x,y\right)=
+    \left(1,0\right)
+  \end{math}.
+  Este punto de intersección tiene que ser un punto de la frontera de
+  la elipse y así, se obtiene la condición
+
+  \begin{equation*}
+    p^{2}\leq
+    1.
+  \end{equation*}
+
+  Por tanto, el esquema numérico es estable si y solo si
+  \begin{math}
+    -1\leq
+    r\leq
+    1,
+  \end{math}
+  esto es,
+  \begin{math}
+    -1\leq
+    c\frac{\Delta t}{\Delta x}\leq
+    1
+  \end{math}.
+  Entonces, el esquema de Lax-Wendroff es estable si se verifica
+  exactamente la condición CFL vista en el apartado 4.3.1.
+\end{example}
