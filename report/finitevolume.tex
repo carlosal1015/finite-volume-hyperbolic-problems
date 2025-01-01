@@ -11,9 +11,10 @@ la solución del problema de Riemann.
 \section{Método de Volúmenes Finitos}
 
 El Método de Volúmenes Finitos en una dimensión espacial consiste en
-dividir el dominio espacial en intervalos, los volúmenes finitos,
-también denominados celdas, y calcular en cada uno de ellos una
-aproximación de la integral de la variable conservativa $u$.
+dividir el dominio espacial en intervalos, los
+\textbf{volúmenes finitos}, también denominados \textbf{celdas}, y
+calcular en cada uno de ellos una aproximación de la integral de la
+variable conservativa $u$.
 En cada paso de tiempo, se actualizan estos valores utilizando
 aproximaciones del flujo a través de las fronteras de los volúmenes
 finitos.
@@ -29,10 +30,11 @@ volúmenes finitos
 
 \begin{equation*}
   c_{i}=
-  \left(
+  \big(
   x_{i-\frac{1}{2}},
   x_{i+\frac{1}{2}}
-  \right),\quad i=1,\cdots,N_{x}
+  \big),\quad
+  i=1,\cdots,N_{x}
 \end{equation*}
 
 cuyos puntos extremos serían
@@ -54,11 +56,19 @@ es decir,
   x_{i+\frac{1}{2}}-
   x_{i-\frac{1}{2}}
 \end{math}.
-En la figura 3.1, se muestran dos ejemplos de celdas.
+En la Figura~\ref{fig:cellsunidimensional}, se muestran dos ejemplos
+de celdas.
 
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=.5\paperwidth]{figure3}
+  \caption{Celdas $c_{i}$ y $c_{i+1}$ en una dimensión espacial.}
+  \label{fig:cellsunidimensional}
+\end{figure}
 
-En esta memoria, denotamos por uni a la aproximación del valor medio
-de $u$ sobre la celda $c_{i}$ en el tiempo $t_{n}$, es decir:
+En esta memoria, denotamos por $u^{n}_{i}$ a la aproximación del
+valor medio de $u$ sobre la celda $c_{i}$ en el tiempo $t_{n}$, es
+decir:
 
 \begin{equation*}
   u^{n}_{i}\approx
@@ -75,20 +85,32 @@ deducir métodos numéricos que mimeticen propiedades importantes de
 las leyes de conservación.
 En particular, se puede asegurar que el método numérico es
 conservativo en un sentido que imite a la solución exacta.
-Esto es debido a que $\sum_{i=1}^{N}\Delta x\cdot u^{n}_{i}$
+Esto es debido a que
+\begin{math}
+  \sum_{i=1}^{N}
+  u^{n}_{i}
+  \Delta x
+\end{math}
 aproxima la integral de $u$ sobre el dominio espacial
 $\left[a,b\right]$, es decir,
 
 \begin{equation*}
   \int_{a}^{b}
-  u\left(x,t_{n}\right)\dl x\approx
+  u\left(x,t_{n}\right)
+  \dl x\approx
   \sum_{i=1}^{N}
-  \Delta x\cdot u^{n}_{i}.
+  u^{n}_{i}
+  \Delta x.
 \end{equation*}
 
 Veremos que si expresamos un método numérico en la forma
 conservativa, la suma discreta anterior,
-$\sum_{i=1}^{N}\Delta x\cdot u^{n}_{i}$, cambiará solamente debido a
+\begin{math}
+  \sum_{i=1}^{N}
+  u^{n}_{i}
+  \Delta x
+\end{math},
+cambiará solamente debido a
 los valores en las fronteras $x=a$ y $x=b$.
 En concreto, la identidad~\eqref{eq:conservative} que aparece más
 adelante, cuando el rango de valores de celdas definido por $I$, $J$
@@ -99,11 +121,11 @@ Ahora podemos expresar la forma integral de la ley de conservación en
 la celda $c_{i}$ como
 
 \begin{equation}\label{eq:integralformcell}
-  \diffp{}{x}
+  \diffp{}{t}
   \int_{c_{i}}
   u\left(x,t\right)\dl x=
-  f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
-  f\left(u\left(x_{i+\frac{1}{2}}\right),t\right).
+  f\big(u\big(x_{i-\frac{1}{2}},t\big)\big)-
+  f\big(u\big(x_{i+\frac{1}{2}},t\big)\big).
 \end{equation}
 
 Una vez que se ha discretizado el dominio espacial, procedemos a
@@ -130,9 +152,10 @@ intervalo de tiempo $\left[t_{n},t_{n+1}\right]$:
   u\left(x,t_{n}\right)\dl x=
   \int_{t_{n}}^{t_{n+1}}
   \left[
-    f\left(u\left(x_{i-\frac{1}{2}}\right),t\right)-
-    f\left(u\left(x_{i+\frac{1}{2}}\right),t\right)
-    \right]\dl t.
+    f\big(u\big(x_{i-\frac{1}{2}},t\big)\big)-
+    f\big(u\big(x_{i+\frac{1}{2}},t\big)\big)
+    \right]
+  \dl t.
 \end{equation}
 
 Dividiendo la expresión~\eqref{eq:integrationeachinterval} entre
@@ -151,8 +174,8 @@ $\Delta x$ y reordenando los términos, se obtiene
     -\frac{1}{\Delta x}
     \int_{t_{n}}^{t_{n+1}}
     \left[
-      f\left(u\left(x_{i-\frac{1}{2}}\right)\right)-
-      f\left(u\left(x_{i+\frac{1}{2}}\right)\right)
+      f\big(u\big(x_{i-\frac{1}{2}}\big)\big)-
+      f\big(u\big(x_{i+\frac{1}{2}}\big)\big)
       \right]\dl t.
   \end{split}
 \end{gather}
@@ -340,11 +363,12 @@ conservativo.
 
 \section{Métodos descentrados}
 
-La solución del Problema de Valores Iniciales (2.8) es constante a lo
-largo de curvas características.
+La solución del Problema de Valores
+Iniciales~\eqref{eq:IVPconservationlaw} es constante a lo largo de
+curvas características.
 En el caso lineal, a lo largo de rectas características, pudiéndose
 diferenciar dos casos en función del signo de la velocidad de
-propagación (figuras 3.2 y 3.3).
+propagación. % (figuras 3.2 y 3.3).
 
 
 Las rectas características son usadas para determinar mejores
@@ -395,9 +419,10 @@ propagación positiva, $c>0$, viene dado por
 denominado método descentrado upwind.
 
 Por otro lado, en el caso de que la información se propague con
-velocidad negativa $c<0$, como se muestra en la figura 3.3, siguiendo
-el mismo razonamiento que para el caso anterior, resulta que el
-método descentrado viene dado por el siguiente esquema numérico
+velocidad negativa $c<0$, %como se muestra en la figura 3.3,
+siguiendo el mismo razonamiento que para el caso anterior, resulta
+que el método descentrado viene dado por el siguiente esquema
+numérico
 
 \begin{equation}\label{eq:downwind}
   u^{n+1}_{i}=
@@ -517,8 +542,8 @@ y promediar.
         \end{equation*}
 
         para $x$ en cada celda $c_{i}$ , entendiéndose como el
-        promedio de la solución en cada celda, en el tiempo $t_{n}$,
-        como se muestra en la figura 3.5.
+        promedio de la solución en cada celda, en el tiempo $t_{n}$.
+        % como se muestra en la figura 3.5.
 
   \item[Paso 2]
 

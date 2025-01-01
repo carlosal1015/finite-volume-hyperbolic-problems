@@ -28,8 +28,8 @@ Supongamos que $\left[a,b\right]$ es el dominio computacional del
 problema, subdividido en las celdas $c_{1},c_{2},\dotsc,c_{N}$ donde
 $c_{i}=\left(x_{i-\frac{1}{2}},x_{i+\frac{1}{2}}\right)$, para
 $i=1,\dotsc,N$.
-La figura 5.1 muestra una malla con una celda fantasma en cada
-extremo.
+% La figura 5.1 muestra una malla con una celda fantasma en cada
+% extremo.
 
 En principio, usaremos condiciones de contorno periódicas, esto es,
 para cada instante de tiempo $t_{n}$, impondremos la condición
@@ -57,7 +57,7 @@ resultados vistos en la teoría.
 Estos experimentos van a ser aplicados a la ecuación de transporte
 dada por
 
-\begin{equation*}
+\begin{equation}\label{eq:transportequation}
     u_{t}
     \left(x,t\right)+
     cu_{x}
@@ -65,19 +65,22 @@ dada por
     0,\quad
     x\in\mathbb{R},\quad
     t>0,
-\end{equation*}
+\end{equation}
 
 siendo $c$ es la velocidad de propagación.
 En el primer ejemplo, nos centraremos en el problema de Cauchy cuya
-condición inicial viene dada por la ecuación (2.7), para un dato
-inicial no regular (infinitamente derivable).
+condición inicial viene dada por la
+ecuación~\eqref{eq:initialcondition}, para un dato inicial no regular
+(infinitamente derivable).
 En el segundo ejemplo, nos centraremos en el problema de Riemann cuya
-condición inicial viene dada por la ecuación (2.13), ambos problemas
+condición inicial viene dada por la
+ecuación~\eqref{eq:initialconditionriemann}, ambos problemas
 estudiados en el capítulo 2.
 Además, a partir de estas condiciones iniciales, obtenemos la
 solución exacta en cualquier instante de tiempo posterior, dada por
-la expresión (2.10) para el problema de Cauchy genérico y por la
-expresión (2.14) para el problema de Riemann.
+la expresión~\eqref{eq:solutionadvection} para el problema de Cauchy
+genérico y por la expresión~\eqref{eq:solutionriemann} para el
+problema de Riemann.
 Entonces, comparamos en cada instante de tiempo la solución exacta
 con la solución aproximada obtenida para cada uno de los esquemas
 numéricos estudiados en el capítulo 4.
@@ -87,7 +90,7 @@ numéricos estudiados en el capítulo 4.
 En este ejemplo consideramos el dominio espacial
 $\Omega=\left[0,20\right]$, el paso en espacio $\Delta x=0.1$, el
 paso en tiempo $\Delta t=0.02$, la velocidad de propagación negativa
-$c=-1$ (para los que se veriﬁca la condición CFL) y la condición
+$c=-1$ (para los que se verifica la condición CFL) y la condición
 inicial dada por
 
 \begin{equation*}
@@ -96,13 +99,14 @@ inicial dada por
 \end{equation*}
 
 Para estos datos calculamos las soluciones numéricas de la ecuación
-de transporte (5.1) con condición inicial, aplicando el método
-descentrado downwind, el método de Lax-Friedrichs y por último, el
-método de Lax-Wendroff.
+de transporte~\eqref{eq:transportequation} con condición inicial,
+aplicando el método descentrado downwind, el método de Lax-Friedrichs
+y por último, el método de Lax-Wendroff.
 Para ello, hemos empleado el lenguaje de programación Python.
-Así, obtenemos los resultados de las figuras 5.2 y 5.3, para cada uno
-de los métodos estudiados junto con la solución exacta para cada
-instante de tiempo considerado.
+Así, obtenemos los resultados de las Figuras~\ref{fig:example1t2}
+y~\ref{fig:example1t40}, para cada uno de los métodos estudiados
+junto con la solución exacta para cada instante de tiempo
+considerado.
 
 \begin{figure}[ht!]
     \centering
@@ -128,11 +132,13 @@ con las simulaciones numéricas como era de esperar.
 En el capítulo anterior, vimos que el método descentrado downwind y
 el de Lax-Friedrichs, ambos, tienen orden de convergencia uno, en
 cambio, el método de Lax-Wendroff tiene orden de convergencia dos.
-Por lo tanto, como se puede apreciar en las ﬁguras 5.2 y 5.3
-(donde se reproduce el mismo experimento pero en los instantes de
-tiempo $t_{2}=0.04$ y $t_{40}=0.8$), el método de Lax-Wendroff es el
-que proporciona una mejor aproximación de la solución de la ecuación
-(5.1) a medida que el tiempo evoluciona.
+Por lo tanto, como se puede apreciar en las
+Figuras~\ref{fig:example1t2} y~\ref{fig:example1t40} (donde se
+reproduce el mismo experimento pero en los instantes de tiempo
+$t_{2}=0.04$ y $t_{40}=0.8$), el método de Lax-Wendroff es el que
+proporciona una mejor aproximación de la solución de la
+ecuación~\eqref{eq:transportequation} a medida que el tiempo
+evoluciona.
 Por otra parte, también es destacable resaltar el adelanto que
 presenta la solución numérica del método de Lax-Friedrichs respecto a
 la solución exacta en el instante de tiempo $t_{40}=0.8$.
@@ -142,7 +148,7 @@ la solución exacta en el instante de tiempo $t_{40}=0.8$.
 En este ejemplo consideramos el dominio espacial
 $\Omega=\left[0,30\right]$, el paso en espacio $\Delta x=0.12$, el
 paso en tiempo $\Delta t=0.02$, la velocidad de propagación positiva
-$c=1$ (para los que se veriﬁca la condición CFL) y la condición
+$c=1$ (para los que se verifica la condición CFL) y la condición
 inicial dada por la función discontinua
 
 \begin{equation*}
@@ -154,11 +160,13 @@ inicial dada por la función discontinua
 \end{equation*}
 
 Para este dato inicial calculamos las soluciones numéricas de la
-ecuación de transporte (5.1), aplicando el método descentrado upwind,
-el método de Lax-Friedrichs y por último, el método de Lax-Wendroff.
+ecuación de transporte~\eqref{eq:transportequation}, aplicando el
+método descentrado upwind, el método de Lax-Friedrichs y por último,
+el método de Lax-Wendroff.
 Al igual que en el ejemplo anterior, hemos empleado el lenguaje de
 programación Python.
-Entonces, obtenemos los resultados de las ﬁguras 5.4 y 5.5 (donde se
+Entonces, obtenemos los resultados de las
+Figuras~\ref{fig:example2t2} y~\ref{fig:example2t10} (donde se
 reproduce el mismo experimento pero en los instantes de tiempo
 $t_{2}=0.04$ y $t_{10}=0.2$), para cada uno de los métodos nombrados
 junto con la solución exacta y para cada instante de tiempo
@@ -175,14 +183,14 @@ considerado.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=.30\paperwidth]{../snapshots/upwindheaviside1d-40.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsheaviside1d-40.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffheaviside1d-40.png}
+    \includegraphics[width=.30\paperwidth]{../snapshots/upwindheaviside1d-10.png}
+    \includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsheaviside1d-10.png}
+    \includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffheaviside1d-10.png}
     \caption{Simulación numérica en el tiempo $t_{40}=40\Delta t$.}
-    \label{fig:example2t40}
+    \label{fig:example2t10}
 \end{figure}
 
-En la figura 5.5 (experimento en el instante de tiempo $t_10=0.2$),
+En la Figura~\ref{fig:example2t10} (experimento en el instante de tiempo $t_10=0.2$),
 se puede apreciar que el método aguas arriba aproxima bien la
 solución pero contiene una pequeña disipación numérica entorno a la
 discontinuidad, en donde disminuye la precisión.
@@ -191,6 +199,6 @@ Lax-Friedrichs en dicha discontinuidad.
 Por otra parte, es destacable resaltar el hecho de que el método de
 Lax-Wendroff provoque las denominadas oscilaciones espurias en las
 regiones próximas a la discontinuidad.
-Este hecho es bien conocido y está documentado en [12].
+Este hecho es bien conocido y está documentado en~\cite{Leveque2002}.
 Sin embargo, es más preciso en aquellos puntos donde la solución es
 más regular.

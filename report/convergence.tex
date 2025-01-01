@@ -90,8 +90,9 @@ denominada la norma discreta $L^{2}$.
 Obsérvese que se introduce el factor $\Delta x$, permitiendo que la
 serie converja a medida que la malla se refine, esto es, a medida que
 $\Delta x$ disminuye.
-Este factor $\Delta x$ hace que ambas normas definidas~\eqref{eq:l2norm}
-y~\eqref{eq:l2normdiscrete} sean análogas.
+Este factor $\Delta x$ hace que ambas normas
+definidas~\eqref{eq:l2norm} y~\eqref{eq:l2normdiscrete} sean
+análogas.
 
 Con el objetivo de simplificar la notación, asumimos que $\Delta t$ y
 $\Delta x$ están relacionadas de manera fija.
@@ -165,20 +166,20 @@ transporte, para los esquemas numéricos presentados a continuación:
   \left(
   u^{n}_{i}-
   u^{n}_{i-1}
-  \right)\label{eq:upwindscheme}         \\
+  \right)\label{eq:upwindscheme}        \\
   u^{n+1}_{i} & =
   u^{n}_{i}-
   c\frac{\Delta t}{\Delta x}
   \left(
   u^{n}_{i+1}-
   u^{n}_{i}
-  \right)\label{eq:downwindscheme}         \\
+  \right)\label{eq:downwindscheme}      \\
   u^{n+1}_{i} & =
   u^{n}_{i}-
   c\frac{\Delta t}{2\Delta x}
   \left(
   u^{n}_{i+1}-u^{n}_{i-1}
-  \right)\label{eq:ftcsscheme}         \\
+  \right)\label{eq:ftcsscheme}          \\
   u^{n+1}_{i} & =
   \frac{1}{2}
   \left(
@@ -189,7 +190,7 @@ transporte, para los esquemas numéricos presentados a continuación:
   \left(
   u^{n}_{i+1}-
   u^{n}_{i-1}
-  \right)\label{eq:laxfriedrichsscheme}         \\
+  \right)\label{eq:laxfriedrichsscheme} \\
   u^{n+1}_{i} & =
   u^{n}_{i}-
   c\frac{\Delta t}{2\Delta x}
@@ -206,13 +207,14 @@ transporte, para los esquemas numéricos presentados a continuación:
   \right)\label{eq:laxwendroffscheme}
 \end{align}
 
-Los esquemas~\eqref{eq:upwindscheme} y~\eqref{eq:downwindscheme} son métodos descentrados, upwind y
-downwind, respectivamente.
-El esquema numérico (4.5) veremos que es inestable y es a partir del
-cual se introdujo el esquema (4.6), denominado esquema de
+Los esquemas~\eqref{eq:upwindscheme} y~\eqref{eq:downwindscheme} son
+métodos descentrados, upwind y downwind, respectivamente.
+El esquema numérico~\eqref{eq:ftcsscheme} veremos que es inestable y
+es a partir del cual se introdujo el
+esquema~\eqref{eq:laxfriedrichsscheme}, denominado esquema de
 Lax-Friedrichs.
-Finalmente, el esquema numérico (4.7) es el conocido por
-Lax-Wendroff.
+Finalmente, el esquema numérico~\eqref{eq:laxwendroffscheme} es el
+conocido por Lax-Wendroff.
 
 En estos esquemas numéricos, la incógnita, $u^{n+1}$, se calcula
 mediante el valor conocido, $u^{n}$, asociado a un paso de tiempo
@@ -224,7 +226,8 @@ tiempo $t_{n+1}$ como
 
 \begin{equation*}
   u^{n+1}=
-  \mathcal{N}\left(u^{n}\right).
+  \mathcal{N}
+  \left(u^{n}\right).
 \end{equation*}
 
 donde $\mathcal{N}\left(\cdot\right)$ representa el operador numérico
@@ -300,7 +303,7 @@ descentrado upwind para la ecuación de transporte.
   exacta de la ecuación de transporte, es decir,
   $u_{t}+cu_{x}=0$, el error de consistencia viene dado por
 
-  \begin{equation*}
+  \begin{equation}\label{eq:truncationerrorupwind}
     \tau^{n}=
     \frac{1}{2}
     c\Delta x
@@ -311,13 +314,13 @@ descentrado upwind para la ecuación de transporte.
     \left(x_{i},t_{n}\right)+
     \mathcal{O}
     \left(\Delta t^{2}\right).
-  \end{equation*}
+  \end{equation}
 
   Dado que $u_{t}+cu_{x}=0$, entonces $u_{t}=-cu_{x}$ y derivando
   dicha igualdad con respecto a $t$ y a $x$, obtenemos que
   $u_{tt}=-cu_{xt}$ y $u_{tx}=-cu_{xx}$, respectivamente.
   De aquí, $u_{tt}=c^{2}u_{xx}$ y sustituyendo en el error de
-  consistencia (4.8), se tiene que
+  consistencia~\eqref{eq:truncationerrorupwind}, se tiene que
 
   \begin{equation*}
     \tau^{n}=
@@ -335,7 +338,7 @@ descentrado upwind para la ecuación de transporte.
   Asumiremos que
   \begin{math}
     u\in
-    \mathcal{C}^{2}
+    C^{2}
     \left(
     \mathbb{R}\times
     \mathbb{R}^{+}
@@ -350,8 +353,9 @@ descentrado upwind para la ecuación de transporte.
 \end{example}
 
 De forma similar, hallamos el error de consistencia del
-esquema (4.6), esquema de Lax-Friedrichs y del esquema (4.7),
-esquema de Lax-Wendroff, ambos, para la ecuación de transporte.
+esquema~\eqref{eq:laxfriedrichsscheme}, esquema de Lax-Friedrichs y
+del esquema~\eqref{eq:laxwendroffscheme}, esquema de Lax-Wendroff,
+ambos, para la ecuación de transporte.
 Respectivamente, vienen dados por
 
 \begin{align*}
@@ -396,37 +400,39 @@ homogéneos, introducimos el siguiente concepto de estabilidad.
   ecuación en derivadas parciales de primer orden es estable si
   existe una constante $K$ tal que
 
-  \begin{equation*}
+  \begin{equation}\label{eq:stabilityonestepscheme}
     \sum_{i=-\infty}^{+\infty}
     {\left|u^{n}_{i}\right|}^{2}\leq
     K
     \sum_{i=-\infty}^{+\infty}
     {\left|u^{0}_{i}\right|}^{2}.
-  \end{equation*}
+  \end{equation}
 \end{definition}
 
-Multiplicando la desigualdad (4.9) por $\Delta x$ y aplicando la
-norma discreta $L^{2}$ dado por la
+Multiplicando la desigualdad~\eqref{eq:stabilityonestepscheme} por
+$\Delta x$ y aplicando la norma discreta $L^{2}$ dado por la
 expresión~\eqref{eq:l2normdiscrete}, tenemos que la definición
 anterior es equivalente a
 
-\begin{equation*}
+\begin{equation}\label{eq:stabilityonestepschemeequivalence}
   {\left\|u^{n}\right\|}^{2}_{2}\leq
   K
   {\left\|u^{0}\right\|}^{2}_{2},
-\end{equation*}
+\end{equation}
 
 para alguna constante $K$.
 En particular, cada esquema numérico que estudiemos requerirá
 un análisis de estabalidad. En algunos casos podemos determinar
 condiciones suficientes que garantizan directamente la estabilidad a
-partir de la expresión (4.9).
-Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
+partir de la expresión~\eqref{eq:stabilityonestepscheme}.
+Veámoslo en el siguiente ejemplo para el esquema
+numérico~\eqref{eq:upwindscheme}.
 
 \begin{example}
-  Consideramos el esquema numérico downwind (4.4), esto es,
+  Consideramos el esquema numérico
+  downwind~\eqref{eq:downwindscheme}, esto es,
 
-  \begin{equation*}
+  \begin{equation}\label{eq:downwindscheme2}
     u^{n+1}_{i}=
     \left(
     1+
@@ -435,7 +441,7 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     u^{n}_{i}-
     c\frac{\Delta t}{\Delta x}
     u^{n}_{i+1}.
-  \end{equation*}
+  \end{equation}
 
   Denotemos
   \begin{math}
@@ -448,8 +454,8 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     \beta=
     -c\frac{\Delta t}{\Delta x}
   \end{math},
-  sustituyendo en la expresión (4.11) obtenemos que el esquema
-  numérico viene dado por
+  sustituyendo en la expresión~\eqref{eq:downwindscheme2} obtenemos
+  que el esquema numérico viene dado por
 
   \begin{equation*}
     u^{n+1}_{i}=
@@ -618,7 +624,7 @@ Veámoslo en el siguiente ejemplo para el esquema numérico (4.3).
     c\frac{\Delta t}{\Delta x}\leq
     0
   \end{math}
-  entonces el esquema numérico (4.11) es estable, como queríamos ver.
+  entonces el esquema numérico~\eqref{eq:downwindscheme2} es estable, como queríamos ver.
 \end{example}
 
 Hemos visto que a partir de la definición de estabilidad podemos
@@ -634,11 +640,17 @@ debe cumplirse en cualquier método de volumen finito si esperamos que
 sea estable y que converja a la solución de la ecuación en derivadas
 parciales a medida que se refine la malla.
 
+\section{Condición CFL}
+
+La condición CFL es una condición necesaria que debe cumplirse en
+cualquier método de volumen finito para garantizar la estabilidad,
+pero no es suficiente como veremos en el ejemplo 4.3.
+
 Sea $\left(x,t\right)$ un punto fijo en el espacio-tiempo.
-Como se vio en la expresión (2.10) la solución $u\left(x,t\right)$
-del problema de Cauchy depende solo del dato inicial $u_{0}$ en
-$x-ct$ siendo $c$ la velocidad de propagación de la ecuación
-diferencial, originándose el siguiente concepto.
+Como se vio en la expresión~\eqref{eq:solutionadvection} la solución
+$u\left(x,t\right)$ del problema de Cauchy depende solo del dato
+inicial $u_{0}$ en $x-ct$ siendo $c$ la velocidad de propagación de
+la ecuación diferencial, originándose el siguiente concepto.
 
 \begin{definition}
   El dominio de dependencia analítico o de una ecuación en derivadas
@@ -658,10 +670,11 @@ diferencial, originándose el siguiente concepto.
 Se considera la ecuación de transporte, $u_t+cu_x=0$, con $c>0$, y se
 aproxima su solución mediante un método explícito, por ejemplo, el
 método descentrado.
-Este esquema numérico viene dado por la ecuación (4.3), por tanto,
-cada nuevo valor $u^{n+1}_{i}$ se calcula en función de las
-aproximaciones de la solución asociadas a un paso de tiempo previo,
-todas estas dentro de una región.
+Este esquema numérico viene dado por la
+ecuación~\eqref{eq:upwindscheme}, por tanto, cada nuevo valor
+$u^{n+1}_{i}$ se calcula en función de las aproximaciones de la
+solución asociadas a un paso de tiempo previo, todas estas dentro de
+una región.
 A esta región se le denomina el dominio de dependencia de un método
 numérico, definido como el conjunto de datos iniciales que pueden
 afectar a la solución numérica en el nivel de tiempo $n+1$.
@@ -678,12 +691,12 @@ numérico.
 Además, incluyendo el caso en el que la velocidad de propagación sea
 negativa, $c<0$, se tiene que cumplir que
 
-\begin{equation*}
+\begin{equation}\label{eq:cflcondition}
   \left|
   c\frac{\Delta t}{\Delta x}
   \right|\leq
   1,
-\end{equation*}
+\end{equation}
 
 donde
 \begin{math}
@@ -697,7 +710,7 @@ En general, veremos que una condición necesaria para la estabilidad
 de un método de volúmenes finitos es que el dominio de dependencia
 numérico contenga el dominio de dependencia analítico.
 Esto se traduce en que la estabilidad requerirá una condición CFL del
-tipo (4.12).
+tipo~\eqref{eq:cflcondition}.
 Así, en el ejemplo 4.2 vimos que el esquema numérico considerado es
 estable si se verifica
 \begin{math}
@@ -721,14 +734,14 @@ una función definida sobre una malla para el problema de Cauchy.
 Sea $\Delta x$ la longitud de las celdas de la malla,
 entonces su transformada de Fourier visto viene dada por
 
-\begin{equation*}
+\begin{equation}\label{eq:fouriertransform}
   \overline{u}
   \left(\xi\right)=
   \frac{1}{\sqrt{2\pi}}
   \sum_{j=-\infty}^{\infty}
   e^{-i\xi j\Delta x}
   u^{n}_{j}\Delta x,
-\end{equation*}
+\end{equation}
 
 donde
 \begin{math}
@@ -751,7 +764,7 @@ y
 \end{math}.
 Y la transformada de Fourier inversa viene dada por
 
-\begin{equation*}
+\begin{equation}\label{eq:fourierinversetransform}
   u^{n}_{j}=
   \frac{1}{\sqrt{2\pi}}
   \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
@@ -759,7 +772,7 @@ Y la transformada de Fourier inversa viene dada por
   \overline{u}^{n}
   \left(\xi\right)
   \dl\xi.
-\end{equation*}
+\end{equation}
 
 Tomando la norma $L^{2}$ como fue definida en la
 expresión~\eqref{eq:l2norm} para funciones continuas y en la
@@ -776,14 +789,15 @@ tiene el siguiente resultado.
       \right]\to
     \mathbb{R}
   \end{math}
-  una función de periodo $\frac{2\pi}{\Delta x}$, dada por la serie (4.13)
-  con coeficientes $u^{n}_{j}$ dados por la igualdad (4.14).
+  una función de periodo $\frac{2\pi}{\Delta x}$, dada por la
+  serie~\eqref{eq:fouriertransform} con coeficientes $u^{n}_{j}$
+  dados por la igualdad~\eqref{eq:fourierinversetransform}.
   Entonces
 
-  \begin{equation*}
+  \begin{equation}\label{eq:parsevalidentity}
     {\left\|\overline{u}\left(\xi\right)\right\|}^{2}_{L^{2}\left(\mathbb{R}\right)}=
     {\left\|u^{n}\right\|}^{2}_{2}.
-  \end{equation*}
+  \end{equation}
 \end{theorem}
 
 \begin{proof}
@@ -845,14 +859,16 @@ tiene el siguiente resultado.
   \end{align*}
 \end{proof}
 
-De esta forma, por la desigualdad (4.10) y por la identidad de
-Parseval (4.16), si se demuestra la estabilidad para la transformada
-de Fourier, inmediatamente, está demostrada para la función original.
+De esta forma, por la
+desigualdad~\eqref{eq:stabilityonestepschemeequivalence} y por la
+identidad de Parseval~\eqref{eq:parsevalidentity}, si se demuestra la
+estabilidad para la transformada de Fourier, inmediatamente, está
+demostrada para la función original.
 
 De forma genérica, sabemos que un esquema de volúmenes finitos de un
 paso se define como
 
-\begin{equation*}
+\begin{equation}\label{eq:onestepschemefinitevolume}
   u^{n+1}_{j}=
   u^{n}_{j}-
   c\frac{\Delta t}{\Delta x}
@@ -860,7 +876,7 @@ paso se define como
   \phi\left(u^{n}_{j},u^{n}_{j+1}\right)-
   \phi\left(u^{n}_{j-1},u^{n}_{j}\right)
   \right).
-\end{equation*}
+\end{equation}
 
 Para simplificar notación, denotamos
 \begin{math}
@@ -868,9 +884,9 @@ Para simplificar notación, denotamos
   c\frac{\Delta t}{\Delta x}
 \end{math}.
 Centrándonos en nuestro estudio de problemas lineales podemos
-escribir el esquema (4.17) como sigue
+escribir el esquema~\eqref{eq:onestepschemefinitevolume} como sigue
 
-\begin{equation*}
+\begin{equation}\label{eq:onestepschemefinitevolume2}
   u^{n+1}_{j}=
   u^{n}_{j}-
   \mu
@@ -885,12 +901,13 @@ escribir el esquema (4.17) como sigue
   u^{n}_{j-1}-
   \mu\gamma
   u^{n}_{j+1}
-\end{equation*}
+\end{equation}
 
-donde $\alpha,\beta,\gamma\in\mathbb{R}$, y sustituyendo la ecuación
-(4.14) en la expresión (4.18), se obtiene que
+donde $\alpha,\beta,\gamma\in\mathbb{R}$, y sustituyendo la
+ecuación~\eqref{eq:fourierinversetransform} en la
+expresión~\eqref{eq:onestepschemefinitevolume2}, se obtiene que
 
-\begin{equation*}
+\begin{equation}\label{eq:onestepschemefinitevolume3}
   u^{n+1}_{j}=
   \frac{1}{\sqrt{2\pi}}
   \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
@@ -904,13 +921,14 @@ donde $\alpha,\beta,\gamma\in\mathbb{R}$, y sustituyendo la ecuación
     \right]
   \overline{u}^{n}\left(\xi\right)
   \dl\xi
-\end{equation*}
+\end{equation}
 
 Aplicando la definición de la transformada de Fourier inversa, dada
-por la ecuación (4.14), en el tiempo $t_{n+1}$, de la ecuación (4.19)
+por la ecuación~\eqref{eq:fourierinversetransform}, en el tiempo
+$t_{n+1}$, de la ecuación~\eqref{eq:onestepschemefinitevolume3}
 resulta que
 
-\begin{align*}
+\begin{equation*}
   \overline{u}^{n+1}
   \left(\xi\right)=
   \left[
@@ -921,7 +939,7 @@ resulta que
     \right]
   \overline{u}^{n}
   \left(\xi\right)
-\end{align*}
+\end{equation*}
 
 Denotando
 \begin{math}
@@ -935,21 +953,22 @@ Denotando
 \end{math},
 entonces
 
-\begin{equation*}
+\begin{equation}\label{eq:amplificationfactor}
   \overline{u}^{n+1}
   \left(\xi\right)=
   g
   \left(\xi\Delta x\right)
   \overline{u}^{n}
   \left(\xi\right).
-\end{equation*}
+\end{equation}
 
-La ecuación (4.20) muestra que para esquemas numéricos de un paso, la
-solución en un tiempo concreto es igual a multiplicar la solución en
-el instante de tiempo previo por un factor denominado factor de
-amplificación, que corresponde con la magnitud en la que avanza la
-solución en un paso de tiempo.
-De la ecuación (4.20) de forma recursiva, se obtiene que
+La ecuación~\eqref{eq:amplificationfactor} muestra que para esquemas
+numéricos de un paso, la solución en un tiempo concreto es igual a
+multiplicar la solución en el instante de tiempo previo por un factor
+denominado factor de amplificación, que corresponde con la magnitud
+en la que avanza la solución en un paso de tiempo.
+De la ecuación~\eqref{eq:amplificationfactor} de forma recursiva, se
+obtiene que
 
 \begin{equation*}
   \overline{u}^{n+1}
@@ -985,9 +1004,9 @@ Consideremos algunos ejemplos de esquemas numéricos para determinar
 su estabilidad mediante el análisis de Von Neumann.
 
 \begin{example}
-  Consideremos el esquema numérico (4.5).
-  Sustituimos la ecuación (4.14) en el esquema numérico considerado y
-  se obtiene que
+  Consideremos el esquema numérico~\eqref{eq:ftcsscheme}.
+  Sustituimos la ecuación~\eqref{eq:fourierinversetransform} en el
+  esquema numérico considerado y se obtiene que
 
   \begin{equation*}
     u^{n+1}_{j}=
@@ -1073,13 +1092,14 @@ su estabilidad mediante el análisis de Von Neumann.
 \end{example}
 
 
-En el siguiente ejemplo, consideramos el esquema numérico dado por la expresión (4.6).
+En el siguiente ejemplo, consideramos el esquema numérico dado por la
+expresión~\eqref{eq:laxfriedrichsscheme}.
 
 \begin{example}
   Consideremos el esquema numérico de Lax-Friedrichs dado por la
-  expresión (4.6).
-  Sustituimos la ecuación (4.14) en el esquema numérico considerado y
-  se obtiene que
+  expresión~\eqref{eq:laxfriedrichsscheme}.
+  Sustituimos la ecuación~\eqref{eq:fourierinversetransform} en el
+  esquema numérico considerado y se obtiene que
 
   \begin{equation*}
     u^{n+1}_{j}=
@@ -1218,13 +1238,14 @@ En el siguiente ejemplo, consideramos el esquema numérico dado por la expresió
 \end{example}
 
 En el siguiente ejemplo estudiamos la estabilidad del esquema
-numérico de Lax-Wendroff dado por la expresión (4.7).
+numérico de Lax-Wendroff dado por la
+expresión~\eqref{eq:laxwendroffscheme}.
 
 \begin{example}
   Consideremos el esquema numérico de Lax-Wendroff dado por la
-  expresión (4.7).
-  Sustituimos la ecuación (4.14) en el esquema numérico considerado
-  y se obtiene que
+  expresión~\eqref{eq:laxwendroffscheme}.
+  Sustituimos la ecuación~\eqref{eq:fourierinversetransform} en el
+  esquema numérico considerado y se obtiene que
 
   \begin{gather*}
     \begin{split}
@@ -1409,15 +1430,16 @@ numérico de Lax-Wendroff dado por la expresión (4.7).
 
   o equivalentemente,
 
-  \begin{equation*}
+  \begin{equation}\label{eq:ellipse}
     \frac{{\left(x-\left(1-r^{2}\right)\right)}^{2}}{r^{4}}+
     \frac{y}{r^{2}}=
     1
-  \end{equation*}
+  \end{equation}
 
-  Así, hemos obtenido que la ecuación (4.21) es una elipse en el plano
-  complejo de centro $\left(1-r^2, 0\right)$, semieje en $x$ de
-  longitud $r^{2}$ y semieje en $y$ de longitud $\left|r\right|$.
+  Así, hemos obtenido que la ecuación~\eqref{eq:ellipse} es una
+  elipse en el plano complejo de centro $\left(1-r^2, 0\right)$,
+  semieje en $x$ de longitud $r^{2}$ y semieje en $y$ de longitud
+  $\left|r\right|$.
 
   Para garantizar la estabilidad del esquema numérico considerado se
   tiene que cumplir que
@@ -1449,10 +1471,10 @@ numérico de Lax-Wendroff dado por la expresión (4.7).
   Entonces, para obtener la condición que garantiza la estabilidad
   del esquema numérico, la elipse tiene que estar contenida en su
   totalidad dentro de la circunferencia $x^{2}+y^{2}=1$.
-  Para ello, veamos en que puntos intersecan la elipse (4.21) y la
-  circunferencia de centro $\left(0,0\right)$ y radio $1$, es decir,
-  los puntos $\left(x,y\right)$ que satisfacen las dos ecuaciones
-  siguientes.
+  Para ello, veamos en que puntos intersecan la
+  elipse~\eqref{eq:ellipse} y la circunferencia de centro
+  $\left(0,0\right)$ y radio $1$, es decir, los puntos
+  $\left(x,y\right)$ que satisfacen las dos ecuaciones siguientes.
 
   \begin{align*}
     x^{2}+

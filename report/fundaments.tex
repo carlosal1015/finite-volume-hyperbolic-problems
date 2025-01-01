@@ -18,23 +18,25 @@ Como problema modelo, se considera la ecuación de transporte escalar.
     f\colon\Omega\to
     \mathbb{R}
   \end{math}
-  una
-  función de clase
+  una función de clase
   \begin{math}
-    \mathcal{C}^{1}
+    C^{1}
     \left(\Omega\right)
   \end{math}.
-  Una ley de conservación unidimensional es
+  Una \textbf{ley de conservación unidimensional} es
 
   \begin{equation}\label{eq:differentialconservationlaw}
     u_{t}
     \left(x,t\right)+
-    {f\left(u\left(x,t\right)\right)}_{x}=
+    f_{x}
+    \left(
+    u\left(x,t\right)
+    \right)=
     0,
   \end{equation}
 
-  donde la función
-
+  donde $u$ es la \textbf{variable conservativa} o variable de
+  estado, es la función
   \begin{align*}
     u\colon\mathbb{R}\times
     \left[0,+\infty\right) &
@@ -42,11 +44,10 @@ Como problema modelo, se considera la ecuación de transporte escalar.
     \Omega                   \\
     \left(x,t\right)       &
     \longmapsto
-    u\left(x,t\right)
+    u\left(x,t\right).
   \end{align*}
-
-  se denomina variable conservativa, el conjunto $\Omega$ es el
-  conjunto de los estados y la función $f$ es la función flujo.
+  El conjunto $\Omega$ es llamado el \textbf{conjunto de los estados}
+  y la función $f$ es el \textbf{flujo convectivo}.
 \end{definition}
 
 \begin{remark}
@@ -63,9 +64,11 @@ Como problema modelo, se considera la ecuación de transporte escalar.
     F\left(b,t\right).
   \end{equation}
 
-  Esta refleja la base de la conservación, la variación de unas
-  magnitudes en una región se debe solo a los flujos a través de los
-  puntos extremos.
+  Se puede ver que ambas son equivalentes, para más detalle
+  consultar~\cite{Leveque2002}.
+  La ecuación~\eqref{eq:integralconservationlaw} refleja la base de
+  la conservación, la variación de unas magnitudes en una región se
+  debe solo a los flujos a través de los puntos extremos.
 \end{remark}
 
 \section{Problema de Cauchy}
@@ -77,7 +80,7 @@ planteada, es garantizar la existencia, unicidad de solución y la
 continuidad con respecto a esta condición inicial.
 
 \begin{definition}
-  El problema de Cauchy consiste en encontrar una función
+  El \textbf{problema de Cauchy} consiste en encontrar una función
 
   \begin{equation*}
     u\colon\mathbb{R}\times
@@ -89,11 +92,11 @@ continuidad con respecto a esta condición inicial.
   ecuación~\eqref{eq:differentialconservationlaw} y que verifique la
   condición inicial
 
-  \begin{equation*}
+  \begin{equation}\label{eq:initialcondition}
     u\left(x,0\right)=
     u_{0}\left(x\right),\quad
     x\in\mathbb{R},
-  \end{equation*}
+  \end{equation}
 
   donde
   \begin{math}
@@ -111,27 +114,28 @@ Entonces, introducimos la solución al problema de Cauchy
     \left[0,+\infty\right)\to
     \Omega
   \end{math}
-  es una solución clásica del problema de valor inicial
+  es una \textbf{solución clásica} del problema de valor inicial
 
   \begin{equation}\label{eq:IVPconservationlaw}
-    \begin{cases}
+    \left\{
+    \begin{aligned}
       u_{t}
       \left(x,t\right)+
-      {f\left(u\left(x,t\right)\right)}_{x}=
-      0,              &
-      \left(x,t\right)\in
-      \mathbb{R}\times
-      \left(0,+\infty\right), \\
-      u\left(x,0\right)=
-      u_{0}
-      \left(x\right), &
-      x\in\mathbb{R},
-    \end{cases}
+      {f\left(u\left(x,t\right)\right)}_{x} & =
+      0,
+                                            &
+      \left(x,t\right)                      & \in
+      \mathbb{R}\times\left(0,+\infty\right),                \\
+      u\left(x,0\right)                     & =
+      u_{0}\left(x\right),                  &
+      x                                     & \in\mathbb{R},
+    \end{aligned}
+    \right.
   \end{equation}
 
   si $u$ es una función de clase
   \begin{math}
-    \mathcal{C}^{1}
+    C^{1}
     \left(
     \mathbb{R}\times
     \left[0,+\infty\right)
@@ -144,14 +148,14 @@ Entonces, introducimos la solución al problema de Cauchy
 \begin{definition}
   Sea
   \begin{math}
-    u\in\mathcal{C}^{1}
+    u\in C^{1}
     \left(
     \mathbb{R}\times
     \left[0,+\infty\right)
     \right)
   \end{math}
   una solución clásica.
-  Defnimos las curvas características en
+  Defnimos las \textbf{curvas características} en
   \begin{math}
     \mathbb{R}\times
     \left[0,T\right]
@@ -189,12 +193,11 @@ largo de ellas ya que se tiene que
   \left(
   X\left(t\right),t
   \right)\cdot
-  X^{\prime}
-  \left(t\right)+
+  \diff{X\left(t\right)}{t}+
   u_{t}
   \left(
   X\left(t\right),t
-  \right)  \\
+  \right). \\
        & =
   u_{x}
   \left(
@@ -207,7 +210,7 @@ largo de ellas ya que se tiene que
   u_{t}
   \left(
   X\left(t\right),t
-  \right)  \\
+  \right). \\
        & =
   f_{x}
   \left(
@@ -241,12 +244,12 @@ De forma que
 de donde $x_{0}=x-ct$.
 Entonces, se obtiene
 
-\begin{equation*}
+\begin{equation}\label{eq:solutionadvection}
   u\left(x,t\right)=
   u\left(x_{0},0\right)=
   u\left(x-ct,0\right)=
   u_{0}\left(x-ct\right),
-\end{equation*}
+\end{equation}
 
 que es la única solución del problema~\eqref{eq:IVPconservationlaw}.
 Luego, para todos los valores iniciales existe una única solución que
@@ -263,8 +266,8 @@ A continuación, vemos un ejemplo de este tipo de problema.
   \end{equation*}
 
   donde $x$ es la coordenada espacial y $t$ representa el tiempo.
-  Esta es la llamada ecuación de transporte o de advección en una
-  dimensión.
+  Esta es la llamada \textbf{ecuación de transporte} o de advección
+  en una dimensión.
   Asumimos que la velocidad de propagación es positiva, $\lambda>0$.
   Como condición inicial, tomamos
   \begin{math}
@@ -293,18 +296,21 @@ A continuación, vemos un ejemplo de este tipo de problema.
       x\in\mathbb{R}.
     \end{cases}
   \end{equation*}
+  viene dada por la expresión~\eqref{eq:solutionadvection}, es decir,
+  $u\left(x,t\right)=u_{0}\left(x-\lambda t\right)$.
+  Entonces, la solución $u$ simplemente se transporta con velocidad
+  constante $\lambda$ con la evolución del tiempo, como se muestra en
+  la Figura~\ref{fig:1}.
+  En este caso, se transporta hacia la derecha, puesto que
+  anteriormente asumimos que $\lambda>0$.
+  En particular, definimos $\lambda=1$ y la condición inicial dada
+  por
+  \begin{math}
+    u_{0}
+    \left(x\right)=
+    e^{-50{\left(x-0.3\right)}^{2}}
+  \end{math}.
 \end{example}
-
-$u$ simplemente se transporta con velocidad constante $\lambda$ con
-la evolución del tiempo, como se muestra en la Figura~\ref{fig:1}.
-En este caso, se transporta hacia la derecha, puesto que
-anteriormente asumimos que $\lambda>0$.
-En particular, definimos $\lambda=1$ y la condición inicial dada por
-\begin{math}
-  u_{0}
-  \left(x\right)=
-  e^{-50{\left(x-0.3\right)}^{2}}
-\end{math}.
 
 \begin{figure}[ht!]
   \centering
@@ -323,7 +329,7 @@ una condición inicial dada por una función constante a trozos con una
 discontinuidad se conoce como problema de Riemann.
 
 \begin{definition}
-  El problema de Riemann consiste en encontrar una función
+  El \textbf{problema de Riemann} consiste en encontrar una función
 
   \begin{equation*}
     u\colon\mathbb{R}\times
@@ -334,7 +340,7 @@ discontinuidad se conoce como problema de Riemann.
   solución de la ecuación~\eqref{eq:differentialconservationlaw} que
   verifica la condición inicial
 
-  \begin{equation*}
+  \begin{equation}\label{eq:initialconditionriemann}
     u_{0}\left(x\right)=
     \begin{cases}
       u_{l}, &
@@ -342,7 +348,7 @@ discontinuidad se conoce como problema de Riemann.
       u_{r}, &
       \text{si } x>x_{0},
     \end{cases}
-  \end{equation*}
+  \end{equation}
 
   donde $u_{l},u_{r}\in\mathbb{R}$ vienen~dados.
   A este problema se le denota por
@@ -354,7 +360,7 @@ problema de Riemann centrado en el $x_{0}$ y con datos iniciales
 $\left(u_{l},u_{r}\right)$ viene dada por
 $u\left(x,t\right)=u_{0}\left(x-ct\right)$, es decir,
 
-\begin{equation*}
+\begin{equation}\label{eq:solutionriemann}
   u
   \left(x,t\right)=
   \begin{cases}
@@ -363,4 +369,4 @@ $u\left(x,t\right)=u_{0}\left(x-ct\right)$, es decir,
     u_{r}, &
     \text{si } x-ct>x_{0}.
   \end{cases}
-\end{equation*}
+\end{equation}

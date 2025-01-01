@@ -1,6 +1,6 @@
 \documentclass[
 	12pt,
-	twoside,
+	oneside,
 	appendixprefix=true
 ]{scrbook}
 \usepackage[spanish]{babel}
@@ -15,6 +15,7 @@
 	style=numeric,
 	backend=biber,
 ]{biblatex}
+\usepackage{hyperref}
 
 \title{
 	Una introducción acerca de los métodos de volúmenes finitos para
@@ -36,6 +37,23 @@
 \providecommand{\name}{Nombre}
 \renewcommand{\listingscaption}{Programa}
 \renewcommand{\listoflistingscaption}{Lista de \listingscaption s}
+
+\hypersetup{
+	pdfencoding=auto,
+	linktocpage=true,
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=magenta,
+	pdfpagelabels,
+	pdftex,
+	pdfauthor={Carlos Aznarán Laos},
+	pdftitle={Una introducción acerca de los métodos de volúmenes
+			finitos para una ecuación de transporte},
+	pdfsubject={Lecture},
+	pdfkeywords={finite volume, pde, transport equation},
+	pdfproducer={LuaHBTeX, Version 1.18.0 (TeX Live 2024/Arch Linux)},
+	% bookmark=false
+}
 
 \clearpage
 \pagestyle{empty}
