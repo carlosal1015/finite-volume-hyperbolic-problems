@@ -1,0 +1,49 @@
+\documentclass[
+  aspectratio=1610, % 2013 169 149 141 54 43 32
+  c,
+  handout,
+  10pt,
+  spanish
+]{beamer}
+
+\usepackage[spanish]{babel}
+\usepackage{diffcoeff}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage[
+  backend=biber,
+  style=numeric,
+  defernumbers=true,
+  sorting=ynt,
+  maxbibnames=4,
+  maxcitenames=4
+]{biblatex}
+\addbibresource{references.bib}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{caption}[numbered]
+\usetheme{Singapore}
+\useinnertheme{rounded}
+\usecolortheme{rose}
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+  \par
+  \def\insertproofname{#1\@addpunct{.}}%
+  \usebeamertemplate{proof begin}#2}
+{\usebeamertemplate{proof end}}
+\makeatother
+
+\providecommand{\name}{Nombre}
+
+\title{
+  Una introducción acerca de los métodos de volúmenes finitos para
+  una ecuación de transporte
+}
+
+\institute{Universidad Nacional de Ingeniería}
+\author{\scshape\name}
+\date{3 de enero de 2025}

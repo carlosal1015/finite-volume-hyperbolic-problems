@@ -1,0 +1,179 @@
+\section{Fundamentos básicos}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{definition}[Ley de conservación~\cite{Vázquez2015}]
+        Sean
+        \begin{math}
+            \Omega\subset
+            \mathbb{R}
+        \end{math}
+        y
+        \begin{math}
+            f\colon\Omega\to
+            \mathbb{R}
+        \end{math}
+        una función de clase
+        \begin{math}
+            C^{1}
+            \left(\Omega\right)
+        \end{math}.
+        Una \textbf{ley de conservación unidimensional} es
+
+        \begin{equation}\label{eq:differentialconservationlaw}
+            u_{t}
+            \left(x,t\right)+
+            f_{x}
+            \left(
+            u\left(x,t\right)
+            \right)=
+            0,
+        \end{equation}
+
+        donde $u$ es la \textbf{variable conservativa} o variable de
+        estado, es la función
+        \begin{align*}
+            u\colon\mathbb{R}\times
+            \left[0,+\infty\right) &
+            \longrightarrow
+            \Omega                   \\
+            \left(x,t\right)       &
+            \longmapsto
+            u\left(x,t\right).
+        \end{align*}
+        El conjunto $\Omega$ es llamado el \textbf{conjunto de los estados}
+        y la función $f$ es el \textbf{flujo convectivo}.
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{definition}
+        El \textbf{problema de Cauchy} consiste en encontrar una función
+
+        \begin{equation*}
+            u\colon\mathbb{R}\times
+            \left[0,+\infty\right)\longrightarrow
+            \Omega
+        \end{equation*}
+
+        que sea solución de la
+        ecuación~\eqref{eq:differentialconservationlaw} y que verifique la
+        condición inicial
+
+        \begin{equation}\label{eq:initialcondition}
+            u\left(x,0\right)=
+            u_{0}\left(x\right),\quad
+            x\in\mathbb{R},
+        \end{equation}
+
+        donde
+        \begin{math}
+            u_{0}\colon\mathbb{R}\to\Omega
+        \end{math}
+        es una función dada.
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+
+    \begin{columns}
+        \begin{column}{0.60\textwidth}
+            \begin{example}
+                Consideremos el siguiente problema de Cauchy de la
+                \textbf{ecuación de transporte}.
+                \begin{equation*}
+                    \left\{
+                    \begin{aligned}
+                        u_{t}
+                        \left(x,t\right)+
+                        c
+                        u_{x}
+                        \left(x,t\right)
+                                             & =
+                        0,                   &
+                        \left(x,t\right)     & \in
+                        \mathbb{R}\times
+                        \left(0,+\infty\right),               \\
+                        u\left(x,0\right)    & =
+                        u_{0}\left(x\right), &
+                        x                    & \in\mathbb{R}.
+                    \end{aligned}
+                    \right.
+                \end{equation*}
+
+                Asumimos que la velocidad de propagación es positiva, $c>0$.
+                La solución viene dada por la expresión
+                \begin{equation*}
+                    u\left(x,t\right)=u_{0}\left(x-ct\right).
+                \end{equation*}
+                Entonces, la solución $u$ simplemente se transporta con velocidad
+                constante $c$ con la evolución del tiempo, como se muestra en
+                la Figura~\ref{fig:1}.
+            \end{example}
+        \end{column}
+        \begin{column}{0.36\textwidth}
+            \begin{figure}[ht!]
+                \centering
+                \includegraphics[width=.35\paperwidth]{figure1}
+                \caption{
+                    Evolución de la solución de la ecuación de transporte con el
+                    tiempo.
+                }
+                \label{fig:1}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{definition}
+        El \textbf{problema de Riemann} consiste en encontrar una función
+
+        \begin{equation*}
+            u\colon\mathbb{R}\times
+            \left[0,+\infty\right)\longrightarrow
+            \Omega
+        \end{equation*}
+
+        solución de la ecuación~\eqref{eq:differentialconservationlaw} que
+        verifica la condición inicial
+
+        \begin{equation}\label{eq:initialconditionriemann}
+            u_{0}\left(x\right)=
+            \begin{cases}
+                u_{l}, &
+                \text{si } x<x_{0}, \\
+                u_{r}, &
+                \text{si } x>x_{0},
+            \end{cases}
+        \end{equation}
+
+        donde $u_{l},u_{r}\in\mathbb{R}$ vienen~dados.
+        A este problema se le denota por
+        $\operatorname{PR}\left(u_{l},u_{r}\right)$ centrado en $x_{0}$.
+    \end{definition}
+
+    \begin{example}
+        Para una ecuación unidimensional, $u_{t}+cu_{x}=0$, la solución al
+        problema de Riemann centrado en el $x_{0}$ y con datos iniciales
+        $\left(u_{l},u_{r}\right)$ viene dada por
+        $u\left(x,t\right)=u_{0}\left(x-ct\right)$, es decir,
+        \begin{equation}\label{eq:solutionriemann}
+            u
+            \left(x,t\right)=
+            \begin{cases}
+                u_{l}, &
+                \text{si } x-ct<x_{0}, \\
+                u_{r}, &
+                \text{si } x-ct>x_{0}.
+            \end{cases}
+        \end{equation}
+    \end{example}
+\end{frame}

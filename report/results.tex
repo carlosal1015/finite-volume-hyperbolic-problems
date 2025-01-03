@@ -26,8 +26,13 @@ Por ello, no será necesario más de una celda fantasma en cada extremo.
 
 Supongamos que $\left[a,b\right]$ es el dominio computacional del
 problema, subdividido en las celdas $c_{1},c_{2},\dotsc,c_{N}$ donde
-$c_{i}=\left(x_{i-\frac{1}{2}},x_{i+\frac{1}{2}}\right)$, para
-$i=1,\dotsc,N$.
+\begin{math}
+	c_{i}=
+	\big(
+	x_{i-\frac{1}{2}},x_{i+\frac{1}{2}}
+	\big)
+\end{math},
+para $i=1,\dotsc,N$.
 % La figura 5.1 muestra una malla con una celda fantasma en cada
 % extremo.
 
@@ -36,21 +41,21 @@ para cada instante de tiempo $t_{n}$, impondremos la condición
 $u^{n}_{0}=u^{n}_{N}$ si las rectas características tienen pendiente
 positiva o la condición $u^{n}_{N+1}=u^{n}_{1}$, en caso contrario.
 
-Además, usaremos condiciones de contorno Neumann homogéneas, donde
-impondremos que la derivada direccional de la función $u$, variable
-conservativa, en la dirección del vector normal unitario $n$, tal y
-como fue definida en (2.26), sea conocida, por ejemplo igual a cero.
-Luego, esta condición de contorno viene dada por
+% Además, usaremos condiciones de contorno Neumann homogéneas, donde
+% impondremos que la derivada direccional de la función $u$, variable
+% conservativa, en la dirección del vector normal unitario $n$, tal y
+% como fue definida en (2.26), sea conocida, por ejemplo igual a cero.
+% Luego, esta condición de contorno viene dada por
 
-\begin{equation*}
-    \diffp{u}{n}=
-    n\cdot Du=
-    0,\text{ para todo }x\in\partial\Omega,
-\end{equation*}
+% \begin{equation*}
+% 	\diffp{u}{n}=
+% 	n\cdot Du=
+% 	0,\text{ para todo }x\in\partial\Omega,
+% \end{equation*}
 
-donde $\partial\Omega$ es la frontera del dominio espacial.
+% donde $\partial\Omega$ es la frontera del dominio espacial.
 
-\section{Primeros tests}
+\section{Primeros tests}\label{sec:firsttests}
 
 En esta sección vamos a realizar experimentos que ratifican algunos
 resultados vistos en la teoría.
@@ -58,24 +63,24 @@ Estos experimentos van a ser aplicados a la ecuación de transporte
 dada por
 
 \begin{equation}\label{eq:transportequation}
-    u_{t}
-    \left(x,t\right)+
-    cu_{x}
-    \left(x,t\right)=
-    0,\quad
-    x\in\mathbb{R},\quad
-    t>0,
+	u_{t}
+	\left(x,t\right)+
+	cu_{x}
+	\left(x,t\right)=
+	0,\quad
+	x\in\mathbb{R},\quad
+	t>0,
 \end{equation}
 
 siendo $c$ es la velocidad de propagación.
 En el primer ejemplo, nos centraremos en el problema de Cauchy cuya
 condición inicial viene dada por la
-ecuación~\eqref{eq:initialcondition}, para un dato inicial no regular
+ecuación~\eqref{eq:initialcondition}, para un dato inicial regular
 (infinitamente derivable).
 En el segundo ejemplo, nos centraremos en el problema de Riemann cuya
 condición inicial viene dada por la
 ecuación~\eqref{eq:initialconditionriemann}, ambos problemas
-estudiados en el capítulo 2.
+estudiados en el capítulo~\ref{ch:fundaments}.
 Además, a partir de estas condiciones iniciales, obtenemos la
 solución exacta en cualquier instante de tiempo posterior, dada por
 la expresión~\eqref{eq:solutionadvection} para el problema de Cauchy
@@ -83,7 +88,7 @@ genérico y por la expresión~\eqref{eq:solutionriemann} para el
 problema de Riemann.
 Entonces, comparamos en cada instante de tiempo la solución exacta
 con la solución aproximada obtenida para cada uno de los esquemas
-numéricos estudiados en el capítulo 4.
+numéricos estudiados en el capítulo~\ref{ch:finitevolume}.
 
 \subsection*{Ejemplo $1$}
 
@@ -94,8 +99,8 @@ $c=-1$ (para los que se verifica la condición CFL) y la condición
 inicial dada por
 
 \begin{equation*}
-    u_{0}=
-    e^{-{\left(x-15\right)}^{2}}.
+	u_{0}=
+	e^{-{\left(x-15\right)}^{2}}.
 \end{equation*}
 
 Para estos datos calculamos las soluciones numéricas de la ecuación
@@ -109,21 +114,21 @@ junto con la solución exacta para cada instante de tiempo
 considerado.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=.30\paperwidth]{../snapshots/downwindgaussian1d-2.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsgaussiana1d-2.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffgaussiana1d-2.png}
-    \caption{Simulación numérica en el tiempo $t_{2}=2\Delta t$.}
-    \label{fig:example1t2}
+	\centering
+	\includegraphics[width=.30\paperwidth]{../snapshots/downwindgaussian1d-2.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsgaussiana1d-2.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffgaussiana1d-2.png}
+	\caption{Simulación numérica en el tiempo $t_{2}=2\Delta t$.}
+	\label{fig:example1t2}
 \end{figure}
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=.30\paperwidth]{../snapshots/downwindgaussian1d-40.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsgaussiana1d-40.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffgaussiana1d-40.png}
-    \caption{Simulación numérica en el tiempo $t_{40}=40\Delta t$.}
-    \label{fig:example1t40}
+	\centering
+	\includegraphics[width=.30\paperwidth]{../snapshots/downwindgaussian1d-40.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsgaussiana1d-40.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffgaussiana1d-40.png}
+	\caption{Simulación numérica en el tiempo $t_{40}=40\Delta t$.}
+	\label{fig:example1t40}
 \end{figure}
 
 
@@ -152,11 +157,11 @@ $c=1$ (para los que se verifica la condición CFL) y la condición
 inicial dada por la función discontinua
 
 \begin{equation*}
-    u_{0}\left(x\right)=
-    \begin{cases}
-        2, & \text{si }x<15, \\
-        1, & \text{si }x>15.
-    \end{cases}
+	u_{0}\left(x\right)=
+	\begin{cases}
+		2, & \text{si }x<15, \\
+		1, & \text{si }x>15.
+	\end{cases}
 \end{equation*}
 
 Para este dato inicial calculamos las soluciones numéricas de la
@@ -173,27 +178,28 @@ junto con la solución exacta y para cada instante de tiempo
 considerado.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=.30\paperwidth]{../snapshots/upwindheaviside1d-2.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsheaviside1d-2.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffheaviside1d-2.png}
-    \caption{Simulación numérica en el tiempo $t_{2}=2\Delta t$.}
-    \label{fig:example2t2}
+	\centering
+	\includegraphics[width=.30\paperwidth]{../snapshots/upwindheaviside1d-2.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsheaviside1d-2.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffheaviside1d-2.png}
+	\caption{Simulación numérica en el tiempo $t_{2}=2\Delta t$.}
+	\label{fig:example2t2}
 \end{figure}
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=.30\paperwidth]{../snapshots/upwindheaviside1d-10.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsheaviside1d-10.png}
-    \includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffheaviside1d-10.png}
-    \caption{Simulación numérica en el tiempo $t_{40}=40\Delta t$.}
-    \label{fig:example2t10}
+	\centering
+	\includegraphics[width=.30\paperwidth]{../snapshots/upwindheaviside1d-10.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-friedrichsheaviside1d-10.png}
+	\includegraphics[width=.30\paperwidth]{../snapshots/lax-wendroffheaviside1d-10.png}
+	\caption{Simulación numérica en el tiempo $t_{10}=10\Delta t$.}
+	\label{fig:example2t10}
 \end{figure}
 
-En la Figura~\ref{fig:example2t10} (experimento en el instante de tiempo $t_10=0.2$),
-se puede apreciar que el método aguas arriba aproxima bien la
-solución pero contiene una pequeña disipación numérica entorno a la
-discontinuidad, en donde disminuye la precisión.
+En la Figura~\ref{fig:example2t10} (experimento en el instante de
+tiempo $t_{10}=0.2$), se puede apreciar que el método descentrado
+upwind aproxima bien la solución pero contiene una pequeña disipación
+numérica entorno a la discontinuidad, en donde disminuye la
+precisión.
 Aunque mayor es la disipación numérica que provoca el método de
 Lax-Friedrichs en dicha discontinuidad.
 Por otra parte, es destacable resaltar el hecho de que el método de

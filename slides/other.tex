@@ -1,0 +1,221 @@
+\section{Introduction}
+
+\begin{frame}
+    \frametitle{\secname}
+    Let $\Omega\subset\mathbb{R}^{2}$ be a polygonal region with
+    boundary $\partial\Omega$.
+    For a given vector function
+    \begin{math}
+        \bm{\mathrm{c}}=
+        \left(
+        a\left(x,y\right),
+        b\left(x,y\right)
+        \right)\in
+        \mathbb{R}^{2}
+    \end{math}
+    and
+    \begin{math}
+        \left(x,y\right)\in
+        \overline{\Omega}
+    \end{math},
+    we divide
+    \begin{math}
+        \partial\Omega
+    \end{math}
+    into the following two parts
+    \begin{align*}
+        {\left(\partial\Omega\right)}_{-}
+         & =
+        \left\{
+        \left(x,y\right)\in\partial\Omega:
+        \bm{c}\cdot\bm{\mathrm{n}}\leq 0
+        \right\}\qquad
+        (\text{flow in}), \\ % flujo entrante
+        {\left(\partial\Omega\right)}_{+}
+         & =
+        \left\{
+        \left(x,y\right)\in\partial\Omega:
+        \bm{c}\cdot\bm{\mathrm{n}}> 0
+        \right\}\qquad
+        (\text{flow out}), % flujo saliente
+    \end{align*}
+
+    where $\bm{\mathrm{n}}$ is the unit outer normal vector of
+    $\partial\Omega$.
+
+    Consider the following initial-boundary value problem of
+    two-dimensional \alert{first-order linear hyperbolic equation} on
+    $\Omega$.
+
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            f\left(x,y,t\right)    & =
+            \diffp{u}{t}+
+            a\left(x,y\right)
+            \diffp{u}{x}+
+            b\left(x,y\right)
+            \diffp{u}{y},          &
+            \left(x,y\right)       & \in
+            \Omega\setminus
+            {\left(\partial\Omega\right)}_{-},
+            0<t\leq T.                   \\
+            u\left(x,y,0\right)    & =
+            u_{0}\left(x,y\right), &
+            \left(x,y\right)       & \in
+            \overline{\Omega}.           \\
+            u\left(x,y,t\right)    & =
+            g\left(x,y,t\right),   &
+            \left(x,y\right)       & \in
+            {\left(\partial\Omega\right)}_{-},
+            0\leq t\leq T.
+        \end{aligned}
+        \right.
+    \end{equation*}
+
+    where $a$, $b$, $f$, $u_{0}$ and $g$ are smooth enough (scalar)
+    functions.
+\end{frame}
+
+\section{Explicit Upwind Scheme}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{equation*}
+        \forall
+        1\leq j,k\leq M,
+        0\leq n\leq N-1:
+        \frac{U^{n+1}_{j,k}-U^{n}_{j,k}}{\Delta t}+
+        a_{j,k}
+        \frac{U^{n}_{j,k}-U^{n}_{j-1,k}}{\Delta x}+
+        b_{j,k}
+        \frac{U^{n}_{j,k}-U^{n}_{j,k-1}}{\Delta y}=
+        f^{n}_{j,k}.
+    \end{equation*}
+\end{frame}
+
+\section{Stability and Convergence Analysis}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{theorem}\normalfont
+        When
+        \begin{equation}
+            \frac{\Delta t}{\Delta x}
+            \max\limits_{
+                \substack{
+                    0\leq j\Delta x\leq L\\
+                    0\leq k\Delta y \leq L}
+            }
+            \left(
+            \left|a_{j,k}\right|+
+            \left|b_{j,k}\right|
+            \right)
+            \leq
+            1,
+        \end{equation}
+
+        the FOU scheme is stable with respect to the initial value
+        $U^{0}$ and the source term $f$.
+    \end{theorem}
+
+    \begin{alertblock}{Remark}
+        It can be seen that when
+        \begin{math}
+            a\left(x,y\right)\equiv
+            a
+        \end{math}
+        and
+        \begin{math}
+            b\left(x,y\right)\equiv
+            b
+        \end{math}
+        with constants $a$ and $b$, the condition
+        reduces to
+        \begin{equation}
+            \frac{\Delta t}{\Delta x}
+            \left(
+            \left|a\right|+
+            \left|b\right|+
+            \right)\leq
+            1,
+        \end{equation}
+        which is just the CFL condition of upwind difference scheme for two-dimensional hyperbolic equations with constant coefficients.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}
+    \begin{example}
+        Consider the following initial-boundary value problem of two
+        dimensional first-order hyperbolic problem:
+
+        \begin{equation*}
+            \begin{aligned}
+                0                                     & =
+                \diffp{u}{t}+
+                \diffp{u}{x}+
+                \diffp{u}{y},                         &
+                0<x,y\leq 1,
+                0<t\leq 1.                                \\
+                u\left(x,y,0\right)                   & =
+                \sin\left(\pi x\right)+
+                \sin\left(\pi y\right),               &
+                0\leq x\leq 1,
+                0\leq y\leq 1.                            \\
+                u\left(0,y,t\right)                   & =
+                \sin\left(-\pi t\right)+
+                \sin\left(\pi\left(y-t\right)\right), &
+                0\leq y\leq 1,
+                0\leq t\leq 1.                            \\
+                u\left(x,0,t\right)                   & =
+                \sin\left(\pi\left(x-t\right)\right)+
+                \sin\left(-\pi t\right),              &
+                0\leq x\leq 1,
+                0\leq t\leq 1.
+            \end{aligned}
+        \end{equation*}
+
+        The exact solution is
+        \begin{math}
+            u\left(x,y,t\right)=
+            \sin\left(\pi\left(x-t\right)\right)+
+            \sin\left(\pi\left(y-t\right)\right)
+        \end{math}.
+    \end{example}
+
+    % 2dinitialsurface
+\end{frame}
+
+\begin{frame}
+    Taking the space step
+    \begin{math}
+        \Delta x=
+        \Delta y=
+        \frac{1}{M}
+    \end{math}
+    and the time step
+    \begin{math}
+        \Delta t=
+        \frac{1}{N}
+    \end{math}.
+
+    \begin{equation*}
+        \boxed{
+            r=s=
+            \frac{\Delta t}{\Delta x}\leq
+            \frac{1}{2}.
+        }
+    \end{equation*}
+
+    \begin{equation*}
+        {\left\|U^{n}\right\|}_{2}=
+        \left\{
+        {\left(\Delta x\right)}^{2}
+        \sum_{k=0}^{M}
+        \sum_{j=0}^{M}
+        \left(U^{n}_{j,k}\right)^{2}
+        \right\}^{\frac{1}{2}}.
+    \end{equation*}
+\end{frame}

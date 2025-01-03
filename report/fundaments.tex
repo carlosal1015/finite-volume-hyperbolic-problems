@@ -53,15 +53,22 @@ Como problema modelo, se considera la ecuación de transporte escalar.
 \begin{remark}
   La ecuación~\eqref{eq:differentialconservationlaw} se corresponde
   con la forma diferencial de la ley de conservación.
-  La forma integral de la ley de conservación viene dada por la
-  ecuación~\eqref{eq:integralconservationlaw}.
+  Si consideramos un intervalo arbitrario
+  \begin{math}
+    I=
+    \left[a,b\right]\subset
+    \mathbb{R}
+  \end{math}
+  e integramos~\eqref{eq:differentialconservationlaw} sobre $I$,
+  entonces la forma integral de la ley de conservación viene dada por
+  la ecuación~\eqref{eq:integralconservationlaw}.
 
   \begin{equation}\label{eq:integralconservationlaw}
     \diffp{}{t}
     \int_{a}^{b}
     u\left(x,t\right)\dl x=
-    F\left(a,t\right)-
-    F\left(b,t\right).
+    f\left(u\left(a,t\right)\right)-
+    f\left(u\left(b,t\right)\right).
   \end{equation}
 
   Se puede ver que ambas son equivalentes, para más detalle
@@ -105,7 +112,7 @@ continuidad con respecto a esta condición inicial.
   es una función dada.
 \end{definition}
 
-Entonces, introducimos la solución al problema de Cauchy
+Entonces, introducimos la solución al problema de Cauchy.
 
 \begin{definition}
   Una función
@@ -121,14 +128,16 @@ Entonces, introducimos la solución al problema de Cauchy
     \begin{aligned}
       u_{t}
       \left(x,t\right)+
-      {f\left(u\left(x,t\right)\right)}_{x} & =
+      f_{x}
+      \left(u\left(x,t\right)\right) & =
       0,
-                                            &
-      \left(x,t\right)                      & \in
-      \mathbb{R}\times\left(0,+\infty\right),                \\
-      u\left(x,0\right)                     & =
-      u_{0}\left(x\right),                  &
-      x                                     & \in\mathbb{R},
+                                     &
+      \left(x,t\right)               & \in
+      \mathbb{R}\times
+      \left(0,+\infty\right),                         \\
+      u\left(x,0\right)              & =
+      u_{0}\left(x\right),           &
+      x                              & \in\mathbb{R},
     \end{aligned}
     \right.
   \end{equation}
@@ -189,36 +198,36 @@ largo de ellas ya que se tiene que
     X\left(t\right),t
     \right)
   }{t} & =
-  u_{x}
-  \left(
-  X\left(t\right),t
-  \right)\cdot
-  \diff{X\left(t\right)}{t}+
   u_{t}
   \left(
   X\left(t\right),t
-  \right). \\
-       & =
+  \right)+
   u_{x}
   \left(
   X\left(t\right),t
-  \right)\cdot
+  \right)
+  \diff{X\left(t\right)}{t}. \\
+       & =
+  u_{t}
+  \left(
+  X\left(t\right),t
+  \right)+
+  u_{x}
+  \left(
+  X\left(t\right),t
+  \right)
   f^{\prime}
   \left(
   u\left(X\left(t\right),t\right)
-  \right)+
+  \right).                   \\
+       & =
   u_{t}
   \left(
   X\left(t\right),t
-  \right). \\
-       & =
+  \right)+
   f_{x}
   \left(
   u\left(X\left(t\right),t\right)
-  \right)+
-  u_{t}
-  \left(
-  X\left(t\right),t
   \right)=
   0,
 \end{align*}
@@ -281,20 +290,23 @@ A continuación, vemos un ejemplo de este tipo de problema.
   La solución al problema de Cauchy
 
   \begin{equation*}
-    \begin{cases}
+    \left\{
+    \begin{aligned}
       u_{t}
       \left(x,t\right)+
       \lambda
       u_{x}
-      \left(x,t\right)=
+      \left(x,t\right)
+                           & =
       0,                   &
-      \left(x,t\right)\in
+      \left(x,t\right)     & \in
       \mathbb{R}\times
-      \left(0,+\infty\right), \\
-      u\left(x,0\right)=
+      \left(0,+\infty\right),               \\
+      u\left(x,0\right)    & =
       u_{0}\left(x\right), &
-      x\in\mathbb{R}.
-    \end{cases}
+      x                    & \in\mathbb{R}.
+    \end{aligned}
+    \right.
   \end{equation*}
   viene dada por la expresión~\eqref{eq:solutionadvection}, es decir,
   $u\left(x,t\right)=u_{0}\left(x-\lambda t\right)$.

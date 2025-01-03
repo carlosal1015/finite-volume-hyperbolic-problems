@@ -1,6 +1,6 @@
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'lol', 'out', 'pdf', 'run.xml', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav', 'out', 'pdf', 'run.xml', 'snm', 'toc']
 % arara: --> }
 % arara: lualatex: {
 % arara: --> shell: yes,
@@ -20,29 +20,18 @@
 % arara: --> }
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'lol', 'out', 'run.xml', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav', 'out', 'run.xml', 'snm', 'toc']
 % arara: --> }
 \input{preamble}
 
 \begin{document}
-\maketitle
-\tableofcontents
-\listoflistings
 
-\frontmatter
-\input{thanks}
-
-\mainmatter
-\input{introduction}
+\input{title}
+\input{toc}
 \input{fundaments}
 \input{finitevolume}
 \input{convergence}
 \input{results}
-\input{conclusions}
-\appendix
-\input{rankinehugoniot}
-\input{programs}
-
-\backmatter
-\input{references}
+\input{bibliography}
+% \input{other}
 \end{document}

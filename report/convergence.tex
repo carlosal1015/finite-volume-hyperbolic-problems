@@ -35,8 +35,8 @@ bien $u^{n}_{i}$ aproxima a $\widehat{u}^{n}_{i}$.
 Entonces, definimos el siguiente concepto.
 
 \begin{definition}
-  El error global en el instante $t_{n}$ de un método numérico viene
-  dado por la diferencia
+  El \textbf{error global} en el instante $t_{n}$ de un método
+  numérico viene dado por la diferencia
 
   \begin{equation*}
     E^{n}=
@@ -53,12 +53,12 @@ Entonces, definimos el siguiente concepto.
   Se define el conjunto
 
   \begin{equation*}
-    L^{2}\left(\Omega\right)=
-    \left\{
+    L^{2}\left(\Omega\right)\coloneqq
+    \big\{
     f\colon\Omega\to\mathbb{R}\mid
     f\text{ es medible y}
     \int_{\Omega}\left|f\right|^{2}<\infty
-    \right\}.
+    \big\}.
   \end{equation*}
 
   Si $f\in L^{2}\left(\Omega\right)$ se define la
@@ -108,8 +108,9 @@ se refina.
 Entonces, introducimos el siguiente concepto.
 
 \begin{definition}
-  Se dice que el método numérico es convergente en el instante de
-  tiempo $t^{n}$ para la norma ${\left\|\cdot\right\|}_{2}$ si
+  Se dice que el método numérico es \textbf{convergente} en el
+  instante de tiempo $t^{n}$ para la norma
+  ${\left\|\cdot\right\|}_{2}$ si
 
   \begin{equation*}
     \lim_{\Delta t\to0}
@@ -117,7 +118,7 @@ Entonces, introducimos el siguiente concepto.
     0.
   \end{equation*}
 
-  Se dirá que tiene orden de convergencia $s$ si
+  Se dirá que tiene \textbf{orden de convergencia} $s$ si
 
   \begin{equation*}
     \left\|
@@ -140,16 +141,16 @@ numéricos que se enuncian a continuación.
 \begin{itemize}
   \item
 
-        El método numérico debe ser consistente con la ecuación
-        diferencial.
+        El método numérico debe ser \textbf{consistente} con la
+        ecuación diferencial.
         En cada paso de tiempo, se estudia que existe una buena
         aproximación local.
 
   \item
 
-        El método numérico debe ser estable: los errores locales
-        que se producen en cada paso de tiempo no deben crecer
-        demasiado rápido en los pasos de tiempos posteriores.
+        El método numérico debe ser \textbf{estable}: los errores
+        locales que se producen en cada paso de tiempo no deben
+        crecer demasiado rápido en los pasos de tiempos posteriores.
 \end{itemize}
 
 
@@ -219,15 +220,15 @@ conocido por Lax-Wendroff.
 En estos esquemas numéricos, la incógnita, $u^{n+1}$, se calcula
 mediante el valor conocido, $u^{n}$, asociado a un paso de tiempo
 previo.
-Este tipo de esquemas numéricos se denominan esquemas numéricos de un
-paso.
+Este tipo de esquemas numéricos se denominan
+\textbf{esquemas numéricos de un paso}.
 Por tanto, podemos definir la solución numérica en el instante de
 tiempo $t_{n+1}$ como
 
 \begin{equation*}
   u^{n+1}=
   \mathcal{N}
-  \left(u^{n}\right).
+  \left(u^{n}\right),
 \end{equation*}
 
 donde $\mathcal{N}\left(\cdot\right)$ representa el operador numérico
@@ -245,9 +246,9 @@ Introducimos ahora conceptos necesarios para el estudio de la
 consistencia.
 
 \begin{definition}
-  El error de truncamiento local o de consistencia en el paso
-  $n$-ésimo de tiempo, $n=0,\dotsc,N-1$, es el número $\tau^{n}$ dado
-  por
+  El \textbf{error de truncamiento local o de consistencia} en el
+  paso $n$-ésimo de tiempo, $n=0,\dotsc,N-1$, es el número $\tau^{n}$
+  dado por
 
   \begin{equation*}
     \tau^{n}=
@@ -260,7 +261,7 @@ consistencia.
 \end{definition}
 
 \begin{definition}
-  Se dice que el método numérico es consistente si
+  Se dice que el método numérico es \textbf{consistente} si
 
   \begin{equation*}
     \lim_{\Delta t\to0}
@@ -269,7 +270,7 @@ consistencia.
     =0.
   \end{equation*}
 
-  Se dirá que tiene orden de consistencia $s$ si
+  Se dirá que tiene \textbf{orden de consistencia} $s$ si
 
   \begin{equation*}
     \tau^{n}=
@@ -326,9 +327,9 @@ descentrado upwind para la ecuación de transporte.
     \tau^{n}=
     \frac{1}{2}
     c\Delta x
-    \left(
+    \big(
     1-c\frac{\Delta t}{\Delta x}
-    \right)
+    \big)
     u_{xx}
     \left(x_{i},t_{n}\right)+
     \mathcal{O}
@@ -361,10 +362,10 @@ Respectivamente, vienen dados por
 \begin{align*}
   \tau^{n} & =
   \frac{1}{2}
-  \left(
+  \big(
   \frac{{\Delta x}^{2}}{\Delta t}-
   c^{2}\Delta t
-  \right)
+  \big)
   u_{xx}
   \left(x_{i},t_{n}\right)+
   \mathcal{O}
@@ -434,10 +435,10 @@ numérico~\eqref{eq:upwindscheme}.
 
   \begin{equation}\label{eq:downwindscheme2}
     u^{n+1}_{i}=
-    \left(
+    \big(
     1+
     c\frac{\Delta t}{\Delta x}
-    \right)
+    \big)
     u^{n}_{i}-
     c\frac{\Delta t}{\Delta x}
     u^{n}_{i+1}.
@@ -814,7 +815,7 @@ tiene el siguiente resultado.
       \overline{u}^{n}
       \left(\xi\right)
       \right|}^{2}
-    \dl\xi                                           \\
+    \dl\xi.                                          \\
                                                  & =
     \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
     \overline{\overline{u}^{n}\left(\xi\right)}
@@ -829,7 +830,7 @@ tiene el siguiente resultado.
     e^{-i\xi j\Delta x}
     u^{n}_{j}
     \Delta x
-    \dl\xi                                           \\
+    \dl\xi.                                          \\
                                                  & =
     \Delta x
     \sum_{j=-\infty}^{+\infty}
@@ -838,7 +839,7 @@ tiene el siguiente resultado.
     e^{-i\xi j \Delta x}
     \overline{\overline{u}^{n}\left(\xi\right)}
     \dl\xi
-    u^{n}_{j}                                        \\
+    u^{n}_{j}.                                       \\
                                                  & =
     \Delta x
     \sum_{j=-\infty}^{+\infty}
@@ -848,12 +849,12 @@ tiene el siguiente resultado.
     \overline{u}^{n}
     \left(\xi\right)
     \dl\xi
-    u^{n}_{j}                                        \\
+    u^{n}_{j}.                                       \\
                                                  & =
     \Delta x
     \sum_{j=-\infty}^{+\infty}
     \overline{u^{n}_{j}}
-    u^{n}_{j}                                        \\
+    u^{n}_{j}.                                       \\
                                                  & =
     {\left\|\overline{u}^{n}\right\|}^{2}_{2}.
   \end{align*}
@@ -900,7 +901,7 @@ escribir el esquema~\eqref{eq:onestepschemefinitevolume} como sigue
   \mu\alpha
   u^{n}_{j-1}-
   \mu\gamma
-  u^{n}_{j+1}
+  u^{n}_{j+1},
 \end{equation}
 
 donde $\alpha,\beta,\gamma\in\mathbb{R}$, y sustituyendo la
@@ -920,7 +921,7 @@ expresión~\eqref{eq:onestepschemefinitevolume2}, se obtiene que
     e^{i\xi\Delta x}
     \right]
   \overline{u}^{n}\left(\xi\right)
-  \dl\xi
+  \dl\xi.
 \end{equation}
 
 Aplicando la definición de la transformada de Fourier inversa, dada
@@ -981,9 +982,9 @@ obtiene que
 En esta memoria, el factor de amplificación $g$ es una función que
 depende de $\xi\Delta x$.
 Entonces, se tiene el siguiente teorema demostrado y visto con más
-detalle para métodos de diferencias finitas en [15], cuya demostración
-se podría extender a los esquemas de volúmenes finitos que estamos
-estudiando.
+detalle para métodos de diferencias finitas en~\cite{Strikwerda2004},
+cuya demostración se podría extender a los esquemas de volúmenes
+finitos que estamos estudiando.
 
 \begin{theorem}
   Un esquema de volúmenes finitos de un paso es estable si y solo si
@@ -1020,7 +1021,7 @@ su estabilidad mediante el análisis de Von Neumann.
     e^{-i\xi\Delta x}\right)
     \overline{u}^{n}
     \left(\xi\right)
-    \dl\xi
+    \dl\xi.
   \end{equation*}
 
   Por tanto, resulta que
@@ -1049,14 +1050,14 @@ su estabilidad mediante el análisis de Von Neumann.
     \left(
     e^{i\xi\Delta x}-
     e^{-i\xi\Delta x}
-    \right)                      \\
+    \right).                     \\
                              & =
     1-
     c\frac{\Delta t}{\Delta x}
     \left(
     2i\sin
     \left(\xi\Delta x\right)
-    \right)
+    \right).
   \end{align*}
 
   Como el factor de amplificación es un número complejo, consideremos
@@ -1091,7 +1092,6 @@ su estabilidad mediante el análisis de Von Neumann.
   transporte es inestable.
 \end{example}
 
-
 En el siguiente ejemplo, consideramos el esquema numérico dado por la
 expresión~\eqref{eq:laxfriedrichsscheme}.
 
@@ -1120,7 +1120,7 @@ expresión~\eqref{eq:laxfriedrichsscheme}.
       \right]
     \overline{u}^{n}
     \left(\xi\right)
-    \dl\xi
+    \dl\xi.
   \end{equation*}
 
   Por tanto, resulta que
@@ -1159,7 +1159,7 @@ expresión~\eqref{eq:laxfriedrichsscheme}.
     \left(
     \frac{1}{2}+c \frac{\Delta t}{\Delta x}
     \right)
-    e^{-i\xi\Delta x} \\
+    e^{-i\xi\Delta x}. \\
             & =
     \frac{1}{2}
     \left(
@@ -1169,7 +1169,7 @@ expresión~\eqref{eq:laxfriedrichsscheme}.
     c\frac{\Delta t}{\Delta x}
     \left(e^{i\xi\Delta x}-
     e^{-i\xi\Delta x}
-    \right)           \\
+    \right).           \\
             & =
     \cos\left(\xi\Delta x\right)-
     c\frac{\Delta t}{\Delta x}
@@ -1191,7 +1191,7 @@ expresión~\eqref{eq:laxfriedrichsscheme}.
     4c^{2}
     \frac{{\Delta t}^{2}}{{\Delta x}^{2}}
     \sin^{2}
-    \left(\xi\Delta x\right)                         \\
+    \left(\xi\Delta x\right).                        \\
                                                  & =
     \left(
     1-
@@ -1200,7 +1200,7 @@ expresión~\eqref{eq:laxfriedrichsscheme}.
     \right)+
     4c^{2}
     \frac{{\Delta t}^{2}}{{\Delta x}^{2}}
-    \sin^{2}\left(\xi\Delta x\right)                 \\
+    \sin^{2}\left(\xi\Delta x\right).                \\
                                                  & =
     1+
     \left(
@@ -1299,7 +1299,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
       e^{-i\xi\Delta x}
       \right]
     \overline{u}^{n}
-    \left(\xi\right)
+    \left(\xi\right),
   \end{equation*}
 
   donde el factor de amplificación viene dado por
@@ -1320,7 +1320,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
     \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}+
     \frac{c\Delta t}{2\Delta x}
     \right)
-    e^{-i\xi\Delta x}            \\
+    e^{-i\xi\Delta x}.           \\
                              & =
     1-
     \frac{c\Delta t}{2\Delta x}
@@ -1329,7 +1329,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
     \frac{c^{2}{\Delta t}^{2}}{2{\Delta x}^{2}}
     \left(e^{i\xi\Delta x}-
     2+
-    e^{-i\xi\Delta x}\right)     \\
+    e^{-i\xi\Delta x}\right).    \\
                              & =
     1-\frac{c\Delta t}{\Delta x}
     \left(
@@ -1341,7 +1341,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
     \cos
     \left(\xi\Delta x\right)-
     1
-    \right)
+    \right).
   \end{align*}
 
   A continuación, denotamos
@@ -1362,7 +1362,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
     \left(
       \xi\Delta x
       \right)-1
-    \right)
+    \right).
   \end{equation*}
 
   Además, también denotamos
@@ -1402,7 +1402,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
       2r^{2}
       \left(1-r^{2}\right)
       \cos\left(\xi\Delta x\right)+
-      {\left(1-r^{2}\right)}^{2}  \\
+      {\left(1-r^{2}\right)}^{2}.  \\
        & \phantom{=}
       +r^{4}
       \sin^{2}
@@ -1410,7 +1410,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
       2r^{2}
       \left(1-r^{2}\right)
       \cos\left(\xi\Delta x\right)-
-      2{\left(1-r^{2}\right)}^{2} \\
+      2{\left(1-r^{2}\right)}^{2}. \\
        & =
       r^{4}-
       {\left(1-r^{2}\right)}^{2},
@@ -1433,7 +1433,7 @@ expresión~\eqref{eq:laxwendroffscheme}.
   \begin{equation}\label{eq:ellipse}
     \frac{{\left(x-\left(1-r^{2}\right)\right)}^{2}}{r^{4}}+
     \frac{y}{r^{2}}=
-    1
+    1.
   \end{equation}
 
   Así, hemos obtenido que la ecuación~\eqref{eq:ellipse} es una

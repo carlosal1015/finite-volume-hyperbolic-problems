@@ -1,0 +1,63 @@
+name: Slides
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - slides/**
+      - book/**
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Partial Clone
+        shell: bash
+        run: |
+          REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          # git config --global init.defaultBranch main
+          git config --global user.email github-actions@github.com
+          git config --global user.name github-actions
+          git clone -q --filter=blob:none --no-checkout --depth=1  --sparse $REPO .
+          git sparse-checkout init --cone
+          git sparse-checkout set slides report
+          git checkout
+
+      - uses: addnab/docker-run-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
+          image: ghcr.io/cpp-review-dune/introductory-review/texlive:latest
+          options: |
+            -v ${{github.workspace}}:/work
+          shell: bash
+          run: |
+            sudo chown -R gitpod:gitpod /work
+            pushd /work/report
+            arara main
+            popd
+            pushd /work/slides
+            arara presentation
+            popd
+            mkdir -p /work/public
+            mv /work/report/main.pdf /work/public
+            mv /work/slides/presentation.pdf /work/public
+      
+      - name: Check pdf files
+        run: |
+          find slides -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+          find report -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+    
+      - name: "Tar files"
+        run: |
+          sudo chown runner:docker -R .
+          tar --zstd -cf PDF.tar.zst public/*.pdf
+  
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PDF-artifact
+          path: PDF.tar.zst
+          if-no-files-found: error
+          retention-days: 90

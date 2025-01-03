@@ -1,0 +1,306 @@
+\section{Método de Volúmenes Finitos}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Comenzamos definiendo una partición del espacio
+    $\Omega\in\mathbb{R}$, es decir, se define un conjunto de celdas o
+    volúmenes finitos
+
+    \begin{equation*}
+        c_{i}=
+        \big(
+        x_{i-\frac{1}{2}},
+        x_{i+\frac{1}{2}}
+        \big),\quad
+        i=1,\dotsc,N_{x}
+    \end{equation*}
+
+    cuyos puntos extremos serían
+
+    \begin{equation*}
+        x_{\frac{1}{2}}<
+        x_{1+\frac{1}{2}}<
+        \cdots<
+        x_{N_{x}-\frac{1}{2}}<
+        x_{N_{x}+\frac{1}{2}},
+    \end{equation*}
+
+    y pertenecen al intervalo $\left(a,b\right)$.
+    Por simplicidad, asumimos que la longitud de las celdas es constante,
+    es decir,
+    \begin{math}
+        \Delta x=
+        \left|c_{i}\right|=
+        x_{i+\frac{1}{2}}-
+        x_{i-\frac{1}{2}}
+    \end{math}.
+    En la Figura~\ref{fig:cellsunidimensional}, se muestran dos ejemplos
+    de celdas.
+
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[width=.5\paperwidth]{figure3}
+        \caption{Celdas $c_{i}$ y $c_{i+1}$ en una dimensión espacial.}
+        \label{fig:cellsunidimensional}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Denotamos por $u^{n}_{i}$ a la aproximación del
+    valor medio de $u$ sobre la celda $c_{i}$ en el tiempo $t_{n}$, es
+    decir:
+
+    \begin{equation*}
+        u^{n}_{i}\approx
+        \frac{1}{\Delta x}
+        \int_{c_{i}}
+        u
+        \left(x,t_{n}\right)
+        \dl x=
+        \frac{1}{\Delta x}
+        \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+        u
+        \left(x,t_{n}\right)
+        \dl x.
+    \end{equation*}
+
+    Ahora podemos expresar la forma integral de la ley de conservación en
+    la celda $c_{i}$ como
+
+    \begin{equation}\label{eq:integralformcell}
+        \diffp{}{t}
+        \int_{c_{i}}
+        u\left(x,t\right)
+        \dl x=
+        f
+        \big(
+        u\big(x_{i-\frac{1}{2}},t\big)
+        \big)-
+        f
+        \big(
+        u\big(x_{i+\frac{1}{2}},t\big)
+        \big).
+    \end{equation}
+
+    Una vez que se ha discretizado el dominio espacial, procedemos a
+    hacerlo con el temporal.
+    Consideremos una partición uniforme en el tiempo,
+
+    \begin{equation*}
+        0=
+        t_{0}<
+        t_{1}<
+        \cdots<
+        t_{N_{t}}=
+        T,
+    \end{equation*}
+
+    siendo $\Delta t=t_{n+1}-t_{n}$.
+    El paso en tiempo lo consideraremos constante.
+    Ahora, integramos la expresión~\eqref{eq:integralformcell} en cada
+    intervalo de tiempo $\left[t_{n},t_{n+1}\right]$:
+
+    \begin{equation}\label{eq:integrationeachinterval}
+        \int_{c_{i}}
+        u
+        \left(x,t_{n+1}\right)
+        \dl x-
+        \int_{c_{i}}
+        u
+        \left(x,t_{n}\right)
+        \dl x=
+        \int_{t_{n}}^{t_{n+1}}
+        \left[
+            f
+            \big(
+            u\big(x_{i-\frac{1}{2}},t\big)
+            \big)-
+            f
+            \big(
+            u\big(x_{i+\frac{1}{2}},t\big)
+            \big)
+            \right]
+        \dl t.
+    \end{equation}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Dividiendo la expresión~\eqref{eq:integrationeachinterval} entre
+    $\Delta x$ y reordenando los términos, se obtiene
+
+    \begin{gather}\label{eq:expressiondividedoverdeltax}
+        \begin{split}
+            \frac{1}{\Delta x}
+            \int_{c_{i}}
+            u
+            \left(x,t_{n+1}\right)
+            \dl x
+             & =
+            \frac{1}{\Delta x}
+            \int_{c_{i}}
+            u
+            \left(x,t_{n}\right)
+            \dl x          \\
+             & \phantom{=}
+            -\frac{1}{\Delta x}
+            \int_{t_{n}}^{t_{n+1}}
+            \left[
+                f
+                \big(
+                u\big(x_{i-\frac{1}{2}}\big)
+                \big)-
+                f
+                \big(
+                u\big(x_{i+\frac{1}{2}}\big)
+                \big)
+                \right]
+            \dl t.
+        \end{split}
+    \end{gather}
+
+    Debido a que, en general, no podemos evaluar exactamente las
+    integrales del segundo miembro de la
+    expresión~\eqref{eq:expressiondividedoverdeltax}, ya que
+    \begin{math}
+        u
+        \big(x_{i+\frac{1}{2}},t\big)
+    \end{math}
+    y
+    \begin{math}
+        u
+        \big(x_{i-\frac{1}{2}},t\big)
+    \end{math}
+    varían con el
+    tiempo a lo largo de cada lado de la celda, y a que no conocemos la
+    solución exacta, vamos a estudiar métodos numéricos de la forma
+    \begin{equation}\label{eq:godunovscheme}
+        u^{n+1}_{i}=
+        u^{n}_{i}-
+        \frac{\Delta t}{\Delta x}
+        \big(
+        F^{n}_{i+\frac{1}{2}}-
+        F^{n}_{i-\frac{1}{2}}
+        \big),
+    \end{equation}
+
+    donde $F^{n}_{i+\frac{1}{2}}$ es una aproximación del valor medio del
+    flujo en el plano $xt$ a lo largo de la recta $x=x_{i}+\frac{1}{2}$
+    con $t$ variando entre $t_{n}$ y $t_{n+1}$, es decir,
+
+    \begin{equation}\label{eq:numericalflux}
+        F^{n}_{i+\frac{1}{2}}\approx
+        \frac{1}{\Delta t}
+        \int_{t_{n}}^{t_{n+1}}
+        f
+        \big(
+        u
+        \big(x_{i+\frac{1}{2}},t\big)
+        \big)
+        \dl t.
+    \end{equation}
+\end{frame}
+
+\subsection{Métodos descentrado para la ecuación de transporte}
+
+\begin{frame}
+    \frametitle{\subsecname}
+
+    La ecuación de transporte viene dada por $u_{t}+cu_{x}=0$.
+    En primer lugar, supongamos que la información se propaga con
+    velocidad positiva, $c>0$.
+    Como se muestra en la figura 3.2, el flujo a través del extremo
+    izquierdo de la celda $c_{i}$ está completamente determinado por el
+    valor $u^{n}_{i-1}$.
+    Por tanto, el flujo numérico a lo largo de la recta
+    $x=x_{i}-\frac{1}{2}$ se define como
+
+    \begin{equation*}
+        F^{n}_{i-\frac{1}{2}}=
+        cu^{n}_{i-1}.
+    \end{equation*}
+
+    En cambio, el flujo a través del extremo derecho de la celda $c_{i}$
+    está completamente determinado por el valor uni en esta misma celda.
+    Luego, el flujo numérico a lo largo de la recta $x=x_{i+\frac{1}{2}}$
+    se define como
+
+    \begin{equation*}
+        F^{n}_{i+\frac{1}{2}}=
+        cu^{n}_{i}.
+    \end{equation*}
+
+    Sustituyendo en la ecuación~\eqref{eq:godunovscheme}, el método
+    descentrado para la ecuación de transporte con velocidad de
+    propagación positiva, $c>0$, viene dado por
+
+    \begin{equation}\label{eq:upwind}
+        u^{n+1}_{i}=
+        u^{n}_{i}-
+        \frac{c\Delta t}{\Delta x}
+        \left(
+        u^{n}_{i}-
+        u^{n}_{i-1}
+        \right).
+    \end{equation}
+
+    denominado \textbf{método descentrado upwind}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\subsecname}
+
+    Por otro lado, en el caso de que la información se propague con
+    velocidad negativa $c<0$, %como se muestra en la figura 3.3,
+    siguiendo el mismo razonamiento que para el caso anterior, resulta
+    que el método descentrado viene dado por el siguiente esquema
+    numérico
+
+    \begin{equation}\label{eq:downwind}
+        u^{n+1}_{i}=
+        u^{n}_{i}-
+        \frac{c\Delta t}{\Delta x}
+        \left(
+        u^{n}_{i+1}-
+        u^{n}_{i}
+        \right),
+    \end{equation}
+
+    donde
+    \begin{math}
+        F^{n}_{i+\frac{1}{2}}=
+        cu^{n}_{i+1}
+    \end{math}
+    y
+    \begin{math}
+        F^{n}_{i-\frac{1}{2}}=
+        cu^{n}_{i}
+    \end{math}
+    denominado \textbf{método descentrado downwind}.
+
+    \begin{alertblock}{Observación}
+        A medida que el tiempo evoluciona, como la solución es constante a lo
+        largo de las rectas características, se tiene que
+
+        \begin{equation*}
+            u^{n+1}_{i}\approx
+            u
+            \left(x_{i},t_{n+1}\right)=
+            u
+            \left(
+            x_{i}-
+            c\left(t_{n+1}-t_{n}\right),
+            t_{n}
+            \right)=
+            u
+            \left(
+            x_{i}-
+            c\Delta t,t_{n}
+            \right).
+        \end{equation*}
+    \end{alertblock}
+\end{frame}

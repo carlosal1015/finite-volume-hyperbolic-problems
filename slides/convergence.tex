@@ -1,0 +1,866 @@
+\section{Convergencia, precisión y estabilidad}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Denotaremos por
+
+    \begin{equation*}
+        \widehat{u}^{n}_{i}\coloneqq
+        \frac{1}{\Delta x}
+        \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+        u\left(x,t_{n}\right)\dl x,
+    \end{equation*}
+
+    a la media de la solución exacta de la ecuación en la celda $c_{i}$ en el tiempo $t_{n}$.
+
+    \begin{definition}
+        El \textbf{error global} en el instante $t_{n}$ de un método
+        numérico viene dado por la diferencia
+
+        \begin{equation*}
+            E^{n}=
+            u^{n}-
+            \widehat{u}^{n}.
+        \end{equation*}
+
+        Para cuantificar el error en un instante de tiempo fijo, debemos
+        elegir alguna norma.
+    \end{definition}
+
+    Para funciones discretas, como el error $E^{n}$, introducimos la
+    norma definida por
+    \begin{equation}\label{eq:l2normdiscrete}
+        {\left\|E^{n}\right\|}_{2}=
+            {
+                \left(
+                \Delta x
+                \sum_{i=-\infty}^{\infty}
+                {\left|E^{n}_{i}\right|}^{2}
+                \right)
+            }^{\frac{1}{2}},
+    \end{equation}
+
+    denominada la norma discreta $L^{2}$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{definition}
+        Se dice que el método numérico es \textbf{convergente} en el
+        instante de tiempo $t^{n}$ para la norma
+        ${\left\|\cdot\right\|}_{2}$ si
+        \begin{equation*}
+            \lim_{\Delta t\to0}
+            {\left\|E^{n}\right\|}_{2}=
+            0.
+        \end{equation*}
+
+        Se dirá que tiene \textbf{orden de convergencia} $s$ si
+        \begin{equation*}
+            \left\|
+            E^{n}
+            \right\|_{2}=
+            \mathcal{O}
+            \left({\Delta t}^{s}\right),
+            \text{ cuando }
+            \Delta t\to 0.
+        \end{equation*}
+    \end{definition}
+
+    \begin{exampleblock}{Recordar}
+        \begin{itemize}
+            \item
+
+                  El método numérico debe ser \textbf{consistente} con la
+                  ecuación diferencial.
+                  En cada paso de tiempo, se estudia que existe una buena
+                  aproximación local.
+
+            \item
+
+                  El método numérico debe ser \textbf{estable}: los errores
+                  locales que se producen en cada paso de tiempo no deben
+                  crecer demasiado rápido en los pasos de tiempos posteriores.
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{example}[Esquemas numéricos de un paso $u^{n+1}=\mathcal{N}\left(u^{n}\right)$]
+        \begin{align}
+            u^{n+1}_{i} & =
+            u^{n}_{i}-
+            c\frac{\Delta t}{\Delta x}
+            \left(
+            u^{n}_{i}-
+            u^{n}_{i-1}
+            \right)\label{eq:upwindscheme}        \\
+            u^{n+1}_{i} & =
+            u^{n}_{i}-
+            c\frac{\Delta t}{\Delta x}
+            \left(
+            u^{n}_{i+1}-
+            u^{n}_{i}
+            \right)\label{eq:downwindscheme}      \\
+            u^{n+1}_{i} & =
+            u^{n}_{i}-
+            c\frac{\Delta t}{2\Delta x}
+            \left(
+            u^{n}_{i+1}-u^{n}_{i-1}
+            \right)\label{eq:ftcsscheme}          \\
+            u^{n+1}_{i} & =
+            \frac{1}{2}
+            \left(
+            u^{n}_{i+1}+
+            u^{n}_{i-1}
+            \right)-
+            c\frac{\Delta t}{2\Delta x}
+            \left(
+            u^{n}_{i+1}-
+            u^{n}_{i-1}
+            \right)\label{eq:laxfriedrichsscheme} \\
+            u^{n+1}_{i} & =
+            u^{n}_{i}-
+            c\frac{\Delta t}{2\Delta x}
+            \left(
+            u^{n}_{i+1}-
+            u^{n}_{i-1}
+            \right)+
+            c^{2}
+            \frac{{\Delta t}^{2}}{2{\Delta x}^{2}}
+            \left(
+            u^{n}_{i+1}-
+            2u^{n}_{i}+
+            u^{n}_{i-1}
+            \right)\label{eq:laxwendroffscheme}
+        \end{align}
+
+        Los esquemas~\eqref{eq:upwindscheme} y~\eqref{eq:downwindscheme} son
+        métodos descentrados, upwind y downwind, respectivamente.
+        El esquema numérico~\eqref{eq:ftcsscheme} veremos que es inestable y
+        es a partir del cual se introdujo el
+        esquema~\eqref{eq:laxfriedrichsscheme}, denominado esquema de
+        Lax-Friedrichs.
+        Finalmente, el esquema numérico~\eqref{eq:laxwendroffscheme} es el
+        conocido por Lax-Wendroff.
+    \end{example}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{definition}
+        El \textbf{error de truncamiento local o de consistencia} en el
+        paso $n$-ésimo de tiempo, $n=0,\dotsc,N-1$, es el número $\tau^{n}$
+        dado por
+        \begin{equation*}
+            \tau^{n}=
+            \frac{1}{\Delta t}
+            \left(
+            \mathcal{N}\left(u^{n}\right)-
+            \widehat{u}^{n+1}
+            \right).
+        \end{equation*}
+    \end{definition}
+
+    \begin{definition}
+        Se dice que el método numérico es \textbf{consistente} si
+        \begin{equation*}
+            \lim_{\Delta t\to0}
+            \max_{0\leq n\leq N-1}
+            \left|\tau^{n}\right|
+            =0.
+        \end{equation*}
+
+        Se dirá que tiene \textbf{orden de consistencia} $s$ si
+        \begin{equation*}
+            \tau^{n}=
+            \mathcal{O}
+            \left({\Delta t}^{s}\right).
+        \end{equation*}
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{example}[Error de consistencia del esquema descentrado upwind]
+        Dicho esquema viene dado por la expresión~\eqref{eq:upwind}.
+        Teniendo en cuenta los desarrollos de Taylor correspondientes,
+        cancelando términos comunes y sabiendo que $u$ es la solución
+        exacta de la ecuación de transporte, es decir,
+        $u_{t}+cu_{x}=0$, el error de consistencia viene dado por
+        \begin{equation}\label{eq:truncationerrorupwind}
+            \tau^{n}=
+            \frac{1}{2}
+            c\Delta x
+            u_{xx}
+            \left(x_{i},t_{n}\right)-
+            \frac{1}{2}\Delta t
+            u_{tt}
+            \left(x_{i},t_{n}\right)+
+            \mathcal{O}
+            \left(\Delta t^{2}\right).
+        \end{equation}
+
+        Dado que $u_{t}+cu_{x}=0$, entonces $u_{t}=-cu_{x}$ y derivando
+        dicha igualdad con respecto a $t$ y a $x$, obtenemos que
+        $u_{tt}=-cu_{xt}$ y $u_{tx}=-cu_{xx}$, respectivamente.
+        De aquí, $u_{tt}=c^{2}u_{xx}$ y sustituyendo en el error de
+        consistencia~\eqref{eq:truncationerrorupwind}, se tiene que
+        \begin{equation*}
+            \tau^{n}=
+            \frac{1}{2}
+            c\Delta x
+            \left(
+            1-c\frac{\Delta t}{\Delta x}
+            \right)
+            u_{xx}
+            \left(x_{i},t_{n}\right)+
+            \mathcal{O}
+            \left(\Delta t^{2}\right).
+        \end{equation*}
+
+        Asumiremos que
+        \begin{math}
+            u\in
+            C^{2}
+            \left(
+            \mathbb{R}\times
+            \mathbb{R}^{+}
+            \right)
+        \end{math}
+        y que $\diffp[2]{u}{x}$ está acotada.
+        Además, $\frac{\Delta t}{\Delta x}$ permanece constante.
+        Entonces tenemos que $\lim_{\Delta t\to0}\tau^{n}=0$, y así queda
+        probado que el esquema descentrado upwind para la
+        ecuación de transporte es consistente, siendo el orden de
+        convergencia $s=1$, pues el término de menor orden es $\Delta x$.
+    \end{example}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{definition}
+        Un esquema numérico de un paso es estable si existe una constante $K$ tal que
+
+        \begin{equation}\label{eq:stabilityonestepscheme}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{n}_{i}\right|}^{2}\leq
+            K
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{0}_{i}\right|}^{2}.
+        \end{equation}
+    \end{definition}
+
+    Multiplicando la desigualdad~\eqref{eq:stabilityonestepscheme} por
+    $\Delta x$ y aplicando la norma discreta $L^{2}$ dado por la
+    expresión~\eqref{eq:l2normdiscrete}, tenemos que la definición
+    anterior es equivalente a
+
+    \begin{equation}\label{eq:stabilityonestepschemeequivalence}
+        {\left\|u^{n}\right\|}^{2}_{2}\leq
+        K
+        {\left\|u^{0}\right\|}^{2}_{2},
+    \end{equation}
+
+    para alguna constante $K$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+    \begin{example}
+        Consideramos el esquema numérico
+        downwind~\eqref{eq:downwindscheme}, esto es,
+
+        \begin{equation}\label{eq:downwindscheme2}
+            u^{n+1}_{i}=
+            \big(
+            1+
+            c\frac{\Delta t}{\Delta x}
+            \big)
+            u^{n}_{i}-
+            c\frac{\Delta t}{\Delta x}
+            u^{n}_{i+1}.
+        \end{equation}
+
+        Denotemos
+        \begin{math}
+            \alpha=
+            1+
+            c\frac{\Delta t}{\Delta x}
+        \end{math}
+        y
+        \begin{math}
+            \beta=
+            -c\frac{\Delta t}{\Delta x}
+        \end{math},
+        sustituyendo en la expresión~\eqref{eq:downwindscheme2} obtenemos
+        que el esquema numérico viene dado por
+
+        \begin{equation*}
+            u^{n+1}_{i}=
+            \alpha u^{n}_{i}+
+            \beta u^{n}_{i+1}.
+        \end{equation*}
+
+        A continuación, vamos a demostrar que el esquema numérico es
+        estable si
+        \begin{math}
+            \left|\alpha\right|+
+            \left|\beta\right|\leq
+            1
+        \end{math}.
+    \end{example}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proofs}
+        \begin{align*}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{n+1}_{i}\right|}^{2} & =
+            \sum_{i=-\infty}^{+\infty}
+            {
+            \left|\alpha u^{n}_{i}+
+            \beta u^{n}_{i+1}\right|
+            }^{2}.                                \\
+                                           & =
+            \sum_{i=-\infty}^{+\infty}
+            \left|
+            \alpha^{2}
+            {\left(u^{n}_{i}\right)}^{2}+
+            2\alpha\beta
+            u^{n}_{i}
+            u^{n}_{i+1}+
+            \beta^{2}
+            {\left(u^{n}_{i+1}\right)}^{2}
+            \right|.                              \\
+                                           & \leq
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \alpha^{2}
+            {\left|u^{n}_{i}\right|}^{2}+
+            2\left|\alpha\right|
+            \left|\beta\right|
+            \left|u^{n}_{i}\right|
+            \left|u^{n}_{i+1}\right|+
+            \beta^{2}
+            {\left|u^{n}_{i+1}\right|}^{2}
+            \right).
+        \end{align*}
+
+        A continuación, vamos a aplicar la desigualdad
+        \begin{math}
+            2
+            \left|u^{n}_{i}\right|
+            \left|u^{n}_{i+1}\right|\leq
+            {\left|u^{n}_{i}\right|}^{2}+
+            {\left|u^{n}_{i+1}\right|}^{2}
+        \end{math}
+        para separar, por un lado, los sumandos con aproximación de la
+        solución en la celda $c_{i}$ y por otro lado, los sumandos con
+        aproximación de la solución en la celda $c_{i+1}$.
+    \end{proofs}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proofs}[\proofname\ (Cont.)]
+        Finalmente, tomamos en todos los sumandos, la aproximación de la
+        solución en la celda $c_{i}$:
+
+        \begin{align*}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{n+1}_{i}\right|}^{2} & \leq
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \alpha^{2}
+            {\left|u^{n}_{i}\right|}^{2}+
+            \left|\alpha\right|
+            \left|\beta\right|
+            \left(
+            \left|u^{n}_{i}\right|^{2}+
+            \left|u^{n}_{i+1}\right|^{2}
+            \right)+
+            \beta^{2}
+            {\left|u^{n}_{i+1}\right|}^{2}
+            \right)                               \\
+                                           & \leq
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \alpha^{2}
+            \left|u^{n}_{i}\right|^{2}+
+            \left|\alpha\right|
+            \left|\beta\right|
+            {\left|u^{n}_{i}\right|}^{2}
+            \right)+
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \left|\alpha\right|
+            \left|\beta\right|
+            {\left|u^{n}_{i+1}\right|}^{2}+
+            \beta^{2}
+            {\left|u^{n}_{i+1}\right|}^{2}
+            \right)                               \\
+                                           & =
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \alpha^{2}
+            {\left|u^{n}_{i}\right|}^{2}+
+            \left|\alpha\right|
+            \left|\beta\right|
+            \left|u^{n}_{i}\right|^{2}
+            \right)+
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \left|\alpha\right|
+            \left|\beta\right|
+            \left|u^{n}_{i}\right|^{2}+
+            \beta^{2}
+            {\left|u^{n}_{i}\right|}^{2}
+            \right)                               \\
+                                           & =
+            \sum_{i=-\infty}^{+\infty}
+            \left(
+            \alpha^{2}+
+            2\left|\alpha\right|
+            \left|\beta\right|+
+            \beta^{2}
+            \right)
+            \left|u^{n}_{i}\right|^{2}=
+                {\left(\left|\alpha\right|+\left|\beta\right|\right)}^{2}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{n}_{i}\right|}^{2}.
+        \end{align*}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+    \begin{proof}[\proofname\ (Cont.)]
+        Entonces, hemos obtenido que
+
+        \begin{equation*}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{n+1}_{i}\right|}^{2}\leq
+            {
+                \left(\left|\alpha\right|+
+                \left|\beta\right|\right)
+            }^{2}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{n}_{i}\right|}^{2}.
+        \end{equation*}
+
+        De forma recursiva, concluimos que
+
+        \begin{equation*}
+            \sum_{i=-\infty}^{\infty}
+            {\left|u^{n+1}_{i}\right|}^{2}\leq
+            {
+                \left(
+                \left|\alpha\right|+
+                \left|\beta\right|
+                \right)
+            }^{2\left(n+1\right)}
+            \sum_{i=-\infty}^{+\infty}
+            {\left|u^{0}_{i}\right|}^{2}.
+        \end{equation*}
+
+        Por lo tanto, si
+        \begin{math}
+            \left|\alpha\right|+
+            \left|\beta\right|\leq
+            1
+        \end{math}
+        entonces el esquema numérico es estable.
+        Sustituyendo los valores de $\alpha$ y $\beta$ y aplicando
+        propiedades de la función valor absoluto, concluimos que si
+        \begin{math}
+            -1\leq
+            c\frac{\Delta t}{\Delta x}\leq
+            0
+        \end{math}
+        entonces el esquema numérico~\eqref{eq:downwindscheme2} es estable, como queríamos ver.
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Emplearemos el subíndice $j$ para denotar
+    $x_{j}=j\Delta x$ en lugar del subíndice $i$ para que no haya
+    confusión con el número complejo $i=\sqrt{-1}$.
+    En la celda $c_{j}$ y para el tiempo $t_{n}$, $u^{n}_{j}$ representa
+    una función definida sobre una malla para el problema de Cauchy.
+    Sea $\Delta x$ la longitud de las celdas de la malla,
+    entonces su transformada de Fourier visto viene dada por
+    \begin{equation}\label{eq:fouriertransform}
+        \overline{u}
+        \left(\xi\right)=
+        \frac{1}{\sqrt{2\pi}}
+        \sum_{j=-\infty}^{\infty}
+        e^{-i\xi j\Delta x}
+        u^{n}_{j}\Delta x,
+    \end{equation}
+
+    donde
+    \begin{math}
+        \xi\in
+        \left[
+            -\frac{\pi}{\Delta x},
+            \frac{\pi}{\Delta x}
+            \right]
+    \end{math}
+    y
+    \begin{math}
+        \overline{u}
+        \left(
+        -\frac{\pi}{\Delta x}
+        \right)=
+        \overline{u}^{n}
+        \left(
+        \frac{\pi}{\Delta x}
+        \right)
+    \end{math}.
+    Y la transformada de Fourier inversa viene dada por
+    \begin{equation}\label{eq:fourierinversetransform}
+        u^{n}_{j}=
+        \frac{1}{\sqrt{2\pi}}
+        \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+        e^{i\xi j\Delta x}
+        \overline{u}^{n}
+        \left(\xi\right)
+        \dl\xi.
+    \end{equation}
+
+    Tomando la norma $L^{2}$ para funciones continuas y en la
+    expresión~\eqref{eq:l2normdiscrete} para funciones discretas, se
+    tiene el siguiente resultado.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{theorem}[Identidad de Parseval]\normalfont
+        Sea
+        \begin{math}
+            \overline{u}^{n}\colon
+            \left[
+                -\frac{\pi}{\Delta x},
+                \frac{\pi}{\Delta x}
+                \right]\to
+            \mathbb{R}
+        \end{math}
+        una función de periodo $\frac{2\pi}{\Delta x}$, dada por la
+        serie~\eqref{eq:fouriertransform} con coeficientes $u^{n}_{j}$
+        dados por la igualdad~\eqref{eq:fourierinversetransform}.
+        Entonces
+        \begin{equation}\label{eq:parsevalidentity}
+            {\left\|\overline{u}\left(\xi\right)\right\|}^{2}_{L^{2}\left(\mathbb{R}\right)}=
+            {\left\|u^{n}\right\|}^{2}_{2}.
+        \end{equation}
+    \end{theorem}
+
+    \begin{proofs}
+        Apliquemos la norma $L^{2}\left(\mathbb{R}\right)$ a la función
+        periódica $\overline{u}^{n}$ en el sentido de la definición 4.2, y
+        usando propiedades de los números complejos, obtenemos
+        \begin{align*}
+            {\left\|
+                \overline{u}^{n}
+                \left(\xi\right)
+            \right\|}^{2}_{L^{2}\left(\mathbb{R}\right)} & =
+            \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+            {\left|
+                \overline{u}^{n}
+                \left(\xi\right)
+                \right|}^{2}
+            \dl\xi.                                          \\
+                                                         & =
+            \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+            \overline{\overline{u}^{n}\left(\xi\right)}
+            \overline{u}^{n}
+            \left(\xi\right)
+            \dl\xi.                                          \\
+                                                         & =
+            \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+            \overline{\overline{u}^{n}\left(\xi\right)}
+            \frac{1}{\sqrt{2\pi}}
+            \sum_{j=-\infty}^{+\infty}
+            e^{-i\xi j\Delta x}
+            u^{n}_{j}
+            \Delta x
+            \dl\xi.
+        \end{align*}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proof}[\proofname\ (Cont.)]
+        \begin{align*}
+            {\left\|
+                \overline{u}^{n}
+                \left(\xi\right)
+                \right\|}^{2}_{L^{2}\left(\mathbb{R}\right)}
+             & =
+            \Delta x
+            \sum_{j=-\infty}^{+\infty}
+            \frac{1}{\sqrt{2\pi}}
+            \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+            e^{-i\xi j \Delta x}
+            \overline{\overline{u}^{n}\left(\xi\right)}
+            \dl\xi
+            u^{n}_{j}. \\
+             & =
+            \Delta x
+            \sum_{j=-\infty}^{+\infty}
+            \frac{1}{\sqrt{2\pi}}
+            \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+            e^{i\xi j \Delta x}
+            \overline{u}^{n}
+            \left(\xi\right)
+            \dl\xi
+            u^{n}_{j}. \\
+             & =
+            \Delta x
+            \sum_{j=-\infty}^{+\infty}
+            \overline{u^{n}_{j}}
+            u^{n}_{j}. \\
+             & =
+            {\left\|\overline{u}^{n}\right\|}^{2}_{2}.
+            \tag*{\qedhere}
+        \end{align*}
+    \end{proof}
+    De esta forma, por la
+    desigualdad~\eqref{eq:stabilityonestepschemeequivalence} y por la
+    identidad de Parseval~\eqref{eq:parsevalidentity}, si se demuestra la
+    estabilidad para la transformada de Fourier, inmediatamente, está
+    demostrada para la función original.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    De forma genérica, sabemos que un esquema de volúmenes finitos de un
+    paso se define como
+    \begin{equation}\label{eq:onestepschemefinitevolume}
+        u^{n+1}_{j}=
+        u^{n}_{j}-
+        c\frac{\Delta t}{\Delta x}
+        \left(
+        \phi\left(u^{n}_{j},u^{n}_{j+1}\right)-
+        \phi\left(u^{n}_{j-1},u^{n}_{j}\right)
+        \right).
+    \end{equation}
+
+    Para simplificar notación, denotamos
+    \begin{math}
+        \mu=
+        c\frac{\Delta t}{\Delta x}
+    \end{math}.
+    Centrándonos en nuestro estudio de problemas lineales podemos
+    escribir el esquema~\eqref{eq:onestepschemefinitevolume} como sigue
+    \begin{equation}\label{eq:onestepschemefinitevolume2}
+        u^{n+1}_{j}=
+        u^{n}_{j}-
+        \mu
+        \left(
+        \alpha u^{n}_{j-1}+
+        \beta u^{n}_{j}+
+        \gamma u^{n}_{j+1}
+        \right)=
+        \left(1-\mu\beta\right)
+        u_j^n-
+        \mu\alpha
+        u^{n}_{j-1}-
+        \mu\gamma
+        u^{n}_{j+1},
+    \end{equation}
+
+    donde $\alpha,\beta,\gamma\in\mathbb{R}$, y sustituyendo la
+    ecuación~\eqref{eq:fourierinversetransform} en la
+    expresión~\eqref{eq:onestepschemefinitevolume2}, se obtiene que
+    \begin{equation}\label{eq:onestepschemefinitevolume3}
+        u^{n+1}_{j}=
+        \frac{1}{\sqrt{2\pi}}
+        \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+        e^{i\xi j\Delta x}
+        \left[
+            \left(1-\mu\beta\right)-
+            \mu\alpha
+            e^{-i\xi\Delta x}-
+            \mu\gamma
+            e^{i\xi\Delta x}
+            \right]
+        \overline{u}^{n}\left(\xi\right)
+        \dl\xi.
+    \end{equation}
+
+    Aplicando la definición de la transformada de Fourier inversa, dada
+    por la ecuación~\eqref{eq:fourierinversetransform}, en el tiempo
+    $t_{n+1}$, de la ecuación~\eqref{eq:onestepschemefinitevolume3}
+    resulta que
+    \begin{equation*}
+        \overline{u}^{n+1}
+        \left(\xi\right)=
+        \left[
+            \left(1-\mu\beta\right)-
+            \mu\alpha
+            e^{-i\xi\Delta x}-
+            \mu\gamma e^{i\xi\Delta x}
+            \right]
+        \overline{u}^{n}
+        \left(\xi\right)
+    \end{equation*}
+
+    Denotando
+    \begin{math}
+        g
+        \left(\xi\Delta x\right)=
+        \left(1-\mu\beta\right)-
+        \mu\alpha
+        e^{-i\xi\Delta x}-
+        \mu\gamma
+        e^{i\xi\Delta x}
+    \end{math},
+    entonces
+    \begin{equation}\label{eq:amplificationfactor}
+        \overline{u}^{n+1}
+        \left(\xi\right)=
+        g
+        \left(\xi\Delta x\right)
+        \overline{u}^{n}
+        \left(\xi\right).
+    \end{equation}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{alertblock}{Observación}
+        La ecuación~\eqref{eq:amplificationfactor} muestra que para esquemas
+        numéricos de un paso, la solución en un tiempo concreto es igual a
+        multiplicar la solución en el instante de tiempo previo por un factor
+        denominado factor de amplificación, que corresponde con la magnitud
+        en la que avanza la solución en un paso de tiempo.
+        De la ecuación~\eqref{eq:amplificationfactor} de forma recursiva, se
+        obtiene que
+        \begin{equation*}
+            \overline{u}^{n+1}
+            \left(\xi\right)=
+            {g\left(\xi\Delta x\right)}^{n}
+            \overline{u}^{0}
+            \left(\xi\right).
+        \end{equation*}
+    \end{alertblock}
+
+    \begin{theorem}\normalfont
+        Un esquema de volúmenes finitos de un paso es estable si y solo si
+        \begin{math}
+            {\left|
+            {g\left(\xi\Delta x\right)}
+            \right|}^{n}\leq
+            1
+        \end{math}.
+    \end{theorem}
+
+    \begin{proof}
+        Ver en~\cite{Strikwerda2004}.
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    % \frametitle{\secname}
+    \begin{example}
+        Consideremos el esquema numérico~\eqref{eq:ftcsscheme}.
+        Sustituimos la ecuación~\eqref{eq:fourierinversetransform} en el
+        esquema numérico considerado y se obtiene que
+        \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+        \begin{equation*}
+            u^{n+1}_{j}=
+            \frac{1}{\sqrt{2\pi}}
+            \int_{-\frac{\pi}{\Delta x}}^{\frac{\pi}{\Delta x}}
+            e^{i\xi j \Delta x}
+            \left(
+            1-c\frac{\Delta t}{\Delta x}
+            e^{i \xi \Delta x}+
+            c\frac{\Delta t}{\Delta x}
+            e^{-i\xi\Delta x}\right)
+            \overline{u}^{n}
+            \left(\xi\right)
+            \dl\xi.
+        \end{equation*}
+        Por tanto, resulta que
+        \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+        \begin{equation*}
+            \bar{u}^{n+1}
+            \left(\xi\right)=
+            \left(
+            1-
+            c\frac{\Delta t}{\Delta x}
+            e^{i\xi\Delta x}+
+            c\frac{\Delta t}{\Delta x}
+            e^{-i\xi\Delta x}
+            \right)
+            \overline{u}^{n}
+            \left(\xi\right),
+        \end{equation*}
+        donde el factor de amplificación viene dado por
+        \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+        \begin{equation*}
+            g
+            \left(\xi\Delta x\right)=
+            1-
+            c\frac{\Delta t}{\Delta x}
+            \left(
+            e^{i\xi\Delta x}-
+            e^{-i\xi\Delta x}
+            \right)=
+            1-
+            c\frac{\Delta t}{\Delta x}
+            \left(
+            2i\sin
+            \left(\xi\Delta x\right)
+            \right).
+        \end{equation*}
+        Como el factor de amplificación es un número complejo, consideremos
+        \begin{math}
+            {\left|
+                g\left(\xi\Delta x\right)
+                \right|}^{2},
+        \end{math}
+        esto es,
+        \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+        \begin{equation*}
+            \left|
+            g
+            \left(\xi\Delta x\right)
+            \right|^{2}=
+            1+
+            4c^{2}
+            \frac{{\Delta t}^{2}}{{\Delta x}^{2}}
+            \sin^{2}
+            \left(\xi\Delta x\right).
+        \end{equation*}
+        De donde, concluimos que
+        \begin{math}
+            \left|
+            g\left(\xi\Delta x\right)
+            \right|>
+            1
+        \end{math}
+        aún cumpliéndose la confición CFL.
+        Entonces, concluimos que este esquema numérico para la ecuación de
+        transporte es inestable.
+    \end{example}
+\end{frame}

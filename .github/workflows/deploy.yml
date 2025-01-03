@@ -28,19 +28,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
+
       - name: Install MyST Markdown
         run: npm install -g mystmd
+
       - name: Build HTML Assets
         run: myst build --html
+
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v7
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: latex.yml
+          name: PDF-artifact
+
+      - name: "Untar files"
+        run: |
+          tar -I zstd -xvf PDF.tar.zst
+          mv main.pdf _build
+          mv presentation.pdf _build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './_build/html'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -34,7 +34,7 @@ volúmenes finitos
   x_{i-\frac{1}{2}},
   x_{i+\frac{1}{2}}
   \big),\quad
-  i=1,\cdots,N_{x}
+  i=1,\dotsc,N_{x}
 \end{equation*}
 
 cuyos puntos extremos serían
@@ -74,10 +74,14 @@ decir:
   u^{n}_{i}\approx
   \frac{1}{\Delta x}
   \int_{c_{i}}
-  u\left(x,t_{n}\right)\dl x=
+  u
+  \left(x,t_{n}\right)
+  \dl x=
   \frac{1}{\Delta x}
   \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
-  u\left(x,t_{n}\right)\dl x.
+  u
+  \left(x,t_{n}\right)
+  \dl x.
 \end{equation*}
 
 El hecho de centrarnos en estos valores promedios nos facilita
@@ -96,7 +100,8 @@ $\left[a,b\right]$, es decir,
 
 \begin{equation*}
   \int_{a}^{b}
-  u\left(x,t_{n}\right)
+  u
+  \left(x,t_{n}\right)
   \dl x\approx
   \sum_{i=1}^{N}
   u^{n}_{i}
@@ -123,9 +128,16 @@ la celda $c_{i}$ como
 \begin{equation}\label{eq:integralformcell}
   \diffp{}{t}
   \int_{c_{i}}
-  u\left(x,t\right)\dl x=
-  f\big(u\big(x_{i-\frac{1}{2}},t\big)\big)-
-  f\big(u\big(x_{i+\frac{1}{2}},t\big)\big).
+  u\left(x,t\right)
+  \dl x=
+  f
+  \big(
+  u\big(x_{i-\frac{1}{2}},t\big)
+  \big)-
+  f
+  \big(
+  u\big(x_{i+\frac{1}{2}},t\big)
+  \big).
 \end{equation}
 
 Una vez que se ha discretizado el dominio espacial, procedemos a
@@ -133,7 +145,8 @@ hacerlo con el temporal.
 Consideremos una partición uniforme en el tiempo,
 
 \begin{equation*}
-  0=t_{0}<
+  0=
+  t_{0}<
   t_{1}<
   \cdots<
   t_{N_{t}}=
@@ -147,13 +160,23 @@ intervalo de tiempo $\left[t_{n},t_{n+1}\right]$:
 
 \begin{equation}\label{eq:integrationeachinterval}
   \int_{c_{i}}
-  u\left(x,t_{n+1}\right)\dl x-
+  u
+  \left(x,t_{n+1}\right)
+  \dl x-
   \int_{c_{i}}
-  u\left(x,t_{n}\right)\dl x=
+  u
+  \left(x,t_{n}\right)
+  \dl x=
   \int_{t_{n}}^{t_{n+1}}
   \left[
-    f\big(u\big(x_{i-\frac{1}{2}},t\big)\big)-
-    f\big(u\big(x_{i+\frac{1}{2}},t\big)\big)
+    f
+    \big(
+    u\big(x_{i-\frac{1}{2}},t\big)
+    \big)-
+    f
+    \big(
+    u\big(x_{i+\frac{1}{2}},t\big)
+    \big)
     \right]
   \dl t.
 \end{equation}
@@ -165,18 +188,29 @@ $\Delta x$ y reordenando los términos, se obtiene
   \begin{split}
     \frac{1}{\Delta x}
     \int_{c_{i}}
-    u\left(x,t_{n+1}\right)\dl x
+    u
+    \left(x,t_{n+1}\right)
+    \dl x
      & =
     \frac{1}{\Delta x}
     \int_{c_{i}}
-    u\left(x,t_{n}\right)\dl x \\
+    u
+    \left(x,t_{n}\right)
+    \dl x          \\
      & \phantom{=}
     -\frac{1}{\Delta x}
     \int_{t_{n}}^{t_{n+1}}
     \left[
-      f\big(u\big(x_{i-\frac{1}{2}}\big)\big)-
-      f\big(u\big(x_{i+\frac{1}{2}}\big)\big)
-      \right]\dl t.
+      f
+      \big(
+      u\big(x_{i-\frac{1}{2}}\big)
+      \big)-
+      f
+      \big(
+      u\big(x_{i+\frac{1}{2}}\big)
+      \big)
+      \right]
+    \dl t.
   \end{split}
 \end{gather}
 
@@ -185,12 +219,12 @@ integrales del segundo miembro de la
 expresión~\eqref{eq:expressiondividedoverdeltax}, ya que
 \begin{math}
   u
-  \left(x_{i}+1,t\right)
+  \big(x_{i+\frac{1}{2}},t\big)
 \end{math}
 y
 \begin{math}
   u
-  \left(x_{i}-1,t\right)
+  \big(x_{i-\frac{1}{2}},t\big)
 \end{math}
 varían con el
 tiempo a lo largo de cada lado de la celda, y a que no conocemos la
@@ -200,25 +234,25 @@ solución exacta, vamos a estudiar métodos numéricos de la forma
   u^{n+1}_{i}=
   u^{n}_{i}-
   \frac{\Delta t}{\Delta x}
-  \left(
+  \big(
   F^{n}_{i+\frac{1}{2}}-
   F^{n}_{i-\frac{1}{2}}
-  \right),
+  \big),
 \end{equation}
 
 donde $F^{n}_{i+\frac{1}{2}}$ es una aproximación del valor medio del
 flujo en el plano $xt$ a lo largo de la recta $x=x_{i}+\frac{1}{2}$
-con $t$ variando entre $t_{n}$ y $t_{n+1}$,es decir,
+con $t$ variando entre $t_{n}$ y $t_{n+1}$, es decir,
 
 \begin{equation}\label{eq:numericalflux}
   F^{n}_{i+\frac{1}{2}}\approx
   \frac{1}{\Delta t}
   \int_{t_{n}}^{t_{n+1}}
   f
-  \left(
+  \big(
   u
-  \left(x_{i+\frac{1}{2}},t\right)
-  \right)
+  \big(x_{i+\frac{1}{2}},t\big)
+  \big)
   \dl t.
 \end{equation}
 
@@ -310,7 +344,7 @@ numérico son las siguientes:
         esto es,
 
         \begin{equation*}
-          \lim_{u^{n}_{i},u^{n+1}_{i}\overline{u}}
+          \lim_{u^{n}_{i},u^{n+1}_{i}\to\overline{u}}
           \phi\left(u^{n}_{i},u^{n+1}_{i}\right)=
           f\left(\overline{u}\right).
         \end{equation*}
@@ -326,12 +360,12 @@ sobre cualquier subconjunto de celdas $i=I,\dotsc,J$ y multipliquemos
 por $\Delta x$:
 
 \begin{equation*}
-  \Delta x
   \sum_{i=I}^{J}
-  u^{n+1}_{i}=
-  \Delta x
+  u^{n+1}_{i}
+  \Delta x=
   \sum_{i=I}^{J}
-  u^{n}_{i}-
+  u^{n}_{i}
+  \Delta x-
   \Delta t
   \left(
   \sum_{i=I}^{J}
@@ -345,12 +379,12 @@ Como la suma de los flujos se cancela salvo los flujos extremos
 $x=x_{I-\frac{1}{2}}$ y $x=x_{J+\frac{1}{2}}$, obtenemos que
 
 \begin{equation}\label{eq:conservative}
-  \Delta x
   \sum_{i=I}^{J}
-  u^{n+1}_{i}=
-  \Delta x
+  u^{n+1}_{i}
+  \Delta x=
   \sum_{i=I}^{J}
-  u^{n}_{i}-
+  u^{n}_{i}
+  \Delta x-
   \Delta t
   \left(
   F^{n}_{J+\frac{1}{2}}-
@@ -372,7 +406,8 @@ propagación. % (figuras 3.2 y 3.3).
 
 
 Las rectas características son usadas para determinar mejores
-funciones de flujo numérico, dando lugar a los métodos descentrados.
+funciones de flujo numérico, dando lugar a los
+\textbf{métodos descentrados}.
 Veamos un ejemplo de este tipo de método en la ecuación de
 transporte.
 
@@ -416,7 +451,7 @@ propagación positiva, $c>0$, viene dado por
   \right).
 \end{equation}
 
-denominado método descentrado upwind.
+denominado \textbf{método descentrado upwind}.
 
 Por otro lado, en el caso de que la información se propague con
 velocidad negativa $c<0$, %como se muestra en la figura 3.3,
@@ -444,7 +479,7 @@ y
   F^{n}_{i-\frac{1}{2}}=
   cu^{n}_{i}
 \end{math}
-denominado método descentrado downwind.
+denominado \textbf{método descentrado downwind}.
 
 A medida que el tiempo evoluciona, como la solución es constante a lo
 largo de las rectas características, se tiene que
@@ -579,18 +614,18 @@ y promediar.
         Denotamos
         \begin{math}
           \widetilde{u}
-          \left(
+          \big(
           x_{i-\frac{1}{2}},
           t_{n+1}
-          \right)
+          \big)
         \end{math}
         y
         \begin{math}
           \widetilde{u}
-          \left(
+          \big(
           x_{i+\frac{1}{2}},
           t_{n+1}
-          \right)
+          \big)
         \end{math},
         respectivamente, las soluciones citadas.
 
@@ -605,14 +640,16 @@ y promediar.
           \frac{1}{\Delta x}
           \int_{x_{i-\frac{1}{2}}}^{x_{i}}
           \widetilde{u}
-          \left(x_{i-\frac{1}{2}},t_{n+1}\right)
+          \big(
+          x_{i-\frac{1}{2}},t_{n+1}
+          \big)
           \dl x+
           \frac{1}{\Delta x}
           \int_{x_{i}}^{x_{i+\frac{1}{2}}}
           \widetilde{u}
-          \left(
+          \big(
           x_{i+\frac{1}{2}},t_{n+1}
-          \right)
+          \big)
           \dl x.
         \end{equation}
 \end{description}
@@ -652,7 +689,10 @@ es decir,
   F^{n}_{i+\frac{1}{2}}\approx
   \frac{1}{\Delta t}
   \int_{t_{n}}^{t_{n+1}}
-  f\left(u\left(x_{i+\frac{1}{2}},t\right)\right)
+  f
+  \big(
+  u\big(x_{i+\frac{1}{2}},t\big)
+  \big)
   \dl t.
 \end{equation*}
 
@@ -663,20 +703,20 @@ anterior.
 De esta forma, el integrando
 \begin{math}
   f
-  \left(
+  \big(
   u
-  \left(
+  \big(
     x_{i+\frac{1}{2}},
     t
-    \right)
-  \right)
+    \big)
+  \big)
 \end{math}
 en cada frontera depende de la solución exacta
 \begin{math}
   \widetilde{u}
-  \left(
+  \big(
   x_{i+\frac{1}{2}},t
-  \right)
+  \big)
 \end{math}
 del problema de Riemann correspondiente en el intervalo de tiempo
 \begin{math}
@@ -691,10 +731,10 @@ Si denotamos
   u^{\downarrow}
   \left(u_{i},u_{i+1}\right)\coloneqq
   \widetilde{u}
-  \left(
+  \big(
   x_{i+\frac{1}{2}},
   t
-  \right)
+  \big)
 \end{math},
 el flujo numérico $F^{n}_{i+\frac{1}{2}}$ viene dado por
 
