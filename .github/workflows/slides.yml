@@ -21,7 +21,7 @@ jobs:
           git config --global user.name github-actions
           git clone -q --filter=blob:none --no-checkout --depth=1  --sparse $REPO .
           git sparse-checkout init --cone
-          git sparse-checkout set slides report
+          git sparse-checkout set slides report snapshots
           git checkout
 
       - uses: addnab/docker-run-action@v3
@@ -35,10 +35,16 @@ jobs:
           shell: bash
           run: |
             sudo chown -R gitpod:gitpod /work
+            sudo pacman -Syu --needed --noconfirm python-matplotlib
             pushd /work/report
+            ./figure1.py
+            ./figure2.py
+            ./figure3.py
             arara main
             popd
             pushd /work/slides
+            ./figure1.py
+            ./figure3.py
             arara presentation
             popd
             mkdir -p /work/public
