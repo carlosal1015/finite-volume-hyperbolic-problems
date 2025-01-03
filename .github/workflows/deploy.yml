@@ -52,7 +52,7 @@ jobs:
       - name: "Untar files"
         run: |
           tar -I zstd -xvf PDF.tar.zst
-          mv public/*.pdf _build
+          mv public/*.pdf _build/html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
