@@ -1,0 +1,31 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out', 'pdf', 'snm', 'toc']
+% arara: --> }
+%! arara: lualatex: {
+%! arara: --> shell: yes,
+%! arara: --> draft: yes,
+%! arara: --> interaction: batchmode
+%! arara: --> }
+%! arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out', 'snm', 'toc']
+% arara: --> }
+\input{preamble}
+\begin{document}
+
+\input{exercise12.3}
+\input{exercise12.4}
+
+\end{document}

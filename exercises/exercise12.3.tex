@@ -1,0 +1,665 @@
+\input{theory12.3}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{alertblock}{Exercise 12.3}
+    Each of the methods~\eqref{eq:12.25},~\eqref{eq:12.26}
+    and~\eqref{eq:12.27} reduces to~\eqref{eq:12.24} in the constant
+    coefficient linear case and is second order accurate on smooth
+    solutions (to nonlinear problems) and conservative.
+    Verify these statements for at least one of these methods and
+    write it in conservation form, determining the numerical flux
+    function.
+    \textbf{Hint}:~\url{https://math.stackexchange.com/q/3227972}.
+  \end{alertblock}
+
+  \begin{exampleblock}{Remark}
+    For a constant coefficient lineal hyperbolic system
+    \begin{math}
+      u_{t}+
+      Au_{x}=
+      0
+    \end{math},
+    where
+    \begin{math}
+      u=
+      u\left(x,t\right)\colon
+      \Omega_{x}\times\Omega_{t}\to\mathbb{R}^{m}
+    \end{math}
+    and $A\in\mathbb{R}^{m\times m}$ is an diagonalizable matrix with
+    real eigenvalues.
+    Then
+    \begin{math}
+      f
+      \left(u\right)=
+      Au
+    \end{math}.
+  \end{exampleblock}
+
+  \begin{proofs}[Solution $\eqref{eq:12.25}\implies\eqref{eq:12.24}$]
+    \begin{align*}
+      \frac{k}{2h}
+      \left[
+        f
+        \big(U^{n}_{j+1}\big)-
+        f
+        \big(U^{n}_{j-1}\big)
+      \right] & =
+      \frac{k}{2h}
+      \big(
+      AU^{n}_{j+1}-
+      AU^{n}_{j-1}
+      \big).      \\
+              & =
+      \textcolor{DarkRed}{
+        \frac{k}{2h}
+        A
+        \big(
+        U^{n}_{j+1}-
+        U^{n}_{j-1}
+      \big)}.     \\[\baselineskip]
+      \frac{k^{2}}{2h^{2}}
+      \left[
+        A_{j+\frac{1}{2}}
+        \big(
+        f
+        \big(U^{n}_{j+1}\big)-
+        f
+        \big(U^{n}_{j}\big)
+        \big)-
+        A_{j-\frac{1}{2}}
+        \big(
+        f
+        \big(U^{n}_{j}\big)-
+        f
+        \big(U^{n}_{j-1}\big)
+        \big)
+      \right] & =
+      \frac{k^{2}}{2h^{2}}
+      \left[
+        A
+        \big(
+        AU^{n}_{j+1}-
+        AU^{n}_{j}
+        \big)-
+        A\big(
+        AU^{n}_{j}-
+        AU^{n}_{j-1}
+        \big)
+      \right].    \\
+              & =
+      \textcolor{DarkGreen}{
+        \frac{k^{2}}{2h^{2}}
+        \left[
+          A^{2}
+          \big(
+          U^{n}_{j+1}-
+          U^{n}_{j}
+          \big)-
+          A^{2}
+          \big(
+          U^{n}_{j}-
+          U^{n}_{j-1}
+          \big)
+          \right]
+      }.
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{proofs}[Solution $\eqref{eq:12.25}\implies\eqref{eq:12.24}$\ (Cont.)]
+    \begin{align*}
+      U^{n+1}_{j} & =
+      U^{n}_{j}-
+      \textcolor{DarkRed}{
+        \frac{k}{2h}
+        A
+        \big(
+        U^{n}_{j+1}-
+        U^{n}_{j-1}
+        \big)
+      }+
+      \textcolor{DarkGreen}{
+        \frac{k^{2}}{2h^{2}}
+        \left[
+          A^{2}
+          \big(
+          U^{n}_{j+1}-
+          U^{n}_{j}
+          \big)-
+          A^{2}
+          \big(
+          U^{n}_{j}-
+          U^{n}_{j-1}
+          \big)
+          \right]
+      }.              \\
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{2h}
+      A
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j-1}
+      \big)+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j}-
+      U^{n}_{j}+
+      U^{n}_{j-1}
+      \big).          \\
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{2h}
+      A
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j-1}
+      \big)+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}
+      \big(
+      U^{n}_{j+1}-
+      2U^{n}_{j}+
+      U^{n}_{j-1}
+      \big).
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{proofs}[Solution $\eqref{eq:12.26}\implies\eqref{eq:12.24}$]
+    \begin{align*}
+      f
+      \Big(
+      U_{j+\frac{1}{2}}^{n+\frac{1}{2}}
+      \Big) & =
+      AU_{j+\frac{1}{2}}^{n+\frac{1}{2}}. \\
+            & =
+      \frac{A}{2}
+      \big(
+      U^{n}_{j}+
+      U^{n}_{j+1}
+      \big)-
+      \frac{k}{2h}
+      A
+      \left[
+        f
+        \big(U^{n}_{j+1}\big)-
+        f
+        \big(U^{n}_{j}\big)
+      \right].                            \\
+            & =
+      \frac{A}{2}
+      \big(
+      U^{n}_{j}+
+      U^{n}_{j+1}
+      \big)-
+      \frac{k}{2h}
+      A
+      \big(
+      AU^{n}_{j+1}-
+      AU^{n}_{j}
+      \big).                              \\
+            & =
+      \textcolor{DarkRed}{
+        \frac{A}{2}
+        \big(
+        U^{n}_{j}+
+        U^{n}_{j+1}
+        \big)-
+        \frac{k}{2h}
+        A^{2}
+        \big(
+        U^{n}_{j+1}-
+        U^{n}_{j}
+      \big)}.                             \\[\baselineskip]
+      f
+      \Big(
+      U_{j-\frac{1}{2}}^{n+\frac{1}{2}}
+      \Big) & =
+      AU_{j-\frac{1}{2}}^{n+\frac{1}{2}}. \\
+            & =
+      \frac{A}{2}
+      \big(
+      U^{n}_{j}+
+      U^{n}_{j-1}
+      \big)-
+      \frac{k}{2h}
+      A
+      \left[
+        f
+        \big(U^{n}_{j}\big)-
+        f
+        \big(U^{n}_{j-1}\big)
+      \right].                            \\
+            & =
+      \frac{A}{2}
+      \big(
+      U^{n}_{j}+
+      U^{n}_{j-1}
+      \big)-
+      \frac{k}{2h}
+      A
+      \big(
+      AU^{n}_{j}-
+      AU^{n}_{j-1}
+      \big).                              \\
+            & =
+      \textcolor{DarkGreen}{
+        \frac{A}{2}
+        \big(
+        U^{n}_{j}+
+        U^{n}_{j-1}
+        \big)-
+        \frac{k}{2h}
+        A^{2}
+        \big(
+        U^{n}_{j}-
+        U^{n}_{j-1}
+        \big)}.
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{proofs}[Solution $\eqref{eq:12.26}\implies\eqref{eq:12.24}$\ (Cont.)]
+    \begin{align*}
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{h}
+      \left[
+        \textcolor{DarkRed}{
+          \frac{A}{2}
+          \big(
+          U^{n}_{j}+
+          U^{n}_{j+1}
+          \big)-
+          \frac{k}{2h}
+          A^{2}
+          \big(
+          U^{n}_{j+1}-
+          U^{n}_{j}
+          \big)}-
+        \textcolor{DarkGreen}{
+          \frac{A}{2}
+          \big(
+          U^{n}_{j}+
+          U^{n}_{j-1}
+          \big)+
+          \frac{k}{2h}
+          A^{2}
+          \big(
+          U^{n}_{j}-
+          U^{n}_{j-1}
+          \big)}
+      \right].        \\
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{2h}
+      A
+      \big(
+      U^{n}_{j}+
+      U^{n}_{j+1}-
+      U^{n}_{j}-
+      U^{n}_{j-1}
+      \big)+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j}-
+      U^{n}_{j}+
+      U^{n}_{j-1}
+      \big).          \\
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{2h}
+      A
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j-1}
+      \big)+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}
+      \big(
+      U^{n}_{j+1}-
+      2U^{n}_{j}+
+      U^{n}_{j-1}
+      \big).
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{proofs}[Solution $\eqref{eq:12.27}\implies\eqref{eq:12.24}$]
+    \begin{align*}
+      U_{j}^{\ast} & =
+      \textcolor{DarkBlue}{
+        U_{j}^{n}-
+        \frac{k}{h}A
+        \big(
+        U^{n}_{j+1}-
+        U^{n}_{j}
+      \big)}.          \\[\baselineskip]
+      f
+      \big(U_{j}^{\ast}\big)
+                   & =
+      AU_{j}^{\ast}.   \\
+                   & =
+      AU_{j}^{n}-
+      \frac{k}{h}A
+      \big(
+      AU^{n}_{j+1}-
+      AU^{n}_{j}
+      \big).           \\
+                   & =
+      \textcolor{DarkRed}{
+      AU_{j}^{n}-
+      \frac{k}{h}A^{2}
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j}
+      \big)}.
+      \\[\baselineskip]
+      f
+      \big(U^{\ast}_{j-1}\big)
+                   & =
+      AU^{\ast}_{j-1}. \\
+                   & =
+      A^{n}U_{j-1}-
+      \frac{k}{h}A
+      \big(
+      AU^{n}_{j}-
+      AU^{n}_{j-1}
+      \big).           \\
+                   & =
+      \textcolor{DarkGreen}{
+      AU^{n}_{j-1}-
+      \frac{k}{h}A^{2}
+      \big(
+      U^{n}_{j}-
+      U^{n}_{j-1}
+      \big)}.
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{proofs}[Solution $\eqref{eq:12.27}\implies\eqref{eq:12.24}$\ (Cont.)]
+    \begin{align*}
+      U^{n+1}_{j} & =
+      \frac{1}{2}
+      \left[
+        U^{n}_{j}+
+        \textcolor{DarkBlue}{
+          U_{j}^{n}-
+          \frac{k}{h}A
+          \big(
+          U^{n}_{j+1}-
+          U^{n}_{j}
+          \big)}
+        \right]-
+      \frac{k}{2h}
+      \left[
+      \textcolor{DarkRed}{
+      AU_{j}^{n}-
+      \frac{k}{h}A^{2}
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j}
+      \big)}-
+      \textcolor{DarkGreen}{
+      AU^{n}_{j-1}+
+      \frac{k}{h}A^{2}
+      \big(
+      U^{n}_{j}-
+      U^{n}_{j-1}
+      \big)}
+      \right].          \\
+      U^{n+1}_{j} & =
+      \frac{1}{2}
+      \left[
+        2U^{n}_{j}-
+        \frac{k}{h}A
+        \big(
+        U^{n}_{j+1}-
+        U^{n}_{j}
+        \big)
+        \right]-
+      \frac{k}{2h}
+      \left[
+      AU_{j}^{n}
+      -\frac{k}{h}
+      A^{2}U^{n}_{j+1}+
+      \frac{k}{h}
+      A^{2}U^{n}_{j}-
+      AU^{n}_{j-1}+
+      \frac{k}{h}A^{2}
+      U^{n}_{j}-
+      \frac{k}{h}A^{2}
+      U^{n}_{j-1}
+      \right].          \\
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{2h}
+      A
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j}+
+      U^{n}_{j}-
+      U^{n}_{j-1}
+      \big)+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}U^{n}_{j+1}-
+      \frac{k^{2}}{2h^{2}}
+      A^{2}2U^{n}_{j}+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}U^{n}_{j-1}. \\
+      U^{n+1}_{j} & =
+      U_{j}^{n}-
+      \frac{k}{2h}
+      A
+      \big(
+      U^{n}_{j+1}-
+      U^{n}_{j-1}
+      \big)+
+      \frac{k^{2}}{2h^{2}}
+      A^{2}
+      \big(
+      U^{n}_{j+1}-
+      2U^{n}_{j}+
+      U^{n}_{j-1}
+      \big).
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+  \begin{proofs}[Solution \eqref{eq:12.24} is second order accurate both in space and time]
+    \begin{equation*}
+      U_{t}+
+      AU_{x}=
+      0.\implies
+      \left\{
+      \begin{aligned}
+        \textcolor{DarkRed}{
+        u_{t}}  & \textcolor{DarkRed}{=
+        -Au_{x}}.                         \\
+        \textcolor{DarkGreen}{
+        u_{tt}} & \textcolor{DarkGreen}{=
+        AU_{xt}=A^{2}u_{xx}}.
+      \end{aligned}
+      \right.
+    \end{equation*}
+
+    \begin{align*}
+      \shortintertext{Taylor expansion in space:}
+      U^{n}_{j+1} & =
+      U^{n}_{j}+
+      hU_{x}+
+      \frac{1}{2}h^{2}U_{xx}+
+      \frac{1}{6}h^{3}U_{xxx}+
+      \mathcal{O}\big(h^{4}\big). \\
+      U^{n}_{j-1} & =
+      U^{n}_{j}-
+      hU_{x}+
+      \frac{1}{2}h^{2}U_{xx}-
+      \frac{1}{6}h^{3}U_{xxx}+
+      \mathcal{O}\big(h^{4}\big).
+      \shortintertext{Taylor expansion in time:}
+      U^{n+1}_{j} & =
+      U^{n}_{j}+
+      k\textcolor{DarkRed}{U_{t}}+
+      \frac{1}{2}k^{2}U_{tt}+
+      \mathcal{O}\big(k^{3}\big). \\
+                  & =
+      U^{n}_{j}+
+      k\left(\textcolor{DarkRed}{-AU_{x}}\right)+
+      \frac{1}{2}k^{2}\textcolor{DarkGreen}{A^{2}U_{xx}}+
+      \mathcal{O}\big(k^{3}\big).
+    \end{align*}
+  \end{proofs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  \begin{proof}[Solution \eqref{eq:12.24} is second order accurate both in space and time]
+    \begin{align*}
+      \frac{U\left(x,t+k\right)-U\left(x,t\right)}{k}
+                                         & =
+      U_{t}+
+      \frac{k^{2}}{2}U_{tt}+
+      \mathcal{O}
+      \left(k^{2}\right).                                                                \\
+                                         & =
+      U_{t}+
+      \frac{1}{2}A^{2}kU_{xx}+
+      \mathcal{O}
+      \left(k^{2}\right).                                                                \\
+      \frac{U^{n+1}_{j}-U_{j}^{n}}{k}+
+      A
+      \frac{U^{n}_{j+1}-U^{n}_{j-1}}{2h} & =
+      \frac{1}{2}
+      \frac{A^{2}k}{h^{2}}
+      \big(
+      U^{n}_{j+1}-
+      2U^{n}_{j}+
+      U^{n}_{j-1}
+      \big).                                                                             \\
+      T\left(x,t\right)                  & =
+      \frac{U\left(x,t+k\right)-U\left(x,t\right)}{k}-
+      A\frac{U\left(x+h,t\right)-U\left(x-h,t\right)}{2h}                                \\
+                                         & \phantom{=}
+      -\frac{A^{2}k U\left(x-h,t\right)-2U\left(x,t\right)+U\left(x+h,t\right)}{2h^{2}}. \\
+                                         & =
+      U_{t}+\frac{k}{2}U_{tt}-AU_{x}-\frac{A^{2}k}{2}U_{xx}+
+      \mathcal{O}\big(h^{2}\big)+
+      \mathcal{O}\big(k^{2}\big).
+    \end{align*}
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+  \begin{proof}[Solution \eqref{eq:12.24} is conservative]
+
+    \begin{align*}
+      \shortintertext{We let $J<K$ be arbitrary cell indices and given by~\eqref{eq:L-W flux}}
+      U^{n+1}_{j} & =
+      U^{n}_{j}-
+      \frac{k}{h}
+      \left[F^{n}_{j+\frac{1}{2}}-F^{n}_{j-\frac{1}{2}}\right],
+      \shortintertext{and sum over $j$}
+      h\sum_{j=J}^{K}
+      U^{n+1}_{j} & =
+      h\sum_{j=J}^{K}
+      U^{n}_{j}-
+      k\sum_{j=J}^{K}
+      \left[F^{n}_{j+\frac{1}{2}}-F^{n}_{j-\frac{1}{2}}\right],
+      \shortintertext{The last sum telescopes}
+      h\sum_{j=J}^{K}
+      U^{n+1}_{j} & =
+      h\sum_{j=J}^{K}
+      U^{n}_{j}-
+      k\left[F^{n}_{K+\frac{1}{2}}-F^{n}_{J-1-\frac{1}{2}}\right],
+      \shortintertext{Applying this recursively gives, for $N>n$,}
+      h\sum_{j=J}^{K}
+      U^{n}_{j}   & =
+      h\sum_{j=J}^{K}
+      U^{n}_{j}
+      -\left(
+      t_{N}-t_{n}
+      \right)
+      \left[
+        f\left(u_{+\infty}\right)-
+        f\left(u_{-\infty}\right)
+        \right],
+      \shortintertext{a discrete form.}
+    \end{align*}
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+  \begin{proof}[Solution \eqref{eq:12.24} numerical flux function]
+    \begin{align*}
+      U^{n+1}_{j}           & =
+      U^{n}_{j}-
+      \frac{k}{h}
+      \left[F^{n}_{j+\frac{1}{2}}-F^{n}_{j-\frac{1}{2}}\right]. \\
+      \tag{L-W flux}\label{eq:L-W flux}
+      F^{n}_{j+\frac{1}{2}} & =
+      \frac{1}{2}
+      \left[
+        f\big(
+        U^{n}_{j+1}
+        \big)
+        +
+        f\big(
+        U^{n}_{j}
+        \big)
+        \right]-
+      \frac{1}{2}
+      {\big(
+        \widetilde{A}_{j+\frac{1}{2}}
+        \big)}^{2}
+      \frac{k}{2h}
+      \big(U^{n}_{j+1}-U^{n}_{j}\big).
+    \end{align*}
+
+    where
+
+    \begin{equation*}
+      \widetilde{A}_{j+\frac{1}{2}}\coloneqq
+      \begin{cases}
+        \frac{
+        f\big(U^{n}_{j+1}\big)-
+        f\big(U^{n}_{j}\big)
+        }{
+        U^{n}_{j+1}-U^{n}_{j}
+        },
+         & \text{if }U^{n}_{j+1}\neq U^{n}_{j}. \\
+        f^{\prime}\big(U^{n}_{j}\big),
+         & \text{if }U^{n}_{j+1}=U^{n}_{j}.
+      \end{cases}
+    \end{equation*}
+  \end{proof}
+\end{frame}

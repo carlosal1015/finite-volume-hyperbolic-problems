@@ -1,0 +1,39 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[
+    aspectratio=1610,
+    c,
+    8pt,
+]{beamer}
+
+\usepackage{mathtools}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{frametitle}[default][center]
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+  \par
+  \def\insertproofname{#1\@addpunct{.}}%
+  \usebeamertemplate{proof begin}#2}
+{\usebeamertemplate{proof end}}
+\makeatother
+
+\hypersetup{
+	pdfencoding=auto,
+	linktocpage=true,
+	colorlinks=true,
+	linkcolor=DarkBlue,
+	urlcolor=magenta,
+	pdfpagelabels,
+	pdftex,
+	pdfauthor={Carlos Aznarán Laos},
+	pdftitle={Partial Differential Equations I},
+	pdfsubject={Lecture},
+	pdfkeywords={ode, pde},
+	pdfproducer={LuaHBTeX, Version 1.18.0 (TeX Live 2024/Arch Linux)},
+	% bookmark=false
+}

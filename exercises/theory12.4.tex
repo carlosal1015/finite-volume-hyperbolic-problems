@@ -1,0 +1,208 @@
+\section{Conservative Methods for Nonlinear Problems}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{example}[Burgers equation in conservative form]
+        \begin{equation}\tag{12.1}\label{eq:12.1}
+            u_{t}+
+            {\bigg(\frac{u^{2}}{2}\bigg)}_{x}=
+            0.
+        \end{equation}
+    \end{example}
+
+    \begin{example}
+        If we write Burgers equation~\eqref{eq:12.1} in the
+        quasilinear form
+        \begin{equation}\tag{12.3}\label{eq:12.3}
+            u_{t}+
+            uu_{x}=
+            0
+        \end{equation}
+        then a natural finite difference method, obtained by a minor
+        modification of the upwind method for
+        \begin{math}
+            u_{t}+
+            au_{x}=
+            0
+        \end{math}
+        (and assuming $U^{n}_{j}\geq 0$ for all $j$, $n$) is
+
+        \begin{equation}\tag{12.4}\label{eq:12.4}
+            U^{n+1}_{j}=
+            U^{n}_{j}-
+            \frac{k}{h}
+            U^{n}_{j}
+            \big(
+            U^{n}_{j}-
+            U^{n}_{j-1}
+            \big).
+        \end{equation}
+    \end{example}
+
+    \begin{definition}
+        The method be in \textbf{conservative form} has the form
+        \begin{equation}\tag{12.6}\label{eq:12.6}
+            U^{n+1}_{j}=
+            U^{n}_{j}-
+            \frac{k}{h}
+            \left[
+                F
+                \big(
+                U^{n}_{j-p},
+                U^{n}_{j-p+1},
+                \dotsc,
+                U^{n}_{j+q},
+                \big)-
+                F
+                \big(
+                U^{n}_{j-p-1},
+                U^{n}_{j-p},
+                \dotsc,
+                U^{n}_{j+q-1}
+                \big)
+                \right]
+        \end{equation}
+
+        for some function $F$ of $p+q+1$ arguments.
+        $F$ is called the \textbf{numerical flux function}.
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{alertblock}{Remark}
+        In the simplest case, $p=0$ and $q=1$ so that $F$ is a
+        function of only two variables and~\eqref{eq:12.6} becomes
+        \begin{equation}\tag{12.7}\label{eq:12.7}
+            U^{n+1}_{j}=
+            U^{n}_{j}-
+            \frac{k}{h}
+            \left[
+                F
+                \big(
+                U^{n}_{j},
+                U^{n}_{j+1}
+                \big)-
+                F
+                \big(
+                U^{n}_{j-1},
+                U^{n}_{j}
+                \big)
+                \right].
+        \end{equation}
+    \end{alertblock}
+
+    One way to derive numerical methods in conservation form is to
+    use standard finite difference discretizations but to start with
+    the conservative form of the PDE rather than the quasilinear
+    form~\eqref{eq:12.1} rather than~\eqref{eq:12.3}, we obtain
+    \begin{equation}\tag{12.11}\label{eq:12.11}
+        U^{n+1}_{j}=
+        U^{n}_{j}-
+        \frac{k}{h}
+        \left[
+            \frac{1}{2}{\big(U^{n}_{j}\big)}^{2}-
+            \frac{1}{2}{\big(U^{n}_{j-1}\big)}^{2}
+            \right].
+    \end{equation}
+
+    This is of the form~\eqref{eq:12.7} with
+    \begin{equation}\tag{12.12}\label{eq:12.12}
+        F\left(v,w\right)=
+        \frac{v^{2}}{2}.
+    \end{equation}
+
+    Here we again assume that $U^{n}_{j}\geq 0$ for all $j$, $n$, so
+    that the ``upwind'' direction is always to the left.
+    More generally, for a nonlinear system
+    \begin{math}
+        u_{t}+
+        f\left(u\right)_{x}=
+        0
+    \end{math}
+    for which the Jacobian matrix
+    \begin{math}
+        f^{\prime}
+        \big(U^{n}_{j}\big)
+    \end{math}
+    has nonnegative eigenvalues
+    for all $U^{n}_{j}$, the upwind method is of the
+    form~\eqref{eq:12.7} with
+    \begin{equation}\tag{12.13}\label{eq:12.13}
+        F
+        \left(v,w\right)=
+        f
+        \left(v\right).
+    \end{equation}
+
+    For now we simply note that if
+    \begin{math}
+        f^{\prime}
+        \big(U^{n}_{j}\big)
+    \end{math}
+    has only nonpositive eigenvalues for all $U^{n}_{j}$, then the
+    upwind method always uses the point to the right, and the flux
+    becomes
+    \begin{equation}\tag{12.14}\label{eq:12.14}
+        F\left(v,w\right)=
+        f\left(w\right).
+    \end{equation}
+\end{frame}
+
+\section{The entropy condition}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{example}
+        Consider Burgers equation with data
+        \begin{equation}\tag{12.49}
+            u_{0}
+            \left(x\right)=
+            \begin{cases}
+                -1, & x<0, \\
+                +1, & x>0.
+            \end{cases}
+        \end{equation}
+        which we might naturally discretize by setting
+        \begin{equation}\tag{12.50}
+            U^{0}_{j}=
+            \begin{cases}
+                -1, & j\leq 0, \\
+                +1, & j>0.
+            \end{cases}
+        \end{equation}
+        The entropy satisfying weak solution consists of a
+        rarefaction wave, but the stationary discontinuity
+        \begin{math}
+            u
+            \left(x,t\right)=
+            u_{0}
+            \left(x\right)
+        \end{math}
+        (for all $x$ and $t$) is also a weak solution.
+        The Rankine-Hugoniot condition with $s=0$ is satisfied since
+        \begin{math}
+            f\left(-1\right)=
+            f\left(1\right)
+        \end{math}
+        for Burgers equation.
+        There are very natural conservative methods that converge to
+        this latter solution rather than to the physically correct
+        rarefaction wave.
+    \end{example}
+
+    One example is a natural generalization of the upwind
+    methods~\eqref{eq:12.13} and~\eqref{eq:12.14} given by
+    \begin{equation}\tag{12.51}\label{eq:12.51}
+        F\left(v,w\right)=
+        \begin{cases}
+            f\left(v\right), &
+            \text{if }\dfrac{f\left(v\right)-f\left(w\right)}{v-w}\geq 0, \\
+            f\left(w\right), &
+            \text{if }\dfrac{f\left(v\right)-f\left(w\right)}{v-w}< 0.
+        \end{cases}
+    \end{equation}
+\end{frame}

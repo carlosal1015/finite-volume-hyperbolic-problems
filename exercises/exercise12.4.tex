@@ -1,0 +1,161 @@
+\input{theory12.4.tex}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{alertblock}{Exercise 12.4}
+        Consider the upwind method with flux~\eqref{eq:12.51}.
+        Take
+        \begin{math}
+            \frac{k}{h}=
+            \frac{1}{2}
+        \end{math}
+        and apply it to Burgers
+        equation with initial data
+        \begin{equation}\tag{12.56}\label{eq:12.56}
+            u_{0}
+            \left(x\right)=
+            \begin{cases}
+                -1,
+                 & x<1 \\
+                +1,
+                 & x>1
+            \end{cases}
+        \end{equation}
+        discretized using
+        \begin{math}
+            U^{0}_{j}=
+            \overline{u}^{0}_{j}
+        \end{math}
+        (cell averages).
+        Based on the behaviour of this method as described above,
+        justify the following statements:
+        \begin{enumerate}
+            \item
+
+                  The sequence
+                  \begin{math}
+                      U_{l}
+                      \left(x,t\right)
+                  \end{math}
+                  for
+                  \begin{math}
+                      k_{l}=
+                      \frac{1}{2l}
+                  \end{math}
+                  converges to the correct rarefaction wave solution
+                  as $l\to\infty$.
+
+            \item
+
+                  The sequence
+                  \begin{math}
+                      U_{l}
+                      \left(x,t\right)
+                  \end{math}
+                  for
+                  \begin{math}
+                      k_{l}=
+                      \frac{1}{2l+1}
+                  \end{math}
+                  converges to an entropy violating shock as
+                  $l\to\infty$.
+
+            \item
+
+                  The sequence
+                  \begin{math}
+                      U_{l}
+                      \left(x,t\right)
+                  \end{math}
+                  for
+                  \begin{math}
+                      k_{l}=\frac{1}{l}
+                  \end{math}
+                  does not converge as $l\to\infty$.
+        \end{enumerate}
+        \textbf{Hint}:~\url{https://math.stackexchange.com/q/4172293}.
+    \end{alertblock}
+
+    \begin{proofs}[Solution 1]
+        By the Rankine-Hugoniot condition
+        \begin{equation*}
+            s=
+            \frac{f\left(u_{l}\right)-f\left(u_{r}\right)}{u_{l}-u_{r}}=
+            \frac{\frac{u_l^{2}}{2}-\frac{u_{r}^{2}}{2}}{u_{l}-u_{r}}=
+            \frac{\frac{(-1)^{2}}{2}-\frac{(1)^{2}}{2}}{-1-1}=
+            0.
+        \end{equation*}
+
+        The weak solution is given by
+        \begin{math}
+            u
+            \left(x,t\right)=
+            u_{0}
+            \left(x-0t\right)
+        \end{math}.
+        The classical solution of~\eqref{eq:12.1} for $t>0$ of the
+        form
+        \begin{equation*}
+            u
+            \left(x,t\right)=
+            \begin{cases}
+                -1,            & \text{if } x<1+t.      \\
+                \frac{x-1}{t}, & \text{if } 1+t<x<1+2t. \\
+                1,             & \text{if } x>1+2t.
+            \end{cases}
+        \end{equation*}
+        % Since the flux $f\left(u\right)=\frac{u^{2}}{2}$ is convex and
+
+        %   \begin{equation*}
+        %       \frac{f\left(v\right)-f\left(w\right)}{v-w}=
+        %       \frac{v+w}{2}.
+        %   \end{equation*}
+
+        %   \begin{equation*}
+        %       u^{n+1}_{j}\in
+        %       \begin{cases}
+        %           \left[u_{j}^{n}-\frac{1}{4}(u_{j}^{n})^{2}, u_{j}^{n}\right]\subset
+        %           \left[0,1\right],  & \text{if } U_{j}^{n}\in\left[0,1\right]_\nearrow  \\
+        %           \left[u_{j}^{n},u_{j}^{n}+\frac{1}{4}(u_{j}^{n})^{2}\right]\subset
+        %           \left[-1,0\right[, & \text{if } U_{j}^{n}\in\left[-1,0\right[_\nearrow
+        %       \end{cases}
+        %   \end{equation*}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proofs}[Solution 1\ (Cont.)]
+        By the Lax and Wendroff theorem, $u$ is a weak solution.
+
+        Since that $f\left(u\right)=\frac{u^{2}}{2}$ is a convex and
+        $u$ is a weak solution and it satisfies an entropy condition
+        the solution (rarefaction wave, since $u_l<u_r$) is unique.
+        %Let $U\left(x,t\right)$ denote the numerical approximation
+    \end{proofs}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proof}[Solution 2]
+        Produce an entropy violating solution for the situation,
+        $f^{\prime}\left(u_{s}\right)=0$,
+        $u_{l}=-1\leq 0\leq 1=u_{r}$.
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proof}[Solution 3]
+        $u$ is a weak solution, but does not satisfies the entropy condition.
+        Because we are dealing with a non-linear problem the concepts of stability (CFL) are not applicable.
+        The total variation diminishing property of a scheme can be used as a non-linear stability condition
+        that together with a consistency it guarantees the convergence of a numerical scheme.
+
+        Since that the scheme does not satisfies the TVD condition, we can not guarantees the convergence
+    \end{proof}
+\end{frame}

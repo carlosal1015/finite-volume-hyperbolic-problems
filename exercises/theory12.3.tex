@@ -1,0 +1,155 @@
+\section{Lax-Wendroff and MacCormack methods}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  Recall the Lax-Wendroff method for a constant coefficient linear
+  hyperbolic system
+  \begin{math}
+    u_{t}+
+    Au_{x}=
+    0
+  \end{math}
+  has the form
+  \begin{equation}\tag{12.24}\label{eq:12.24}
+    U^{n+1}_{j}=
+    U_{j}^{n}-
+    \frac{k}{2h}
+    A
+    \big(
+    U^{n}_{j+1}-
+    U^{n}_{j-1}
+    \big)+
+    \frac{k^{2}}{2h^{2}}
+    A^{2}
+    \big(
+    U^{n}_{j+1}-
+    2U^{n}_{j}+
+    U^{n}_{j-1}
+    \big).
+  \end{equation}
+
+  There are various ways that this can be extended to give a second
+  order method for nonlinear conservation laws.
+  If we let
+  \begin{math}
+    A\left(u\right)=
+    f^{\prime}
+    \left(u\right)
+  \end{math}
+  be the Jacobian matrix, then a conservative form of Lax-Wendroff is
+  \begin{equation}\tag{12.25}\label{eq:12.25}
+    \begin{split}
+      U^{n+1}_{j}=
+      U^{n}_{j}-
+      \frac{k}{2h}
+      \left[
+        f
+        \big(U^{n}_{j+1}\big)-
+        f
+        \big(U^{n}_{j-1}\big)
+      \right]+ \\
+      \frac{k^{2}}{2h^{2}}
+      \left[
+        A_{j+\frac{1}{2}}
+        \big(
+        f
+        \big(U^{n}_{j+1}\big)-
+        f
+        \big(U^{n}_{j}\big)
+        \big)-
+        A_{j-\frac{1}{2}}
+        \big(
+        f
+        \big(U^{n}_{j}\big)-
+        f
+        \big(U^{n}_{j-1}\big)
+        \big)
+        \right],
+    \end{split}
+  \end{equation}
+
+  where $A_{j\pm\frac{1}{2}}$ is the Jacobian matrix evaluated at
+  \begin{math}
+    \frac{1}{2}
+    \big(
+    U_{j}^{n}+
+    U_{j\pm 1}^{n}
+    \big)
+  \end{math}.
+  The difficulty with this form is that it requires evaluating the
+  Jacobian matrix, and is more expensive to use than other forms that
+  only use the function $f\left(u\right)$.
+
+  One way to avoid using $A$ is to use a two-step procedure.
+  This was first proposed by Richtmyer, and the
+  \textbf{Richtmyer two-step Lax-Wendroff method} is
+
+  \begin{align}\tag{12.26}\label{eq:12.26}
+    \textcolor{DarkRed}{
+      U_{j+\frac{1}{2}}^{n+\frac{1}{2}}
+    }           & =
+    \frac{1}{2}
+    \big(
+    U^{n}_{j}+
+    U^{n}_{j+1}
+    \big)-
+    \frac{k}{2h}
+    \left[
+      f
+      \big(U^{n}_{j+1}\big)-
+      f
+      \big(U^{n}_{j}\big)
+    \right].        \\
+    \notag
+    U^{n+1}_{j} & =
+    U_{j}^{n}-
+    \frac{k}{h}
+    \left[
+      f
+      \Big(
+      \textcolor{DarkRed}{U_{j+\frac{1}{2}}^{n+\frac{1}{2}}}
+      \Big)-
+      f
+      \Big(
+      U_{j-\frac{1}{2}}^{n+\frac{1}{2}}
+      \Big)
+      \right].
+  \end{align}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}
+
+  Another method of this same type was proposed by
+  MacCormack\footnote{\url{https://sci-hub.se/10.2514/6.1969-354}}.
+  MacCormack's method uses first forward differencing and then
+  backward differencing to achieve second order accuracy:
+
+  \begin{align}\tag{12.27}\label{eq:12.27}
+    \textcolor{DarkRed}{U_{j}^{\ast}} & =
+    U_{j}^{n}-
+    \frac{k}{h}
+    \left[
+      f\big(U^{n}_{j+1}\big)-
+      f\big(U^{n}_{j}\big)
+    \right].                              \\
+    \notag
+    U^{n+1}_{j}                       & =
+    \frac{1}{2}
+    \big(
+    U^{n}_{j}+
+    \textcolor{DarkRed}{U_{j}^{\ast}}
+    \big)-
+    \frac{k}{2h}
+    \left[
+      f
+      \big(\textcolor{DarkRed}{U_{j}^{\ast}}\big)-
+      f
+      \big(U^{\ast}_{j-1}\big)
+      \right].
+  \end{align}
+
+  Alternatively, we could use backward differencing in the first step
+  and then forward differencing in the second step.
+\end{frame}
