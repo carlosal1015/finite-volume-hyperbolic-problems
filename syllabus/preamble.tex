@@ -1,0 +1,18 @@
+\documentclass{scrletter}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+% \usepackage{plantuml}
+\usepackage{hyperref}
+
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+
+\addbibresource{references.bib}
+
+\newcommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}

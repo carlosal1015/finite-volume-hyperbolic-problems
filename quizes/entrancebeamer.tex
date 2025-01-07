@@ -1,0 +1,290 @@
+\documentclass[aspectratio=1610,spanish,8pt]{beamer}
+\usetheme{Mirage} % [light]
+\usepackage[spanish]{babel}
+\usepackage{mathtools}
+\usepackage{diffcoeff}
+% The glowy light in the footnline
+% \setlength{\MirageGlowRadius}{0.25ex}
+
+\title{Métodos Numéricos para las Ecuaciones Diferenciales Parciales} % CM 032
+\subtitle{Prueba de Entrada}
+\author{Nombre}
+\institute{Universidad Nacional de Ingeniería}
+\date{\today}
+
+\usepackage[lining,tabular]{carlito}
+\usepackage{caladea}
+
+\usepackage{unicode-math}
+%\setmathfont{STIX Two Math}
+\setmathfont{Erewhon Math}
+%\setmathfont{Fira Math}
+\difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
+
+\begin{document}
+
+\frame{\maketitle}
+
+\section{Pregunta $1$}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Considere el problema de valor de frontera Dirichlet en un disco
+    \begin{math}
+        D=
+        \left\{
+        \left(x,y\right)\in
+        \mathbb{R}^{2}\mid
+        x^{2}+y^{2}<a^{2}
+        \right\}
+    \end{math}
+    \begin{equation*}
+        \begin{cases}
+            \difc.L.{u}{}=0, & x\in D,         \\
+            u=g,             & x\in\partial D.
+        \end{cases}
+    \end{equation*}
+
+    Resolvamos este problema mediante la separación de variables.
+    Pasando a coordenadas polares, sea $u=u\left(r,\theta\right)$,
+    y notemos que $x\in\partial D$ es lo mismo que $r=a$, de modo que
+    $u=g\left(\theta\right)$ en $r=a$.
+    Reescriba el operador $\difc.L.{u}{}$ en términos de $r$ y
+    $\theta$ obtenga
+    \begin{equation*}
+        \difc.L.{u}{}=
+        \difcp[2]{u}{r}+
+        \frac{1}{r}
+        \difcp{u}{r}+
+        \frac{1}{r^{2}}
+        \difcp{u}{\theta}.
+    \end{equation*}
+
+    Luego, resuelva
+    \begin{equation*}
+        \begin{cases}
+            \difcp[2]{u}{r}+
+            \dfrac{1}{r}
+            \difcp{u}{r}+
+            \dfrac{1}{r^{2}}
+            \difcp{u}{\theta}=0,    & r<a, \\
+            u=g\left(\theta\right), & r=a.
+        \end{cases}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{proof}[Solución]
+        Buscamos soluciones separadas de la forma
+        \begin{math}
+            u\left(r,\theta\right)=
+            R\left(r\right)
+            \Theta\left(\theta\right)
+        \end{math},
+        para las cuales la EDP requiere que
+        \begin{equation*}
+            R^{\prime\prime}\Theta+
+            \frac{1}{r}
+            R^{\prime}
+            \Theta+
+            \frac{1}{r^{2}}
+            R\Theta^{\prime\prime}=
+            0.
+        \end{equation*}
+
+        Dividiendo por $R\Theta$ y multiplicando por $r^{2}$,
+        obtenemos
+        \begin{equation*}
+            r^{2}
+            \frac{R^{\prime\prime}}{R}+
+            r\frac{R^{\prime}}{R}=
+            -\frac{\Theta^{\prime\prime}}{\Theta}=
+            \lambda.
+        \end{equation*}
+        \begin{equation*}
+            \lambda_{n}=n^{2},
+            \Theta_{n}\left(\Theta\right)=
+            A_{n}
+            \cos\left(n\theta\right)+
+            B_{n}\sin\left(n\theta\right),\quad
+            n=1,\dotsc,
+        \end{equation*}
+        y para $n=0$, obtenemos que $\Theta_{0}\left(\theta\right)=A_{0}$.
+
+        \begin{equation*}
+            R_{n}\left(r\right)=
+            c_{n}r^{n}+
+            d_{n}r^{-n}.
+        \end{equation*}
+
+        \begin{equation*}
+            u\left(x,y\right)=
+            \frac{1}{2\pi a}
+            \int_{y\in\partial D}
+            g\left(y\right)
+            \frac{a^{2}-{\left\|x\right\|}^{2}}{{\left\|x-y\right\|}^{2}}\dl{s}
+        \end{equation*}
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            x & =
+            r\cos\theta. \\
+            y & =
+            r\sin\theta.
+        \end{aligned}
+        \right.
+        \iff
+        \left\{
+        \begin{aligned}
+            r      & =
+            \sqrt{x^{2}+y^{2}}. \\
+            \theta & =
+            \arctan
+            \left(
+            \frac{y}{x}
+            \right).
+        \end{aligned}
+        \right.
+    \end{equation*}
+
+    \begin{align*}
+        \diffp{}{x} & =
+        \diffp{r}{x}
+        \diffp{}{r}+
+        \diffp{\theta}{x}
+        \diffp{}{\theta}=
+        \frac{x}{\sqrt{x^{2}+y^{2}}}
+        \diffp{}{r}-
+        \frac{y}{x^{2}+y^{2}}
+        \diffp{}{\theta}=
+        \cos\theta
+        \diffp{}{r}-
+        \frac{\sin\theta}{r}
+        \diffp{}{\theta}. \\
+        \diffp{}{y} & =
+        \diffp{r}{x}
+        \diffp{}{r}+
+        \diffp{\theta}{x}
+        \diffp{}{\theta}=
+        \frac{y}{\sqrt{x^{2}+y^{2}}}
+        \diffp{}{r}+
+        \frac{x}{x^{2}+y^{2}}
+        \diffp{}{\theta}=
+        \sin\theta
+        \diffp{}{r}+
+        \frac{\cos\theta}{r}
+        \diffp{}{\theta}.
+    \end{align*}
+
+    \begin{definition}{Operador Laplaciano}
+        \begin{equation*}
+            \difc.L.{u}{}\coloneqq
+            \sum_{i=1}^{d}
+            \difcp[2]{u}{x_{i}}.
+        \end{equation*}
+    \end{definition}
+\end{frame}
+
+\section{Pregunta $2$}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \begin{itemize}
+        \item
+
+              Pruebe que
+              \begin{math}
+                  \forall x\in\mathbb{R}^{d}:
+                  \left\|x\right\|_{1}\leq
+                  \sqrt{d}{\left\|x\right\|}_{2}
+              \end{math}.
+
+        \item
+
+              Pruebe que
+              \begin{math}
+                  \forall x\in\mathbb{R}^{d}:
+                  \left\|x\right\|_{2}\leq
+                  \sqrt{d}{\left\|x\right\|}_{\infty}
+              \end{math}.
+    \end{itemize}
+\end{frame}
+
+\section{Pregunta $3$}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Considere la ecuación de transporte de coeficiente constante
+    \begin{math}
+        \difcp{u}{t}+
+        c\difcp{u}{x}=
+        f\left(x,t\right)
+    \end{math}.
+    Reemplazaremos la derivada espacial $\difcp{u}{x}$ por una
+    aproximación de diferencia finita para obtener un sistema
+    semidiscretizado donde $w_{j}\left(t\right)=u\left(x_{j},t\right)$
+    en una malla uniforme $\Omega_{h}$
+    \begin{equation*}
+        \forall j=1,\dotsc,m:
+        w^{\prime}_{j}\left(t\right)=
+        \dfrac{c}{2h}
+        \left(
+        w_{j-1}\left(t\right)-
+        w_{j+1}\left(t\right)
+        \right),
+    \end{equation*}
+    con
+    \begin{math}
+        w_{0}\left(t\right)=
+        w_{m}\left(t\right)
+    \end{math}
+    y
+    \begin{math}
+        w_{m+1}\left(t\right)=
+        w_{1}\left(t\right)
+    \end{math}.
+    Así, tenemos
+    \begin{math}
+        w^{\prime}\left(t\right)=Aw\left(t\right)
+    \end{math}.
+    Verifique que los autovalores de la matriz antisimétrica
+    circulante
+    \begin{equation*}
+        A=
+        \frac{c}{2h}
+        \begin{bmatrix}
+            0      & -1     & 0      & \cdots & 1      \\
+            1      & 0      & -1     & \ddots & \vdots \\
+            0      & \ddots & \ddots & \ddots & 0      \\
+            \vdots & \ddots & \ddots & 0      & -1     \\
+            -1     & 0      & \cdots & 1      & 0
+        \end{bmatrix}\in\mathbb{R}^{m\times m}
+    \end{equation*}
+
+    tiene $m$ autovalores con parte imaginaria igual a cero.
+\end{frame}
+
+\begin{frame}
+    \begin{definition}[Normas vectoriales]
+        \begin{align*}
+            \left\|x\right\|_{1}      & \coloneqq
+            \sum_{j=1}^{d}\left|x_{j}\right|.                  \\
+            \left\|x\right\|_{2}      & \coloneqq
+            {\Big(\sum_{j=1}^{d}x^{2}_{j}\Big)}^{\frac{1}{2}}. \\
+            \left\|x\right\|_{\infty} & \coloneqq
+            \max_{1\leq j\leq d}\left|x_{j}\right|.            \\
+        \end{align*}
+    \end{definition}
+\end{frame}
+\end{document}

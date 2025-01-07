@@ -1,0 +1,37 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'pdf', 'run.xml']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'run.xml']
+% arara: --> }
+\input{preamble}
+\begin{document}
+\input{header}
+
+\input{generalinformation}
+\input{summary}
+\input{competencies}
+\input{learningunits}
+\input{methodology}
+\input{evaluationsystem}
+\input{forms}
+\input{references}
+\end{document}

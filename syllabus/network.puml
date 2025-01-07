@@ -1,0 +1,15 @@
+@startuml
+
+rectangle "Nociones Básicas de los errores y ecuaciones no lineales"
+rectangle "Funciones de Variable Compleja"
+rectangle "Aproximación"
+rectangle "Resolución Numérica de EDO y EDP"
+rectangle "Sistema de Ecuaciones Lineales y valores y vectores propios"
+rectangle "Introducción a los métodos de Elementos Finitos"
+
+"Aproximación" -u-> "Nociones Básicas de los errores y ecuaciones no lineales" 
+"Aproximación" -d-> "Resolución Numérica de EDO y EDP"
+"Aproximación" -l-> "Sistema de Ecuaciones Lineales y valores y vectores propios"
+"Aproximación" -d-> "Introducción a los métodos de Elementos Finitos"
+"Resolución Numérica de EDO y EDP" -r-> "Introducción a los métodos de Elementos Finitos"
+@enduml
