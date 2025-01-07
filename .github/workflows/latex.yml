@@ -1,11 +1,15 @@
-name: Slides
+name: LaTeX
 
 on:
   push:
     branches: [main]
     paths:
+      - exercises/**
+      - quizes/**
+      - report/**
       - slides/**
-      - book/**
+      - syllabus/**
+      - template/**
 
 jobs:
   build_latex:
@@ -40,7 +44,7 @@ jobs:
             arara exercises
             popd
             pushd /work/quizes
-            arara entrance entrancebeamer # week1
+            arara entrance entrancebeamer #week1
             popd
             pushd /work/report
             ./figure1.py
