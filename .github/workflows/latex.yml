@@ -21,7 +21,7 @@ jobs:
           git config --global user.name github-actions
           git clone -q --filter=blob:none --no-checkout --depth=1  --sparse $REPO .
           git sparse-checkout init --cone
-          git sparse-checkout set slides report snapshots
+          git sparse-checkout set exercises quizes report slides snapshots syllabus template
           git checkout
 
       - uses: addnab/docker-run-action@v3
@@ -35,7 +35,13 @@ jobs:
           shell: bash
           run: |
             sudo chown -R gitpod:gitpod /work
-            sudo pacman -Syu --needed --noconfirm python-matplotlib
+            sudo pacman -Syu --needed --noconfirm python-matplotlib python-qrcode
+            pushd /work/exercises
+            arara exercises
+            popd
+            pushd /work/quizes
+            arara entrance entrancebeamer # week1
+            popd
             pushd /work/report
             ./figure1.py
             ./figure2.py
@@ -47,14 +53,29 @@ jobs:
             ./figure3.py
             arara presentation
             popd
+            pushd /work/syllabus
+            ./qr.py
+            arara syllabus
+            popd
+            pushd /work/template
+            arara amsart-template
+            popd
             mkdir -p /work/public
+            mv /work/exercises/exercises.pdf /work/public
+            mv /work/quizes/entrance*.pdf /work/public
             mv /work/report/main.pdf /work/public
             mv /work/slides/presentation.pdf /work/public
+            mv /work/syllabus/syllabus.pdf /work/public
+            mv /work/template/amsart-template.pdf /work/public
       
       - name: Check pdf files
         run: |
-          find slides -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+          find exercises -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+          find quizes -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
           find report -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+          find slides -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+          find syllabus -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
+          find template -type f -name "*.pdf" -exec file -- {} + | grep -q ' PDF '
     
       - name: "Tar files"
         run: |

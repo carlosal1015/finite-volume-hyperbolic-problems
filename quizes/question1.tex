@@ -1,0 +1,41 @@
+Considere el problema de valor de frontera Dirichlet en un disco
+\begin{math}
+    D=
+    \left\{
+    \left(x,y\right)\in\mathbb{R}^{2}\mid
+    x^{2}+y^{2}<a^{2}
+    \right\}
+\end{math}
+\begin{equation*}
+    \begin{cases}
+        \difc.L.{u}{}=0, & x\in D,         \\
+        u=g,             & x\in\partial D.
+    \end{cases}
+\end{equation*}
+
+Resolvamos este problema mediante la separación de variables.
+Pasando a coordenadas polares, sea $u=u\left(r,\theta\right)$,
+y notemos que $x\in\partial D$ es lo mismo que $r=a$, de modo que
+$u=g\left(\theta\right)$ en $r=a$.
+Reescriba el operador $\difc.L.{u}{}$ en términos de $r$ y
+$\theta$ obtenga
+\begin{equation*}
+    \difc.L.{u}{}=
+    \difcp[2]{u}{r}+
+    \frac{1}{r}
+    \difcp{u}{r}+
+    \frac{1}{r^{2}}
+    \difcp{u}{\theta}.
+\end{equation*}
+
+Luego, resuelva
+\begin{equation*}
+    \begin{cases}
+        \difcp[2]{u}{r}+
+        \dfrac{1}{r}
+        \difcp{u}{r}+
+        \dfrac{1}{r^{2}}
+        \difcp{u}{\theta}=0,    & r<a, \\
+        u=g\left(\theta\right), & r=a.
+    \end{cases}
+\end{equation*}

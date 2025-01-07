@@ -1,5 +1,23 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out', 'pdf', 'snm', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out', 'snm', 'toc']
+% arara: --> }
 \documentclass[aspectratio=1610,spanish,8pt]{beamer}
-\usetheme{Mirage} % [light]
+\usetheme[light]{Mirage}
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
 \usepackage{diffcoeff}
@@ -29,49 +47,7 @@
 
 \begin{frame}
     \frametitle{\secname}
-
-    Considere el problema de valor de frontera Dirichlet en un disco
-    \begin{math}
-        D=
-        \left\{
-        \left(x,y\right)\in
-        \mathbb{R}^{2}\mid
-        x^{2}+y^{2}<a^{2}
-        \right\}
-    \end{math}
-    \begin{equation*}
-        \begin{cases}
-            \difc.L.{u}{}=0, & x\in D,         \\
-            u=g,             & x\in\partial D.
-        \end{cases}
-    \end{equation*}
-
-    Resolvamos este problema mediante la separación de variables.
-    Pasando a coordenadas polares, sea $u=u\left(r,\theta\right)$,
-    y notemos que $x\in\partial D$ es lo mismo que $r=a$, de modo que
-    $u=g\left(\theta\right)$ en $r=a$.
-    Reescriba el operador $\difc.L.{u}{}$ en términos de $r$ y
-    $\theta$ obtenga
-    \begin{equation*}
-        \difc.L.{u}{}=
-        \difcp[2]{u}{r}+
-        \frac{1}{r}
-        \difcp{u}{r}+
-        \frac{1}{r^{2}}
-        \difcp{u}{\theta}.
-    \end{equation*}
-
-    Luego, resuelva
-    \begin{equation*}
-        \begin{cases}
-            \difcp[2]{u}{r}+
-            \dfrac{1}{r}
-            \difcp{u}{r}+
-            \dfrac{1}{r^{2}}
-            \difcp{u}{\theta}=0,    & r<a, \\
-            u=g\left(\theta\right), & r=a.
-        \end{cases}
-    \end{equation*}
+    \input{question1}
 \end{frame}
 
 \begin{frame}
@@ -105,7 +81,7 @@
             \lambda.
         \end{equation*}
         \begin{equation*}
-            \lambda_{n}=n^{2},
+            \lambda_{n}=n^{2},\quad
             \Theta_{n}\left(\Theta\right)=
             A_{n}
             \cos\left(n\theta\right)+
@@ -125,7 +101,7 @@
             \frac{1}{2\pi a}
             \int_{y\in\partial D}
             g\left(y\right)
-            \frac{a^{2}-{\left\|x\right\|}^{2}}{{\left\|x-y\right\|}^{2}}\dl{s}
+            \frac{a^{2}-{\left\|x\right\|}^{2}}{{\left\|x-y\right\|}^{2}}\dl{s}.
         \end{equation*}
     \end{proof}
 \end{frame}
@@ -202,80 +178,13 @@
     \begin{itemize}
         \item
 
-              Pruebe que
-              \begin{math}
-                  \forall x\in\mathbb{R}^{d}:
-                  \left\|x\right\|_{1}\leq
-                  \sqrt{d}{\left\|x\right\|}_{2}
-              \end{math}.
+              \input{question2a}
 
         \item
 
-              Pruebe que
-              \begin{math}
-                  \forall x\in\mathbb{R}^{d}:
-                  \left\|x\right\|_{2}\leq
-                  \sqrt{d}{\left\|x\right\|}_{\infty}
-              \end{math}.
+              \input{question2b}
     \end{itemize}
-\end{frame}
 
-\section{Pregunta $3$}
-
-\begin{frame}
-    \frametitle{\secname}
-
-    Considere la ecuación de transporte de coeficiente constante
-    \begin{math}
-        \difcp{u}{t}+
-        c\difcp{u}{x}=
-        f\left(x,t\right)
-    \end{math}.
-    Reemplazaremos la derivada espacial $\difcp{u}{x}$ por una
-    aproximación de diferencia finita para obtener un sistema
-    semidiscretizado donde $w_{j}\left(t\right)=u\left(x_{j},t\right)$
-    en una malla uniforme $\Omega_{h}$
-    \begin{equation*}
-        \forall j=1,\dotsc,m:
-        w^{\prime}_{j}\left(t\right)=
-        \dfrac{c}{2h}
-        \left(
-        w_{j-1}\left(t\right)-
-        w_{j+1}\left(t\right)
-        \right),
-    \end{equation*}
-    con
-    \begin{math}
-        w_{0}\left(t\right)=
-        w_{m}\left(t\right)
-    \end{math}
-    y
-    \begin{math}
-        w_{m+1}\left(t\right)=
-        w_{1}\left(t\right)
-    \end{math}.
-    Así, tenemos
-    \begin{math}
-        w^{\prime}\left(t\right)=Aw\left(t\right)
-    \end{math}.
-    Verifique que los autovalores de la matriz antisimétrica
-    circulante
-    \begin{equation*}
-        A=
-        \frac{c}{2h}
-        \begin{bmatrix}
-            0      & -1     & 0      & \cdots & 1      \\
-            1      & 0      & -1     & \ddots & \vdots \\
-            0      & \ddots & \ddots & \ddots & 0      \\
-            \vdots & \ddots & \ddots & 0      & -1     \\
-            -1     & 0      & \cdots & 1      & 0
-        \end{bmatrix}\in\mathbb{R}^{m\times m}
-    \end{equation*}
-
-    tiene $m$ autovalores con parte imaginaria igual a cero.
-\end{frame}
-
-\begin{frame}
     \begin{definition}[Normas vectoriales]
         \begin{align*}
             \left\|x\right\|_{1}      & \coloneqq
@@ -287,4 +196,43 @@
         \end{align*}
     \end{definition}
 \end{frame}
+
+\section{Pregunta $3$}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    \input{question3}
+\end{frame}
+
+\begin{frame}
+    \begin{proof}[Solución]
+        Los $m$ autovalores $\lambda_{k}$ de la matriz
+        \begin{equation*}
+            B=
+            \begin{bmatrix}
+                0      & -1     & 0      & \cdots & 1      \\
+                1      & 0      & -1     & \ddots & \vdots \\
+                0      & \ddots & \ddots & \ddots & 0      \\
+                \vdots & \ddots & \ddots & 0      & -1     \\
+                -1     & 0      & \cdots & 1      & 0
+            \end{bmatrix}\in\mathbb{R}^{m\times m}
+        \end{equation*}
+        son
+        \begin{equation*}
+            \forall k=0,\dotsc,m-1:
+            \lambda_{k}=
+            \sum_{j=0}^{m-1}
+            c_{j}
+            \exp
+            \left(
+            2\pi i\frac{kj}{m}
+            \right).
+        \end{equation*}
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+\end{frame}
+
 \end{document}

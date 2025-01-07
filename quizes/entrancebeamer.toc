@@ -1,4 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\beamer@sectionintoc {1}{Pregunta $1$}{2}{0}{1}
-\beamer@sectionintoc {2}{Pregunta $2$}{5}{0}{2}
-\beamer@sectionintoc {3}{Pregunta $3$}{6}{0}{3}

@@ -1,0 +1,36 @@
+\documentclass[spanish,addpoints,answers,a4paper,8pt]{exam}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{libertine}
+\usepackage{geometry}
+\geometry{
+    left = 2cm,
+    right = 2cm,
+    top = 2cm,
+    bottom = 3cm
+}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{diffcoeff}
+\usepackage{amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{multicol}
+\usepackage{hyperref}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\pagestyle{headandfoot}
+
+\usepackage{minted}
+\renewcommand{\solutiontitle}{\noindent\textbf{Solución}\par\noindent}
+\renewcommand\listingscaption{Listado}
+\newcommand{\unmarkedfntext}[1]{%
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}%
+    \addtocounter{footnote}{-1}%
+    \endgroup
+}
+
+\difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
+
+\pointpoints{Punto}{Puntos}
+\bracketedpoints

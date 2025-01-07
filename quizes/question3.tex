@@ -1,0 +1,52 @@
+Considere la ecuación de transporte de coeficiente constante
+\begin{math}
+    \difcp{u}{t}+
+    c\difcp{u}{x}=
+    f\left(x,t\right)
+\end{math}.
+Reemplazaremos la derivada espacial $\difcp{u}{x}$ por una
+aproximación de diferencia finita para obtener un sistema
+semidiscretizado donde
+\begin{math}
+    w_{j}\left(t\right)=
+    u\big(x_{j},t\big)
+\end{math}
+en una malla uniforme $\Omega_{h}$
+\begin{equation*}
+    \forall j=1,\dotsc,m:
+    w^{\prime}_{j}\left(t\right)=
+    \dfrac{c}{2h}
+    \left(
+    w_{j-1}\left(t\right)-
+    w_{j+1}\left(t\right)
+    \right),
+\end{equation*}
+con
+\begin{math}
+    w_{0}\left(t\right)=
+    w_{m}\left(t\right)
+\end{math}
+y
+\begin{math}
+    w_{m+1}\left(t\right)=
+    w_{1}\left(t\right)
+\end{math}.
+Así, tenemos
+\begin{math}
+    w^{\prime}\left(t\right)=Aw\left(t\right)
+\end{math}.
+Verifique que los autovalores de la matriz antisimétrica
+circulante
+\begin{equation*}
+    A=
+    \frac{c}{2h}
+    \begin{bmatrix}
+        0      & -1     & 0      & \cdots & 1      \\
+        1      & 0      & -1     & \ddots & \vdots \\
+        0      & \ddots & \ddots & \ddots & 0      \\
+        \vdots & \ddots & \ddots & 0      & -1     \\
+        -1     & 0      & \cdots & 1      & 0
+    \end{bmatrix}\in\mathbb{R}^{m\times m}
+\end{equation*}
+
+tiene $m$ autovalores con la parte imaginaria igual a cero.
