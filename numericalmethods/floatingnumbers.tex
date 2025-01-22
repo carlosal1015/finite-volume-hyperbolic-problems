@@ -1,0 +1,412 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'pdf']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log']
+% arara: --> }
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[left=1.5cm,right=1.5cm]{geometry}
+\usepackage[spanish]{babel}
+\decimalpoint
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\newtheorem{example}{Ejemplo}
+
+\title{
+    Métodos numéricos:
+    breve introducción a los números de punto flotante\thanks{
+    Adaptación de
+    \emph{Numerical Methods: brief introduction to floating point numbers}
+    por Elena Celledoni.}
+}
+
+\author{
+    Fidel Jara Huanca\\
+    Carlos Aznarán Laos}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Representación de números en un ordenador: modelo de punto flotante}
+
+Las computadoras tienen una memoria finita, por lo que no todos los
+números se pueden representar exactamente en una computadora.
+Por ejemplo, $\sqrt{2}$ y $\pi$ tienen una cantidad infinita de
+dígitos, por lo que es imposible representarlos exactamente en una
+computadora.
+Para que quepan en una computadora, los números reales se aproximan
+mediante el \textbf{modelo de punto flotante}:
+
+\begin{itemize}
+    \item
+
+          Se utiliza el sistema binario:
+          \begin{math}
+              r=\pm
+              \left(
+              \alpha_{k}2^{k}+
+              \alpha_{k-1}2^{k-1}+
+              \cdots+
+              \alpha_{1}2^{1}+
+              \alpha_{0}2^{0}
+              \right)
+          \end{math}
+          donde
+          \begin{math}
+              \alpha_{0},\dotsc,\alpha_{k}\in
+              \left\{0,1\right\},
+              \alpha_{k}\neq 0.
+          \end{math}
+
+    \item
+
+          Se asigna una cantidad \textbf{fija} de memoria para
+          representar cada número:
+          \begin{align*}
+              r
+               & =\pm
+              0.
+              \alpha_{k}\alpha_{k-1}\dotsc
+              \alpha_{k-m-1}\alpha_{k-m}\dotsc
+              \alpha_{0}\times 2^{k+1}. \\
+              \operatorname{fl}
+              \left(r\right)
+               & =\pm
+              0.
+              \alpha_{k}\alpha_{k-1}\dotsc
+              \alpha_{k-m-1}\widetilde{\alpha}_{k-m}\times
+              2^{E}.
+          \end{align*}
+\end{itemize}
+
+\section{Números de punto flotante}
+
+Un \emph{bit} es una unidad básica de información en la teoría de la
+información, el nombre bit proviene del \emph{dígito binario}.
+En el sistema de números de doble precisión IEEE 745, $1$ bit está
+destinado para el signo, $52$ bits para los dígitos significativos y
+$11$ bits para el exponente.
+
+\begin{minipage}{0.35\paperwidth}
+    \centering
+    \textbf{Precisión doble IEEE 745}\\[.3\baselineskip]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        signo & dígitos significativos & exponente \\
+        \hline
+        1 bit & 52 bits                & 11 bits   \\
+        \hline
+    \end{tabular}
+
+    \
+
+    \
+
+    \begin{flushleft}
+        \textbf{\bfseries William Kahan, premio Turing en 1989, fue
+            el arquitecto principal detrás de la norma IEEE 754-1985.}
+    \end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}{0.35\paperwidth}
+    \centering
+    \includegraphics[width=.25\paperwidth]{kahan}
+\end{minipage}
+
+Algunos conceptos y definiciones:
+
+\begin{itemize}
+    \item
+
+          \textbf{Redondeo} es un procedimiento para determinar la
+          contraparte en punto flotante
+          \begin{math}
+              \operatorname{fl}
+              \left(r\right)
+          \end{math}
+          de un número real $r$.
+          Un enfoque alternativo se denomina ``corte''.
+
+    \item
+
+          \textbf{Error por redondeo} es
+          \begin{math}
+              r-
+              \operatorname{fl}
+              \left(r\right)
+          \end{math}.
+
+    \item
+
+          \textbf{Épsilon de la máquina} $\epsilon_{M}$ es el número
+          de punto flotante más pequeño tal que
+          \begin{math}
+              1+\epsilon_{M}\neq
+              1
+          \end{math}
+          en la computadora.
+
+    \item
+
+          \textbf{Pérdida de dígitos significativos} es la pérdida de
+          precisión debido a la resta de números de punto flotante
+          muy próximos entre sí.
+\end{itemize}
+
+\subsection{Redondeo}
+
+El redondeo es el método más utilizado para aproximar números reales
+en una computadora.
+Supongamos que $b=10$.
+Dado
+\begin{equation*}
+    0.d_{1}\dotsc d_{p}d_{p+1}\dotsc
+    d_{p+k}\times b^{E}
+\end{equation*}
+redondeando a $p$ dígitos da
+\begin{equation*}
+    0.d_{1}\dotsc
+    d_{p}d_{p+1}\dotsc
+    d_{p+k}\times
+    b^{E}=
+    \begin{cases}
+        0.d_{1}\dotsc
+        d_{p}\times
+        b^{E}, &
+        \text{si }
+        0.d_{p+1}\dotsc
+        d_{p+k}<
+        \frac{1}{2}. \\
+        0.d_{1}\dotsc
+        \widetilde{d}_{p}\times
+        b^{E}, &
+        \text{si }
+        0.d_{p+1}\dotsc
+        d_{p+k}=
+        \frac{1}{2}. \\
+        0.d_{1}\dotsc
+        \widehat{d}_{p}\times
+        b^{E}, &
+        \text{si }
+        0.d_{p+1}\dotsc
+        d_{p+k}>
+        \frac{1}{2}.
+    \end{cases}
+\end{equation*}
+Donde $\widetilde{d}_{p}$ es el dígito par más cercano a
+$d_{p}.d_{p+1}\dotsc d_{p+k}$ y $\widehat{d}_{p}=d_{p}+1$.
+
+\section{Pérdida de dígitos significativos}
+
+\begin{align*}
+    \shortintertext{Dados los dos números reales}
+    x
+     & =0.3721478693.  \\
+    y
+     & =0.37202300572.
+    \shortintertext{Su diferencia es}
+    x-y
+     & = 0.0001248121.
+    \shortintertext{Realizamos \textbf{redondeo} a $5$ dígitos, esto
+        nos da}
+    \operatorname{fl}\left(x\right)
+     & =0.37215.       \\
+    \operatorname{fl}\left(y\right)
+     & =0.37202.
+    \shortintertext{Ahora la diferencia de los dos números de punto
+        flotante es}
+    \operatorname{fl}\left(x\right)-\operatorname{fl}\left(y\right)
+     & =
+    0.00013.
+\end{align*}
+En la memoria podemos almacenar $5$ dígitos para
+\begin{math}
+    \operatorname{fl}\left(x\right)-
+    \operatorname{fl}\left(y\right)
+\end{math}
+pero realmente solo conocemos dos de ellos, los demás se pierden.
+
+\section{Evite la propagación del error de redondeo}
+
+\textbf{Estabilidad}: estudiar cómo se propaga el error debido a
+perturbaciones en los datos iniciales.
+
+\
+
+\begin{minipage}{0.6\paperwidth}
+    \begin{itemize}
+        \item
+
+              Estabilidad del problema.
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\paperwidth}
+    \begin{itemize}
+        \item
+
+              Estabilidad del algoritmo.
+    \end{itemize}
+\end{minipage}
+
+\begin{example}
+    Encuentra $x$ tal que $ax+b=c$ donde $a$, $b$, $c$ son números
+    dados y $a\neq 0$.
+
+    \
+
+    \begin{minipage}{0.4\paperwidth}
+        \begin{description}
+            \item[Algoritmo 1]\leavevmode
+                  \begin{enumerate}
+                      \item
+
+                            Divida por $a$: $x+\dfrac{b}{a}=\dfrac{c}{a}$.
+
+                      \item
+
+                            Reste $\dfrac{b}{a}$: $x=\dfrac{c}{a}-\dfrac{b}{a}$.
+                  \end{enumerate}
+        \end{description}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\paperwidth}
+        \begin{description}
+
+            \item[Algoritmo 2]\leavevmode
+
+                  \begin{enumerate}
+                      \item
+
+                            Reste $b$: $ax=c-b$.
+
+                      \item
+
+                            Divida por $a$: $x=\dfrac{c-b}{a}$.
+                  \end{enumerate}
+        \end{description}
+    \end{minipage}
+\end{example}
+
+\begin{description}
+    \item[Estabilidad del problema] responde a la pregunta:
+          ¿Qué sucede con la solución de $ax+b$ si $a\to a\left(1+\delta_{a}\right)$,
+          $b\to b\left(1+\delta_{b}\right)$, $c\to c\left(1+\delta_{c}\right)$?
+
+    \item[Estabilidad del algoritmo] responde a la pregunta:
+          ¿Qué sucede con la salida del algoritmo si $a\to a\left(1+\delta_{a}\right)$,
+          $b\to b\left(1+\delta_{b}\right)$, $c\to c\left(1+\delta_{c}\right)$?
+\end{description}
+
+\section{Números de estabilidad y condición}
+
+Un problema es estable cuando el error relativo en la solución de
+salida es del mismo tamaño que el error relativo en los datos de
+entrada.
+Dado un problema estable, solo si elegimos un algoritmo estable para
+resolverlo obtenemos errores en la salida que son del mismo tamaño
+que los errores en la entrada.
+
+\begin{definition}
+    Los números de condición son constantes utilizadas para limitar
+    la amplificación del error relativo en la salida por medio del
+    error relativo en la entrada.
+\end{definition}
+
+Los números de condición son útiles para cuantificar la estabilidad
+de un problema así como la estabilidad de un algoritmo.
+
+\begin{example}[Estabilidad de la operación aritmética ``$+$'']
+    Sean los números reales $x>0$ e $y>0$.
+    Sean
+    \begin{math}
+        \operatorname{fl}
+        \left(x\right)=
+        x\left(1+\delta_{x}\right)
+    \end{math},
+    \begin{math}
+        \operatorname{fl}
+        \left(y\right)=
+        y\left(1+\delta_{y}\right)
+    \end{math}
+    con
+    \begin{math}
+        \left|\delta_{x}\right|\leq
+        \epsilon
+    \end{math}
+    y
+    \begin{math}
+        \left|\delta_{y}\right|\leq
+        \epsilon
+    \end{math}.
+    Mire el error relativo:
+    \begin{align*}
+        \left|
+        \frac{
+            x+y-
+            \left(
+            \operatorname{fl}
+            \left(x\right)+
+            \operatorname{fl}
+            \left(y\right)
+            \right)
+        }{x+y}
+        \right| & =
+        \left|
+        \frac{
+            x+y-
+            \left(
+            x+x\delta_{x}+y+y\delta_{y}
+            \right)
+        }{x+y}
+        \right|     \\
+                & =
+        \left|
+        -\frac{x}{x+y}\delta_{x}-
+        \frac{y}{x+y}\delta_{y}
+        \right|\leq
+        C\overline{\delta}.
+    \end{align*}
+    donde
+    \begin{math}
+        \overline{\delta}=
+        \max
+        \left\{
+        \frac{x}{x+y},\frac{y}{x+y}
+        \right\}
+    \end{math}
+    y
+    \begin{math}
+        \overline{\delta}=
+        2\max
+        \left\{
+        \left|\delta_{x}\right|,
+        \left|\delta_{y}\right|
+        \right\}\leq
+        2\epsilon
+    \end{math}
+    La suma de números positivos es una operación estable.
+    $C$ es el número de condición.
+\end{example}
+\end{document}

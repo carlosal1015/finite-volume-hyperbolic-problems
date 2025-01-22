@@ -1,0 +1,825 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out', 'pdf']
+% arara: --> }
+%! arara: lualatex: {
+%! arara: --> shell: yes,
+%! arara: --> draft: yes,
+%! arara: --> interaction: batchmode
+%! arara: --> }
+%! arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out']
+% arara: --> }
+\input{preamble}
+\begin{document}
+
+\noindent\parbox[c]{.18\textwidth}{\includegraphics[width=2.8cm]{logouni}}\hfill
+\parbox[c]{1\textwidth}{\raggedright%
+    {\large\textbf{UNIVERSIDAD NACIONAL DE INGENIERÍA} \par\smallskip}
+    {\large\textbf{FACULTAD DE INGENIERÍA ELÉCTRICA Y ELECTRÓNICA} \par\smallskip}
+    {\large\textbf{DEPARTAMENTO ACADÉMICO DE CIENCIAS BÁSICAS} \par\smallskip}
+}
+
+\begin{center}\bfseries\large
+    Práctica Dirigida 1 de Métodos Numéricos (BMA-18)
+\end{center}
+
+\vspace{-0.5cm}
+
+\hrulefill
+\vspace{-2.5mm}
+
+\rule{16.5cm}{0.8mm}
+
+% \section{Semana 1}
+% \subsection{Conceptos de métodos numéricos}
+
+\begin{questions}
+    \question
+
+    Un algoritmo se describe como robusto si, para cualquier entrada
+    de datos válidos que sea razonablemente representable, se
+    completa con éxito.
+    Consideremos la ecuación cuadrática $ax^{2}+bx+c=0$, $a\neq 0$.
+    Es importante que se implemente de manera robusta, lo que
+    significa que no fallará y dará respuestas
+    razonablemente precisas para cualquier coeficiente $a$, $b$ y
+    $c$ que no esté demasiado cerca del desbordamiento o
+    subdesbordamiento.
+    La forma estándar para los dos raíces es
+    \begin{equation*}
+        x=
+        \frac{-b\pm\sqrt{b^{2}-4ac}}{2a}.
+    \end{equation*}
+    Surge un problema si $b^{2}$ es mucho mayor que
+    $\left|4ac\right|$.
+    En el peor de los casos, la diferencia entre las magnitudes de
+    $b^{2}$ y $\left|4ac\right|$ es tan grande que $b^{2}-4ac$ evalúa
+    a $b^{2}$ y la raíz cuadrada evalúa a $b$, y una de las raíces
+    calculados da cero.
+    Sin pérdida de generalidad, asumamos que $b>0$ y la menor raíz es
+    dada por
+    \begin{equation*}
+        x=
+        \frac{-b+\sqrt{b^{2}-4ac}}{2a}.
+    \end{equation*}
+    Observamos que hay una pérdida de significancia en el numerador.
+    Como hemos visto antes, esto puede llevar a un gran error
+    relativo en el resultado en comparación con el error relativo en
+    la entrada.
+    El problema se puede evitar manipulando la fórmula de la
+    siguiente manera:
+    \begin{align*}
+        x & =
+        \frac{-b+\sqrt{b^{2}-4ac}}{2a}\times
+        \frac{-b-\sqrt{b^{2}-4ac}}{-b-\sqrt{b^{2}-4ac}}.                         \\
+          & =
+        \frac{b^{2}-\left(b^{2}-4ac\right)}{2a\left(-b-\sqrt{b^{2}-4ac}\right)}. \\
+          & =
+        \frac{-2c}{b+\sqrt{b^{2}-4ac}}.
+    \end{align*}
+    Tome $a=1$, $b=100000$ y $c=1$ y como precisión
+    $2\times 10^{-10}$, obtenga el valor de la menor raíz obtenida
+    con ambas fórmulas.
+
+    \question
+
+    Los polinomios se pueden evaluar en una forma anidada (también
+    llamado método de Horner), que tiene dos ventajas:
+    la forma anidada requiere muchos menos cálculos y puede reducir
+    el error de redondeo.
+    Para
+    \begin{equation*}
+        p\left(x\right)=
+        a_{0}+
+        a_{1}x+
+        a_{2}x^{2}+
+        \cdots+
+        a_{n-1}x^{n-1}+
+        a_{n}x^{n}
+    \end{equation*}
+    en su forma anidada
+    \begin{equation*}
+        p\left(x\right)=
+        a_{0}+
+        x
+        \left(
+        a_{1}+
+        x
+        \left(
+        a_{2}+
+        \cdots+x
+        \left(
+        a_{n-1}+
+        xa_{n}
+        \right)
+        \right)
+        \right).
+    \end{equation*}
+
+    \begin{listing}[ht!]
+        \tiny
+        \centering
+        \inputminted[linenos,highlightlines={9-18}]{octave}{nest.m}
+        \caption{Multiplicación anidada.}
+    \end{listing}
+
+    Considere el polinomio $p\left(x\right)=x^{2}+1.1x-2.8$.
+
+    \begin{parts}
+        \part\label{part:ahorner}
+
+        Calcule $p\left(3.5\right)$ utilizando el redondeo de tres
+        dígitos y la aritmética de corte de tres dígitos.
+        ¿Cuáles son los errores absolutos?
+        El valor exacto de $p\left(3.5\right)$ es $13.3$.
+
+        \part\label{part:bhorner}
+
+        Escribe $x^{2}+ 1.1x-2.8$ en forma anidada mediante estos
+        sencillos pasos:
+        \begin{equation*}
+            x^{2}+1.1x-2.8=
+            \left(x^{2}+1.1x\right)-2.8=
+            \left(x+1.1\right)x-2.8.
+        \end{equation*}
+
+        Luego, calcula $p\left(3.5\right)$ usando el redondeo de tres
+        dígitos y el recorte usando la forma anidada.
+        ¿Cuáles son los errores absolutos?
+        Compara los errores con los que encontraste en~\eqref{part:ahorner}.
+    \end{parts}
+    % \subsection{Estudio del error}
+
+    \question
+
+    Sean $x=1.123456$, $y=1.123447$.
+    Calcule $x-y$ y el error de redondeo resultante utilizando la
+    aritmética de $6$ dígitos.
+
+    \question
+
+    Considere el cálculo de $\frac{1-\cos x}{\operatorname{sen}x}$
+    cuando $x$ está cerca de cero.
+    Este es un problema en el que tenemos tanto la resta de
+    cantidades casi iguales, que ocurre en el numerador, como la
+    división por un número pequeño, cuando $x$ está cerca de cero.
+
+    Sea $x=0.1$. Continúe con el redondeo de $5$ dígitos, el
+    resultado exacto a $8$ dígitos es $0.050041708$, calcule el error
+    relativo de este cálculo.
+    Ahora usando la siguiente identidad:
+    \begin{math}
+        \frac{1-\cos x}{\operatorname{sen}x}=
+        \frac{\operatorname{sen}x}{1+\cos x}
+    \end{math}
+    que remueve las dificultades encontradas antes: no hay
+    cancelación de dígitos significativos y división por un número
+    pequeño.
+    Calcule el nuevo error relativo y compárelo con el anterior.
+    ¿En cuánto se ha reducido el factor del error?
+
+    \question
+
+    Hay dos fórmulas estándar en los libros de texto para calcular la
+    varianza muestral $s^{2}$ de los números $x_{1},\dotsc,x_{n}$:
+
+    \begin{parts}
+        \part
+
+        \begin{math}
+            s^{2}=
+            \frac{1}{n-1}
+            \left[
+                \sum_{i=1}^{n}
+                x^{2}_{i}
+                -\frac{1}{n}
+                \left(\sum_{i=1}^{n}x_{i}\right)^{2}
+                \right].
+        \end{math}
+
+        \part
+
+        Primero calcule,
+        \begin{math}
+            \overline{x}=
+            \frac{1}{n}
+            \sum_{i=1}^{n}
+            x_{i}
+        \end{math},
+        y luego
+        \begin{math}
+            s^{2}=
+            \frac{1}{n-1}
+            \sum_{i=1}^{n}
+            {\left(x_{i}-\overline{x}\right)}^{2}
+        \end{math}.
+    \end{parts}
+
+    Ambas fórmulas pueden sufrir errores de redondeo debido a la
+    adición de grandes listas de números si $n$ es grande.
+    Sin embargo, la primera fórmula también es propensa a errores
+    debido a la cancelación de los dígitos iniciales.
+    Realice un experimento con un vector de números aleatorios de
+    tamaño $1000$
+    cuyos valores están entre $0$ y $100$ y responda cuál de los
+    métodos es mejor.
+
+    \question
+
+    La intersección con el eje $x$ de la recta que pasa por los
+    puntos $\left(x_{1},y_{1}\right)$ y $\left(x_{2},y_{2}\right)$ se
+    puede calcular utilizando cualquiera de las siguientes fórmulas
+    \begin{align*}
+        x & =
+        \frac{x_{1}y_{2}-x_{2}y_{1}}{y_{2}-y_{1}}. \\
+        x & =
+        x_{1}-
+        \frac{\left(x_{2}-x_{1}\right)y_{1}}{y_{2}-y_{1}}.
+    \end{align*}
+    con el supuesto de que $y_{1}\neq y_{2}$.
+
+    \begin{parts}
+        \part\label{part:acartesian}
+
+        Demuestre que las fórmulas son equivalentes entre sí.
+
+        \part\label{part:bcartesian}
+
+        Calcule la intersección con el eje $x$ utilizando cada
+        fórmula cuando
+        \begin{math}
+            \left(x_{1},y_{1}\right)=
+            \left(1.02,3.32\right)
+        \end{math}
+        y
+        \begin{math}
+            \left(x_{2},y_{2}\right)=
+            \left(1.31,4.31\right)
+        \end{math}.
+        Use la aritmética de redondeo de tres dígitos.
+
+        \part\label{part:ccartesian}
+
+        Utilice su lenguaje de programación favorito (o una
+        calculadora) para calcular la intersección con el eje $x$
+        utilizando la precisión total del dispositivo (puede
+        utilizar cualquiera de las fórmulas).
+        Con este resultado, calcule los errores relativos y absolutos
+        de las respuestas que dio en la parte~\eqref{part:bcartesian}.
+        Analice qué fórmula es mejor y por qué.
+    \end{parts}
+
+    % \subsection{Fuentes de error}
+
+    \question
+
+    Ejecuta el siguiente programa y obtenga el valor numérico del
+    épsilon de la máquina.
+
+    \begin{listing}[ht!]
+        \tiny
+        \centering
+        \inputminted[linenos,highlightlines={3-5}]{octave}{epsilonmachine.m}
+        \caption{Cálculo del épsilon de máquina $\epsilon_{M}$.}
+    \end{listing}
+
+    \question
+    % \url{https://youtu.be/kOMrRn2tdCs?t=30}
+    % \emph{Wilkinson, Numerical Analysis, and Me} por Nick Trefethen.
+    Un ejemplo famoso con raíces simples que son difíciles de
+    determinar numéricamente es el polinomio de Wilkinson
+    \begin{equation*}
+        W\left(x\right)=
+        \prod_{k=1}^{20}
+        \left(x-k\right).
+    \end{equation*}
+    Las raíces son los números enteros del $1$ al $20$.
+    Sin embargo, cuando $W\left(x\right)$ se define de acuerdo con su
+    forma expandida, su evaluación sufre la cancelación de números
+    grandes casi iguales.
+    Para ver el efecto en la búsqueda de raíces, considere el
+    siguiente programa
+    \begin{listing}[ht!]
+        \tiny
+        \centering
+        \inputminted[linenos,highlightlines={1-13}]{octave}{wilkpoly.m}
+        \caption{Polinomio de Wilkinson.}
+    \end{listing}
+    Un problema se considera sensible si pequeños errores en la
+    entrada, en este caso la ecuación a resolver, dan lugar a grandes
+    errores en la salida o solución.
+    Para entender qué causa esta magnificación del error,
+    estableceremos una fórmula que prediga cuánto se mueve una raíz
+    cuando se cambia la ecuación.
+    Supongamos que el problema es encontrar una raíz $r$ de
+    $f\left(x\right)=0$, pero que se realiza un pequeño cambio
+    $g\left(x\right)$ en la entrada, donde $\epsilon$ es pequeño.
+    Sea $\Delta r$ el cambio correspondiente en la raíz, de modo que
+    \begin{equation*}
+        f\left(r+\Delta r\right)+\epsilon
+        g\left(g+\Delta r\right)=
+        0.
+    \end{equation*}
+    La expansión de $f$ y $g$ en polinomios de Taylor de grado uno
+    implica que
+    \begin{equation*}
+        f\left(r\right)+
+        \Delta r
+        f^{\prime}\left(r\right)+
+        \epsilon
+        g\left(r\right)+
+        \epsilon
+        \Delta r
+        g^{\prime}\left(r\right)+
+        \mathcal{O}\left(\Delta r^{2}\right)=0.
+    \end{equation*}
+
+    donde usamos la notación ``O mayúscula''
+    $\mathcal{O}\left(\Delta r^{2}\right)$ para representar términos
+    que involucran $\Delta r^{2}$ y potencias mayores de $r$.
+    Para $r$ pequeñas, los términos
+    $\mathcal{O}\left(\Delta r^{2}\right)$ pueden ignorarse para
+    obtener
+    \begin{equation*}
+        \Delta r
+        \left(
+        f^{\prime}\left(r\right)+
+        \epsilon g^{\prime}\left(r\right)
+        \right)
+        \approx
+        -f\left(r\right)-\epsilon g\left(r\right)=
+        -\epsilon g\left(r\right)
+    \end{equation*}
+    o
+    \begin{equation*}
+        \Delta r\approx
+        \frac{-\epsilon g\left(r\right)}{
+            f^{\prime}\left(r\right)+
+            \epsilon g^{\prime}\left(r\right)
+        }\approx
+        -\epsilon\frac{g\left(r\right)}{f^{\prime}\left(r\right)}.
+    \end{equation*}
+    suponiendo que $\epsilon$ es pequeño comparado con
+    $f^{\prime}\left(r\right)$, y en particular, que
+    $f^{\prime}\left(r\right)=0$.
+
+    Use cualquier método visto en clase para determinar la solución
+    en una vecindad de la solución y use la fórmula
+    de sensibilidad de las raíces que expresa los error de entrada
+    del tamaño relativo en $W\left(x\right)$ se magnifican por un
+    factor en la raíz de salida.
+
+    % \subsection{Principales teoremas del análisis matemático usados en los métodos Numéricos}
+
+    \question
+
+    Considere la función $\operatorname{sen}x$, que tiene la
+    expansión en serie de Taylor
+    \begin{equation*}
+        \operatorname{sen}x=
+        x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\cdots
+    \end{equation*}
+    que converge, para cualquier $x$, al valor en el rango
+    $-1\leq\operatorname{sen}x\leq 1$.
+    Escriba una rutina en su lenguaje de programación favorito que
+    examine el comportamiento al sumar esta serie de términos con
+    signos alternos, ya que representa diferentes valores iniciales
+    de $x$.
+    Decida una condición de convergencia para la suma.
+    Para diferentes $x$, ¿cuántos términos se necesitan para lograr
+    la convergencia y qué tan grande es el error relativo?
+
+
+    \question
+
+    Vea un extracto del vídeo titulado
+    \emph{Tricks and Tips in Numerical Computing} por Nick Higham.
+    En el minuto 6:24 de \url{https://youtu.be/Q9OLOqEhc64?t=1645},
+    muestra que una aproximación de la derivada de la función es
+    \begin{equation*}
+        f^{\prime}\left(x\right)\approx
+        \operatorname{Im}
+        \left[
+            \frac{f\left(x+ih\right)}{h}
+            \right],
+    \end{equation*}
+    donde $i=\sqrt{-1}$.
+    El valor exacto de la derivada de la función
+    \begin{math}
+        f\left(x\right)=
+        \dfrac{\arctan\left(x\right)}{1+e^{-x^{2}}}
+    \end{math}
+    en $x=2$ es $0.274623728154858$.
+    Verifique que una aproximación cuando $h=1\times 10^{-100}$ es
+    más precisa que con respecto a la regla de aproximación
+    \begin{equation*}
+        f^{\prime}\left(x\right)\approx
+        \frac{
+            f\left(x+\frac{h}{2}\right)-
+            f\left(x-\frac{h}{2}\right)
+        }{h}.
+    \end{equation*}.
+    % \subsection{Aritmética de punto flotante}
+
+    \question
+
+    Encuentre la representación de punto flotante de $10.375$.
+
+    \question
+
+    Considere el siguiente modelo para una representación de punto
+    flotante normalizada en base $2$:
+    \begin{equation*}
+        x=\left(-1\right)^{s}
+        \left(1.a_{2}a_{3}\right)
+        \times 2^{e}
+    \end{equation*}
+    donde $-1\leq e\leq 1$.
+    Encuentre todos los números de máquina positivos (hay $12$ de
+    ellos) que se pueden representar en este modelo.
+    Convierta los números a base $10$, y luego gráfiquelos
+    cuidadosamente en la recta numérica a mano, y comente cómo están
+    espaciados los números.
+
+    \question
+
+    Encuentre valores de corte y redondeo de $5$ dígitos
+    $\left(k=5\right)$ de los números siguientes:
+
+    \begin{multicols}{2}
+
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \pi=0.314159265\dotsc\times10^{1}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                0.0001234567
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+    % \subsection{Solución de $f\left(x\right)=0$ mediante el método de la bisección}
+
+    \question
+
+    Use el método de la bisección y calcule la solución de
+    $\cos x=\operatorname{sen}x$ en el intervalo $\left[0,1\right]$
+    dentro de seis decimales correctos.
+
+    \question
+
+    Utilice el método de bisección para encontrar los dos números
+    reales $x$, dentro de seis decimales correctos, que forman el
+    determinante de la matriz
+    \begin{equation*}
+        A=\begin{bmatrix}
+            1 & 2  & 3  & x  \\
+            4 & 5  & x  & 6  \\
+            7 & x  & 8  & 9  \\
+            x & 10 & 11 & 12
+        \end{bmatrix}
+    \end{equation*}
+    igual a $1000$.
+    Para cada solución que encuentre, verifique calculando el
+    determinante correspondiente e informando cuántos decimales
+    correctos (después del punto decimal) tiene el determinante
+    cuando se utiliza su solución $x$.
+
+    \question
+
+    La matriz de Hilbert es la matriz $n\times n$ cuya entrada es
+    \begin{math}
+        \frac{1}{i+j-1}
+    \end{math}.
+    Sea $A$ la matriz de Hilbert $5\times 5$.
+    Su valor propio más grande es aproxidamente $1.567$.
+    Utilice el método de bisección para decidir cómo cambiar la
+    $A_{11}$ para hacer que el valor propio más grande de $A$ sea
+    igual a $\pi$.
+    Determine $A_{11}$ dentro de seis decimales correctas.
+
+    \question
+
+    Un planeta que orbita alrededor del Sol recorre una elipse.
+    La excentricidad $e$ de la elipse es la distancia entre el centro
+    de la elipse y cualquiera de sus focos dividida por la longitud
+    del semieje mayor.
+    El perihelio es el punto más cercano de la órbita al Sol.
+    La ecuación de Kepler $M=E-e\operatorname{sen}E$ relaciona la
+    anomalía excéntrica $E$, la distancia angular verdadera (en
+    radianes) desde el perihelio, con la anomalía media $M$, la
+    distancia angular ficticia desde el perihelio si estuviera en una
+    órbita circular con el mismo período que la elipse.
+
+    \begin{parts}
+        \part\label{part:aelliptic}
+
+        Suponga que $e=0.1$.
+        Utilice el método de bisección para encontrar las anomalías
+        excéntricas E cuando $M=\frac{\pi}{6}$ y $M=\frac{\pi}{2}$.
+
+        \part\label{part:belliptic}
+
+        Comience por encontrar un intervalo de inicio y explique por
+        qué funciona.
+        ¿Cómo cambian las respuestas a~\eqref{part:aelliptic} si la
+        excentricidad se modifica a $e=0.2$?
+    \end{parts}
+
+    \question
+
+    La ley de los gases ideales para un gas a baja temperatura y
+    presión es $PV=nRT$, donde $P$ es la presión (en atm), $V$ es el
+    volumen (en L), $T$ es la temperatura (en $K$), $n$ es el número
+    de moles del gas y $R=0.0820578$ es la constante molar del gas.
+    La ecuación de van der Waals
+    \begin{equation*}
+        \left(P+\frac{n^{2}a}{V^{2}}\right)
+        \left(v-nb\right)
+        =nRT
+    \end{equation*}
+    cubre el caso no ideal en el que estas suposiciones no se
+    cumplen.
+    Utilice la ley de los gases ideales para calcular una estimación
+    inicial, seguida del método de Newton aplicado a la ecuación de
+    van der Waals para encontrar el volumen de un mol de oxígeno a
+    $320$K y una presión de $15$ atm.
+    Para el oxígeno,
+    \begin{math}
+        a=
+        1.36\operatorname{L}^{2}-
+        \operatorname{atm}/\operatorname{mole}^{2}
+    \end{math}
+    y
+    \begin{math}
+        b=
+        0.003183\operatorname{L}/\operatorname{mole}
+    \end{math}.
+    Indique su estimación inicial y la solución con tres dígitos
+    significativos.
+
+    \begin{listing}[ht!]
+        \tiny
+        \centering
+        \inputminted[linenos,highlightlines={7-35}]{octave}{bisect.m}
+        \caption{Método de la bisección.}
+    \end{listing}
+
+    % \subsection{Falsa posición}
+
+    \question
+
+    Halla la altura que alcanza $1$ metro cúbico de agua almacenada
+    en un tanque esférico de radio $1$ metro.
+    Da tu respuesta $\pm1$mm usando el método de la falsa posición.
+    El volumen del tanque esférico a $H$ metros de profundidad de un
+    hemisferio de radio $R$ es $\pi H^{2}\left(R-\frac{H}{3}\right)$.
+
+    % \subsection{Método de la secante}
+
+    \question
+
+    Un pescador comercial quiere colocar la red a una profundidad de
+    agua donde la temperatura es de $10^{\circ}$.
+    Al dejar caer un sedal con un termómetro adjunto, descubre que
+    la temperatura es de $8^{\circ}$ grados a una profundidad de $9$
+    metros y de $15^{\circ}$ a una profundidad de 5 metros.
+    Utilice el método secante para determinar una mejor estimación de
+    la profundidad a la que la temperatura es de $10^{\circ}$.
+
+    % \subsection{Método de Newton}
+
+    \question
+
+    Aplique el método de Newton para hallar ambas raíces de la
+    función
+    \begin{math}
+        f\left(x\right)=
+        14xe^{x-2}-
+        12e^{x-2}-
+        7x^{3}+
+        20x^2-
+        26x+
+        12
+    \end{math}
+    en el intervalo $\left[0,3\right]$.
+    Para cada raíz, imprima la secuencia de iteraciones, los errores
+    $e_{i}$ y la razón de error relevante $\frac{e_{i+1}}{e^{2}_{i}}$
+    o $\frac{e_{i+1}}{e_{i}}$ que converge a un límite distinto de
+    cero.
+
+    \question
+
+    Una cantidad crucial en el diseño de tuberías es la caída de
+    presión debido a la fricción bajo flujo turbulento.
+    La caída de presión por unidad de longitud se describe mediante
+    el número de Darcy $f$, una cantidad adimensional que satisface
+    la ecuación empírica de Colebrook
+    \begin{equation*}
+        \frac{1}{\sqrt{f}}=
+        -2\log_{10}\left[\frac{\epsilon}{3.7D}+
+            \frac{2.51}{R\sqrt{f}}\right]
+    \end{equation*}
+    donde $D$ es el diámetro interior de la tubería, $\epsilon$ es la
+    altura de rugosidad del interior de la tubería y $R$ es el número
+    de Reynolds del flujo.
+
+    \begin{parts}
+        \part\label{part:adarcy}
+
+        Para $D=0.3$m, $\epsilon=0.0002$m y $R=105$, utilice el
+        método de Newton para calcular el número de Darcy $f$.
+
+        \part\label{part:bdarcy}
+        Fije $D$ y como en~\eqref{part:adarcy}, y calcule el número
+        de Darcy para varios números de Reynolds $R$ entre $104$ y
+        $108$.
+        Haga un gráfico del número de Darcy en función del número de
+        Reynolds, utilizando un eje logarítmico para este último.
+    \end{parts}
+
+    \question
+
+    El movimiento de un péndulo se describe mediante la siguiente EDO
+    \begin{equation*}
+        \diff{\theta}{t}+
+        \frac{g}{l}
+        \operatorname{sen}
+        \theta=
+        0
+    \end{equation*}
+    con la condición inicial
+    \begin{math}
+        \theta\left(0\right)=
+        \theta_{0}
+    \end{math}
+    y
+    \begin{math}
+        \diff{\theta}{t}
+        \left(0\right)=
+        \dot{\theta}_{0}.
+    \end{math}
+
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[width=.2\paperwidth]{pendulum.png}
+    \end{figure}
+    La energía del sistema viene dado por
+    \begin{equation*}
+        E\left(\theta\right)=
+        \frac{1}{2}
+        \left[
+            \dot{\theta}^{2}-\dot{\theta}_{0}^{2}
+            \right]+
+        \cos\theta_{0}-
+        \cos\theta.
+    \end{equation*}
+
+    Calcule numéricamente los valores en el intervalo
+    $\left[-\pi,\pi\right]$ para el cual la energía del sistema es
+    $0$.
+    ¿Qué es lo que observa?
+
+    % \subsection{Método de punto fijo}
+
+    \question
+
+    Discuta la convergencia del método de punto fijo para la función
+    $f\left(x\right)=ae^{x}$, $a\in\mathbb{R}$ para condiciones
+    iniciales en el intervalo $\left[0,1\right]$.
+
+    \question
+
+    ¿Cuál de las siguientes tres iteraciones de punto fijo converge a
+    la raíz cúbica de $4$?
+    Clasifique las que convergen de más rápidas a más lentas.
+
+    \begin{multicols}{3}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                g\left(x\right)=
+                \dfrac{2}{\sqrt{x}}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                g\left(x\right)=
+                \dfrac{3x}{4}+\dfrac{1}{x^{2}}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                g\left(x\right)=
+                \dfrac{2x}{3}+\dfrac{4}{3x^{2}}
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Encuentre el conjunto de todas las estimaciones iniciales para
+    las cuales la iteración de punto fijo
+    $x\rightarrow\dfrac{4}{9}-x^{2}$ converge a un punto fijo.
+
+    \begin{listing}[ht!]
+        \tiny
+        \centering
+        \inputminted[linenos,highlightlines={7-15}]{octave}{fpi.m}
+        \caption{Método de punto fijo.}
+    \end{listing}
+
+    % \subsection{Solución a sistemas de ecuaciones no lineales}
+
+    \question
+
+    Utilice el método de Newton con la estimación inicial
+    $\left(1,2\right)$ para encontrar una solución del sistema no
+    lineal.
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            v-u^{3}       & =0. \\
+            u^{2}+v^{2}-1 & =0.
+        \end{aligned}
+        \right.
+    \end{equation*}
+
+    \question
+
+    Aplicar el método de Newton para encontrar ambas soluciones del
+    sistema de tres ecuaciones.
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            2u^{2}-4u+v^{2}+3w^{2}+6w+2 & =0. \\
+            u^{2}+v^{2}-2v+2w^{2}-5     & =0. \\
+            3u^{2}-12u+v^{2}+3w^{2}+8   & =0.
+        \end{aligned}
+        \right.
+    \end{equation*}
+
+    \question
+
+    Aunque una intersección genérica de tres esferas en el espacio
+    tridimensional son dos puntos, puede ser un único punto.
+    Aplique el método de Newton multivariable para encontrar el único
+    punto de intersección de las esferas con centro
+    $\left(1,0,1\right)$ y radio $8$, centro $\left(0,2,2\right)$ y
+    radio $\sqrt{2}$, y centro $\left(0,3,3\right)$ y radio
+    $\sqrt{2}$.
+    ¿La iteración sigue convergiendo cuadráticamente?
+    Explique.
+\end{questions}
+
+\vfill{\noindent Fidel Jara Huanca\\Carlos Aznarán
+}
+\hfill{UNI, 14 de enero de 2025\footnote{Hecho en \LaTeX}}
+
+\end{document}
+
+- series de Taylor: sen, cos, log.
+- aritmética de números punto flotante.
+
+% firstline=1,lastline=18
+
+\begin{listing}[ht!]
+    \tiny
+    \centering
+    \inputminted[linenos,highlightlines={5-16}]{octave}{broyden2.m}
+    \caption{Método de Broyden.}
+\end{listing}
+
+\begin{listing}[ht!]
+    \tiny
+    \centering
+    \inputminted[linenos,highlightlines={5-15}]{octave}{jacobi.m}
+    \caption{Método de jacobi.}
+\end{listing}
+
+\begin{listing}[ht!]
+    \tiny
+    \centering
+    \inputminted[linenos,highlightlines={4-20}]{octave}{sparsesetup.m}
+    \caption{Ensamblar la matriz dispersa.}
+\end{listing}

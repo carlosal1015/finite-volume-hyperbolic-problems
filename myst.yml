@@ -2,15 +2,15 @@
 version: 1
 project:
   id: 05ad32de-9c33-47d6-aa81-c6d349a46365
-  title: Métodos de volúmenes finitos para ecuaciones hiperbólicas
-  # description:
-  # keywords: []
+  title: Métodos numéricos para leyes de conservación
+  description: Lista de
+  keywords: [finite volume, godunov scheme]
   # authors: [Carlos Aznarán]
   github: https://github.com/carlosal1015/finite-volume-hyperbolic-problems
   # To autogenerate a Table of Contents, run "myst init --write-toc"
 site:
   template: book-theme
-  title: "Dept 999"
+  title: "Métodos numéricos para leyes de conservación"
   # options:
   #   favicon: favicon.ico
   #   logo: site_logo.png
