@@ -2,6 +2,10 @@
 
 from qrcode import make
 
-make(data="https://docs.google.com/spreadsheets/d/1a9oeJ7al-g58u4nRNeKJQ2sihxVG7mZTZM-kIhISZEA/edit?usp=sharing").save(
+make(data="https://www.wikipedia.org").save(
     stream="qrcode.pdf", format="pdf"
+)
+
+make(data="https://portal.uni.edu.pe").save(
+    stream="qrcodefuncionaliii.pdf", format="pdf"
 )

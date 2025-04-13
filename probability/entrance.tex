@@ -1,0 +1,55 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out', 'pdf']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+\begin{center}
+    \sffamily\bfseries\Large
+    Cálculo de Probabilidades~CM 1H2 A\\
+    Prueba de entrada
+\end{center}
+
+\begin{center}
+    \fbox{\fbox{\parbox{5.5in}
+            {\centering
+                Responda las preguntas en los espacios provistos en
+                las hojas de preguntas.
+                Los argumentos y la claridad de las respuestas se
+                considerarán en la puntuación final.
+            }}}
+\end{center}
+\vspace{0.1in}
+\makebox[\textwidth]{Nombres y apellidos del alumno:\enspace\hrulefill}
+\vspace{0.2in}
+\providecommand{\name}{Nombre}
+\makebox[\textwidth]{Nombres y apellidos del profesor:\enspace \name.\hfill}
+
+\begin{questions}
+    % \header{Math 115}{Second Exam}{July 4, 1776}
+    \input{question1}
+    \input{question2}
+    \input{question3}
+\end{questions}
+\vfill
+\begin{flushright}\bfseries
+    Facultad de Ciencias\\[2mm]
+    Universidad Nacional de Ingeniería\\[2mm]
+    \today %\unmarkedfntext{Cada pregunta vale 5 puntos.}
+\end{flushright}
+\end{document}

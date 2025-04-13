@@ -7,8 +7,13 @@
 ]{geometry}
 \usepackage{multicol}
 \usepackage{amssymb}
-\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[intlimits]{mathtools}
 \usepackage{diffcoeff}
+\usepackage{multicol}
+\usepackage{nicematrix}
+\usepackage{systeme}
+\usepackage[shortlabels]{enumitem}
 \usepackage[linesnumbered,ruled,boxed,vlined,spanish]{algorithm2e}
 \usepackage{minted}
 \setminted[cpp]{highlightcolor=yellow!50!white}
@@ -18,3 +23,7 @@
 \runningfooter{}{\thepage}{}
 
 \renewcommand{\listingscaption}{Programa}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Teorema}
+\newtheorem{definition}{Definición}

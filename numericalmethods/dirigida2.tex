@@ -25,15 +25,17 @@
 \input{preamble}
 \begin{document}
 
+\providecommand{\faculty}{Facultad}
 \noindent\parbox[c]{.18\textwidth}{\includegraphics[width=2.8cm]{logouni}}\hfill
 \parbox[c]{1\textwidth}{\raggedright%
     {\large\textbf{UNIVERSIDAD NACIONAL DE INGENIERÍA} \par\smallskip}
-    {\large\textbf{FACULTAD DE INGENIERÍA ELÉCTRICA Y ELECTRÓNICA} \par\smallskip}
+    {\large\textbf{\faculty} \par\smallskip}
     {\large\textbf{DEPARTAMENTO ACADÉMICO DE CIENCIAS BÁSICAS} \par\smallskip}
 }
 
 \begin{center}\bfseries\large
     Práctica Dirigida 2 de Métodos Numéricos (BMA-18)
+    Parte $2$
 \end{center}
 
 \vspace{-0.5cm}
@@ -68,10 +70,48 @@ polinomios para que sean computables con estas dos operaciones de
 hardware.
 
 \begin{questions}
+    \question\label{q:lagrangeinterpolation}
+
+    Utilice la interpolación de Lagrange para encontrar un polinomio
+    que pase por los puntos.
+
+    \begin{multicols}{3}
+
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \left(0,1\right),
+                \left(2,3\right),
+                \left(3,0\right)
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \left(-1,0\right),
+                \left(2,1\right),
+                \left(3,1\right),
+                \left(5,2\right)
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \left(0,-2\right),
+                \left(2,1\right),
+                \left(4,4\right)
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
     \question
 
-
-    Utilice la interpolación de Lagrange para encontrar un polinomio que pase por los puntos.
+    Utilice las diferencias divididas de Newton, vea el
+    Algoritmo~\ref{algo:updateL}, para encontrar los polinomios de
+    interpolación de los puntos del
+    Ejercicio~\ref{q:lagrangeinterpolation} y verificar la
+    concordancia con el polinomio de interpolación de Lagrange.
 
     \begin{listing}[ht!]
         \tiny
@@ -79,319 +119,331 @@ hardware.
         \inputminted[linenos,highlightlines={7-25}]{octave}{newtdd.m}
         \caption{Método de las diferencias divididas de Newton.}
     \end{listing}
-    % \subsection{Estudio del error}
-
-    Algoritmo~\ref{algo:updateL}.
 
     \begin{algorithm}[H]
         \caption{Diferencias divididas de Newton}\label{algo:updateL}
-        Dada $x=\left[x_{1},\dotsc,x_{n}\right]$, $y=\left[y_{1},\dotsc,y_{n}\right]$\;
+        Dada $x=\left[x_{1},\dotsc,x_{n}\right]$ e $y=\left[y_{1},\dotsc,y_{n}\right]$\;
         \For{$j=1,\dotsc,n$}{
             $f\left[x_{j}\right]\longleftarrow y_{j}$\;
         }
+        \For{$i=2,\dotsc,n$}{
+            \For{$j=1,\dotsc,n+1-i$}{
+                \begin{math}
+                    f\left[x_{j},x_{j+i-1}\right]\longleftarrow
+                    \frac{f\left[x_{j+1}\dotsc\, x_{j+i-1}\right]-f\left[x_{j}\dotsc\, x_{j+i-2}\right]}{x_{j+i-1}-x_{j}}
+                \end{math}\;
+            }
+        }
     \end{algorithm}
-
-    \question
-
-    Utilice las diferencias divididas de Newton para encontrar los
-    polinomios de interpolación de los puntos del Ejercicio 1 y verificar la concordancia con el polinomio de interpolación de Lagrange.
-
-    \question
-
-    La intersección con el eje $x$ de la recta que pasa por los
-    puntos $\left(x_{1},y_{1}\right)$ y $\left(x_{2},y_{2}\right)$ se
-    puede calcular utilizando cualquiera de las siguientes fórmulas
-    \begin{align*}
-        x & =
-        \frac{x_{1}y_{2}-x_{2}y_{1}}{y_{2}-y_{1}}. \\
-        x & =
-        x_{1}-
-        \frac{\left(x_{2}-x_{1}\right)y_{1}}{y_{2}-y_{1}}.
-    \end{align*}
-    con el supuesto de que $y_{1}\neq y_{2}$.
-
-    \begin{parts}
-        \part\label{part:acartesian}
-
-        Demuestre que las fórmulas son equivalentes entre sí.
-
-        \part\label{part:bcartesian}
-
-        Calcule la intersección con el eje $x$ utilizando cada
-        fórmula cuando
-        \begin{math}
-            \left(x_{1},y_{1}\right)=
-            \left(1.02,3.32\right)
-        \end{math}
-        y
-        \begin{math}
-            \left(x_{2},y_{2}\right)=
-            \left(1.31,4.31\right)
-        \end{math}.
-        Use la aritmética de redondeo de tres dígitos.
-
-        \part\label{part:ccartesian}
-
-        Utilice su lenguaje de programación favorito (o una
-        calculadora) para calcular la intersección con el eje $x$
-        utilizando la precisión total del dispositivo (puede
-        utilizar cualquiera de las fórmulas).
-        Con este resultado, calcule los errores relativos y absolutos
-        de las respuestas que dio en la parte~\eqref{part:bcartesian}.
-        Analice qué fórmula es mejor y por qué.
-    \end{parts}
-
-    % \subsection{Fuentes de error}
-
-    \question
-
-    Ejecuta el siguiente programa y obtenga el valor numérico del
-    épsilon de la máquina.
-
-    \begin{listing}[ht!]
-        \tiny
-        \centering
-        \inputminted[linenos,highlightlines={3-5}]{octave}{epsilonmachine.m}
-        \caption{Cálculo del épsilon de máquina $\epsilon_{M}$.}
-    \end{listing}
-
-    % \subsection{Principales teoremas del análisis matemático usados en los métodos Numéricos}
-
-    \question
-
-    Vea un extracto del vídeo titulado \emph{Tricks and Tips in Numerical Computing} por Nick Higham.
-    En el minuto 6:24 de \url{https://youtu.be/Q9OLOqEhc64?t=1645}, muestra que una aproximación de
-    la derivada de la función es
+    El polinomio de interpolación es
     \begin{equation*}
-        f^{\prime}\left(x\right)\approx
-        \operatorname{Im}
-        \left[
-            \frac{f\left(x+ih\right)}{h}
-            \right],
+        P\left(x\right)=
+        \sum_{i=1}^{n}
+        f\left[x_{1}\dotsc\, x_{i}\right]
+        \left(x-x_{1}\right)\cdots\left(x-x_{i-1}\right)
     \end{equation*}
-    donde $i=\sqrt{-1}$.
-    El valor exacto de la derivada de la función
+
+    \question
+
+    Halla un polinomio $P\left(x\right)$ de grado $3$ o menor
+    cuyo gráfico pase por los puntos
     \begin{math}
-        f\left(x\right)=
-        \dfrac{\arctan\left(x\right)}{1+e^{-x^{2}}}
+        \left(0,0\right),
+        \left(1,1\right),
+        \left(2,2\right),
+        \left(3,7\right)
+    \end{math}.
+
+    \question Halla otros dos polinomios (de cualquier grado) que
+    pasen por estos cuatro puntos.
+
+    \question
+    Decide si existe un polinomio $P\left(x\right)$ de grado $3$
+    o menor cuyo gráfico pase por los puntos
+    \begin{math}
+        \left(0,0\right),
+        \left(1,1\right),
+        \left(2,2\right),
+        \left(3,7\right)
     \end{math}
-    en $x=2$ es $0.274623728154858$.
-    Verifique que una aproximación cuando $h=1\times 10^{-100}$ es
-    más precisa que con respecto a la regla de aproximación
-    \begin{equation*}
-        f^{\prime}\left(x\right)\approx
-        \frac{f\left(x+\frac{h}{2}\right)-f\left(x-\frac{h}{2}\right)}{h}.
-    \end{equation*}.
-
-    % \subsection{Aritmética de punto flotante}
+    y
+    \begin{math}
+        \left(4,2\right)
+    \end{math}.
 
     \question
 
-    Encuentre la representación de punto flotante de $10.375$.
+    ¿Puede un polinomio de grado $3$ intersecar a un polinomio de
+    grado $4$ en exactamente cinco puntos?
+    Explique.
 
     \question
 
-    Considere el siguiente modelo para una representación de punto
-    flotante normalizada en base $2$:
-    \begin{equation*}
-        x=\left(-1\right)^{s}
-        \left(1.a_{2}a_{3}\right)
-        \times 2^{e}
-    \end{equation*}
-    donde $-1\leq e\leq 1$.
-    Encuentre todos los números de máquina positivos (hay $12$ de
-    ellos) que se pueden representar en este modelo.
-    Convierta los números a base $10$, y luego gráfiquelos
-    cuidadosamente en la recta numérica a mano, y comente cómo están
-    espaciados los números.
+    La concentración atmosférica media estimada de dióxido de carbono
+    en la atmósfera terrestre se da en la tabla que sigue, en partes
+    por millón por volumen.
+    Encuentre el polinomio de interpolación de grado $3$ de los datos
+    y utilícelo para estimar la concentración de CO$_{2}$ en $1950$ y $2050$.
+    (La concentración real en $1950$ fue de $310$ ppm).
+
+    \begin{table}[ht!]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            Año  & CO$_{2}$ (ppm)
+            \\
+            \hline
+            1800 & 280
+            \\
+            \hline
+            1850 & 283
+            \\
+            \hline
+            1900 & 291
+            \\
+            \hline
+            2000 & 370            \\
+            \hline
+        \end{tabular}
+    \end{table}
 
     \question
 
-    Encuentre valores de corte y redondeo de 5 dígitos
-    $\left(k=5\right)$ de los números siguientes:
+    La vida útil esperada de un ventilador industrial cuando funciona
+    a la temperatura indicada se muestra en la tabla que sigue.
+    Calcule la vida útil a $70^{\circ}$C utilizando
 
     \begin{multicols}{2}
-
         \begin{parts}
             \part
-
-            \begin{math}
-                \pi=0.314159265\dotsc\times10^{1}
-            \end{math}.
-
+            la parábola de los últimos tres puntos de datos.
             \part
 
-            \begin{math}
-                0.0001234567
-            \end{math}.
+            la curva de grado 3 utilizando los cuatro puntos.
         \end{parts}
     \end{multicols}
 
-    % \subsection{Solución de $f\left(x\right)=0$ mediante el método de la bisección}
-
-    \question
-
-    La ley de los gases ideales para un gas a baja temperatura y
-    presión es $PV=nRT$, donde $P$ es la presión (en atm), $V$ es el
-    volumen (en L), $T$ es la temperatura (en $K$), $n$ es el número
-    de moles del gas y $R=0.0820578$ es la constante molar del gas.
-    La ecuación de van der Waals
-    \begin{equation*}
-        \left(P+\frac{n^{2}a}{V^{2}}\right)
-        \left(v-nb\right)
-        =nRT
-    \end{equation*}
-    cubre el caso no ideal en el que estas suposiciones no se cumplen.
-    Utilice la ley de los gases ideales para calcular una estimación
-    inicial, seguida del método de Newton aplicado a la ecuación de
-    van der Waals para encontrar el volumen de un mol de oxígeno a
-    $320$K y una presión de $15$ atm.
-    Para el oxígeno,
-    $a=1.36\operatorname{L}^{2}-\operatorname{atm}/\operatorname{mole}^{2}$
-    y $b=0.003183\operatorname{L}/\operatorname{mole}$.
-    Indique su estimación inicial y la solución con tres dígitos
-    significativos.
-
-    \begin{listing}[ht!]
-        \tiny
+    \begin{table}[ht!]
         \centering
-        \inputminted[linenos,highlightlines={7-35}]{octave}{bisect.m}
-        \caption{Método de la bisección.}
-    \end{listing}
-
-    % \subsection{Falsa posición}
+        \begin{tabular}{|c|c|}
+            \hline
+            temperatura ($^{\circ}$C) & horas ($\times 1000$)
+            \\
+            \hline
+            25                        & 95
+            \\
+            \hline
+            40                        & 75
+            \\
+            \hline
+            50                        & 63
+            \\
+            \hline
+            60                        & 54                    \\
+            \hline
+        \end{tabular}
+    \end{table}
 
     \question
 
-    Halla la altura que alcanza $1$ metro cúbico de agua almacenada
-    en un tanque esférico de radio $1$ metro.
-    Da tu respuesta $\pm1$mm usando el método de la falsa posición.
-    El volumen del tanque esférico a $H$ metros de profundidad de un
-    hemisferio de radio $R$ es $\pi H^{2}\left(R-\frac{H}{3}\right)$.
-
-    % \subsection{Método de la secante}
-
-    % \subsection{Método de Newton}
+    Sea $P_{5}\left(x\right)$ el polinomio de grado $5$ que
+    interpola $f\left(x\right)=2x$ en los seis nodos
+    $\left\{0, 0.2, 0.4, 0.6, 0.8, 1.0\right\}$ en el intervalo $\left[0,1\right]$.
+    Halle los mejores cotas superiores posibles para el error de interpolación
+    $\left|2x-P_{5}\left(x\right)\right|$ en $x=0.5$ y $x=0.9$.
 
     \question
 
-    Una cantidad crucial en el diseño de tuberías es la caída de
-    presión debido a la fricción bajo flujo turbulento.
-    La caída de presión por unidad de longitud se describe mediante
-    el número de Darcy $f$, una cantidad adimensional que satisface
-    la ecuación empírica de Colebrook
-    \begin{equation*}
-        \frac{1}{\sqrt{f}}=
-        -2\log_{10}\left[\frac{\epsilon}{3.7D}+
-            \frac{2.51}{R\sqrt{f}}\right]
-    \end{equation*}
-    donde $D$ es el diámetro interior de la tubería, $\epsilon$ es la
-    altura de rugosidad del interior de la tubería y $R$ es el número
-    de Reynolds del flujo.
-
+    Suponga que el polinomio $P_{9}\left(x\right)$ interpola la función $f\left(x\right)=e^{-2x}$
+    en los $10$ puntos espaciados uniformemente $\left\{0,\frac{1}{9},\frac{2}{9},\dotsc,\frac{8}{9},1\right\}$.
     \begin{parts}
-        \part\label{part:adarcy}
+        \part
+        Encuentre un límite superior para el error
+        \begin{math}
+            \left|f\left(\frac{1}{2}\right)-P_{9}\left(\frac{1}{2}\right)\right|.
+        \end{math}
 
-        Para $D=0.3m$, $\epsilon=0.0002$m y $R=105$, utilice el
-        método de Newton para calcular el número de Darcy $f$.
+        \part
 
-        \part\label{part:bdarcy}
-        Fije $D$ y como en~\eqref{part:adarcy}, y calcule el número
-        de Darcy para varios números de Reynolds $R$ entre $104$ y
-        $108$.
-        Haga un gráfico del número de Darcy en función del número de
-        Reynolds, utilizando un eje logarítmico para este último.
+        ¿Cuántos decimales puede garantizar que sean correctos si se usa $P_{9}\left(\frac{1}{2}\right)$ para aproximar $e^{-1}$?
     \end{parts}
 
-    % \subsection{Método de punto fijo}
+    \question
+
+    Utilice el método de diferencias divididas para encontrar el polinomio de interpolación de grado $4$, $P_{4}\left(x\right)$,
+    para los datos $\left(0.6, 1.433329\right)$, $\left(0.7,1.632316\right)$,
+    $\left(0.8, 1.896481\right)$, $\left(0.9, 2.247908\right)$, y $\left(1.0, 2.718282\right)$.
+    Calcule $P_{4}(0.82)$ and $P_{4}\left(0.98\right)$.
+    Los datos fueron obtenidos de la función $f\left(x\right)=e^{x^2}$.
+    Use la fórmula del error de interpolación para encontrar cotas superiores para el error en $x=0.82$
+    y $x=0.98$, y compare las cotas con el error actual.
 
     \question
 
-    ¿Cuál de las siguientes tres iteraciones de punto fijo converge a
-    la raíz cúbica de $4$?
-    Clasifique las que convergen de más rápidas a más lentas.
+    Pruebe que la fórmula de segundo orden para la primera derivada
+
+    \begin{equation*}
+        f^{\prime}\left(x\right)=
+        \frac{-f\left(x+2h\right)+4f\left(x+h\right)-3f\left(x\right)}{2h}+
+        \mathcal{O}\left(h^{2}\right).
+    \end{equation*}
+
+    \question
+
+    Encuentre el término de error para la fórmula de aproximación
+
+    \begin{equation*}
+        f^{\prime}\left(x\right)=
+        \frac{4f\left(x+h\right)-3f\left(x\right)-f\left(x-2h\right)}{6h}.
+    \end{equation*}
+
+    \question
+
+    Desarrolle un método de segundo orden para aproximar $f\left(x\right)$
+    que use solamente los datos $f\left(x-h\right)$, $f\left(x\right)$, y $f\left(x+3h\right)$.
+
+    \question
+
+    Crea una tabla del error de la fórmula de diferencia centrada de
+    tres puntos para $f\left(0\right)$, donde
+    $f\left(x\right)=\operatorname{sen}\left(x\right)-\cos\left(x\right)$,
+    con $h=10^{-1},\dotsc,10^{-12}$.
+    Dibuje un gráfico de los resultados.
+
+    \question
+
+    Aplique la regla de trapezio compuesta con $m=1,2,4$ para aproximar la integral.
+    Calcule el error comparando con el valor exacto del cálculo integral.
+
+    \begin{multicols}{3}
+
+        \begin{parts}
+            \part
+            \begin{equation*}
+                \int_{0}^{1}
+                x^{2}\dl x.
+            \end{equation*}
+
+            \part
+            \begin{equation*}
+                \int_{0}^{\frac{\pi}{2}}
+                \cos x\dl x.
+            \end{equation*}
+
+            \part
+            \begin{equation*}
+                \int_{0}^{1}
+                e^{x}\dl x.
+            \end{equation*}
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Aplique la regla de Simpson compuesta con $m=1,2,4$ para aproximar la integral
+    y reporte los errores.
+
+    \begin{multicols}{3}
+
+        \begin{parts}
+            \part
+            \begin{equation*}
+                \int_{0}^{1}
+                xe^{x}\dl x.
+            \end{equation*}
+
+            \part
+            \begin{equation*}
+                \int_{0}^{1}
+                \frac{\dl x}{1+x^{2}}
+            \end{equation*}
+
+            \part
+            \begin{equation*}
+                \int_{0}^{\pi}
+                x\cos\left(x\right)\dl x
+            \end{equation*}
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Aplique la regla del punto medio compuesta con $m=1,2,4$ para aproximar la integral
+    y reporte los errores.
+
+    \begin{multicols}{3}
+
+        \begin{parts}
+            \part
+            \begin{equation*}
+                \int_{0}^{1}
+                \frac{\dl x}{\sqrt{x}}.
+            \end{equation*}
+
+            \part
+            \begin{equation*}
+                \int_{0}^{1}
+                x^{-\frac{1}{3}}\dl x.
+            \end{equation*}
+
+            \part
+            \begin{equation*}
+                \int_{0}^{2}
+                \frac{\dl x}{\sqrt{2-x}}.
+            \end{equation*}
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+
+    Encuentre $c_{1}$, $c_{2}$ y $c_{3}$ tal que la regla
+    \begin{equation*}
+        \int_{0}^{1}
+        f\left(x\right)\dl x\approx
+        c_{1}f\left(0\right)+
+        c_{2}f\left(\frac{1}{2}\right)+
+        c_{3}f\left(1\right).
+    \end{equation*}
+    tenga grado de precisión mayor que uno.
+    Sugerencia: Sustituya $f\left(x\right)=1,x,x^{2}$.
+
+    \question
+
+    Encuentre el grado de precisión de la siguiente aproximación
+    \begin{math}
+        \int_{-1}^{1}f\left(x\right)\dl x
+    \end{math}:
 
     \begin{multicols}{3}
         \begin{parts}
             \part
 
             \begin{math}
-                g\left(x\right)=
-                \dfrac{2}{\sqrt{x}}
+                f\left(1\right)+
+                f\left(-1\right)
             \end{math}.
 
             \part
 
             \begin{math}
-                g\left(x\right)=
-                \dfrac{3x}{4}+\dfrac{1}{x^{2}}
+                \frac{2}{3}
+                \left[f\left(-1\right)+f\left(0\right)+f\left(1\right)\right]
             \end{math}.
 
             \part
 
             \begin{math}
-                g\left(x\right)=
-                \dfrac{2x}{3}+\dfrac{4}{3x^{2}}
+                f\left(-\frac{1}{3}\right)+
+                f\left(\frac{1}{3}\right)
             \end{math}.
         \end{parts}
     \end{multicols}
 
-    \question
-
-    Encuentre el conjunto de todas las estimaciones iniciales para
-    las cuales la iteración de punto fijo
-    $x\rightarrow\dfrac{4}{9}-x^{2}$ converge a un punto fijo.
-
-    \begin{listing}[ht!]
-        \tiny
-        \centering
-        \inputminted[linenos,highlightlines={7-15}]{octave}{fpi.m}
-        \caption{Método de punto fijo.}
-    \end{listing}
-
-    % \subsection{Solución a sistemas de ecuaciones no lineales}
-
-    \question
-
-    Utilice el método de Newton con la estimación inicial
-    $\left(1,2\right)$ para encontrar una solución del sistema no
-    lineal.
-    \begin{equation*}
-        \left\{
-        \begin{aligned}
-            v-u^{3}       & =0. \\
-            u^{2}+v^{2}-1 & =0.
-        \end{aligned}
-        \right.
-    \end{equation*}
-
-    \question
-
-    Aplicar el método de Newton para encontrar ambas soluciones del
-    sistema de tres ecuaciones.
-
-    \begin{equation*}
-        \left\{
-        \begin{aligned}
-            2u^{2}-4u+v^{2}+3w^{2}+6w+2 & =0. \\
-            u^{2}+v^{2}-2v+2w^{2}-5     & =0. \\
-            3u^{2}-12u+v^{2}+3w^{2}+8   & =0.
-        \end{aligned}
-        \right.
-    \end{equation*}
-
-    \question
-
-    Aunque una intersección genérica de tres esferas en el espacio
-    tridimensional son dos puntos, puede ser un único punto.
-    Aplique el método de Newton multivariable para encontrar el único
-    punto de intersección de las esferas con centro $\left(1,0,1\right)$
-    y radio $8$, centro $\left(0,2,2\right)$ y radio $\sqrt{2}$,
-    y centro $\left(0,3,3\right)$ y radio $\sqrt{2}$.
-    ¿La iteración sigue convergiendo cuadráticamente? Explique.
 \end{questions}
 
-\vfill{Fidel Jara Huanca}\footnote{Hecho en \LaTeX}
-\hfill{UNI, 21 de enero de 2025}
+\providecommand{\name}{Nombre}
+\vfill{Nombre}\footnote{Hecho en \LaTeX}
+\hfill{UNI, 25 de enero de 2025}
 
 \end{document}

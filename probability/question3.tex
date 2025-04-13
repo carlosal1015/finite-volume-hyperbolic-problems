@@ -1,0 +1,68 @@
+\question[10]
+
+Determine
+\begin{math}\displaystyle
+    \diff{}{x}
+    \left(
+    \int_{3x-1}^{0}
+    \frac{\dl t}{t+4}
+    \right).
+\end{math}
+
+% \begin{figure}[ht!]
+%     \centering
+%     \begin{tikzpicture}[xscale=0.5,yscale=0.5]
+%         \draw[help lines] (0,0) grid (32,40);
+%     \end{tikzpicture}
+% \end{figure}
+
+\begin{solutionordottedlines}
+
+    Defina las siguientes funciones y calcule sus derivadas
+    \begin{equation}
+        \begin{split}
+            f\left(x\right) & \coloneqq
+            \int_{0}^{x}
+            \frac{\dl t}{t+4}.          \\
+            g\left(x\right) & \coloneqq
+            3x-1.
+        \end{split}
+        \xRightarrow{\quad\text{Teorema Fundamental del Cálculo}\quad}
+        \begin{split}
+            \diff{}{x}f\left(x\right) & =
+            \frac{1}{x+4}.                \\
+            \diff{}{x}g\left(x\right) & =
+            3.
+        \end{split}
+    \end{equation}
+    Note que
+    \begin{align*}
+        \left(f\circ g\right)\left(x\right) & =
+        f\left(3x-1\right)=
+        \int_{0}^{3x-1}
+        \frac{\dl t}{t+4}.
+        \shortintertext{Aplique la regla de la cadena}
+        \diff{}{x}
+        \left(f\circ g\right)\left(x\right)
+                                            & =
+        \diff{}{x}f\left(g\left(x\right)\right)
+        \diff{}{x}g\left(x\right)=
+        \frac{3}{3x-1+4}=
+        \frac{1}{x+1}.
+        \shortintertext{Así,}
+        -\frac{1}{x+1}=
+        -\diff{}{x}
+        \left(f\circ g\right)\left(x\right)
+                                            & =
+        -\diff{}{x}
+        \left(
+        \int_{0}^{3x-1}
+        \frac{\dl t}{t+4}
+        \right)=
+        \diff{}{x}
+        \left(
+        \int_{3x-1}^{0}
+        \frac{\dl t}{t+4}
+        \right).
+    \end{align*}
+\end{solutionordottedlines}

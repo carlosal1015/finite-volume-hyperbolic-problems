@@ -1,0 +1,283 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav', 'out', 'run.xml', 'snm', 'pdf', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav', 'out', 'run.xml', 'snm', 'toc']
+% arara: --> }
+\documentclass[
+  aspectratio=1610,
+  c,
+  handout,
+  9pt,
+  spanish
+]{beamer}
+\usepackage[spanish]{babel}
+\usepackage{mathtools}
+\usepackage{diffcoeff}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{references.bib}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{frametitle}[default][center]
+
+\title{Solución de ondas viajeras para un modelo de combustión in situ simple}
+\subtitle{}
+\institute{}
+\providecommand{\name}{Nombre}
+\author{\scshape\name}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+    \maketitle
+\end{frame}
+
+\section{¿Qué es la combustión in situ?~\cite{Storey2022}}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Es una técnica de \alert{recuperación mejorada de petróleo} (EOR)
+    que implica inyectar aire u oxígeno en un yacimiento petrolífero
+    para encender el petróleo y crear un frente de combustión
+    controlada que desplaza el petróleo hacia los pozos de
+    producción.
+    Las zonas de reacción son
+    \begin{description}
+        \item[Oxidación a baja temperatura ($25-300^{\circ}$C)]
+
+              Oxidación sin CO$_{2}$ (alcoholes, cetonas).
+
+        \item[Oxidación a temperatura media ($300-350^{\circ}$C)]
+
+              Deposición de coque.
+
+        \item[Oxidación a alta temperatura ($>350^{\circ}$C)]
+              Combustión del coque, generando CO$_{2}$ y calor.
+    \end{description}
+
+    % https://cdn-ceo-ca.s3.amazonaws.com/1htavbg-geosciences-12-00340-v2.pdf
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics{schematicdiagram}
+        \caption{Diagrama esquemático que muestra las zonas de
+            reacción en todo el yacimiento entre las zonas de pre y post
+            quema.
+            Recuperado de~\cite{Storey2022}.}
+    \end{figure}
+\end{frame}
+
+\section{Modelo de Buckley-Leverett~\cite{booth2008a}}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Modela el flujo inmiscible a través de medios porosos, como el
+    desplazamiento del petróleo por el agua.
+    Las fracciones de espacio poroso que están ocupadas
+    (saturaciones) por petróleo y agua son $S_{\text{oil}}$ y
+    $S_{\text{water}}$, respectivamente.
+    Los flujos de petróleo y agua se denotan por $u_{\text{oil}}$ y
+    $u_{\text{water}}$ respectivamente y la presión en el petróleo y
+    el agua se da por $p_{\text{oil}}$ y $p_{\text{water}}$.
+
+    Despreciando el efecto de la gravedad para simplificar, este
+    efecto se puede modelar mediante la introducción de
+    permeabilidades relativas de modo que en cada fluido
+    \begin{align}
+        u_{\text{oil}}   & =
+        -\frac{k_{\text{rel oil}}}{\mu_{\text{oil}}}
+        K\nabla p_{\text{oil}}. \\
+        u_{\text{water}} & =
+        -\frac{k_{\text{rel water}}}{\mu_{\text{water}}}
+        K\nabla p_{\text{water}}.
+    \end{align}
+    donde las permeabilidades relativas, $k_{\text{rel oil}}$ y
+    $k_{\text{rel water}}$ se determinan empíricamente y dependen de
+    la fracción de la fase acuosa presente, $S_{\text{water}}$.
+    La conservación de la masa aplicada al petróleo y al agua da
+    \begin{align}
+        \phi
+        \diffp{S_{\text{water}}}{t}+
+        \nabla\cdot u_{\text{water}} & =0. \\
+        \phi
+        \diffp{S_{\text{oil}}}{t}+
+        \nabla\cdot u_{\text{oil}}   & =0.
+    \end{align}
+    donde $\phi$ es la porosidad de la roca.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    La diferencia entre la presión en la fase acuosa y la presión en
+    la fase oleosa viene dada por la presión capilar.
+    \begin{equation}
+        p_{c}\left(S_{\text{water}}\right)=
+        p_{\text{oil}}-p_{\text{water}}.
+    \end{equation}
+    La presión capilar es una consecuencia de la tensión superficial
+    y, para un poro individual, lleno de agua, la presión capilar
+    podría determinarse mediante
+    \begin{equation}
+        p_{c}=
+        \frac{2\gamma\cos\theta}{r\left(S_{\text{water}}\right)},
+    \end{equation}
+    donde $\gamma$ es el coeficiente de tensión superficial, $\theta$
+    es el ángulo de humectación en el punto donde se encuentran el
+    petróleo, el agua y la roca, y $r\left(S_{\text{water}}\right)$
+    es un radio típico para un poro en el que están presentes tanto
+    el agua como el petróleo.
+    \begin{equation}
+        \diffp{S_{\text{water}}}{t}+
+        U\diffp{F\left(S_{\text{water}}\right)}{x}=0,
+    \end{equation}
+    donde la función de flujo fraccional es
+    \begin{equation*}
+        F\left(S_{\text{water}}\right)=
+        {
+        \left(
+        1+
+        \frac{
+            k_{\text{rel oil}}\left(S_{\text{water}}\right)
+            \mu_{\text{water}}
+        }{
+            k_{\text{rel water}}\left(S_{\text{water}}\right)
+            \mu_{\text{oil}}
+        }
+        \right)}^{-1}.
+    \end{equation*}
+\end{frame}
+
+\section{Modelo de Koval~\cite{booth2008a,Koval1963}}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    Se ha observado en experimentos que, en un desplazamiento
+    miscible a través de un canal, la evolución de la concentración
+    de disolvente es muy diferente a la predicha por el modelo
+    unidimensional de Peaceman.
+    La causa de esta diferencia es la ``digitación'' del disolvente.
+    Koval derivó un modelo unidimensional simple a partir de las
+    ecuaciones de Buckley-Leverett y viene dado por
+    \begin{equation}
+        \diffp{c}{t}+U\diffp{F\left(c\right)}{x}=0,
+    \end{equation}
+    donde la función de flujo fraccional es
+    \begin{equation*}
+        F\left(c\right)=
+        \frac{M_{e}c}{1+\left(M_{e}-1\right)c}
+    \end{equation*}
+    y la relación de movilidad efectiva, $M_{e}$, se define como la
+    relación entre la viscosidad del petróleo y una mezcla específica
+    de solvente y petróleo con una fracción de volumen de solvente $c_{e}$.
+    Al comparar con experimentos, Koval determinó que $c_{e}=0.22$.
+    % \begin{align}
+    %     f_{s}\left(c_{s},T\right) & =
+    %     \frac{Kc_{s}}{1+c_{s}\left(K-1\right)}.    \\
+    %     K\left(T\right)           & =
+    %     \frac{\mu_{\text{oil}}}{\mu_{\text{mix}}}. \\
+    %     \mu_{\text{mix}}          & =+.
+    % \end{align}
+\end{frame}
+
+\section{Modelo de Gagar~\cite{Gargar2020}}
+
+\begin{frame}
+    \frametitle{\secname}
+
+    También conocido como modelo de Koval modificado sujeto a un
+    desplazamiento miscible para inyección de aire a alta presión.
+
+    Asumiendo que la temperatura de la roca sólida, el líquido y el gas son iguales,
+    escribimos la ecuación de balance de calor como
+    \begin{equation*}
+        \diffp{}{t}
+        \left(
+        C_{m}\Delta T+
+        \varphi C_{0}\Delta T\right)
+        \diffp{}{x}
+        \left(C_{o} u\Delta T\right)=
+        \lambda
+        \diffp[2]{T}{x}+
+        QR,
+    \end{equation*}
+    donde $\Delta T=T-T_{\text{ini}}$ es la temperatura relativa al reservorio inicial,
+    $\lambda$ es la conductividad térmica, $Q$ es el calor de reacción de combustión y $C_{m}$
+    es la matriz de la capacidad calorífica de la roca.
+    La tasa de reacción $R$ es
+    \begin{equation*}
+        R=\varphi A_{r}c_{\text{oil}}c^{n}_{\text{ox}}
+        \exp\left(-\frac{T_{\text{ac}}}{T}\right),
+    \end{equation*}
+
+    donde $A_{r}$ es el factor de frecuencia para la tasa de oxidación del petróleo y $n$ es
+    el orden de la reacción con respecto al oxígeno.
+    % https://sci-hub.se/10.1007/s10596-020-09977-y
+\end{frame}
+
+\begin{frame}
+    \frametitle{\secname}
+    \framesubtitle{Recuperado de~\url{https://alexei.impa.br/data/_uploaded/file/notes/lncc_interpore.pdf}}
+    \begin{align}
+        \varphi
+        \diffp{c_{s}}{t}+
+        \diffp{}{x}
+        \left(uf_{s}\right)         & =
+        \left(\nu_{in}-\nu_{ox}\right)R \\
+        \varphi
+        \diffp{c_{oil}}{t}+
+        \diffp{}{x}
+        \left(uf_{oil}\right)       & =
+        -\nu_{oil}R,                    \\
+        \varphi
+        \diffp{c_{ox}}{t}+
+        \diffp{}{x}
+        \left(uf_{ox}\right)        & =
+        -\nu_{ox}R,                     \\
+        \diffp{}{t}
+        \left(C_{m}\Delta T+\varphi C_{o}\Delta T\right)+
+        \diffp{}{x}
+        \left(C_{o}u\Delta T\right) & =
+        \lambda
+        \diffp[2]{T}{x}+QR
+    \end{align}
+
+    donde $f_{oil}=1-f_{s}$ y $f_{ox}=\frac{c_{ox}}{c_s}f_{s}$.
+\end{frame}
+
+\begin{frame}\transblindsvertical
+    \frametitle{Referencias}
+
+    \nocite{*}
+    \printbibliography[heading=none]
+\end{frame}
+
+\end{document}

@@ -1,0 +1,83 @@
+\question
+
+Dada la siguiente tabla
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{|C|C|C|C|C|C|}
+        \hline
+        x_{i}               & 2            & 5           & 7           & 11          & 20           \\
+        \hline
+        f\left(x_{i}\right) & \frac{1}{16} & \frac{1}{8} & \frac{5}{8} & \frac{1}{8} & \frac{1}{16} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{parts}
+    \part[5]
+
+    Halle el valor de
+    \begin{math}\displaystyle
+        \mu=
+        \sum_{i=1}^{5}
+        x_{i}f\left(x_{i}\right)
+    \end{math}.
+
+    \part[5]
+
+    Analice la convergencia de
+    \begin{math}\displaystyle
+        I=
+        \int_{0}^{\infty}
+        xe^{-\big(\frac{x-\mu}{2}\big)^{2}}\dl x.
+    \end{math}
+\end{parts}
+
+% \begin{figure}[ht!]
+%     \centering
+%     \begin{tikzpicture}[xscale=0.5,yscale=0.5]
+%         \draw[help lines] (0,0) grid (32,28);
+%     \end{tikzpicture}
+% \end{figure}
+
+\begin{solutionordottedlines}
+    \begin{parts}
+        \part
+
+        \textbf{Cálculo de} $\mu$.
+
+        \begin{math}
+            \mu=
+            \sum_{i=1}^{5}
+            x_{i}f\left(x_{i}\right)=
+            2\times\dfrac{1}{16}+
+            5\times\dfrac{1}{8}+
+            7\times\dfrac{5}{8}+
+            11\times\dfrac{1}{8}+
+            20\times\dfrac{1}{16}=
+            \dfrac{124}{16}=
+            7.75
+        \end{math}.
+
+        \part
+
+        \textbf{Convergencia de la integral}.
+
+        Si la sustitución es $z=\frac{x-\mu}{2}$, entonces
+        $x=2z+\mu$ y $\dl z=\frac{\dl x}{2}$.
+
+        \begin{equation*}
+            I=
+            \int_{0}^{\infty}
+            xe^{-\big(\frac{x-\mu}{2}\big)^{2}}
+            \dl x=
+            \int_{0}^{\infty}
+            \left(2z+\mu\right)e^{-z^{2}}2\dl z=
+            4\int_{0}^{\infty}
+            ze^{-z^{2}}\dl z+
+            2\mu\int_{0}^{\infty}e^{-z^{2}}\dl z<
+            \infty.
+        \end{equation*}
+
+        Como cada integral converge, $I$ es convergente.
+    \end{parts}
+\end{solutionordottedlines}

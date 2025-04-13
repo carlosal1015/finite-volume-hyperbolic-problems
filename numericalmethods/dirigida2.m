@@ -8,3 +8,5 @@ y = nest(2, c, x, x0);
 figure('visible', 'off');
 plot(x0, y0, 'o', x, y);
 saveas(gcf, "interpolation.pdf", 'pdfcrop')
+
+clickinterp

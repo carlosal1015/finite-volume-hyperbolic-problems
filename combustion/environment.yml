@@ -1,0 +1,15 @@
+# Create environment
+# [ -d $PWD/.venv ] || micromamba env create -f environment.yml --prefix $PWD/.venv
+# Activate environment
+# micromamba activate $PWD/.venv
+name: fenics
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.12.9
+  - fenics=2019.1.0
+  - mshr=2019.1.0
+  - matplotlib>=3.10.0
+  - openpyxl>=3.1.5
+  - pandas>=2.2.3

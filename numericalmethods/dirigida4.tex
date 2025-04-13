@@ -1,0 +1,1113 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out', 'pdf']
+% arara: --> }
+%! arara: lualatex: {
+%! arara: --> shell: yes,
+%! arara: --> draft: yes,
+%! arara: --> interaction: batchmode
+%! arara: --> }
+%! arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out']
+% arara: --> }
+\input{preamble}
+\begin{document}
+
+\providecommand{\faculty}{Facultad}
+\noindent\parbox[c]{.18\textwidth}{\includegraphics[width=2.8cm]{logouni}}\hfill
+\parbox[c]{1\textwidth}{\raggedright%
+    {\large\textbf{UNIVERSIDAD NACIONAL DE INGENIERÍA} \par\smallskip}
+    {\large\textbf{\faculty} \par\smallskip}
+    {\large\textbf{DEPARTAMENTO ACADÉMICO DE CIENCIAS BÁSICAS} \par\smallskip}
+}
+
+\begin{center}\bfseries\large
+    Práctica Dirigida 4 de Métodos Numéricos (BMA-18)
+\end{center}
+
+\vspace{-0.5cm}
+
+\hrulefill
+\vspace{-2.5mm}
+
+\rule{16.5cm}{0.8mm}
+
+\section{Semana 6}
+
+\subsection{Sistema de ecuaciones lineales}
+
+Consideramos el problema de resolver varias ecuaciones lineales
+simultáneas cuando el caso en el que el número de ecuaciones y el
+número de variables desconocidas son iguales.
+La eliminación gaussiana es la técnica más utilizada para sistemas de
+ecuaciones lineales de tamaño razonable.
+Los métodos iterativos son necesarios para sistemas muy grandes.
+
+\subsubsection{Eliminación gaussiana ingenua}
+
+Es tan simple que no se garantiza que se complete, y mucho menos que
+se encuentre una solución precisa.
+Se pueden aplicar tres operaciones útiles a un sistema lineal de
+ecuaciones que dan como resultado un sistema equivalente, es decir,
+uno que tenga las mismas soluciones.
+Estas operaciones son las siguientes:
+
+\begin{enumerate}
+    \item
+
+          Intercambiar una ecuación por otra.
+
+    \item
+
+          Sumar o restar un múltiplo de una ecuación de otra.
+
+    \item
+
+          Multiplicar una ecuación por una constante distinta de
+          cero.
+\end{enumerate}
+
+\subsubsection{Conteo de operaciones}
+
+Realizamos un recuento aproximado de las operaciones para las dos
+partes de la eliminación gaussiana:
+el paso de eliminación y el paso de sustitución hacia atrás.
+Para ello, será útil escribir para el caso general las operaciones
+que se llevaron a cabo en los dos ejemplos anteriores.
+Para comenzar, recordemos dos hechos sobre las sumas de números
+enteros.
+Para cualquier $n\in\mathbb{N}$, se cumple
+
+\begin{multicols}{2}
+    \begin{enumerate}[a)]
+        \item
+              \begin{math}
+                  1+2+3+4+5+\cdots+n=
+                  \dfrac{n\left(n+1\right)}{2}
+              \end{math},
+
+        \item
+              \begin{math}
+                  1^{2}+2^{2}+3^{2}+4^{2}+5^{2}+\cdots+n^{2}=
+                  \dfrac{n\left(n+1\right)\left(2n+1\right)}{6}
+              \end{math}.
+    \end{enumerate}
+\end{multicols}
+
+La forma general de la tabla para $n$ ecuaciones con $n$ incógnitas
+es
+\begin{equation*}
+    \begin{bNiceArray}{cccc|c}
+        a_{11} & a_{12} & \cdots & a_{1n} & b_{1}  \\
+        a_{21} & a_{22} & \cdots & a_{2n} & b_{2}  \\
+        \vdots & \vdots & \ddots & \vdots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn} & b_{n}
+    \end{bNiceArray}.
+\end{equation*}
+
+Para realizar el paso de eliminación, necesitamos poner ceros en el
+triángulo inferior, utilizando las operaciones de fila permitidas.
+Podemos escribir el paso de eliminación como el bucle donde, por
+``eliminar la columna $j$'', queremos decir ``usar operaciones de
+fila para poner un cero en cada ubicación debajo de la diagonal
+principal, que son las ubicaciones
+\begin{math}
+    a_{j+1j},a_{j+2j},\dotsc,a_{nj}
+\end{math}''.
+
+\begin{listing}[ht!]
+    \small
+    \centering
+    \inputminted[firstline=50,lastline=52]{octave}{dirigida4.m}
+\end{listing}
+Por ejemplo, para realizar la eliminación en la columna $1$,
+necesitamos poner ceros en $a_{21},\dotsc,a_{n1}$.
+Esto se puede escribir como el siguiente bucle dentro del bucle
+anterior:
+\begin{listing}[ht!]
+    \small
+    \centering
+    \inputminted[firstline=54,lastline=60]{octave}{dirigida4.m}
+\end{listing}
+Queda por completar el paso interior del doble bucle, para aplicar
+una operación de fila que establece la entrada $a_{ij}$ en cero.
+Por ejemplo, la primera entrada que se eliminará es la entrada
+$a_{21}$.
+Para lograr esto, restamos $\frac{a_{21}}{a_{11}}$ multiplicado por
+la fila $1$ de la fila $2$, suponiendo que $a_{11}\neq 0$.
+Es decir, las dos primeras filas cambian de
+\begin{equation*}
+    \begin{NiceArray}{cccc|c}
+        a_{11} & a_{12} & \cdots & a_{1n} & b_{1} \\
+        a_{21} & a_{22} & \cdots & a_{2n} & b_{2}
+    \end{NiceArray}.
+\end{equation*}
+a
+\begin{equation*}
+    \begin{NiceArray}{llll|l}
+        a_{11} & a_{12}                             & \cdots & a_{1n}                             & b_{1}                            \\
+        0      & a_{22}-\frac{a_{21}}{a_{11}}a_{12} & \cdots & a_{2n}-\frac{a_{21}}{a_{11}}a_{1n} & b_{2}-\frac{a_{21}}{a_{11}}b_{1}
+    \end{NiceArray}.
+\end{equation*}
+Teniendo en cuenta las operaciones, se requiere una división (para
+hallar el multiplicador $\frac{a_{21}}{a_{11}}$) más $n$
+multiplicaciones y $n$ adiciones.
+La operación de fila utilizada para eliminar la entrada $a_{i1}$ de
+la primera columna, es decir,
+\begin{equation*}
+    \begin{NiceArray}{llll|l}
+        a_{11} & a_{12}                             & \cdots & a_{1n}                             & b_{1}                            \\
+        \vdots & \vdots                             & \ddots & \vdots                             & \vdots                           \\
+        0      & a_{i2}-\frac{a_{i1}}{a_{11}}a_{12} & \cdots & a_{in}-\frac{a_{i1}}{a_{11}}a_{1n} & b_{i}-\frac{a_{i1}}{a_{11}}b_{1}
+    \end{NiceArray}
+\end{equation*}
+requiere operaciones similares.
+El procedimiento que se acaba de describir funciona siempre que el
+número $a_{11}\neq 0$.
+Este número y los demás números $a_{ii}$ que son eventualmente
+divisores en la eliminación gaussiana se denominan \textbf{pivotes}.
+Un pivote cero hará que el algoritmo se detenga.
+Observe que eliminar cada entrada $a_{i1}$ en la primera columna
+utiliza una división, $n$ multiplicaciones y $n$ summas / restas,
+o $2n+1$ operaciones cuando se cuentan juntas.
+Poner ceros en la primera columna requiere repetir estas $2n+1$
+operaciones un total de $n-1$ veces.
+Después de eliminar la primera columna, se utiliza el pivote $a_{22}$
+para eliminar la segunda columna de la misma manera y las columnas
+restantes después de eso.
+Por ejemplo, la operación de fila utilizada para eliminar la entrada
+$a_{ij}$ es
+\begin{equation*}
+    \begin{NiceArray}{lllll|l}
+        0      & 0      & a_{jj+1}                               & \cdots & a_{jn}                             & b_{j}                            \\
+        \vdots & \vdots & \vdots                                 & \ddots & \vdots                             & \vdots                           \\
+        0      & 0      & a_{ij+1}-\frac{a_{ij}}{a_{jj}}a_{jj+1} & \cdots & a_{in}-\frac{a_{ij}}{a_{jj}}a_{jn} & b_{i}-\frac{a_{ij}}{a_{jj}}b_{j}
+    \end{NiceArray}.
+\end{equation*}
+En nuestra notación, $a_{22}$, por ejemplo, se refiere al número
+revisado en esa posición despuésde de la eliminación de la columna
+$1$, que no es el $a_{22}$ original.
+La operación de fila para eliminar $a_{ij}$ requiere una división,
+$n-j+1$ multiplicaciones, y $n-j+1$ sumas / restas.
+Inserte este paso en el mismo bucle da como resultado
+\begin{listing}[ht!]
+    \small
+    \centering
+    \inputminted[firstline=1,lastline=17,highlightlines={8,11,14}]{octave}{dirigida4.m}
+\end{listing}
+En primer lugar, pedirle al índice $k$ que se mueva de $j$ a $n$.
+colocará un cero en la ubicación $a_{ij}$; sin embargo, moverse de
+$j+1$ a $n$ es la codificación más eficiente.
+Esto último no colocará un cero en la entrada $a_{ij}$, que era la
+entrada que estamos tratando de eliminar.
+Aunque esto parece ser un error, tenga en cuenta que nunca volveremos
+a esta entrada en el resto del proceso de eliminación gaussiana o
+sustitución hacia atrás, por lo que en realidad poner un cero allí
+representa paso desperdiciado desde el punto de vista de la
+eficiencia.
+En segundo lugar, le pedimos que termine el programa utilizando el
+comando de error si encuentra que un pivote es cero.
+Podemos hacer un recuento total de operacionespara el paso de la
+eliminación gaussiana.
+La eliminación de cada $a_{ij}$ requiere la siguiente cantidad de
+operaciones, incluidas divisiones, multiplicaciones y sumas / restas.
+\begin{equation*}
+    \begin{bNiceArray}{ccccccc}
+        0 &  &  &  &  & &\\
+        2n+1 & 0 & & & & & \\
+        2n+1 & 2\left(n-1\right)+1 & 0 &&&  &  \\
+        2n+1 & 2\left(n-1\right)+1 & 2\left(n-2\right)+1 & 0 &&& \\
+        \vdots & \vdots & \vdots & \ddots&\ddots&  & \\
+        \vdots & \vdots & \vdots & &&  & \\
+        2n+1 & 2\left(n-1\right)+1 & 2\left(n-2\right)+1 &\cdots & 2\left(3\right)+1 & 0 &   \\
+        2n+1 & 2\left(n-1\right)+1 & 2\left(n-2\right)+1 &\cdots & 2\left(3\right)+1 & 2\left(2\right)+1 & 0
+    \end{bNiceArray}.
+\end{equation*}
+Es conveniente sumar las operaciones en orden inverso a como se
+aplican.
+Empezando por la derecha, totalizamos las operaciones como
+\begin{align*}
+    \sum_{j=1}^{n-1}
+    \sum_{i=1}^{j}
+    2\left(j+1\right)+1 & =
+    \sum_{j=1}^{n-1}
+    2j\left(j+1\right)+j.                         \\
+                        & =
+    2\sum_{j=1}^{n-1}j^{2}+
+    3\sum_{j=1}^{n-1}j=
+    2\frac{\left(n-1\right)n\left(2n-1\right)}{6}+
+    3\frac{\left(n-1\right)n}{2}.                 \\
+                        & =
+    \left(n-1\right)n
+    \left[\frac{2n-1}{3}+\frac{3}{2}\right]=
+    \frac{n\left(n-1\right)\left(4n+7\right)}{6}. \\
+                        & =
+    \frac{2}{3}n^{3}+\frac{1}{2}n^{2}-\frac{7}{6}n.
+\end{align*}
+Por lo tanto, el paso de eliminación para un sistema de $n$
+ecuaciones en $n$ variables se puede completar en
+$\frac{2}{3}n^{3}+\frac{1}{2}n^{2}-\frac{7}{6}n$ operaciones.
+Normalmente, el recuento exacto de operaciones es menos importante
+que las estimaciones de orden de magnitud, ya que los detalles de
+implementación en los distintos procesadores de computadora difieren.
+El punto principal es que el número de operaciones es aproximadamente
+proporcional al tiempo de ejecución del algoritmo.
+Comúnmente haremos la aproximación de $\frac{2}{3}n^{3}$ operaciones
+para la eliminación, que es una aproximación razonablemente precisa
+cuando $n$ es grande.
+
+Una vez realizada la eliminación, la tabla queda en la forma
+triangular superior:
+\begin{equation*}
+    \begin{bNiceArray}{cccc|c}
+        a_{11} & a_{12} & \cdots & a_{1n} & b_{1}  \\
+        0 & a_{22} & \cdots & a_{2n} & b_{2}  \\
+        \vdots & \vdots & \ddots & \vdots & \vdots \\
+        0 & 0 & \cdots & a_{nn} & b_{n}
+    \end{bNiceArray}.
+\end{equation*}
+En forma de ecuación,
+\begin{align*}
+    a_{11}x_{1} + a_{12}x_{2} + \cdots + a_{1n}x_{n} & = b_{1}     \\
+    a_{22}x_{2} + \cdots + a_{2n}x_{2}               & = b_{2}     \\
+                                                     & \;\; \vdots \\
+    a_{nn}x_{n}                                      & = b_{n},
+\end{align*}
+donde, nuevamente, $a_{ij}$ se refieren a las entradas revisadas, no
+a las originales.
+Para completar el cálculo de la solución $x$, debemos realizar el
+paso de sustitución hacia atrás.
+\begin{align*}
+    x_{1} & = \frac{b_{1}-a_{12}x_{2}-\cdots-a_{1n}x_{n}}{a_{11}} \\
+    x_{2} & = \frac{b_{2}-a_{23}x_{3}-\cdots-a_{2n}x_{n}}{a_{22}} \\
+          & \;\; \vdots                                           \\
+    x_{n} & = \frac{b_{n}}{a_{nn}}.
+\end{align*}
+Debido a la forma triangular de los coeficientes distintos de cero de
+las ecuaciones, comenzamos desde abajo y avanzamos hasta la ecuación
+superior.
+De esta manera, se conocen los $x_{i}$ requeridos cuando se los
+necesita para calcular el siguiente.
+Contando operaciones se obtiene
+\begin{equation*}
+    1+3+5+\cdots+\left(2n-1\right)=
+    \sum_{i=1}^{n}
+    \left(2i-1\right)=
+    2\sum_{i=1}^{n}i-
+    \sum_{i=1}^{n}1=
+    2\frac{n\left(n+1\right)}{2}-n=
+    n^{2}.
+\end{equation*}
+El paso de sustitución hacia atrás es
+\begin{listing}[ht!]
+    \small
+    \centering
+    \inputminted[firstline=19,lastline=26]{octave}{dirigida4.m}
+\end{listing}
+
+El recuento de operaciones muestra que la solución directa de $n$
+ecuaciones con $n$ incógnitas por eliminación gaussiana es un
+proceso $\mathcal{O}\left(n^{3}\right)$.
+Este es un hecho útil para estimar el tiempo necesario para resolver
+sistemas grandes.
+Por ejemplo, para estimar el tiempo necesario para resolver un
+sistema de $n=500$ ecuaciones en una computadora en particular,
+podríamos obtener una estimación justa resolviendo un sistema de
+$n=50$ ecuaciones y luego escalando el tiempo transcurrido por
+$10^{3}=1000$.
+
+\begin{questions}
+    \question
+
+    Utilice la eliminación gaussiana para resolver los sistemas:
+
+    \begin{multicols}{3}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \systeme[xyz]{2x-2y-z=-2,4x+y-2z=1,-2x+y-z=-3}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \systeme[xyz]{x+2y-z=2,3y+z=4,2x-y+z=2}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \systeme[xyz]{2x+y-4z=-7,x-y+z=-2,-x+3y-2z=6}
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Resolver la forma de tabla
+
+    \begin{multicols}{2}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc|c}
+                    3 & -4 & -2 & 3  \\
+                    6 & -6 & 1 & 2   \\
+                    -3 & 8 & 2 & -1
+                \end{bNiceArray}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc|c}
+                    2 & 1 & -1 & 2  \\
+                    6 & 2 & -2 & 8   \\
+                    4 & 6 & -3 & 5
+                \end{bNiceArray}
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Resolver por sustitución hacia atrás:
+
+    \begin{multicols}{2}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \systeme[xyz]{3x-4y+5z=2,3y-4z=-1,5z=5}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \systeme[xyz]{x-2y+z=2,4y-3z=1,-3z=3}
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Si un sistema de $3000$ ecuaciones con $3000$ incógnitas se puede
+    resolver mediante eliminación gaussiana en $5$ segundos en una
+    computadora determinada, ¿cuántas sustituciones hacia atrás del
+    mismo tamaño se pueden realizar por segundo?
+
+    \question
+
+    Sea $H$ la matriz de Hilbert,\footnote{Consulte \url{https://docs.octave.org/latest/Famous-Matrices.html\#index-hilb}.}
+    cuya entrada $\left(i,j\right)$ es $\dfrac{1}{i+j-1}$.
+    Utilice un programa para resolver $Hx=b$, donde $b$ es el vector
+    de todos los unos, para
+    \begin{multicols}{4}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                n=2
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                n=5
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                n=10
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                n=20
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+\end{questions}
+
+\subsubsection{Factorización $LU$}
+
+Una vez que se conocen $L$ y $U$, el problema $Ax=b$ puede escribirse
+como $LUx=b$.
+Defina un nuevo vector ``auxiliar'' $c=Ux$.
+Luego, la sustitución inversa es un procedimiento de dos pasos:
+\begin{enumerate}[(a)]
+    \item
+
+          Resuelva $Lc=b$ para $c$.
+
+    \item
+
+          Resuelva $Ux=c$ para $x$.
+\end{enumerate}
+Ambos pasos son sencillos, ya que $L$ y $U$ son matrices
+triangulares.
+
+\begin{algorithm}[H]
+    \caption{Sustitución hacia adelante orientada a filas}
+    \% Si $L\in\mathbb{R}^{n\times n}$ es una matriz triangular
+    inferior y $b\in\mathbb{R}^{n}$, entonces este algoritmo
+    sobrescribe $b$ con la solución $Lx=b$. $L$ es no singular.
+
+    $b\left[1\right]=\frac{b\left[1\right]}{L\left[1,1\right]}$
+
+    \For{$i=2,\dotsc,n$}{
+        \begin{math}
+            b\left[i\right]\longleftarrow
+            \frac{b\left[i\right]-L\left[i,1\dotsc,i-1\right]\cdot
+                b\left[1\dotsc,i-1\right]}{L\left[i,i\right]}
+        \end{math}\;
+    }
+\end{algorithm}
+
+Este algoritmo requiere $\mathcal{O}\left(n^{2}\right)$ flops y $L$
+es accedido por filas.
+
+\begin{algorithm}[H]
+    \caption{Sustitución hacia atrás orientada a filas}
+    \% Si $U\in\mathbb{R}^{n\times n}$ es una matriz triangular
+    superior y $b\in\mathbb{R}^{n}$, entonces este algoritmo
+    sobrescribe $b$ con la solución $Ux=b$.
+    $U$ es no singular.
+
+    $b\left[n\right]=\frac{b\left[n\right]}{U\left[n,n\right]}$
+
+    \For{$k=n-1,\dotsc,1$}{
+        \begin{math}
+            b\left[i\right]\longleftarrow
+            \frac{b\left[i\right]-U\left[i,i+1\dotsc,n\right]\cdot
+                b\left[i+1\dotsc,n\right]}{U\left[i,i\right]}
+        \end{math}\;
+    }
+\end{algorithm}
+
+Este algoritmo requiere $\mathcal{O}\left(n^{2}\right)$ flops y $U$
+es accedido por filas.
+La eliminación gaussiana clásica implica tanto a $A$ como a $b$ en el
+paso de eliminación del cálculo.
+Esta es, por lejos, la parte más costosa del proceso, como hemos
+visto.
+Ahora, supongamos que necesitamos resolver varios problemas
+diferentes con el mismo $A$ y diferentes $b$.
+Es decir, se nos presenta el conjunto de problemas con varios
+vectores del lado derecho $b_{i}$.
+La eliminación gaussiana clásica requerirá aproximadamente
+$\frac{2k^{3}}{3}$ operaciones, donde $A$ es una matriz $n\times n$,
+ya que debemos comenzar desde el principio para cada problema.
+Con el enfoque $LU$, por otro lado, el $b$ del lado derecho no entra
+en los cálculos hasta que finaliza la eliminación (la factorización
+$A=LU$).
+Al aislar los cálculos que involucran a $A$ de $b$, podemos resolver
+el conjunto anterior de ecuaciones con una sola eliminación, seguida
+de dos sustituciones hacia atrás ($Lc=b$, $Ux=c$) para cada nuevo
+$b$.
+El número aproximado de operaciones con el enfoque $LU$ es, por lo
+tanto, $\frac{2n^3}{3}+2kn^{2}$.
+Cuando $n^{2}$ es pequeño en comparación con $n^{3}$ (es decir,
+cuando $n$ es grande), esta es una diferencia significativa.
+
+\begin{theorem}
+    Si $A\in\mathbb{R}^{n\times n}$ y
+    \begin{math}
+        \forall k\in\left\{1,\dotsc,n-1\right\}:
+        \det\left(A\left(1:k,1:k\right)\right)\neq 0
+    \end{math},
+    entonces existe una única matriz triangular inferior de unos en
+    su diagonal $L\in\mathbb{R}^{n\times n}$ y una matriz triangular
+    superior $U\in\mathbb{R}^{n\times n}$ tal que $A=LU$.
+    Si este es el caso y $A$ es no singular, entonces la
+    factorización $LU$ es única y el
+    $\det\left(A\right)=u_{11}\cdots u_{nn}$
+\end{theorem}
+
+\begin{algorithm}[H]
+    \caption{Row-Oriented Generalized $AX$ Plus $Y$ $LU$}
+    \% Si $A\in\mathbb{R}^{n\times n}$ tiene la propiedad que
+    $A\left[1,\dotsc,k,1,\dotsc,k\right]$ es no singular para
+    $k\in\left\{1,\dotsc,n-1\right\}$.
+    Este algoritmo calcula la factorización $LU$ donde $L$ es una
+    matriz triangular inferior de unos en su diagonal y $U$ es una
+    matriz triangular superior.
+
+    Inicialice la matriz $L$ como la matriz identidad y $U$ como la
+    matriz de ceros.
+
+    \For{$j=1,\dotsc,n$}{
+        \For{$k=1,\dotsc,r$}{
+            $C\left[:,j\right]\longleftarrow C\left[:,j\right]+A\left[:,k\right]B\left[k,j\right]$\;
+            \eIf{$j=1$}{
+                \begin{math}
+                    v=A\left[:,1\right]
+                \end{math}
+            }{
+                \begin{math}
+                    \widetilde{a}=
+                    A\left[:,j\right]
+                \end{math}
+                \text{Resolver }$L\left[1:j-1,1:j-1\right]\cdot z=\widetilde{a}\left[1:j-1\right]$\text{ para }$z\in\mathbb{R}^{j-1}$
+                \begin{math}
+                    U\left[1:j-1,j\right]=z
+                \end{math}
+                \begin{math}
+                    v\left[j:n\right]=\widetilde{a}\left[j:n\right]-L\left[j:n,1:j-1\right]\cdot z
+                \end{math}
+            }
+            $U\left[j,j\right]\longleftarrow v\left[j\right]$
+
+            $L\left[j+1:n,j\right]\longleftarrow \frac{v\left[j+1:n\right]}{v\left[j\right]}$
+        }
+    }
+\end{algorithm}
+
+\begin{theorem}
+    Si $A$ es no singular y diagonalmente dominante por columna,
+    entonces este tiene factorización $LU$ y las entradas de
+    \begin{math}
+        L=
+        \begin{bNiceArray}{c}
+            \ell_{ij}
+        \end{bNiceArray}
+    \end{math}
+    satisface
+    \begin{math}
+        \left|\ell_{ij}\right|\leq 1
+    \end{math}.
+\end{theorem}
+
+\begin{theorem}
+    Si $A\in\mathbb{R}^{n\times n}$ es una matriz simétrica y para
+    todo $k\in\left\{1,\dotsc,n-1\right\}$ la submatriz principal
+    $A\left(1:k,1:k\right)$ es no singular, entonces existe una
+    matriz triangular inferior de unos en su diagonal y una matriz
+    diagonal
+    \begin{math}
+        D=
+        \operatorname{diag}
+        \left(d_{1},\dotsc,d_{n}\right)
+    \end{math}
+    tal que $A=LDL^{T}$.
+    La factorización es única.
+\end{theorem}
+
+\begin{algorithm}[H]
+    \caption{$LDL^{T}$}
+    \% Si $A\in\mathbb{R}^{n\times n}$ es una matriz simétrica y
+    tiene una factorización $LU$, este algoritmo calcula la matriz
+    triangular inferior de unos en su diagonal $L$ y una matriz
+    diagonal $D=\operatorname{diag}\left(d_{1},\dotsc,d_{n}\right)$
+    tal que $A=LDL^{T}$.
+    La entrada $a_{ij}$ es sobreescrita con $\ell_{ij}$ si $i>j$ y
+    $d_{i}$ si $i=j$.
+
+    \For{$j=1,\dotsc,n$}{
+        \For{$i=1,\dotsc,j-1$}{
+            \begin{math}
+                v\left[i\right]\longleftarrow
+                A\left[j,i\right]
+                A\left[i,i\right]
+            \end{math}\;
+        }
+        \begin{math}
+            A\left[j,j\right]\longleftarrow
+            A\left[j,j\right]-
+            A\left[j,1,\dotsc,j-1\right]\cdot
+            v\left[1,\dotsc,j-1\right]
+        \end{math}\;
+
+        \begin{math}
+            A\left[j+1,\dotsc,n,j\right]\longleftarrow
+            \frac{A\left[j+1,\dotsc,n,j\right]-A\left[j+1,\dotsc n,1,\dotsc,j-1\right]\cdot v\left[1,\dotsc,j-1\right]}{A\left[j,j\right]}
+        \end{math}\;
+    }
+\end{algorithm}
+
+\begin{definition}
+    Una matriz $A\in\mathbb{R}^{n\times n}$ es definida positiva (semidefinida positiva) si y solamente si
+    $\forall x\in\mathbb{R}^{n}\setminus\left\{0\right\}$ se cumple que $x^{T}Ax>0$. ($x^{T}Ax\geq 0$)
+    Decimos que $A$ es indefinida si y solamente si $\exists x,y\in\mathbb{R}^{n}$ tales que
+    \begin{math}
+        \left(x^{T}Ax\right)
+        \left(y^{T}Ay\right)<0
+    \end{math}.
+\end{definition}
+
+\begin{theorem}
+    La matriz $A\in\mathbb{R}^{n\times n}$ es definida positiva si y solamente si la matriz simétrica
+    $\frac{A+A^{T}}{2}$ tiene autovalores positivos.
+\end{theorem}
+
+\begin{theorem}
+    Si $A\in\mathbb{R}^{n\times n}$ es una matriz simétrica definida positiva,
+    entonces existe una única matriz triangular inferior $G\in\mathbb{R}^{n\times n}$
+    con entradas en su diagonal positivas tal que $A=GG^{T}$.
+\end{theorem}
+
+\begin{questions}
+    \question
+
+    Encuentra la factorización $LU$ de las matrices dadas.
+    Compruébalo mediante la multiplicación de matrices.
+
+    \begin{multicols}{3}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{cccc}
+                    1 & -1& 1 & 2 \\
+                    0 & 2 & 1 & 0 \\
+                    1 & 3 & 4 & 4 \\
+                    0 & 2 & 1 & -1
+                \end{bNiceArray}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    3 & 1 & 2 \\
+                    6 & 3 & 4 \\
+                    3 & 1 & 5
+                \end{bNiceArray}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    4 & 2 & 0 \\
+                    4 & 4 & 2 \\
+                    2 & 2 & 3
+                \end{bNiceArray}
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Resuelva el sistema encontrando la factorización $LU$ y luego
+    realizando la sustitución hacia atrás en dos pasos.
+
+    \begin{multicols}{2}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    3 & 1 & 2 \\
+                    6 & 3 & 4 \\
+                    3 & 1 & 5
+                \end{bNiceArray}
+                \begin{bNiceArray}{c}
+                    x_{1} \\
+                    x_{2} \\
+                    x_{3}
+                \end{bNiceArray}=
+                \begin{bNiceArray}{c}
+                    0 \\
+                    1 \\
+                    3
+                \end{bNiceArray}
+            \end{math}.
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    4 & 2 & 0 \\
+                    4 & 4 & 2 \\
+                    2 & 2 & 3
+                \end{bNiceArray}
+                \begin{bNiceArray}{c}
+                    x_{1} \\
+                    x_{2} \\
+                    x_{3}
+                \end{bNiceArray}=
+                \begin{bNiceArray}{c}
+                    2 \\
+                    4 \\
+                    6
+                \end{bNiceArray}
+            \end{math}.
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Resuelva la ecuación $Ax=b$, donde
+    \begin{equation*}
+        A=
+        \begin{bNiceArray}{cccc}
+            1 & 0 & 0 & 0\\
+            0 & 1 & 0 & 0 \\
+            1 & 3 & 1 & 0\\
+            4 & 1 & 2 & 1
+        \end{bNiceArray}
+        \begin{bNiceArray}{cccc}
+            2 & 1 & 0 & 0\\
+            0 & 1 & 2 & 0 \\
+            0 & 0 & -1 & 1\\
+            0 & 0 & 0 & 1
+        \end{bNiceArray}
+        \text{  y  }
+        b=
+        \begin{bNiceArray}{c}
+            1\\
+            1 \\
+            2\\
+            0
+        \end{bNiceArray}.
+    \end{equation*}
+\end{questions}
+
+\subsection{Métodos Iterativos}
+
+\begin{listing}[ht!]
+    \small
+    \centering
+    \inputminted[linenos]{octave}{sparsesetup.m}
+\end{listing}
+
+\begin{listing}[ht!]
+    \small
+    \centering
+    \inputminted[linenos]{octave}{jacobi.m}
+\end{listing}
+
+
+\begin{questions}
+    \question
+
+    Reordene las ecuaciones $-x+4y+z=2$, $x-y+3z=8$, $2x-z=4$ para que sean estrictamente
+    diagonalmente dominantes y aplique dos pasos del método de Gauss-Seidel con un valor
+    inicial $[0,0,0]$ para aproximar la solución.
+
+    \question
+
+    Calcule los dos primeros pasos de los métodos de Jacobi y de Gauss-Seidel con el vector inicial $\left[0,\dotsc,0\right]$.
+
+    \begin{multicols}{3}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{cc}
+                    3 & -1 \\
+                    -1 & 2
+                \end{bNiceArray}
+                \begin{bNiceArray}{c}
+                    u \\
+                    v
+                \end{bNiceArray}=
+                \begin{bNiceArray}{c}
+                    5 \\
+                    4
+                \end{bNiceArray}
+            \end{math}
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    2 & -1 & 0 \\
+                    -1 & 2 & -1 \\
+                    0 & -1 & 2
+                \end{bNiceArray}
+                \begin{bNiceArray}{c}
+                    u \\
+                    v \\
+                    w
+                \end{bNiceArray}=
+                \begin{bNiceArray}{c}
+                    0 \\
+                    2 \\
+                    0
+                \end{bNiceArray}
+            \end{math}
+
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    3 & 1 & 1 \\
+                    1 & 3 & 1 \\
+                    1 & 1 & 3
+                \end{bNiceArray}
+                \begin{bNiceArray}{c}
+                    u \\
+                    v \\
+                    w
+                \end{bNiceArray}=
+                \begin{bNiceArray}{c}
+                    6 \\
+                    3 \\
+                    5
+                \end{bNiceArray}
+            \end{math}
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Reordenar las ecuaciones para formar un sistema estrictamente
+    diagonalmente dominante.
+    Aplicar dos pasos de los métodos de Jacobi y Gauss-Seidel a
+    partir del vector inicial $\left[0,\dotsc,0\right]$.
+
+    \question
+
+    Utilice el método de Jacobi para resolver el sistema disperso
+    dentro de seis decimales correctas (error hacia adelante en la norma de infinito)
+    para $n=100$ y $n=100000$.
+    La solución correcta es $\left[1,\dotsc,1\right]$.
+    Informe la cantidad de pasos necesarios y el error hacia atrás.
+    El sistema es
+    \begin{equation*}
+        \begin{bNiceArray}{ccccc}
+            3 & -1 & 0 & \cdots & 0 \\
+            -1 & 3 &-1 & 0 \cdots & 0 \\
+            0 & \ddots & \ddots & \ddots & 0\\
+            0 & 0 & -1 & 3 & -1 \\
+            0 & 0 & 0 &-1 & 3
+        \end{bNiceArray}
+        \begin{bNiceArray}{c}
+            x_{1} \\
+            \vdots\\
+            \vdots \\
+            \vdots \\
+            x_{n}
+        \end{bNiceArray}=
+        \begin{bNiceArray}{c}
+            2 \\
+            1 \\
+            \vdots\\
+            1 \\
+            2
+        \end{bNiceArray}.
+    \end{equation*}
+
+    \question
+
+    Demuestre que las siguientes matrices son simétricas definidas
+    positivas expresando $x^{T}Ax$ como una suma de cuadrados.
+    \begin{multicols}{3}
+        \begin{parts}
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{ccc}
+                    1 & 0 & 0 \\
+                    0 & 2 & 0 \\
+                    0 & 0 & 3
+                \end{bNiceArray}
+            \end{math}
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{cc}
+                    1 & 3  \\
+                    3 & 10
+                \end{bNiceArray}
+            \end{math}
+
+            \part
+
+            \begin{math}
+                \begin{bNiceArray}{cc}
+                    1 & 0  \\
+                    0 & 3
+                \end{bNiceArray}
+            \end{math}
+        \end{parts}
+    \end{multicols}
+
+    \question
+
+    Demuestre que si $d>4$, la matriz
+    $A=\begin{bNiceArray}{cc}
+            1 & 2 \\
+            2& d
+        \end{bNiceArray}$
+    es definida positiva.
+\end{questions}
+
+\providecommand{\name}{Nombre}
+\vfill{Nombre}\footnote{Hecho en \LaTeX}
+\hfill{UNI, 17 de febrero de 2025}
+
+\clearpage
+
+\appendix
+
+\section{Algoritmos}
+
+Presentamos una lista de algoritmos elementales de la multiplicación
+de matrices requeridos en la resolución de sistemas de ecuaciones
+lineales.
+
+\begin{algorithm}[H]
+    \caption{Producto interno}
+    \% Si $x,y\in\mathbb{R}^{n}$, entonces el algoritmo calcula su
+    producto interno $c=x^{T}y$.
+
+    $c\longleftarrow 0$\;
+    \For{$j=1,\dotsc,n$}{
+        $c\longleftarrow c+x\left[i\right]y\left[i\right]$\;
+    }
+\end{algorithm}
+
+La operación del producto escalar es una operación
+$\mathcal{O}\left(n\right)$, lo que significa que la cantidad de
+trabajo escala linealmente con la dimensión.
+El cálculo de Single-Precision $AX$ Plus $Y$ también es
+$\mathcal{O}\left(n\right)$.
+
+\begin{algorithm}[H]
+    \caption{Single-Precision $AX$ Plus $Y$}
+    \% Si $x,y\in\mathbb{R}^{n}$, entonces este algoritmo sobrescribe
+    $y$ con $y+ax$.
+
+    \For{$j=1,\dotsc,n$}{
+        $y\left[i\right]\longleftarrow y\left[i\right]+ax\left[i\right]$\;
+    }
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Row-Oriented Generalized $AX$ Plus $Y$}
+    \% Si $A\in\mathbb{R}^{m\times n}$, $x\in\mathbb{R}^{n}$ e
+    $y\in\mathbb{R}^{m}$, entonces este algoritmo sobrescribe $y$ con
+    $Ax+y$.
+
+    \For{$i=1,\dotsc,m$}{
+        \For{$j=1,\dotsc,n$}{
+            $y\left[i\right]\longleftarrow y\left[i\right]+A\left[i,j\right]x\left[i\right]$\;
+        }
+    }
+\end{algorithm}
+
+Tenga en cuenta que esto implica $\mathcal{O}\left(mn\right)$
+trabajo.
+
+\begin{algorithm}[H]
+    \caption{Column-Oriented Generalized $AX$ Plus $Y$}
+    \% Si $A\in\mathbb{R}^{m\times n}$, $x\in\mathbb{R}^{n}$ e
+    $y\in\mathbb{R}^{m}$, entonces este algoritmo sobrescribe $y$ con
+    $Ax+y$.
+
+    \For{$j=1,\dotsc,m$}{
+        \For{$i=1,\dotsc,n$}{
+            $y\left[i\right]\longleftarrow y\left[i\right]+A\left[i,j\right]x\left[i\right]$\;
+        }
+    }
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Actualización producto exterior}
+    \% Si $A\in\mathbb{R}^{m\times n}$, $x\in\mathbb{R}^{m}$ e
+    $y\in\mathbb{R}^{n}$, entonces este algoritmo sobrescribe $y$ con
+    $Ax+y$.
+
+    \For{$i=1,\dotsc,m$}{
+        \For{$j=1,\dotsc,n$}{
+            $A\left[i,j\right]\longleftarrow A\left[i,j\right]+x\left[i\right]y\left[j\right]$\;
+        }
+    }
+\end{algorithm}
+
+Esto implica $\mathcal{O}\left(mn\right)$ operaciones aritméticas.
+
+\begin{algorithm}[H]
+    \caption{Multiplicación de matrices $ijk$}
+    \% Si $A\in\mathbb{R}^{m\times r}$, $B\in\mathbb{R}^{r\times n}$
+    y $C\in\mathbb{R}^{m\times n}$, entonces este algoritmo
+    sobrescribe $C$ con $C+AB$.
+
+    \For{$i=1,\dotsc,m$}{
+        \For{$j=1,\dotsc,n$}{
+            \For{$k=1,\dotsc,r$}{
+                $C\left[i,j\right]\longleftarrow C\left[i,j\right]+A\left[i,k\right]B\left[k,j\right]$\;
+            }
+        }
+    }
+\end{algorithm}
+
+Este cálculo implica aritmética $\mathcal{O}\left(mnr\right)$.
+
+\begin{algorithm}[H]
+    \caption{Multiplicación de matrices producto interno}
+    \% Si $A\in\mathbb{R}^{m\times r}$, $B\in\mathbb{R}^{r\times n}$
+    y $C\in\mathbb{R}^{m\times n}$, entonces este algoritmo
+    sobrescribe $C$ con $C+AB$.
+
+    \For{$i=1,\dotsc,m$}{
+        \For{$j=1,\dotsc,n$}{
+            $C\left[i,j\right]\longleftarrow C\left[i,j\right]+A\left[i,:\right]B\left[:,j\right]$\;
+        }
+    }
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Multiplicación de matrices Saxpy}
+    \% Si $A\in\mathbb{R}^{m\times r}$, $B\in\mathbb{R}^{r\times n}$
+    y $C\in\mathbb{R}^{m\times n}$, entonces este algoritmo
+    sobrescribe $C$ con $C+AB$.
+
+    \For{$j=1,\dotsc,m$}{
+        \For{$k=1,\dotsc,r$}{
+            $C\left[:,j\right]\longleftarrow C\left[:,j\right]+A\left[:,k\right]B\left[k,j\right]$\;
+        }
+    }
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Producto exterior $ijk$}
+    \% Si $A\in\mathbb{R}^{m\times r}$, $B\in\mathbb{R}^{r\times n}$
+    y $C\in\mathbb{R}^{m\times n}$, entonces este algoritmo
+    sobrescribe $C$ con $C+AB$.
+
+    \For{$k=1,\dotsc,r$}{
+        \For{$j=1,\dotsc,n$}{
+            \For{$i=1,\dotsc,m$}{
+                $C\left[i,j\right]\longleftarrow C\left[i,j\right]+A\left[i,k\right]B\left[k,j\right]$\;
+            }
+        }
+    }
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Multiplicación de matrices triangulares}
+    \% Si $A,B,C\in\mathbb{R}^{n\times n}$ son matrices triangulares,
+    entonces este algoritmo sobrescribe $C$ con $C+AB$.
+
+    \For{$k=1,\dotsc,n$}{
+        \For{$j=1,\dotsc,n$}{
+            \For{$k=i,\dotsc,j$}{
+                $C\left[i,j\right]\longleftarrow C\left[i,j\right]+A\left[i,k\right]B\left[k,j\right]$\;
+            }
+        }
+    }
+\end{algorithm}
+
+\end{document}
