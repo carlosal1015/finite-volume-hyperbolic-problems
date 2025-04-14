@@ -1,0 +1,172 @@
+% !TeX document-id = {4a66a092-a797-425f-b588-c0b0f6bcb4d3}
+% !TeX TXS-program:compile = txs:///lualatex/[--shell-escape] | txs:///bibtex | txs:///lualatex/[--shell-escape] | txs:///makeindex | txs:///lualatex/[--shell-escape] | txs:///lualatex/[--shell-escape] | txs:///view
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'blg', 'idx', 'ilg', 'ind',
+% arara: --> 'log', 'out', 'pdf', 'synctex.gz', 'toc']
+% arara: --> }
+% arara: lualatex
+% arara: bibtex
+% arara: lualatex
+% arara: makeindex
+% arara: lualatex
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> synctex: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'blg', 'idx', 'ilg', 'ind',
+% arara: --> 'log', 'out', 'synctex.gz', 'toc']
+% arara: --> }
+\RequirePackage{fix-cm}
+\documentclass[graybox,envcountchap,sectrefs,a4paper]{svmono}
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+\usepackage{newtxtext}       % 
+\usepackage[varvw]{newtxmath}       % selects Times Roman as basic font
+
+% see the list of further useful packages
+% in the Reference Guide
+
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with
+                       % your makeindex program
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\date{5 de Mayo de 2025}
+
+\usepackage[svgnames]{xcolor}
+\usepackage{academicons}
+\usepackage[fixed]{fontawesome5}
+\usepackage{diffcoeff}
+
+% https://tex.stackexchange.com/a/556802/117967
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+% https://tex.stackexchange.com/q/637200
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\newcommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
+\definecolor{orcidcolor}{HTML}{a5ca3f}
+\definecolor{orcidlinkcolor}{HTML}{0961ba}
+
+\usepackage{hyperref}
+\hypersetup{
+	pdfencoding=auto,
+	linktocpage=true,
+	colorlinks=true,
+	linkcolor=DarkBlue,
+    citecolor=DarkBlue,
+	urlcolor=orcidlinkcolor,
+	pdfpagelabels,
+	pdftex,
+	pdfauthor={Carlos Aznarán Laos},
+	pdftitle={El Método de Volúmenes Finitos},
+	pdfsubject={Proyecto de Tesis II},
+	pdfkeywords={fvm, pde},
+	pdfproducer={LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)},
+	% bookmark=false
+}
+\begin{document}
+
+\author{Carlos Aznarán Laos}
+\title{El Método de Volúmenes Finitos}
+\subtitle{Proyecto de Tesis II presentado a la \\
+    Universidad Nacional de Ingeniería, \\
+    Lima, Perú}
+\maketitle
+
+\clearpage
+\thispagestyle{empty}
+
+\begin{minipage}[t]{0.5\textwidth}
+    \textit{Autor} \\
+    Carlos Aznarán Laos~\href{https://orcid.org/0000-0001-8314-2271}{\textcolor{orcidcolor}{\aiOrcid}} \\
+    Facultad de Ciencias \\
+    Universidad Nacional de Ingeniería \\
+    Av. Túpac Amaru N$^{\circ}210$ Rímac \\
+    Lima 15032, República del Perú \\
+    \textcolor{black}{\faIcon{inbox}}
+    \href{mailto:caznaranl@uni.pe}{\texttt{caznaranl\MVAt uni.pe}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\textwidth}
+    \textit{Supervisor} \\
+    Fidel Jara Huanca~\href{https://orcid.org/0009-0000-1884-1949}{\textcolor{orcidcolor}{\aiOrcid}} \\
+    Profesor de la Facultad de Ciencias \\
+    Universidad Nacional de Ingeniería \\
+    Av. Túpac Amaru N$^{\circ}210$ Rímac \\
+    Lima 15032, República del Perú \\
+    \textcolor{black}{\faIcon{inbox}}
+    \href{mailto:fjarah@uni.edu.pe}{\texttt{fjarah\MVAt uni.edu.pe}}
+\end{minipage}
+
+\vfill
+
+% \noindent
+% ISSN 2190-5053 \hfill e-ISSN 2190-5061 \\
+% ISBN 978-1-4419-7600-0 \hfill e-ISBN 978-1-4419-7601-7 \\
+% DOI \href{https://www.doi.org/10.1007/978-1-4419-7601-7}{10.1007/978-1-4419-7601-7}
+
+% \vspace{1cm}
+
+\noindent
+\includegraphics[width=.25\textwidth]{CC-BY-NC-SA-4.0} \\
+Reconocimiento - No Comercial - Compartir Igual - Sin restricciones adicionales \\
+\url{https://creativecommons.org/licenses/by-nc-sa/4.0} \\
+
+\noindent
+Usted puede copiar, redistribuir y adaptar este material en cualquier
+formato o medio, así como crear obras derivadas a partir de él,
+siempre que:
+
+\begin{itemize}
+    \item
+
+          Reconozca adecuadamente la autoría original, incluyendo un
+          enlace a la licencia e indicando si se realizaron
+          modificaciones.
+
+    \item
+
+          No lo utilice con fines comerciales.
+
+    \item
+
+          Comparta cualquier obra derivada bajo la misma licencia.
+
+    \item
+
+          No añada restricciones adicionales que limiten los derechos
+          otorgados por esta \linebreak licencia.
+\end{itemize}
+
+\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{dedication}
+\include{foreword}
+\include{preface}
+\include{acknowledgement}
+% \include{ethics}
+
+\tableofcontents
+
+\include{acronym}
+
+
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \include{part}
+\include{chapter}
+\include{appendix}
+
+\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{glossary}
+\include{solutions}
+\printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
