@@ -10,6 +10,7 @@ on:
       - slides/**
       - syllabus/**
       - template/**
+      - monograph/**
 
 jobs:
   build_latex:
@@ -64,6 +65,9 @@ jobs:
             pushd /work/template
             arara amsart-template
             popd
+            pushd /work/monograph
+            arara book
+            popd
             mkdir -p /work/public
             mv /work/exercises/exercises.pdf /work/public
             mv /work/quizes/entrance*.pdf /work/public
@@ -71,6 +75,7 @@ jobs:
             mv /work/slides/presentation.pdf /work/public
             mv /work/syllabus/syllabus.pdf /work/public
             mv /work/template/amsart-template.pdf /work/public
+            mv /work/monograph/book.pdf /work/public
 
       - name: "Tar files"
         run: |
