@@ -21,28 +21,25 @@
 % arara: --> 'log', 'out', 'synctex.gz', 'toc']
 % arara: --> }
 \RequirePackage{fix-cm}
-\documentclass[graybox,envcountchap,sectrefs,a4paper]{svmono}
+\documentclass[graybox,envcountchap,sectrefs,a4paper,intlimits]{svmono}
 \usepackage{makeidx}         % allows index generation
 \usepackage{graphicx}        % standard LaTeX graphics tool
                              % when including figure files
 \usepackage{multicol}        % used for the two-column index
 \usepackage[bottom]{footmisc}% places footnotes at page bottom
-\usepackage{newtxtext}       % 
-\usepackage[varvw]{newtxmath}       % selects Times Roman as basic font
-
-% see the list of further useful packages
-% in the Reference Guide
+\usepackage{newtxtext}       %
+\usepackage[varvw]{newtxmath}% selects Times Roman as basic font
 
 \makeindex             % used for the subject index
                        % please use the style svind.ist with
                        % your makeindex program
-\date{5 de Mayo de 2025}
+\date{5 de mayo de 2025}
 
 \usepackage[svgnames]{xcolor}
 \usepackage{academicons}
 \usepackage[fixed]{fontawesome5}
 \usepackage{diffcoeff}
-
+\usepackage{bm}
 % https://tex.stackexchange.com/a/556802/117967
 \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
 % https://tex.stackexchange.com/q/637200

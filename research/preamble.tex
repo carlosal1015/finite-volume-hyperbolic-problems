@@ -1,0 +1,44 @@
+\documentclass{scrartcl}
+
+% \DefCurrentAudience{english}
+% \DefCurrentAudience{spanish}
+% \usepackage{multiaudience}
+\usepackage[svgnames]{xcolor}
+\usepackage{unicode-math}
+\usepackage{mathtools}
+\usepackage{diffcoeff}
+\usepackage{academicons}
+\usepackage[fixed]{fontawesome5}
+% \usepackage[spanish]{babel}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{references.bib}
+\usepackage{hyperref}
+
+\title{Study of a Two-Phase Fluid Model in Fractured Porous Media}
+
+\author{\normalfont\normalsize\scshape
+	Carlos Aznarán\thanks{
+		Facultad de Ciencias, Universidad Nacional de Ingeniería \\
+		Av. Tupac Amaru, s/n, Lima, Peru \\
+		\textcolor{black}{\faIcon{inbox}}
+		\href{mailto:caznaranl@uni.pe}{\texttt{caznaranl\MVAt uni.pe}}
+	}~\href{https://orcid.org/0000-0001-8314-2271}{\textcolor{orcidcolor}{\aiOrcid}}
+	\and\normalfont\normalsize\scshape
+	Fidel Jara\thanks{
+		Instituto de Matemática y Ciencias Afines, Universidad Nacional de Ingeniería \\
+		Calle los Biológos 245, Lima 15012, Peru \\
+		\textcolor{black}{\faIcon{inbox}}
+		\href{mailto:fjarah@uni.edu.pe}{\texttt{fjarah\MVAt uni.edu.pe}}
+	}~\href{https://orcid.org/0009-0000-1884-1949}{\textcolor{orcidcolor}{\aiOrcid}}
+}
+
+\publishers{}
+\date{\today}
+
+\newcommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
+\definecolor{orcidcolor}{HTML}{a5ca3f}
+\definecolor{orcidlinkcolor}{HTML}{0961ba}

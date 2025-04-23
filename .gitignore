@@ -170,7 +170,7 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 *.pdf
-_minted-*
+**/_minted*
 letter
 output*
 *.xlsx

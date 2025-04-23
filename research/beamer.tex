@@ -1,0 +1,886 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'pdf', 'run.xml', 'snm', 'toc', 'vrb']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'run.xml', 'snm', 'toc', 'vrb']
+% arara: --> }
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[
+    8pt,
+    aspectratio=1610,
+    c,
+    intlimits,
+    leqno,
+    professionalfonts,
+]{beamer}
+
+\usepackage{diffcoeff}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{newunicodechar}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{beamer.bib}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{items}[ball]
+
+\hypersetup{
+	pdfencoding=auto,
+	linktocpage=true,
+	colorlinks=true,
+	linkcolor=DarkBlue,
+	urlcolor=DarkBlue,
+	pdfpagelabels,
+}
+
+\renewcommand\theequation{{\color{DarkBlue}\arabic{equation}}}
+\newunicodechar{ₒ}{\makebox[\fontcharwd\font`a]{${}_{\text{o}}$}}
+\newunicodechar{₁}{\makebox[\fontcharwd\font`a]{${}_{\text{1}}$}}
+\newunicodechar{₂}{\makebox[\fontcharwd\font`a]{${}_{\text{2}}$}}
+\newunicodechar{₃}{\makebox[\fontcharwd\font`a]{${}_{\text{3}}$}}
+\newunicodechar{⋅}{\makebox[\fontcharwd\font`a]{$\cdot$}}
+\newunicodechar{ψ}{\makebox[\fontcharwd\font`a]{$\Phi$}}
+\newunicodechar{θ}{\makebox[\fontcharwd\font`a]{$\theta$}}
+\newunicodechar{β}{\makebox[\fontcharwd\font`a]{$\beta$}}
+\newunicodechar{∂}{\makebox[\fontcharwd\font`a]{$\partial$}}
+\newunicodechar{ξ}{\makebox[\fontcharwd\font`a]{$\xi$}}
+\newunicodechar{─}{\makebox[\fontcharwd\font`a]{$-$}}
+
+\title{Travelling wave solution for a simple in situ combustion model}
+\subtitle{}
+\author{}
+\institute{}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\section{Mathematical model}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{block}{Two-Phase Flow model with combustion~\cite{Gargar2020}}
+		\begin{align}
+			C_{\text{m}}
+			\diffp{T}{t}+
+			\diffp{
+				\big[
+					c_{\text{o}}
+					\rho_{\text{o}}
+					S_{\text{o}}
+					u_{\text{o}}
+					\big(
+					T-T_{\text{res}}
+					\big)
+					\big]
+			}{x}                                                          & =
+			\rho_{\text{o}}
+			Q_{\text{r}}
+			Y
+			S_{\text{g}}
+			S_{\text{o}}
+			W_{\text{r}}-
+			\alpha
+			\left(T-T_{\text{res}}\right).                                    \\
+			\varphi
+			\diffp{\big(YS_{\text{g}}\rho_{\text{g}}\big)}{t}+
+			\diffp{\big(YS_{\text{g}}\rho_{\text{g}}u_{\text{g}}\big)}{x} & =
+			-w\varphi\rho_{\text{o}}YS_{\text{g}}S_{\text{o}}W_{\text{r}}.    \\
+			\varphi
+			\diffp{\big(\rho_{\text{o}}S_{\text{o}}\big)}{t}+
+			\diffp{\big(\rho_{\text{o}}S_{\text{o}}u_{\text{o}}\big)}{x}
+			                                                              & =
+			-\varphi\rho_{\text{o}}YS_{\text{g}}S_{\text{o}}W_{\text{r}}.     \\
+			W_{\text{r}}                                                  & =
+			k_{p}
+			\exp
+			\left(
+			-\frac{E_{r}}{RT}
+			\right).
+		\end{align}
+		where
+		\begin{columns}
+			\begin{column}{.3\paperwidth}
+				\begin{itemize}
+					\item
+
+					      $T$ is the temperature.
+
+					\item
+
+					      $Y$ is the oxygen fraction.
+
+					\item
+
+					      $\rho_{\text{o}}$ is the oil density.
+
+					\item
+
+					      $u_{\text{g}}$ is the gas velocity.
+
+					\item
+
+					      $\varphi$ is the porosity.
+
+					\item
+
+					      $E_{r}$ is the activation energy.
+
+					      % \item
+
+					      %       $\alpha$ is the heat loss coefficient.
+				\end{itemize}
+			\end{column}
+			\begin{column}{.3\paperwidth}
+				\begin{itemize}
+					\item
+
+					      $S_{\text{o}}$ is the oil saturation.
+
+					\item
+
+					      $C_{\text{m}}$ is the heat capacity.
+
+					\item
+
+					      $\rho_{\text{g}}$ is the gas density.
+
+					\item
+
+					      $T_{\text{res}}$ is the reservoir temperature.
+
+					\item
+
+					      $\omega$ is the stoichiometric coefficient.
+
+					\item
+
+					      $R$ is the universal gas constant.
+				\end{itemize}
+			\end{column}
+			\begin{column}{.3\paperwidth}
+				\begin{itemize}
+					\item
+
+					      $S_{\text{g}}$ is the gas saturation.
+
+					\item
+
+
+					      $c_{\text{o}}$ is the oil molar heat capacity.
+
+
+					\item
+
+					      $u_{\text{o}}$ is the oil velocity.
+
+					\item
+
+					      $Q_{\text{r}}$ is the reaction heat.
+
+					\item
+
+					      $W_{\text{r}}$ is the reaction rate.
+
+					\item
+
+					      $k_{p}$ is pre-exponential coefficient.
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\section{Dimensionless model}
+
+\begin{frame}
+	\frametitle{\secname}
+	By change of variables,
+	\begin{equation}
+		\overline{t}=
+		tk_{p},\quad
+		\overline{x}=
+		\frac{T_{\text{res}}k_{p}x}{\rho_{\text{g}}u},\quad
+		\overline{\theta}=
+		\frac{T-T_{\text{res}}}{T_{\text{res}}}.
+	\end{equation}
+	Now, omitting bars we have.
+
+	\begin{block}{PDE system with initial and boundary
+			conditions~\cite{Quispe2020}}
+
+		Let $\theta\left(x,t\right)$ the \alert{temperature},
+		$S_{y}\left(x,t\right)$ the \alert{oxygen saturation} and
+		$S_{\text{o}}\left(x,t\right)$ the \alert{oil saturation}.
+		\begin{align}
+			\diffp{\theta}{t}+
+			a_{1}
+			\diffp{
+				\big(
+				\theta
+				S_{\text{o}}
+				\big)
+			}{x}                    & =
+			b_{1}
+			S_{\text{o}}
+			S_{y}
+			\Phi-
+			\beta\theta.
+			\label{eq:6}                \\
+			\diffp{S_{y}}{t}+
+			a_{2}
+			\diffp{S_{y}}{x}        & =
+			-b_{2}
+			S_{\text{o}}
+			S_{y}
+			\Phi.
+			\label{eq:7}                \\
+			\diffp{S_{\text{o}}}{t}+
+			a_{3}
+			\diffp{S_{\text{o}}}{x} & =
+			-b_{3}
+			S_{\text{o}}
+			S_{y}
+			\Phi.
+			\label{eq:8}                \\
+			S_{\text{o}}
+			S_{y}
+			\Phi                    & =
+			0.
+			\tag{Initial Condition}
+		\end{align}
+		where
+		\begin{equation}
+			a_{1}=
+			\frac{
+			t^{\ast}
+			u_{\text{o}}
+			c_{\text{o}}
+			\rho_{\text{o}}
+			}{C_{\text{m}}x^{\ast}},\quad
+			a_{2}=
+			\frac{t^{\ast}u_{\text{g}}}{\varphi x^{\ast}},\quad
+			a_{3}=
+			\frac{t^{\ast}u_{\text{o}}}{\varphi x^{\ast}},\quad
+			b_{1}=
+			\frac{
+				\rho_{\text{o}}
+				Q_{\text{r}}
+			}{
+				C_{\text{m}}
+				T_{\text{res}}
+			},\quad
+			b_{2}=
+			\frac{w\rho_{\text{o}}}{\rho_{\text{g}}},\quad
+			b_{3}=
+			1,\quad
+			\beta=
+			\frac{\alpha}{k_{p}C_{\text{m}}}
+		\end{equation}
+		are the dimensionless coefficients.
+		\setcounter{equation}{12}
+		\begin{equation}
+			\big(
+			\theta^{L},
+			S^{L}_{y},
+			S^{L}_{\text{o}}
+			\big)=
+			\big(
+			0,
+			S^{L}_{y},
+			0
+			\big)
+			\text{ and }
+			\big(
+			\theta^{R},
+			S^{R}_{y},
+			S^{R}_{\text{o}}
+			\big)                           =
+			\big(
+			0,
+			0,
+			S^{R}_{\text{o}}
+			\big).
+			\label{eq:13}
+		\end{equation}
+	\end{block}
+\end{frame}
+
+\section{Travelling wave analysis}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	Rewrite the equations~\eqref{eq:6},\eqref{eq:7} and~\eqref{eq:8},
+	via the \alert{travelling wave substitution}
+	\begin{math}
+		\left(x,t\right)\leftarrow
+		\left(\xi,t\right)
+	\end{math},
+	$\xi=x-ct$ with $c>0$.
+	\setcounter{equation}{14}
+	\begin{align}
+		-c
+		\diff{\theta}{\xi}+
+		a_{1}
+		\diff{
+			\big(
+			\theta
+			S_{\text{o}}
+			\big)
+		}{\xi}                   & =
+		b_{1}
+		S_{\text{o}}
+		S_{y}
+		\Phi-
+		\beta\theta.
+		\label{eq:15}                   \\
+		-c
+		\diff{S_{y}}{\xi}+
+		a_{2}
+		\diff{S_{y}}{\xi}        & =
+		-b_{2}
+		S_{\text{o}}
+		S_{y}
+		\Phi.
+		\label{eq:16}                   \\
+		-c
+		\diff{S_{\text{o}}}{\xi}+
+		a_{3}
+		\diff{S_{\text{o}}}{\xi} & =
+		-b_{3}
+		S_{\text{o}}
+		S_{y}
+		\Phi.
+		\label{eq:17}
+		\shortintertext{Replace~\eqref{eq:16} in~\eqref{eq:17}.}
+		\frac{b_{3}}{b_{2}}
+		\left(
+		\textcolor{DarkBlue}{
+			-c
+			\diff{S_{y}}{\xi}+
+			a_{2}
+			\diff{S_{y}}{\xi}
+		}
+		\right)                  & =
+		-c\diff{S_{\text{o}}}{\xi}+
+		a_{3}
+		\diff{S_{\text{o}}}{\xi}.\notag \\
+		-c
+		\frac{b_{3}}{b_{2}}
+		\int
+		\diff{S_{y}}{\xi}
+		\dl\xi+
+		a_{2}
+		\frac{b_{3}}{b_{2}}
+		\int
+		\diff{S_{y}}{\xi}
+		\dl\xi                   & =
+		-c
+		\int
+		\diff{S_{\text{o}}}{\xi}
+		\dl\xi+
+		a_{3}
+		\int
+		\diff{S_{\text{o}}}{\xi}
+		\dl\xi.
+		\notag                          \\
+		-c
+		\frac{b_{3}}{b_{2}}
+		S_{y}+
+		a_{2}
+		\frac{b_{3}}{b_{2}}
+		S_{y}                    & =
+		-c
+		S_{\text{o}}+
+		a_{3}
+		S_{\text{o}}+
+		K.\notag
+		\shortintertext{Multiply both sides by $b_{2}$.}
+		b_{2}
+		\left(
+		c-a_{3}
+		\right)
+		S_{\text{o}}-
+		b_{3}
+		\left(
+		c-
+		a_{2}
+		\right)
+		S_{y}                    & =
+		K.\label{eq:18}
+		\shortintertext{Take the limits $\xi\to\pm\infty$
+			in~\eqref{eq:18}.}
+		\lim_{\xi\to-\infty}
+		\left[
+			b_{2}
+			\left(
+			c-a_{3}
+			\right)
+			S_{\text{o}}-
+			b_{3}
+			\left(
+			c-
+			a_{2}
+			\right)
+			S_{y}
+		\right]                  & =
+		\lim_{\xi\to\infty}
+		K=
+		\lim_{\xi\to\infty}
+		\left[
+			b_{2}
+			\left(
+			c-a_{3}
+			\right)
+			S_{\text{o}}-
+			b_{3}
+			\left(
+			c-
+			a_{2}
+			\right)
+			S_{y}
+		\right].\notag                  \\
+		b_{2}
+		\left(
+		c-a_{3}
+		\right)
+		S^{L}_{\text{o}}-
+		b_{3}
+		\left(
+		c-
+		a_{2}
+		\right)
+		S^{L}_{y}                & =
+		K=
+		b_{2}
+		\left(
+		c-a_{3}
+		\right)
+		S^{R}_{\text{o}}-
+		b_{3}
+		\left(
+		c-
+		a_{2}
+		\right)
+		S^{R}_{y}.\label{eq:19}
+	\end{align}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{align}
+		\shortintertext{Substitute the BC $S^{L}_{\text{o}}=0$ and
+			$S^{R}_{y}=0$ from~\eqref{eq:13} and solve~\eqref{eq:19}
+			respect to $c$ and $S^{L}_{y}$, respectively.}
+		c                        & =
+		\frac{
+			a_{2}
+			b_{3}
+			S^{L}_{y}+
+			a_{3}
+			b_{2}
+			S^{R}_{\text{o}}
+		}{
+			b_{2}
+			S^{R}_{\text{o}}+
+			b_{3}
+			S^{L}_{y}
+		}.                           \\
+		S^{L}_{y}                & =
+		-\frac{b_{2}\left(c-a_{3}\right)}{b_{3}\left(c-a_{2}\right)}
+		S^{R}_{\text{o}}.
+		\shortintertext{If $S^{L}_{\text{o}}=0$, \eqref{eq:19} results
+		$\textcolor{DarkBlue}{-b_{3}\left(c-a_{2}\right)S^{L}_{y}}=K$ and
+		replace it in~\eqref{eq:18}.}
+		b_{2}
+		\left(
+		c-a_{3}
+		\right)
+		S_{\text{o}}-
+		b_{3}
+		\left(
+		c-
+		a_{2}
+		\right)
+		S_{y}                    & =
+		\textcolor{DarkBlue}{-b_{3}\left(c-a_{2}\right)S^{L}_{y}}.
+		\notag
+		\shortintertext{Solve respect to $S_{y}$.}
+		S_{y}                    & =
+		S^{L}_{y}+
+		\frac{b_{2}\left(c-a_{3}\right)}{b_{3}\left(c-a_{2}\right)}
+		S_{\text{o}}.\label{eq:22}
+		\shortintertext{Solve~\eqref{eq:17} respect to
+			$\diff{S_{\text{o}}}{\xi}$.}
+		\diff{S_{\text{o}}}{\xi} & =
+		\frac{
+		b_{3}
+		S_{\text{o}}
+		S_{y}
+		\Phi
+		}{c-a_{3}}.\label{eq:23}
+	\end{align}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{align}
+		\shortintertext{From $\textcolor{DarkBlue}{b_{2}}\times\eqref{eq:15}+\textcolor{DarkBlue}{b_{1}}\times\eqref{eq:16}$.}
+		\textcolor{DarkBlue}{b_{2}}
+		\left[
+			-c
+			\diff{\theta}{\xi}+
+			a_{1}
+			\textcolor{DarkBlue}{\diff{\big(\theta S_{\text{o}}\big)}{\xi}}
+			\right]+
+		\textcolor{DarkBlue}{b_{1}}
+		\left[
+			-c
+			\diff{S_{y}}{\xi}+
+			a_{2}
+			\diff{S_{y}}{\xi}
+		\right]           & =
+		\textcolor{DarkBlue}{b_{2}}
+		\left[
+			b_{1}
+			S_{\text{o}}
+			S_{y}
+			\Phi-
+			\beta\theta
+			\right]+
+		\textcolor{DarkBlue}{b_{1}}
+		\left[
+		-b_{2}
+		S_{\text{o}}
+		S_{y}
+		\Phi
+		\right].\notag           \\
+		-b_{2}c
+		\diff{\theta}{\xi}+
+		b_{2}a_{1}
+		\textcolor{DarkBlue}{
+			\left(
+			\theta
+			\diff{S_{\text{o}}}{\xi}+
+			S_{\text{o}}
+			\diff{\theta}{\xi}
+			\right)
+		}-
+		b_{1}c
+		\diff{S_{y}}{\xi}+
+		b_{1}a_{2}
+		\diff{S_{y}}{\xi} & =
+		-b_{2}\beta\theta.\notag \\
+		-b_{2}
+		\left(c-a_{1}S_{\text{o}}\right)
+		\alert{\diff{\theta}{\xi}}+
+		b_{2}a_{1}
+		\theta
+		\diff{S_{\text{o}}}{\xi}-
+		b_{1}
+		\left(c-a_{2}\right)
+		\diff{S_{y}}{\xi} & =
+		-b_{2}
+		\beta
+		\theta.
+		\notag                   \\
+		\shortintertext{Solve respect to $\alert{\diff{\theta}{\xi}}$.}
+		\setcounter{equation}{25}
+		\frac{
+		b_{1}\left(c-a_{2}\right)
+		\textcolor{DarkBlue}{\diff{S_{y}}{\xi}}-
+		b_{2}a_{1}\theta
+		\diff{S_{\text{o}}}{\xi}
+		-b_{2}\beta\theta
+		}{-b_{2}
+		\left(c-a_{1}S_{\text{o}}\right)
+		}                 & =
+		\alert{\diff{\theta}{\xi}}.\label{eq:26}
+		\shortintertext{Replace~\eqref{eq:22} in~\eqref{eq:26}.}
+		\frac{
+		b_{1}\left(c-a_{2}\right)
+		\textcolor{DarkBlue}{
+			\frac{b_{2}\left(c-a_{3}\right)}{b_{3}\left(c-a_{2}\right)}
+			\diff{S_{\text{o}}}{\xi}
+		}-
+		b_{2}a_{1}\theta
+		\diff{S_{\text{o}}}{\xi}
+		-b_{2}\beta\theta
+		}{
+		-b_{2}
+		\left(c-a_{1}S_{\text{o}}\right)
+		}                 & =
+		\diff{\theta}{\xi}.
+		\shortintertext{If $c\neq a_{2}$ and cancel $b_{2}$, then}
+		\setcounter{equation}{28}
+		\frac{
+		\left[
+			\frac{b_{1}}{b_{3}}
+			\left(c-a_{3}\right)
+			a_{1}\theta
+			\right]
+		\textcolor{DarkBlue}{\diff{S_{\text{o}}}{\xi}}
+		-\beta\theta
+		}{
+		a_{1}S_{\text{o}}-c
+		}                 & =
+		\diff{\theta}{\xi}.
+		\label{eq:29}
+	\end{align}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{align}
+		\shortintertext{Multiply~\eqref{eq:29} LHS by
+			$\frac{b_{3}}{b_{3}}$ and replace~\eqref{eq:23}.}
+		\frac{
+		\left[
+			b_{1}
+			\left(c-a_{3}\right)
+			a_{1}\theta
+			\right]
+		\textcolor{DarkBlue}{
+		\frac{
+		b_{3}
+		S_{\text{o}}
+		S_{y}
+		\Phi
+		}{c-a_{3}}
+		}
+		-b_{3}\beta\theta
+		}{
+		b_{3}
+		\left(
+		a_{1}S_{\text{o}}-c
+		\right)
+		}                       & =
+		\diff{\theta}{\xi}.\notag   \\
+		\setcounter{equation}{33}
+		\Phi\left(\theta\right) & =
+		\exp
+		\left(
+		-\frac{E_{r}}{
+			RT_{\text{res}}\left(\theta+1\right)
+		}
+		\right).                    \\
+		S_{y}                   & =
+		S^{L}_{y}+
+		\frac{b_{2}\left(c-a_{3}\right)}{b_{3}\left(c-a_{2}\right)}
+		S_{\text{o}}=
+		\left(
+		S^{R}_{\text{o}}-
+		S_{\text{o}}
+		\right)
+		\frac{S^{L}_{y}}{S^{R}_{\text{o}}}.
+		\label{eq:35}               \\
+		\diff{\theta}{\xi}
+		                        & =
+		\frac{
+			\beta\theta
+			\left(c-a_{3}\right)+
+			\left[
+				a_{1}
+				b_{3}
+				\theta-
+				b_{1}
+				\left(c-a_{3}\right)
+				\right]
+			S_{\text{o}}
+			S_{y}
+			\Phi}{
+			\left(c-a_{1}S_{\text{o}}\right)
+			\left(c-a_{3}\right)
+		}.\label{eq:36}
+	\end{align}
+\end{frame}
+
+\section{Relation $f\left(\theta\right)$, $f\left(S_{y}\right)$ and
+  $f\left(S_{\text{o}}\right)$}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{block}{$f\left(\theta\right)$,
+			$f\left(S_{y}\right)$ and $f\left(S_{\text{o}}\right)$}
+
+		Setting~$\eqref{eq:36}=0$, ~$\eqref{eq:22}=0$
+		and~$\eqref{eq:23}=0$.
+		\begin{align*}
+			\diff{\theta}{\xi}=
+			0
+			 & =
+			\frac{
+				\beta\theta
+				\left(c-a_{3}\right)+
+				\left[
+					a_{1}
+					b_{3}
+					\theta-
+					b_{1}
+					\left(c-a_{3}\right)
+					\right]
+				S_{\text{o}}
+				S_{y}
+				\Phi}{
+				\left(c-a_{1}S_{\text{o}}\right)
+				\left(c-a_{3}\right)
+			}.
+			% 	f\left(\theta\right)       & =
+			% 	0.                             \\
+			% 	f\left(S_{y}\right)        & =
+			% 	0.                             \\
+			% 	f\left(S_{\text{o}}\right) & =
+			% 	0.                             \\
+			% 	\jacob{u,v,w}{x,y,z}       & =
+			% 	0.
+		\end{align*}
+
+		\begin{equation*}
+			f\left(\theta\right)\coloneqq
+			\frac{
+				\beta\theta\left(c-a_{3}\right)}{
+				-\left[
+					a_{1}
+					b_{3}
+					\theta-
+					b_{1}
+					\left(c-a_{3}\right)
+					\right]
+				\Phi
+			}
+			\frac{S^{R}_{\text{o}}}{S^{L}_{y}}.
+		\end{equation*}
+
+		\begin{align*}
+			\Gamma_{1} & =
+			\left\{
+			\left(S_{\text{o}},\theta\right)\mid
+			S_{\text{o}}
+			S_{y}=
+			f\left(\theta\right),\theta\geq0
+			\right\}.      \\
+			\Gamma_{1} & =
+			\left\{
+			\left(S_{\text{o}},\theta\right)\mid
+			S_{\text{o}}
+			\left(
+			S^{R}_{\text{o}}-
+			S_{\text{o}}
+			\right)=
+			f\left(\theta\right),\theta\geq0
+			\right\}.
+			% \Gamma_{2} & =
+			% \left\{
+			% \left(S_{\text{o}},\theta\right)\mid
+			% \text{expresion }2=
+			% f\left(S_{\text{o}}\right),\theta\geq0
+			% \right\}.      \\
+			% \Gamma_{3} & =
+			% \left\{
+			% \left(S_{\text{o}},\theta\right)\mid
+			% \text{expresion }3=
+			% f\left(\theta\right),\theta\geq0
+			% \right\}.
+		\end{align*}
+
+		\begin{equation*}
+			JF\left(S_{\text{o}},\theta\right)=
+			\begin{bmatrix}
+				0 & 0 \\
+				0 & 0
+			\end{bmatrix}
+		\end{equation*}
+
+		\begin{equation*}
+			F\left(S_{\text{o}},\theta\right)=
+			\begin{bmatrix}
+				.
+			\end{bmatrix}
+		\end{equation*}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{columns}
+		\begin{column}{0.43\textwidth}
+			\inputminted[fontsize=\tiny,firstline=5,lastline=35]{python}{main.py}
+			\inputminted[fontsize=\tiny,firstline=45,lastline=56]{python}{main.py}
+		\end{column}
+		\begin{column}{0.53\textwidth}
+			\inputminted[fontsize=\tiny,firstline=1,lastline=27]{text}{main.txt}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{columns}
+		\begin{column}{0.43\textwidth}
+			\inputminted[fontsize=\tiny,firstline=67,lastline=107]{python}{main.py}
+		\end{column}
+		\begin{column}{0.53\textwidth}
+			\inputminted[fontsize=\tiny,firstline=29,lastline=63]{text}{main.txt}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{columns}
+		\begin{column}{0.43\textwidth}
+			\inputminted[fontsize=\tiny,firstline=109,lastline=120]{python}{main.py}
+		\end{column}
+		\begin{column}{0.53\textwidth}
+			\inputminted[fontsize=\tiny,firstline=64,lastline=75]{text}{main.txt}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{References}
+
+	\nocite{*}
+	\printbibliography[heading=none]
+\end{frame}
+
+\end{document}

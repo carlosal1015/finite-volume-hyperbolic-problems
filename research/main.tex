@@ -1,0 +1,102 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'pdf', 'run.xml', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'run.xml', 'toc']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{justification}
+
+\section{Hypothesis and Objectives}
+
+\section{Review of Earlier Antecedents and Experimental}
+
+% Marco teórico
+% Fluid Flow fracture porous media (flujo de fluido de medio poroso fracturado)
+% ¿Qué es el modelo de Darcy?
+% ¿Qué es el modelo de Stokes?
+% ¿Qué es el modelo de Navier-Stokes?
+% ¿Qué es el modelo de Stokes-Brinkman?
+% ¿En qué espacios vamos a trabajar? \Omega_{T}
+% Hacer un análisis de la dimensionalidad del modelo
+% Los conceptos nuevos van como preliminares
+% Un modelo de fluido de 1 fase y 2 fases
+% ¿Cuál es la diferencia entre ellos? ¿Qué elementos intervienen?
+
+\section{Presentation of Theoretical and Experimental Results}
+
+% Trabajo puro
+
+Mathematical model of two-phase porous media Flow
+
+Consider the flow of two-phase immiscible, incompressible fluid.
+Capillary and gravity effects are neglected, and viscous effects are
+assumed dominant.
+
+\begin{align*}
+	\difcp{\symbf{u}}{t}                                        & =
+	-\symbf{K}\difcp{\lambda}{t}\left(S\right)\nabla p.               \\
+	\nabla\cdot \difcp{\symbf{u}}{t}                            & =
+	q.                                                                \\
+	\varepsilon\diffp{S}{t}+
+	\nabla\cdot\left(\diffp{\symbf{u}}{t}F\left(S\right)\right) & =0.
+\end{align*}
+
+where $S$ is the saturation (volume fraction),
+$\symbf{K}$ is the permeability tensor,
+$\difcp{\lambda}{t}\left(S\right)$ is the total mobility,
+$\varepsilon$ is the porosity, $F\left(S\right)$ is the fractional flow
+of the wetting phase.
+
+\begin{align*}
+	\mu K^{-1}u+\nabla p & =0,\quad\text{in }\Omega_{T}  \\
+	\nabla\cdot p        & =0,\quad\text{in }\Omega_{T}.
+\end{align*}
+
+
+\begin{align*}
+	-\frac{\mu}{\emptyset}\nabla^{2}u+\mu K^{-1}u+\nabla p & =0,\quad\text{in }\Omega_{T} \\
+	\nabla\cdot u                                          & =0,\quad\text{in }\Omega_{T}
+\end{align*}
+
+~\cite{Brinkman1949}
+
+\section{Discussions Results}
+
+% Discusión de resultados
+
+\section{Future Works}
+
+% Presentación de resultados experimentales con sus comentarios
+
+\section{Conclusions}
+
+% Comentarios finales acerca de todo el trabajo
+
+\input{references}
+
+\end{document}
