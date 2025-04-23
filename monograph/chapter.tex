@@ -1,14 +1,33 @@
-%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
-\chapter{Introducción}
-\label{intro} % Always give a unique label
+\motto{
+	Por tanto, estudiantes estudien matemáticas y no construyan sin fundamentos.
+	\begin{flushright}\normalfont
+		Leonardo da Vinci (1452-1519)
+	\end{flushright}
+}
+\chapter{Motivación}
+\label{intro}
 % use \chaptermark{}
 % to alter or adjust the chapter heading in the running head
 
-\abstract*{Each chapter should be preceded by an abstract (no more than 200 words) that summarizes the content. The abstract will appear \textit{online} at \url{www.SpringerLink.com} and be available with unrestricted access. This allows unregistered users to read the abstract as a teaser for the complete chapter.
-    Please use the 'starred' version of the new \texttt{abstract} command for typesetting the text of the online abstracts (cf. source file of this chapter template \texttt{abstract}) and include them with the source files of your manuscript. Use the plain \texttt{abstract} command if the abstract is also to appear in the printed version of the book.}
+\abstract{
+	Este capítulo inicia nuestro estudio de las Leyes de Conservación y
+	resume el estado del arte de los avances en este fascinante campo
+	de las Ecuaciones Diferenciales Parciales.
+	El principal objetivo es ilustrar las dificultades tanto analíticas
+	como numéricas al resolver un \emph{problema de Cauchy} con una
+	condición inicial discontinua, soluciones de este tipo no son
+	satisfechas en todo punto de su dominio en el sentido clásico, ya
+	que las derivadas no son definidas en las discontinuidades.
+	Para encontrar la definición correcta, necesitamos entender el
+	significado de la forma diferencial de las ecuaciones desde el
+	enfoque físico.
+	Esto nos llevará al estudio de la forma integral de estas
+	ecuaciones y será justificado en este capítulo.
+	Además, presentamos diferentes modelos de leyes de conservación que
+	nos resume su amplio rango de aplicaciones.
+}
 
-\abstract{Each chapter should be preceded by an abstract (no more than 200 words) that summarizes the content. The abstract will appear \textit{online} at \url{www.SpringerLink.com} and be available with unrestricted access. This allows unregistered users to read the abstract as a teaser for the complete chapter. \newline\indent
-    Please use the 'starred' version of the new \texttt{abstract} command for typesetting the text of the online abstracts (cf. source file of this chapter template \texttt{abstract}) and include them with the source files of your manuscript. Use the plain \texttt{abstract} command if the abstract is also to appear in the printed version of the book.}
+\section{Introducción}
 
 Considere un dominio $\Omega\subset\mathbb{R}^{n}$ y una cantidad de
 interés $\bm{U}$ definida para todos los $\bm{x}\in\Omega$.
@@ -452,8 +471,7 @@ When placed at se \textit{do not} use the \verb|appendix| command when
 \begin{prob}
     \label{prob2}
     \textbf{Problem Heading}\\
-    (a) The first part of the problem is described here.\\
-    (b) The second part of
+    (a) The first part of the problem is described here.
 \end{prob}
 
 \input{references}
