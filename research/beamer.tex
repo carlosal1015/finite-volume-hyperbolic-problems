@@ -61,6 +61,7 @@
 }
 
 \renewcommand\theequation{{\color{DarkBlue}\arabic{equation}}}
+
 \newunicodechar{ₒ}{\makebox[\fontcharwd\font`a]{${}_{\text{o}}$}}
 \newunicodechar{₁}{\makebox[\fontcharwd\font`a]{${}_{\text{1}}$}}
 \newunicodechar{₂}{\makebox[\fontcharwd\font`a]{${}_{\text{2}}$}}
@@ -74,9 +75,9 @@
 \newunicodechar{─}{\makebox[\fontcharwd\font`a]{$-$}}
 
 \title{Travelling wave solution for a simple in situ combustion model}
-\subtitle{}
-\author{}
-\institute{}
+\subtitle{Seminario de Investigación I}
+\author{Angel Ramírez Gutiérrez \and Fidel Jara Huanca}
+\institute{\small Instituto de Matemática y Ciencias Afines}
 \date{\today}
 
 \begin{document}
@@ -229,11 +230,17 @@
 	By change of variables,
 	\begin{equation}
 		\overline{t}=
-		tk_{p},\quad
+		\frac{t}{t^{\ast}},\quad
 		\overline{x}=
 		\frac{T_{\text{res}}k_{p}x}{\rho_{\text{g}}u},\quad
 		\overline{\theta}=
-		\frac{T-T_{\text{res}}}{T_{\text{res}}}.
+		\frac{T-T_{\text{res}}}{T_{\text{res}}},\quad
+		T^{\ast}=T_{\text{res}},\quad
+		t^{\ast}=
+		\frac{10^{8}}{k_{p}},\quad
+		x^{\ast}=
+		\frac{\rho_{g}}{\rho^{\text{res}}}
+		\frac{u}{k_{p}}.
 	\end{equation}
 	Now, omitting bars we have.
 
@@ -696,9 +703,9 @@
 		\exp
 		\left(
 		-\frac{E_{r}}{
-			RT_{\text{res}}\left(\theta+1\right)
+			R\left(T^{\ast}\theta+T_{\text{res}}\right)
 		}
-		\right).                    \\
+		\right).\label{eq:34}       \\
 		S_{y}                   & =
 		S^{L}_{y}+
 		\frac{b_{2}\left(c-a_{3}\right)}{b_{3}\left(c-a_{2}\right)}
@@ -820,20 +827,742 @@
 		\end{align*}
 
 		\begin{equation*}
-			JF\left(S_{\text{o}},\theta\right)=
+			F\left(S_{\text{o}},\theta\right)=
 			\begin{bmatrix}
-				0 & 0 \\
-				0 & 0
+				\frac{b_{3}S_{y}S_{\text{o}}}{c-a_{3}}\Phi \\
+				\frac{
+					\beta\theta
+					\left(c-a_{3}\right)+
+					\left[
+						a_{1}
+						b_{3}
+						\theta-
+						b_{1}
+						\left(c-a_{3}\right)
+						\right]
+					S_{\text{o}}
+					S_{y}
+					\Phi}{
+					\left(c-a_{1}S_{\text{o}}\right)
+					\left(c-a_{3}\right)
+				}
 			\end{bmatrix}
 		\end{equation*}
 
 		\begin{equation*}
-			F\left(S_{\text{o}},\theta\right)=
+			JF\left(S_{\text{o}},\theta\right)=
 			\begin{bmatrix}
-				.
+				\diffp{F_{1}}{S_{\text{o}}} & \diffp{F_{1}}{\theta} \\
+				\diffp{F_{2}}{S_{\text{o}}} & \diffp{F_{2}}{\theta}
 			\end{bmatrix}
 		\end{equation*}
+
+		We define
+		\setcounter{equation}{38}
+		\begin{equation}
+			g\left(\theta\right)\coloneqq
+			\left[
+				a_{1}
+				b_{3}
+				\theta-
+				b_{1}
+				\left(c-a_{3}\right)
+				\right]
+			\Phi\left(\theta\right).\label{eq:39}
+		\end{equation}
 	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{align}
+		F_{1}\left(S_{\text{o}},\theta\right) & =
+		\frac{
+		b_{3}
+		S_{\text{o}}
+		S_{y}
+		\Phi\left(\theta\right)
+		}{c-a_{3}}.
+		\\
+		F_{2}\left(S_{\text{o}},\theta\right) & =
+		\frac{
+			\beta\theta
+			\left(c-a_{3}\right)+
+			g\left(\theta\right)
+			S_{\text{o}}
+			S_{y}
+			\Phi\left(\theta\right)}{
+			\left(c-a_{1}S_{\text{o}}\right)
+			\left(c-a_{3}\right)
+		}
+	\end{align}
+
+	\begin{align*}
+		\diffp{F_{1}}{S_{\text{o}}} & =
+		\frac{
+		b_{3}
+		}{c-a_{3}}
+		\left(
+		\diff{S_{y}}{S_{\text{o}}}
+		S_{\text{o}}+
+		S_{y}
+		\right)
+		\Phi\left(\theta\right)
+		.                                       \\
+		\diffp{F_{1}}{\theta}       & =
+		\frac{b_{3}S_{y}S_{\text{o}}}{c-a_{3}}
+		\diff{\Phi\left(\theta\right)}{\theta}. \\
+		\diffp{F_{2}}{S_{\text{o}}} & =
+		\frac{
+			g\left(\theta\right)
+			\left(
+			\diff{S_{y}}{S_{\text{o}}}
+			S_{\text{o}}+
+			S_{y}
+			\right)
+			\left(c-a_{1}S_{\text{o}}\right)+
+			a_{1}
+			\left(
+			\beta\theta
+			\left(c-a_{3}\right)+
+			g\left(\theta\right)
+			S_{y}
+			S_{\text{o}}
+			\right)
+		}{
+			{\left(c-a_{1}S_{\text{o}}\right)}^{2}
+			\left(c-a_{3}\right)
+		}                                       \\
+		\diffp{F_{2}}{\theta}       & =
+		\frac{
+			\beta
+			\left(c-a_{3}\right)+
+			\diff{g\left(\theta\right)}{\theta}
+			S_{y}
+			S_{\text{o}}}{
+			\left(c-a_{1}S_{\text{o}}\right)
+			\left(c-a_{3}\right)
+		}.
+	\end{align*}
+	It is easy to see that:
+	\begin{align*}
+		\diff{\Phi\left(\theta\right)}{\theta} & =
+		\Phi\left(\theta\right)
+		h\left(\theta\right),
+		\text{ where }
+		h\left(\theta\right)=
+		\frac{E_{\text{r}}T^{\ast}}{R{\left(T^{\ast}\theta+T_{\text{res}}\right)}^{2}}, \\
+		\diff{g\left(\theta\right)}{\theta}    & =
+		\left[
+		a_{1}b_{3}+
+		\left(
+		a_{1}b_{3}\theta-
+		b_{1}\left(c-a_{3}\right)
+		\right)
+		h\left(\theta\right)
+		\right]
+		\Phi\left(\theta\right).
+	\end{align*}
+	and $\Phi\left(\theta\right)$ is given by~\eqref{eq:34}.
+\end{frame}
+
+\begin{frame}
+	In this paper we are interested in studying the combustion from and
+	thus we assume that the reaction does not occur at the boundaries,
+	i.e., the reaction rate $\Phi$ in~\eqref{eq:34} vanish when: there
+	is no oxygen $(Y=0)$, which we call ``Oxygen Controlled'' case
+	(OC); there is no fuel $(S_{\text{o}}=0)$, which we call
+	``Fuel Controlled'' case (FC).
+	In order to approximate applications, we consider that the left
+	injection end of the domain is FC, and the production right end of
+	the domain is OC.
+	The OC and FC equilibria are given by~\eqref{eq:13}, then:
+	\begin{align*}
+		\text{OC: }
+		\big(S^{L}_{\text{o}},\theta^{L}\big) & =
+		\left(0,0\right).                         \\
+		\text{FC: }
+		\big(S^{R}_{\text{o}},\theta^{R}\big) & =
+		\big(S^{R}_{\text{o}},0\big).
+	\end{align*}
+
+	From~\eqref{eq:39}, we obtain:
+	\setcounter{equation}{47}
+	\begin{equation}
+		g\left(0\right)=
+		-b_{1}\left(c-a_{3}\right)\Phi\left(0\right).
+	\end{equation}
+	From~\eqref{eq:34}, we obtain:
+	\begin{equation}
+		\Phi\left(0\right)=
+		t^{\ast}
+		k_{p}
+		\exp\left(-\frac{E_{\text{r}}}{RT_{\text{res}}}\right).
+	\end{equation}
+	At OC and FC equilibria, the matrix $JF$ has the forms:
+	\begin{equation}\label{eq:50}
+		JF_{\text{OC}}=
+		\begin{bmatrix}
+			\frac{b_{3}S^{L}_{y}}{c-a_{3}}\Phi\left(0\right) & 0               \\
+			-\frac{b_{1}S^{L}_{y}}{c}\Phi\left(0\right)      & \frac{\beta}{c}
+		\end{bmatrix}.
+	\end{equation}
+	\begin{equation}\label{eq:51}
+		JF_{\text{FC}}=
+		\begin{bmatrix}
+			-\frac{b_{3}S^{L}_{y}}{c-a_{3}}\Phi\left(0\right)                & 0                                     \\[.5\baselineskip]
+			\frac{b_{1}S^{L}_{y}}{c-a_{1}S^{R}_{\text{o}}}\Phi\left(0\right) & \frac{\beta}{c-a_{1}S^{R}_{\text{o}}}
+		\end{bmatrix}.
+	\end{equation}
+	because from~\eqref{eq:35} we obtain:
+	\begin{equation*}
+		S_{y}
+		\big(S^{R}_{\text{o}}\big)=0
+		\quad\text{ and }\quad
+		\diff{S_{y}}{S_{\text{o}}}=
+		-\frac{S^{L}_{y}}{S^{R}_{\text{o}}}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	Defining $e=S^{L}_{y}\Phi\left(0\right)$, then the corresponding
+	eigenvalues and eigenvectors of~\eqref{eq:50} are:
+	\begin{equation*}
+		\begin{vmatrix}
+			JF_{\text{OC}}-\lambda I
+		\end{vmatrix}=
+		\begin{vmatrix}
+			\frac{b_{3}e}{c-a_{3}}-\lambda & 0                       \\
+			-\frac{b_{1}e}{c}              & \frac{\beta}{c}-\lambda
+		\end{vmatrix}=
+		\left(\frac{b_{3}e}{c-a_{3}}-\lambda\right)
+		\left(\frac{\beta}{c}-\lambda\right)=
+		0.
+	\end{equation*}
+	then:
+	\begin{equation*}
+		\lambda^{1}_{\text{OC}}=
+		\frac{b_{3}e}{c-a_{3}},\qquad
+		\lambda^{2}_{\text{OC}}=
+		\frac{\beta}{c}.
+	\end{equation*}
+
+	For $\lambda^{1}_{\text{OC}}$:
+	\begin{equation*}
+		\begin{bmatrix}
+			0                 & 0                                      \\
+			-\frac{b_{1}e}{c} & \frac{\beta}{c}-\frac{b_{3}e}{c-a_{3}}
+		\end{bmatrix}
+		\begin{bmatrix}
+			v_{1} \\
+			v_{2}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{2}=1\implies
+		v=\begin{bmatrix}
+			\frac{
+			\left(c-a_{3}\right)\beta-b_{3}ec
+			}{b_{1}e\left(c-a_{3}\right)} \\
+			1
+		\end{bmatrix}.
+	\end{equation*}
+
+	For $\lambda^{2}_{\text{OC}}$:
+	\begin{equation*}
+		\begin{bmatrix}
+			\frac{b_{3}e}{c-a_{3}}-\frac{\beta}{c} & 0 \\
+			-\frac{b_{1}e}{c}                      & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			v_{1} \\
+			v_{2}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v=\begin{bmatrix}
+			0 \\
+			1
+		\end{bmatrix}.
+	\end{equation*}
+
+	The corresponding eigenvalues and eigenvectors of~\eqref{eq:51}
+	are:
+	\begin{equation*}
+		\begin{vmatrix}
+			JF_{\text{FC}}-\lambda I
+		\end{vmatrix}=
+		\begin{vmatrix}
+			-\frac{b_{3}e}{c-a_{3}}-\lambda        & 0                                             \\[.5\baselineskip]
+			\frac{b_{1}e}{c-a_{1}S^{R}_{\text{o}}} & \frac{\beta}{c-a_{1}S^{R}_{\text{o}}}-\lambda
+		\end{vmatrix}=
+		\left(-\frac{b_{3}e}{c-a_{3}}-\lambda\right)
+		\left(\frac{\beta}{c-a_{1}S^{R}_{\text{o}}}-\lambda\right)=
+		0.
+	\end{equation*}
+	then:
+	\begin{equation*}
+		\lambda^{1}_{\text{FC}}=
+		-\frac{b_{3}e}{c-a_{3}},\qquad
+		\lambda^{2}_{\text{FC}}=
+		\frac{\beta}{c-a_{1}S^{R}_{\text{o}}}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	For $\lambda^{1}_{\text{FC}}$:
+	\begin{equation*}
+		\begin{bmatrix}
+			0                                      & 0                                                            \\[.5\baselineskip]
+			\frac{b_{1}e}{c-a_{1}S^{R}_{\text{o}}} & \frac{\beta}{c-a_{1}S^{R}_{\text{o}}}+\frac{b_{3}e}{c-a_{3}}
+		\end{bmatrix}
+		\begin{bmatrix}
+			v_{1} \\
+			v_{2}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{1}=0\implies
+		v=\begin{bmatrix}
+			\frac{
+			\left(c-a_{3}\right)\beta-b_{3}ec
+			}{b_{1}e\left(c-a_{3}\right)} \\
+			1
+		\end{bmatrix}.
+	\end{equation*}
+
+	For $\lambda^{2}_{\text{FC}}$:
+	\begin{equation*}
+		\begin{bmatrix}
+			-\frac{b_{3}e}{c-a_{3}}-\frac{\beta}{c-a_{1}S^{R}_{\text{o}}} & 0 \\[.5\baselineskip]
+			\frac{b_{1}e}{c-a_{1}S^{R}_{\text{o}}}                        & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			v_{1} \\
+			v_{2}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v=\begin{bmatrix}
+			0 \\
+			1
+		\end{bmatrix}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	Let be
+	\begin{equation*}
+		\Gamma_{1}=
+		\left\{
+		\left(S_{\text{o}},\theta\right)\mid
+		S_{\text{o}}
+		\left(
+		S^{R}_{\text{o}}-
+		S_{\text{o}}
+		\right)=
+		f\left(\theta\right),\theta\geq0
+		\right\}
+	\end{equation*}
+	where
+	\begin{equation*}
+		f\left(\theta\right)=
+		\beta
+		\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+		\frac{
+			\left(c-a_{3}\right)\theta}{
+			b_{1}
+			\left(c-a_{3}\right)-
+			a_{1}
+			b_{3}
+			\theta
+		}
+		\exp
+		\left(
+		\frac{E_{r}}{
+			R\left(T^{\ast}\theta+T_{\text{res}}\right)
+		}
+		\right).
+	\end{equation*}
+
+	Then,
+	\begin{equation*}
+		S_{\text{o}_{\pm}}=
+		\frac{S^{R}_{\text{o}}}{2}\pm
+		\sqrt{{\left(\frac{S^{R}_{\text{o}}}{2}\right)}^{2}-f\left(\theta\right)}.
+	\end{equation*}
+	Furthermore,
+	\begin{enumerate}
+		\item
+
+		      \begin{math}
+			      f\left(\alert{0}\right)=
+			      \beta
+			      \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+			      \frac{
+				      \left(c-a_{3}\right)\alert{0}}{
+				      b_{1}
+				      \left(c-a_{3}\right)-
+				      a_{1}
+				      b_{3}
+				      \alert{0}
+			      }
+			      \exp
+			      \left(
+			      \frac{E_{r}}{
+				      R\left(T^{\ast}\alert{0}+T_{\text{res}}\right)
+			      }
+			      \right)=0
+		      \end{math}.
+
+		      \
+
+		\item
+
+		      \begin{math}
+			      \lim\limits_{\theta\to\infty}
+			      f\left(\theta\right)=
+			      \lim\limits_{\theta\to\infty}
+			      \left[
+				      \beta
+				      \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+				      \frac{
+					      \left(c-a_{3}\right)\theta}{
+					      b_{1}
+					      \left(c-a_{3}\right)-
+					      a_{1}
+					      b_{3}
+					      \theta
+				      }
+				      \exp
+				      \left(
+				      \frac{E_{r}}{
+					      R\left(T^{\ast}\theta+T_{\text{res}}\right)
+				      }
+				      \right)
+				      \right]=
+			      \left[
+				      \lim\limits_{\theta\to\infty}
+				      \beta
+				      \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+				      \right]
+			      \left[
+				      \lim\limits_{\theta\to\infty}
+				      \frac{
+					      \left(c-a_{3}\right)\theta}{
+					      b_{1}
+					      \left(c-a_{3}\right)-
+					      a_{1}
+					      b_{3}
+					      \theta
+				      }
+				      \right]
+			      \left[
+				      \lim\limits_{\theta\to\infty}
+				      \exp
+				      \left(
+				      \frac{E_{r}}{
+					      R\left(T^{\ast}\theta+T_{\text{res}}\right)
+				      }
+				      \right)
+				      \right]=
+			      \left[
+				      \beta
+				      \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+				      \right]
+			      \left[\frac{c-a_{3}}{a_{1}b_{3}}\right]
+			      \left[1\right]=
+			      -\beta
+			      \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+			      \frac{c-a_{3}}{a_{1}b_{3}}
+		      \end{math}.
+
+		      \
+
+		\item
+
+		      If $\theta\geq 0$, $c-a_{3}\geq 0$ and
+		      $b_{1}\left(c-a_{3}\right)-a_{1}b_{3}\theta>0$,
+		      then $f\left(\theta\right)\geq 0$.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\begin{align*}
+		f\left(\theta\right) & =
+		\beta
+		\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+		\frac{1}{t^{\ast}k_{p}}
+		\frac{
+			\left(c-a_{3}\right)\theta}{
+			b_{1}
+			\left(c-a_{3}\right)-
+			a_{1}
+			b_{3}
+			\theta
+		}
+		\exp
+		\left(
+		\frac{E_{r}}{
+			R\left(T^{\ast}\theta+T_{\text{res}}\right)
+		}
+		\right).                                                      \\
+		f\left(\theta\right) & =
+		\alpha
+		\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+		\frac{1}{k_{p}C_{\text{m}}}
+		\frac{
+		\left(c-a_{3}\right)\theta}{
+		b_{1}
+		\left(c-a_{3}\right)
+		\left[
+		1-\frac{a_{1}b_{3}\theta}{b_{1}\left(c-a_{3}\right)}
+		\right]
+		}
+		\exp
+		\left(
+		\frac{E_{r}}{
+			R\left(T^{\ast}\theta+T_{\text{res}}\right)
+		}
+		\right).                                                      \\
+		f\left(\theta\right) & =
+		\frac{m\theta\exp\left(\frac{n}{\theta+p}\right)}{1-q\theta}. \\
+		f\left(\theta\right) & =
+		m\left[\frac{\theta}{1-q\theta}\right]
+		\exp\left(\frac{n}{\theta+p}\right).
+	\end{align*}
+
+	\begin{equation*}
+		m\coloneqq \alpha\frac{S^{R}_{\text{o}}}{S^{L}_{y}b_{1}}
+		\frac{1}{k_{p}C_{\text{m}}},\quad
+		n\coloneqq \frac{E_{r}}{RT^{\ast}},\qquad
+		p\coloneqq \frac{T_{\text{res}}}{T^{\ast}},\qquad
+		q\coloneqq \frac{a_{1}b_{3}}{b_{1}\left(c-a_{3}\right)}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\begin{align*}
+		\diff{f\left(\theta\right)}{\theta} & =
+		m\left[\frac{1}{1-q\theta}\right]
+		\exp\left(\frac{n}{p+\theta}\right)+
+		m\left[\frac{q\theta}{\left(1-q\theta\right)^{2}}\right]
+		\exp\left(\frac{n}{p+\theta}\right)-
+		m\left[\frac{n\theta}{{\left(p+\theta\right)}^{2}\left(1-q\theta\right)}\right]
+		\exp\left(\frac{n}{p+\theta}\right).    \\
+		\diff{f\left(\theta\right)}{\theta} & =
+		m\left[
+			\frac{
+				nq\theta^{2}-
+				n\theta+
+				p^{2}+
+				2p\theta+
+				\theta^{2}
+			}{
+				{\left(p+\theta\right)}^{2}
+					{\left(1-q\theta\right)}^{2}
+			}
+			\right]
+		\exp\left(\frac{n}{p+\theta}\right).
+	\end{align*}
+
+	\begin{align*}
+		\diff{f\left(\theta\right)}{\theta} & =
+		0.                                      \\
+		nq\theta^{2}-
+		n\theta+
+		p^{2}+
+		2p\theta+
+		\theta^{2}                          & =
+		0.                                      \\
+		\left(1+nq\right)
+		\theta^{2}+
+		\left(2p-n\right)\theta+
+		p^{2}                               & =
+		0.                                      \\
+		\frac{
+		\left(n-2p\right)\pm
+		\sqrt{{\left(2p-n\right)}^{2}-4\left(1+nq\right)p^{2}}
+		}{
+		2\left(1+nq\right)
+		}
+		                                    & =
+		\theta^{C}_{\pm}.                       \\
+		\frac{
+			\left(n-2p\right)\pm
+			\sqrt{n\left(n-4p-4p^{2}q\right)}
+		}{
+			2\left(1+nq\right)
+		}
+		                                    & =
+		\theta^{C}_{\pm}.
+	\end{align*}
+
+	Let be $\Delta\coloneqq {\left(2p-n\right)}^{2}-4\left(1+nq\right)p^{2}=n\left(n-4p-4p^{2}q\right)$.
+
+	\begin{description}
+		\item[First case $\Delta<0$,]
+
+		      $f\left(\theta\right)$ has no critical points and $S_{\text{o}^{\pm}}\left(\theta\right)$ are strictly increasing.
+
+		\item[Second case $\Delta=0$,]
+
+		      $f\left(\theta\right)$ has one single critical point.
+
+		\item[Third case $\Delta>0$,]
+
+		      $f\left(\theta\right)$ has two critical points.
+	\end{description}
+	% TODO: En la gráfica 2a) $\varpsilon$ es como $n$ y el $\theta_{0}$ es como $p$
+	% \begin{equation*}
+	% 	\fcolorbox{DarkBlue}{yellow}{
+	% 		\begin{math}
+	% 			\frac{
+	% 				-\left(n+2\right)\pm
+	% 				\sqrt{{\left(n+2\right)}^{2}-4\left(1-nq\right)}
+	% 			}{
+	% 				2\left(1+nq\right)
+	% 			}
+	% 			=
+	% 			\theta^{C}_{\pm}.
+	% 		\end{math}
+	% 	}
+	% \end{equation*}
+\end{frame}
+
+\begin{frame}
+	In other hand, we analyze $S_{\text{o}^{\pm}}$ as function of $\theta$.
+
+	\begin{align*}
+		S_{\text{o}^{\pm}}\left(\theta\right) & =
+		\frac{S^{R}_{\text{o}}}{2}\pm
+		\sqrt{\left(\frac{S^{R}_{\text{o}}}{2}\right)^{2}-f\left(\theta\right)}. \\
+		S_{\text{o}^{\pm}}\left(\theta\right) & =
+		\frac{S^{R}_{\text{o}}}{2}\pm
+		\sqrt{\frac{\left(S^{R}_{\text{o}}\right)^{2}-4f\left(\theta\right)}{4}}.
+	\end{align*}
+
+	\begin{align*}
+		\diff{S_{\text{o}^{\pm}}\left(\theta\right)}{\theta} & =
+		\pm\frac{
+			\diff{f\left(\theta\right)}{\theta}
+		}{\sqrt{{\left(S^{R}_{\text{o}}\right)}^{2}-4f\left(\theta\right)}}.
+	\end{align*}
+
+	Therefore,
+	\begin{enumerate}[i.]
+		\item
+
+		      The functions $S_{\text{o}^{+}}$ are well-defined in the set
+		      \begin{math}
+			      \left\{
+			      \theta>0:
+			      f\left(\theta\right)<\frac{1}{4}{\left(S^{R}_{\text{o}}\right)}^{2}
+			      \right\}
+		      \end{math}.
+
+		\item
+
+		      the critical points of $S_{\text{o}^{+}}\left(\theta\right)$
+		      and those of $f\left(\theta\right)$ are the same;
+
+		\item
+
+		      there exists $\theta_{\text{M}}>0$ such that $4f\left(\theta_{\text{M}}\right)={\left(S^{R}_{\text{o}}\right)}^{2}$ then
+		      \begin{math}
+			      \lim\limits_{\theta\to\theta_{\text{M}}}
+			      \diff{S_{\text{o}^{+}}\left(\theta\right)}{\theta}=
+			      \pm\infty
+		      \end{math}.
+
+		      \begin{description}
+			      \item[First case $\Delta<0$,]
+
+			            $f\left(\theta\right)$ has no critical points and $f\left(\theta\right)$ and $S_{\text{o}^{+}}\left(\theta\right)$ are strictly increasing.
+
+
+
+			      \item[Second case $\Delta=0$,]
+			            $f\left(\theta\right)$ has one single critical point.
+
+			      \item[Third case $\Delta>0$,]
+
+			            $f\left(\theta\right)$ has two critical points.
+		      \end{description}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{fthetaplot}
+		\caption{Plot $f\left(\theta\right)$.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\begin{columns}
+		\begin{column}{0.51\textwidth}
+			\begin{table}[ht!]
+				\begin{tabular}{cc}
+					\hline
+					$\alpha$           & $0.2$            \\
+					\hline
+					$S^{L}_{y}$        & $0.5$            \\
+					\hline
+					$S^{R}_{\text{o}}$ & $0.5$            \\
+					\hline
+					$a_{1}$            & $0.00189$        \\
+					\hline
+					$a_{2}$            & $27.6$           \\
+					\hline
+					$a_{3}$            & $0.00252$        \\
+					\hline
+					$b_{1}$            & $1.1$            \\
+					\hline
+					$b_{2}$            & $30.4$           \\
+					\hline
+					$b_{3}$            & $1$              \\
+					\hline
+					$C_{\text{m}}$     & $2\times 10^{6}$ \\
+					\hline
+					$k_{p}$            & $24556$          \\
+					\hline
+					$R$                & $8.314$          \\
+					\hline
+					$T_{\text{res}}$   & $300$            \\
+					\hline
+				\end{tabular}
+				\caption{Values.}
+			\end{table}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\inputminted[fontsize=\tiny]{text}{calculations.txt}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{phaseportrait}
+		\caption{Phase portrait of $\Gamma_{1}$.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{phaseportrait2}
+		\caption{Phase portrait of $\Gamma_{1}$.}
+	\end{figure}
 \end{frame}
 
 \begin{frame}[fragile]
