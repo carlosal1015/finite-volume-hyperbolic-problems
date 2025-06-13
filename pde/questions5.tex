@@ -1,0 +1,675 @@
+\question
+
+Sea $S=\left(0,\pi\right)^{2}$.
+Resuelva la ecuación de onda 2D
+\begin{equation*}
+	\begin{cases}
+		\difc.A.{}{}u=0        &
+		\text{en }S\times\left(0,T\right).          \\
+		\difcp{u}{n}=0         &
+		\text{en }\partial S\times\left(0,T\right). \\
+		u=0                    &
+		\text{en }S\times\left\{t=0\right\}.        \\
+		\difcp{u}{t}=
+		\sen^{2}\left(x\right) &
+		\text{en }S\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+
+Sea $R=\left(0,a\right)\times\left(0,b\right)$.
+Resuelva la ecuación de onda 2D
+\begin{equation*}
+	\begin{cases}
+		\difc.A.{}{}u=0                      &
+		\text{en }R\times\left(0,T\right).          \\
+		u=0                                  &
+		\text{en }\partial R\times\left(0,T\right). \\
+		u=xy\left(b-y\right)\left(a-x\right) &
+		\text{en }R\times\left\{t=0\right\}.        \\
+		\difcp{u}{t}=
+		0                                    &
+		\text{en }R\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+
+\question
+
+Sea $D=\left(0,1\right)^{2}$.
+Resuelva el problema de valores propios
+\begin{equation*}
+	\begin{cases}
+		-\difc.L.{}{}u=
+		\lambda u       &
+		\text{en }D.                                                           \\
+		u=0             &
+		\text{en }\partial D\setminus\left(0,1\right)\times\left\{y=1\right\}. \\
+		\difcp{u}{n}=-u &
+		\text{en }\left(0,1\right)\times\left\{y=1\right\}.
+	\end{cases}
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Muestre que todos los valores propios son positivos.
+
+	\part
+
+	Encuentre una ecuación para los valores propios $\lambda$.
+	Demuestre que pueden expresarse en términos de las raíces de la
+	ecuación $s+\tan s=0$.
+
+	\part
+
+	Encuentre las soluciones de la última ecuación gráficamente.
+	Encuentre una fórmula aproximada para el $\left(m,n\right)$-ésimo
+	valor propio para valores grandes de $\left(m,n\right)$.
+\end{parts}
+
+\question
+
+Encuentra la dimensión de cada uno de los siguientes espacios
+vectoriales.
+
+\begin{parts}
+	\part
+
+	El espacio de las soluciones de
+	\begin{math}
+		\diff[2]{u}{x}+x^{2}u=0
+	\end{math}.
+
+	\part
+
+	El espacio propio con valor propio
+	\begin{math}
+		{\left(
+			\frac{2\pi}{l}
+			\right)}^{2}
+	\end{math}
+	del operador
+	\begin{math}
+		-\diff[2]{}{t}
+	\end{math}
+	en el intervalo $\left(-l,l\right)$ con las condiciones de contorno
+	periódicas.
+
+	\part
+
+	El espacio de funciones armónicas en el disco unitario con la
+	condición de frontera Neumann homogénea.
+
+	\part
+
+	El espacio propio con valor propio $\lambda=25\pi^{2}$ de
+	$-\difc.L.{}{}$ en el cuadrado unitario $\left(0,1\right)^{2}$ con
+	las condiciones de frontera Neumann homogéneas en los cuatro lados.
+
+	\part
+
+	El espacio de las soluciones de
+	\begin{math}
+		\difc.A.{}{}u=0
+	\end{math}
+	en
+	\begin{math}
+		\mathbb{R}\times\left(0,\infty\right)
+	\end{math}.
+\end{parts}
+
+\question
+
+Sea
+\begin{math}
+	D=
+	\left\{
+	\left(r,\theta\right)\mid
+	r<a
+	\right\}\subset\mathbb{R}^{2}
+\end{math}.
+Determinar las vibraciones de un parche de tambor circular
+\begin{equation*}
+	\begin{cases}
+		\frac{1}{c^{2}}\difcp[2]{u}{t}=
+		\difcp[2]{u}{r}
+		+\frac{1}{r}\difcp{u}{r}
+		+\frac{1}{r^{2}}\difcp[2]{u}{\theta} &
+		\text{en }D\times\left(0,T\right).     \\
+		u=0                                  &
+		\text{en }\partial D.                  \\
+		u=1-\frac{r^{2}}{a^{2}}              &
+		\text{en }S\times\left\{t=0\right\}.   \\
+		\difcp{u}{t}=
+		0                                    &
+		\text{en }S\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+
+\question
+
+Encuentre las soluciones de la ecuación de onda de la forma
+\begin{math}
+	u=e^{-i\omega t}
+	f\left(r\right)
+\end{math}
+que sean finitas en el origen, donde
+\begin{math}
+	r=\sqrt{x^{2}+y^{2}}
+\end{math}.
+
+\question
+
+Resuelva la ecuación de difusión en el disco de radio $a$, con
+$u=B\in\mathbb{R}$ en la frontera y $u\left(x,y,0\right)=0$.
+
+\question
+
+Resuelva la ecuación de difusión en el anillo
+\begin{math}
+	\left\{
+	a^{2}<
+	x^{2}+y^{2}<
+	b^{2}
+	\right\}
+\end{math}
+con $u=B\in\mathbb{R}$ en la frontera.
+
+\question
+
+Sea $D$ el semidisco
+\begin{math}
+	\left\{
+	x^{2}+y^{2}<
+	b^{2},
+	y>0
+	\right\}
+\end{math}.
+Considere la ecuación de difusión en $D$ con las condiciones:
+$u=0$ en la frontera de $D$ y
+\begin{math}
+	u\left(r,\theta,0\right)=
+	\varphi\left(r,\theta\right)
+\end{math}.
+Escriba el desarrollo completo de la solución
+$u\left(r,\theta,t\right)$, incluyendo las fórmulas para los
+coeficientes.
+
+\question
+
+Calcule las constantes de normalización para los armónicos esféricos
+utilizando los datos apropiados sobre las funciones de Legendre.
+
+\question
+
+Resolver la ecuación de onda en la bola $\left\{r<a\right\}$ de radio
+$a$, con las condiciones $\difcp{u}{r}=0$ en $\left\{r=a\right\}$,
+$u\left(x,y,z,0\right)=z=r\cos\theta$ y
+\begin{math}
+	\difcp{u}{t}\left(x,y,z,0\right)=0
+\end{math}.
+
+\question
+
+Resuelva la ecuación de difusión en la esfera de radio $a$, con
+$u=B\in\mathbb{R}$ en la frontera y
+\begin{math}
+	u\left(x,y,z,0\right)=
+	C\in\mathbb{R}
+\end{math}.
+
+\question
+
+Consideremos un huevo como una bola homogénea de radio $\pi$
+centímetros.
+Inicialmente, a $20^{\circ}$C, se coloca en una olla con agua
+hirviendo (a $100^{\circ}$C).
+¿Cuánto tarda el centro en alcanzar los $50^{\circ}$C?
+Supongamos que la constante de difusión es
+$k=6\times 10^{-3}$cm$^{2}$/seg.
+\textbf{Sugerencia}: La temperatura es función de $r$ y $t$.
+Aproxime $u\left(0,t\right)$ mediante el primer término de la
+expansión.
+
+\question
+
+\begin{parts}
+	\part
+
+	Considere la ecuación de difusión en la esfera de radio $a$, con
+	$\difcp{u}{r}=B\in\mathbb{R}$ en la frontera y
+	$u\left(x,y,z,0\right)=C\in\mathbb{R}$.
+	Encuentre los términos de no decaimiento en el desarrollo de la
+	solución.
+
+	\part
+
+	Encuentre los términos de no decaimiento, incluyendo una ecuación
+	simple satisfecha por los valores propios.
+\end{parts}
+
+\question
+
+\begin{parts}
+	\part
+
+	Halle las funciones propias radiales (depende únicamente de
+	la distancia $r$ al origen) de $-\difc.L.{}{}$ en la
+	bola
+	\begin{math}
+		B=
+		\left\{
+		x^{2}+y^{2}+z^{2}<
+		a^{2}
+		\right\}
+	\end{math}
+	con la condición de frontera Neumann.
+	\textbf{Sugerencia}: Un método simple consiste en hacer
+	$v\left(r\right)=ru\left(r\right)$.
+
+	\part
+
+	Halle una fórmula explícita simple para los valores propios.
+
+	\part
+
+	Escriba la solución de $\difcp{u}{t}=k\difc.L.{}{}u$ en $B$,
+	$\difcp{u}{r}=0$ en la frontera de $B$,
+	\begin{math}
+		u\left(x,y,z0\right)=
+		\varphi\left(r\right)
+	\end{math}
+	como una serie infinita, incluyendo las fórmulas para los
+	coeficientes.
+
+	\part
+	En el inciso anterior,
+	¿por qué $u\left(x,y,z,t\right)$ depende únicamente de $r$ y $t$?
+\end{parts}
+
+\question
+
+Resuelva la ecuación de difusión en la bola
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}<
+	a^{2}
+	\right\}
+\end{math}
+con $u=0$ en la frontera y una condición inicial radial
+$u\left(x,y,z,0\right)=\varphi\left(r\right)$, donde
+$r^{2}=x^{2}+y^{2}+z^{2}$.
+\textbf{Sugerencia}: Un método simple consiste en hacer
+$v\left(r\right)=ru\left(r\right)$.
+
+\question
+
+Halle la función armónica en el exterior $\left\{r>a\right\}$ de una
+esfera que satisface la condición de contorno
+\begin{math}
+	\difcp{u}{r}=
+	-\cos\theta
+\end{math}
+en $r=a$ y que está acotada en el infinito.
+
+\question
+
+Halla la función armónica en la semiesfera
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}<
+	a^{2},
+	z>0
+	\right\}
+\end{math}
+con la condición de frontera $u=f\left(z\right)$ en el hemisferio
+\begin{math}
+	\left\{
+	z=
+	\sqrt{a^{2}-x^{2}-y^{2}}
+	\right\}
+\end{math}
+y la condición de frontera $u=0$ en el disco
+\begin{math}
+	\left\{
+	z=0,
+	x^{2}+y^{2}<a^{2}
+	\right\}
+\end{math}.
+Incluye las fórmulas para los coeficientes.
+\textbf{Sugerencia}: Usa coordenadas esféricas y extiende la solución para
+que sea impar en el plano $xy$.
+
+\question
+
+Una sustancia se difunde en el espacio infinito con una concentración
+inicial $\varphi\left(r\right)=1$ para $r<a$ y
+$\varphi\left(r\right)=0$ para $r>a$.
+Halla una fórmula para la concentración en instantes posteriores.
+\textbf{Sugerencia}: Es radial. Puedes sustituir $v=ru$ para obtener un
+problema en una semirrecta.
+
+\question
+
+Dibuje el conjunto nodal de la función propia
+\begin{math}
+	v\left(x,y\right)=
+	\sen\left(3x\right)
+	\sen\left(y\right)+
+	\sen\left(x\right)
+	\sen\left(3y\right)
+\end{math}
+en el cuadrado $\left(0,\pi\right)^{2}$.
+\textbf{Sugerencia}: Use las fórmulas para
+$\sen\left(3x\right)$ y $\sen\left(3y\right)$
+junto con la factorización para reescribirlo como
+\begin{math}
+	v\left(x,y\right)=
+	2\sen\left(x\right)
+	\sen\left(y\right)
+	\left[3-2\sen^{2}\left(x\right)-2\sen^{2}\left(y\right)\right]
+\end{math}.
+
+\question
+
+Muestre que
+\begin{align*}
+	J_{0}\left(z\right) & =
+	1-{\left(\frac{z}{2}\right)}^{2}+
+	\frac{1}{\left(2!\right)^{2}}
+	{\left(\frac{z}{2}\right)}^{4}-
+	\frac{1}{{\left(3!\right)}^{2}}
+	{\left(\frac{z}{2}\right)}^{6}+\cdots.
+	\shortintertext{y}
+	J_{1}\left(z\right) & =
+	-\diff{J_{0}}{z}=
+	\frac{z}{2}-
+	\frac{1}{2!}
+	{\left(\frac{z}{2}\right)}^{3}+
+	\frac{3}{{\left(3!\right)}^{2}}
+	{\left(\frac{z}{2}\right)}^{5}+\cdots.
+\end{align*}
+
+\question
+
+Escriba fórmulas simples para $J_{\frac{3}{2}}$ y $J_{-\frac{3}{2}}$.
+
+\question
+
+Derivar las relaciones de recurrencia de las funciones de Bessel.
+
+\begin{align*}
+	J_{s\pm 1}\left(z\right) & =
+	\frac{s}{z}J_{s}\left(z\right)\mp
+	\diff{J_{s}}{z}
+	\text{y}
+	J_{s-1}\left(z\right)+
+	J_{s+1}\left(z\right)=
+	\frac{2s}{z}J_{s}\left(z\right).
+\end{align*}
+
+\question
+
+Convierta la ecuación de Bessel
+\begin{equation*}
+	\diff[2]{u}{z}+
+	\frac{1}{z}\diff{u}{z}+
+	\left(1-\frac{s^{2}}{z^{2}}\right)u=
+	0
+\end{equation*}
+en
+\begin{equation*}
+	\diff{v}{z}+
+	\left(1-\frac{s^{2}-\frac{1}{4}}{z^{2}}\right)=
+	0
+\end{equation*}
+al sustituir $u=z^{-\frac{1}{2}}v$.
+
+\question
+
+Muestre que si $u$ satisface la ecuación de Bessel, entonces
+$v=z^{\alpha}u\left(\lambda z^{\beta}\right)$ satisface la ecuación
+diferencial
+\begin{equation*}
+	\diff[2]{v}{z}+
+	\frac{1-2\alpha}{z}
+	\diff{v}{z}+
+	\left[
+		\left(\lambda\beta z^{\beta-1}\right)^{2}-
+		\frac{s^{2}\beta^{2}-\alpha^{2}}{z^{2}}
+		\right]v=0.
+\end{equation*}
+
+\question
+
+Encuentra las soluciones $u\left(x\right)$ de
+\begin{math}
+	x\diff[2]{u}{x}-\diff{u}{x}+xu=0
+\end{math}.
+\textbf{Sugerencia}: Sustituye $u=xv$.
+
+\question
+
+Muestre que
+\begin{math}
+	\cos\left(x\sen\theta\right)=
+	J_{0}\left(x\right)+2
+	\sum_{k=1}^{\infty}
+	J_{2k}\left(x\right)
+	\cos\left(2k\theta\right)
+\end{math}.
+
+\question
+
+Resuelve la ecuación
+\begin{math}
+	-\difcp[2]{u}{x}-
+	\difcp[2]{u}{y}+
+	k^{2}u=0
+\end{math}
+en el disco
+\begin{math}
+	\left\{
+	x^{2}+y^{2}<
+	a^{2}
+	\right\}
+\end{math}
+con $u=1$ en la frontera del círculo.
+Escribe tu respuesta en términos de las funciones de Bessel
+$J_{s}\left(iz\right)$ de argumento imaginario.
+
+\question
+
+Resuelve la ecuación
+\begin{math}
+	-\difcp[2]{u}{x}-
+	\difcp[2]{u}{y}+
+	k^{2}u=0
+\end{math}
+en el exterior
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}>
+	a^{2}
+	\right\}
+\end{math}
+del disco con $u=1$ en la frontera del círculo
+$u\left(x,y\right)$ acotada en el infinito.
+Escribe tu respuesta en términos de las funciones de Hankel
+$H_{s}\left(iz\right)$ del argumento imaginario.
+
+\question
+
+Resuelve la ecuación
+\begin{math}
+	-\difcp[2]{u}{x}-
+	\difcp[2]{u}{y}-
+	\difcp{u}{z}+
+	k^{2}u=0
+\end{math}
+en la esfera
+\begin{math}
+	\left\{
+	x^{2}+y^{2}+z^{2}<
+	a^{2}\right\},
+\end{math}
+con $u=1$ en la frontera esfera.
+Escribe tu respuesta en términos de funciones elementales.
+
+\question
+
+Resuelve la ecuación
+\begin{math}
+	-\difcp[2]{u}{x}-
+	\difcp[2]{u}{y}-
+	\difcp[2]{u}{z}+
+	k^{2}u=0
+\end{math}
+en el exterior
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}>
+	a^{2}
+	\right\}
+\end{math}
+de la bola con $u=1$ en la frontera de la esfera y
+$u\left(x,y,z\right)$ acotada en el infinito.
+Escribe tu respuesta en términos de funciones elementales.
+
+\question
+
+Encuentre una ecuación para los valores propios y encuentre las
+funciones propias de $-\difc.L.{}{}$ en el disco
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}<
+	a^{2}
+	\right\}
+\end{math}
+con la condición de frontera Robin
+\begin{math}
+	\difcp{v}{r}+hv=0
+\end{math}
+en la circunferencia, donde $h\in\mathbb{R}$.
+
+\question
+
+Encuentre una ecuación para los valores propios y encuentre las
+funciones propias de $-\difc.L.{}{}$ en el anillo
+\begin{math}
+	\left\{
+	a^{2}<
+	x^{2}+
+	y^{2}<
+	b^{2}
+	\right\}
+\end{math}
+con condición de frontera Dirichlet en ambas circunferencias.
+
+\question
+
+Demuestre que los polinomios de Legendre
+\begin{equation*}
+	P_{l}\left(z\right)=
+	\frac{1}{2^{l}}
+	\sum_{j=0}^{m}
+	\frac{{\left(-1\right)}^{j}}{j!}
+	\frac{\left(2l-2j\right)!}{\left(l-2j\right)!\left(l-j\right)!}z^{l-2j}
+\end{equation*}
+donde $m=\frac{l}{2}$ si $l$ es par y $m=\frac{l-1}{2}$ si $l$ es impar,
+satisfacen la relación de recurrencia
+\begin{equation*}
+	\left(l+1\right)
+	P_{l+1}\left(z\right)-
+	\left(2l+1\right)z
+	P_{l}\left(z\right)+
+	lP_{l-1}\left(z\right)=0.
+\end{equation*}
+
+\question
+
+Muestre que
+\begin{math}
+	P_{2n}\left(0\right)=
+		{\left(-1\right)}^{n}
+	\frac{\left(2n\right)!}{2^{2n}{\left(n!\right)}^{2}}
+\end{math}.
+
+\question
+
+Muestre que $\forall l\geq 3:\int_{-1}^{1}x^{2}P_{l}\left(x\right)\dl x=0$.
+
+\question
+
+Encuentra la función armónica en la bola
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}<
+	a^{2}
+	\right\}
+\end{math}
+con $u=\cos^{2}\left(\theta\right)$ en la frontera.
+
+\question
+
+Encuentra la función armónica en la bola
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}<
+	a^{2}
+	\right\}
+\end{math}
+con la condición de frontera $u=A\in\mathbb{R}$ en el hemisferio superior
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}=
+	a^{2},
+	z>0\right\}
+\end{math}
+y con $u=B\in\mathbb{R}$ en el hemisferio inferior
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}=
+	a^{2},
+	z<0
+	\right\}
+\end{math}.
+
+\question
+
+Resuelva la ecuación de difusión en el cono sólido
+\begin{math}
+	\left\{
+	x^{2}+
+	y^{2}+
+	z^{2}<
+	a^{2},
+	\theta<\alpha
+	\right\}
+\end{math}
+con $u=0$ en la frontera y con condiciones iniciales generales.
+\textbf{Sugerencia}: Separe las variables y escriba la solución como una
+serie con términos de la forma separada
+\begin{math}
+	T\left(t\right)
+	R\left(r\right)
+	q\left(\phi\right)
+	p\left(\cos\theta\right)
+\end{math}.
+Demuestre que $p\left(s\right)$ satisface la ecuación de Legendre
+asociada.

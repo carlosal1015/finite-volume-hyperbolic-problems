@@ -1,0 +1,716 @@
+\question
+
+Mediante integración muestre que se cumplen las identidades.
+\begin{align*}
+	\forall m,n\in\mathbb{Z},m\neq n:
+	\int_{0}^{l}
+	\sen
+	\left(\frac{m\pi x}{l}\right)
+	\sen
+	\left(\frac{n\pi x}{l}\right)
+	\dl x & =
+	0.                                \\
+	\forall m\in\mathbb{Z}:
+	\int_{0}^{l}
+	\sen^{2}
+	\left(\frac{m\pi x}{l}\right)
+	\dl x & =
+	\frac{l}{2}.                      \\
+	\forall m,n\in\mathbb{Z}:
+	\int_{0}^{l}
+	\cos
+	\left(\frac{m\pi x}{l}\right)
+	\cos
+	\left(\frac{n\pi x}{l}\right)
+	\dl x & =
+	\begin{cases}
+		0,           & \text{si }n\neq m. \\
+		\frac{l}{2}, & \text{si }n=m.
+	\end{cases} \\
+	\forall m,n\in\mathbb{Z}:
+	\int_{-l}^{l}
+	\sen\left(\frac{m\pi x}{l}\right)
+	\cos\left(\frac{n\pi x}{l}\right)
+	\dl x & =
+	0.
+\end{align*}
+
+\question
+
+Defina
+\begin{equation*}
+	\phi\left(x\right)=
+	\begin{cases}
+		1, & 0<x\leq 1. \\
+		2, & 1<x\leq 2. \\
+		3, & 2<x\leq 3. \\
+		4, & 3<x\leq 4.
+	\end{cases}\quad
+	\vcenter{\hbox{\includegraphics[width=.55\paperwidth]{2}}}
+\end{equation*}
+Extienda $\phi$ por periodicidad en todo $\mathbb{R}$; es decir,
+\begin{math}
+	\forall x\in\mathbb{R}:
+	\phi\left(x+4\right)=
+	\phi\left(x\right)
+\end{math}.
+Considere la serie de Fourier completa para $\phi$
+\begin{equation*}
+	\phi\left(x\right)\sim
+	\frac{a_{0}}{2}+
+	\sum_{n=1}^{\infty}
+	\left[
+		a_{n}
+		\cos\left(\frac{n\pi x}{l}\right)+
+		b_{n}
+		\sen
+		\left(\frac{n\pi x}{l}\right)
+		\right].
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	¿A qué valores convergerá esta serie de Fourier en $x=0$, $x=1$,
+	$x=4$, $x=7.4$ y $x=40$?
+
+	\part
+
+	¿La serie de Fourier converge uniformemente a
+	$\phi\left(x\right)$?
+	Explique.
+
+	\part
+
+	Encuentre $a_{0}$.
+\end{parts}
+
+\question
+
+Encuentre la serie de Fourier completa de las funciones definidas en
+el intervalo $\left(-1,1\right)$.
+
+\begin{multicols}{2}
+	\begin{parts}
+		\part
+
+		\begin{math}
+			\phi\left(x\right)=
+			\cos\left(26\pi x\right)-
+			4-
+			3\sen\left(\pi x\right)
+		\end{math}.
+
+		\part
+
+		\begin{math}
+			\phi\left(x\right)=
+			x
+		\end{math}.
+
+		\part
+
+		\begin{math}
+			\phi\left(x\right)=
+			\left|x\right|+
+			1
+		\end{math}.
+
+		\part
+
+		\begin{math}
+			\phi\left(x\right)=
+			x^{3}+x^{2}
+		\end{math}.
+	\end{parts}
+\end{multicols}
+
+Dibuje las sumas parciales correspondientes a los primeros $3$, $5$ y
+$30$ términos.
+Utilice cualquier programa informático para superponer sus gráficos
+con los de la función original.
+
+\question
+
+\begin{parts}
+	\part
+
+	Sean las siguientes funciones y sus respectivos coeficientes de
+	Fourier.
+	\begin{equation*}
+		\begin{aligned}
+			f_{1}
+			\left(x\right) & =
+			\frac{a_{0}}{2}+
+			\sum_{n=1}^{\infty}
+			a_{n}
+			\cos\left(n\pi x\right). \\
+			f_{2}
+			\left(x\right) & =
+			\sum_{n=1}^{\infty}
+			b_{n}
+			\sen
+			\left(n\pi x\right).     \\
+			f_{3}
+			\left(x\right) & =
+			\frac{c_{0}}{2}+
+			\sum_{n=1}^{\infty}
+			\left[
+				c_{n}
+				\cos\left(n\pi x\right)+
+				d_{n}
+				\sen\left(n\pi x\right)
+				\right].
+		\end{aligned}\qquad
+		\begin{aligned}
+			a_{n} & =
+			2\int_{0}^{1}
+			\left(x^{3}+1\right)
+			\cos\left(n\pi x\right)\dl x. \\
+			b_{n} & =
+			2\int_{0}^{1}
+			\left(x^{3}+1\right)
+			\sen\left(n\pi x\right)\dl x. \\
+			c_{n} & =
+			\int_{-1}^{1}
+			\left(x^{3}+1\right)
+			\cos\left(n\pi x\right)\dl x. \\
+			d_{n} & =
+			\int_{-1}^{1}
+			\left(x^{3}+1\right)
+			\sen\left(n\pi x\right)\dl x.
+		\end{aligned}
+	\end{equation*}
+	Dibuje las gráficas de $f_{1}$, $f_{2}$ y $f_{3}$ para $-3<x< 3$;
+	es decir, dibuje los límites puntuales de las respectivas series
+	de Fourier e indique los valores para
+	$x\in\left\{-2,-1,0,1,2\right\}$.
+
+	\part
+
+	¿Cuál es el $\lim\limits_{n\to\infty}d_{n}$?
+	¿Cuánto es
+	\begin{math}
+		c^{2}_{0}+
+		\sum\limits_{n=1}^{\infty}
+		\left(
+		c^{2}_{n}+d^{2}_{n}
+		\right)
+	\end{math}?
+
+	\part
+
+	Sea
+	\begin{math}
+		f_{4}\left(x\right)=
+		\sum\limits_{n=0}^{\infty}
+		b_{n}
+		\sen
+		\left(n\pi x+\frac{\pi x}{2}\right)
+	\end{math},
+	donde
+	\begin{math}
+		b_{n}=
+		2\int\limits_{0}^{1}
+		x^{3}
+		\left[
+			\sen
+			\left(n\pi x+\frac{\pi x}{2}\right)
+			\right]
+		\dl x
+	\end{math}.
+	Dibuje las gráficas de $f_{4}$ para $-5<x<5$; es decir,
+	dibuje los límites puntuales de las respectivas series de
+	Fourier.
+\end{parts}
+
+\question
+
+Encuentre la serie de Fourier completa versión compleja de
+\begin{math}
+	f\left(x\right)=
+	\exp\left(x\right)
+\end{math}
+en $\left(-1,1\right)$.
+
+\question
+
+Utilice la identidad de Parseval para los siguientes problemas.
+
+\begin{parts}
+	\part
+
+	Considere $f\left(x\right)=\left|x\right|$ en $-\pi<x<\pi$ y
+	muestre que
+	\begin{math}
+		\sum\limits_{n=0}^{\infty}
+		\frac{1}{{\left(2n+1\right)}^{2}}=
+		\frac{\pi^{2}}{8}
+	\end{math}.
+
+	\part
+
+	Considere $f\left(x\right)=x$ en $-\pi<x<\pi$
+	y muestre que
+	\begin{math}
+		\sum\limits_{n=1}^{\infty}
+		\frac{1}{n^{2}}=
+		\frac{\pi^{2}}{6}
+	\end{math}
+	y
+	\begin{math}
+		\sum\limits_{n=1}^{\infty}
+		\frac{{\left(-1\right)}^{n+1}}{n^{2}}=
+		\frac{\pi^{2}}{12}
+	\end{math}.
+
+	\part
+
+	Considere $f\left(x\right)=x^{2}$ en $-\pi<x<\pi$ y muestre que
+	\begin{math}
+		\sum\limits_{n=1}^{\infty}
+		\frac{1}{n^{4}}=
+		\frac{\pi^{4}}{90}
+	\end{math}.
+\end{parts}
+
+\question
+
+Sean $f,g\colon\left[-\pi,\pi\right)\to\mathbb{R}$ dos funciones
+integrables.
+Extienda $f$ y $g$ por periodicidad a $\mathbb{R}$.
+Defina la función de convolución $f\ast g$ como
+\begin{equation*}
+	\left(f\ast g\right)
+	\left(x\right)\coloneqq
+	\frac{1}{2\pi}
+	\int_{-\pi}^{\pi}
+	f\left(x-y\right)
+	g\left(y\right)
+	\dl y.
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Muestre que $f\ast g$ es una función periódica con período $2\pi$.
+
+	\part
+
+	Muestre que $f\ast g=g\ast f$.
+
+	\part
+
+	Sean los pares de coeficientes la serie de Fourier completa
+	$\left(a^{f}_{n},b^{f}_{n}\right)$,
+	$\left(a^{g}_{n},b^{g}_{n}\right)$,
+	$\left(a^{f\ast g}_{n},b^{f\ast g}_{n}\right)$
+	de las funciones, respectivamente, $f$, $g$ y $f\ast g$:
+
+	Muestre que
+	\vspace*{-\baselineskip}\setlength\belowdisplayshortskip{0pt}
+	\begin{align*}
+		\forall n\in
+		\mathbb{N}\cup\left\{0\right\}:
+		a^{f\ast g}_{n} & =
+		a^{f}_{n}
+		a^{g}_{n}.          \\
+		\forall n\in\mathbb{N}:
+		b^{f\ast g}_{n} & =
+		b^{f}_{n}
+		b^{g}_{n}.
+	\end{align*}
+
+	\part
+
+	Muestre que $f\ast g$ es integrable en $\left(-\pi,\pi\right)$
+	con
+	\begin{equation*}
+		\int_{-\pi}^{\pi}
+		\left|
+		\left(f\ast g\right)\left(x\right)
+		\right|\dl x
+		\leq
+		\left(
+		\int_{-\pi}^{\pi}
+		\left|
+		f\left(x\right)
+		\right|\dl x
+		\right)
+		\left(
+		\int_{-\pi}^{\pi}
+		\left|
+		g\left(x\right)
+		\right|\dl x
+		\right).
+	\end{equation*}
+
+	\part
+
+	Si $f,g\in L^{2}\left(a,b\right)$, entonces
+	\begin{math}
+		\left|\left\langle f,g\right\rangle\right|\leq
+		\left\|f\right\|
+		\left\|g\right\|
+	\end{math}.
+
+	\textbf{Sugerencia}:
+	Minimice la función
+	\begin{math}
+		G\left(t\right)\coloneqq
+		{\left\|f+tg\right\|}^{2}
+	\end{math}
+	para cualquier $t\in\mathbb{R}$.
+\end{parts}
+
+\question
+
+Muestre que la serie de Fourier completa de
+\begin{math}
+	\phi\left(x\right)=
+	\begin{cases}
+		-1, & \text{si }-\pi<x<0.    \\
+		1,  & \text{si }0\leq x<\pi.
+	\end{cases}
+\end{math}
+es
+\begin{math}
+	\dfrac{4}{\pi}
+	\sum\limits_{n\text{ impar}}
+	\dfrac{\sen\left(nx\right)}{n}
+\end{math}.
+
+\question
+
+Muestre que el conjunto de eigenfunciones
+\begin{math}
+	\left\{
+	\cos\left(\frac{n\pi x}{L}\right)
+	\right\}_{n=0}^{\infty}
+\end{math}
+del problema
+\begin{math}
+	\left\{
+		\begin{aligned}
+			X^{\prime\prime}+
+			\lambda X                & =
+			0.                           \\
+			X^{\prime}\left(0\right)=
+			X^{\prime}\left(L\right) & =
+			0.
+		\end{aligned}
+		\right.
+	\end{math}\linebreak
+es ortogonal.
+
+\question
+
+\begin{parts}
+	\part
+
+	Encuentre los eigenvalores y eigenfunciones del problema
+	\begin{math}
+		\left\{
+		\begin{aligned}
+			X^{\prime\prime}+
+			X^{\prime}+
+			\lambda X       & =
+			0.                    \\
+			X\left(0\right)=
+			X\left(2\right) & =0. \\
+		\end{aligned}
+		\right.
+	\end{math}
+
+	\part
+
+	Escriba la ecuación diferencial en la forma autoadjunta.
+
+	\part
+
+	Dé una relación de ortogonalidad.
+\end{parts}
+
+\question
+
+Considere el problema de Sturm-Liouville
+\begin{equation*}
+	\left\{
+	\begin{aligned}
+		y^{\prime\prime}+
+		\lambda y         & =
+		0.                    \\
+		y\left(0\right)=
+		y\left(\pi\right) & =
+		0.
+	\end{aligned}
+	\right.\qquad\qquad
+	\vcenter{\hbox{\includegraphics[width=.25\paperwidth]{sturmapplication}}}
+\end{equation*}
+que tiene soluciones no triviales
+\begin{math}
+	\forall m\in\mathbb{N}:
+	y_{m}\left(x\right)=
+	\sen\left(nx\right)
+\end{math}
+y $\lambda_{m}=m^{2}$.
+
+\begin{description}
+	\item[Paso 1]
+
+	      Resolvamos este problema numéricamente.
+	      Introduciendo la diferenciación finita centrada
+	      \begin{equation*}
+		      \forall n=1,\dotsc,N:
+		      y^{\prime\prime}_{n}\approx
+		      \frac{y_{n+1}-2y_{n}+y_{n-1}}{\left(\Delta x\right)^{2}}
+	      \end{equation*}
+	      donde $y_{n}=y\left(x_{n}\right)$, $x_{n}=n\Delta x$ y
+	      $\Delta x=\frac{\pi}{N+1}$.
+
+	      Muestre que la forma de diferencia finita del problema de
+	      valor de frontera dado
+	      \begin{equation*}
+		      -h^{2}y_{n+1}+
+		      2h^{2}y_{n}-
+		      h^{2}y_{n-1}=
+		      \lambda y_{n}
+	      \end{equation*}
+	      con $y_{0}=y_{N+1}=0$ y $h=\frac{1}{\Delta x}$.
+
+	\item[Paso 2]
+
+	      Resuelva la ecuación anterior como un problema de
+	      eigenvalor algebraico usando $N=1,\dotsc$.
+	      Muestre que se puede escribir de la forma matricial
+	      \begin{equation*}
+		      h^{2}
+		      \begin{bmatrix}
+			      2      & -1     & 0      & \cdots & 0      & 0      & 0      \\
+			      -1     & 2      & -1     & \cdots & 0      & 0      & 0      \\
+			      0      & -1     & 2      & \cdots & 0      & 0      & 0      \\
+			      \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+			      0      & 0      & 0      & \cdots & -1     & 2      & -1     \\
+			      0      & 0      & 0      & \cdots & 0      & -1     & 2
+		      \end{bmatrix}
+		      \begin{bmatrix}
+			      y_{1}   \\
+			      y_{2}   \\
+			      y_{3}   \\
+			      \vdots  \\
+			      y_{N-1} \\
+			      y_{N}
+		      \end{bmatrix}=
+		      \lambda
+		      \begin{bmatrix}
+			      y_{1}   \\
+			      y_{2}   \\
+			      y_{3}   \\
+			      \vdots  \\
+			      y_{N-1} \\
+			      y_{N}
+		      \end{bmatrix}.
+	      \end{equation*}
+	      Note que la matriz de coeficientes es simétrica.
+
+	\item[Paso 3]
+
+	      Escriba un programa que $\forall N\geq 2$ calcule los
+	      eigenvalores.
+	      Se proporciona la tabla para que pueda comprobar su
+	      programa.
+	      Con su programa, responda las siguientes preguntas:
+	      ¿Cómo se comparan los autovalores calculados con los
+	      valores propios dados por el problema de Sturm-Liouville?
+	      ¿Qué sucede al aumentar $N$?
+	      ¿Qué autovalores calculados concuerdan mejor con los dados
+	      por el problema de Sturm-Liouville?
+	      ¿Cuáles presentan peores diferencias en la comparación?
+
+	      \begin{table}[ht!]
+		      \centering
+		      \begin{tabular}{CCCCCCCC}
+			      \hline
+			      N  & \lambda_{1} & \lambda_{2} & \lambda_{3} & \lambda_{4} & \lambda_{5} & \lambda_{6} & \lambda_{7} \\
+			      \hline
+			      1  & 0.81057     &             &             &             &             &             &             \\
+			      2  & 0.91189     & 2.73567     &             &             &             &             &             \\
+			      3  & 0.94964     & 3.24228     & 5.53491     &             &             &             &             \\
+			      4  & 0.96753     & 3.50056     & 6.63156     & 9.16459     &             &             &             \\
+			      5  & 0.97736     & 3.64756     & 7.29513     & 10.94269    & 13.61289    &             &             \\
+			      6  & 0.98333     & 3.73855     & 7.71996     & 12.13899    & 16.12040    & 18.87563    &             \\
+			      7  & 0.98721     & 3.79857     & 8.00605     & 12.96911    & 17.93217    & 22.13966    & 24.95100    \\
+			      20 & 0.99813     & 3.97023     & 8.84993     & 15.52822    & 23.85591    & 33.64694    & 44.68265    \\
+			      50 & 0.99972     & 3.99498     & 8.97438     & 15.91922    & 24.80297    & 35.59203    & 48.24538    \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+
+	\item[Paso 4]
+
+	      Represente gráficamente el $m$-ésimo eigenvector
+	      $Cy^{\left(m\right)}_{n}$ en función de $x_{n}$, donde
+	      $n,m=1,\dotsc,N$ y $C$ es tal que
+	      \begin{math}
+		      C^{2}\Delta x
+		      \sum\limits_{n=1}^{N}\left[y^{\left(m\right)}_{n}\right]^{2}=
+		      1
+	      \end{math}.
+	      En el mismo marco, grafique
+	      $y_{m}=\sqrt{\frac{2}{\pi}}\sen\left(mx\right)$.
+	      ¿Por qué elegimos $C$ como lo hicimos?
+	      ¿Cuáles eigenvectores y eigenfunciones concuerdan mejor?
+	      ¿Qué eigenvectores y eigenfunciones concuerdan peor?
+	      ¿Por qué?
+	      ¿Por qué hay $N$ eigenvectores y un número infinito de eigenfunciones?
+\end{description}
+
+\question
+
+Encuentre los eigenvalores y eigenfunciones de los problemas de
+eigenvalor en $\left[0,l\right]$ con condiciones de frontera:
+
+\begin{multicols}{3}
+	\begin{parts}
+		\part
+
+		Neumann
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X                        & =
+				0.                                                    \\
+				X^{\prime}\left(0\right)=X^{\prime}\left(l\right) & =
+				0.
+			\end{aligned}
+			\right.\qquad
+		\end{equation*}
+
+		\part
+
+		Mixta
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X               & =
+				0.                                           \\
+				X\left(0\right)=X^{\prime}\left(l\right) & =
+				0.
+			\end{aligned}
+			\right.\qquad
+		\end{equation*}
+
+		\part
+
+		Periódica
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X & =0.                        \\
+				X\left(0\right)            & =X\left(l\right).          \\
+				X^{\prime}\left(0\right)   & =X^{\prime}\left(l\right).
+			\end{aligned}
+			\right.\qquad
+		\end{equation*}
+	\end{parts}
+\end{multicols}
+
+\question
+
+Encuentre los eigenvalores positivos y las eigenfunciones
+correspondientes para el problema de eigenvalor
+$\mathcal{B}X=\lambda X$, donde $\mathcal{B}=-\diff[4]{}{x}$
+con las condiciones de contorno
+\begin{math}
+	X\left(0\right)=
+	X\left(l\right)=
+	X^{\prime\prime}\left(0\right)=
+	X^{\prime\prime}\left(l\right)=
+	0
+\end{math}.
+
+\question
+
+Verifique la condición de ortogonalidad mediante integración en cada
+problema de Sturm-Liouville.
+
+\begin{multicols}{2}
+
+	\begin{parts}
+		\part
+
+		\begin{math}
+			X_{n}\left(x\right)=
+			\sen\left(\frac{n\pi x}{l}\right)
+		\end{math}
+		es solución de
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X      & =0. \\
+				X\left(0\right)=X\left(l\right) & =0.
+			\end{aligned}
+			\right.
+		\end{equation*}
+
+		\part
+
+		\begin{math}
+			X_{n}\left(x\right)=
+			\cos\left(\frac{n\pi x}{l}\right)
+		\end{math}
+		es solución de
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X                        & =0. \\
+				X^{\prime}\left(0\right)=X^{\prime}\left(l\right) & =0.
+			\end{aligned}
+			\right.
+		\end{equation*}
+
+		\part
+
+		\begin{math}
+			X_{n}\left(x\right)=
+			\sen\left(\frac{2n-1}{2l}\pi x\right)
+		\end{math}
+		es solución de
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X               & =0. \\
+				X\left(0\right)=X^{\prime}\left(l\right) & =0.
+			\end{aligned}
+			\right.
+		\end{equation*}
+
+		\part
+
+		\begin{math}
+			X_{n}\left(x\right)=
+			\cos\left(\frac{2n-1}{2l}\pi x\right)
+		\end{math}
+		es solución de
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				X^{\prime\prime}+\lambda X               & =0. \\
+				X^{\prime}\left(0\right)=X\left(l\right) & =0.
+			\end{aligned}
+			\right.
+		\end{equation*}
+	\end{parts}
+\end{multicols}
+
+\question
+
+Resuelva el problema de Sturm-Liouville dada por
+\begin{equation*}
+	\left\{
+	\begin{aligned}
+		{\left(e^{-6x}y^{\prime}\right)}^{\prime}+\left(1+\lambda\right)e^{-6x}y & =0. \\
+		y\left(0\right)=y\left(8\right)                                          & =0.
+	\end{aligned}
+	\right.
+\end{equation*}

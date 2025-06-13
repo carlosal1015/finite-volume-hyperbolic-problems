@@ -1,0 +1,169 @@
+\section{EDPs no lineales}
+
+El mundo que nos rodea es modelado por EDPs no lineales.
+A continuación, se muestra una breve lista de lugares en los que se
+pueden encontrar estas ecuaciones.
+
+\begin{description}
+	\item[Difusión no lineal]
+	      es una ecuación diferencial parcial no lineal que modela la
+	      transferencia de calor en un medio donde la conductividad
+	      térmica puede depender de la temperatura.
+	      \begin{equation*}
+		      \difcp{u}{t}=
+		      \difcp{\left[D\left(u\right)\difcp{u}{x}\right]}{x}.
+	      \end{equation*}
+
+	\item[Onda no lineal]
+	      modela la propagación de ondas y aparece en aplicaciones
+	      que involucran gases unidimensionales, ondas en aguas poco
+	      profundas, líneas de filamento longitudinales, cuerdas no
+	      lineales finitas, materiales elastoplásticos y líneas de
+	      transmisión, por nombrar solo algunas.
+	      \begin{equation*}
+		      \difcp[2]{u}{t}=
+		      \difcp{\left[c\left(u\right)^{2}\difcp{u}{x}\right]}{x}.
+	      \end{equation*}
+
+	\item[Burgers]
+	      es una ecuación diferencial parcial que incorpora tanto la
+	      no linealidad como la difusión.
+	      Se introdujo inicialmente como un modelo simplificado de
+	      turbulencia y aparece en diversas áreas de las matemáticas
+	      aplicadas, como el flujo suelo-agua, la acústica no lineal
+	      y el flujo de tráfico.
+	      \begin{equation*}
+		      \difcp{u}{t}+u\difcp{u}{x}=
+		      \nu\difcp[2]{u}{x}.
+	      \end{equation*}
+
+	\item[Fisher]
+	      es un modelo propuesto para la onda de avance de genes
+	      ventajosos y tiene aplicaciones en la agricultura temprana,
+	      la propagación de ondas químicas, los reactores nucleares,
+	      la cinética química y en la teoría de la combustión.
+	      \begin{equation*}
+		      \difcp{u}{t}=
+		      \difcp[2]{u}{x}+
+		      u\left(1-u\right).
+	      \end{equation*}
+
+	\item[Fitzhugh-Nagumo]
+	      modela la transmisión de impulsos nerviosos y surge en
+	      modelos de genética de poblaciones.
+	      \begin{equation*}
+		      \difcp{u}{t}=
+		      \difcp[2]{u}{x}+
+		      u\left(1-u\right)
+		      \left(u+\lambda\right).
+	      \end{equation*}
+
+	\item[Korteweg de Vries]
+	      describe la evolución de largas ondas de agua a lo largo de
+	      un canal de sección transversal rectangular.
+	      También se ha demostrado que modela ondas longitudinales
+	      que se propagan en una red unidimensional, ondas
+	      iónico-acústicas en un plasma frío, ondas en varillas
+	      elásticas y se utiliza para describir la componente axial
+	      de la velocidad en un flujo de fluido giratorio a lo largo de
+	      un tubo.
+	      \begin{equation*}
+		      \difcp{u}{t}+
+		      6u\difcp{u}{x}+
+		      \difcp[3]{u}{x}=
+		      0.
+	      \end{equation*}
+
+	\item[Boussinesq]
+	      fue introducido por Boussinesq en $1871$ para modelar ondas
+	      en aguas poco profundas en canales largos.
+	      También surge en otras aplicaciones, como en ondas
+	      reticulares no lineales unidimensionales, vibraciones en una
+	      cuerda no lineal y ondas sonoras iónicas en un plasma.
+	      \begin{equation*}
+		      \difcp[2]{u}{t}+
+		      \difcp[2]{u}{x}+
+		      \difcp{\left(2u\difcp{u}{x}\right)}{x}
+		      \frac{1}{3}\difcp[4]{u}{x}=
+		      0.
+	      \end{equation*}
+
+	\item[Eikonal]
+	      aparece en la óptica de rayos.
+	      \begin{equation*}
+		      \left|\nabla u\right|=
+		      F\left(\symbf{x}\right).
+	      \end{equation*}
+
+	\item[Gross-Pitáyevski]
+	      es un modelo para la función de onda de una sola partícula
+	      en un condensado de Bose-Einstein.
+	      \begin{equation*}
+		      i\difcp{\psi}{t}=
+		      -\nabla^{2}\psi+
+		      \left[
+		      V\left(x\right)+
+		      {\left|\psi\right|}^{2}
+		      \right]
+		      \psi.
+	      \end{equation*}
+
+	\item[Plateau]
+	      surge en el estudio de superficies mínimas.
+	      \begin{equation*}
+		      \left[
+		      1+
+		      {\left(\difcp{u}{y}\right)}^{2}
+		      \right]
+		      \difcp[2]{u}{x}-
+		      2\difcp{u}{x}
+		      \difcp{u}{y}
+		      \difcp[2]{u}{x,y}+
+		      \left[
+		      1+{\left(\difcp{u}{x}\right)}^{2}
+		      \right]
+		      \difcp[2]{u}{y}=
+		      0.
+	      \end{equation*}
+
+	\item[Sine-Gordon]
+	      surge en el estudio de superficies de curvatura negativa
+	      constante y en el estudio de dislocaciones cristalinas.
+	      \begin{equation*}
+		      \difcp[2]{u}{x,y}=
+		      \sen\left(u\right).
+	      \end{equation*}
+
+	\item[Equilibrio]
+	      surgen en elasticidad.
+	      Aquí, $\sigma_{xx}$, $\sigma_{xy}$ y $\sigma_{yy}$ son
+	      tensiones normales y cortantes, y $F_{x}$ y $F_{y}$ son
+	      fuerzas del cuerpo.
+	      Estas han sido utilizadas para modelar materiales granulares
+	      con alta fricción.
+	      \begin{align*}
+		      \diffp{\sigma_{xx}}{x}+
+		      \diffp{\sigma_{xy}}{y}+
+		      F_{x} & =
+		      0.        \\
+		      \diffp{\sigma_{xy}}{x}+
+		      \diffp{\sigma_{yy}}{y}+
+		      F_{y} & =
+		      0.
+	      \end{align*}
+
+	\item[Navier-Stokes]
+	      describe el campo de velocidad y presión de fluidos
+	      incompresibles.
+	      Aquí $\nu$ es la viscosidad cinemática, $\symbf{u}$ es la
+	      velocidad de la parcela de fluido, $P$ es la presión y $\rho$
+	      es la densidad del fluido.
+	      \begin{align*}
+		      \nabla\cdot\symbf{u}          & =
+		      0.                                \\
+		      \difcp{\symbf{u}}{t}+
+		      \symbf{u}\cdot\nabla\symbf{u} & =
+		      -\frac{\nabla P}{\rho}+
+		      \nu\nabla^{2}\symbf{u}.
+	      \end{align*}
+\end{description}

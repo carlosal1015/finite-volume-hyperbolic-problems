@@ -1,0 +1,382 @@
+\section{Ecuación de onda}
+
+\begin{theorem}[Solución general de la ecuación de onda 1D]
+	La solución general de
+	\begin{math}
+		\difcp[2]{u}{t}-
+		c^{2}\difcp[2]{u}{x}=
+		0
+	\end{math}
+	es
+	\begin{math}
+		u\left(x,t\right)=
+		f\left(x+ct\right)+
+		g\left(x-ct\right)
+	\end{math}
+	para funciones arbitrarias
+	\begin{math}
+		f,g\in
+		C^{2}\left(\mathbb{R}\right)
+	\end{math}.
+\end{theorem}
+
+\begin{theorem}[Fórmula de D'Alembert]
+	Sean
+	\begin{math}
+		\phi\in
+		C^{2}\left(\mathbb{R}\right),
+		\psi\in
+		C^{1}\left(\mathbb{R}\right)
+	\end{math}
+	dados.
+	La solución del problema de valor inicial de la ecuación de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}=
+			c^{2}\difcp[2]{u}{x} &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			u=\phi               &
+			\text{en }\mathbb{R}\times\left\{t=0\right\}.    \\
+			\difcp{u}{t}=\psi    &
+			\text{en }\mathbb{R}\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\frac{1}{2}
+		\left[
+			\phi\left(x+ct\right)+
+			\phi\left(x-ct\right)
+			\right]+
+		\frac{1}{2c}
+		\int_{x-ct}^{x+ct}
+		\psi\left(s\right)\dl s
+	\end{math}.
+\end{theorem}
+
+\begin{theorem}
+	Sean
+	\begin{math}
+		\phi\in
+		C^{2}\left(\mathbb{R}\right),
+		\psi\in
+		C^{1}\left(\mathbb{R}\right)
+	\end{math}
+	dados y $D$ es el dominio de dependencia asociado con
+	$\left(x,t\right)$.
+	La solución del problema de valor inicial de la ecuación de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}-c^{2}\difcp[2]{u}{x}=
+			f    &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			u=
+			\phi &
+			\text{en }\mathbb{R}\times\left\{t=0\right\}.    \\
+			\difcp{u}{t}=
+			\psi &
+			\text{en }\mathbb{R}\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\frac{1}{2}
+		\left[
+			\phi\left(x+ct\right)+
+			\phi\left(x-ct\right)
+			\right]+
+		\frac{1}{2c}
+		\int_{x-ct}^{x+ct}
+		\psi\left(s\right)\dl s+
+		\frac{1}{2c}
+		\iint_{D}
+		f\left(y,\tau\right)\dl y\dl\tau
+	\end{math}.
+\end{theorem}
+
+\begin{theorem}
+	Sean
+	\begin{math}
+		\phi\in
+		C^{2}\left(\mathbb{R}\right),
+		\psi\in
+		C^{1}\left(\mathbb{R}\right)
+	\end{math}
+	dados.
+	La solución del problema de valor inicial / frontera de la ecuación
+	de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{v}{t}=
+			c^{2}\difcp[2]{v}{x} &
+			\text{en }\left[0,\infty\right)\times\left[0,\infty\right). \\
+			v=
+			0                    &
+			\text{en }\left\{x=0\right\}\times\left[0,\infty\right).    \\
+			v=
+			\phi                 &
+			\text{en }\left[0,\infty\right)\times\left\{t=0\right\}.    \\
+			\difcp{v}{t}=
+			\psi                 &
+			\text{en }\left[0,\infty\right)\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}
+		v\left(x,t\right)=
+		\begin{cases}
+			\displaystyle
+			\frac{1}{2}
+			\left[
+				\phi\left(x+ct\right)+
+				\phi\left(x-ct\right)
+				\right]+
+			\frac{1}{2c}
+			\int_{x-ct}^{x+ct}
+			\psi\left(s\right)\dl s, & x\geq ct.   \\
+			\displaystyle
+			\frac{1}{2}
+			\left[
+				\phi\left(x+ct\right)+
+				\phi\left(ct-x\right)
+				\right]+
+			\frac{1}{2c}
+			\int_{ct-x}^{x+ct}
+			\psi\left(s\right)\dl s, & 0<x\leq ct.
+		\end{cases}
+	\end{math}
+\end{theorem}
+
+\begin{theorem}
+	Sean
+	\begin{math}
+		\phi\in
+		C^{2}\left(\mathbb{R}\right),
+		\psi\in
+		C^{1}\left(\mathbb{R}\right)
+	\end{math}
+	dados.
+	La solución del problema de valor inicial / frontera de la ecuación
+	de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}=
+			c^{2}\difcp[2]{u}{x} &
+			\text{en }\left(0,l\right)\times\left(0,\infty\right).     \\
+			u=0                  &
+			\text{en }\left\{x=0,l\right\}\times\left[0,\infty\right). \\
+			u=\phi               &
+			\text{en }\left(0,l\right)\times\left\{t=0\right\}.        \\
+			\difcp{u}{t}=\psi    &
+			\text{en }\left(0,l\right)\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\sum_{n=1}^{\infty}
+		\left[
+			c_{n}
+			\cos\left(\frac{n\pi ct}{l}\right)+
+			d_{n}
+			\sen
+			\left(\frac{n\pi ct}{l}\right)
+			\right]
+		\sen
+		\left(\frac{n\pi x}{l}\right)
+	\end{math},
+	donde los coeficientes de la serie son
+	\begin{equation*}
+		\forall n\in\mathbb{N}:
+		c_{n}=
+		\frac{2}{l}
+		\int_{0}^{l}
+		\phi\left(x\right)
+		\sen
+		\left(\frac{n\pi x}{l}\right)\dl x,\qquad
+		d_{n}=
+		\frac{2}{n\pi c}
+		\int_{0}^{l}
+		\psi\left(x\right)
+		\sen
+		\left(\frac{n\pi x}{l}\right)\dl x.
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	Sean
+	\begin{math}
+		\phi\in
+		C^{2}\left(\mathbb{R}\right),
+		\psi\in
+		C^{1}\left(\mathbb{R}\right)
+	\end{math}
+	dados.
+	La solución del problema de valor inicial / frontera de la ecuación
+	de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}=
+			c^{2}\difcp[2]{u}{x} &
+			\text{en }\left(0,l\right)\times\left(0,\infty\right).     \\
+			\difcp{u}{x}=0       &
+			\text{en }\left\{x=0,l\right\}\times\left[0,\infty\right). \\
+			u=\phi               &
+			\text{en }\left(0,l\right)\times\left\{t=0\right\}.        \\
+			\difcp{u}{t}=\psi    &
+			\text{en }\left(0,l\right)\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\frac{c_{0}}{2}+
+		\frac{d_{0}}{2}t+
+		\sum_{n=1}^{\infty}
+		\left[
+			c_{n}
+			\cos\left(\frac{n\pi ct}{l}\right)+
+			d_{n}
+			\sen
+			\left(\frac{n\pi ct}{l}\right)
+			\right]
+		\cos
+		\left(\frac{n\pi x}{l}\right)
+	\end{math},
+	donde los coeficientes son
+	\begin{equation*}
+		\forall n\in\mathbb{N}\cup\left\{0\right\}:
+		c_{n}=
+		\frac{2}{l}
+		\int_{0}^{l}
+		\phi\left(x\right)
+		\cos
+		\left(\frac{n\pi x}{l}\right)\dl x,\qquad
+		d_{n}=
+		\frac{2}{n\pi c}
+		\int_{0}^{l}
+		\psi\left(x\right)
+		\cos
+		\left(\frac{n\pi x}{l}\right)\dl x.
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	Sean
+	\begin{math}
+		\phi\in
+		C^{3}\left(\mathbb{R}^{2}\right),
+		\psi\in
+		C^{2}\left(\mathbb{R}^{2}\right)
+	\end{math}
+	dados.
+	La solución del problema de valor inicial de la ecuación de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}=
+			c^{2}\difc.L.{u}{} &
+			\text{en }\mathbb{R}^{2}\times\left(0,\infty\right). \\
+			u=\phi             &
+			\text{en }\mathbb{R}^{2}\times\left\{t=0\right\}.    \\
+			\difcp{u}{t}=\psi  &
+			\text{en }\mathbb{R}^{2}\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\frac{2}{4\pi ct}
+		\iint_{B\left(\symbf{x},ct\right)}
+		\frac{
+		\phi\left(\symbf{y}\right)+
+		\nabla\phi\left(\symbf{y}\right)\cdot
+		\left(\symbf{y}-\symbf{x}\right)+
+		t\psi\left(\symbf{y}\right)
+		}{
+		\sqrt{c^{2}t^{2}-{\left|y-x\right|}^{2}}
+		}
+		\dl{\symbf{y}}
+	\end{math}.
+\end{theorem}
+
+\begin{theorem}[Fórmula de Kirchoff]
+	Sean
+	\begin{math}
+		\phi\in
+		C^{3}\left(\mathbb{R}^{3}\right),
+		\psi\in
+		C^{2}\left(\mathbb{R}^{3}\right)
+	\end{math}
+	dados, $\partial B\left(\symbf{x},ct\right)$ es una esfera centrada
+	en $\symbf{x}$ con radio $ct$ y $\dl{S_{\symbf{y}}}$ es el
+	diferencial de superficie sobre la esfera
+	$\partial B\left(\symbf{x},ct\right)$ parametrizada por
+	$\symbf{y}$.
+	La solución del problema de valor inicial de la ecuación de onda
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}=
+			c^{2}\difc.L.{u}{} &
+			\text{en }\mathbb{R}^{3}\times\left(0,\infty\right). \\
+			u=\phi             &
+			\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}.    \\
+			\difcp{u}{t}=\psi  &
+			\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\frac{1}{4\pi c^{2}t^{2}}
+		\iint_{\partial B\left(\symbf{x},ct\right)}
+		\left[
+			\phi\left(\symbf{y}\right)+
+			\nabla\phi\left(\symbf{y}\right)\cdot
+			\left(\symbf{y}-\symbf{x}\right)+
+			t\psi\left(\symbf{y}\right)
+			\right]
+		\dl{S_{\symbf{y}}}
+	\end{math}.
+\end{theorem}
+
+\begin{theorem}[Principio de Duhamel]
+	La solución del problema de valor inicial de la ecuación de onda 1D no homogénea
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{u}{t}-
+			c^{2}\difcp[2]{u}{x}=
+			f\left(x,t\right) &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			u\left(x,t\right)=
+			0                 &
+			\text{en }\mathbb{R}.                            \\
+			\difcp{u}{t}\left(x,0\right)=
+			0                 &
+			\text{en }\mathbb{R}.
+		\end{cases}
+	\end{equation*}
+	es
+	\begin{math}\displaystyle
+		u\left(x,t\right)=
+		\int_{0}^{t}
+		w\left(x,t;s\right)
+		\dl s
+	\end{math},
+	donde para cada $s<t$ fijo, $w\left(x,t;s\right)$ es la solución
+	indexada por $s$ del problema
+	\begin{equation*}
+		\begin{cases}
+			\difcp[2]{w}{t}\left(x,t;s\right)=
+			c^{2}\difcp[2]{w}{x}\left(x,t;s\right) &
+			\text{en }\mathbb{R}\times\left(s,\infty\right). \\
+			w\left(x,s;s\right)=
+			0                                      &
+			\text{en }\mathbb{R}.                            \\
+			\difcp{w}{t}\left(x,s;s\right)=
+			f\left(x,s\right)                      &
+			\text{en }\mathbb{R}.
+		\end{cases}
+	\end{equation*}
+\end{theorem}

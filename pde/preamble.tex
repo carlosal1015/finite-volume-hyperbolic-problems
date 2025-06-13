@@ -1,0 +1,60 @@
+\documentclass[
+	spanish,
+	addpoints,
+	answers,
+	a4paper,
+	11pt,
+	intlimits
+]{exam}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{libertine}
+\usepackage{geometry}
+\geometry{
+	left = 2cm,
+	right = 2cm,
+	top = 2cm,
+	bottom = 3cm
+}
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{diffcoeff}
+\usepackage{amsthm}
+\usepackage{unicode-math}
+\usepackage[shortlabels]{enumitem}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{hyperref}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\newtheorem{theorem}{Teorema}
+\pagestyle{headandfoot}
+
+\usepackage{minted}
+\renewcommand{\solutiontitle}{\noindent\textbf{Solución}\par\noindent}
+\renewcommand\listingscaption{Listado}
+\newcommand{\unmarkedfntext}[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
+\difdef{c}{A}{op-symbol=\mathop{}\!\mathbin\Box}
+
+\pointpoints{Punto}{Puntos}
+\bracketedpoints
+\newcolumntype{C}{>{$}c<{$}}
+\footer{}{Página \thepage\ de \numpages}{}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall \, }
+\let\oldexist\exists
+\renewcommand{\exists}{\oldexist \: }
+
+\removenolimits{\int\iint\iiint}

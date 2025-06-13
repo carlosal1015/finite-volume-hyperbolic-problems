@@ -1,0 +1,623 @@
+\section{Series de Fourier}
+
+\begin{definition}[Seccionalmente continua]
+    La función
+    \begin{math}
+        \phi\colon\left(a,b\right)\to\mathbb{R}
+    \end{math}
+    es \textbf{seccionalmente continua} si se satisfacen:
+
+    \begin{enumerate}[(a)]
+        \item
+
+              Es continua en todos los puntos de $\left(a,b\right)$
+              \textbf{excepto quizás en un número finito de puntos}.
+
+        \item
+
+              En un punto de discontinuidad $x$, tiene una
+              \textbf{discontinuidad de salto}, es decir,
+              \begin{align*}
+                  \phi\left(x+\right) & \coloneqq
+                  \lim_{h\to0^{+}}
+                  \phi\left(x+h\right).           \\
+                  \phi\left(x-\right) & \coloneqq
+                  \lim_{h\to0^{-}}
+                  \phi\left(x+h\right).
+              \end{align*}
+
+              Ambos \textbf{existen} y son \textbf{finitos}.
+
+        \item
+
+              Los límites $\phi\left(a+\right)$ y
+              $\phi\left(b-\right)$ \textbf{existen} y son
+              \textbf{finitos}.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Serie de Fourier seno]
+    La \textbf{serie de Fourier seno} de
+    $\phi\colon\left(0,l\right)\to\mathbb{R}$ es
+    \begin{math}\displaystyle
+        \sum_{n=1}^{\infty}
+        b_{n}
+        \sen
+        \left(\frac{n\pi x}{l}\right)
+    \end{math},
+    donde
+    \begin{math}\displaystyle
+        \forall n\in
+        \mathbb{N}:
+        b_{n}\coloneq
+        \frac{2}{l}
+        \int_{0}^{l}
+        \phi\left(x\right)
+        \sen
+        \left(\frac{n\pi x}{l}\right)
+        \dl x
+    \end{math}.
+\end{definition}
+
+\begin{definition}[Serie de Fourier coseno]
+    La \textbf{serie de Fourier coseno} de
+    $\phi\colon\left(0,l\right)\to\mathbb{R}$ es
+    \begin{math}\displaystyle
+        \frac{a_{0}}{2}+
+        \sum_{n=1}^{\infty}
+        a_{n}
+        \cos\left(\frac{n\pi x}{l}\right)
+    \end{math},
+    donde
+    \begin{math}\displaystyle
+        \forall n\in
+        \mathbb{N}\cup\left\{0\right\}:
+        a_{n}=
+        \frac{2}{l}
+        \int_{0}^{l}
+        \phi\left(x\right)
+        \cos\left(\frac{n\pi x}{l}\right)
+        \dl x
+    \end{math}.
+\end{definition}
+
+\begin{definition}[Serie de Fourier completa]
+    La \textbf{serie de Fourier completa} de
+    $\phi\colon\left(-l,l\right)\to\mathbb{R}$ es\linebreak
+    \begin{math}\displaystyle
+        \frac{a_{0}}{2}+
+        \sum_{n=1}^{\infty}
+        \left[
+            a_{n}
+            \cos\left(\frac{n\pi x}{l}\right)+
+            b_{n}
+            \sen
+            \left(\frac{n\pi x}{l}\right)
+            \right]
+    \end{math},
+    donde
+    \begin{math}\displaystyle
+        \forall n\in
+        \mathbb{N}\cup\left\{0\right\}:
+        a_{n}=
+        \frac{1}{l}
+        \int_{-l}^{l}
+        \phi\left(x\right)
+        \cos\left(\frac{n\pi x}{l}\right)
+        \dl x
+    \end{math}
+    y
+    \begin{math}\displaystyle
+        \forall n\in
+        \mathbb{N}:
+        b_{n}=
+        \frac{1}{l}
+        \int_{-l}^{l}
+        \phi\left(x\right)
+        \sen
+        \left(\frac{n\pi x}{l}\right)
+        \dl x
+    \end{math}.
+\end{definition}
+
+\begin{definition}[Serie de Fourier completa versión compleja]
+    La \textbf{serie de Fourier completa versión compleja} de
+    $\phi\colon\left(-l,l\right)\to\mathbb{R}$ es
+    \begin{math}\displaystyle
+        \sum_{n=-\infty}^{\infty}
+        c_{n}
+        \exp\left(\frac{in\pi x}{l}\right)
+    \end{math},
+    donde
+    \begin{math}\displaystyle
+        \forall n\in
+        \mathbb{Z}:
+        c_{n}=
+        \frac{1}{2l}
+        \int_{-l}^{l}
+        \phi\left(x\right)
+        \exp\left(-\frac{in\pi x}{l}\right)
+        \dl x
+    \end{math}
+    e $i=\sqrt{-1}\in\mathbb{C}$.
+\end{definition}
+
+% \begin{definition}
+%     Una función $f\colon I\subset\mathbb{R}\to\mathbb{R}$ es
+%     \textbf{uniformemente continua} si y solamente si
+%     \begin{equation*}
+%         \forall\varepsilon>0:
+%         \exists\delta>0
+%         \text{ tal que }
+%         \forall x,y\in I:
+%         \left|x-y\right|\implies
+%         \left|f\left(x\right)-f\left(y\right)\right|<
+%         \varepsilon.
+%     \end{equation*}
+% \end{definition}
+
+% \begin{theorem}
+%     Si $f\colon\left[a,b\right]\to\mathbb{R}$ es continua, entonces
+%     $f$ es \textbf{uniformemente continua}.
+% \end{theorem}
+
+\begin{theorem}[Lema de Riemann-Lebesgue]
+    Sean $\left\{a_{n}\right\}_{n\in\mathbb{N}}$ y
+    $\left\{b_{n}\right\}_{n\in\mathbb{N}}$ los coeficientes de la
+    serie de Fourier completa de $\phi\in L^{2}\left(a,b\right)$.
+    Entonces,
+    \begin{math}
+        \lim\limits_{n\to\infty}
+        a_{n}=0
+    \end{math}
+    y
+    \begin{math}
+        \lim\limits_{n\to\infty}
+        b_{n}=0
+    \end{math}.
+\end{theorem}
+
+\section{Problema de Sturm-Liouville}
+
+\begin{definition}[Problema de Sturm-Liouville]
+    Considere el siguiente problema de valor de frontera para una
+    función $X\left(x\right)$ en $\left[0,l\right]$:
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            -{\left(
+            p\left(x\right)
+            X^{\prime}\left(x\right)
+            \right)}^{\prime}-
+            q\left(x\right)
+            X\left(x\right)                    & =
+            \lambda
+            \sigma\left(x\right)
+            X\left(x\right).                       \\
+            \alpha_{1}X\left(0\right)+
+            \alpha_{2}X^{\prime}\left(0\right) & =
+            0.                                     \\
+            \alpha_{3}X\left(l\right)+
+            \alpha_{4}X^{\prime}\left(l\right) & =
+            0.
+        \end{aligned}
+        \right.
+    \end{equation*}
+    Aquí,
+    \begin{itemize}
+        \item
+
+              las funciones dadas $p\left(x\right)$,
+              $q\left(x\right)$ y $\sigma\left(x\right)$ son no
+              negativas en $\left[0,l\right]$ y
+              $p\in C^{1}\left(0,l\right)$;
+
+        \item
+
+              las constantes fijas dadas $\alpha_{1}$, $\alpha_{2}$,
+              $\alpha_{3}$, $\alpha_{4}$, alguna de ellas es distinta
+              de cero.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Eigenfunción y eigenvalor]
+    Defina el \textbf{operador de Sturm-Liouville}
+    \begin{equation*}
+        \forall x\in\left[0,l\right]:
+        \mathcal{L}
+        X\left(x\right)\coloneqq
+        -{\left(
+        p\left(x\right)
+        X^{\prime}\left(x\right)
+        \right)}^{\prime}-
+        q\left(x\right).
+    \end{equation*}
+    $X$ es una \textbf{eigenfunción} de $\mathcal{L}$ con peso
+    $\sigma\left(x\right)$ y su correspondiente \textbf{eigenvalor}
+    $\lambda$ si y solamente si
+    \begin{equation*}
+        \mathcal{L}
+        X\left(x\right)=
+        \lambda
+        \sigma\left(x\right)
+        X\left(x\right).
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Identidad de Lagrange]
+    \begin{equation*}
+        \forall X_{1},X_{2}\in C^{2}\left[0,l\right]:
+        \int_{0}^{l}
+        \left[
+        X_{2}\left(x\right)
+        \mathcal{L}X_{1}\left(x\right)-
+        X_{1}\left(x\right)
+        \mathcal{L}X_{2}\left(x\right)
+        \right]
+        \dl x=
+        {
+        -p\left(x\right)
+        X^{\prime}_{1}\left(x\right)
+        X_{2}\left(x\right)
+        \Big|}_{0}^{l}+
+        {
+        p\left(x\right)
+        X_{1}\left(x\right)
+        X_{2}^{\prime}\left(x\right)
+        \Big|}_{0}^{l}.
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+    El operador $\mathcal{L}$ es \textbf{simétrico}.
+    Se tiene que para cualquier $X_{1}$ y $X_{2}$
+    \begin{align*}
+        \left\langle X_{1},\mathcal{L}X_{2}\right\rangle & =
+        \left\langle \mathcal{L}X_{1},X_{2}\right\rangle.    \\
+        \int_{0}^{l}
+        X_{1}\left(x\right)
+        \mathcal{L}X_{2}\left(x\right)
+        \dl x                                            & =
+        \int_{0}^{l}
+        \mathcal{L}X_{1}\left(x\right)
+        X_{2}\left(x\right)
+        \dl x.
+    \end{align*}
+\end{theorem}
+
+\section{Serie de Fourier asociada a la condición de frontera simétrica}
+
+%Considere $X\in C^{2}\left[a,b\right]$ que satisface cierta condición
+%de frontera $X\left(a\right)=X\left(b\right)=0$.
+%Defina el operador diferencial, $\mathcal{A}\coloneqq-\diff[2]{}{x}$.
+%
+%Sea $\lambda\in\mathbb{R}$ y $X\neq 0$ una función que satisface
+%las condiciones de frontera tal que $0$.
+\begin{definition}[Condición de frontera simétrica]
+    $X_{1}\left(x\right)$ es una
+    \textbf{condición de frontera simétrica en $\left[a,b\right]$} de
+    $X_{2}\left(x\right)$ si y solamente
+    \begin{math}
+        X_{1}\left(b\right)
+        X^{\prime}_{2}\left(b\right)-
+        X^{\prime}_{1}\left(b\right)
+        X_{2}\left(b\right)=
+        X_{1}\left(a\right)
+        X^{\prime}_{2}\left(a\right)-
+        X^{\prime}_{1}\left(a\right)
+        X_{2}\left(a\right).
+    \end{math}
+\end{definition}
+
+\noindent
+Considere el \textbf{problema de eigenvalor}
+$\mathcal{A}X=\lambda X$ que satisface alguna condición de frontera
+simétrica, donde el operador diferencial
+$\mathcal{A}\coloneqq -\diff[2]{}{x}$.
+Este operador satisface
+\begin{math}
+    \left\langle\mathcal{A}X_{1},X_{2}\right\rangle=
+    \left\langle X_{1},\mathcal{A}X_{2}\right\rangle
+\end{math}.
+
+\begin{definition}[Serie de Fourier general]
+    Considere una condición de frontera simétrica y asuma que existe
+    una cantidad infinita numerable de eigenvalores
+    ${\left\{\lambda_{n}\right\}}_{n\in\mathbb{N}}$ y eigenfunciones
+    ${\left\{X_{n}\left(x\right)\right\}}_{n\in\mathbb{N}}$.
+    La \textbf{serie de Fourier general} de
+    $\phi\in L^{2}\left(a,b\right)$ es
+    \begin{math}
+        \sum\limits_{n=1}^{\infty}
+        A_{n}X_{n}\left(x\right)
+    \end{math},
+    donde
+    \vspace*{-\baselineskip}\setlength\belowdisplayshortskip{0pt}
+    \begin{equation*}
+        \forall n\in\mathbb{N}:
+        A_{n}\coloneqq
+        \frac{
+        \left\langle
+        \phi,X_{n}
+        \right\rangle}{
+        \left\|
+        X_{n}
+        \right\|^{2}}=
+        \frac{
+            \int_{a}^{b}
+            \phi\left(x\right)
+            X_{n}\left(x\right)
+            \dl x}{
+            \int_{a}^{b}
+            X^{2}_{n}\left(x\right)
+            \dl x}
+    \end{equation*}
+    y $\left\{X_{n}\colon n\in\mathbb{N}\right\}$ es un conjunto
+    ortogonal de funciones en $\left(a,b\right)$.
+\end{definition}
+
+Para los casos de condiciones de frontera \textbf{Dirichlet}:
+$X\left(a\right)=X\left(b\right)=0$, \textbf{Neumann}:
+$X^{\prime}\left(a\right)=X^{\prime}\left(b\right)=0$,
+\textbf{periódicas}: $X\left(a\right)=X\left(b\right)$ y
+$X^{\prime}\left(a\right)=X^{\prime}\left(b\right)$,
+la \textbf{serie de Fourier clásica} de $\phi$.
+En ese caso, los $X_{n}$ estará formado por senos y cosenos con
+frecuencias que aumentan apropiadamente.
+
+\begin{theorem}
+    Los eigenvalores del problema de eigenvalor
+    $\mathcal{A}X=\lambda X$ sobre las funciones $X\left(X\right)$ en
+    $\left[a,b\right]$ que satisface condiciones de frontera
+    simétrica, son reales.
+\end{theorem}
+
+\section{Convergencia de la serie de Fourier general}
+
+Existen muchas maneras en que una función asociada
+$\phi\colon\left(a,b\right)\to\mathbb{R}$ puede converger a otra
+función.
+Analizamos tres maneras en que una serie de Fourier general
+\textbf{puede converger} a $\phi$ en $L^{2}$, puntualmente o
+uniformemente.
+
+\begin{definition}
+    La sucesión de funciones
+    \begin{math}
+        \left\{
+        f_{n}\colon\left(a,b\right)\to\mathbb{R}
+        \right\}_{n\in\mathbb{N}}
+    \end{math}
+    converge hacia $f$ en $L^{2}\left(a,b\right)$ si y solamente si
+    \begin{equation*}
+        \int_{a}^{b}
+        {\left|
+        f_{n}\left(x\right)-
+        f\left(x\right)
+        \right|}^{2}
+        \dl x
+        \xrightarrow{n\to\infty}
+        0.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Convergencia de la serie de Fourier general]
+    Si $\phi\in L^{2}\left(a,b\right)$, entonces la serie de Fourier
+    general asociada con cualquier condición de frontera simétrico
+    converge a $\phi$ en el sentido $L^{2}$ sobre el intervalo
+    $\left(a,b\right)$.
+    Decimos que las eigenfunciones asociadas con la condición de
+    frontera simétrica es \textbf{completo} en
+    $L^{2}\left(a,b\right)$.
+\end{theorem}
+
+\begin{definition}[Convergencia puntual de funciones]
+    La sucesión de funciones continuas
+    \begin{math}
+        \left\{
+        f_{n}\colon\left(a,b\right)\to\mathbb{R}
+        \right\}_{n\in\mathbb{N}}
+    \end{math}
+    \textbf{converge puntualmente} a $f$ si y solamente si
+    \begin{equation*}
+        \forall x\in\left(a,b\right):
+        \forall\varepsilon>0:
+        \exists n_{0}\in\mathbb{N}
+        \text{ tal que }
+        \forall n\geq n_{0}:
+        \left|
+        f\left(x\right)-
+        f_{n}\left(x\right)
+        \right|<
+        \varepsilon.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Convergencia puntual de la serie de Fourier completa]
+    Suponga que $\phi$ y $\phi^{\prime}$ son funciones seccionalmente
+    continuas en $\left(-\pi,\pi\right)$ y los límites laterales
+    $\phi\left(\left(-\pi\right)+\right)$,
+    $\phi^{\prime}\left(\left(-\pi\right)+\right)$
+    $\phi\left(\pi-\right)$ y $\phi^{\prime}\left(\pi-\right)$
+    existen.
+    Extienda $\phi$ periódicamente a todo $\mathbb{R}$.
+    Entonces, $\forall x\in\mathbb{R}$, la serie de Fourier clásica
+    converge puntualmente a
+    $\frac{\phi\left(x+\right)+\phi\left(x-\right)}{2}$.
+\end{theorem}
+
+\begin{definition}[Convergencia uniforme de funciones]
+    La sucesión de funciones continuas
+    \begin{math}
+        \left\{
+        f_{n}\colon\left(a,b\right)\to\mathbb{R}
+        \right\}_{n\in\mathbb{N}}
+    \end{math}
+    \textbf{converge uniformemente} a $f$ si y solamente si
+    \begin{equation*}
+        \forall\varepsilon>0:
+        \exists n_{0}\in\mathbb{N}
+        \text{ tal que }
+        \forall n\geq n_{0}:
+        \forall x\in\left(a,b\right):
+        \left|
+        f\left(x\right)-
+        f_{n}\left(x\right)
+        \right|<
+        \varepsilon.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Convergencia uniforme de la serie de Fourier completa]
+    Suponga que $\phi$ es continua y seccionalmente
+    $C^{1}\left[-\pi,\pi\right]$ con
+    $\phi\left(-\pi\right)=\phi\left(\pi\right)$.
+    Entonces, la serie de Fourier completa clásica converge
+    absolutamente y uniformemente a $\phi$ en
+    $\left[-\pi,\pi\right]$.
+    Además, la serie de Fourier completa converge absolutamente y
+    uniformemente a la extensión periódica de $\phi$ en $\mathbb{R}$.
+\end{theorem}
+
+\begin{theorem}[Diferenciación término a término de la serie de Fourier]
+    Suponga que $\phi\in C\left[-\pi,\pi\right]$  satisface
+    $\phi\left(-\pi\right)=\phi\left(\pi\right)$ y es
+    seccionalmente $C^{1}\left(-\pi,\pi\right)$.
+    \begin{enumerate}[(a)]
+        \item
+
+              La extensión periódica de $\phi$ en $\mathbb{R}$ es
+              continua y seccionalmente
+              $C^{1}\left(\mathbb{R}\right)$.
+              Considere las series de Fourier
+              \begin{equation*}
+                  \begin{aligned}
+                      \phi\left(x\right)          & =
+                      \frac{a_{0}}{2}+
+                      \sum_{n=1}^{\infty}
+                      \left[
+                          a_{n}
+                          \cos\left(nx\right)+
+                          b_{n}
+                          \sen\left(nx\right)
+                      \right].                        \\
+                      \phi^{\prime}\left(x\right) & =
+                      \frac{A_{0}}{2}+
+                      \sum_{n=1}^{\infty}
+                      \left[
+                          A_{n}
+                          \cos\left(nx\right)+
+                          B_{n}
+                          \sen\left(nx\right)
+                          \right].
+                  \end{aligned}\qquad
+                  \begin{aligned}
+                      a_{n} & =
+                      \frac{1}{\pi}
+                      \int_{-\pi}^{\pi}
+                      \phi\left(y\right)
+                      \cos\left(ny\right)\dl y. \\
+                      b_{n} & =
+                      \frac{1}{\pi}
+                      \int_{-\pi}^{\pi}
+                      \phi\left(y\right)
+                      \sen\left(ny\right)\dl y.
+                  \end{aligned}
+              \end{equation*}
+              Entonces, $\forall n\in\mathbb{N}$: $A_{0}=a_{0}$,
+              $A_{n}=nb_{n}$ y $B_{n}=-na_{n}$.
+
+        \item
+
+              Supongamos que la extensión de $\phi^{\prime}$ es
+              seccionalmente $C^{1}$ en cualquier intervalo de
+              $\mathbb{R}$ en el que sea continua.
+              Entonces,
+              \begin{equation*}
+                  \phi^{\prime}\left(x\right)=
+                  \sum_{n=1}^{\infty}
+                  \left[
+                      nb_{n}
+                      \cos\left(nx\right)-
+                      na_{n}
+                      \sen\left(nx\right)
+                      \right].
+              \end{equation*}
+              Si $x$ es un punto donde $\phi^{\prime}$ presenta una
+              discontinuidad de salto, entonces esta serie de Fourier
+              converge a
+              \begin{math}
+                  \frac{
+                      \phi^{\prime}\left(x+\right)+
+                      \phi^{\prime}\left(x-\right)
+                  }{2}
+              \end{math}.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Integración término a término de la serie de Fourier]
+    Sea $\phi\left(x\right)$ seccionalmente continua en
+    $\left[-\pi,\pi\right]$ y extienda $\phi$ periódicamente a
+    $\mathbb{R}$ (con período $2\pi$).
+    Defina la siguiente primitiva de $\phi$:
+    \begin{equation*}
+        \Phi\left(x\right)\coloneqq
+        \int_{0}^{x}
+        \phi\left(y\right)\dl y.
+    \end{equation*}
+    Entonces, $\Psi$ es continua, seccionalmente
+    $C^{1}\left(0,x\right)$ y en cualquier $x$ donde $\phi$ es
+    continua: $\Psi^{\prime}\left(x\right)=\phi\left(x\right)$.
+    Además, la serie de Fourier para $\Psi$ es dada por
+    \begin{equation*}
+        \frac{A_{0}}{2}+
+        \sum_{n=1}^{\infty}
+        \left[
+        \frac{-b_{n}}{n}
+        \cos\left(nx\right)+
+        \frac{a_{n}}{n}
+        \sen\left(x\right)
+        \right],\qquad
+        \frac{A_{0}}{2}=
+        \frac{1}{2\pi}
+        \int_{-\pi}^{\pi}
+        \Phi\left(y\right)
+        \dl y.
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Desigualdad de Bessel]
+    Sean $\phi\in L^{2}\left(a,b\right)$ y
+    $\left\{X_{n}\left(x\right)\right\}_{n\in\mathbb{N}}$ una familia
+    ortonormal de funciones en $\left(a,b\right)$.
+    Defina
+    \begin{align*}
+        A_{n}\coloneqq
+        \frac{
+        \left\langle
+        \phi,X_{n}
+        \right\rangle
+        }{
+        {\left\|X_{n}\right\|}^{2}
+        }     & =
+        \frac{
+        \int_{a}^{b}
+        \phi\left(x\right)
+        X_{n}\left(x\right)\dl x
+        }{
+        \int_{a}^{b}
+        {\left|X_{n}\left(x\right)\right|}^{2}\dl x
+        }.\notag
+        \shortintertext{Entonces,}
+        \sum_{n=1}^{\infty}
+        A^{2}_{n}
+        \int_{a}^{b}
+        \left|X_{n}\left(x\right)\right|
+        \dl x & \leq
+        \int_{a}^{b}
+        {\left|\phi\left(x\right)\right|}^{2}
+        \dl x.\tag{Desigualdad de Bessel}
+    \end{align*}
+    Cuando la igualdad se cumple, llamaremos la
+    \textbf{identidad de Parseval}.
+\end{theorem}

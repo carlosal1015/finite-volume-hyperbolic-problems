@@ -1,0 +1,966 @@
+\question
+
+Sea $h\colon\mathbb{R}\times\left(0,\infty\right)\to\mathbb{R}$ dado.
+Utilice la transformada de Fourier para resolver el problema
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		c^{2}
+		\difcp[2]{u}{x}=
+		h              &
+		\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+		u=0            &
+		\text{en }\mathbb{R}\times\left\{t=0\right\}.    \\
+		\difcp{u}{t}=0 &
+		\text{en }\mathbb{R}\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+
+\question
+
+Utilice la transformada de Fourier para resolver el problema
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-\difc.L.{u}{}=0 &
+		\text{en }\mathbb{R}^{n}\times\left(0,\infty\right). \\
+		u=g                             &
+		\text{en }\mathbb{R}^{n}\times\left\{t=0\right\}.    \\
+		\difcp{u}{t}=0                  &
+		\text{en }\mathbb{R}^{n}\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+\begin{equation*}
+	\text{donde }
+	g\in\mathcal{S}\coloneqq
+	\left\{
+	u\in C^{\infty}\left(\mathbb{R}^{n}\right)\,\middle|\,
+	\forall j\in\mathbb{N}_{0}:
+	\forall\alpha\in\mathbb{N}^{n}_{0}:
+	\sup_{x\in\mathbb{R}^{n}}
+	\left\{
+	\left[1+\left|x\right|^{j}\right]
+	\left|
+	D^{\alpha}
+	u\left(x\right)
+	\right|
+	\right\}<\infty
+	\right\}.
+\end{equation*}
+
+\textbf{Sugerencia}: Use la transformada Fourier de $u$ en la variable $x$,
+la solución de la EDO resultante son de la forma $\beta e^{t\gamma}$,
+donde $\left\{\beta,\gamma\right\}\subset\mathbb{C}$.
+
+\question
+
+Use el cambio de variables $\xi=x+ct$, $\eta=x-ct$ y transforme la
+ecuación de onda 1D $\difcp[2]{u}{t}-c^{2}\difcp[2]{u}{x}=0$ en
+$\difcp{u}{\xi,\eta}=0$ y halle la fórmula de D'Alembert.
+
+\question
+
+Sean $g\in C^2\left(\mathbb{R}\right)$,
+$h\in C^{1}\left(\mathbb{R}\right)$ dados.
+Encuentre una fórmula explícita para el problema
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-\difcp[2]{u}{x}=0 &
+		\text{en }\left(0,\infty\right)\times\left(0,\infty\right). \\
+		u=0                               &
+		\text{en }\left\{x=0\right\}\times\left(0,\infty\right).    \\
+		u=g                               &
+		\text{en }\left(0,\infty\right)\times\left\{t=0\right\}.    \\
+		\difcp{u}{t}=
+		h                                 &
+		\text{en }\left(0,\infty\right)\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+
+\question
+
+Sean $g\in C^3\left(\mathbb{R}^{3}\right)$,
+$h\in C^{2}\left(\mathbb{R}^{3}\right)$ dados.
+Pruebe que $u\in C^{2}\left(\mathbb{R}^{3}\times[0,\infty)\right)$
+satisface el problema de valor inicial para la ecuación de onda 3D
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		\difc.L.{u}{}=0 &
+		\text{en }\mathbb{R}^{3}\times(0,\infty).         \\
+		u=g             &
+		\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}. \\
+		\difcp{u}{t}=
+		h               &
+		\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+
+\question
+
+Sea $u\in C^{2}\left(\mathbb{R}\times\left[0,\infty\right)\right)$
+una solución de la ecuación de onda 1D
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		\difcp[2]{u}{x}=0 &
+		\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+		u=g               &
+		\text{en }\mathbb{R}\times\left\{t=0\right\}.    \\
+		\difcp{u}{t}=h    &
+		\text{en }\mathbb{R}\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+Supongamos que $g\in C^{2}_{c}\left(\mathbb{R}\right)$ y
+$h\in C^{1}_{c}\left(\mathbb{R}\right)$.
+Se definen la energía cinética $k\left(t\right)$ y la energía
+potencial $p\left(t\right)$ en el tiempo $t$ como
+\begin{equation*}
+	k\left(t\right)\coloneqq
+	\frac{1}{2}
+	\int_{-\infty}^{\infty}
+	{\left(\difcp{u}{t}\right)}^{2}\dl x,\quad
+	p\left(t\right)\coloneqq
+	\frac{1}{2}
+	\int_{-\infty}^{\infty}
+	{\left(\difcp{u}{x}\right)}^{2}
+	\dl x.
+\end{equation*}
+Pruebe que
+\begin{multicols}{2}
+	\begin{parts}
+		\part
+
+
+		\begin{math}
+			\forall t\geq0: k\left(t\right)+p\left(t\right)
+		\end{math}
+		es constante.
+
+		\part
+
+		\begin{math}
+			\lim\limits_{t\to\infty}
+			k\left(t\right)=
+			\lim\limits_{t\to\infty}
+			p\left(t\right)
+		\end{math}.
+	\end{parts}
+\end{multicols}
+\textbf{Sugerencia}: Use que $u$ viene dado por
+$u\left(x,t\right)=F\left(x+t\right)+G\left(x-t\right)$.
+
+\question
+
+Sea $u$ la solución de la ecuación de onda
+\begin{equation*}
+	\begin{cases}
+		\difcp{u}{t}-
+		\difc.L.{u}{}=0 &
+		\text{en }\mathbb{R}^{3}\times(0,\infty).         \\
+		u=g.            &
+		\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}. \\
+		\difcp{u}{t}=h  &
+		\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+dada por la fórmula de Kirchhoff, donde $g,h$ son suaves y tienen
+soporte compacto.
+Muestre que $\exists C\in\mathbb{R}$ tal que
+\begin{math}
+	\forall\left(x,t\right)\in
+	\mathbb{R}^{3}\times\left(0,\infty\right):
+	\left|u\left(x,t\right)\right|\leq
+	\frac{C}{t}
+\end{math}.
+
+\question
+
+Se define una solución débil de la ecuación de onda 1D a una función
+$u$ tal que
+\begin{equation*}
+	\forall\phi\in
+	C^{2}_{c}\left(\mathbb{R}^{2}\right):
+	\iint_{\mathbb{R}^{2}}
+	u\left(x,t\right)
+	\left[
+		\difcp[2]{\phi}{t}\left(x,t\right)-
+		c^{2}
+		\difcp[2]{\phi}{x}\left(x,t\right)
+		\right]
+	\dl x\dl t=
+	0.
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Muestre que toda solución clásica de la ecuación de onda 1D es una
+	solución débil y que toda solución débil regular de la ecuación de
+	onda es solución clásica.
+
+	\part
+
+	Muestre que las funciones discontinuas
+	\begin{math}
+		u_{1}\left(x,t\right)=
+		H\left(x-t\right)
+	\end{math}
+	y
+	\begin{math}
+		u_{2}\left(x,t\right)=
+		H\left(x+t\right)
+	\end{math}
+	son soluciones débiles de la ecuación de onda 1D,
+	donde $H$ es la función de Heaviside
+	\begin{equation*}
+		H\left(x\right)=
+		\begin{cases}
+			0, & x<0.     \\
+			1, & x\geq 0.
+		\end{cases}.
+	\end{equation*}
+\end{parts}
+
+\question
+
+Sea $f\in C_{c}\left(\mathbb{R}\right)$.
+Pruebe que $u\left(x,t\right)\equiv f\left(x-t\right)$ es solución
+débil de la ecuación de onda 1D en el sentido del ejercicio anterior.
+
+\question
+
+Sea $\lambda\in\mathbb{R}$.
+Encuentre una solución de
+\begin{math}
+	\difcp[2]{u}{t}-
+	\difcp[2]{u}{x}=
+	\lambda^{2}u
+\end{math} de la forma $u=f\left(x^{2}-t^{2}\right)=f\left(s\right)$,
+donde $f\left(0\right)=1$, en forma de serie de potencias en $s$.
+
+\question
+
+Hallar la solución de
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		\difcp[2]{u}{x}=0 &
+		\text{en }\left(0,\infty\right)\times\left(0,\infty\right). \\
+		u=f               &
+		\text{en }\left\{x=0\right\}\times\left(0,\infty\right).    \\
+		u=g               &
+		\text{en }\left(0,\infty\right)\times\left\{t=0\right\}.    \\
+		\difcp{u}{t}=h    &
+		\text{en }\left(0,\infty\right)\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+con $f,g\in C^{2}\left(\left(0,\infty\right)\right)$,
+$h\in C^{1}\left(\left(0,\infty\right)\right)$ que satisfacen
+$f\left(0\right)=g\left(0\right)$,
+$f^{\prime}\left(0\right)=h\left(0\right)$
+y $f^{\prime\prime}\left(0\right)=g^{\prime\prime}\left(0\right)$.
+Verificar que la solución obtenida tiene derivadas de segundo orden
+continuas aún sobre la característica $x=t$.
+
+\question
+
+Pruebe que si
+\begin{math}
+	u\left(\symbf{x},t\right)=
+	w\left(\left|\symbf{x}\right|,t\right)
+\end{math}
+es una solución clásica radial de la ecuación de onda 3D, se tiene
+que existen $F$ y $G$ tales que
+\begin{math}
+	u\left(x,t\right)=
+	\dfrac{
+		F\left(\left|\symbf{x}\right|-t\right)+
+		G\left(\left|\symbf{x}\right|+t\right)
+	}{\left|\symbf{x}\right|}
+\end{math}.
+
+\question
+
+Sean $\symbf{B}\left(x,y,z,t\right)$, $\symbf{E}\left(x,y,z,t\right)$
+el campo magnético y eléctrico, respectivamente.
+Su evolución se rige por las leyes de Maxwell, que para el vacío, se
+expresa como
+\begin{align*}
+	\nabla\times\symbf{E}                & =
+	-\diffp{\symbf{B}}{t}.
+	                                     &
+	\nabla\times\symbf{B}=
+	\frac{1}{c^{2}}\diffp{\symbf{E}}{t}. &   \\
+	\nabla\cdot\symbf{E}                 & =
+	0.                                   &
+	\nabla\cdot\symbf{B}=0.              &
+\end{align*}
+Muestre que si
+\begin{math}
+	\symbf{B}\left(x,y,z,t\right)=
+	\left(0,B\left(x,t\right),0\right)
+\end{math}
+y
+\begin{math}
+	\symbf{E}\left(x,y,z,t\right)=
+	\left(0,0,E\left(x,t\right)\right)
+\end{math},
+entonces $B\left(x,t\right)$ y $E\left(x,t\right)$ satisfacen la
+ecuación de onda
+\begin{math}
+	\difcp[2]{u}{t}-c^{2}\difcp[2]{u}{x}=
+	0.
+\end{math}
+
+\question
+
+Utilice la fórmula de Kirchhoff para escribir la solución explícita
+de las ecuaciones de Maxwell.
+Escribe la respuesta en forma vectorial.
+
+\question
+
+Resuelva el problema de Cauchy
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		\difcp[2]{u}{x}=0                    &
+		\text{en }\mathbb{R}\times(0,\infty).  \\
+		u\left(x,0\right)=\sen\left(x\right) &
+		\text{en }\mathbb{R}.                  \\
+		\difcp{u}{t}\left(x,0\right)=x       &
+		\text{en }\mathbb{R}.
+	\end{cases}
+\end{equation*}
+
+\question
+
+Sea $t^{\ast}>0$ un tiempo fijo, pero arbitrario.
+Sean $u_{1}$ y $u_{2}$ las soluciones de los problemas de Cauchy
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u_{1}}{t}-
+		\difcp[2]{u_{1}}{x}=0  &
+		\text{en }\mathbb{R}\times(0,\infty). \\
+		u_{1}\left(x,0\right)=
+		\phi_{1}\left(x\right) &
+		\text{en }\mathbb{R}.                 \\
+		\difcp{u_{1}}{t}\left(x,0\right)=
+		\psi_{1}\left(x\right) &
+		\text{en }\mathbb{R}.
+	\end{cases}\qquad
+	\begin{cases}
+		\difcp[2]{u_{2}}{t}-
+		\difcp[2]{u_{2}}{x}=0  &
+		\text{en }\mathbb{R}\times(0,\infty). \\
+		u_{2}\left(x,0\right)=
+		\phi_{2}\left(x\right) &
+		\text{en }\mathbb{R}.                 \\
+		\difcp{u_{2}}{t}\left(x,0\right)=
+		\psi_{2}\left(x\right) &
+		\text{en }\mathbb{R}.
+	\end{cases}
+\end{equation*}
+Asuma que
+\begin{math}
+	\phi_{1},
+	\phi_{2},
+	\psi_{1},
+	\psi_{2}\colon\mathbb{R}\to\mathbb{R}
+\end{math}
+son funciones acotadas.
+Considere la siguiente proposición:
+\begin{equation*}
+	\forall\varepsilon>0:
+	\exists\delta>0
+	\text{ tal que }
+	{
+		\left\|
+		\phi_{1}\left(x\right)-
+		\phi_{2}\left(x\right)
+		\right\|
+	}_{\infty}<
+	\delta,
+	{
+			\left\|
+			\psi_{1}\left(x\right)-
+			\psi_{2}\left(x\right)
+			\right\|}_{\infty}<
+	\delta
+	\implies
+	{
+		\left\|
+		u_{1}\left(x,t^{\ast}\right)-
+		u_{2}\left(x,t^{\ast}\right)
+		\right\|
+	}_{\infty}<
+	\varepsilon.
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Explique con palabras qué significa esta afirmación en
+	términos de resolver el problema de valor inicial para la
+	ecuación de onda.
+
+	\part
+
+	Prueba la proposición.
+\end{parts}
+
+\question
+
+Resuelva el problema de valor inicial
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{x}-
+		\difcp{u}{x,t}-
+		4\difcp[2]{u}{t}=0                 &
+		\text{en }\mathbb{R}\times(0,\infty). \\
+		u\left(x,0\right)=
+		x^{2}                              &
+		\text{en }\mathbb{R}.                 \\
+		\difcp{u}{t}\left(x,0\right)=e^{x} &
+		\text{en }\mathbb{R}.
+	\end{cases}
+\end{equation*}
+\textbf{Sugerencia}: ``Factorice'' la ecuación.
+
+\question
+
+Considere la ecuación de onda 1D para una cuerda de piano infinita
+que está sujeta tanto a un ``punteo'' como a un ``golpe de martillo''
+en $t=0$.
+Para modelar esto, supongamos que la velocidad es $1$ y sea
+\begin{equation*}
+	\phi\left(x\right)=
+	\begin{cases}
+		1-\left|x-1\right|, & \left|x-1\right|<1.     \\
+		0,                  & \left|x-1\right|\geq 1.
+	\end{cases}\qquad
+	\psi\left(x\right)=
+	\begin{cases}
+		1, & 3<x<4.                 \\
+		0, & \text{caso contrario}.
+	\end{cases}
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Use cualquier software para graficar los perfiles
+	$u\left(x,t_{\text{fijo}}\right)$ como funciones de $x$ para los
+	tiempos $t_{\text{fijo}}=0,\frac{1}{2},1,2,4,8$.
+	Haz que el software genere una película de los primeros $20$
+	segundos.
+
+	\part
+
+	Repita esta vez para la cuerda semiinfinita con un punto final fijo
+	en $x=0$.
+\end{parts}
+
+\question
+
+Considere la EDP
+$\difcp[2]{u}{t}+\nu\difcp{u}{t}=c^{2}\difcp[2]{u}{x}$,
+donde $\nu$ es el coeficiente de fricción.
+Pruebe que la energía total (cinética más potencial) no se conserva,
+pero decrece con el tiempo.
+
+\question
+
+Sea $u\colon\mathbb{R}\times(0,\infty)\to\mathbb{R}$
+la solución del problema de valor inicial
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		\difcp[2]{u}{x}=0  &
+		\text{en }\mathbb{R}\times(0,\infty). \\
+		u\left(x,0\right)=
+		\phi\left(x\right) &
+		\text{en }\mathbb{R}.                 \\
+		\difcp{u}{t}\left(x,0\right)=
+		\psi\left(x\right) &
+		\text{en }\mathbb{R}.
+	\end{cases}
+\end{equation*}
+Sean $t_{1}$ y $t_{2}$ dos instantes de tiempos fijos
+con $0<t_{1}<t_{2}$.
+Muestre que la solución del problema de valor inicial
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-
+		\difcp[2]{u}{x}=0 &
+		\text{en }\mathbb{R}\times(t_{1},\infty). \\
+		u\left(x,t_{1}\right)=
+		\widetilde{\phi}
+		\left(x\right)    &
+		\text{en }\mathbb{R}.                     \\
+		\difcp{u}{t}\left(x,t_{1}\right)=
+		\widetilde{\psi}
+		\left(x\right)    &
+		\text{en }\mathbb{R}.
+	\end{cases}
+\end{equation*}
+es
+\begin{math}\displaystyle
+	u\left(x,t_{2}\right)=
+	\frac{1}{2}
+	\left[
+		u\left(x+c\left(t_{2}-t_{1}\right),t_{1}\right)+
+		u\left(x-c\left(t_{2}-t_{1}\right),t_{1}\right)
+		\right]+
+	\frac{1}{2c}
+	\int_{x-c\left(t_{2}-t_{1}\right)}^{x+c\left(t_{2}-t_{1}\right)}
+	\difcp{u}{t}\left(s,t_{1}\right)\dl s
+\end{math}.
+
+Decimos que $u$ posee la propiedad de semigrupo.
+
+\question
+
+Discretice la ecuación de onda 1D por diferencias finitas sobre el
+espacio $\left[-L,L\right]$ y el tiempo $\left[0, T\right]$ por
+tamaños de paso $\Delta x>0$ y $\Delta t>0$.
+Considere los puntos malla
+\begin{align*}
+	\forall j=-J,\dotsc,J:
+	x_{j} & =j\Delta x,\quad
+	J\Delta x=L.             \\
+	\forall n=0,\dotsc,K:
+	t_{n} & =n\Delta t,\quad
+	K\Delta t=T.
+\end{align*}
+Sea $U^{n}_{j}\coloneqq u\left(j\Delta x,n\Delta t\right)$
+la solución en los puntos malla.
+Aproximemos las derivadas por
+\begin{align*}
+	\difcp[2]{u}{x} & \approx
+	\frac{
+		u\left(j\Delta x +\Delta x,n\Delta t\right)-
+		2u\left(j\Delta x,n\Delta t\right)+
+		u\left(j\Delta x-\Delta x, n\Delta t\right)
+	}{
+		{\left(\Delta x\right)}^{2}
+	}=
+	\frac{
+	U^{n}_{j+1}-2U^{n}_{j}+U^{n}_{j-1}
+	}{{\left(\Delta x\right)}^{2}}. \\
+	\difcp[2]{u}{t} & \approx
+	\frac{
+		u\left(j\Delta x, n\Delta t+\Delta t\right)-
+		2u\left(j\Delta x,n\Delta t\right)+
+		u\left(j\Delta x,n\Delta t-\Delta t\right)}{
+		{\left(\Delta t\right)}^{2}
+	}=
+	\frac{
+	U^{n+1}_{j}-2U^{n}_{j}+U^{n-1}_{j}
+	}{
+	{\left(\Delta t\right)}^{2}
+	}.                              \\
+\end{align*}
+Reemplace las aproximaciones de las derivadas de segundo orden en la
+ecuación de onda
+\begin{align*}
+	\difcp[2]{u}{t} & =
+	c^{2}\difcp[2]{u}{x}.     \\
+	\frac{
+	U^{n+1}_{j}-2U^{n}_{j}+U^{n-1}_{j}
+	}{
+	{\left(\Delta t\right)}^{2}
+	}               & \approx
+	c^{2}
+	\frac{
+	U^{n}_{j+1}-2U^{n}_{j}+U^{n}_{j-1}
+	}{
+	{\left(\Delta x\right)}^{2}
+	}.
+	\shortintertext{Sea
+	$r={\left(\frac{c\Delta t}{\Delta x}\right)}^{2}$.
+	El esquema Leapfrog viene dado por}
+	\Aboxed{
+	\forall j=-J,\dotsc,J:
+	\forall n=0,\dotsc,K:
+	U^{n+1}_{j}     & =
+	r\left(U^{n}_{j+1}+U^{n}_{j-1}\right)+
+	2\left(1-r\right)U^{n}_{j}-
+	U^{n-1}_{j}.
+	}
+\end{align*}
+
+Calcule la solución de la ecuación de onda con $c=1$ y datos
+iniciales
+\begin{equation*}
+	\phi\left(j\Delta x\right)=
+	\begin{cases}
+		2, & j=0.                   \\
+		1, & j=-1,1.                \\
+		0, & \text{caso contrario}.
+	\end{cases}\qquad
+	\forall j=-J,\dotsc,J:
+	\psi\left(j\Delta x\right)=
+	0.
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Sea $\Delta x=0.1$ y calcule la solución después de $10$ pasos de
+	tiempo usando $r=1,\frac{1}{2},2$.
+	Grafique la solución en cada caso.
+
+	\part
+
+	Sea $\Delta x=0.1$ y $r=1$ calcule la solución aproximada en
+	$t=10$.
+
+	\part
+
+	Repita los dos pasos anteriores para los datos discretos
+	\begin{equation*}
+		\forall j=-J,\dotsc,J:
+		\phi\left(j\Delta x\right)=
+		0.\qquad
+		\psi\left(j\Delta x\right)=
+		\begin{cases}
+			2, & j=0.                   \\
+			1, & j=-1,1.                \\
+			0, & \text{caso contrario}.
+		\end{cases}
+	\end{equation*}
+\end{parts}
+
+\question
+
+La solución de la ecuación de onda dada por la fórmula de D'Alembert
+satisface el principio del máximo
+\begin{equation*}
+	\forall\left(x,t\right)\in\mathbb{R}\times\left(0,\infty\right):
+	\left|u\left(x,t\right)\right|\leq
+	\max_{y\in\mathbb{R}}
+	\left|\phi\left(y\right)\right|.
+\end{equation*}
+Muestre que el esquema Leapfrog con $r=1$ satisface el principio del
+máximo discreto
+\begin{equation*}
+	\forall j\in\mathbb{Z}:
+	\forall n\in\mathbb{N}:
+	\left|U^{n}_{j}\right|\leq
+	\max_{i\in\mathbb{Z}}
+	\left|\phi\left(i\Delta x\right)\right|.
+\end{equation*}
+
+\begin{parts}
+	\part
+
+	Muestre que
+	\begin{math}
+		U^{1}_{j}=
+		\frac{1}{2}
+		\left(U^{0}_{j+1}+U^{0}_{j-1}\right)
+	\end{math}
+	y concluya que
+	\begin{math}
+		\left|U^{1}_{j}\right|\leq
+		\max_{i\in\mathbb{Z}}
+		\left|\phi\left(i\Delta x\right)\right|
+	\end{math}.
+
+	\part
+
+	Ahora, pruebe que
+	\begin{math}
+		U^{2}_{j}=
+		\frac{1}{2}
+		\left(U^{0}_{j+2}+U^{0}_{j-2}\right)
+	\end{math}
+	y concluya que
+	\begin{math}
+		\left|U^{2}_{j}\right|\leq
+		\max_{i\in\mathbb{Z}}
+		\left|\phi\left(i\Delta x\right)\right|
+	\end{math}.
+
+	\part
+
+	Pruebe el principio del máximo discreto por inducción matemática.
+
+	\part
+
+	Para mostrar que el esquema Leapfrog preserva el área.
+	Primero muestre que si $\phi\left(x\right)>0$ con
+	\begin{math}\displaystyle
+		\int_{-\infty}^{\infty}
+		\phi\left(x\right)\dl x<
+		\infty
+	\end{math},
+	entonces
+	\begin{math}\displaystyle
+		\forall t>0:
+		\int_{-\infty}^{\infty}
+		u\left(x,t\right)\dl x=
+		\int_{-\infty}^{\infty}
+		\phi\left(x\right)\dl x
+	\end{math}.
+
+	Luego, muestre que
+	\begin{math}
+		\forall n\in\mathbb{N}:
+		\sum_{j\in\mathbb{Z}}
+		U^{n}_{j}=
+		\sum_{j\in\mathbb{Z}}
+		\phi\left(j\Delta x\right)
+	\end{math}.
+\end{parts}
+
+\question
+
+Resuelva la ecuación de onda 3D con datos iniciales
+$\phi\left(x,y,z,t\right)\equiv 0$ y
+$\psi\left(x,y,z,t\right)=y$
+y rapidez $c=1$.
+
+\question
+
+Considere el problema de valor inicial de la ecuación de onda 3D
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}=
+		c^{2}\difc.L.{u}{}                      &
+		\text{en }\mathbb{R}^{3}\times\left(0,\infty\right). \\
+		u\left(\symbf{x},0\right)=
+		\phi\left(\left|\symbf{x}\right|\right) &
+		\text{en }\mathbb{R}^{3}.                            \\
+		\difcp{u}{t}\left(\symbf{x},0\right)=
+		\psi\left(\left|\symbf{x}\right|\right) &
+		\text{en }\mathbb{R}^{3}.
+	\end{cases}
+\end{equation*}
+Sean $\widetilde{\phi}$ y $\widetilde{\psi}$ es la extensión par de
+$\phi$ y $\psi$ a todo $\mathbb{R}$, respectivamente.
+Muestre que la solución es
+\begin{equation*}
+	u\left(\symbf{x},t\right)=
+	\frac{1}{2\left|\symbf{x}\right|}
+	\left(\left|\symbf{x}\right|+ct\right)
+	\widetilde{\phi}\left(\left|\symbf{x}\right|+ct\right)+
+	\left(\left|\symbf{x}\right|-ct\right)
+	\widetilde{\phi}\left(\left|\symbf{x}\right|-ct\right)+
+	\frac{1}{2\left|\symbf{x}\right|}
+	\int_{\left|\symbf{x}\right|-ct}^{\left|\symbf{x}\right|+ct}
+	s\widetilde{\psi}
+	\left(s\right)
+	\dl s.
+\end{equation*}
+Sugerencia: No intente demostrar con la fórmula de Kirchhoff,
+sino busque una solución
+\begin{math}
+	u\left(\symbf{x},t\right)=
+	u\left(r,t\right)
+\end{math},
+donde $r=\left|\symbf{x}\right|$ es la norma vectorial de
+$\symbf{x}\in\mathbb{R}^{3}$, trabajando en coordenadas esféricas y
+notando que
+\begin{math}
+	v\left(r,t\right)\coloneqq
+	ru\left(r,t\right)
+\end{math}
+resuelve la ecuación de onda 1D.
+Use la siguiente identidad, donde
+\begin{math}
+	f\left(\left|\symbf{x}\right|\right)=
+	g\left(r\right)
+\end{math}.
+\begin{equation*}
+	\iiint_{B\left(\symbf{0},a\right)}
+	f\left(\symbf{x}\right)\dl{\symbf{x}}=
+	\int_{0}^{\pi}
+	\int_{0}^{2\pi}
+	\int_{0}^{a}
+	r^{2}
+	g\left(r\right)
+	\sen\phi
+	\dl r
+	\dl\theta
+	\dl\phi=
+	\int_{0}^{a}
+	r^{2}
+	g\left(r\right)
+	\dl r
+	\left(
+	\int_{0}^{\pi}
+	\int_{0}^{2\pi}
+	\sen\phi
+	\dl\theta
+	\dl\phi
+	\right)=
+	4\pi
+	\int_{0}^{a}
+	r^{2}
+	g\left(r\right).
+\end{equation*}
+% \iiint_{\partial B\left(\symbf{0},a\right)}
+% f\left(\symbf{x}\right)\dl S
+%                                       & =
+% \int_{0}^{\pi}
+% \int_{0}^{2\pi}
+% g\left(a\right)
+% a^{2}
+% \sen\phi
+% \dl\theta
+% \dl\phi=
+% 4\pi a^{2}
+% g\left(a\right).
+
+\question
+
+Aplique el método de separación de variables para resolver
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}=
+		c^{2}\difc.L.{u}{}         &
+		\text{en }B\left(\symbf{0},1\right)\times
+		\left(0,\infty\right).               \\
+		u\left(\symbf{x},t\right)=
+		0                          &
+		\text{en }\partial B\left(\symbf{0},1\right)\times
+		\left(0,\infty\right).               \\
+		u\left(\symbf{x},0\right)=
+		\phi\left(\symbf{x}\right) &
+		\text{en }B\left(\symbf{0},1\right). \\
+		\difcp{u}{t}\left(\symbf{x},0\right)=
+		\psi\left(\symbf{x}\right) &
+		\text{en }B\left(\symbf{0},1\right).
+	\end{cases}
+\end{equation*}
+donde $B\left(\symbf{0},1\right)\subset\mathbb{R}^{3}$ es la bola
+unitaria.
+Busque soluciones separadas en coordenadas esféricas de la forma
+\begin{math}
+	u\left(r,\phi,\theta,t\right)=
+	U\left(r,\phi,\theta\right)T\left(t\right)=
+	R\left(r\right)
+	\Phi\left(\phi\right)
+	\Theta\left(\theta\right)
+	T\left(t\right)
+\end{math}
+y obtenga
+\begin{math}
+	U\left(r,\phi,\theta\right)
+	T^{\prime\prime}\left(t\right)=
+	c^{2}\difc.L.{U}{}
+	\left(r,\phi,\theta\right)
+	T\left(t\right)
+\end{math}.
+
+\question
+
+Determine una fórmula explícita de la solución del problema de valor
+inicial de la ecuación de onda 3D no homogénea
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}-c^{2}\difc.L.{u}{}=
+		f\left(\symbf{x},t\right)  &
+		\text{en }\mathbb{R}^{3}\times\left(0,\infty\right). \\
+		u\left(\symbf{x},t\right)=
+		\phi\left(\symbf{x}\right) &
+		\text{en }\mathbb{R}^{3}.                            \\
+		\difcp{u}{t}\left(\symbf{x},0\right)=
+		\psi\left(\symbf{x}\right) &
+		\text{en }\mathbb{R}^{3}.
+	\end{cases}
+\end{equation*}
+en dos etapas.
+\vspace*{-\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{enumerate}
+	\item
+
+	      Primero, muestre que
+	      \begin{math}\displaystyle
+		      u\left(\symbf{x},t\right)=
+		      \int_{0}^{t}
+		      w\left(\symbf{x},t;s\right)
+		      \dl s
+	      \end{math}
+	      es la solución del problema de valor inicial
+	      \begin{equation*}
+		      \begin{cases}
+			      \difcp[2]{u}{t}-c^{2}\difc.L.{u}{}=
+			      f\left(\symbf{x},t\right) &
+			      \text{en }\mathbb{R}^{3}\times\left(0,\infty\right). \\
+			      u\left(\symbf{x},t\right)=
+			      0                         &
+			      \text{en }\mathbb{R}^{3}.                            \\
+			      \difcp{u}{t}\left(\symbf{x},0\right)=
+			      0                         &
+			      \text{en }\mathbb{R}^{3}.
+		      \end{cases}
+	      \end{equation*}
+	      donde para cada $s<t$ fijo,
+	      $w\left(\symbf{x},t;s\right)$ es la solución indexada por $s$
+	      del problema
+	      \begin{equation*}
+		      \begin{cases}
+			      \difcp[2]{w}{t}\left(\symbf{x},t;s\right)=
+			      c^{2}\difc.L.{w}{}\left(\symbf{x},t;s\right) &
+			      \text{en }\mathbb{R}^{3}\times\left(s,\infty\right). \\
+			      w\left(\symbf{x},s;s\right)=
+			      0                                            &
+			      \text{en }\mathbb{R}^{3}.                            \\
+			      \difcp{w}{t}\left(\symbf{x},s;s\right)=
+			      f\left(\symbf{x},s\right)                    &
+			      \text{en }\mathbb{R}^{3}.
+		      \end{cases}
+	      \end{equation*}
+	      Este resultado se conoce como el Principio de Duhamel.
+
+	\item
+
+	      Finalmente, use la fórmula de Kirchhoff para encontrar la
+	      solución explícita del problema original.
+\end{enumerate}
+
+\question
+
+Sea $u\left(\symbf{x},t\right)$ la solución del problema de valor
+inicial de la ecuación de onda 3D
+\begin{equation*}
+	\begin{cases}
+		\difcp[2]{u}{t}=
+		c^{2}\difc.L.{u}{} &
+		\text{en }\mathbb{R}^{3}\times\left(0,\infty\right). \\
+		u=
+		\phi               &
+		\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}.    \\
+		\difcp{u}{t}=\psi  &
+		\text{en }\mathbb{R}^{3}\times\left\{t=0\right\}.
+	\end{cases}
+\end{equation*}
+Donde $\phi$ y $\psi$ son funciones suaves de soporte compacto.
+
+\begin{parts}
+	\part
+
+	Muestre que la energía total (cinética más potencial)
+	\begin{equation*}
+		\forall t\geq0:
+		E\left(t\right)=
+		\frac{1}{2}
+		\iint_{\mathbb{R}^{3}}
+		\left(
+		\difcp[2]{u}{t}
+		\left(\symbf{x},t\right)+
+		c^{2}
+		{\left|\nabla u\left(\symbf{x},t\right)\right|}^{2}
+		\right)
+		\dl{\symbf{x}}
+	\end{equation*}
+	es conservado en el tiempo, es decir, $E^{\prime}\left(t\right)=0$.
+
+	\part
+
+	A partir del ítem anterior, pruebe que existe al menos una solución
+	del problema de valor inicial de la ecuación de onda 3D.
+\end{parts}
