@@ -1,0 +1,28 @@
+\documentclass[
+	8pt,
+	aspectratio=1610,
+	professionalfonts,
+	spanish,
+	intlimits,
+	leqno,
+	handout,
+	xcolor=svgnames,
+	noamsthm,
+	c
+]{beamer}
+
+\input{preamble.common}
+
+\AtBeginSection[]{
+	\begin{frame}
+		\usebeamertemplate{section page}
+	\end{frame}
+}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{theorems}[ams style]
+\addtobeamertemplate{theorem begin}{\normalfont}{}

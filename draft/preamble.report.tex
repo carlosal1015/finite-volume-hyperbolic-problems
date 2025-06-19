@@ -1,0 +1,49 @@
+\documentclass[
+	a4paper,
+	abstract=true
+]{scrartcl}
+\usepackage[spanish]{babel}
+\usepackage[svgnames]{xcolor}
+\usepackage{graphicx}
+\usepackage[intlimits]{mathtools}
+\usepackage{amssymb}
+\usepackage{diffcoeff}
+\usepackage[
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+]{geometry}
+\usepackage[
+	colorlinks=true,
+	urlcolor=DarkBlue,
+	linkcolor=DarkBlue,
+	anchorcolor=black,
+	citecolor=black
+]{hyperref}
+\usepackage[
+	citestyle=numeric,
+	backend=biber,
+	defernumbers=true,
+	maxcitenames=4
+]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+\setkomafont{disposition}{\color{DarkBlue!50!black}\bfseries\sffamily}
+
+\makeatletter
+% latex.ltx, line 8262:
+\def\@fnsymbol#1{%
+	\ifcase#1\or
+		%\TextOrMath\textasteriskcentered *\or
+		\TextOrMath \textdagger \dagger\or
+		\TextOrMath \textdaggerdbl \ddagger \or
+		\TextOrMath \textsection  \mathsection\or
+		\TextOrMath \textparagraph \mathparagraph\or
+		\TextOrMath \textbardbl \|\or
+		%\TextOrMath {\textasteriskcentered\textasteriskcentered}{**}\or
+		\TextOrMath {\textdagger\textdagger}{\dagger\dagger}\or
+		\TextOrMath {\textdaggerdbl\textdaggerdbl}{\ddagger\ddagger}\else
+		\@ctrerr \fi
+}
+\makeatother
