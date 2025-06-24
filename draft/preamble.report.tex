@@ -1,13 +1,24 @@
 \documentclass[
-	a4paper,
-	abstract=true
+	a4,
+	abstract=true,
+	bibliography=totoc,
+	DIV=calc,
+	final,
+	fontsize=9pt,
+	footsepline,
+	headsepline,
+	intlimits,
+	leqno,
+	nosumlimits,
+	pagesize,
+	% paper=landscape,
+	sfdefaults=false,
 ]{scrartcl}
-\usepackage[spanish]{babel}
-\usepackage[svgnames]{xcolor}
+
+\input{preamble.common}
+
+\usepackage{amsthm}
 \usepackage{graphicx}
-\usepackage[intlimits]{mathtools}
-\usepackage{amssymb}
-\usepackage{diffcoeff}
 \usepackage[
 	total={170mm,257mm},
 	left=20mm,
@@ -20,14 +31,11 @@
 	anchorcolor=black,
 	citecolor=black
 ]{hyperref}
-\usepackage[
-	citestyle=numeric,
-	backend=biber,
-	defernumbers=true,
-	maxcitenames=4
-]{biblatex}
 
-\addbibresource{bibliography.bib}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\newtheorem{example}{Ejemplo}
+\newtheorem{theorem}{Teorema}
 
 \setkomafont{disposition}{\color{DarkBlue!50!black}\bfseries\sffamily}
 
@@ -47,3 +55,12 @@
 		\@ctrerr \fi
 }
 \makeatother
+
+\title{
+	El método de los volúmenes finitos
+}
+
+\author{
+	Carlos Aznarán Laos\and
+	Fidel Jara Huanca
+}

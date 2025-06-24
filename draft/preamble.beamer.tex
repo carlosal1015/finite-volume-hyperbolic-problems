@@ -5,13 +5,63 @@
 	spanish,
 	intlimits,
 	leqno,
-	handout,
+	% handout,
 	xcolor=svgnames,
-	noamsthm,
+	% noamsthm,
 	c
 ]{beamer}
 
+\usepackage{changepage}
 \input{preamble.common}
+
+\newcommand{\Minipage}[4]{\noindent % Avoid overfull
+	\begin{minipage}[t][][b]
+		{#1\textwidth}{#2}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t][][b]
+		{#3\textwidth}{#4}
+	\end{minipage}
+
+	\noindent}
+
+\setbeamertemplate{title page}{
+	\vfill
+	\begin{adjustwidth}{15pt}{-40pt}
+		\begin{tabular}[t]{p{0.66\textwidth}@{\hspace{1cm}}p{0.37\textwidth}}
+			{\Large\inserttitle} \\\\
+			{\small\insertsubtitle}
+			 &
+			\raisebox{0pt}[0pt][0pt]{\includegraphics[width=.12\paperwidth]{logo}}
+		\end{tabular}
+	\end{adjustwidth}
+
+	\vspace{.2cm}
+	\noindent\hfil\rule{0.9\textwidth}{0.1pt}\hfil
+
+	\begin{adjustwidth}{15pt}{0pt}
+		\Minipage{.45}{
+			\begin{tabular}{rl}
+				{\bfseries\small Alumno:}
+				\small\insertauthor
+			\end{tabular}
+			\\[5pt]
+			\begin{tabular}{rl}{\bfseries\small Fecha:} &
+               \small\insertdate
+			\end{tabular}
+		}{.45}{
+			\begin{tabular}{rl}
+				{\bfseries\small Asesor:} &
+				\small Prof. Fidel Jara Huanca \href{https://orcid.org/0009-0000-1884-1949}{\textcolor{orcidcolor}{\aiOrcid}}
+			\end{tabular}
+			\\[5pt]
+			\begin{tabular}{rl}{\bfseries\small Jurado:} &
+               \begin{minipage}[t]{.5\textwidth}
+				               \small Por designar\\ Por designar
+			               \end{minipage}
+			\end{tabular}
+		}
+	\end{adjustwidth}}
 
 \AtBeginSection[]{
 	\begin{frame}
@@ -19,10 +69,44 @@
 	\end{frame}
 }
 
+% \usetheme{Luebeck}
+\useinnertheme[rounded,shadow]{tcolorbox}
 \usefonttheme[onlymath]{serif}
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{headline}{}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamercovered{dynamic} % transparent
+\setbeamerfont{normal text}{size=\small}
+\setbeamersize{text margin left=10pt,text margin right=10pt}
 \setbeamertemplate{footline}[frame number]{}
 \setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{theorems}[ams style]
 \addtobeamertemplate{theorem begin}{\normalfont}{}
+\AtBeginDocument{\usebeamerfont{normal text}}
+
+\makeatletter
+\renewcommand\eqref[1]{%
+	\textup{\usebeamercolor[fg]{structure}\tagform@{\ref{#1}}}%
+}
+
+\title{\sffamily\bfseries
+	El método de los volúmenes finitos
+}
+
+\subtitle{
+	Proyecto de Tesis II - CM5D1A
+}
+
+\author{
+	Carlos Aznarán Laos~\href{https://orcid.org/0000-0001-8314-2271}{\textcolor{orcidcolor}{\aiOrcid}}
+	% \and\normalfont\normalsize\scshape
+	% \href{https://orcid.org/0009-0000-1884-1949}{\textcolor{orcidcolor}{\aiOrcid}}
+	% Fidel Jara Huanca\inst{1}
+}
+
+\institute{\normalsize\inst{1}
+	Universidad Nacional de Ingeniería \\
+	Escuela Profesional de Matemática \\
+	Facultad de Ciencias
+}

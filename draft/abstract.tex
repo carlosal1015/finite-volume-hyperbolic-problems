@@ -1,9 +1,15 @@
 \begin{frame}
+
 	\begin{abstract}
 		El método de los volúmenes finitos constituye una técnica
 		numérica robusta para aproximar la solución de una ley de
-		conservación $\difcp{u}{t}+\difcp{f\left(u\right)}{x}=0$, por
-		funciones constantes por partes.
+		conservación
+		\begin{math}
+			\difcp{u}{t}+
+			\difcp{f\left(u\right)}{x}=
+			0
+		\end{math},
+		por funciones constantes por partes~\cite[p.~5]{Saeed2025}.
 		Este enfoque se basa en discretizar el dominio computacional
 		$\Omega\subset\mathbb{R}^{d}$ en una malla compuesta por celdas
 		disjuntas
@@ -18,46 +24,65 @@
 		Las incógnitas del sistema son aproximaciones del valor medio de
 		la solución en cada celda, lo que preserva localmente las
 		propiedades de conservación de la EDP.
+
+		\par\vskip\baselineskip\noindent
+		{\textbf{Palabras clave}:
+			Esquema de Alta Resolución,
+			Limitador de flujo,
+			Análisis de estabilidad,
+			Variación total decreciente.}
+		\par\vskip\baselineskip\noindent
+		{\textbf{Clasificación Matemática por Temas}:
+			35L04,
+			35L65,
+			35Q35,
+			65L12,
+			65M06,
+			65M12.}
 	\end{abstract}
 
-	\begin{figure}[ht!]
-		\centering
-		\includegraphics[width=.55\textwidth]{fv1d}
-		\caption{Ilustración de una malla de volúmenes finitos
-			unidimensional de $\Omega=\left(0,1\right)$.
-			La malla contiene un conjunto de nodos de índices enteros
-			\begin{math}
-				{\big\{x_{j}\big\}}^{N}_{j=1}
-			\end{math},
-			que representan los puntos de aproximación, y otro conjunto de
-			nodos de índices fraccionarios
-			\begin{math}
-				{\big\{x_{j+\tfrac{1}{2}}\big\}}^{N}_{j=1}
-			\end{math}.
-			\begin{math}
-				x_{j}
-			\end{math}
-			es el centro de la celda
-			\begin{math}
-				\Omega_{j}=
-				\big[
-					x_{j-\tfrac{1}{2}},
-					x_{j+\tfrac{1}{2}}
-					\big]
-			\end{math}
-			cuyo tamaño es
-			\begin{math}
-				h_{j}=
-				x_{j+\tfrac{1}{2}}-
-				x_{j-\tfrac{1}{2}}
-			\end{math}.
-			La distancia entre dos celdas consecutivas es
-			% \forall j=0,\dotsc,N:
-			\begin{math}
-				h_{j+\tfrac{1}{2}}=
-				\frac{1}{2}\left(h_{j}+h_{j+1}\right)=
-				x_{j+1}-x_{j}
-			\end{math}.
-		}
-	\end{figure}
+	\pause
+
+	\visible<.(1)>{
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=.45\textwidth]{fv1d}
+			\caption{
+				Malla de volúmenes finitos 1D de $\Omega=\left(0,1\right)$.
+				Los nodos de índices enteros
+				\begin{math}
+					{\big\{x_{j}\big\}}^{N}_{j=1}
+				\end{math}
+				representan los puntos de aproximación y los nodos de índices
+				fraccionarios
+				\begin{math}
+					{\big\{x_{j+\tfrac{1}{2}}\big\}}^{N}_{j=1}
+				\end{math}.
+				\begin{math}
+					x_{j}
+				\end{math}
+				es el centro de la celda
+				\begin{math}
+					\Omega_{j}=
+					\big[
+						x_{j-\tfrac{1}{2}},
+						x_{j+\tfrac{1}{2}}
+						\big]
+				\end{math}
+				cuyo tamaño es
+				\begin{math}
+					h_{j}=
+					x_{j+\tfrac{1}{2}}-
+					x_{j-\tfrac{1}{2}}
+				\end{math}.
+				La distancia entre dos celdas consecutivas es
+				% \forall j=0,\dotsc,N:
+				\begin{math}
+					h_{j+\tfrac{1}{2}}=
+					\frac{1}{2}\left(h_{j}+h_{j+1}\right)=
+					x_{j+1}-x_{j}
+				\end{math}.
+			}
+		\end{figure}
+	}
 \end{frame}

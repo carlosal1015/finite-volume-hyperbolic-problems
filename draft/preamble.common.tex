@@ -3,10 +3,9 @@
 \usepackage[intlimits]{mathtools}
 \usepackage{diffcoeff}
 %\usepackage[makeroom]{cancel}
-\usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{academicons}
 \usepackage[fixed]{fontawesome5}
+\usepackage{bm}
 
 \usepackage[
 	citestyle=numeric,
@@ -17,11 +16,8 @@
 
 \addbibresource{bibliography.bib}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definición}
-\newtheorem{example}{Ejemplo}
-\newtheorem{theorem}{Teorema}
 \difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
+\difdef{f}{}{outer-Ldelim=\left .,outer-Rdelim=\right |,sub-nudge=0 mu}
 
 \decimalpoint
 
@@ -30,40 +26,6 @@
 \let\oldexist\exists
 \renewcommand{\exists}{\oldexist \: }
 
-\makeatletter
-% latex.ltx, line 8262:
-\def\@fnsymbol#1{%
-	\ifcase#1\or
-		%\TextOrMath\textasteriskcentered *\or
-		\TextOrMath \textdagger \dagger\or
-		\TextOrMath \textdaggerdbl \ddagger \or
-		\TextOrMath \textsection  \mathsection\or
-		\TextOrMath \textparagraph \mathparagraph\or
-		\TextOrMath \textbardbl \|\or
-		%\TextOrMath {\textasteriskcentered\textasteriskcentered}{**}\or
-		\TextOrMath {\textdagger\textdagger}{\dagger\dagger}\or
-		\TextOrMath {\textdaggerdbl\textdaggerdbl}{\ddagger\ddagger}\else
-		\@ctrerr \fi
-}
-\makeatother
-
 \providecommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
 \definecolor{orcidcolor}{HTML}{a5ca3f}
 \definecolor{orcidlinkcolor}{HTML}{0961ba}
-
-\title{\sffamily\bfseries\Large\color{DarkBlue}
-	El método de los volúmenes finitos
-}
-\author{\normalfont\normalsize\scshape
-	\href{https://orcid.org/0000-0001-8314-2271}{\textcolor{orcidcolor}{\aiOrcid}}
-	Carlos Aznarán Laos\inst{1}
-	\and\normalfont\normalsize\scshape
-	\href{https://orcid.org/0009-0000-1884-1949}{\textcolor{orcidcolor}{\aiOrcid}}
-	Fidel Jara Huanca\inst{1}
-}
-
-\institute{\normalsize\inst{1}
-	Universidad Nacional de Ingeniería \\
-	Escuela Profesional de Matemática \\
-	Facultad de Ciencias
-}

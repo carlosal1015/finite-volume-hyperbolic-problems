@@ -1,0 +1,72 @@
+\section{Ley de conservación unidimensional}
+
+\begin{frame}
+
+	\begin{equation*}
+		\diffp{u}{t}+
+		\diffp{}{x}
+		\left[f\left(u\right)\right]
+	\end{equation*}
+\end{frame}
+
+\section{Ecuación elíptica bidimensional}
+
+\begin{frame}
+
+	Sea $\Omega\subset\mathbb{R}^{2}$.
+
+	\begin{equation*}
+		\begin{cases}
+			-\nabla\cdot\nabla u+
+			\nabla\cdot\left(bu\right)+
+			cu=f & \text{en }\Omega. \\
+			u\big|_{\partial\Omega}=0.
+		\end{cases}
+	\end{equation*}
+
+	$f\in L^{2}\left(\Omega\right)$, $b\in C^{1}\left(\Omega\right)$.
+	$\forall\left(x,y\right)\in\Omega:c\left(x,y\right)\geq 0$.
+	$\forall\left(x,y\right)\in\Omega:\nabla\cdot b\left(x,y\right)\geq 0$.
+\end{frame}
+
+% \appendix
+
+% \section{Cálculo}
+
+% Teorema de Taylor unidimensional
+
+% Sea $n\in\mathbb{N}\cup\left\{0\right\}$.
+% Si
+% \begin{math}
+% 	u\in
+% 	C^{n+1}\left(\left[a,b\right],\mathbb{R}\right)
+% \end{math}
+% y $\forall \left\{x,x_{0}\right\}\subset\left[a,b\right]$,
+% entonces
+% \begin{equation*}
+% 	u\left(x\right)=
+% 	\sum_{k=0}^{n}
+% 	\left[
+% 	\frac{{\left(x-x_{0}\right)}^{k}}{k!}
+% 	\diff[k]{u}{x}{\bigg|}_{x_{0}}
+% 	\right]+
+% 	\int_{x_{0}}^{x}
+% 	\frac{{\left(x-t\right)}^{n}}{n!}
+% 	\diff[n+1]{u}{x}{\bigg|}_{t}\dl t.
+% \end{equation*}
+
+% Forma de Lagrange del resto
+
+% $\exists\xi\in\left(x,x_{0}\right)$
+
+% \begin{equation*}
+% 	u\left(x\right)=
+% 	\sum_{k=0}^{n}
+% 	\frac{{\left(x-x_{0}\right)}^{k}}{k!}
+% 	\diff[k]{u}{x}{\bigg|}_{x_{0}}+
+% 	\frac{{\left(x-x_{0}\right)}^{n+1}}{\left(n+1\right)!}
+% 	\diff[n+1]{u}{x}{\bigg|}_{\xi}.
+% \end{equation*}
+
+% \nocite{*}
+% \printbibliography[title={Referencias},heading=bibintoc]

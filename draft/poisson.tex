@@ -1,528 +1,434 @@
 \section{La ecuación de Poisson unidimensional}
 
-% Página 29. Elliptic Differential Equations. Wolfgang Hackbusch
 \begin{frame}
 	\frametitle{\secname}
 
-	Sea $\Omega=\left(0,1\right)\subset\mathbb{R}$.
-	Encuentre una solución
-	\begin{math}
-		u\in
-		C^{2}\left(\Omega\right)\cap
-		C^{0}\left(\overline{\Omega}\right)
-	\end{math}
-	que satisfaga el problema elíptico con condiciones de frontera
-	Dirichlet homogénea~\eqref{eq:PoissonBVP}, donde
-	\begin{math}
-		f\in
-		C^{0}\left(\overline{\Omega}\right)
-	\end{math}.
-	\begin{equation}\label{eq:PoissonBVP}
+	Nuestra presentación de los métodos de volúmenes finitos fue
+	fuertemente influenciado
+	por~\cite{Adler2025,Eymard2000,Hesthaven2018,LeDret2016}.
+	También remitimos al lector a textos más centrados en la ecuación
+	de Poisson, tales como~\cite[p.~337]{Choksi2022},
+	\cite[p.~22]{Evans2010} y~\cite[p.~29]{Hackbusch2017}.
+	\begin{align}
+		\shortintertext{
+			Sea
+			\begin{math}
+				\Omega=
+				\left(0,1\right)\subset
+				\mathbb{R}
+			\end{math}.
+			Encuentre una solución
+			\begin{math}
+				u\in
+				C^{2}\left(\Omega\right)\cap
+				C^{0}\big(\overline{\Omega}\big)
+			\end{math}
+			que satisfaga el siguiente problema elíptico con condiciones de
+			frontera Dirichlet homogénea~\eqref{eq:PoissonBVP}, donde
+			\begin{math}
+				f\in
+				C^{0}\big(\overline{\Omega}\big)
+			\end{math}.
+		}
 		\begin{cases}
 			-\difc.L.{}{}u=f &
 			\text{en }\Omega.  \\
 			u=0              &
 			\text{en }\partial\Omega.
-		\end{cases}
-	\end{equation}
-	Si integra la EDP~\eqref{eq:PoissonBVP} en $\Omega_{j}$ y emplea el
-	Teorema Fundamental del Cálculo, obtenga
-	\begin{align}
-		\forall j=1,\dotsc,N:
-		-\diff{u}{x}{\bigg|}_{x_{j+\tfrac{1}{2}}}+
-		\diff{u}{x}{\bigg|}_{x_{j-\tfrac{1}{2}}} & =
-		-\int_{\Omega_{j}}
-		\diff[2]{u\left(x\right)}{x}\dl x=
-		\int_{\Omega_{j}}
-		f\left(x\right)\dl x.\label{eq:PoissonBVPIntegral}
-		\shortintertext{Aproxime las derivadas por}
-		\diff{u}{x}{\bigg|}_{x_{\tfrac{1}{2}}}   & \approx
-		\frac{1}{h_{\tfrac{1}{2}}}
-		\left[
-			\frac{1}{h_{1}}
-			\int_{\Omega_{1}}
-			u\left(x\right)\dl x
-		\right].                                           \\
-		\forall j=1,\dotsc,N-1:
-		\diff{u}{x}{\bigg|}_{x_{j+\tfrac{1}{2}}} & \approx
-		\frac{1}{h_{j+\tfrac{1}{2}}}
-		\left[
-			\frac{1}{h_{j+1}}
-			\int_{\Omega_{j+1}}
-			u\left(x\right)\dl x-
-			\frac{1}{h_{j}}
+		\end{cases}\label{eq:PoissonBVP}
+		\uncover<2->{
+			\shortintertext{
+				Si integra la EDP~\eqref{eq:PoissonBVP} en $\Omega_{j}$ y
+				emplea el Teorema Fundamental del Cálculo, obtenga
+			}
+			\forall j=1,\dotsc,N:
+			-\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		\diff{u}{x}[x_{j-\frac{1}{2}}] & =
+			-\int_{\Omega_{j}}
+			\diff[2]{u\left(x\right)}{x}
+			\dl x=
 			\int_{\Omega_{j}}
-			u\left(x\right)\dl x
-		\right].                                           \\
-		\diff{u}{x}{\bigg|}_{x_{N+\tfrac{1}{2}}} & \approx
-		-\frac{1}{h_{N+\tfrac{1}{2}}}
-		\left[
-			\frac{1}{h_{N}}
-			\int_{\Omega_{N}}
-			u\left(x\right)\dl x
-			\right].
+			f\left(x\right)\dl x.\label{eq:PoissonBVPIntegral}
+		}
+		\uncover<3->{
+			\shortintertext{Aproxime las derivadas por}
+		\diff{u}{x}[x_{\frac{1}{2}}]   & \approx
+			\frac{1}{h_{\frac{1}{2}}}
+			\left[
+				\frac{1}{h_{1}}
+				\int_{\Omega_{1}}
+				u\left(x\right)
+				\dl x
+		\right].\notag                           \\
+			\forall j=1,\dotsc,N-1:
+		\diff{u}{x}[x_{j+\frac{1}{2}}] & \approx
+			\frac{1}{h_{j+\frac{1}{2}}}
+			\left[
+				\frac{1}{h_{j+1}}
+				\int_{\mathclap{\Omega_{j+1}}}
+				u\left(x\right)
+				\dl x-
+				\frac{1}{h_{j}}
+				\int_{\Omega_{j}}
+				u\left(x\right)
+				\dl x
+		\right].\notag                           \\
+		\diff{u}{x}[x_{N+\frac{1}{2}}] & \approx
+			-\frac{1}{h_{N+\frac{1}{2}}}
+			\left[
+				\frac{1}{h_{N}}
+				\int_{\Omega_{N}}
+				u\left(x\right)
+				\dl x
+				\right].\notag
+		}
 	\end{align}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\secname}
 
-	Si $x_{0}=-x_{1}$ y $X_{N+1}=2-X_{N}$, entonces $h_{0}=h_{1}$ y $h_{N+1}=h_{N}$.
-	Sea $h=\max\limits_{0\leq j\leq N}h_{j}$ y dado que
-	$u\in C^{2}\left(\Omega\right)$, por el teorema de Taylor se tiene
 	\begin{align*}
+		\shortintertext{
+		Si $x_{0}=-x_{1}$ y $x_{N+1}=2-x_{N}$, entonces $h_{0}=h_{1}$ y
+		$h_{N+1}=h_{N}$.
+		Sea $h=\max\left\{h_{j}\mid 0\leq j\leq N\right\}$ y dado que
+		\begin{math}
+			u\in
+			C^{2}\left(\Omega\right)
+		\end{math},
+		por el teorema de Taylor se tiene
+		}
 		\forall j=0,\dotsc,N:
-		u\big(x_{j+\tfrac{1}{2}}\big)+
-		\big(x-x_{j+\tfrac{1}{2}}\big)
-		\diff{u}{x}{\bigg|}_{x_{j+\frac{1}{2}}}+
-		\mathcal{O}\left(h^{2}\right) & =
+		u\big(x_{j+\frac{1}{2}}\big)+
+		\big(x-x_{j+\frac{1}{2}}\big)
+		\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		\mathcal{O}\big(h^{2}\big)                                                                & =
 		u\left(x\right).
-		\shortintertext{Para $j=0$, la condición de frontera Dirichlet
-			$u\big(x_{\tfrac{1}{2}}\big)=0$.}
-		u\big(x_{\tfrac{1}{2}}\big)+
-		\frac{h_{1}}{2}
-		\diff{u}{x}{\bigg|}_{x_{\tfrac{1}{2}}}+
-		\mathcal{O}\left(h^{2}\right) & =
-		\frac{1}{h_{1}}
-		\int_{\Omega_{1}}
-		u\left(x\right)\dl x.
-		\shortintertext{Por lo tanto,}
-		\left|
-		\frac{1}{h_{\tfrac{1}{2}}}
-		\left[
+		\uncover<2->{
+			\shortintertext{
+				En $j=0$, la condición de frontera es
+				$u\big(x_{\frac{1}{2}}\big)=0$.
+			}
+			u\big(x_{\frac{1}{2}}\big)+
+			\frac{h_{1}}{2}
+			\diff{u}{x}[x_{\frac{1}{2}}]+
+			\mathcal{O}\big(h^{2}\big)=
 			\frac{1}{h_{1}}
 			\int_{\Omega_{1}}
-			u\left(x\right)\dl x
-			\right]-
-		\diff{u}{x}{\bigg|}_{x_{\tfrac{1}{2}}}
-		\right|                       & \leq
-		Ch.
-		\shortintertext{Para $j=1,\dotsc,N-1$, en las celdas $\Omega_{j}$ y
-			$\Omega_{j+1}$.}
-		u\big(x_{j+\tfrac{1}{2}}\big)-
-		\frac{h_{j}}{2}
-		\diff{u}{x}{\bigg|}_{x_{j+\tfrac{1}{2}}}+
-		\mathcal{O}\left(h^{2}\right) & =
-		\frac{1}{h_{j}}
-		\int_{\Omega_{j}}
-		u\left(x\right)\dl x.                \\
-		u\big(x_{j+\tfrac{1}{2}}\big)+
-		\frac{h_{j+1}}{2}
-		\diff{u}{x}{\bigg|}_{x_{j+\tfrac{1}{2}}}+
-		\mathcal{O}\left(h^{2}\right) & =
-		\frac{1}{h_{j+1}}
-		\int_{\Omega_{j+1}}
-		u\left(x\right)\dl x.
-		\shortintertext{Por lo tanto,}
-		\left|
-		\frac{1}{h_{j+\tfrac{1}{2}}}
-		\left[
-			\frac{1}{h_{j+1}}
-			\int_{\Omega_{j+1}}
-			u\left(x\right)\dl x-
-			\frac{1}{h_{j}}
-			\int_{\Omega_{j}}
-			u\left(x\right)\dl x
-			\right]
-		-\diff{u}{x}{\bigg|}_{x_{j+\tfrac{1}{2}}}
-		\right|                       & \leq
-		Ch.
-		\shortintertext{Para $j=N$, la condición de frontera Dirichlet
-			$u\big(x_{N+\tfrac{1}{2}}\big)=0$.}
-		u\big(x_{N+\tfrac{1}{2}}\big)+
-		\frac{h_{N}}{2}
-		\diff{u}{x}{\bigg|}_{x_{N+\tfrac{1}{2}}}+
-		\mathcal{O}\left(h^{2}\right) & =
-		\frac{1}{h_{N}}
-		\int_{\Omega_{N}}
-		u\left(x\right)\dl x.
-		\shortintertext{Por lo tanto,}
-		\left|
-		\frac{1}{h_{N+\tfrac{1}{2}}}
-		\left[
+			u\left(x\right)
+		\dl x                                                                                     & \implies
+			\left|
+			\frac{1}{h_{\frac{1}{2}}}
+			\left[
+				\frac{1}{h_{1}}
+				\int_{\Omega_{1}}
+				u\left(x\right)
+				\dl x
+				\right]-
+			\diff{u}{x}[x_{\frac{1}{2}}]
+			\right|\leq
+			Ch.
+		}
+		\uncover<3->{
+			\shortintertext{
+				Para $j=1,\dotsc,N-1$, en las celdas $\Omega_{j}$ y
+				$\Omega_{j+1}$.
+			}
+		\begin{aligned}
+				u\big(x_{j+\frac{1}{2}}\big)-
+				\frac{h_{j}}{2}
+				\diff{u}{x}[x_{j+\frac{1}{2}}]+
+				\mathcal{O}\big(h^{2}\big) & =
+				\frac{1}{h_{j}}
+				\int_{\Omega_{j}}
+				u\left(x\right)
+				\dl x                          \\
+				u\big(x_{j+\frac{1}{2}}\big)+
+				\frac{h_{j+1}}{2}
+				\diff{u}{x}[x_{j+\frac{1}{2}}]+
+				\mathcal{O}\big(h^{2}\big) & =
+				\frac{1}{h_{j+1}}
+				\int_{\mathclap{\Omega_{j+1}}}
+				u\left(x\right)
+				\dl x
+			\end{aligned} & \implies
+			\left|
+			\frac{1}{h_{j+\frac{1}{2}}}
+			\left[
+				\frac{1}{h_{j+1}}
+				\int_{\mathclap{\Omega_{j+1}}}
+				u\left(x\right)
+				\dl x-
+				\frac{1}{h_{j}}
+				\int_{\Omega_{j}}
+				u\left(x\right)
+				\dl x
+				\right]
+			-\diff{u}{x}[x_{j+\frac{1}{2}}]
+			\right|\leq
+			Ch.
+		}
+		\uncover<4->{
+			\shortintertext{
+				En $j=N$, la condición de frontera es
+				$u\big(x_{N+\frac{1}{2}}\big)=0$.
+			}
+			u\big(x_{N+\frac{1}{2}}\big)+
+			\frac{h_{N}}{2}
+			\diff{u}{x}[x_{N+\frac{1}{2}}]+
+			\mathcal{O}\big(h^{2}\big)=
 			\frac{1}{h_{N}}
 			\int_{\Omega_{N}}
-			u\left(x\right)\dl x
-			\right]-
-		\diff{u}{x}{\bigg|}_{x_{N+\tfrac{1}{2}}}
-		\right|                       & \leq
-		Ch.
+			u\left(x\right)
+		\dl x                                                                                     & \implies
+			\left|
+			\frac{1}{h_{N+\frac{1}{2}}}
+			\left[
+				\frac{1}{h_{N}}
+				\int_{\Omega_{N}}
+				u\left(x\right)
+				\dl x
+				\right]-
+			\diff{u}{x}[x_{N+\frac{1}{2}}]
+			\right|\leq
+			Ch.
+		}
 	\end{align*}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\secname}
 
-	Para $j=1,\dotsc,N$, reemplace en~\eqref{eq:PoissonBVPIntegral} y
-	defina
 	\begin{align*}
-		F_{\frac{1}{2}}   & \coloneqq
-		-\frac{u_{1}}{h_{\frac{1}{2}}}.           \\
+		\shortintertext{
+			Defina los flujos numéricos que aproximan los flujos
+			$-\diff{u}{x}[x_{j+\frac{1}{2}}]$ y la integral sobre la
+			celda el término fuente.
+		}
+		F_{\frac{1}{2}}                     & \coloneqq
+		-\frac{u_{1}}{h_{\frac{1}{2}}}.                 \\
 		\forall j=2,\dotsc,N-1:
-		F_{j+\frac{1}{2}} & \coloneqq
-		-\frac{u_{j+1}-u_{j}}{h_{j+\frac{1}{2}}}. \\
-		F_{N+\frac{1}{2}} & \coloneqq
-		-\frac{u_{N}}{h_{N+\frac{1}{2}}}.         \\
-		\forall j=1,\dotsc,N:
-		f_{j}             & \coloneqq
-		\int_{\Omega_{j}}
-		f\left(x\right)\dl x.
-	\end{align*}
-	Las cantidades $F_{j+\frac{1}{2}}$ son los flujos numéricos que
-	aproximan los flujos $-\diff{u}{x}{\big|}_{x_{j+\frac{1}{2}}}$.
-	De este modo, obtenga el esquema de volúmenes finitos
-	\begin{equation}
-		\forall j=1,\dotsc, N:
-		F_{j+\frac{1}{2}}-
-		F_{j-\frac{1}{2}}=
-		f_{j}.
-	\end{equation}
-	Reescriba línea por línea el esquema de volúmenes finitos,
-	\begin{align*}
+		F_{j+\frac{1}{2}}                   & \coloneqq
+		-\frac{u_{j+1}-u_{j}}{h_{j+\frac{1}{2}}}.       \\
+		F_{N+\frac{1}{2}}                   & \coloneqq
+		-\frac{u_{N}}{h_{N+\frac{1}{2}}}.
+		\uncover<2->{
+			\shortintertext{
+				Reemplace en~\eqref{eq:PoissonBVPIntegral} y obtenga el
+				esquema de volúmenes finitos
+			}
+			\forall j=1,\dotsc,N:
+			F_{j+\frac{1}{2}}-
+		F_{j-\frac{1}{2}}                   & =
+			f_{j}\coloneqq
+			\int_{\Omega_{j}}
+			f\left(x\right)
+			\dl x.
+		}
+		\uncover<3->{
+		\shortintertext{
+			Reescriba el esquema línea por línea,
+		}
 		\left(
 		\frac{1}{h_{\frac{1}{2}}}+\frac{1}{h_{\frac{3}{2}}}
-		\right)u_{1}-
-		\frac{1}{h_{\frac{3}{2}}}u_{2}     & =
-		f_{1}.                                 \\
+		\right)
+		u_{1}-
+		\frac{u_{2}}{h_{\frac{3}{2}}}=
+		F_{\frac{3}{2}}-F_{\frac{1}{2}}     & =
+		f_{1}.                                          \\
 		\forall j=2,\dotsc,N-1:
-		-\frac{1}{h_{j-\frac{1}{2}}}u_{j-1}+
+		-\frac{u_{j-1}}{h_{j-\frac{1}{2}}}+
 		\left(
 		\frac{1}{h_{j-\frac{1}{2}}}+
 		\frac{1}{h_{j+\frac{1}{2}}}
-		\right)u_{j}-
-		\frac{1}{h_{j+\frac{1}{2}}}u_{j+1} & =
-		f_{j}.                                 \\
-		-\frac{1}{h_{N-\frac{1}{2}}}u_{N-1}+
+		\right)
+		u_{j}-
+		\frac{u_{j+1}}{h_{j+\frac{1}{2}}}=
+		F_{j+\frac{1}{2}}-F_{j-\frac{1}{2}} & =
+		f_{j}.                                          \\
+		-\frac{u_{N-1}}{h_{N-\frac{1}{2}}}+
 		\left(
 		\frac{1}{h_{N-\frac{1}{2}}}+
 		\frac{1}{h_{N+\frac{1}{2}}}
-		\right)u_{N}                       & =
+		\right)
+		u_{N}=
+		F_{N+\frac{1}{2}}-F_{N-\frac{1}{2}} & =
 		f_{N}.
+		}
 	\end{align*}
 \end{frame}
-% Note que
-% \begin{align*}
-% 	\begin{bmatrix}
-% 		\frac{1}{h_{\frac{1}{2}}}+
-% 		\frac{1}{h_{\frac{3}{2}}}    &
-% 		-\frac{1}{h_{\frac{3}{2}}}   & \cdots                       & 0      & 0               \\
-% 		-\frac{1}{h_{\frac{3}{2}}}   &
-% 		\frac{1}{h_{\frac{3}{2}}}+
-% 		\frac{1}{h_{\frac{5}{2}}}    &
-% 		-\frac{1}{h_{\frac{5}{2}}}   & \cdots                       & 0                        \\
-% 		\vdots                       & \ddots                       & \ddots & \ddots & \vdots \\
-% 		0                            & \cdots                       & \cdots &
-% 		-\frac{1}{h_{N-\frac{1}{2}}} & \frac{1}{h_{N-\frac{1}{2}}}+
-% 		\frac{1}{h_{N+\frac{1}{2}}}
-% 	\end{bmatrix}
-% 	\begin{bmatrix}
-% 		u_{1}  \\
-% 		\vdots \\
-% 		\vdots \\
-% 		\vdots \\
-% 		u_{N}
-% 	\end{bmatrix} & =
-% 	\begin{bmatrix}
-% 		f_{1}  \\
-% 		\vdots \\
-% 		\vdots \\
-% 		\vdots \\
-% 		f_{N}
-% 	\end{bmatrix}.      \\
-% 	A^{h}U^{h}      & =
-% 	F^{h}.
-% \end{align*}
-% El error de truncamiento se encuentra
-% \begin{align*}
-% 	h_{j}
-% 	\varepsilon_{h}
-% 	{\left(u\right)}_{j} & =
-% 	-\frac{1}{h_{j-\frac{1}{2}}}
-% 	u\left(x_{j-1}\right)+
-% 	\left(
-% 	\frac{1}{h_{j-\frac{1}{2}}}+\frac{1}{h_{j+\frac{1}{2}}}
-% 	\right)
-% 	u\left(x_{j}\right)-
-% 	\frac{1}{h_{j+\frac{1}{2}}}
-% 	u\left(x_{j+1}\right)-
-% 	\int_{\Omega_{j}}f\left(x\right)\dl x. \\
-% 	\varepsilon_{h}
-% 	{\left(u\right)}_{j} & =
-% 	\left[
-% 		1-
-% 		\frac{1}{2h_{j}}
-% 		\left(
-% 		h_{j-\frac{1}{2}}+
-% 		h_{j+\frac{1}{2}}
-% 		\right)
-% 		\right]
-% 	\diff[2]{u}{x}{\bigg|}_{x_{j}}+
-% 	\mathcal{O}\left(h\right).
-% \end{align*}
 
-% La matriz $A_{h}$ es invertible porque es definida positiva.
-% \begin{equation*}
-% 	\forall x\in\mathbb{R}^{N}\setminus\left\{0\right\}:
-% 	x^{T}A_{h}x=
-% 	\frac{x^{2}_{1}}{h_{\frac{1}{2}}}+
-% 	\sum_{j=1}^{N-1}
-% 	\frac{{\left(x_{j+1}-x_{j}\right)}^{2}}{h_{j+\frac{1}{2}}}+
-% 	\frac{x^{2}_{N}}{h_{N+\frac{1}{2}}}
-% 	>0.
-% \end{equation*}
+\begin{frame}
+	Note que
+	\begin{align*}
+		\begin{bmatrix}
+			\dfrac{1}{h_{\frac{1}{2}}}+\mathcolor{red}{\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}} & -\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}                                              & 0                                                 & \cdots                                                                                          & 0                                                                           \\
+			-\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}                                            & \mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}+\mathcolor{green}{\dfrac{1}{h_{\frac{5}{2}}}} & -\mathcolor{green}{\dfrac{1}{h_{\frac{5}{2}}}}    & \ddots                                                                                          & \vdots                                                                      \\
+			0                                                                                       & -\mathcolor{green}{\dfrac{1}{h_{\frac{5}{2}}}}                                            & \ddots                                            & \ddots                                                                                          & 0                                                                           \\
+			0                                                                                       & \ddots                                                                                    & \ddots                                            & -\mathcolor{orange}{\dfrac{1}{h_{N-\frac{3}{2}}}}                                               & 0                                                                           \\
+			\vdots                                                                                  & \ddots                                                                                    & -\mathcolor{orange}{\dfrac{1}{h_{N-\frac{3}{2}}}} & \mathcolor{orange}{\dfrac{1}{h_{N-\frac{3}{2}}}}+\mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}} & -\mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}}                             \\
+			0                                                                                       & \cdots                                                                                    & 0                                                 & -\mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}}                                                 & \mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}}+\dfrac{1}{h_{N+\frac{1}{2}}}
+		\end{bmatrix}
+		\begin{bmatrix}
+			u_{1}   \\
+			u_{2}   \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			u_{N-1} \\
+			u_{N}
+		\end{bmatrix} & =
+		\begin{bmatrix}
+			f_{1}   \\
+			f_{2}   \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			\vdots  \\
+			f_{N-1} \\
+			f_{N}
+		\end{bmatrix}.      \\
+		A^{h}U^{h}      & =
+		F^{h}.
+	\end{align*}
 
-% Si $f\in C^{0}\left(\overline{\Omega}\right)$, entonces $\exists C>0$
-% que no depende de $h$ tal que
-% \begin{align*}
-% 	\max_{1\leq j\leq N}
-% 	\left|
-% 	u_{j}-
-% 	\frac{1}{h_{j}}
-% 	\int_{\Omega_{j}}
-% 	u\left(x\right)\dl x
-% 	\right| & \leq
-% 	Ch.            \\
-% 	\max_{1\leq j\leq N}
-% 	\left|
-% 	u_{j}-
-% 	u\left(x_{j}\right)
-% 	\right| & \leq
-% 	Ch.
-% \end{align*}
+	\pause
 
-% \section{La ecuación de transporte unidimensional}
+	\begin{theorem}
+		La matriz $A^{h}\in\mathbb{R}^{N\times N}$ es simétrica definida
+		positiva, y por lo tanto invertible.
+	\end{theorem}
 
-% Sea $a\in\mathbb{R}\setminus\left\{0\right\}$.
-% \begin{equation}\label{eq:TransportIVP}
-% 	\begin{cases}
-% 		\diffp{u}{t}+
-% 		a\diffp{u}{x}=0                       &
-% 		\text{en }\mathbb{R}\times\left(0,\infty\right). \\
-% 		u\left(x,0\right)=u_{0}\left(x\right) &
-% 		\text{en }\mathbb{R}\times\left\{0\right\}.
-% 	\end{cases}
-% \end{equation}
-% Cubra el espacio $\mathbb{R}$ por celdas
-% \begin{math}
-% 	\Omega_{j}=
-% 	\big[
-% 		x_{j-\frac{1}{2}},
-% 		x_{j+\frac{1}{2}}
-% 		\big]
-% \end{math},
-% $j\in\mathbb{Z}$ y buscamos una aproximación constante por partes de
-% la solución $u$, que sea constante sobre cada celda $\Omega_{N}$, en
-% algunos instantes discretizados.
-% Defina el valor medio de $u\left(x,t\right)$ en $\Omega_{j}$ como
-% \begin{equation*}
-% 	\overline{u}_{j}\left(t\right)\coloneqq
-% 	\frac{1}{h_{j}}
-% 	\int_{\Omega_{j}}
-% 	u\left(x,t\right)\dl x.
-% \end{equation*}
-% Para cada $t\in\left(0,\infty\right)$ y $j\in\mathbb{Z}$,
-% $u_{j}\left(t\right)\in\mathbb{R}$ es la aproximación de
-% $\overline{u}_{j}\left(t\right)$.
-% % Sea $q\left(x,t\right)=au\left(x,t\right)$.
-% Primero, integre~\eqref{eq:TransportIVP} en $\Omega_{j}$
-% \begin{align*}
-% 	\int_{\Omega_{j}}
-% 	\left(
-% 	\diffp{u}{t}+
-% 	a\diffp{u}{x}
-% 	\right)
-% 	\left(x,t\right)\dl x           & =
-% 	\int_{\Omega_{j}}
-% 	0\dl x.                             \\
-% 	\int_{\Omega_{j}}
-% 	\diffp{u}{t}
-% 	\left(x,t\right)
-% 	\dl x+
-% 	a
-% 	\int_{\Omega_{j}}
-% 	\diffp{u}{x}
-% 	\left(x,t\right)\dl x           & =
-% 	0.
-% 	\shortintertext{Derive el primer término bajo el signo de la
-% 		integral y emplee el Teorema Fundamental del Cálculo en el
-% 		segundo término.}
-% 	\diff{}{t}
-% 	\left[
-% 		\int_{\Omega_{j}}
-% 		u\left(x,t\right)\dl x
-% 		\right]+
-% 	a\left[
-% 		u\big(x_{j+\frac{1}{2}},t\big)-
-% 		u\big(x_{j-\frac{1}{2}},t\big)
-% 	\right]                         & =
-% 	0.                                  \\
-% 	h_{j}
-% 	\diff{\overline{u}_{j}\left(t\right)}{t}+
-% 	au\big(x_{j+\frac{1}{2}},t\big)-
-% 	au\big(x_{j-\frac{1}{2}},t\big) & =
-% 	0.
-% \end{align*}
-% Discretizando
-% \begin{align*}
-% 	h_{j}
-% 	\frac{u^{n+1}_{j}-u^{n}_{j}}{k}+
-% 	g\left(u^{n}_{j},u^{n}_{j+1}\right)-
-% 	g\left(u^{n}_{j-1},u^{n}_{j}\right) & =
-% 	0.                                      \\
-% 	\frac{1}{h_{j}}
-% 	\int_{\Omega_{j}}
-% 	u_{0}\left(x\right)\dl x
-% 	\overline{u}_{j}\left(0\right)      & =
-% 	u^{0}_{j}.
-% \end{align*}
-% %Busque una aproximación de
-% % La condición inicial es dada por
+	\pause
 
-% Si $u$ es solución de~\eqref{eq:TransportIVP}
+	\begin{proof}
+		\begin{equation*}
+			\forall x\in\mathbb{R}^{N}\setminus\left\{0\right\}:
+			x^{T}A^{h}x=
+			\sum_{j=1}^{N}
+			x_{j}
+			\mathcolor{DarkBlue}{
+				{\big(A^{h}x\big)}_{j}
+			}=
+			\sum_{j=1}^{N}
+			x_{j}
+			\mathcolor{DarkBlue}{
+				\left[
+					\frac{1}{h_{j}}
+					\left(
+					-\frac{x_{j+1}-x_{j}}{h_{j+\frac{1}{2}}}+
+					\frac{x_{j}-x_{j-1}}{h_{j-\frac{1}{2}}}
+					\right)
+					\right]
+			}=
+			\frac{x^{2}_{1}}{h_{\frac{1}{2}}}+
+			\sum_{j=1}^{N-1}
+			\frac{{\left(x_{j+1}-x_{j}\right)}^{2}}{h_{j+\frac{1}{2}}}+
+			\frac{x^{2}_{N}}{h_{N+\frac{1}{2}}}
+			>0.
+		\end{equation*}
+	\end{proof}
+\end{frame}
 
-% \begin{equation*}
-% 	\sum_{l=-1}^{1}
-% 	c_{l}v_{l}.
-% \end{equation*}
+\begin{frame}
+	El error de truncamiento es
+	\begin{align*}
+		h_{j}
+		\varepsilon_{h}
+		{\left(u\right)}_{j} & =
+		-\frac{u\left(x_{j-1}\right)}{h_{j-\frac{1}{2}}}+
+		\left(
+		\frac{1}{h_{j-\frac{1}{2}}}+\frac{1}{h_{j+\frac{1}{2}}}
+		\right)
+		u\left(x_{j}\right)-
+		\frac{u\left(x_{j+1}\right)}{h_{j+\frac{1}{2}}}-
+		f_{j}.                   \\
+		\varepsilon_{h}
+		{\left(u\right)}_{j} & =
+		\left[
+			1-
+			\frac{1}{2h_{j}}
+			\left(
+			h_{j-\frac{1}{2}}+
+			h_{j+\frac{1}{2}}
+			\right)
+			\right]
+		\diff[2]{u}{x}[x_{j}]+
+		\mathcal{O}\left(h\right).
+	\end{align*}
 
-% \subsection{Ejemplos de esquemas lineales}
+	\begin{theorem}
+		Sea $\Omega=\left(0,1\right)$.
+		Si $f\in C^{0}\big(\overline{\Omega}\big)$, entonces
+		$\exists C>0$ que no depende de $h$ tal que
+		\begin{math}
+			\max\limits_{1\leq j\leq N}
+			\left|
+			u_{j}-
+			\frac{1}{h_{j}}
+			\int_{\Omega_{j}}
+			u\left(x\right)\dl x
+			\right|=
+			\max\limits_{1\leq j\leq N}
+			\left|
+			u_{j}-
+			u\left(x_{j}\right)
+			\right|\leq
+			Ch
+		\end{math}.
+	\end{theorem}
 
-% Sea $h_{j}=h$, $\lambda=\frac{k}{h}\in\mathbb{R}$ y
-% \begin{math}
-% 	u^{0}_{j}=
-% 	\frac{1}{h}
-% 	\int_{\Omega_{j}}
-% 	u_{0}\left(x\right)\dl x
-% \end{math}.
+	\begin{proof}
+		Defina
+		\begin{align*}
+			e_{0}                        & =0. \\
+			\forall j=1,\dotsc,N:
+			e_{n}                        & =
+			u_{n}-\frac{f_{j}}{h_{j}}.         \\
+			e_{N+1}                      & =0. \\
+			\forall j=1,\dotsc,N:
+			\overline{F}_{j+\frac{1}{2}} & =
+			-\diff{u}{x}[x_{j+\frac{1}{2}}].
+		\end{align*}
+	\end{proof}
+\end{frame}
 
-% \begin{equation*}
-% 	u^{n+1}_{j}=
-% 	u^{n}_{j}-
-% 	\lambda
-% 	\left[
-% 		a^{-}\left(u^{n}_{j+1}-u^{n}_{j}\right)+
-% 		a^{+}\left(u^{n}_{j}-u^{n}_{j-1}\right)
-% 		\right].
-% \end{equation*}
-% Donde $a^{-}=\min\left\{a,0\right\}$ si $a<0$ y $a^{+}=\max\left\{a,0\right\}$ si $a>0$.
+\begin{frame}
+	% https://www.sci-hub.in/10.1016/s1570-8659(00)07005-8#page=21
+	% https://hal.science/hal-02100732v2/document
+	% https://www.i2m.univ-amu.fr/perso/raphaele.herbin/PUBLI/anedp.pdf
+	% https://www.i2m.univ-amu.fr/perso/thierry.gallouet/tele.d/anum.d/envoi1.pdf
+	\begin{theorem}[]
+		Sea $\Omega=\left(0,1\right)$.
+		Si $f\in C\big(\overline{\Omega}\big)$ y
+		$u\in C^{2}\big(\overline{\Omega}\big)$, entonces
+		$\exists\,!U^{h}\in\mathbb{R}^{N}$ que es solución
+		y $\exists C>0$ que solo depende de $u$ tal que
+		\begin{equation*}
+			\sum_{j=0}^{N}
+			\frac{\left(e_{j+1}-e_{j}\right)^{2}}{h_{j+\frac{1}{2}}}\leq
+			C^{2}h^{2}.
+		\end{equation*}
+	\end{theorem}
 
-% \begin{equation*}
-% 	g\left(u,v\right)=
-% 	a^{+}u+a^{-}v.
-% \end{equation*}
-
-% \begin{equation*}
-% 	u^{n+1}_{j}=
-% 	u^{n}_{j}-
-% 	\frac{\lambda a}{2}
-% 	\left(u^{n}_{j+1}-u^{n}_{j-1}\right)+
-% 	\frac{\lambda\left|a\right|}{2}
-% 	\left(u^{n}_{j+1}-2u^{n}_{j}+u^{n}_{j-1}\right).
-% \end{equation*}
-
-% \begin{equation*}
-% 	u^{n+1}_{j}=
-% 	u^{n}_{j}-
-% 	\frac{\lambda a}{2}
-% 	\left(u^{n}_{j+1}-u^{n}_{j-1}\right)
-% \end{equation*}
-
-% \begin{equation*}
-% 	g\left(u,v\right)=
-% 	\frac{a}{2}\left(u+v\right).
-% \end{equation*}
-
-% \begin{equation*}
-% 	u^{n+1}_{j}=
-% 	\frac{u^{n}_{j+1}+u^{n}_{j-1}}{2}-
-% 	\frac{\lambda a}{2}
-% 	\left(u^{n}_{j+1}-u^{n}_{j-1}\right).
-% \end{equation*}
-
-% \begin{equation*}
-% 	g\left(u,v\right)=
-% 	\frac{a}{2}\left(u+v\right)-
-% 	\frac{1}{2\lambda}\left(v-u\right).
-% \end{equation*}
-
-% \begin{equation*}
-% 	u^{n+1}_{j}=
-% 	u^{n}_{j}-
-% 	\frac{\lambda a}{2}
-% 	\left(u^{n}_{j+1}-u^{n}_{j-1}\right)+
-% 	\frac{\lambda^{2}a^{2}}{2}
-% 	\left(u^{n}_{j+1}-2u^{n}_{j}+u^{n}_{j-1}\right)
-% \end{equation*}
-
-% \begin{equation*}
-% 	g\left(u,v\right)=
-% 	\frac{a}{2}\left(u+v\right)-
-% 	\lambda\frac{a^{2}}{2}\left(v-u\right).
-% \end{equation*}
-
-% \section{Ley de conservación unidimensional}
-
-% \begin{equation*}
-% 	\diffp{u}{t}+
-% 	\diffp{}{x}
-% 	\left[f\left(u\right)\right]
-% \end{equation*}
-
-% \section{Ecuación elíptica bidimensional}
-
-% Sea $\Omega\subset\mathbb{R}^{2}$.
-
-% \begin{equation*}
-% 	\begin{cases}
-% 		-\nabla\cdot\nabla u+
-% 		\nabla\cdot\left(bu\right)+
-% 		cu=f & \text{en }\Omega. \\
-% 		u\big|_{\partial\Omega}=0.
-% 	\end{cases}
-% \end{equation*}
-
-% $f\in L^{2}\left(\Omega\right)$, $b\in C^{1}\left(\Omega\right)$.
-% $\forall\left(x,y\right)\in\Omega:c\left(x,y\right)\geq 0$.
-% $\forall\left(x,y\right)\in\Omega:\nabla\cdot b\left(x,y\right)\geq 0$.
-
-% \appendix
-
-% \section{Cálculo}
-
-% Teorema de Taylor unidimensional
-
-% Sea $n\in\mathbb{N}\cup\left\{0\right\}$.
-% Si
-% \begin{math}
-% 	u\in
-% 	C^{n+1}\left(\left[a,b\right],\mathbb{R}\right)
-% \end{math}
-% y $\forall \left\{x,x_{0}\right\}\subset\left[a,b\right]$,
-% entonces
-% \begin{equation*}
-% 	u\left(x\right)=
-% 	\sum_{k=0}^{n}
-% 	\left[
-% 	\frac{{\left(x-x_{0}\right)}^{k}}{k!}
-% 	\diff[k]{u}{x}{\bigg|}_{x_{0}}
-% 	\right]+
-% 	\int_{x_{0}}^{x}
-% 	\frac{{\left(x-t\right)}^{n}}{n!}
-% 	\diff[n+1]{u}{x}{\bigg|}_{t}\dl t.
-% \end{equation*}
-
-% Forma de Lagrange del resto
-
-% $\exists\xi\in\left(x,x_{0}\right)$
-
-% \begin{equation*}
-% 	u\left(x\right)=
-% 	\sum_{k=0}^{n}
-% 	\frac{{\left(x-x_{0}\right)}^{k}}{k!}
-% 	\diff[k]{u}{x}{\bigg|}_{x_{0}}+
-% 	\frac{{\left(x-x_{0}\right)}^{n+1}}{\left(n+1\right)!}
-% 	\diff[n+1]{u}{x}{\bigg|}_{\xi}.
-% \end{equation*}
-
-% \nocite{*}
-% \printbibliography[title={Referencias},heading=bibintoc]
+	\begin{example}[{\cite[p.~15]{Frey2008}}]
+		Sea
+		\begin{math}
+			f\left(x\right)=
+			\frac{\pi^{2}}{4}
+			\cos\left(\frac{\pi x}{2}\right)
+		\end{math}
+		y considere una malla de $\left(-1,1\right)$.
+		La solución exacta es
+		\begin{math}
+			u\left(x\right)=
+			\cos\left(\frac{\pi x}{2}\right)
+		\end{math}.
+	\end{example}
+\end{frame}

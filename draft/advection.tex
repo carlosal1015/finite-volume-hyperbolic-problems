@@ -1,0 +1,187 @@
+\section{La ecuación de transporte unidimensional}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	Sea
+	\begin{math}
+		a\in
+		\mathbb{R}\setminus\left\{0\right\}
+	\end{math}.
+	\begin{equation}\label{eq:TransportIVP}
+		\begin{cases}
+			\diffp{u}{t}+
+			a\diffp{u}{x}=0     &
+			\text{en }\mathbb{R}\times
+			\left(0,\infty\right). \\
+			u\left(x,0\right)=
+			u_{0}\left(x\right) &
+			\text{en }\mathbb{R}\times
+			\left\{0\right\}.
+		\end{cases}
+	\end{equation}
+	Cubra el espacio $\mathbb{R}$ por celdas
+	\begin{math}
+		\Omega_{j}=
+		\big[
+			x_{j-\frac{1}{2}},
+			x_{j+\frac{1}{2}}
+			\big]
+	\end{math},
+	$j\in\mathbb{Z}$ y buscamos una aproximación constante por partes
+	de la solución $u$, que sea constante sobre cada celda
+	$\Omega_{N}$, en algunos instantes discretizados.
+	Defina el valor medio de $u\left(x,t\right)$ en $\Omega_{j}$ como
+	\begin{equation*}
+		\overline{u}_{j}\left(t\right)\coloneqq
+		\frac{1}{h_{j}}
+		\int_{\Omega_{j}}
+		u\left(x,t\right)\dl x.
+	\end{equation*}
+	Para cada $t\in\left(0,\infty\right)$ y $j\in\mathbb{Z}$,
+	$u_{j}\left(t\right)\in\mathbb{R}$ es la aproximación de
+	$\overline{u}_{j}\left(t\right)$.
+	% Sea $q\left(x,t\right)=au\left(x,t\right)$.
+	Primero, integre~\eqref{eq:TransportIVP} en $\Omega_{j}$
+	\begin{align*}
+		\int_{\Omega_{j}}
+		\left[
+			\diffp{u\left(x,t\right)}{t}+
+			a\diffp{u\left(x,t\right)}{x}
+			\right]
+		\dl x                           & =
+		\int_{\Omega_{j}}
+		0\dl x.                             \\
+		\int_{\Omega_{j}}
+		\diffp{u\left(x,t\right)}{t}
+		\dl x+
+		a
+		\int_{\Omega_{j}}
+		\diffp{u\left(x,t\right)}{x}
+		\dl x                           & =
+		0.
+		\shortintertext{Derive el primer término bajo el signo de la
+			integral y emplee el Teorema Fundamental del Cálculo en el
+			segundo término.}
+		\diff{}{t}
+		\left[
+			\int_{\Omega_{j}}
+			u\left(x,t\right)\dl x
+			\right]+
+		a\left[
+			u\big(x_{j+\frac{1}{2}},t\big)-
+			u\big(x_{j-\frac{1}{2}},t\big)
+		\right]                         & =
+		0.                                  \\
+		h_{j}
+		\diff{\overline{u}_{j}\left(t\right)}{t}+
+		au\big(x_{j+\frac{1}{2}},t\big)-
+		au\big(x_{j-\frac{1}{2}},t\big) & =
+		0.
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{\secname}
+
+	Discretizando
+	\begin{align*}
+		h_{j}
+		\frac{u^{n+1}_{j}-u^{n}_{j}}{k}+
+		g\left(u^{n}_{j},u^{n}_{j+1}\right)-
+		g\left(u^{n}_{j-1},u^{n}_{j}\right) & =
+		0.                                      \\
+		\frac{1}{h_{j}}
+		\int_{\Omega_{j}}
+		u_{0}\left(x\right)\dl x
+		\overline{u}_{j}\left(0\right)      & =
+		u^{0}_{j}.
+	\end{align*}
+	%Busque una aproximación de
+	% La condición inicial es dada por
+	Si $u$ es solución de~\eqref{eq:TransportIVP}
+	\begin{equation*}
+		\sum_{l=-1}^{1}
+		c_{l}v_{l}.
+	\end{equation*}
+\end{frame}
+
+
+\subsection{Ejemplos de esquemas lineales}
+
+\begin{frame}
+
+	Sea $h_{j}=h$, $\lambda=\frac{k}{h}\in\mathbb{R}$ y
+	\begin{math}
+		u^{0}_{j}=
+		\frac{1}{h}
+		\int_{\Omega_{j}}
+		u_{0}\left(x\right)\dl x
+	\end{math}.
+
+	\begin{equation*}
+		u^{n+1}_{j}=
+		u^{n}_{j}-
+		\lambda
+		\left[
+			a^{-}\left(u^{n}_{j+1}-u^{n}_{j}\right)+
+			a^{+}\left(u^{n}_{j}-u^{n}_{j-1}\right)
+			\right].
+	\end{equation*}
+	Donde $a^{-}=\min\left\{a,0\right\}$ si $a<0$ y $a^{+}=\max\left\{a,0\right\}$ si $a>0$.
+
+	\begin{equation*}
+		g\left(u,v\right)=
+		a^{+}u+a^{-}v.
+	\end{equation*}
+
+	\begin{equation*}
+		u^{n+1}_{j}=
+		u^{n}_{j}-
+		\frac{\lambda a}{2}
+		\left(u^{n}_{j+1}-u^{n}_{j-1}\right)+
+		\frac{\lambda\left|a\right|}{2}
+		\left(u^{n}_{j+1}-2u^{n}_{j}+u^{n}_{j-1}\right).
+	\end{equation*}
+
+	\begin{equation*}
+		u^{n+1}_{j}=
+		u^{n}_{j}-
+		\frac{\lambda a}{2}
+		\left(u^{n}_{j+1}-u^{n}_{j-1}\right)
+	\end{equation*}
+
+	\begin{equation*}
+		g\left(u,v\right)=
+		\frac{a}{2}\left(u+v\right).
+	\end{equation*}
+
+	\begin{equation*}
+		u^{n+1}_{j}=
+		\frac{u^{n}_{j+1}+u^{n}_{j-1}}{2}-
+		\frac{\lambda a}{2}
+		\left(u^{n}_{j+1}-u^{n}_{j-1}\right).
+	\end{equation*}
+
+	\begin{equation*}
+		g\left(u,v\right)=
+		\frac{a}{2}\left(u+v\right)-
+		\frac{1}{2\lambda}\left(v-u\right).
+	\end{equation*}
+
+	\begin{equation*}
+		u^{n+1}_{j}=
+		u^{n}_{j}-
+		\frac{\lambda a}{2}
+		\left(u^{n}_{j+1}-u^{n}_{j-1}\right)+
+		\frac{\lambda^{2}a^{2}}{2}
+		\left(u^{n}_{j+1}-2u^{n}_{j}+u^{n}_{j-1}\right)
+	\end{equation*}
+
+	\begin{equation*}
+		g\left(u,v\right)=
+		\frac{a}{2}\left(u+v\right)-
+		\lambda\frac{a^{2}}{2}\left(v-u\right).
+	\end{equation*}
+\end{frame}
