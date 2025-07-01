@@ -1,0 +1,6 @@
+Valor de c: 0.8814206369426753
+Valor de 1/q: 511.5294712364778 cuando S^L_y = 0.5 y S^R_o = 0.5
+Valor de m: 3.702113166195264e-12
+Valor de n: 20.546467805308318
+Valor de p: 1
+Valor de q: 0.0019549215758434854

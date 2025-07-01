@@ -46,6 +46,10 @@ def f(theta):
     return m * (theta / (1 - q * theta)) * np.exp(varepsilon / (theta + theta0))
 
 
+def Phi(theta):
+    return tast * kp * np.exp(-Er / (R * (Tres * theta + Tres)))  # Tres= Tast
+
+
 #     print(f"Valor de c: {c}")
 #     print(f"Valor de 1/q: {1 / q} cuando S^L_y = {Sly} y S^R_o = {Sor}")
 theta = np.linspace(start=0, stop=10, num=3000)
@@ -83,3 +87,19 @@ print(f"Valor de delta: {delta}")
 print(f"Case 3.2: {1 + q * varepsilon}")
 # print(f"Case 3.2.1: {2 * theta0 - varepsilon}")
 print(f"Case 3.2.2: {2 * theta0 - varepsilon}")
+plt.clf()
+
+So, theta = np.meshgrid(np.linspace(0, 10), np.linspace(0, 10))
+F1 = b3 * Sly / Sor * Phi(theta) * (Sor - So) * So / (c - a3)
+F2 = b1 * (1 - q * theta) / (c - a1 * So) * Phi(theta) * (So**2 - Sor + f(theta))
+
+fig, ax = plt.subplots()
+ax.set_title("Arrows")
+ax.quiver(So, theta, F1, F2, units="width")
+plt.savefig("1.pdf")
+plt.clf()
+
+fig, ax = plt.subplots()
+ax.streamplot(So, theta, F1, F2)
+plt.savefig("2.pdf")
+plt.clf()
