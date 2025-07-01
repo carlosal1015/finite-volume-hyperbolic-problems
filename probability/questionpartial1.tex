@@ -1,0 +1,219 @@
+\question
+
+Sea $\Omega$ el espacio muestral.
+Demostrar que
+\begin{equation*}
+	\forall A,B\subset\Omega:
+	0\leq
+	\mathbb{P}\left(A\cap B\right)\leq
+	\mathbb{P}\left(A\right)\leq
+	\mathbb{P}\left(A\cup B\right)\leq
+	\mathbb{P}\left(A\right)+
+	\mathbb{P}\left(B\right)\leq
+	2.
+\end{equation*}
+
+\begin{solutionordottedlines}
+	Sean $A,B\subset\Omega$ dos eventos.
+	Tenemos que
+	\begin{equation*}
+		\begin{aligned}
+			A                        & \subseteq A\cup B. \\
+			\mathbb{P}\left(A\right) & \leq
+			\mathbb{P}\left(A\cup B\right).
+		\end{aligned}\quad
+		\begin{aligned}
+			A                        & \subseteq \Omega. \\
+			\mathbb{P}\left(A\right) & \leq
+			\mathbb{P}\left(\Omega\right)=1.
+		\end{aligned}\quad
+		\begin{aligned}
+			B                        & \subseteq \Omega. \\
+			\mathbb{P}\left(B\right) & \leq
+			\mathbb{P}\left(\Omega\right)=1.
+		\end{aligned}
+	\end{equation*}
+	\vspace*{-\baselineskip}\setlength\belowdisplayshortskip{0pt}
+	\begin{align*}
+		\shortintertext{Luego,}
+		\emptyset\subseteq A\cap B                                           & \subseteq A. \\
+		0=\mathbb{P}\left(\emptyset\right)\leq\mathbb{P}\left(A\cap B\right) & \leq
+		\mathbb{P}\left(A\right).                                                           \\
+		\shortintertext{Además,}
+		\mathbb{P}\left(A\cup B\right)                                       & =
+		\mathbb{P}\left(A\right)+
+		\mathbb{P}\left(B\right)-
+		\mathbb{P}\left(A\cap B\right)                                                      \\
+		\mathbb{P}\left(A\cup B\right)                                       & \leq
+		\mathbb{P}\left(A\right)+
+		\mathbb{P}\left(B\right)\leq \mathbb{P}\left(\Omega\right)+\mathbb{P}\left(\Omega\right)=1+1=2.
+	\end{align*}
+	Así, de ambas desigualdades obtenemos las desigualdades pedidas.
+	\begin{equation*}
+		\forall A,B\subset\Omega:
+		0\leq
+		\mathbb{P}\left(A\cap B\right)\leq
+		\mathbb{P}\left(A\right)\leq
+		\mathbb{P}\left(A\cup B\right)\leq
+		\mathbb{P}\left(A\right)+
+		\mathbb{P}\left(B\right)\leq
+		2.
+	\end{equation*}
+\end{solutionordottedlines}
+
+\question
+
+Sean $X$ e $Y$ dos variables aleatorias discretas e independientes
+con valores en $\left\{0,1,2,\dotsc\right\}$ tal que sus funciones
+generatrices respectivas existen.
+Demostrar que
+\begin{math}
+	G_{X+Y}
+	\left(t\right)=
+	G_{X}
+	\left(t\right)
+	G_{X}
+	\left(t\right)
+\end{math}.
+
+\begin{solutionordottedlines}
+	Suponga que las variables aleatorias $X$ e $Y$ son independientes.
+	Además,
+	$G_{X}\left(t\right)$ y $G_{Y}\left(t\right)$ existen.
+	\begin{align*}
+		G_{X}
+		\left[t\right]
+		G_{Y}
+		\left[t\right] & \stackrel{\operatorname{def}}{=}
+		\mathbb{E}\left[t^{X}\right]
+		\mathbb{E}\left[t^{Y}\right].                     \\
+		               & =
+		\sum_{j=0}^{\infty}
+		\left(
+		\mathbb{P}\left[X=j\right]t^{j}
+		\right)
+		\cdot
+		\sum_{k=0}^{\infty}
+		\left(
+		\mathbb{P}\left[Y=k\right]t^{k}
+		\right).                                          \\
+		% \shortintertext{Por independencia,
+		% 	\begin{math}
+		% 		\mathbb{E}\left[t^{X}\right]
+		% 		\mathbb{E}\left[t^{X}\right]=
+		% 		\mathbb{E}\left[t^{X}t^{Y}\right]
+		% 	\end{math}.
+		% }
+		               & =
+		\sum_{j=0}^{\infty}
+		\left(
+		\sum_{k=0}^{\infty}
+		\mathbb{P}\left[X=j\right]
+		\mathbb{P}\left[Y=k\right]
+		t^{j+k}
+		\right).
+		\shortintertext{Reindexamos la suma $n=j+k$}
+		% \shortintertext{Por el teorema de la convolución para variables independientes}
+		               & =
+		\sum_{n=0}^{\infty}
+		\left(
+		\sum_{j=0}^{\infty}
+		\mathbb{P}\left[X=j\right]
+		\mathbb{P}\left[X=n-j\right]
+		t^{n}
+		\right).
+		\shortintertext{La suma interna es la convolución de las distribuciones de $X$ e $Y$.}
+		               & =
+		\sum_{n=0}^{\infty}
+		\left(
+		\mathbb{P}\left[\left(X+Y\right)=n\right]
+		t^{n}
+		\right).                                          \\
+		               & =
+		\mathbb{E}
+		\left[t^{X+Y}\right].                             \\
+		               & \stackrel{\operatorname{def}}{=}
+		G_{X+Y}
+		\left(t\right).
+	\end{align*}
+\end{solutionordottedlines}
+
+\question
+
+Una aerolínea muestra la siguiente información (distribución de probabilidades)
+sobre el número de salidas con retraso en vuelos nacionales por día $X$
+y del número de salidas con retraso en vueltos internacionales por día $Y$
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{|C|C|C|C|C|C|}
+		\hline
+		X                                 & 1           & 2             & 3            & 4            & 5 \\
+		\hline
+		f\left(x\right)=P\left[X=x\right] & \frac{1}{4} & \frac{21}{50} & \frac{3}{20} & \frac{1}{10} & a \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{|C|C|C|C|C|C|}
+		\hline
+		Y                                 & 1              & 2              & 3            & 4            & 5 \\
+		\hline
+		f\left(y\right)=P\left[X=y\right] & \frac{27}{100} & \frac{37}{100} & \frac{9}{50} & \frac{3}{25} & b \\
+		\hline
+	\end{tabular}
+\end{table}
+
+La empresa implementará cambios en aquel tipo de vuelo, nacional o internacional, cuyo número de retrasos
+sea más variable.
+¿En qué tipo de vuelo se harán los cambios?
+
+\begin{solutionordottedlines}
+	\begin{tabular}{|C|C|C|C|C|C|}
+		\hline
+		X & f\left(x\right) & Xf\left(x\right) & \left(x-\text{promedio}\right)^{2}f\left(x\right) \\
+		\hline
+		1 & 0.25            & 0.25             & 0.4489                                            \\
+		\hline
+		2 & 0.42            & 0.84             & 0.048552                                          \\
+		\hline
+		3 & 0.15            & 0.45             & 0.06534                                           \\
+		\hline
+		4 & 0.1             & 0.4              & 0.27556                                           \\
+		\hline
+		5 & 0.08            & 0.4              & 0.566048                                          \\
+		\hline
+	\end{tabular}
+	\begin{tabular}{|C|C|C|C|C|C|}
+		\hline
+		Y & f\left(y\right) & Yf\left(y\right) & \left(y-\text{promedio}\right)^{2}f\left(y\right) \\
+		\hline
+		1 & 0.27            & 0.27             & 0.477603                                          \\
+		\hline
+		2 & 0.37            & 0.74             & 0.040293                                          \\
+		\hline
+		3 & 0.18            & 0.54             & 0.080802                                          \\
+		\hline
+		4 & 0.12            & 0.48             & 0.334668                                          \\
+		\hline
+		5 & 0.06            & 0.3              & 0.427734                                          \\
+		\hline
+	\end{tabular}
+
+	\begin{itemize}
+		\item
+
+		      El promedio en los vuelos nacionales es $2.34$ y la
+		      varianza es $1.4044$.
+
+		\item
+
+		      El promedio en los vuelos internacionales es $2.33$ y la
+		      varianza es $1.3611$.
+	\end{itemize}
+
+	Se realizarán los cambios en los vuelos nacionales, ya que tiene
+	mayor variabilidad.
+\end{solutionordottedlines}

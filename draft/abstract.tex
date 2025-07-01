@@ -48,40 +48,32 @@
 			\centering
 			\includegraphics[width=.45\textwidth]{fv1d}
 			\caption{
-				Malla de volúmenes finitos 1D de $\Omega=\left(0,1\right)$.
-				Los nodos de índices enteros
-				\begin{math}
-					{\big\{x_{j}\big\}}^{N}_{j=1}
-				\end{math}
-				representan los puntos de aproximación y los nodos de índices
-				fraccionarios
-				\begin{math}
-					{\big\{x_{j+\tfrac{1}{2}}\big\}}^{N}_{j=1}
-				\end{math}.
-				\begin{math}
-					x_{j}
-				\end{math}
-				es el centro de la celda
-				\begin{math}
-					\Omega_{j}=
-					\big[
-						x_{j-\tfrac{1}{2}},
-						x_{j+\tfrac{1}{2}}
-						\big]
-				\end{math}
-				cuyo tamaño es
-				\begin{math}
-					h_{j}=
-					x_{j+\tfrac{1}{2}}-
-					x_{j-\tfrac{1}{2}}
-				\end{math}.
-				La distancia entre dos celdas consecutivas es
-				% \forall j=0,\dotsc,N:
-				\begin{math}
-					h_{j+\tfrac{1}{2}}=
-					\frac{1}{2}\left(h_{j}+h_{j+1}\right)=
-					x_{j+1}-x_{j}
-				\end{math}.
+			Malla de volúmenes finitos 1D de $\Omega=\left(0,1\right)$.
+			Los nodos de índices fraccionarios
+			\begin{math}
+				{\big\{x_{j\pm\frac{1}{2}}\big\}}^{N}_{j=1}
+			\end{math}
+			son los extremos de las celdas
+			\begin{math}
+				\Omega_{j}=
+				\big[
+					x_{j-\frac{1}{2}},
+					x_{j+\frac{1}{2}}
+					\big]
+			\end{math}
+			cuyo tamaño es $h_{j}$, y los nodos de índices enteros
+			\begin{math}
+				{\big\{x_{j}\big\}}^{N}_{j=1}
+			\end{math}
+			son los centros de las celdas.
+			Si $x_{0}=-x_{1}$ y $x_{N+1}=2-x_{N}$, entonces $h_{0}=h_{1}$ y
+			$h_{N+1}=h_{N}$.
+			La distancia entre dos celdas consecutivas es
+			\begin{math}
+				h_{j+\frac{1}{2}}=
+				\frac{1}{2}\left(h_{j}+h_{j+1}\right),
+				\forall j=0,\dotsc,N
+			\end{math}.
 			}
 		\end{figure}
 	}

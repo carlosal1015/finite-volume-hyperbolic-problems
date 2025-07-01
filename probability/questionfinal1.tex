@@ -1,0 +1,413 @@
+\question
+
+Suponga que los resultados de un examen siguen una distribución
+normal con media $\mu=78$ y varianza $\sigma^{2}=36$.
+
+\begin{parts}
+	\part[2]
+
+	¿Cuál es la probabilidad de que un estudiante obtenga en el examen
+	una calificación superior a $72$?
+
+	\part[3]
+
+	Si se sabe que la calificación de un estudiante es mayor que $72$.
+	¿Cuál es la probabilidad de que su calificación sea, de hecho,
+	superior a $84$?
+\end{parts}
+
+Sugerencia:
+Use la propiedad de simetría de la distribución normal estándar
+\begin{math}
+	\mathbb{P}
+	\left(
+	\left\{
+	Z>-z
+	\right\}
+	\right)=
+	\mathbb{P}
+	\left(
+	\left\{
+	Z\leq z
+	\right\}
+	\right)
+\end{math}
+y que
+\begin{math}
+	\mathbb{P}
+	\left(
+	\left\{
+	Z\leq 1
+	\right\}
+	\right)\approx
+	0.8413447460685429
+\end{math}.
+
+\begin{solutionordottedlines}
+	\begin{parts}
+		\part[2]
+
+		La probabilidad de que un estudiante obtenga una calificación
+		superior a $72$ es
+		\begin{align*}
+			\mathbb{P}
+			\left(
+			\left\{
+			X>72
+			\right\}
+			\right) & =
+			\mathbb{P}
+			\left(
+			\left\{
+			X-\mu>
+			72-\mu
+			\right\}
+			\right)=
+			\mathbb{P}
+			\left(
+			\left\{
+			\mathcolor{green}{\frac{X-\mu}{\sigma}}>
+			\frac{72-78}{6}
+			\right\}
+			\right)=
+			\mathbb{P}
+			\left(
+			\left\{
+			\mathcolor{green}{Z}>-1
+			\right\}
+			\right).               \\
+			        & =
+			1-
+			\mathbb{P}
+			\left(
+			\left\{
+			Z\leq -1
+			\right\}
+			\right).               \\
+			        & \approx
+			1-0.15865525393145707. \\
+			\Aboxed{
+				\mathcolor{blue}{
+					\mathbb{P}
+					\left(
+					\left\{
+					X>72
+					\right\}
+					\right)
+			}       & \approx
+				\mathcolor{blue}{0.8413447460685429}.
+			}
+		\end{align*}
+
+		\part[3]
+
+		La probabilidad condicional de que un estudiante obtenga una
+		calificación superior a $84$ dado que obtuvo una calificación
+		superior a $72$ es
+		\begin{align*}
+			\mathbb{P}
+			\left(
+			\left\{
+			X>84
+			\right\}
+			\mid
+			\left\{
+			X>72
+			\right\}
+			\right) & =
+			\frac{
+				\mathbb{P}
+				\left(
+				\left\{
+				X>84
+				\right\}\cap
+				\left\{
+				X>72
+				\right\}
+				\right)}{
+				\mathbb{P}
+				\left(
+				\left\{
+				X>72
+				\right\}
+				\right)
+			}=
+			\frac{
+				\mathcolor{red}{
+					\mathbb{P}
+					\left(
+					\left\{X>84\right\}
+					\right)
+				}
+			}{
+				\mathcolor{blue}{
+					\mathbb{P}
+					\left(
+					\left\{X>72\right\}
+					\right)
+				}
+			}.
+			\shortintertext{Pero, }
+			\mathbb{P}
+			\left(
+			\left\{
+			X>84
+			\right\}
+			\right) & =
+			\mathbb{P}
+			\left(
+			\left\{
+			X-\mu>84-\mu
+			\right\}
+			\right)=
+			\mathbb{P}
+			\left(
+			\left\{
+			\mathcolor{green}{\frac{X-\mu}{\sigma}}>
+			\frac{84-78}{6}
+			\right\}
+			\right)=
+			\mathbb{P}
+			\left(
+			\left\{\mathcolor{green}{Z}>1\right\}
+			\right).                                                                           \\
+			        & =
+			1-
+			\mathbb{P}
+			\left(
+			\left\{Z\leq 1\right\}
+			\right).                                                                           \\
+			        & \approx
+			1-0.8413447460685429.                                                              \\
+			\Aboxed{
+				\mathcolor{red}{
+					\mathbb{P}
+					\left(
+					\left\{
+					X>84
+					\right\}
+					\right)
+			}       & \approx
+				\mathcolor{red}{0.15865525393145707}.
+			}                                                                                  \\
+			\therefore
+			\mathbb{P}
+			\left(
+			\left\{X>84\right\}\mid
+			\left\{X>72\right\}
+			\right) & =
+			\frac{
+				\mathcolor{red}{
+					\mathbb{P}
+					\left(
+					\left\{X>84\right\}
+					\right)
+				}
+			}{
+				\mathcolor{blue}{
+					\mathbb{P}
+					\left(
+					\left\{X>72\right\}
+					\right)}
+			}.                                                                                 \\
+			        & \approx
+			\frac{\mathcolor{red}{0.15865525393145707}}{\mathcolor{blue}{0.8413447460685429}}. \\
+			\Aboxed{
+				\mathbb{P}
+				\left(
+				\left\{X>84\right\}\mid
+				\left\{X>72\right\}
+			\right) & \approx
+				0.18857341734506025.
+			}
+		\end{align*}
+	\end{parts}
+\end{solutionordottedlines}
+
+\question
+
+Sea
+\begin{math}
+	A=
+	\left\{
+	\left(x,y\right)\in\mathbb{R}^{2}\mid
+	0<y<x<1
+	\right\}
+\end{math}
+y la función
+\begin{math}
+	f_{X,Y}
+	\left(x,y\right)=
+	k\cdot
+	\mathbf{1}_{A}
+	\left(x,y\right)=
+	\begin{cases}
+		k, & \left(x,y\right)\in A.                        \\
+		0, & \left(x,y\right)\in\mathbb{R}^{2}\setminus A.
+	\end{cases}
+\end{math}
+
+\begin{parts}
+	\part[2]
+
+	Determine el valor de $k\in\mathbb{R}\setminus\left\{0\right\}$
+	para que $f_{X,Y}$ sea una función de densidad de una variable
+	aleatoria bidimensional $\left(X,Y\right)$.
+
+	\part[1]
+
+	Hallar las funciones de densidad marginales.
+	¿Son $X$ e $Y$ independientes?
+
+	\part[1]
+
+	Hallar las funciones de distribución marginales.
+
+	\part[1]
+
+	Hallar las funciones de densidad condicionadas.
+\end{parts}
+
+\begin{solutionordottedlines}
+	\begin{parts}
+		\part[2]
+
+		Una función de densidad $f_{X,Y}\left(x,y\right)$ verifica
+		\begin{align*}
+			1            & =
+			\iint_{\mathbb{R}^{2}}
+			f_{X,Y}\left(x,y\right)
+			\dl x\dl y=
+			\iint_{\mathbb{R}^{2}}
+			k\cdot
+			\mathbf{1}_{A}
+			\left(x,y\right)
+			\dl x\dl y=
+			k
+			\iint_{A}
+			\dl x\dl y=k
+			\int_{0}^{1}
+			\int_{0}^{x}
+			\dl x
+			\dl y.           \\
+			1            & =
+			k
+			\int_{0}^{1}
+			\mathcolor{red}{
+				\left(
+				\int_{0}^{x}\dl y
+				\right)
+			} \dl x=
+			k
+			\int_{0}^{1}
+			\mathcolor{red}{y\big|^{x}_{0}}
+			\dl x=
+			k
+			\int_{0}^{1}
+			\mathcolor{red}{x}
+			\dl x=
+			k
+			\frac{x^{2}}{2}\bigg|^{1}_{0}=
+			\frac{k}{2}.     \\
+			\Aboxed{
+			\therefore 2 & =
+				k.
+			}
+		\end{align*}
+
+		\part[1]
+
+		Sean las funciones de densidad marginales
+		\begin{align*}
+			\forall x\in\left(0,1\right):
+			f_{X}\left(x\right) & \stackrel{\operatorname{def}}{=}
+			\int_{\mathbb{R}}
+			f_{X,Y}\left(x,y\right)
+			\dl y=
+			\int_{\mathbb{R}}
+			k\cdot
+			\mathbf{1}_{A}
+			\left(x,y\right)\dl y=
+			2
+			\mathcolor{red}{
+				\int_{0}^{x}
+				\dl y
+			}=
+			2\mathcolor{red}{y\big|^{x}_{0}}=
+			2x.                     \\
+			\forall y\in\left(0,1\right):
+			f_{Y}\left(y\right) & \stackrel{\operatorname{def}}{=}
+			\int_{\mathbb{R}}
+			f_{X,Y}\left(x,y\right)
+			\dl x=
+			\int_{\mathbb{R}}
+			k\cdot
+			\mathbf{1}_{A}
+			\left(x,y\right)\dl x=
+			2
+			\mathcolor{red}{
+				\int_{y}^{1}
+				\dl x
+			}=
+			2\mathcolor{red}{x\big|^{1}_{y}}=
+			2-2y.
+		\end{align*}
+		$X$ e $Y$ no son variables aleatorias independientes porque
+		$\exists\left(x,y\right)\in A$ tal que
+		\begin{align*}
+			f_{X}
+			\left(x,y\right)\cdot
+			f_{Y}
+			\left(x,y\right)=
+			2x\cdot\left(2-2y\right)
+			\neq
+			2\cdot\mathbf{1}_{A}
+			\left(x,y\right)=
+			f_{X,Y}\left(x,y\right).
+		\end{align*}
+
+		\part[1]
+
+		Sean las funciones de distribución marginales
+		\begin{align*}
+			\forall x\in\left(0,1\right):
+			f_{X}\left(x\right) & \stackrel{\operatorname{def}}{=}
+			\int_{-\infty}^{x}
+			f_{X}\left(t\right)\dl t=
+			\int_{0}^{x}
+			f_{X}\left(t\right)\dl t=
+			\int_{0}^{x}
+			2t\dl t=
+			x^{2}.                                                 \\
+			\forall y\in\left(0,1\right):
+			f_{Y}\left(y\right) & \stackrel{\operatorname{def}}{=}
+			\int_{-\infty}^{y}
+			f_{Y}\left(t\right)\dl t=
+			\int_{0}^{y}
+			f_{Y}\left(t\right)\dl t=
+			\int_{0}^{y}
+			\left(2-2t\right)\dl t=
+			2y-y^{2}.
+		\end{align*}
+
+		\part[1]
+
+		Sean las funciones de densidad condicionadas
+		\begin{align*}
+			\forall\left(x,y\right)\in A:
+			f_{X\mid Y}\left(x\mid y\right) & \stackrel{\operatorname{def}}{=}
+			\frac{f_{X,Y}\left(x,y\right)}{f_{Y}\left(y\right)}=
+			\frac{2}{2-2y}=
+			\frac{1}{1-y}.                                                     \\
+			\forall\left(x,y\right)\in A:
+			f_{Y\mid X}\left(y\mid x\right) & \stackrel{\operatorname{def}}{=}
+			\frac{f_{X,Y}\left(x,y\right)}{f_{X}\left(x\right)}=
+			\frac{2}{2x}=
+			\frac{1}{x}.
+		\end{align*}
+	\end{parts}
+
+	\begin{center}
+		\includegraphics[width=.75\paperwidth]{2final}
+	\end{center}
+\end{solutionordottedlines}

@@ -38,8 +38,10 @@
 		\end{cases}\label{eq:PoissonBVP}
 		\uncover<2->{
 			\shortintertext{
-				Si integra la EDP~\eqref{eq:PoissonBVP} en $\Omega_{j}$ y
-				emplea el Teorema Fundamental del Cálculo, obtenga
+				Suponga que $\Omega^{h}=\bigcup^{N}_{j=1}\Omega_{j}$ es una
+				malla de volúmenes finitos de $\Omega$.
+				Integra la EDP~\eqref{eq:PoissonBVP} en $\Omega_{j}$ y emplea
+				el teorema fundamental del cálculo, obtenga
 			}
 			\forall j=1,\dotsc,N:
 			-\diff{u}{x}[x_{j+\frac{1}{2}}]+
@@ -51,60 +53,100 @@
 			f\left(x\right)\dl x.\label{eq:PoissonBVPIntegral}
 		}
 		\uncover<3->{
-			\shortintertext{Aproxime las derivadas por}
+			\shortintertext{
+				Sea
+				\begin{math}
+					h=
+					\max
+					\left\{
+					h_{j}\mid 0\leq j\leq N
+					\right\}
+				\end{math}
+				y dado que
+				\begin{math}
+					u\in
+					C^{2}\left(\Omega\right)
+				\end{math},
+				por el teorema de Taylor en la celda $\Omega_{j}$ se tiene
+			}\label{eq:Taylor}
+			\forall j=1,\dotsc,N:
+			u\big(x_{j+\frac{1}{2}}\big)+
+			\big(x-x_{j+\frac{1}{2}}\big)
+			\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		\mathcal{O}\big(h^{2}\big)     & =
+			u\left(x\right).
+		}
+		\uncover<4->{
+		\shortintertext{
+		Use la condición de frontera $u\big(x_{\frac{1}{2}}\big)=0$
+		en~\eqref{eq:Taylor} e integre sobre $\Omega_{1}$.
+		}
+		{\bigg[
+		\frac{x^{2}}{2}-x_{\frac{1}{2}}x
+		\bigg]}^{x_{\frac{3}{2}}}_{x_{\frac{1}{2}}}
+		\diff{u}{x}[x_{\frac{1}{2}}]
+		\dl x+
+		\mathcal{O}\big(h^{3}\big)     & =
+		\int_{\Omega_{1}}
+		u\left(x\right)
+		\dl x.\notag                             \\
 		\diff{u}{x}[x_{\frac{1}{2}}]   & \approx
-			\frac{1}{h_{\frac{1}{2}}}
-			\left[
-				\frac{1}{h_{1}}
-				\int_{\Omega_{1}}
-				u\left(x\right)
-				\dl x
-		\right].\notag                           \\
-			\forall j=1,\dotsc,N-1:
-		\diff{u}{x}[x_{j+\frac{1}{2}}] & \approx
-			\frac{1}{h_{j+\frac{1}{2}}}
-			\left[
-				\frac{1}{h_{j+1}}
-				\int_{\mathclap{\Omega_{j+1}}}
-				u\left(x\right)
-				\dl x-
-				\frac{1}{h_{j}}
-				\int_{\Omega_{j}}
-				u\left(x\right)
-				\dl x
-		\right].\notag                           \\
-		\diff{u}{x}[x_{N+\frac{1}{2}}] & \approx
-			-\frac{1}{h_{N+\frac{1}{2}}}
-			\left[
-				\frac{1}{h_{N}}
-				\int_{\Omega_{N}}
-				u\left(x\right)
-				\dl x
-				\right].\notag
+		\frac{1}{h_{\frac{1}{2}}}
+		\left[
+			\frac{1}{h_{1}}
+			\int_{\Omega_{1}}
+			u\left(x\right)
+			\dl x
+			\right].\notag
+		% 	\forall j=1,\dotsc,N-1:
+		% \diff{u}{x}[x_{j+\frac{1}{2}}] & \approx
+		% 	\frac{1}{h_{j+\frac{1}{2}}}
+		% 	\left[
+		% 		\frac{1}{h_{j+1}}
+		% 		\int_{\mathclap{\Omega_{j+1}}}
+		% 		u\left(x\right)
+		% 		\dl x-
+		% 		\frac{1}{h_{j}}
+		% 		\int_{\Omega_{j}}
+		% 		u\left(x\right)
+		% 		\dl x
+		% \right].\notag                           \\
+		% \diff{u}{x}[x_{N+\frac{1}{2}}] & \approx
+		% 	-\frac{1}{h_{N+\frac{1}{2}}}
+		% 	\left[
+		% 		\frac{1}{h_{N}}
+		% 		\int_{\Omega_{N}}
+		% 		u\left(x\right)
+		% 		\dl x
+		% 		\right].\notag
 		}
 	\end{align}
+
+	\note{
+		Emplee el Teorema del valor medio para integrales definidas y
+		aproxime los flujos numéricos en la interfaz como la diferencia
+		de promedio entre dos celdas adyacentes, dividido entre la
+		distancia de los centros de esas celdas.
+	}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\secname}
 
-	\begin{align*}
+	\begin{align}
 		\shortintertext{
-		Si $x_{0}=-x_{1}$ y $x_{N+1}=2-x_{N}$, entonces $h_{0}=h_{1}$ y
-		$h_{N+1}=h_{N}$.
-		Sea $h=\max\left\{h_{j}\mid 0\leq j\leq N\right\}$ y dado que
-		\begin{math}
-			u\in
-			C^{2}\left(\Omega\right)
-		\end{math},
-		por el teorema de Taylor se tiene
+			Integre~\eqref{eq:Taylor} en $\Omega_{j}$,
 		}
 		\forall j=0,\dotsc,N:
-		u\big(x_{j+\frac{1}{2}}\big)+
+		u\big(x_{j+\frac{1}{2}}\big)h_{j}+
+		\diff{u}{x}[x_{j+\frac{1}{2}}]
+		\int_{\Omega_{j}}
 		\big(x-x_{j+\frac{1}{2}}\big)
-		\diff{u}{x}[x_{j+\frac{1}{2}}]+
-		\mathcal{O}\big(h^{2}\big)                                                                & =
-		u\left(x\right).
+		\dl x+
+		\mathcal{O}\big(h^{3}\big)                                                                & =
+		\int_{\Omega_{j}}
+		u\left(x\right)
+		\dl x.\notag
 		\uncover<2->{
 			\shortintertext{
 				En $j=0$, la condición de frontera es
@@ -128,7 +170,7 @@
 				\right]-
 			\diff{u}{x}[x_{\frac{1}{2}}]
 			\right|\leq
-			Ch.
+			Ch.\notag
 		}
 		\uncover<3->{
 			\shortintertext{
@@ -167,7 +209,7 @@
 				\right]
 			-\diff{u}{x}[x_{j+\frac{1}{2}}]
 			\right|\leq
-			Ch.
+			Ch.\notag
 		}
 		\uncover<4->{
 			\shortintertext{
@@ -193,8 +235,8 @@
 			\diff{u}{x}[x_{N+\frac{1}{2}}]
 			\right|\leq
 			Ch.
-		}
-	\end{align*}
+		}\notag
+	\end{align}
 \end{frame}
 
 \begin{frame}
@@ -300,7 +342,7 @@
 
 	\pause
 
-	\begin{theorem}
+	\begin{theorem}[\cite{Thomas1999}]
 		La matriz $A^{h}\in\mathbb{R}^{N\times N}$ es simétrica definida
 		positiva, y por lo tanto invertible.
 	\end{theorem}
@@ -399,6 +441,8 @@
 	\end{proof}
 \end{frame}
 
+\subsection{Implementación del método de volúmenes finitos}
+
 \begin{frame}
 	% https://www.sci-hub.in/10.1016/s1570-8659(00)07005-8#page=21
 	% https://hal.science/hal-02100732v2/document
@@ -418,7 +462,7 @@
 	\end{theorem}
 
 	\begin{example}[{\cite[p.~15]{Frey2008}}]
-		Sea
+		Considere el problema de valor de frontera Sea
 		\begin{math}
 			f\left(x\right)=
 			\frac{\pi^{2}}{4}

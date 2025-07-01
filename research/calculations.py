@@ -6,50 +6,80 @@ import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8-white")
 np.set_printoptions(precision=2, suppress=True, threshold=5)
 
+alpha = 0.2
+Sly = 1 / 2  # np.linspace(start=0, stop=1, num=10)
+Sor = 1 - Sly
+kp = 1  # 24556
+Cm = 2e6
+a1 = 0.00189
+a2 = 27.6
+a3 = 0.00252
+b1 = 1.1
+b2 = 30.4
+b3 = 1
+Er = 51247
+R = 8.314
+Tres = 300
+tast = 1e8 / kp
+beta = alpha * tast / Cm
+theta0 = 1  # Tres / tast
+c = (a2 * b3 * Sly + a3 * b2 * Sor) / (b2 * Sor + b3 * Sly)
+q = (a1 * b3) / (b1 * (c - a3))
+m = beta * Sor / (b1 * Sly * tast * kp)
+m = 1
+varepsilon = Er / (R * Tres)  # Tres= Tast
 
-# tast = 1e8 / kp
-# beta = alpha * tast / Cm
+
+# varepsilon = 0.5
+# theta0 = 1
+# q = -1
+theta0 = 1.5
+q = -1
+varepsilon = 2
+
+theta0 = 0.5
+delta = varepsilon * (varepsilon - 4 * theta0 - 4 * theta0**2 * q)
+
+
 # m = (beta * Sor) / (Sly * tast * kp * b1)
 def f(theta):
-    alpha = 0.2
-    Sly = 1 / 2  # np.linspace(start=0, stop=1, num=10)
-    Sor = 1 - Sly
-    kp = 1  # 24556
-    Cm = 2e6
-    a1 = 0.00189
-    a2 = 27.6
-    a3 = 0.00252
-    b1 = 1.1
-    b2 = 30.4
-    b3 = 1
-    Er = 51247
-    R = 8.314
-    Tres = 300
-    p = 1  # Tres / tast
-    c = (a2 * b3 * Sly + a3 * b2 * Sor) / (b2 * Sor + b3 * Sly)
-    q = (a1 * b3) / (b1 * (c - a3))
-    m = alpha * Sor / (Sly * b1) * 1 / (kp * Cm)
-    n = Er / (R * Tres)  # Tres= Tast
-    return m * theta * np.exp(n / (theta + p)) / (1 - q * theta)
+    return m * (theta / (1 - q * theta)) * np.exp(varepsilon / (theta + theta0))
 
 
-# if __name__ == "__main__":
 #     print(f"Valor de c: {c}")
 #     print(f"Valor de 1/q: {1 / q} cuando S^L_y = {Sly} y S^R_o = {Sor}")
-#     theta = np.linspace(start=0, stop=1000, num=3000)
-#     plt.scatter(x=theta, y=f(theta=theta), s=0.5)
-#     # plt.axhline(y=1 / 16, linewidth=0.5, color="g", linestyle="dashed")
-#     plt.axhline(linewidth=0.5, color="r")
-#     plt.axhline(y=2.5e-7, linewidth=0.5, color="g", linestyle="dashed")
-#     plt.axvline(x=511.5294712364778, linewidth=0.5, color="b", linestyle="dashed")
-#     plt.title(r"$f\left(\theta\right)$ over $\theta\in\left[0,1000\right]$")
-#     plt.xlim(0, 1000)
-#     plt.ylim(-5e-7, 5e-7)
-#     # plt.ylim(-5e-6, 5e-6)
-#     plt.tight_layout()
-#     plt.savefig("fthetaplot.pdf", transparent=True, bbox_inches="tight")
+theta = np.linspace(start=0, stop=10, num=3000)
+plt.scatter(x=theta, y=f(theta=theta), s=0.5)
+# plt.axhline(y=1 / 16, linewidth=0.5, color="g", linestyle="dashed")
+# plt.axhline(linewidth=0.5, color="r")
+# plt.axhline(y=2.5e-7, linewidth=0.5, color="g", linestyle="dashed")
+# plt.axvline(x=511.5294712364778, linewidth=0.5, color="b", linestyle="dashed")
+plt.title(
+    # label=rf"Case 3.1.2, $f\left(\theta\right)$ with parameters $m={{{m}}}$, $\varepsilon={{{varepsilon:.2f}}}$, $\theta_{0}={{{theta0:.2f}}}$, $q={{{q:.3f}}}$"
+    # label=rf"Case 3.2.1, $f\left(\theta\right)$ with parameters $m={{{m}}}$, $\varepsilon={{{varepsilon:.2f}}}$, $\theta_{0}={{{theta0:.2f}}}$, $q={{{q:.3f}}}$"
+    label=rf"Case 3.2.2, $f\left(\theta\right)$ with parameters $m={{{m}}}$, $\varepsilon={{{varepsilon:.2f}}}$, $\theta_{0}={{{theta0:.2f}}}$, $q={{{q:.3f}}}$"
+    + "\n"
+    # + rf"$1+q\varepsilon={{{(1 + q * varepsilon):.3f}}}>0$, "
+    + rf"$1+q\varepsilon={{{(1 + q * varepsilon):.3f}}}<0$, "
+    # + rf"$2\theta_{0}-\varepsilon={{{(2 * theta0 - varepsilon):.3f}}}>0$",
+    + rf"$2\theta_{0}-\varepsilon={{{(2 * theta0 - varepsilon):.3f}}}<0$",
+    loc="center",
+    wrap=True,
+    fontsize=15,
+)
+# plt.xlim(0, 1000)
+# plt.ylim(-1e6, 1e6)
+# plt.ylim(-5e-1, 5e-1)
+plt.tight_layout()
+plt.savefig("fthetaplot3.2.2.pdf", transparent=True, bbox_inches="tight")
 
-#     print(f"Valor de m: {m}")
-#     print(f"Valor de n: {n}")
-#     print(f"Valor de p: {p}")
-#     print(f"Valor de q: {q}")
+print(f"Valor de m: {m}")
+print(f"Valor de varepsilon: {varepsilon}")
+print(f"Valor de theta0: {theta0}")
+print(f"Valor de q: {q}")
+print(f"Valor de delta: {delta}")
+# print(f"Case 3.1: {1 + q * varepsilon}")
+# print(f"Case 3.1.2: {2 * theta0 - varepsilon}")
+print(f"Case 3.2: {1 + q * varepsilon}")
+# print(f"Case 3.2.1: {2 * theta0 - varepsilon}")
+print(f"Case 3.2.2: {2 * theta0 - varepsilon}")

@@ -19,6 +19,7 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
     ax.set_xlabel(r"$S_{0}$")
     ax.set_ylabel(r"$\theta$")
+    ax.set_title(r"$f\left(\theta\right)$ with parameters $m=n=p=q=1$")
     # ax.grid()
     # ax.set_xlim(So[0], So[-1])
     # ax.set_ylim(-4e-6, 4e-6)

@@ -2,17 +2,15 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from calculations import f
-
+from calculations import f, m, varepsilon, theta0, q
 SoR = 1 / 2
-L = 5
-So = np.linspace(start=0, stop=L, num=2000)
-θ = np.linspace(start=0, stop=L, num=2000)
+L = 1e-10
+So = np.linspace(start=-L, stop=L, num=2000)
+θ = np.linspace(start=-L, stop=L, num=2000)
 So_, θ_ = np.meshgrid(So, θ)
 LHS = So_ * (SoR - So_)
-# RHS = f(θ_)
-RHS = θ_ / (1 - θ_) * np.exp(1 / (θ_ + 1))
+RHS = f(θ_)
+# RHS = θ_ / (1 - θ_) * np.exp(1 / (θ_ + 1))
 equation = LHS - RHS
 
 So_detail = np.linspace(start=0, stop=0.5, num=200)
@@ -22,21 +20,15 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
     ax.set_xlabel(r"$S_{0}$")
     ax.set_ylabel(r"$\theta$")
-    # ax.grid()
-    # ax.set_xlim(So[0], So[-1])
-    # ax.set_ylim(-4e-6, 4e-6)
-    # ax.plot(So, So * (SoR - So), "b", lw=0.5)
-    # ax.plot(θ, f(θ), "r", lw=0.5)
-    # https://matplotlib.org/stable/gallery/subplots_axes_and_figures/axis_equal_demo.html
-    # https://stackoverflow.com/a/39500357/9302545
-    # ax.axis("equal")
+    # ax.set_ylim(0, 4e-2)
+    ax.set_title(
+    label=rf"Case 3.1.2, $f\left(\theta\right)$ with parameters $m={{{m}}}$, $\varepsilon={{{varepsilon:.2f}}}$, $\theta_{0}={{{theta0:.2f}}}$, $q={{{q:.3f}}}$"
+    + "\n"
+    + rf"$1+q\varepsilon={{{(1 + q * varepsilon):.3f}}}>0$, "
+    + rf"$2\theta_{0}-\varepsilon={{{(2 * theta0 - varepsilon):.3f}}}>0$",
+    loc="center",
+    wrap=True,
+    fontsize=15,
+)
     CS_1 = ax.contour(So_, θ_, equation, [0], linewidths=0.5, colors=["red"])
-    # h, _ = CS.legend_elements()
-    # label=r"$x + y = 24$"
-    #     black_patch = mpatches.Patch(
-    #         color="red", label=r"$x^{2} + xy = 77$", linewidth=0.1, linestyle="-"
-    #     )
-    #     ax.legend(
-    #         handles=[black_patch], shadow=True, title="Leyenda", fancybox=True
-    #     )
-    fig.savefig("phaseportrait.pdf", transparent=True, bbox_inches="tight")
+    fig.savefig("phaseportrait3.1.2.pdf", transparent=True, bbox_inches="tight")

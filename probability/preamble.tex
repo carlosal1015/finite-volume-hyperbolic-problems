@@ -1,19 +1,20 @@
 \documentclass[
-    spanish,
-    addpoints,
-    answers,
-    a4paper,
-    11pt
+	spanish,
+	addpoints,
+	intlimits,
+	answers,
+	a4paper,
+	11pt
 ]{exam}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{libertine}
 \usepackage{geometry}
 \geometry{
-    left = 2cm,
-    right = 2cm,
-    top = 2cm,
-    bottom = 3cm
+	left = 2cm,
+	right = 2cm,
+	top = 2cm,
+	bottom = 3cm
 }
 \usepackage{array}
 \usepackage{mathtools}
@@ -32,10 +33,10 @@
 \renewcommand{\solutiontitle}{\noindent\textbf{Solución}\par\noindent}
 \renewcommand\listingscaption{Listado}
 \newcommand{\unmarkedfntext}[1]{%
-    \begingroup
-    \renewcommand\thefootnote{}\footnote{#1}%
-    \addtocounter{footnote}{-1}%
-    \endgroup
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
 }
 
 \difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
@@ -44,3 +45,10 @@
 \bracketedpoints
 \newcolumntype{C}{>{$}c<{$}}
 \footer{}{Página \thepage\ de \numpages}{}
+\decimalpoint
+
+% \let\oldforall\forall
+% \renewcommand{\forall}{\oldforall \, }
+% \let\oldexist\exists
+% \renewcommand{\exists}{\oldexist \: }
+% \newcommand\existu{\oldexist! \: }
