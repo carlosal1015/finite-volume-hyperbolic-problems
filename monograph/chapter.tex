@@ -11,8 +11,8 @@
 
 \abstract{
 	Este capítulo inicia nuestro estudio de las Leyes de Conservación y
-	resume el estado del arte de los avances en este fascinante campo
-	de las Ecuaciones Diferenciales Parciales.
+	resume el estado del arte de los avances~\cite{Mishra2020} en este
+	fascinante campo de las EDPs.
 	El principal objetivo es ilustrar las dificultades tanto analíticas
 	como numéricas al resolver un \emph{problema de Cauchy} con una
 	condición inicial discontinua, soluciones de este tipo no son
@@ -38,20 +38,20 @@ temperatura de una cuerda.
 La evolución en tiempo de esta cantidad de interés $\bm{U}$
 puede ser descrito mediante la observación:
 \begin{quote}
-    La tasa temporal de cambio de $\bm{U}$ en cualquier subdominio
-    fijo $\omega\in\Omega$ es igual a la cantidad total de
-    $\bm{U}$ producido o destruido dentro de $\omega$ y el flujo
-    de $\bm{U}$ a través de la frontera $\partial\omega$.
+	La tasa temporal de cambio de $\bm{U}$ en cualquier subdominio
+	fijo $\omega\in\Omega$ es igual a la cantidad total de
+	$\bm{U}$ producido o destruido dentro de $\omega$ y el flujo
+	de $\bm{U}$ a través de la frontera $\partial\omega$.
 \end{quote}
 Esta observación se describe matemáticamente como
 \begin{equation}\label{eq:integralbalance}
-    \diff{}{t}
-    \int_{\omega}
-    \bm{U}\dl{\bm{x}}=
-    -\int_{\partial\omega}
-    \bm{F}\cdot\nu\dl{\sigma\left(\bm{x}\right)}+
-    \int_{\omega}
-    \bm{S}\dl{\bm{x}}.
+	\diff{}{t}
+	\int_{\omega}
+	\bm{U}\dl{\bm{x}}=
+	-\int_{\partial\omega}
+	\bm{F}\cdot\nu\dl{\sigma\left(\bm{x}\right)}+
+	\int_{\omega}
+	\bm{S}\dl{\bm{x}}.
 \end{equation}
 donde $\nu$ es la normal unitaria exterior,
 $\dl{\sigma\left(\bm{x}\right)}$ es la medida de la superficie,
@@ -59,53 +59,49 @@ $\bm{F}$ es el flujo y $\bm{S}$ es la fuente.
 Así,~\eqref{eq:integralbalance} es la ecuación integral para la
 evolución de la cantidad total de $\bm{U}$ en $\omega$.
 \begin{figure}[b]
-    \sidecaption
-    % Use the relevant command for your figure-insertion program
-    % to insert the figure file.
-    % For example, with the option graphics use
-    \includegraphics{conservationscheme}
-    %
-    % If not, use
-    %\picplace{5cm}{2cm} % Give the correct figure height and width in cm
-    %
-    \caption{If the width of the figure is less than 7.8 cm use the
-        \texttt{sidecapion} command to flush the caption on the left side of the page.
-        If the figure is positioned at the top of the page, align the sidecaption with
-        the top of the figure -- to achieve this you simply need to use the optional
-        argument \texttt{[t]} with the \texttt{sidecaption} command}
-    \label{fig:1}       % Give a unique label
+	\sidecaption
+	\includegraphics{conservationscheme}
+	% If not, use
+	%\picplace{5cm}{2cm} % Give the correct figure height and width in cm
+	%
+	\caption{If the width of the figure is less than 7.8 cm use the
+		\texttt{sidecapion} command to flush the caption on the left side of the page.
+		If the figure is positioned at the top of the page, align the sidecaption with
+		the top of the figure -- to achieve this you simply need to use the optional
+		argument \texttt{[t]} with the \texttt{sidecaption} command}
+	\label{fig:1}       % Give a unique label
 \end{figure}
 Simplificamos~\eqref{eq:integralbalance} utilizando el teorema de la
 divergencia de Gauß en la integral de superficie para obtener
 \begin{equation}\label{eq:integralbalance2}
-    \diff{}{t}
-    \int_{\omega}
-    \bm{U}\dl{\bm{x}}
-    +\int_{\omega}
-    \operatorname{div}
-    \left(\bm{F}\right)\dl{\bm{x}}=
-    \int_{\omega}
-    \bm{S}\dl{\bm{x}}.
+	\diff{}{t}
+	\int_{\omega}
+	\bm{U}\dl{\bm{x}}
+	+\int_{\omega}
+	\operatorname{div}
+	\left(\bm{F}\right)\dl{\bm{x}}=
+	\int_{\omega}
+	\bm{S}\dl{\bm{x}}.
 \end{equation}
 Dado que~\eqref{eq:integralbalance2} se cumple para cualquier
 subdominio $\omega\subset\Omega$,
 \begin{equation}\label{eq:balancelaw}
-    \forall\left(x,t\right)\in\Omega\times\mathbb{R}_{+}:
-    \difcp{\bm{U}}{t}+
-    \operatorname{\operatorname{div}
-        \left(\bm{F}\right)}=
-    \bm{S}.
+	\forall\left(x,t\right)\in\Omega\times\mathbb{R}_{+}:
+	\difcp{\bm{U}}{t}+
+	\operatorname{\operatorname{div}
+		\left(\bm{F}\right)}=
+	\bm{S}.
 \end{equation}
 La ecuación~\eqref{eq:balancelaw} se llama \emph{ley de balance}.
 Frequentemente, el único cambio en $\bm{U}$ proviene de los
 flujos y la fuente se fija en cero.
 \begin{equation}\label{eq:conservationlaw}
-    \forall\left(x,t\right)\in
-    \Omega\times\mathbb{R}_{+}:
-    \difcp{\bm{U}}{t}+
-    \operatorname{\operatorname{div}
-        \left(\bm{F}\right)}=
-    0.
+	\forall\left(x,t\right)\in
+	\Omega\times\mathbb{R}_{+}:
+	\difcp{\bm{U}}{t}+
+	\operatorname{\operatorname{div}
+		\left(\bm{F}\right)}=
+	0.
 \end{equation}
 La ecuación~\eqref{eq:conservationlaw} se llama
 \emph{ley de conservación}, ya que el único cambio en $\bm{U}$
@@ -129,10 +125,10 @@ Dado que no hay producción ni destrucción del contaminante durante el
 flujo, el término fuente en~\eqref{eq:balancelaw} es cero.
 La ley de conservación~\eqref{eq:conservationlaw} resulta ser
 \begin{equation}
-    \difcp{U}{t}+
-    \operatorname{div}
-    \left(\bm{a}\left(\bm{x},t\right)U\right)=
-    0.
+	\difcp{U}{t}+
+	\operatorname{div}
+	\left(\bm{a}\left(\bm{x},t\right)U\right)=
+	0.
 \end{equation}
 
 \subsection*{Ecuación de difusión}
@@ -144,17 +140,17 @@ El calor se propaga o difunde y la temperatura del bloque se
 uniformiza al cabo de un tiempo.
 La difusión del calor se rige por la ley de Fick
 \begin{equation}\label{eq:ficklaw}
-    \bm{F}\left(U\right)=
-    -\bm{k}\nabla U.
+	\bm{F}\left(U\right)=
+	-\bm{k}\nabla U.
 \end{equation}
 Aquí, $\bm{k}$ es el tensor de conductividad del medio.
 Sustituyendo~\eqref{eq:ficklaw} en~\eqref{eq:conservationlaw}
 resulta ser
 \begin{equation*}
-    \difcp{U}{t}-
-    \operatorname{div}
-    \left(\bm{k}\nabla U\right)=
-    0.
+	\difcp{U}{t}-
+	\operatorname{div}
+	\left(\bm{k}\nabla U\right)=
+	0.
 \end{equation*}
 
 \subsection*{Ecuaciones de Euler}
@@ -169,24 +165,38 @@ Las variables de interés son: la densidad $\rho$, el campo de
 velocidad $u$ y la presión del gas $p$.
 
 \begin{description}
-    \item[Conservación de la masa]
+	\item[Conservación de la masa]
 
-    \item[Conservación del momento]
+	      La masa total de un gas es conservado, garantizado
+	      por el Teorema de la circulación de Kelvin.
 
-    \item[Conservación de la energía]
+	\item[Conservación del momento]
+
+	      Se sigue de la segunda ley de Newton que la tasa de cambio de
+	      la cantidad de movimiento es igual a la fuerza aplicada.
+	      En ausencia de fuerzas externas, la presión del gas es la
+	      única fuerza que actúa sobre el gas.
+
+	\item[Conservación de la energía]
+
+	      La energía total de un gas es la suma de su energía cinética
+	      y su energía interna (potencial)
 \end{description}
 
-\begin{align*}
-    \difcp{\rho}{t}+
-    \operatorname{div}
-    \left(\rho\bm{u}\right)                       & =0. \\
-    \difcp{\rho\bm{u}}{t}+
-    \operatorname{div}
-    \left(\rho\bm{u}\otimes\bm{u}\right)+\nabla p & =0. \\
-    \difcp{E}{t}+
-    \operatorname{div}
-    \left(\left(E+p\right)\bm{u}\right)           & =0.
-\end{align*}
+\begin{align}
+	\difcp{\rho}{t}+
+	\operatorname{div}
+	\left(\rho\bm{u}\right)                       & =
+	0.                                                \\
+	\difcp{\rho\bm{u}}{t}+
+	\operatorname{div}
+	\left(\rho\bm{u}\otimes\bm{u}\right)+\nabla p & =
+	0.                                                \\
+	\difcp{E}{t}+
+	\operatorname{div}
+	\left(\left(E+p\right)\bm{u}\right)           & =
+	0.
+\end{align}
 
 \subsection*{Ecuación de Richards}
 
@@ -209,13 +219,13 @@ Use the template \emph{chapter.tex} together with the document class SVMono (mon
 
 however, for multiline equations we recommend to use the \verb|eqnarray| environment\footnote{In physics texts please activate the class option \texttt{vecphys} to depict your vectors in \textbf{\itshape boldface-italic} type - as is customary for a wide range of physical subjects.}.
 \begin{eqnarray}
-    \left|\nabla U_{\alpha}^{\mu}(y)\right| &\le&\frac1{d-\alpha}\int
-    \left|\nabla\frac1{|\xi-y|^{d-\alpha}}\right|\,d\mu(\xi) =
-    \int \frac1{|\xi-y|^{d-\alpha+1}} \,d\mu(\xi)\qquad  \\
-    &=&(d-\alpha+1) \int\limits_{d(y)}^\infty
-    \frac{\mu(B(y,r))}{r^{d-\alpha+2}}\,dr \le (d-\alpha+1)
-    \int\limits_{d(y)}^\infty \frac{r^{d-\alpha}}{r^{d-\alpha+2}}\,dr
-    \label{eq:01}
+	\left|\nabla U_{\alpha}^{\mu}(y)\right| &\le&\frac1{d-\alpha}\int
+	\left|\nabla\frac1{|\xi-y|^{d-\alpha}}\right|\,d\mu(\xi) =
+	\int \frac1{|\xi-y|^{d-\alpha+1}} \,d\mu(\xi)\qquad  \\
+	&=&(d-\alpha+1) \int\limits_{d(y)}^\infty
+	\frac{\mu(B(y,r))}{r^{d-\alpha+2}}\,dr \le (d-\alpha+1)
+	\int\limits_{d(y)}^\infty \frac{r^{d-\alpha}}{r^{d-\alpha+2}}\,dr
+	\label{eq:01}
 \end{eqnarray}
 
 \enlargethispage{24pt}
@@ -225,7 +235,7 @@ however, for multiline equations we recommend to use the \verb|eqnarray| environ
 Instead of simply listing\index{cross-references} and citations\index{citations} as has already been described in Sect.~\ref{sec:2}.
 
 \begin{quotation}
-    Please do not use quotation marks when quoting texts! Simply use the \verb|quotation| environment -- it will automatically be rendered in the preferred layout.
+	Please do not use quotation marks when quoting texts! Simply use the \verb|quotation| environment -- it will automatically be rendered in the preferred layout.
 \end{quotation}
 
 \subsection{Buckley-Leverett}
@@ -234,7 +244,7 @@ Instead of simply listing\index{cross-references} and citations\index{citations}
 Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations as has already been described in Sect.~\ref{sec:2}.
 
 \begin{enumerate}
-    \item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
+	\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development.}
 \end{enumerate}
 
 
@@ -243,21 +253,21 @@ Instead of simply listing headings of different levels we recommend to let every
 Please note that the first line of text that follows a heading is not indented, whereas the first lines of all subsequent paragraphs are.
 
 \begin{itemize}
-    \item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development, cf. Table~\ref{tab:1}.}
+	\item{Livelihood and survival mobility are oftentimes coutcomes of uneven socioeconomic development, cf. Table~\ref{tab:1}.}
 \end{itemize}
 
 \begin{figure}[t]
-    \sidecaption[t]
-    % Use the relevant command for your figure-insertion program
-    % to insert the figure file.
-    % For example, with the option graphics use
-    \includegraphics{figure}
-    %
-    % If not, use
-    %\picplace{5cm}{2cm} % Give the correct figure height and width in cm
-    %
-    \caption{Please write your figure caption here}
-    \label{fig:2}       % Give a unique label
+	\sidecaption[t]
+	% Use the relevant command for your figure-insertion program
+	% to insert the figure file.
+	% For example, with the option graphics use
+	\includegraphics{figure}
+	%
+	% If not, use
+	%\picplace{5cm}{2cm} % Give the correct figure height and width in cm
+	%
+	\caption{Please write your figure caption here}
+	\label{fig:2}       % Give a unique label
 \end{figure}
 
 \runinhead{Run-in Heading Boldface Version} Use the \LaTeX\ automatism for all your cross-references and citations as has already been described in Sect.~\ref{sec:2}.
@@ -270,19 +280,19 @@ Please note that the first line of text that follows a heading is not indented, 
 % For tables use
 %
 \begin{table}[!t]
-    \caption{Please write your table caption here}
-    \label{tab:1}       % Give a unique label
-    %
-    % For LaTeX tables use
-    %
-    \begin{tabular}{p{2cm}p{2.4cm}p{2cm}p{4.9cm}}
-        \hline\noalign{\smallskip}
-        Classes     & Subclass & Length      & Action Mechanism                      \\
-        \noalign{\smallskip}\svhline\noalign{\smallskip}
-        Translation & mRNA$^a$ & 22 (19--25) & Translation repression, mRNA cleavage \\
-        \noalign{\smallskip}\hline\noalign{\smallskip}
-    \end{tabular}
-    $^a$ Table foot note (with superscript)
+	\caption{Please write your table caption here}
+	\label{tab:1}       % Give a unique label
+	%
+	% For LaTeX tables use
+	%
+	\begin{tabular}{p{2cm}p{2.4cm}p{2cm}p{4.9cm}}
+		\hline\noalign{\smallskip}
+		Classes     & Subclass & Length      & Action Mechanism                      \\
+		\noalign{\smallskip}\svhline\noalign{\smallskip}
+		Translation & mRNA$^a$ & 22 (19--25) & Translation repression, mRNA cleavage \\
+		\noalign{\smallskip}\hline\noalign{\smallskip}
+	\end{tabular}
+	$^a$ Table foot note (with superscript)
 \end{table}
 %
 \section{Contenido principal y organización}
@@ -297,137 +307,137 @@ Instead of simply listing headings of different levels we recommend to let every
 If you want to list definitions or the like we recommend to use the Springer-enhanced \verb|description| environment -- it will automatically render Springer's preferred layout.
 
 \begin{description}[Type 1]
-    \item[Type 1]{That addresses central themes pertainng to migration, health, and disease. In Sect.~\ref{sec:1}, Wilson discusses the role of human migration in infectious disease distributions and patterns.}
-    \item[Type 2]{That addresses central themes pertainng to migration, health, and disease. In Sect.~\ref{subsec:2}, Wilson discusses the role of human migration in infectious disease distributions and patterns.}
+	\item[Type 1]{That addresses central themes pertainng to migration, health, and disease. In Sect.~\ref{sec:1}, Wilson discusses the role of human migration in infectious disease distributions and patterns.}
+	\item[Type 2]{That addresses central themes pertainng to migration, health, and disease. In Sect.~\ref{subsec:2}, Wilson discusses the role of human migration in infectious disease distributions and patterns.}
 \end{description}
 
 \begin{svgraybox}
-    If you want to emphasize complete paragraphs of texts we recommend to use the newly defined Springer class option \verb|graybox| and the newly defined environment \verb|svgraybox|. This will produce a 15 percent screened box 'behind' your text.
+	If you want to emphasize complete paragraphs of texts we recommend to use the newly defined Springer class option \verb|graybox| and the newly defined environment \verb|svgraybox|. This will produce a 15 percent screened box 'behind' your text.
 
-    If you want to emphasize complete paragraphs of texts we recommend to use the newly defined Springer class option and environment \verb|svgraybox|. This will produce a 15 percent screened box 'behind' your text.
+	If you want to emphasize complete paragraphs of texts we recommend to use the newly defined Springer class option and environment \verb|svgraybox|. This will produce a 15 percent screened box 'behind' your text.
 \end{svgraybox}
 
 \begin{theorem}
-    Theorem text goes here.
+	Theorem text goes here.
 \end{theorem}
 
 \begin{definition}
-    Definition text goes here.
+	Definition text goes here.
 \end{definition}
 
 \begin{proof}
-    %\smartqed
-    Proof text goes here.
-    %\qed
+	%\smartqed
+	Proof text goes here.
+	%\qed
 \end{proof}
 
 \paragraph{Paragraph Heading} %
 Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations as has already been described in Sect.~\ref{sec:2}.
 
 \begin{trailer}{Trailer Head}
-    If you want to emphasize complete paragraphs of texts in a \verb|Trailer Head| we recommend to
-    use  \begin{verbatim}\begin{trailer}{Trailer Head}
+	If you want to emphasize complete paragraphs of texts in a \verb|Trailer Head| we recommend to
+	use  \begin{verbatim}\begin{trailer}{Trailer Head}
 ...
 \end{trailer}\end{verbatim}
 \end{trailer}
 %
 \begin{questype}{Questions}
-    If you want to emphasize complete paragraphs of texts in an \verb|Questions| we recommend to
-    use  \begin{verbatim}\begin{questype}{Questions}
+	If you want to emphasize complete paragraphs of texts in an \verb|Questions| we recommend to
+	use  \begin{verbatim}\begin{questype}{Questions}
 ...
 \end{questype}\end{verbatim}
 \end{questype}
 %
 %
 \begin{important}{Important}
-    If you want to emphasize complete paragraphs of texts in an \verb|Important| we recommend to
-    use  \begin{verbatim}\begin{important}{Important}
+	If you want to emphasize complete paragraphs of texts in an \verb|Important| we recommend to
+	use  \begin{verbatim}\begin{important}{Important}
 ...
 \end{important}\end{verbatim}
 \end{important}
 %
 \clearpage
 \begin{warning}{Attention}
-    If you want to emphasize complete paragraphs of texts in an \verb|Attention| we recommend to
-    use  \begin{verbatim}\begin{warning}{Attention}
+	If you want to emphasize complete paragraphs of texts in an \verb|Attention| we recommend to
+	use  \begin{verbatim}\begin{warning}{Attention}
 ...
 \end{warning}\end{verbatim}
 \end{warning}
 
 \begin{programcode}{Program Code}
-    If you want to emphasize complete paragraphs of texts in a \verb|Program Code| we recommend to
-    use
+	If you want to emphasize complete paragraphs of texts in a \verb|Program Code| we recommend to
+	use
 
-    \verb|\begin{programcode}{Program Code}|
+	\verb|\begin{programcode}{Program Code}|
 
-    \verb|\begin{verbatim}...\end{verbatim}|
+	\verb|\begin{verbatim}...\end{verbatim}|
 
-    \verb|\end{programcode}|
+	\verb|\end{programcode}|
 
 \end{programcode}
 %
 \begin{tips}{Tips}
-    If you want to emphasize complete paragraphs of texts in a \verb|Tips| we recommend to
-    use  \begin{verbatim}\begin{tips}{Tips}
+	If you want to emphasize complete paragraphs of texts in a \verb|Tips| we recommend to
+	use  \begin{verbatim}\begin{tips}{Tips}
 ...
 \end{tips}\end{verbatim}
 \end{tips}
 %
 %
 \begin{overview}{Overview}
-    If you want to emphasize complete paragraphs of texts in an \verb|Overview| we recommend to
-    use  \begin{verbatim}\begin{overview}{Overview}
+	If you want to emphasize complete paragraphs of texts in an \verb|Overview| we recommend to
+	use  \begin{verbatim}\begin{overview}{Overview}
 ...
 \end{overview}\end{verbatim}
 \end{overview}
 \clearpage
 \begin{backgroundinformation}{Background Information}
-    If you want to emphasize complete paragraphs of texts in a \verb|Background|
-    \verb|Information| we recommend to
-    use
+	If you want to emphasize complete paragraphs of texts in a \verb|Background|
+	\verb|Information| we recommend to
+	use
 
-    \verb|\begin{backgroundinformation}{Background Information}|
+	\verb|\begin{backgroundinformation}{Background Information}|
 
-    \verb|...|
+	\verb|...|
 
-    \verb|\end{backgroundinformation}|
+	\verb|\end{backgroundinformation}|
 \end{backgroundinformation}
 \begin{legaltext}{Legal Text}
-    If you want to emphasize complete paragraphs of texts in a \verb|Legal Text| we recommend to
-    use  \begin{verbatim}\begin{legaltext}{Legal Text}
+	If you want to emphasize complete paragraphs of texts in a \verb|Legal Text| we recommend to
+	use  \begin{verbatim}\begin{legaltext}{Legal Text}
 ...
 \end{legaltext}\end{verbatim}
 \end{legaltext}
 %
 \begin{acknowledgement}
-    If you want to include acknowledgments of assistance and the like at the end of an individual chapter please use the \verb|acknowledgement| environment -- it will automatically render Springer's preferred layout.
+	If you want to include acknowledgments of assistance and the like at the end of an individual chapter please use the \verb|acknowledgement| environment -- it will automatically render Springer's preferred layout.
 \end{acknowledgement}
 
 \chapter{Leyes de conservación hiperbólicas escalares}
 
 \begin{equation}
-    \difcp{U}{t}+
-    \difcp{f\left(U\right)}{x}=
-    0.
+	\difcp{U}{t}+
+	\difcp{f\left(U\right)}{x}=
+	0.
 \end{equation}
 donde $U$ es la función desconocida y $f$ es la función flujo.
 
 \section*{Modelo de flujo de tráfico}
 
 \begin{equation}
-    \difcp{U}{t}+
-    \difcp{V_{\text{max}}U\left(1-U\right)}{x}=
-    0.
+	\difcp{U}{t}+
+	\difcp{V_{\text{max}}U\left(1-U\right)}{x}=
+	0.
 \end{equation}
 
 \section*{Recuperación mejorada de petróleo}
 
 \begin{equation}
-    \difcp{S^{\text{oil}}}{t}+
-    \difcp{
-        \frac{q\left(S^{\text{oil}}\right)^{2}}{\left(S^{\text{oil}}\right)^{2}+\left(1-S^{\text{oil}}\right)^{2}}
-    }{x}=
-    0.
+	\difcp{S^{\text{oil}}}{t}+
+	\difcp{
+		\frac{q\left(S^{\text{oil}}\right)^{2}}{\left(S^{\text{oil}}\right)^{2}+\left(1-S^{\text{oil}}\right)^{2}}
+	}{x}=
+	0.
 \end{equation}
 
 \section*{Condición de salto de Rankine-Hugoniot}
@@ -453,25 +463,25 @@ es una solución entrópica
 When placed at se \textit{do not} use the \verb|appendix| command when
 
 \begin{equation}
-    a \times b = c
+	a \times b = c
 \end{equation}
-% Problems or Exercises should be sorted chapterwise
-\section*{Problemas}
-\addcontentsline{toc}{section}{Problemas}
-%
-% Use the following environment.
-% Don't forget to label each problem;
-% the label is needed for the solutions' environment
-\begin{prob}
-    \label{prob1}
-    A given problem or Excercise is described here. The
-    problem is described here. The problem is described here.
-\end{prob}
+% % Problems or Exercises should be sorted chapterwise
+% \section*{Problemas}
+% \addcontentsline{toc}{section}{Problemas}
+% %
+% % Use the following environment.
+% % Don't forget to label each problem;
+% % the label is needed for the solutions' environment
+% \begin{prob}
+%     \label{prob1}
+%     A given problem or Excercise is described here. The
+%     problem is described here. The problem is described here.
+% \end{prob}
 
-\begin{prob}
-    \label{prob2}
-    \textbf{Problem Heading}\\
-    (a) The first part of the problem is described here.
-\end{prob}
+% \begin{prob}
+%     \label{prob2}
+%     \textbf{Problem Heading}\\
+%     (a) The first part of the problem is described here.
+% \end{prob}
 
 \input{references}
