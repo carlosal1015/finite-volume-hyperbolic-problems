@@ -1,5 +1,6 @@
 \motto{
-	Por tanto, estudiantes estudien matemáticas y no construyan sin fundamentos.
+	Por tanto, estudiantes estudien matemáticas y no construyan sin
+	fundamentos.
 	\begin{flushright}\normalfont
 		Leonardo da Vinci (1452-1519)
 	\end{flushright}
@@ -30,45 +31,42 @@
 \section{Introducción}
 
 Considere un dominio $\Omega\subset\mathbb{R}^{n}$ y una cantidad de
-interés $\bm{U}$ definida para todos los $\bm{x}\in\Omega$.
+interés $\mathbf{U}$ definida para todos los $\mathbf{x}\in\Omega$.
 La cantidad de interés podría ser la concentración de un químico o la
 densidad de una población humana, la presión de un fluido o la
 temperatura de una cuerda.
 
-La evolución en tiempo de esta cantidad de interés $\bm{U}$
+La evolución en tiempo de esta cantidad de interés $\mathbf{U}$
 puede ser descrito mediante la observación:
 \begin{quote}
-	La tasa temporal de cambio de $\bm{U}$ en cualquier subdominio
+	La tasa temporal de cambio de $\mathbf{U}$ en cualquier subdominio
 	fijo $\omega\in\Omega$ es igual a la cantidad total de
-	$\bm{U}$ producido o destruido dentro de $\omega$ y el flujo
-	de $\bm{U}$ a través de la frontera $\partial\omega$.
+	$\mathbf{U}$ producido o destruido dentro de $\omega$ y el flujo
+	de $\mathbf{U}$ a través de la frontera $\partial\omega$.
 \end{quote}
 Esta observación se describe matemáticamente como
 \begin{equation}\label{eq:integralbalance}
 	\diff{}{t}
 	\int_{\omega}
-	\bm{U}\dl{\bm{x}}=
+	\mathbf{U}\dl{\mathbf{x}}=
 	-\int_{\partial\omega}
-	\bm{F}\cdot\nu\dl{\sigma\left(\bm{x}\right)}+
+	\mathbf{F}\cdot\nu\dl{\sigma\left(\mathbf{x}\right)}+
 	\int_{\omega}
-	\bm{S}\dl{\bm{x}}.
+	\mathbf{S}\dl{\mathbf{x}}.
 \end{equation}
 donde $\nu$ es la normal unitaria exterior,
-$\dl{\sigma\left(\bm{x}\right)}$ es la medida de la superficie,
-$\bm{F}$ es el flujo y $\bm{S}$ es la fuente.
+$\dl{\sigma\left(\mathbf{x}\right)}$ es la medida de la superficie,
+$\mathbf{F}$ es el flujo y $\mathbf{S}$ es la fuente.
 Así,~\eqref{eq:integralbalance} es la ecuación integral para la
-evolución de la cantidad total de $\bm{U}$ en $\omega$.
-\begin{figure}[b]
+evolución de la cantidad total de $\mathbf{U}$ en $\omega$.
+\begin{figure}[ht!]
 	\sidecaption
 	\includegraphics{conservationscheme}
 	% If not, use
 	%\picplace{5cm}{2cm} % Give the correct figure height and width in cm
 	%
-	\caption{If the width of the figure is less than 7.8 cm use the
-		\texttt{sidecapion} command to flush the caption on the left side of the page.
-		If the figure is positioned at the top of the page, align the sidecaption with
-		the top of the figure -- to achieve this you simply need to use the optional
-		argument \texttt{[t]} with the \texttt{sidecaption} command}
+	\caption{Ley de conservación para una magnitud escalar.
+		Adaptado de~\cite{Hirsch2007}.}
 	\label{fig:1}       % Give a unique label
 \end{figure}
 Simplificamos~\eqref{eq:integralbalance} utilizando el teorema de la
@@ -76,35 +74,36 @@ divergencia de Gauß en la integral de superficie para obtener
 \begin{equation}\label{eq:integralbalance2}
 	\diff{}{t}
 	\int_{\omega}
-	\bm{U}\dl{\bm{x}}
+	\mathbf{U}\dl{\mathbf{x}}
 	+\int_{\omega}
 	\operatorname{div}
-	\left(\bm{F}\right)\dl{\bm{x}}=
+	\left(\mathbf{F}\right)
+	\dl{\mathbf{x}}=
 	\int_{\omega}
-	\bm{S}\dl{\bm{x}}.
+	\mathbf{S}\dl{\mathbf{x}}.
 \end{equation}
 Dado que~\eqref{eq:integralbalance2} se cumple para cualquier
 subdominio $\omega\subset\Omega$,
 \begin{equation}\label{eq:balancelaw}
 	\forall\left(x,t\right)\in\Omega\times\mathbb{R}_{+}:
-	\difcp{\bm{U}}{t}+
+	\diffp{\mathbf{U}}{t}+
 	\operatorname{\operatorname{div}
-		\left(\bm{F}\right)}=
-	\bm{S}.
+		\left(\mathbf{F}\right)}=
+	\mathbf{S}.
 \end{equation}
 La ecuación~\eqref{eq:balancelaw} se llama \emph{ley de balance}.
-Frequentemente, el único cambio en $\bm{U}$ proviene de los
+Frequentemente, el único cambio en $\mathbf{U}$ proviene de los
 flujos y la fuente se fija en cero.
 \begin{equation}\label{eq:conservationlaw}
 	\forall\left(x,t\right)\in
 	\Omega\times\mathbb{R}_{+}:
-	\difcp{\bm{U}}{t}+
+	\diffp{\mathbf{U}}{t}+
 	\operatorname{\operatorname{div}
-		\left(\bm{F}\right)}=
+		\left(\mathbf{F}\right)}=
 	0.
 \end{equation}
 La ecuación~\eqref{eq:conservationlaw} se llama
-\emph{ley de conservación}, ya que el único cambio en $\bm{U}$
+\emph{ley de conservación}, ya que el único cambio en $\mathbf{U}$
 procede de la cantidad que entra o sale del dominio de interés.
 
 \section*{Ejemplos de leyes de conservación}
@@ -115,43 +114,43 @@ la ecuación de Richards y la ecuación Buckley-Leverett.
 
 \subsection*{Ecuación de transporte escalar}
 
-Sea $\bm{U}=U$ la concentración de un contaminante en un río.
+Sea $\mathbf{U}=U$ la concentración de un contaminante en un río.
 Suponga que el río fluye con un campo de velocidad
-$\bm{a}\left(\bm{x},t\right)$ y conocemos el campo de
+$\mathbf{a}\left(\mathbf{x},t\right)$ y conocemos el campo de
 velocidad en todos los puntos del río.
 El contaminante es transportado en la dirección de la velocidad, y
-así el flujo es $\bm{F}=\bm{a}U$.
+así el flujo es $\mathbf{F}=\mathbf{a}U$.
 Dado que no hay producción ni destrucción del contaminante durante el
 flujo, el término fuente en~\eqref{eq:balancelaw} es cero.
 La ley de conservación~\eqref{eq:conservationlaw} resulta ser
 \begin{equation}
-	\difcp{U}{t}+
+	\diffp{U}{t}+
 	\operatorname{div}
-	\left(\bm{a}\left(\bm{x},t\right)U\right)=
+	\left(\mathbf{a}\left(\mathbf{x},t\right)U\right)=
 	0.
 \end{equation}
 
 \subsection*{Ecuación de difusión}
 
-Sea $\bm{U}=U$ la temperatura de un bloque metálico.
+Sea $\mathbf{U}=U$ la temperatura de un bloque metálico.
 Suponga que el bloque se calienta por un extremo y se deja enfriar
 después, sin aportar ninguna fuente de calor adicional.
 El calor se propaga o difunde y la temperatura del bloque se
 uniformiza al cabo de un tiempo.
 La difusión del calor se rige por la ley de Fick
 \begin{equation}\label{eq:ficklaw}
-	\bm{F}\left(U\right)=
-	-\bm{k}\nabla U.
+	\mathbf{F}\left(U\right)=
+	-\mathbf{k}\nabla U.
 \end{equation}
-Aquí, $\bm{k}$ es el tensor de conductividad del medio.
+Aquí, $\mathbf{k}$ es el tensor de conductividad del medio.
 Sustituyendo~\eqref{eq:ficklaw} en~\eqref{eq:conservationlaw}
 resulta ser
-\begin{equation*}
-	\difcp{U}{t}-
+\begin{equation}
+	\diffp{U}{t}-
 	\operatorname{div}
-	\left(\bm{k}\nabla U\right)=
+	\left(\mathbf{k}\nabla U\right)=
 	0.
-\end{equation*}
+\end{equation}
 
 \subsection*{Ecuaciones de Euler}
 
@@ -160,51 +159,137 @@ El movimiento de cada molécula puede seguirse individualmente y
 da lugar a un gran número de EDOs.
 El sistema EDO resultante es demasiado grande para ser
 computacionalmente viable.
-En su lugar, se utiliza una descripción macroscópica.
-Las variables de interés son: la densidad $\rho$, el campo de
-velocidad $u$ y la presión del gas $p$.
+En su lugar, se utiliza una descripción macroscópica de un gas ideal
+y se ignora los efectos de viscosidad y la conducción de calor.
+Las variables de interés son la densidad $\rho$, el campo de
+velocidad $\mathbf{u}$ y la presión del gas $p$.
+Las leyes de conservación relevante son
 
 \begin{description}
-	\item[Conservación de la masa]
+	\item[\bfseries Conservación de la masa]
 
 	      La masa total de un gas es conservado, garantizado
-	      por el Teorema de la circulación de Kelvin.
+	      por el Teorema de la circulación de Kelvin. % https://en.wikipedia.org/wiki/Kelvin%27s_circulation_theorem
 
-	\item[Conservación del momento]
+	\item[\bfseries Conservación de la cantidad de movimiento]
 
 	      Se sigue de la segunda ley de Newton que la tasa de cambio de
 	      la cantidad de movimiento es igual a la fuerza aplicada.
 	      En ausencia de fuerzas externas, la presión del gas es la
 	      única fuerza que actúa sobre el gas.
 
-	\item[Conservación de la energía]
+	\item[\bfseries Conservación de la energía]
 
-	      La energía total de un gas es la suma de su energía cinética
-	      y su energía interna (potencial)
+	      La suma de la energía cinética y de la energía interna
+	      (potencial) del gas ideal es la energía total
+	      \begin{math}
+		      E=
+		      \frac{p}{\gamma-1}+
+		      \frac{1}{2}
+		      \rho{\left|\mathbf{u}\right|}^{2}
+	      \end{math},
+	      donde la constante del gas $\gamma$ es $\frac{5}{3}$ si este
+	      es monoatómico y $\frac{7}{5}$ si es diatómico.
 \end{description}
 
+Estas tres leyes de conservación forman un sistema EDP no lineal
+llamado las ecuaciones de Euler para la dinámica de gases.
 \begin{align}
-	\difcp{\rho}{t}+
+	\diffp{\rho}{t}+
 	\operatorname{div}
-	\left(\rho\bm{u}\right)                       & =
-	0.                                                \\
-	\difcp{\rho\bm{u}}{t}+
+	\left(\rho\mathbf{u}\right)             & =
+	0.                                          \\
+	\diffp{\rho\mathbf{u}}{t}+
 	\operatorname{div}
-	\left(\rho\bm{u}\otimes\bm{u}\right)+\nabla p & =
-	0.                                                \\
-	\difcp{E}{t}+
+	\left(\rho\mathbf{u}\otimes\mathbf{u}\right)+
+	\nabla p                                & =
+	0.                                          \\
+	\diffp{E}{t}+
 	\operatorname{div}
-	\left(\left(E+p\right)\bm{u}\right)           & =
+	\left(\left(E+p\right)\mathbf{u}\right) & =
 	0.
 \end{align}
 
+Para cualquier
+\begin{math}
+	a=
+	\begin{bmatrix}
+		a_{1} \\
+		a_{2} \\
+		a_{3}
+	\end{bmatrix},
+	b=
+	\begin{bmatrix}
+		b_{1} \\
+		b_{2} \\
+		b_{3}
+	\end{bmatrix}\in\mathbb{R}^{3}
+\end{math}
+se define el producto tensorial como
+\begin{equation*}
+	a\otimes b\coloneqq
+	\begin{bmatrix}
+		a_{1}b_{1} & a_{1}b_{2} & a_{1}b_{3} \\
+		a_{2}b_{1} & a_{2}b_{2} & a_{2}b_{3} \\
+		a_{3}b_{1} & a_{3}b_{2} & a_{3}b_{3} \\
+	\end{bmatrix}\in\mathbb{R}^{3\times 3}.
+\end{equation*}
+
 \subsection*{Ecuación de Richards}
+
+Derivada la conservación de la masa, la ecuación de continuidad
+unidimensional de la infiltración se da como~\cite{Tan2018}
+\begin{equation}\label{eq:reynoldstheorem}
+	\diffp{\theta}{t}+
+	\operatorname{div}\left(\mathbf{q}\right)=
+	0.
+\end{equation}
+Por la ley de Darcy, $q_{z}$ representa
+\begin{equation}\label{eq:darcy}
+	q_{z}=
+	-K\diffp{H}{z}=
+	-K\diffp{\left(h-z\right)}{z}=
+	K\left(
+	1-
+	\diffp{h}{z}
+	\right).
+\end{equation}
+Uniendo las ecuaciones~\eqref{eq:reynoldstheorem} y~\eqref{eq:darcy}
+obtenemos la formulación mixta de Richards
+\begin{equation*}
+	\frac{\partial\theta}{\partial t}+
+	\frac{\partial}{\partial z}
+	\left[K\left(1-\frac{\partial h}{\partial z}\right)\right]=0.
+\end{equation*}
+donde
+\begin{itemize}
+	\item $\theta$ es el contenido de agua del suelo $\left(\unit[per-mode=symbol]{\cubic\metre\per\cubic\metre}\right)$.
+	\item $z$ es la profundidad del suelo.
+	\item $\mathbf{q}$ es la tasa de infiltración de agua $\left(\unit[per-mode=symbol]{\metre\per\second}\right)$.
+	\item $K$ es la conductividad hidráulica.
+	\item $H$ es el potencial hídrico total en el eje $z$.
+	\item $h$ es la cabeza de presión\footnote{\url{https://en.wikipedia.org/wiki/Pressure_head}}.
+\end{itemize}
 
 \subsection*{Ecuación de Buckley-Leverett}
 
+La ecuación de Buckley-Leverett definida por la ley de conservación
+con
+\begin{equation*}
+	f\left(u\right)=
+	\frac{\mu u^{2}}{\mu u^{2}+{\left(1-\mu\right)}^{2}}
+\end{equation*}
+provee un modelo simple para el flujo de dos fluidos inmiscibles en
+un medio poroso y tiene aplicaciones en la simulación de yacimientos
+petrolíferos.
+La solución representa la saturación de agua en un yacimiento de
+petróleo y $0<\mu<1$ representa la movilidad.
+
+Para profundizar en los modelos presentados vea~\cite{Vázquez2015}.
+
 \section{Antecedentes}
 \label{sec:1}
-Use the template \emph{chapter.tex} together with the document class SVMono (monograph-type books) or SVMult (edited books) to style the various elements of your chapter content conformable to the Springer Nature layout.
+Use the template \emph{chapter.tex} together with the
 
 \section{Trabajos relacionados}
 \section{Modelo de leyes de conservación}
@@ -217,14 +302,11 @@ Use the template \emph{chapter.tex} together with the document class SVMono (mon
 
 \eject
 
-however, for multiline equations we recommend to use the \verb|eqnarray| environment\footnote{In physics texts please activate the class option \texttt{vecphys} to depict your vectors in \textbf{\itshape boldface-italic} type - as is customary for a wide range of physical subjects.}.
 \begin{eqnarray}
 	\left|\nabla U_{\alpha}^{\mu}(y)\right| &\le&\frac1{d-\alpha}\int
 	\left|\nabla\frac1{|\xi-y|^{d-\alpha}}\right|\,d\mu(\xi) =
 	\int \frac1{|\xi-y|^{d-\alpha+1}} \,d\mu(\xi)\qquad  \\
 	&=&(d-\alpha+1) \int\limits_{d(y)}^\infty
-	\frac{\mu(B(y,r))}{r^{d-\alpha+2}}\,dr \le (d-\alpha+1)
-	\int\limits_{d(y)}^\infty \frac{r^{d-\alpha}}{r^{d-\alpha+2}}\,dr
 	\label{eq:01}
 \end{eqnarray}
 
@@ -416,8 +498,8 @@ Instead of simply listing headings of different levels we recommend to let every
 \chapter{Leyes de conservación hiperbólicas escalares}
 
 \begin{equation}
-	\difcp{U}{t}+
-	\difcp{f\left(U\right)}{x}=
+	\diffp{U}{t}+
+	\diffp{f\left(U\right)}{x}=
 	0.
 \end{equation}
 donde $U$ es la función desconocida y $f$ es la función flujo.
@@ -425,16 +507,16 @@ donde $U$ es la función desconocida y $f$ es la función flujo.
 \section*{Modelo de flujo de tráfico}
 
 \begin{equation}
-	\difcp{U}{t}+
-	\difcp{V_{\text{max}}U\left(1-U\right)}{x}=
+	\diffp{U}{t}+
+	\diffp{V_{\text{max}}U\left(1-U\right)}{x}=
 	0.
 \end{equation}
 
 \section*{Recuperación mejorada de petróleo}
 
 \begin{equation}
-	\difcp{S^{\text{oil}}}{t}+
-	\difcp{
+	\diffp{S^{\text{oil}}}{t}+
+	\diffp{
 		\frac{q\left(S^{\text{oil}}\right)^{2}}{\left(S^{\text{oil}}\right)^{2}+\left(1-S^{\text{oil}}\right)^{2}}
 	}{x}=
 	0.
