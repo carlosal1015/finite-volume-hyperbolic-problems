@@ -35,7 +35,7 @@
 \makeindex             % used for the subject index
                        % please use the style svind.ist with
                        % your makeindex program
-\date{5 de mayo de 2025}
+\date{4 de julio de 2025}
 
 \usepackage[svgnames]{xcolor}
 \usepackage{academicons}
@@ -49,6 +49,9 @@
 \newcommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
 \definecolor{orcidcolor}{HTML}{a5ca3f}
 \definecolor{orcidlinkcolor}{HTML}{0961ba}
+
+\difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
+\difdef{f}{}{outer-Ldelim=\left .,outer-Rdelim=\right |,sub-nudge=0 mu}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -153,7 +156,7 @@ siempre que:
 \mainmatter
 \include{part}
 \include{chapter}
-\include{appendix}
+% \include{appendix}
 
 \backmatter
 % \include{glossary}
