@@ -1,5 +1,3 @@
-\section{La ecuación de Poisson unidimensional}
-
 \begin{frame}
 	\frametitle{\secname}
 
@@ -143,117 +141,110 @@
 		\int_{\Omega_{j}}
 		\big(x-x_{j+\frac{1}{2}}\big)
 		\dl x+
-		\mathcal{O}\big(h^{3}\big)                                                                & =
+		\mathcal{O}\big(h^{3}\big) & =
 		\int_{\Omega_{j}}
 		u\left(x\right)
 		\dl x.\notag
-		\uncover<2->{
-			\shortintertext{
-				En $j=0$, la condición de frontera es
-				$u\big(x_{\frac{1}{2}}\big)=0$.
-			}
-			u\big(x_{\frac{1}{2}}\big)+
-			\frac{h_{1}}{2}
-			\diff{u}{x}[x_{\frac{1}{2}}]+
-			\mathcal{O}\big(h^{2}\big)=
-			\frac{1}{h_{1}}
-			\int_{\Omega_{1}}
-			u\left(x\right)
-		\dl x                                                                                     & \implies
-			\left|
-			\frac{1}{h_{\frac{1}{2}}}
-			\left[
-				\frac{1}{h_{1}}
-				\int_{\Omega_{1}}
-				u\left(x\right)
-				\dl x
-				\right]-
-			\diff{u}{x}[x_{\frac{1}{2}}]
-			\right|\leq
-			Ch.\notag
-		}
-		\uncover<3->{
-			\shortintertext{
-				Para $j=1,\dotsc,N-1$, en las celdas $\Omega_{j}$ y
-				$\Omega_{j+1}$.
-			}
-		\begin{aligned}
-				u\big(x_{j+\frac{1}{2}}\big)-
-				\frac{h_{j}}{2}
-				\diff{u}{x}[x_{j+\frac{1}{2}}]+
-				\mathcal{O}\big(h^{2}\big) & =
-				\frac{1}{h_{j}}
-				\int_{\Omega_{j}}
-				u\left(x\right)
-				\dl x                          \\
-				u\big(x_{j+\frac{1}{2}}\big)+
-				\frac{h_{j+1}}{2}
-				\diff{u}{x}[x_{j+\frac{1}{2}}]+
-				\mathcal{O}\big(h^{2}\big) & =
-				\frac{1}{h_{j+1}}
-				\int_{\mathclap{\Omega_{j+1}}}
-				u\left(x\right)
-				\dl x
-			\end{aligned} & \implies
-			\left|
-			\frac{1}{h_{j+\frac{1}{2}}}
-			\left[
-				\frac{1}{h_{j+1}}
-				\int_{\mathclap{\Omega_{j+1}}}
-				u\left(x\right)
-				\dl x-
-				\frac{1}{h_{j}}
-				\int_{\Omega_{j}}
-				u\left(x\right)
-				\dl x
-				\right]
-			-\diff{u}{x}[x_{j+\frac{1}{2}}]
-			\right|\leq
-			Ch.\notag
-		}
-		\uncover<4->{
-			\shortintertext{
-				En $j=N$, la condición de frontera es
-				$u\big(x_{N+\frac{1}{2}}\big)=0$.
-			}
-			u\big(x_{N+\frac{1}{2}}\big)+
-			\frac{h_{N}}{2}
-			\diff{u}{x}[x_{N+\frac{1}{2}}]+
-			\mathcal{O}\big(h^{2}\big)=
-			\frac{1}{h_{N}}
-			\int_{\Omega_{N}}
-			u\left(x\right)
-		\dl x                                                                                     & \implies
-			\left|
-			\frac{1}{h_{N+\frac{1}{2}}}
-			\left[
-				\frac{1}{h_{N}}
-				\int_{\Omega_{N}}
-				u\left(x\right)
-				\dl x
-				\right]-
-			\diff{u}{x}[x_{N+\frac{1}{2}}]
-			\right|\leq
-			Ch.
-		}\notag
-	\end{align}
-\end{frame}
-
-\begin{frame}
-	\frametitle{\secname}
-
-	\begin{align*}
+		% \uncover<2->{
+		% 	\shortintertext{
+		% 		En $j=0$, la condición de frontera es
+		% 		$u\big(x_{\frac{1}{2}}\big)=0$.
+		% 	}
+		% 	u\big(x_{\frac{1}{2}}\big)+
+		% 	\frac{h_{1}}{2}
+		% 	\diff{u}{x}[x_{\frac{1}{2}}]+
+		% 	\mathcal{O}\big(h^{2}\big)=
+		% 	\frac{1}{h_{1}}
+		% 	\int_{\Omega_{1}}
+		% 	u\left(x\right)
+		% \dl x                                                                                     & \implies
+		% 	\left|
+		% 	\frac{1}{h_{\frac{1}{2}}}
+		% 	\left[
+		% 		\frac{1}{h_{1}}
+		% 		\int_{\Omega_{1}}
+		% 		u\left(x\right)
+		% 		\dl x
+		% 		\right]-
+		% 	\diff{u}{x}[x_{\frac{1}{2}}]
+		% 	\right|\leq
+		% 	Ch.\notag
+		% }
+		% \uncover<3->{
+		% 	\shortintertext{
+		% 		Para $j=1,\dotsc,N-1$, en las celdas $\Omega_{j}$ y
+		% 		$\Omega_{j+1}$.
+		% 	}
+		% \begin{aligned}
+		% 		u\big(x_{j+\frac{1}{2}}\big)-
+		% 		\frac{h_{j}}{2}
+		% 		\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		% 		\mathcal{O}\big(h^{2}\big) & =
+		% 		\frac{1}{h_{j}}
+		% 		\int_{\Omega_{j}}
+		% 		u\left(x\right)
+		% 		\dl x                          \\
+		% 		u\big(x_{j+\frac{1}{2}}\big)+
+		% 		\frac{h_{j+1}}{2}
+		% 		\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		% 		\mathcal{O}\big(h^{2}\big) & =
+		% 		\frac{1}{h_{j+1}}
+		% 		\int_{\mathclap{\Omega_{j+1}}}
+		% 		u\left(x\right)
+		% 		\dl x
+		% 	\end{aligned} & \implies
+		% 	\left|
+		% 	\frac{1}{h_{j+\frac{1}{2}}}
+		% 	\left[
+		% 		\frac{1}{h_{j+1}}
+		% 		\int_{\mathclap{\Omega_{j+1}}}
+		% 		u\left(x\right)
+		% 		\dl x-
+		% 		\frac{1}{h_{j}}
+		% 		\int_{\Omega_{j}}
+		% 		u\left(x\right)
+		% 		\dl x
+		% 		\right]
+		% 	-\diff{u}{x}[x_{j+\frac{1}{2}}]
+		% 	\right|\leq
+		% 	Ch.\notag
+		% }
+		% \uncover<4->{
+		% 	\shortintertext{
+		% 		En $j=N$, la condición de frontera es
+		% 		$u\big(x_{N+\frac{1}{2}}\big)=0$.
+		% 	}
+		% 	u\big(x_{N+\frac{1}{2}}\big)+
+		% 	\frac{h_{N}}{2}
+		% 	\diff{u}{x}[x_{N+\frac{1}{2}}]+
+		% 	\mathcal{O}\big(h^{2}\big)=
+		% 	\frac{1}{h_{N}}
+		% 	\int_{\Omega_{N}}
+		% 	u\left(x\right)
+		% \dl x                                                                                     & \implies
+		% 	\left|
+		% 	\frac{1}{h_{N+\frac{1}{2}}}
+		% 	\left[
+		% 		\frac{1}{h_{N}}
+		% 		\int_{\Omega_{N}}
+		% 		u\left(x\right)
+		% 		\dl x
+		% 		\right]-
+		% 	\diff{u}{x}[x_{N+\frac{1}{2}}]
+		% 	\right|\leq
+		% 	Ch.
+		% }\notag
 		\shortintertext{
 			Defina los flujos numéricos que aproximan los flujos
 			$-\diff{u}{x}[x_{j+\frac{1}{2}}]$ y la integral sobre la
 			celda el término fuente.
 		}
-		F_{\frac{1}{2}}                     & \coloneqq
-		-\frac{u_{1}}{h_{\frac{1}{2}}}.                 \\
+		F_{\frac{1}{2}}            & \coloneqq
+		-\frac{u_{1}}{h_{\frac{1}{2}}}.           \\
 		\forall j=2,\dotsc,N-1:
-		F_{j+\frac{1}{2}}                   & \coloneqq
-		-\frac{u_{j+1}-u_{j}}{h_{j+\frac{1}{2}}}.       \\
-		F_{N+\frac{1}{2}}                   & \coloneqq
+		F_{j+\frac{1}{2}}          & \coloneqq
+		-\frac{u_{j+1}-u_{j}}{h_{j+\frac{1}{2}}}. \\
+		F_{N+\frac{1}{2}}          & \coloneqq
 		-\frac{u_{N}}{h_{N+\frac{1}{2}}}.
 		\uncover<2->{
 			\shortintertext{
@@ -262,12 +253,19 @@
 			}
 			\forall j=1,\dotsc,N:
 			F_{j+\frac{1}{2}}-
-		F_{j-\frac{1}{2}}                   & =
+		F_{j-\frac{1}{2}}          & =
 			f_{j}\coloneqq
 			\int_{\Omega_{j}}
 			f\left(x\right)
 			\dl x.
 		}
+	\end{align}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{align*}
 		\uncover<3->{
 		\shortintertext{
 			Reescriba el esquema línea por línea,
@@ -278,7 +276,7 @@
 		u_{1}-
 		\frac{u_{2}}{h_{\frac{3}{2}}}=
 		F_{\frac{3}{2}}-F_{\frac{1}{2}}     & =
-		f_{1}.                                          \\
+		f_{1}.                                  \\
 		\forall j=2,\dotsc,N-1:
 		-\frac{u_{j-1}}{h_{j-\frac{1}{2}}}+
 		\left(
@@ -288,7 +286,7 @@
 		u_{j}-
 		\frac{u_{j+1}}{h_{j+\frac{1}{2}}}=
 		F_{j+\frac{1}{2}}-F_{j-\frac{1}{2}} & =
-		f_{j}.                                          \\
+		f_{j}.                                  \\
 		-\frac{u_{N-1}}{h_{N-\frac{1}{2}}}+
 		\left(
 		\frac{1}{h_{N-\frac{1}{2}}}+
@@ -378,101 +376,101 @@
 	\end{proof}
 \end{frame}
 
-\begin{frame}
-	El error de truncamiento es
-	\begin{align*}
-		h_{j}
-		\varepsilon_{h}
-		{\left(u\right)}_{j} & =
-		-\frac{u\left(x_{j-1}\right)}{h_{j-\frac{1}{2}}}+
-		\left(
-		\frac{1}{h_{j-\frac{1}{2}}}+\frac{1}{h_{j+\frac{1}{2}}}
-		\right)
-		u\left(x_{j}\right)-
-		\frac{u\left(x_{j+1}\right)}{h_{j+\frac{1}{2}}}-
-		f_{j}.                   \\
-		\varepsilon_{h}
-		{\left(u\right)}_{j} & =
-		\left[
-			1-
-			\frac{1}{2h_{j}}
-			\left(
-			h_{j-\frac{1}{2}}+
-			h_{j+\frac{1}{2}}
-			\right)
-			\right]
-		\diff[2]{u}{x}[x_{j}]+
-		\mathcal{O}\left(h\right).
-	\end{align*}
+% \begin{frame}
+% 	El error de truncamiento es
+% 	\begin{align*}
+% 		h_{j}
+% 		\varepsilon_{h}
+% 		{\left(u\right)}_{j} & =
+% 		-\frac{u\left(x_{j-1}\right)}{h_{j-\frac{1}{2}}}+
+% 		\left(
+% 		\frac{1}{h_{j-\frac{1}{2}}}+\frac{1}{h_{j+\frac{1}{2}}}
+% 		\right)
+% 		u\left(x_{j}\right)-
+% 		\frac{u\left(x_{j+1}\right)}{h_{j+\frac{1}{2}}}-
+% 		f_{j}.                   \\
+% 		\varepsilon_{h}
+% 		{\left(u\right)}_{j} & =
+% 		\left[
+% 			1-
+% 			\frac{1}{2h_{j}}
+% 			\left(
+% 			h_{j-\frac{1}{2}}+
+% 			h_{j+\frac{1}{2}}
+% 			\right)
+% 			\right]
+% 		\diff[2]{u}{x}[x_{j}]+
+% 		\mathcal{O}\left(h\right).
+% 	\end{align*}
 
-	\begin{theorem}
-		Sea $\Omega=\left(0,1\right)$.
-		Si $f\in C^{0}\big(\overline{\Omega}\big)$, entonces
-		$\exists C>0$ que no depende de $h$ tal que
-		\begin{math}
-			\max\limits_{1\leq j\leq N}
-			\left|
-			u_{j}-
-			\frac{1}{h_{j}}
-			\int_{\Omega_{j}}
-			u\left(x\right)\dl x
-			\right|=
-			\max\limits_{1\leq j\leq N}
-			\left|
-			u_{j}-
-			u\left(x_{j}\right)
-			\right|\leq
-			Ch
-		\end{math}.
-	\end{theorem}
+	% \begin{theorem}
+	% 	Sea $\Omega=\left(0,1\right)$.
+	% 	Si $f\in C^{0}\big(\overline{\Omega}\big)$, entonces
+	% 	$\exists C>0$ que no depende de $h$ tal que
+	% 	\begin{math}
+	% 		\max\limits_{1\leq j\leq N}
+	% 		\left|
+	% 		u_{j}-
+	% 		\frac{1}{h_{j}}
+	% 		\int_{\Omega_{j}}
+	% 		u\left(x\right)\dl x
+	% 		\right|=
+	% 		\max\limits_{1\leq j\leq N}
+	% 		\left|
+	% 		u_{j}-
+	% 		u\left(x_{j}\right)
+	% 		\right|\leq
+	% 		Ch
+	% 	\end{math}.
+	% \end{theorem}
 
-	\begin{proof}
-		Defina
-		\begin{align*}
-			e_{0}                        & =0. \\
-			\forall j=1,\dotsc,N:
-			e_{n}                        & =
-			u_{n}-\frac{f_{j}}{h_{j}}.         \\
-			e_{N+1}                      & =0. \\
-			\forall j=1,\dotsc,N:
-			\overline{F}_{j+\frac{1}{2}} & =
-			-\diff{u}{x}[x_{j+\frac{1}{2}}].
-		\end{align*}
-	\end{proof}
-\end{frame}
+	% \begin{proof}
+	% 	Defina
+	% 	\begin{align*}
+	% 		e_{0}                        & =0. \\
+	% 		\forall j=1,\dotsc,N:
+	% 		e_{n}                        & =
+	% 		u_{n}-\frac{f_{j}}{h_{j}}.         \\
+	% 		e_{N+1}                      & =0. \\
+	% 		\forall j=1,\dotsc,N:
+	% 		\overline{F}_{j+\frac{1}{2}} & =
+	% 		-\diff{u}{x}[x_{j+\frac{1}{2}}].
+	% 	\end{align*}
+	% \end{proof}
+% \end{frame}
 
-\subsection{Implementación del método de volúmenes finitos}
+% \subsection{Implementación del método de volúmenes finitos}
 
-\begin{frame}
-	% https://www.sci-hub.in/10.1016/s1570-8659(00)07005-8#page=21
-	% https://hal.science/hal-02100732v2/document
-	% https://www.i2m.univ-amu.fr/perso/raphaele.herbin/PUBLI/anedp.pdf
-	% https://www.i2m.univ-amu.fr/perso/thierry.gallouet/tele.d/anum.d/envoi1.pdf
-	\begin{theorem}[]
-		Sea $\Omega=\left(0,1\right)$.
-		Si $f\in C\big(\overline{\Omega}\big)$ y
-		$u\in C^{2}\big(\overline{\Omega}\big)$, entonces
-		$\exists\,!U^{h}\in\mathbb{R}^{N}$ que es solución
-		y $\exists C>0$ que solo depende de $u$ tal que
-		\begin{equation*}
-			\sum_{j=0}^{N}
-			\frac{\left(e_{j+1}-e_{j}\right)^{2}}{h_{j+\frac{1}{2}}}\leq
-			C^{2}h^{2}.
-		\end{equation*}
-	\end{theorem}
+% \begin{frame}
+% 	% https://www.sci-hub.in/10.1016/s1570-8659(00)07005-8#page=21
+% 	% https://hal.science/hal-02100732v2/document
+% 	% https://www.i2m.univ-amu.fr/perso/raphaele.herbin/PUBLI/anedp.pdf
+% 	% https://www.i2m.univ-amu.fr/perso/thierry.gallouet/tele.d/anum.d/envoi1.pdf
+% 	\begin{theorem}[]
+% 		Sea $\Omega=\left(0,1\right)$.
+% 		Si $f\in C\big(\overline{\Omega}\big)$ y
+% 		$u\in C^{2}\big(\overline{\Omega}\big)$, entonces
+% 		$\exists\,!U^{h}\in\mathbb{R}^{N}$ que es solución
+% 		y $\exists C>0$ que solo depende de $u$ tal que
+% 		\begin{equation*}
+% 			\sum_{j=0}^{N}
+% 			\frac{\left(e_{j+1}-e_{j}\right)^{2}}{h_{j+\frac{1}{2}}}\leq
+% 			C^{2}h^{2}.
+% 		\end{equation*}
+% 	\end{theorem}
 
-	\begin{example}[{\cite[p.~15]{Frey2008}}]
-		Considere el problema de valor de frontera Sea
-		\begin{math}
-			f\left(x\right)=
-			\frac{\pi^{2}}{4}
-			\cos\left(\frac{\pi x}{2}\right)
-		\end{math}
-		y considere una malla de $\left(-1,1\right)$.
-		La solución exacta es
-		\begin{math}
-			u\left(x\right)=
-			\cos\left(\frac{\pi x}{2}\right)
-		\end{math}.
-	\end{example}
-\end{frame}
+% 	\begin{example}[{\cite[p.~15]{Frey2008}}]
+% 		Considere el problema de valor de frontera Sea
+% 		\begin{math}
+% 			f\left(x\right)=
+% 			\frac{\pi^{2}}{4}
+% 			\cos\left(\frac{\pi x}{2}\right)
+% 		\end{math}
+% 		y considere una malla de $\left(-1,1\right)$.
+% 		La solución exacta es
+% 		\begin{math}
+% 			u\left(x\right)=
+% 			\cos\left(\frac{\pi x}{2}\right)
+% 		\end{math}.
+% 	\end{example}
+% \end{frame}

@@ -39,7 +39,7 @@ varepsilon = 2
 
 theta0 = 0.5
 delta = varepsilon * (varepsilon - 4 * theta0 - 4 * theta0**2 * q)
-
+print(f"Delta: {delta}")
 
 # m = (beta * Sor) / (Sly * tast * kp * b1)
 def f(theta):
@@ -92,7 +92,8 @@ plt.clf()
 So, theta = np.meshgrid(np.linspace(0, 10), np.linspace(0, 10))
 F1 = b3 * Sly / Sor * Phi(theta) * (Sor - So) * So / (c - a3)
 F2 = b1 * (1 - q * theta) / (c - a1 * So) * Phi(theta) * (So**2 - Sor + f(theta))
-
+print(c)
+print(a3)
 fig, ax = plt.subplots()
 ax.set_title("Arrows")
 ax.quiver(So, theta, F1, F2, units="width")

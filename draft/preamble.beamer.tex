@@ -14,7 +14,7 @@
 \usepackage{changepage}
 \input{preamble.common}
 
-\newcommand{\Minipage}[4]{\noindent % Avoid overfull
+\newcommand{\Minipage}[4]{\noindent
 	\begin{minipage}[t][][b]
 		{#1\textwidth}{#2}
 	\end{minipage}
@@ -47,7 +47,7 @@
 			\end{tabular}
 			\\[5pt]
 			\begin{tabular}{rl}{\bfseries\small Fecha:} &
-               \small\insertdate
+               \small Lunes,~\insertdate
 			\end{tabular}
 		}{.45}{
 			\begin{tabular}{rl}
@@ -57,17 +57,18 @@
 			\\[5pt]
 			\begin{tabular}{rl}{\bfseries\small Jurado:} &
                \begin{minipage}[t]{.5\textwidth}
-				               \small Por designar\\ Por designar
+				               \small Prof. Dimas Abanto\\
+				               Prof. Andrés Chulluncuy
 			               \end{minipage}
 			\end{tabular}
 		}
 	\end{adjustwidth}}
 
-\AtBeginSection[]{
-	\begin{frame}
-		\usebeamertemplate{section page}
-	\end{frame}
-}
+% \AtBeginSection[]{
+% 	\begin{frame}
+% 		\usebeamertemplate{section page}
+% 	\end{frame}
+% }
 
 % \usetheme{Luebeck}
 \useinnertheme[rounded,shadow]{tcolorbox}
@@ -91,7 +92,7 @@
 }
 
 \title{\sffamily\bfseries
-	El método de los volúmenes finitos
+	Una introducción al método de los volúmenes finitos
 }
 
 \subtitle{
@@ -110,3 +111,5 @@
 	Escuela Profesional de Matemática \\
 	Facultad de Ciencias
 }
+
+\date{21 de julio de 2025}

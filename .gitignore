@@ -175,3 +175,4 @@ letter
 output*
 *.xlsx
 *.aux
+.vscode

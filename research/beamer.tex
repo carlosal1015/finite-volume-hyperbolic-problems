@@ -45,6 +45,7 @@
 ]{biblatex}
 \addbibresource{beamer.bib}
 
+\addtobeamertemplate{theorem begin}{\normalfont}{}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{navigation symbols}{}
 \setbeamercolor{structure}{fg=DarkBlue}
@@ -1541,6 +1542,240 @@
 			      If $c>a_{3}$ or $c<a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}<0$. (attractor)
 		\end{itemize}
 	\end{lemma}
+\end{frame}
+
+\begin{frame}
+	If $q<0$ and $\Delta=0$, then
+	there exists a single critical point
+	\begin{math}
+		\theta_{\text{crit}}=
+		\frac{\varepsilon-2\theta_{0}}{2\left(1+q\varepsilon\right)}
+	\end{math}
+	and
+	\begin{math}
+		f^{\prime}
+		\left(\theta\right)=
+		\text{FP}
+		\left(1+q\varepsilon\right)
+		\left(\theta-\theta_{\text{crit}}\right)
+	\end{math}.
+
+	\begin{description}
+		\item[Case I: $1+q\varepsilon>0$]
+
+
+		\item[Case II: $1+q\varepsilon<0$]
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Case $q<0$ and
+		\begin{math}
+			\Delta=
+			\varepsilon\left(\varepsilon-4\theta_{0}-4q\theta^{2}_{0}\right)=
+			0\iff\varepsilon=4\theta_{0}+4q\theta^{2}_{0}
+		\end{math}
+	}
+
+	\begin{equation*}
+		\theta^{\text{crit}}=
+		\frac{\varepsilon-2\theta_{0}}{2\left(1+q\varepsilon\right)}=
+		1.0204081632653061,\qquad
+		\lim_{\theta\to\infty}f\left(\theta\right)=
+		-\frac{m}{q}=
+		3.702113166195264\times 10^{-10}.
+	\end{equation*}
+
+	\begin{table}[ht!]
+		\begin{tabular}{cc}
+			\hline
+			$m$           & $3.702113166195264\times 10^{-12}$ \\
+			\hline
+			$\varepsilon$ & $4-4\times 10^{-2}$                \\
+			\hline
+			$\theta_{0}$  & $1$                                \\
+			\hline
+			$q$           & $-10^{-2}$                         \\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.43\paperwidth]{casedeltazeroa}
+		\includegraphics[width=.43\paperwidth]{casedeltazerob}
+		\caption{Single critical point and $f$ is a concave function.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	Let be
+	\begin{math}
+		f\left(\theta\right)=
+		\frac{m\theta}{1-q\theta}
+		\exp
+		\left(
+		\frac{\varepsilon}{\theta+\theta_{0}}
+		\right)
+	\end{math},
+	\begin{math}
+		\Delta=
+		{\left(\varepsilon-2\theta_{0}\right)}^{2}-
+		4\theta^{2}_{0}
+		\left(1+q\varepsilon\right)
+	\end{math}
+	and
+	\begin{math}
+		\theta^{\text{crit}}_{\pm}=
+		\frac{\varepsilon-2\theta_{0}\pm\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}
+	\end{math}.
+	\begin{theorem}
+		If
+		\begin{math}
+			\Delta>
+			0
+		\end{math},
+		$q<0$ and $1+q\varepsilon>0$, then
+		$\theta^{\text{crit}}_{+}<0$ or
+		$\theta^{\text{crit}}_{-}>0$.
+	\end{theorem}
+
+	\begin{proof}
+		Then
+		\begin{math}
+			\Delta=
+			{\left(\varepsilon-2\theta_{0}\right)}^{2}-
+			4\theta^{2}_{0}
+			\left(
+			\mathcolor{DarkBlue}{1+q\varepsilon}
+			\right)<
+			{\left(\varepsilon-2\theta_{0}\right)}^{2}
+		\end{math}.
+		\begin{align*}
+			\sqrt{\Delta}<
+			\left|
+			\varepsilon-
+			2\theta_{0}
+			\right|=
+			\begin{cases}
+				\varepsilon-2\theta_{0}>\sqrt{\Delta}  & \iff
+				\varepsilon-2\theta_{0}-\sqrt{\Delta}>0
+				\iff
+				\theta^{\text{crit}}_{-}>0.                        \\
+				                                       & \quad\vee \\
+				\varepsilon-2\theta_{0}<-\sqrt{\Delta} & \iff
+				\varepsilon-2\theta_{0}+\sqrt{\Delta}>0
+				\iff
+				\theta^{\text{crit}}_{+}<0.
+			\end{cases}
+		\end{align*}
+		\begin{math}
+			\therefore
+			\theta^{\text{crit}}_{+}<
+			0
+			\text{ or }
+			\theta^{\text{crit}}_{-}>
+			0
+		\end{math}.
+	\end{proof}
+
+	\begin{theorem}
+		If
+		\begin{math}
+			\Delta>
+			0
+		\end{math},
+		$q<0$ and $1+q\varepsilon<0$, then
+		\begin{math}
+			\theta^{\text{crit}}_{+}<
+			0<
+			\theta^{\text{crit}}_{-}
+		\end{math}.
+	\end{theorem}
+
+	\begin{proof}
+		Then,
+		\begin{math}
+			\Delta=
+			{\left(\varepsilon-2\theta_{0}\right)}^{2}-
+			4\theta^{2}_{0}
+			\left(
+			\mathcolor{DarkBlue}{1+q\varepsilon}
+			\right)>
+			{\left(\varepsilon-2\theta_{0}\right)}^{2}
+		\end{math}.
+		\begin{align*}
+			\sqrt{\Delta}>
+			\left|
+			\varepsilon-
+			2\theta_{0}
+			\right|=
+			\begin{cases}
+				-\sqrt{\Delta}<\varepsilon-2\theta_{0} & \iff
+				0<\varepsilon-2\theta_{0}+\sqrt{\Delta}
+				\iff
+				\theta^{\text{crit}}_{+}<0.                          \\
+				                                       & \quad\wedge \\
+				\varepsilon-2\theta_{0}<\sqrt{\Delta}  & \iff
+				\varepsilon-2\theta_{0}-\sqrt{\Delta}<0
+				\iff
+				\theta^{\text{crit}}_{-}>0.
+			\end{cases}
+		\end{align*}
+		\begin{math}
+			\therefore
+			% \text{ the critical points satisfies }
+			\theta^{\text{crit}}_{+}<
+			0<
+			\theta^{\text{crit}}_{-}
+		\end{math}.
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Case $q<0$ and
+		\begin{math}
+			\Delta=
+			\varepsilon\left(\varepsilon-4\theta_{0}-4q\theta^{2}_{0}\right)>
+			0\iff\varepsilon>4\theta_{0}+4q\theta^{2}_{0}
+		\end{math}
+	}
+
+	\begin{equation*}
+		\theta^{\text{crit}}_{+}=
+		\frac{
+			\varepsilon-2\theta_{0}+\sqrt{\Delta}
+		}{
+			2\left(1+q\varepsilon\right)
+		}=
+		0,\qquad
+		\theta^{\text{crit}}_{-}=
+		\frac{
+			\varepsilon-2\theta_{0}-\sqrt{\Delta}
+		}{
+			2\left(1+q\varepsilon\right)
+		}.
+	\end{equation*}
+
+	\begin{table}[ht!]
+		\begin{tabular}{cc}
+			\hline
+			$m$           & $3.702113166195264\times 10^{-12}$ \\
+			\hline
+			$\varepsilon$ & $4-4\times 10^{-2}$                \\
+			\hline
+			$\theta_{0}$  & $1$                                \\
+			\hline
+			$q$           & $-10^{-2}$                         \\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.43\paperwidth]{example-image}
+		\caption{.}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
