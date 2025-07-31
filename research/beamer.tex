@@ -1291,7 +1291,7 @@
 
 \begin{frame}
 	\begin{align*}
-		f\left(\theta\right) & =
+		f\left(\theta\right)          & =
 		\beta
 		\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
 		\frac{1}{t^{\ast}k_{p}}
@@ -1310,7 +1310,7 @@
 		\frac{E_{r}}{
 			R\left(T^{\ast}\theta+T_{\text{res}}\right)
 		}
-		\right).                 \\
+		\right).                                                \\
 		% f\left(\theta\right) & =
 		% \alpha
 		% \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
@@ -1331,9 +1331,14 @@
 		% \right).                                                      \\
 		% f\left(\theta\right) & =
 		% \frac{m\theta\exp\left(\frac{\varepsilon}{\theta+\theta_{0}}\right)}{1-q\theta}. \\
-		f\left(\theta\right) & =
+		f\left(\theta\right)          & =
 		m\left(\frac{\theta}{1-q\theta}\right)
-		\exp\left(\frac{\varepsilon}{\theta+\theta_{0}}\right).
+		\exp\left(\frac{\varepsilon}{\theta+\theta_{0}}\right). \\
+		f^{\prime}\left(\theta\right) & =
+		f\left(\theta\right)
+		\left[
+			0
+			\right].
 	\end{align*}
 
 	\begin{equation*}
@@ -1402,7 +1407,12 @@
 		\theta^{C}_{\pm}.
 	\end{align*}
 
-	Let be $\Delta\coloneqq {\left(2\theta_{0}-\varepsilon\right)}^{2}-4\left(1+\varepsilon q\right)\theta_{0}^{2}=\varepsilon\left(\varepsilon-4\theta_{0}-4\theta_{0}^{2}q\right)$.
+	Let be
+	\begin{math}
+		\Delta\coloneqq
+		{\left(2\theta_{0}-\varepsilon\right)}^{2}-4\left(1+\varepsilon q\right)\theta_{0}^{2}=
+		\varepsilon\left(\varepsilon-4\theta_{0}-4\theta_{0}^{2}q\right)
+	\end{math}.
 
 	\begin{description}
 		\item[First case $\Delta<0$,]
@@ -1515,8 +1525,17 @@
 		\left(S_{\text{o}^{\pm}},\theta\right)^{\prime}\big|_{\theta=0}=
 		\left(\pm\frac{m}{S^{R}_{\text{o}}}\exp\left(\frac{n}{p}\right),1\right)
 	\end{math}.
-	Since $\diff{f}{\theta}\big|_{\theta=0}=m\exp\left(\frac{n}{p}\right)$.
-	Then, $\diff{S_{\text{o}^{\pm}}}{\theta}\left(0\right)=\pm\frac{m}{S^{R}_{\text{o}}}\exp\left(\frac{n}{p}\right)$.
+	Since
+	\begin{math}
+		\diff{f}{\theta}\big|_{\theta=0}=
+		m\exp\left(\frac{n}{p}\right)
+	\end{math}.
+	Then,
+	\begin{math}
+		\diff{S_{\text{o}^{\pm}}}{\theta}\left(0\right)=
+		\pm\frac{m}{S^{R}_{\text{o}}}
+		\exp\left(\frac{n}{p}\right)
+	\end{math}.
 
 	% https://faculty.ksu.edu.sa/sites/default/files/R.-Kent-Nagle-Edward-B.-Saff-Arthur-David-Snider-Fundamentals-of-Differential-Equations-Pearson-2017.pdf
 	%https://eva.fing.edu.uy/pluginfile.php/517824/mod_resource/content/1/Jorge%20Sotomayor%20-%20Li%C3%A7%C3%B5es%20de%20equa%C3%A7oes%20diferenciais%20ordin%C3%A1rias-Impa%20%281979%29.pdf
@@ -1525,48 +1544,56 @@
 		\begin{itemize}
 			\item
 
-			      If $c>a_{3}$, then $\lambda^{1}_{\text{OC}}>0$ and $\lambda^{2}_{\text{OC}}>0$. (repulsor)
+			      If $c>a_{3}$, then $\lambda^{1}_{\text{OC}}>0$ and
+			      $\lambda^{2}_{\text{OC}}>0$.
+			      (repulsor)
 
 			\item
-			      If $c<a_{3}$, then $\lambda^{1}_{\text{OC}}<0$ and $\lambda^{2}_{\text{OC}}>0$ (saddle point)
+
+			      If $c<a_{3}$, then $\lambda^{1}_{\text{OC}}<0$ and
+			      $\lambda^{2}_{\text{OC}}>0$ (saddle point).
 		\end{itemize}
 
 		For $JF_{\text{FC}}\left(S^{R}_{\text{o}},0\right)$.
 		\begin{itemize}
 			\item
 
-			      If $c>a_{3}$ or $c>a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}>0$. (saddle point)
+			      If $c>a_{3}$ or $c>a_{1}S^{R}_{\text{o}}$, then
+			      $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}>0$.
+			      (saddle point)
 
 			\item
 
-			      If $c>a_{3}$ or $c<a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}<0$. (attractor)
+			      If $c>a_{3}$ or $c<a_{1}S^{R}_{\text{o}}$, then
+			      $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}<0$.
+			      (attractor)
 		\end{itemize}
 	\end{lemma}
 \end{frame}
 
-\begin{frame}
-	If $q<0$ and $\Delta=0$, then
-	there exists a single critical point
-	\begin{math}
-		\theta_{\text{crit}}=
-		\frac{\varepsilon-2\theta_{0}}{2\left(1+q\varepsilon\right)}
-	\end{math}
-	and
-	\begin{math}
-		f^{\prime}
-		\left(\theta\right)=
-		\text{FP}
-		\left(1+q\varepsilon\right)
-		\left(\theta-\theta_{\text{crit}}\right)
-	\end{math}.
+% \begin{frame}
+% 	If $q<0$ and $\Delta=0$, then
+% 	there exists a single critical point
+% 	\begin{math}
+% 		\theta_{\text{crit}}=
+% 		\frac{\varepsilon-2\theta_{0}}{2\left(1+q\varepsilon\right)}
+% 	\end{math}
+% 	and
+% 	\begin{math}
+% 		f^{\prime}
+% 		\left(\theta\right)=
+% 		\text{FP}
+% 		\left(1+q\varepsilon\right)
+% 		\left(\theta-\theta_{\text{crit}}\right)
+% 	\end{math}.
 
-	\begin{description}
-		\item[Case I: $1+q\varepsilon>0$]
+% 	\begin{description}
+% 		\item[Case I: $1+q\varepsilon>0$]
 
 
-		\item[Case II: $1+q\varepsilon<0$]
-	\end{description}
-\end{frame}
+% 		\item[Case II: $1+q\varepsilon<0$]
+% 	\end{description}
+% \end{frame}
 
 \begin{frame}
 	\frametitle{Case $q<0$ and
@@ -1604,7 +1631,22 @@
 		\centering
 		\includegraphics[width=.43\paperwidth]{casedeltazeroa}
 		\includegraphics[width=.43\paperwidth]{casedeltazerob}
-		\caption{Single critical point and $f$ is a concave function.}
+		\caption{Single critical point.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Case $q<0$ and
+		\begin{math}
+			\Delta=
+			\varepsilon\left(\varepsilon-4\theta_{0}-4q\theta^{2}_{0}\right)=
+			0\iff\varepsilon=4\theta_{0}+4q\theta^{2}_{0}
+		\end{math}
+	}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{casedeltazeroc}
 	\end{figure}
 \end{frame}
 
@@ -1636,8 +1678,16 @@
 			0
 		\end{math},
 		$q<0$ and $1+q\varepsilon>0$, then
-		$\theta^{\text{crit}}_{+}<0$ or
-		$\theta^{\text{crit}}_{-}>0$.
+		\begin{math}
+			\theta^{\text{crit}}_{+}>
+			\theta^{\text{crit}}_{-}>0
+		\end{math}
+		or
+		\begin{math}
+			0>
+			\theta^{\text{crit}}_{+}>
+			\theta^{\text{crit}}_{-}
+		\end{math}.
 	\end{theorem}
 
 	\begin{proof}
@@ -1659,23 +1709,32 @@
 			\right|=
 			\begin{cases}
 				\varepsilon-2\theta_{0}>\sqrt{\Delta}  & \iff
-				\varepsilon-2\theta_{0}-\sqrt{\Delta}>0
-				\iff
-				\theta^{\text{crit}}_{-}>0.                        \\
-				                                       & \quad\vee \\
+				\begin{cases}
+					\frac{\varepsilon-2\theta_{0}-\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}>
+					0                                                     & \iff \theta^{\text{crit}}_{-}>0. \\
+					\frac{\varepsilon-2\theta_{0}+\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}>
+					\frac{2\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}>0 & \iff \theta^{\text{crit}}_{+}>0.
+				\end{cases} \\
+				                                       & \quad\vee                                                         \\
 				\varepsilon-2\theta_{0}<-\sqrt{\Delta} & \iff
-				\varepsilon-2\theta_{0}+\sqrt{\Delta}>0
-				\iff
-				\theta^{\text{crit}}_{+}<0.
+				\begin{cases}
+					\frac{\varepsilon-2\theta_{0}+\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}<
+					0                                                      & \iff \theta^{\text{crit}}_{+}<0. \\
+					\frac{\varepsilon-2\theta_{0}-\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}<
+					\frac{-2\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}<0 & \iff \theta^{\text{crit}}_{-}<0.
+				\end{cases}
 			\end{cases}
 		\end{align*}
 		\begin{math}
 			\therefore
-			\theta^{\text{crit}}_{+}<
-			0
-			\text{ or }
-			\theta^{\text{crit}}_{-}>
-			0
+			\theta^{\text{crit}}_{+}>
+			\theta^{\text{crit}}_{-}>0
+		\end{math}
+		or
+		\begin{math}
+			0>
+			\theta^{\text{crit}}_{+}>
+			\theta^{\text{crit}}_{-}
 		\end{math}.
 	\end{proof}
 
@@ -1712,12 +1771,19 @@
 			\right|=
 			\begin{cases}
 				-\sqrt{\Delta}<\varepsilon-2\theta_{0} & \iff
-				0<\varepsilon-2\theta_{0}+\sqrt{\Delta}
+				0<
+				\varepsilon-2\theta_{0}+\sqrt{\Delta}
+				\iff
+				\frac{\varepsilon-2\theta_{0}+\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}<
+				0
 				\iff
 				\theta^{\text{crit}}_{+}<0.                          \\
 				                                       & \quad\wedge \\
 				\varepsilon-2\theta_{0}<\sqrt{\Delta}  & \iff
 				\varepsilon-2\theta_{0}-\sqrt{\Delta}<0
+				\iff
+				\frac{\varepsilon-2\theta_{0}-\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}>
+				0
 				\iff
 				\theta^{\text{crit}}_{-}>0.
 			\end{cases}
@@ -1740,21 +1806,30 @@
 			0\iff\varepsilon>4\theta_{0}+4q\theta^{2}_{0}
 		\end{math}
 	}
-
 	\begin{equation*}
-		\theta^{\text{crit}}_{+}=
-		\frac{
-			\varepsilon-2\theta_{0}+\sqrt{\Delta}
-		}{
-			2\left(1+q\varepsilon\right)
-		}=
-		0,\qquad
-		\theta^{\text{crit}}_{-}=
-		\frac{
-			\varepsilon-2\theta_{0}-\sqrt{\Delta}
-		}{
-			2\left(1+q\varepsilon\right)
-		}.
+		\begin{aligned}
+			\theta^{\text{crit}}_{+} & =
+			\frac{
+				\varepsilon-2\theta_{0}+\sqrt{\Delta}
+			}{
+				2\left(1+q\varepsilon\right)
+			}=
+			23.288490301174345.          \\
+			\theta^{\text{crit}}_{-} & =
+			\frac{
+				\varepsilon-2\theta_{0}-\sqrt{\Delta}
+			}{
+				2\left(1+q\varepsilon\right)
+			}=
+			0.05404374735901535.
+		\end{aligned}\qquad
+		\begin{aligned}
+			\lim_{\theta\to\infty}f\left(\theta\right) & =
+			-\frac{m}{q}=
+			3.702113166195264\times 10^{-10}.              \\
+			1+q\varepsilon                             & =
+			0.7945353219469168>0
+		\end{aligned}
 	\end{equation*}
 
 	\begin{table}[ht!]
@@ -1762,7 +1837,7 @@
 			\hline
 			$m$           & $3.702113166195264\times 10^{-12}$ \\
 			\hline
-			$\varepsilon$ & $4-4\times 10^{-2}$                \\
+			$\varepsilon$ & $20.546467805308318$               \\
 			\hline
 			$\theta_{0}$  & $1$                                \\
 			\hline
@@ -1773,8 +1848,75 @@
 
 	\begin{figure}[ht!]
 		\centering
-		\includegraphics[width=.43\paperwidth]{example-image}
-		\caption{.}
+		\includegraphics[width=.43\paperwidth]{casedeltapositivea}
+		\includegraphics[width=.43\paperwidth]{casedeltapositiveb}
+		\caption{Single critical point.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{casedeltapositivec}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{casedeltapositived}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Case $q<0$ and
+		\begin{math}
+			\Delta=
+			\varepsilon\left(\varepsilon-4\theta_{0}-4q\theta^{2}_{0}\right)>
+			0\iff\varepsilon>4\theta_{0}+4q\theta^{2}_{0}
+		\end{math}
+	}
+
+	\begin{equation*}
+		\begin{aligned}
+			\theta^{\text{crit}}_{+} & =
+			\frac{
+				\varepsilon-2\theta_{0}+\sqrt{\Delta}
+			}{
+				2\left(1+q\varepsilon\right)
+			}=
+			-0.9094894481614705<
+			0.                           \\
+			\theta^{\text{crit}}_{-} & =
+			\frac{
+				\varepsilon-2\theta_{0}-\sqrt{\Delta}
+			}{
+				2\left(1+q\varepsilon\right)
+			}=
+			0.050900983589060936
+			>0.
+		\end{aligned}\qquad
+		\begin{aligned}
+			\lim_{\theta\to\infty}f\left(\theta\right) & =
+			-\frac{m}{q}=
+			0.3365557423813876.                            \\
+			1+q\varepsilon                             & =
+			-21.601114585839152<0.
+		\end{aligned}
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{casedeltapositive_thetamin}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{casedeltapositive_thetacritminus}
 	\end{figure}
 \end{frame}
 

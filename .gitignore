@@ -176,3 +176,6 @@ output*
 *.xlsx
 *.aux
 .vscode
+*.jpeg
+*.xopp
+*.png
