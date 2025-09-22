@@ -1,0 +1,46 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'pdf', 'run.xml', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'run.xml', 'toc']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\input{thanks}
+\input{abstract}
+\tableofcontents
+
+\part{Teoría}
+
+\input{conservationlaws}
+\input{finitevolume}
+% clawpack, fipy
+\part{Aplicaciones}
+\input{strategy}
+
+\nocite{*}
+\printbibliography[title={Referencias},heading=bibintoc]
+
+\end{document}
