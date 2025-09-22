@@ -136,6 +136,212 @@ plt.savefig(
 )
 plt.clf()
 
+q = 1
+θ0 = 1
+ε = 4 - 4e-2
+m = 3.702113166195264e-12
+θ = np.linspace(start=0, stop=2, num=30000)
+f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+fprime = f * (1 / θ + q / (1 - q * θ) - ε / (θ0 + θ) ** 2)
+fprimeprime = -f * (
+    (2 * ε * q) / ((1 - q * θ) * (θ0 + θ) ** 2)
+    - ε * (2 + ε / (θ0 + θ)) / (θ0 + θ) ** 3
+    + 2 * ε / (θ * (θ0 + θ) ** 2)
+    - 2 * q**2 / (1 - q * θ) ** 2
+    - 2 * q / (θ * (1 - q * θ))
+)
+fig, ax = plt.subplots()
+ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
+ax.plot(
+    θ, fprime, label=r"$f^{\prime}\left(\theta\right)$", linewidth=0.7, color="orange"
+)
+ax.plot(
+    θ,
+    fprimeprime,
+    label=r"$f^{\prime\prime}\left(\theta\right)$",
+    linewidth=0.5,
+    color="green",
+)
+ax.axhline(
+    -m / q,
+    color="black",
+    linestyle="dashed",
+    linewidth=0.7,
+)
+ax.legend(loc="best", shadow=True)
+ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+ax.set_xlim(θ[0], θ[-1])
+ax.set_ylim(-1e-9, 1e-9)
+ax.set_xlabel(xlabel=r"$\theta$")
+ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=6))
+ax.set_yticks(ticks=np.linspace(start=-1e-9, stop=1e-9, num=6))
+ax.set_title(
+    label=r"$q$"
+    + f"= {q}, "
+    + r"$\theta_0$"
+    + f"= {θ0}, "
+    + r"$\varepsilon$"
+    + f" = {ε}, "
+    + r"$m$"
+    + f" ={m}",
+    loc="center",
+    wrap=True,
+    fontsize=15,
+)
+ax.spines["bottom"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.spines["left"].set_color("none")
+ax.spines["right"].set_color("none")
+plt.savefig(
+    "epsilonmayorquedostheta.pdf",
+    transparent=True,
+    bbox_inches="tight",
+)
+plt.clf()
+
+q = 1
+θ0 = 1
+ε = 2
+m = 3.702113166195264e-12
+θ = np.linspace(start=0, stop=2, num=30000)
+f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+fprime = f * (1 / θ + q / (1 - q * θ) - ε / (θ0 + θ) ** 2)
+fprimeprime = -f * (
+    (2 * ε * q) / ((1 - q * θ) * (θ0 + θ) ** 2)
+    - ε * (2 + ε / (θ0 + θ)) / (θ0 + θ) ** 3
+    + 2 * ε / (θ * (θ0 + θ) ** 2)
+    - 2 * q**2 / (1 - q * θ) ** 2
+    - 2 * q / (θ * (1 - q * θ))
+)
+fig, ax = plt.subplots()
+ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
+ax.plot(
+    θ, fprime, label=r"$f^{\prime}\left(\theta\right)$", linewidth=0.7, color="orange"
+)
+ax.plot(
+    θ,
+    fprimeprime,
+    label=r"$f^{\prime\prime}\left(\theta\right)$",
+    linewidth=0.5,
+    color="green",
+)
+ax.axhline(
+    -m / q,
+    color="black",
+    linestyle="dashed",
+    linewidth=0.7,
+)
+ax.legend(loc="best", shadow=True)
+ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+ax.set_xlim(θ[0], θ[-1])
+ax.set_ylim(-1e-9, 1e-9)
+ax.set_xlabel(xlabel=r"$\theta$")
+ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=6))
+ax.set_yticks(ticks=np.linspace(start=-1e-9, stop=1e-9, num=6))
+ax.set_title(
+    label=r"$q$"
+    + f"= {q}, "
+    + r"$\theta_0$"
+    + f"= {θ0}, "
+    + r"$\varepsilon$"
+    + f" = {ε}, "
+    + r"$m$"
+    + f" ={m}",
+    loc="center",
+    wrap=True,
+    fontsize=15,
+)
+ax.spines["bottom"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.spines["left"].set_color("none")
+ax.spines["right"].set_color("none")
+plt.savefig(
+    "epsilonigualadostheta.pdf",
+    transparent=True,
+    bbox_inches="tight",
+)
+plt.clf()
+
+q = 1
+θ0 = 1
+ε = 1.5
+m = 3.702113166195264e-12
+θ = np.linspace(start=0, stop=2, num=30000)
+f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+fprime = f * (1 / θ + q / (1 - q * θ) - ε / (θ0 + θ) ** 2)
+fprimeprime = -f * (
+    (2 * ε * q) / ((1 - q * θ) * (θ0 + θ) ** 2)
+    - ε * (2 + ε / (θ0 + θ)) / (θ0 + θ) ** 3
+    + 2 * ε / (θ * (θ0 + θ) ** 2)
+    - 2 * q**2 / (1 - q * θ) ** 2
+    - 2 * q / (θ * (1 - q * θ))
+)
+fig, ax = plt.subplots()
+ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
+ax.plot(
+    θ, fprime, label=r"$f^{\prime}\left(\theta\right)$", linewidth=0.7, color="orange"
+)
+ax.plot(
+    θ,
+    fprimeprime,
+    label=r"$f^{\prime\prime}\left(\theta\right)$",
+    linewidth=0.5,
+    color="green",
+)
+ax.axhline(
+    -m / q,
+    color="black",
+    linestyle="dashed",
+    linewidth=0.7,
+)
+ax.legend(loc="best", shadow=True)
+ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+ax.set_xlim(θ[0], θ[-1])
+ax.set_ylim(-1e-9, 1e-9)
+ax.set_xlabel(xlabel=r"$\theta$")
+ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=6))
+ax.set_yticks(ticks=np.linspace(start=-1e-9, stop=1e-9, num=6))
+ax.set_title(
+    label=r"$q$"
+    + f"= {q}, "
+    + r"$\theta_0$"
+    + f"= {θ0}, "
+    + r"$\varepsilon$"
+    + f" = {ε}, "
+    + r"$m$"
+    + f" ={m}",
+    loc="center",
+    wrap=True,
+    fontsize=15,
+)
+ax.spines["bottom"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.spines["left"].set_color("none")
+ax.spines["right"].set_color("none")
+plt.savefig(
+    "epsilonmenorquedostheta.pdf",
+    transparent=True,
+    bbox_inches="tight",
+)
+plt.clf()
+
+SoR = 1
+So_ = np.linspace(start=-1, stop=1, num=2000)
+θ_ = np.linspace(start=-1, stop=1, num=2000)
+So, θ = np.meshgrid(So_, θ_)
+
+
+def f(theta):
+    return m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+
+
+fig, ax = plt.subplots()
+ax.set_xlabel(r"$S_{0}$")
+ax.set_ylabel(r"$\theta$")
+ax.contour(So, θ, So * (SoR - So) - f(θ), [0], linewidths=0.5, colors=["red"])
+ax.set_title(label="Case", loc="center", wrap=True, fontsize=15)
+fig.savefig("phaseportraitdeltazeroa.pdf", transparent=True, bbox_inches="tight")
+
 """Case Δ > 0, q < 0, 1 + q * ε > 0.
 """
 
@@ -481,210 +687,229 @@ plt.savefig(
 )
 plt.clf()
 
-"""Case Δ > 0, q < 0, 1 + q * ε > 0.
-"""
+SoR = 1
+So_ = np.linspace(start=-1, stop=1, num=2000)
+θ_ = np.linspace(start=-1, stop=1, num=2000)
+So, θ = np.meshgrid(So_, θ_)
 
-m = 3.702113166195264e-2
-ε = 20.546467805308318
-θ0 = 1
-q = -1e-2
 
-Δ = ε * (ε - 4 * θ0 - 4 * q * θ0**2)
-assert Δ > 0 and q < 0 and (1 + q * ε) > 0
-print(f"Case Δ > 0, q < 0, 1 + q * ε = {1 + q * ε}>0")
+def f(theta):
+    return m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
 
-θcritplus = (ε - 2 * θ0 + np.sqrt(Δ)) / (2 * (1 + q * ε))
-θcritminus = (ε - 2 * θ0 - np.sqrt(Δ)) / (2 * (1 + q * ε))
 
-θ = np.linspace(start=0, stop=1, num=2000)
-f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+fig, ax = plt.subplots()
+ax.set_xlabel(r"$S_{0}$")
+ax.set_ylabel(r"$\theta$")
+ax.contour(So, θ, So * (SoR - So) - f(θ), [0], linewidths=0.5, colors=["red"])
+ax.set_title(label="Case", loc="center", wrap=True, fontsize=15)
+fig.savefig(
+    "phaseportraitdeltapositivepositivea.pdf", transparent=True, bbox_inches="tight"
+)
 
-fig, ax = plt.subplots(layout="constrained")
-ax.plot(θ, f, label=r"$f$", linewidth=0.7, color="blue")
-ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
-ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
+# """Case Δ > 0, q < 0, 1 + q * ε > 0.
+# """
+
+# m = 3.702113166195264e-2
+# ε = 20.546467805308318
+# θ0 = 1
+# q = -1e-2
+
+# Δ = ε * (ε - 4 * θ0 - 4 * q * θ0**2)
+# assert Δ > 0 and q < 0 and (1 + q * ε) > 0
+# print(f"Case Δ > 0, q < 0, 1 + q * ε = {1 + q * ε}>0")
+
+# θcritplus = (ε - 2 * θ0 + np.sqrt(Δ)) / (2 * (1 + q * ε))
+# θcritminus = (ε - 2 * θ0 - np.sqrt(Δ)) / (2 * (1 + q * ε))
+
+# θ = np.linspace(start=0, stop=1, num=2000)
+# f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+
+# fig, ax = plt.subplots(layout="constrained")
+# ax.plot(θ, f, label=r"$f$", linewidth=0.7, color="blue")
+# ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+# ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
+# # ax.set_xlim(θ[0], θ[-1])
+# # ax.set_ylim(0, 6e-5)
+# # ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
+# # ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
+# # ax.set_yticks(ticks=np.linspace(start=0, stop=6e-5, num=5))
+# ax.set_xlabel(xlabel=r"$\theta$")
+# ax.set_title(r"Case $1+q\varepsilon>0$")
+# ax.legend(loc="best", shadow=True)
+# ax.spines["bottom"].set_color("none")
+# ax.spines["top"].set_color("none")
+# ax.spines["left"].set_color("none")
+# ax.spines["right"].set_color("none")
+# plt.savefig(
+#     "deltapositivepositiveaa.pdf",
+#     transparent=True,
+#     bbox_inches="tight",
+# )
+# plt.clf()
+
+# θ = np.linspace(start=-10, stop=1, num=2000)
+# f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+
+# fig, ax = plt.subplots(layout="constrained")
+# ax.plot(θ, f, label=r"$f$", linewidth=0.7, color="blue")
+# ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+# ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
+# # ax.set_xlim(θ[0], θ[-1])
+# # ax.set_ylim(0, 6e-5)
+# # ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
+# # ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
+# # ax.set_yticks(ticks=np.linspace(start=0, stop=6e-5, num=5))
+# ax.set_xlabel(xlabel=r"$\theta$")
+# ax.set_title(r"Case $1+q\varepsilon>0$")
+# ax.legend(loc="best", shadow=True)
+# ax.spines["bottom"].set_color("none")
+# ax.spines["top"].set_color("none")
+# ax.spines["left"].set_color("none")
+# ax.spines["right"].set_color("none")
+# plt.savefig(
+#     "deltapositivepositivebb.pdf",
+#     transparent=True,
+#     bbox_inches="tight",
+# )
+# plt.clf()
+
+
+# """Case Δ > 0, q < 0, 1 + q * ε < 0.
+# """
+
+# m = 3.702113166195264e-1
+# ε = 20.546467805308318
+# θ0 = 1
+# q = -1.1
+
+# Δ = ε * (ε - 4 * θ0 - 4 * q * θ0**2)
+# assert Δ > 0 and q < 0 and (1 + q * ε) < 0
+# print(f"Case Δ > 0, q < 0, 1 + q * ε = {1 + q * ε}<0")
+# θcritplus = (ε - 2 * θ0 + np.sqrt(Δ)) / (2 * (1 + q * ε))
+# θcritminus = (ε - 2 * θ0 - np.sqrt(Δ)) / (2 * (1 + q * ε))
+# print(f"θcritplus: {θcritplus}")
+# print(f"θcritminus: {θcritminus}")
+# print(f"Horizontal asimptote: {-m / q}")
+# print(f"Vertical asimptote: {1 / q}")
+
+# θ = np.linspace(start=0, stop=0.12, num=2000)
+# f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+
+# fig, ax = plt.subplots(layout="constrained")
+# ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
+# ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+# ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
+# ax.axvline(
+#     θcritminus,
+#     ymin=0,
+#     ymax=0.92,
+#     color="gray",
+#     linestyle="dashed",
+#     linewidth=0.5,
+# )
+# ax.text(
+#     x=θcritminus,
+#     y=-0.2e6,
+#     s=r"$\theta^{\text{crit}}_{-}$",
+#     fontdict=dict(size=10),
+# )
 # ax.set_xlim(θ[0], θ[-1])
-# ax.set_ylim(0, 6e-5)
+# ax.set_ylim(0, 6e6)
 # ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
 # ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
-# ax.set_yticks(ticks=np.linspace(start=0, stop=6e-5, num=5))
-ax.set_xlabel(xlabel=r"$\theta$")
-ax.set_title(r"Case $1+q\varepsilon>0$")
-ax.legend(loc="best", shadow=True)
-ax.spines["bottom"].set_color("none")
-ax.spines["top"].set_color("none")
-ax.spines["left"].set_color("none")
-ax.spines["right"].set_color("none")
-plt.savefig(
-    "deltapositivepositiveaa.pdf",
-    transparent=True,
-    bbox_inches="tight",
-)
-plt.clf()
+# ax.set_yticks(ticks=np.linspace(start=0, stop=6e6, num=5))
+# ax.set_xlabel(xlabel=r"$\theta$")
+# ax.set_title(r"Case $1+q\varepsilon<0$")
+# ax.legend(loc="best", shadow=True)
+# ax.spines["bottom"].set_color("none")
+# ax.spines["top"].set_color("none")
+# ax.spines["left"].set_color("none")
+# ax.spines["right"].set_color("none")
+# plt.savefig(
+#     "deltapositivenegativea.pdf",
+#     transparent=True,
+#     bbox_inches="tight",
+# )
+# plt.clf()
 
-θ = np.linspace(start=-10, stop=1, num=2000)
-f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
-
-fig, ax = plt.subplots(layout="constrained")
-ax.plot(θ, f, label=r"$f$", linewidth=0.7, color="blue")
-ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
-ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
+# θ = np.linspace(start=0, stop=0.2, num=2000)
+# f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
+# fprime = f * (1 / θ + q / (1 - q * θ) - ε / (θ0 + θ) ** 2)
+# fprimeprime = -f * (
+#     (2 * ε * q) / ((1 - q * θ) * (θ0 + θ) ** 2)
+#     - ε * (2 + ε / (θ0 + θ)) / (θ0 + θ) ** 3
+#     + 2 * ε / (θ * (θ0 + θ) ** 2)
+#     - 2 * q**2 / (1 - q * θ) ** 2
+#     - 2 * q / (θ * (1 - q * θ))
+# )
+# fig, ax = plt.subplots(layout="constrained")
+# ax.plot(
+#     θ, fprime, label=r"$f^{\prime}\left(\theta\right)$", linewidth=0.7, color="orange"
+# )
+# ax.plot(
+#     θ,
+#     fprimeprime,
+#     label=r"$f^{\prime\prime}\left(\theta\right)$",
+#     linewidth=0.5,
+#     color="green",
+# )
+# ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+# ax.legend(loc="best", shadow=True)
+# ax.axhline(0, color="gray", linestyle="dashed", linewidth=0.7)
+# ax.axvline(
+#     θcritminus,
+#     ymin=0.86,
+#     ymax=0.89,
+#     color="gray",
+#     linestyle="dashed",
+#     linewidth=0.5,
+# )
+# ax.text(
+#     x=θcritminus,
+#     y=-0.07e10,
+#     s=r"$\theta^{\text{crit}}_{-}$",
+#     fontdict=dict(size=10),
+# )
 # ax.set_xlim(θ[0], θ[-1])
-# ax.set_ylim(0, 6e-5)
-# ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
+# ax.set_ylim(-1.4e10, 0.2e10)
 # ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
-# ax.set_yticks(ticks=np.linspace(start=0, stop=6e-5, num=5))
-ax.set_xlabel(xlabel=r"$\theta$")
-ax.set_title(r"Case $1+q\varepsilon>0$")
-ax.legend(loc="best", shadow=True)
-ax.spines["bottom"].set_color("none")
-ax.spines["top"].set_color("none")
-ax.spines["left"].set_color("none")
-ax.spines["right"].set_color("none")
-plt.savefig(
-    "deltapositivepositivebb.pdf",
-    transparent=True,
-    bbox_inches="tight",
-)
-plt.clf()
+# ax.set_yticks(ticks=np.linspace(start=-1.4e10, stop=0.2e10, num=5))
+# ax.set_xlabel(xlabel=r"$\theta$")
+# ax.set_title(r"Case $1+q\varepsilon<0$")
+# ax.spines["bottom"].set_color("none")
+# ax.spines["top"].set_color("none")
+# ax.spines["left"].set_color("none")
+# ax.spines["right"].set_color("none")
+# plt.savefig(
+#     "deltapositivenegativeb.pdf",
+#     transparent=True,
+#     bbox_inches="tight",
+# )
+# plt.clf()
 
+# θ = np.linspace(start=10, stop=2010, num=2000)
+# f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
 
-"""Case Δ > 0, q < 0, 1 + q * ε < 0.
-"""
-
-m = 3.702113166195264e-1
-ε = 20.546467805308318
-θ0 = 1
-q = -1.1
-
-Δ = ε * (ε - 4 * θ0 - 4 * q * θ0**2)
-assert Δ > 0 and q < 0 and (1 + q * ε) < 0
-print(f"Case Δ > 0, q < 0, 1 + q * ε = {1 + q * ε}<0")
-θcritplus = (ε - 2 * θ0 + np.sqrt(Δ)) / (2 * (1 + q * ε))
-θcritminus = (ε - 2 * θ0 - np.sqrt(Δ)) / (2 * (1 + q * ε))
-print(f"θcritplus: {θcritplus}")
-print(f"θcritminus: {θcritminus}")
-print(f"Horizontal asimptote: {-m / q}")
-print(f"Vertical asimptote: {1 / q}")
-
-θ = np.linspace(start=0, stop=0.12, num=2000)
-f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
-
-fig, ax = plt.subplots(layout="constrained")
-ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
-ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
-ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
-ax.axvline(
-    θcritminus,
-    ymin=0,
-    ymax=0.92,
-    color="gray",
-    linestyle="dashed",
-    linewidth=0.5,
-)
-ax.text(
-    x=θcritminus,
-    y=-0.2e6,
-    s=r"$\theta^{\text{crit}}_{-}$",
-    fontdict=dict(size=10),
-)
-ax.set_xlim(θ[0], θ[-1])
-ax.set_ylim(0, 6e6)
-ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
-ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
-ax.set_yticks(ticks=np.linspace(start=0, stop=6e6, num=5))
-ax.set_xlabel(xlabel=r"$\theta$")
-ax.set_title(r"Case $1+q\varepsilon<0$")
-ax.legend(loc="best", shadow=True)
-ax.spines["bottom"].set_color("none")
-ax.spines["top"].set_color("none")
-ax.spines["left"].set_color("none")
-ax.spines["right"].set_color("none")
-plt.savefig(
-    "deltapositivenegativea.pdf",
-    transparent=True,
-    bbox_inches="tight",
-)
-plt.clf()
-
-θ = np.linspace(start=0, stop=0.2, num=2000)
-f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
-fprime = f * (1 / θ + q / (1 - q * θ) - ε / (θ0 + θ) ** 2)
-fprimeprime = -f * (
-    (2 * ε * q) / ((1 - q * θ) * (θ0 + θ) ** 2)
-    - ε * (2 + ε / (θ0 + θ)) / (θ0 + θ) ** 3
-    + 2 * ε / (θ * (θ0 + θ) ** 2)
-    - 2 * q**2 / (1 - q * θ) ** 2
-    - 2 * q / (θ * (1 - q * θ))
-)
-fig, ax = plt.subplots(layout="constrained")
-ax.plot(
-    θ, fprime, label=r"$f^{\prime}\left(\theta\right)$", linewidth=0.7, color="orange"
-)
-ax.plot(
-    θ,
-    fprimeprime,
-    label=r"$f^{\prime\prime}\left(\theta\right)$",
-    linewidth=0.5,
-    color="green",
-)
-ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
-ax.legend(loc="best", shadow=True)
-ax.axhline(0, color="gray", linestyle="dashed", linewidth=0.7)
-ax.axvline(
-    θcritminus,
-    ymin=0.86,
-    ymax=0.89,
-    color="gray",
-    linestyle="dashed",
-    linewidth=0.5,
-)
-ax.text(
-    x=θcritminus,
-    y=-0.07e10,
-    s=r"$\theta^{\text{crit}}_{-}$",
-    fontdict=dict(size=10),
-)
-ax.set_xlim(θ[0], θ[-1])
-ax.set_ylim(-1.4e10, 0.2e10)
-ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
-ax.set_yticks(ticks=np.linspace(start=-1.4e10, stop=0.2e10, num=5))
-ax.set_xlabel(xlabel=r"$\theta$")
-ax.set_title(r"Case $1+q\varepsilon<0$")
-ax.spines["bottom"].set_color("none")
-ax.spines["top"].set_color("none")
-ax.spines["left"].set_color("none")
-ax.spines["right"].set_color("none")
-plt.savefig(
-    "deltapositivenegativeb.pdf",
-    transparent=True,
-    bbox_inches="tight",
-)
-plt.clf()
-
-θ = np.linspace(start=10, stop=2010, num=2000)
-f = m * θ / (1 - q * θ) * np.exp(ε / (θ0 + θ))
-
-fig, ax = plt.subplots(layout="constrained")
-ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
-ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
-ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
-# ax.axvline(θcritminus, color="red", linestyle="dashed", linewidth=0.5)
-ax.set_xlim(θ[0], θ[-1])
-ax.set_ylim(0, 2)
-# ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
-ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
-ax.set_yticks(ticks=np.linspace(start=0, stop=2, num=5))
-ax.set_xlabel(xlabel=r"$\theta$")
-ax.set_title(r"Case $1+q\varepsilon<0$")
-ax.legend(loc="best", shadow=True)
-ax.spines["bottom"].set_color("none")
-ax.spines["top"].set_color("none")
-ax.spines["left"].set_color("none")
-ax.spines["right"].set_color("none")
-plt.savefig(
-    "deltapositivenegativec.pdf",
-    transparent=True,
-    bbox_inches="tight",
-)
-plt.clf()
+# fig, ax = plt.subplots(layout="constrained")
+# ax.plot(θ, f, label=r"$f\left(\theta\right)$", linewidth=0.7, color="blue")
+# ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+# ax.axhline(-m / q, color="red", linestyle="dashed", linewidth=0.7)
+# # ax.axvline(θcritminus, color="red", linestyle="dashed", linewidth=0.5)
+# ax.set_xlim(θ[0], θ[-1])
+# ax.set_ylim(0, 2)
+# # ax.text(x=-1e-2, y=-m / q, s=r"$-\frac{m}{q}$", fontdict=dict(size=12))
+# ax.set_xticks(ticks=np.linspace(start=θ[0], stop=θ[-1], num=5))
+# ax.set_yticks(ticks=np.linspace(start=0, stop=2, num=5))
+# ax.set_xlabel(xlabel=r"$\theta$")
+# ax.set_title(r"Case $1+q\varepsilon<0$")
+# ax.legend(loc="best", shadow=True)
+# ax.spines["bottom"].set_color("none")
+# ax.spines["top"].set_color("none")
+# ax.spines["left"].set_color("none")
+# ax.spines["right"].set_color("none")
+# plt.savefig(
+#     "deltapositivenegativec.pdf",
+#     transparent=True,
+#     bbox_inches="tight",
+# )
+# plt.clf()

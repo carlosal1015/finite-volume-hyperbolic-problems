@@ -179,3 +179,7 @@ output*
 *.jpeg
 *.xopp
 *.png
+*.bcf
+*.out
+*.run.xml
+*.toc

@@ -1,80 +1,117 @@
 \begin{frame}
 	\frametitle{\secname}
 
-	Nuestra presentación de los métodos de volúmenes finitos fue
-	fuertemente influenciado
+	Nuestra exposición del método de volúmenes finitos fue fuertemente
+	influenciado
 	por~\cite{Adler2025,Eymard2000,Hesthaven2018,LeDret2016}.
 	También remitimos al lector a textos más centrados en la ecuación
 	de Poisson, tales como~\cite[p.~337]{Choksi2022},
 	\cite[p.~22]{Evans2010} y~\cite[p.~29]{Hackbusch2017}.
+
+	\begin{alertblock}{Problema del potencial}
+		Sea
+		\begin{math}
+			\Omega=
+			\left(0,1\right)\subset
+			\mathbb{R}
+		\end{math}.
+		Encuentre una solución
+		\begin{math}
+			u\in
+			C^{2}\left(\Omega\right)\cap
+			C^{0}\big(\overline{\Omega}\big)
+		\end{math}
+		que satisfaga el siguiente problema elíptico con condiciones de
+		frontera Dirichlet homogénea~\eqref{eq:PoissonBVP}, donde
+		\begin{math}
+			f\in
+			C^{0}\big(\overline{\Omega}\big)
+		\end{math}.
+		\begin{equation}
+			\begin{cases}\label{eq:PoissonBVP}
+				-\difc.L.{}{}u=f &
+				\text{en }\Omega.  \\
+				u=0              &
+				\text{en }\partial\Omega.
+			\end{cases}
+		\end{equation}
+	\end{alertblock}
+	Suponga que $\Omega^{h}=\bigcup^{N}_{j=1}\Omega_{j}$ es una
+	malla de volúmenes finitos de $\Omega$.
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.4\paperwidth]{fv1d}
+		\caption{Malla de volúmenes finitos $1$D de
+			$\Omega=\left(0,1\right)$.
+			Los nodos de índices fraccionarios
+			\begin{math}
+				{\big\{x_{j\pm\frac{1}{2}}\big\}}^{N}_{j=1}
+			\end{math}
+			son los extremos de las celdas
+			\begin{math}
+				\Omega_{j}=
+				\big[
+					x_{j-\frac{1}{2}},
+					x_{j+\frac{1}{2}}
+					\big]
+			\end{math}
+			cuyo tamaño es $h_{j}$, y los nodos de índices enteros
+			\begin{math}
+				{\big\{x_{j}\big\}}^{N}_{j=1}
+			\end{math}
+			son los centros de las celdas.
+		}
+	\end{figure}
+
+	Integra la EDP~\eqref{eq:PoissonBVP} en $\Omega_{j}$ y emplea
+	el teorema fundamental del cálculo, obtenga
+	\begin{equation}\label{eq:PoissonBVPIntegral}
+		\forall j=1,\dotsc,N:
+		-\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		\diff{u}{x}[x_{j-\frac{1}{2}}]=
+		-\int_{\Omega_{j}}
+		\diff[2]{u\left(x\right)}{x}
+		\dl x=
+		\int_{\Omega_{j}}
+		f\left(x\right)\dl x.
+	\end{equation}
+
+	\note{
+		Emplee el Teorema del valor medio para integrales definidas y
+		aproxime los flujos numéricos en la interfaz como la diferencia
+		de promedio entre dos celdas adyacentes, dividido entre la
+		distancia de los centros de esas celdas.
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
 	\begin{align}
 		\shortintertext{
 			Sea
 			\begin{math}
-				\Omega=
-				\left(0,1\right)\subset
-				\mathbb{R}
-			\end{math}.
-			Encuentre una solución
+				h=
+				\max
+				\left\{
+				h_{j}\mid 0\leq j\leq N
+				\right\}
+			\end{math}
+			y dado que
 			\begin{math}
 				u\in
-				C^{2}\left(\Omega\right)\cap
-				C^{0}\big(\overline{\Omega}\big)
-			\end{math}
-			que satisfaga el siguiente problema elíptico con condiciones de
-			frontera Dirichlet homogénea~\eqref{eq:PoissonBVP}, donde
-			\begin{math}
-				f\in
-				C^{0}\big(\overline{\Omega}\big)
-			\end{math}.
-		}
-		\begin{cases}
-			-\difc.L.{}{}u=f &
-			\text{en }\Omega.  \\
-			u=0              &
-			\text{en }\partial\Omega.
-		\end{cases}\label{eq:PoissonBVP}
+				C^{2}\left(\Omega\right)
+			\end{math},
+			por el teorema de Taylor en la celda $\Omega_{j}$ se tiene
+		}\label{eq:Taylor}
+		\forall j=1,\dotsc,N:
+		u\big(x_{j+\frac{1}{2}}\big)+
+		\big(x-x_{j+\frac{1}{2}}\big)
+		\diff{u}{x}[x_{j+\frac{1}{2}}]+
+		\mathcal{O}\big(h^{2}\big)   & =
+		u\left(x\right).
 		\uncover<2->{
-			\shortintertext{
-				Suponga que $\Omega^{h}=\bigcup^{N}_{j=1}\Omega_{j}$ es una
-				malla de volúmenes finitos de $\Omega$.
-				Integra la EDP~\eqref{eq:PoissonBVP} en $\Omega_{j}$ y emplea
-				el teorema fundamental del cálculo, obtenga
-			}
-			\forall j=1,\dotsc,N:
-			-\diff{u}{x}[x_{j+\frac{1}{2}}]+
-		\diff{u}{x}[x_{j-\frac{1}{2}}] & =
-			-\int_{\Omega_{j}}
-			\diff[2]{u\left(x\right)}{x}
-			\dl x=
-			\int_{\Omega_{j}}
-			f\left(x\right)\dl x.\label{eq:PoissonBVPIntegral}
-		}
-		\uncover<3->{
-			\shortintertext{
-				Sea
-				\begin{math}
-					h=
-					\max
-					\left\{
-					h_{j}\mid 0\leq j\leq N
-					\right\}
-				\end{math}
-				y dado que
-				\begin{math}
-					u\in
-					C^{2}\left(\Omega\right)
-				\end{math},
-				por el teorema de Taylor en la celda $\Omega_{j}$ se tiene
-			}\label{eq:Taylor}
-			\forall j=1,\dotsc,N:
-			u\big(x_{j+\frac{1}{2}}\big)+
-			\big(x-x_{j+\frac{1}{2}}\big)
-			\diff{u}{x}[x_{j+\frac{1}{2}}]+
-		\mathcal{O}\big(h^{2}\big)     & =
-			u\left(x\right).
-		}
-		\uncover<4->{
 		\shortintertext{
 		Use la condición de frontera $u\big(x_{\frac{1}{2}}\big)=0$
 		en~\eqref{eq:Taylor} e integre sobre $\Omega_{1}$.
@@ -84,11 +121,11 @@
 		\bigg]}^{x_{\frac{3}{2}}}_{x_{\frac{1}{2}}}
 		\diff{u}{x}[x_{\frac{1}{2}}]
 		\dl x+
-		\mathcal{O}\big(h^{3}\big)     & =
+		\mathcal{O}\big(h^{3}\big)   & =
 		\int_{\Omega_{1}}
 		u\left(x\right)
-		\dl x.\notag                             \\
-		\diff{u}{x}[x_{\frac{1}{2}}]   & \approx
+		\dl x.\notag                              \\
+		\diff{u}{x}[x_{\frac{1}{2}}] & \approx
 		\frac{1}{h_{\frac{1}{2}}}
 		\left[
 			\frac{1}{h_{1}}
@@ -118,20 +155,6 @@
 		% 		\dl x
 		% 		\right].\notag
 		}
-	\end{align}
-
-	\note{
-		Emplee el Teorema del valor medio para integrales definidas y
-		aproxime los flujos numéricos en la interfaz como la diferencia
-		de promedio entre dos celdas adyacentes, dividido entre la
-		distancia de los centros de esas celdas.
-	}
-\end{frame}
-
-\begin{frame}
-	\frametitle{\secname}
-
-	\begin{align}
 		\shortintertext{
 			Integre~\eqref{eq:Taylor} en $\Omega_{j}$,
 		}
@@ -141,7 +164,7 @@
 		\int_{\Omega_{j}}
 		\big(x-x_{j+\frac{1}{2}}\big)
 		\dl x+
-		\mathcal{O}\big(h^{3}\big) & =
+		\mathcal{O}\big(h^{3}\big)   & =
 		\int_{\Omega_{j}}
 		u\left(x\right)
 		\dl x.\notag
@@ -239,26 +262,13 @@
 			$-\diff{u}{x}[x_{j+\frac{1}{2}}]$ y la integral sobre la
 			celda el término fuente.
 		}
-		F_{\frac{1}{2}}            & \coloneqq
+		F_{\frac{1}{2}}              & \coloneqq
 		-\frac{u_{1}}{h_{\frac{1}{2}}}.           \\
 		\forall j=2,\dotsc,N-1:
-		F_{j+\frac{1}{2}}          & \coloneqq
+		F_{j+\frac{1}{2}}            & \coloneqq
 		-\frac{u_{j+1}-u_{j}}{h_{j+\frac{1}{2}}}. \\
-		F_{N+\frac{1}{2}}          & \coloneqq
+		F_{N+\frac{1}{2}}            & \coloneqq
 		-\frac{u_{N}}{h_{N+\frac{1}{2}}}.
-		\uncover<2->{
-			\shortintertext{
-				Reemplace en~\eqref{eq:PoissonBVPIntegral} y obtenga el
-				esquema de volúmenes finitos
-			}
-			\forall j=1,\dotsc,N:
-			F_{j+\frac{1}{2}}-
-		F_{j-\frac{1}{2}}          & =
-			f_{j}\coloneqq
-			\int_{\Omega_{j}}
-			f\left(x\right)
-			\dl x.
-		}
 	\end{align}
 \end{frame}
 
@@ -266,6 +276,19 @@
 	\frametitle{\secname}
 
 	\begin{align*}
+		\uncover<2->{
+			\shortintertext{
+				Reemplace en~\eqref{eq:PoissonBVPIntegral} y obtenga el
+				esquema de volúmenes finitos
+			}
+			\forall j=1,\dotsc,N:
+			F_{j+\frac{1}{2}}-
+		F_{j-\frac{1}{2}}                   & =
+			f_{j}\coloneqq
+			\int_{\Omega_{j}}
+			f\left(x\right)
+			\dl x.
+		}
 		\uncover<3->{
 		\shortintertext{
 			Reescriba el esquema línea por línea,
@@ -304,8 +327,8 @@
 	\begin{align*}
 		\begin{bmatrix}
 			\dfrac{1}{h_{\frac{1}{2}}}+\mathcolor{red}{\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}} & -\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}                                              & 0                                                 & \cdots                                                                                          & 0                                                                           \\
-			-\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}                                            & \mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}+\mathcolor{green}{\dfrac{1}{h_{\frac{5}{2}}}} & -\mathcolor{green}{\dfrac{1}{h_{\frac{5}{2}}}}    & \ddots                                                                                          & \vdots                                                                      \\
-			0                                                                                       & -\mathcolor{green}{\dfrac{1}{h_{\frac{5}{2}}}}                                            & \ddots                                            & \ddots                                                                                          & 0                                                                           \\
+			-\mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}                                            & \mathcolor{red}{\dfrac{1}{h_{\frac{3}{2}}}}+\mathcolor{PineGreen}{\dfrac{1}{h_{\frac{5}{2}}}} & -\mathcolor{PineGreen}{\dfrac{1}{h_{\frac{5}{2}}}}    & \ddots                                                                                          & \vdots                                                                      \\
+			0                                                                                       & -\mathcolor{PineGreen}{\dfrac{1}{h_{\frac{5}{2}}}}                                            & \ddots                                            & \ddots                                                                                          & 0                                                                           \\
 			0                                                                                       & \ddots                                                                                    & \ddots                                            & -\mathcolor{orange}{\dfrac{1}{h_{N-\frac{3}{2}}}}                                               & 0                                                                           \\
 			\vdots                                                                                  & \ddots                                                                                    & -\mathcolor{orange}{\dfrac{1}{h_{N-\frac{3}{2}}}} & \mathcolor{orange}{\dfrac{1}{h_{N-\frac{3}{2}}}}+\mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}} & -\mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}}                             \\
 			0                                                                                       & \cdots                                                                                    & 0                                                 & -\mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}}                                                 & \mathcolor{blue}{\dfrac{1}{h_{N-\frac{1}{2}}}}+\dfrac{1}{h_{N+\frac{1}{2}}}
@@ -340,7 +363,7 @@
 
 	\pause
 
-	\begin{theorem}[\cite{Thomas1999}]
+	\begin{theorem}[El sistema $A^{h}U^{h}=F^{h}$ tiene solución~\cite{Thomas1999}]
 		La matriz $A^{h}\in\mathbb{R}^{N\times N}$ es simétrica definida
 		positiva, y por lo tanto invertible.
 	\end{theorem}
@@ -403,40 +426,40 @@
 % 		\mathcal{O}\left(h\right).
 % 	\end{align*}
 
-	% \begin{theorem}
-	% 	Sea $\Omega=\left(0,1\right)$.
-	% 	Si $f\in C^{0}\big(\overline{\Omega}\big)$, entonces
-	% 	$\exists C>0$ que no depende de $h$ tal que
-	% 	\begin{math}
-	% 		\max\limits_{1\leq j\leq N}
-	% 		\left|
-	% 		u_{j}-
-	% 		\frac{1}{h_{j}}
-	% 		\int_{\Omega_{j}}
-	% 		u\left(x\right)\dl x
-	% 		\right|=
-	% 		\max\limits_{1\leq j\leq N}
-	% 		\left|
-	% 		u_{j}-
-	% 		u\left(x_{j}\right)
-	% 		\right|\leq
-	% 		Ch
-	% 	\end{math}.
-	% \end{theorem}
+% \begin{theorem}
+% 	Sea $\Omega=\left(0,1\right)$.
+% 	Si $f\in C^{0}\big(\overline{\Omega}\big)$, entonces
+% 	$\exists C>0$ que no depende de $h$ tal que
+% 	\begin{math}
+% 		\max\limits_{1\leq j\leq N}
+% 		\left|
+% 		u_{j}-
+% 		\frac{1}{h_{j}}
+% 		\int_{\Omega_{j}}
+% 		u\left(x\right)\dl x
+% 		\right|=
+% 		\max\limits_{1\leq j\leq N}
+% 		\left|
+% 		u_{j}-
+% 		u\left(x_{j}\right)
+% 		\right|\leq
+% 		Ch
+% 	\end{math}.
+% \end{theorem}
 
-	% \begin{proof}
-	% 	Defina
-	% 	\begin{align*}
-	% 		e_{0}                        & =0. \\
-	% 		\forall j=1,\dotsc,N:
-	% 		e_{n}                        & =
-	% 		u_{n}-\frac{f_{j}}{h_{j}}.         \\
-	% 		e_{N+1}                      & =0. \\
-	% 		\forall j=1,\dotsc,N:
-	% 		\overline{F}_{j+\frac{1}{2}} & =
-	% 		-\diff{u}{x}[x_{j+\frac{1}{2}}].
-	% 	\end{align*}
-	% \end{proof}
+% \begin{proof}
+% 	Defina
+% 	\begin{align*}
+% 		e_{0}                        & =0. \\
+% 		\forall j=1,\dotsc,N:
+% 		e_{n}                        & =
+% 		u_{n}-\frac{f_{j}}{h_{j}}.         \\
+% 		e_{N+1}                      & =0. \\
+% 		\forall j=1,\dotsc,N:
+% 		\overline{F}_{j+\frac{1}{2}} & =
+% 		-\diff{u}{x}[x_{j+\frac{1}{2}}].
+% 	\end{align*}
+% \end{proof}
 % \end{frame}
 
 % \subsection{Implementación del método de volúmenes finitos}

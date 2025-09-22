@@ -3,46 +3,50 @@
 \begin{frame}
 	\frametitle{\secname}
 	\begin{columns}
-		\begin{column}{.38\paperwidth}
-			\begin{alertblock}{¿Por qué el método de volúmenes finitos?}
+		\begin{column}{.48\paperwidth}
+			\begin{alertblock}{¿Por qué el método de los volúmenes finitos?}
 				\begin{enumerate}
 					\item
 
-					      Ideal para EDPs escritas en su forma conservativa.
+					      Se obtiene un {\usebeamercolor[fg]{structure} esquema
+							      conservativo} al
+					      discretizar~\eqref{eq:conservationlaw} desde su forma integral.
 					      \begin{equation}\label{eq:conservationlaw}
-						      \difcp{u}{t}+
-						      \difcp{f\left(u\right)}{x}=0.
+						      \diffp{U}{t}+
+						      \diffp{f\left(U\right)}{x}=
+						      0.
 					      \end{equation}
 
 					      \
 
 					\item
 
-					      La discretización a partir de la forma integral.
+					      Los esquemas lineales de diferencias finitas con
+					      orden de convergencia mayor o igual que $2$ son
+					      inestables para~\eqref{eq:conservationlaw}
+					      ({\usebeamercolor[fg]{structure} Teorema de la
+						      Barrera de orden de Godunov}~\cite{Godunov1959}).
 
 					      \
 
 					\item
 
-					      No existen esquemas numéricos de diferencias finitas
-					      de orden mayor o igual que 2 estables, esto es conocido
-					      como el Teorema de Barrera de Godunov.
-
-					      \
-
-					\item
-
-					      Para una ley de conservación hiperbólica, el método de Galerkin
-					      conforme no es adecuado, se prefieren variantes como
-					      Galerkin-Discontinuo o método estabilizados como
-					      Streamline Upwind Petrov-Galerkin.
+					      El método de Galerkin conforme genera
+						      {\usebeamercolor[fg]{structure} oscilaciones
+							      espurias} en problemas hiperbólicos.
+					      Se requieren técnicas adicionales Galerkin
+					      Discontinuo o método estabilizados como Streamline
+					      Upwind Petrov-Galerkin, mientras que FVM maneja
+					      discontinuidades.
 				\end{enumerate}
 			\end{alertblock}
 		\end{column}
-		\begin{column}{.58\paperwidth}
+		\begin{column}{.48\paperwidth}
 			\begin{figure}[ht!]
 				\centering
-				\includegraphics[width=.5\paperwidth]{methods.pdf}
+				\includegraphics[width=.45\paperwidth]{methods.pdf}
+				\caption{Comparativa de los métodos de discretización
+					para~\eqref{eq:conservationlaw}~\cite{Milbradt2008}.}
 			\end{figure}
 		\end{column}
 	\end{columns}

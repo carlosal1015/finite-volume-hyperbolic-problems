@@ -1291,7 +1291,7 @@
 
 \begin{frame}
 	\begin{align*}
-		f\left(\theta\right)          & =
+		f\left(\theta\right)                      & =
 		\beta
 		\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
 		\frac{1}{t^{\ast}k_{p}}
@@ -1310,7 +1310,7 @@
 		\frac{E_{r}}{
 			R\left(T^{\ast}\theta+T_{\text{res}}\right)
 		}
-		\right).                                                \\
+		\right).                                                                                                                                                                                                            \\
 		% f\left(\theta\right) & =
 		% \alpha
 		% \frac{S^{R}_{\text{o}}}{S^{L}_{y}}
@@ -1331,15 +1331,17 @@
 		% \right).                                                      \\
 		% f\left(\theta\right) & =
 		% \frac{m\theta\exp\left(\frac{\varepsilon}{\theta+\theta_{0}}\right)}{1-q\theta}. \\
-		f\left(\theta\right)          & =
+		f\left(\theta\right)                      & =
 		m\left(\frac{\theta}{1-q\theta}\right)
-		\exp\left(\frac{\varepsilon}{\theta+\theta_{0}}\right). \\
-		f^{\prime}\left(\theta\right) & =
-		f\left(\theta\right)
-		\left[
-			0
-			\right].
+		\exp\left(\frac{\varepsilon}{\theta+\theta_{0}}\right).                                                                                                                                                             \\
+		f^{\prime}\left(\theta\right)             & =
+		\frac{m\left(\epsilon q\theta^{2}-\varepsilon\theta+\theta^{2}+2\theta\theta_{0}+\theta_{0}^{2}\right)e^{\frac{\varepsilon}{\theta+\theta_{0}}}}{{\left(\theta+\theta_{0}\right)}^{2}{\left(q\theta-1\right)}^{2}}.
 	\end{align*}
+
+	{\tiny
+		$f^{\prime\prime}\left(\theta\right)=
+		-\frac{m\left(\varepsilon^{2}q^{2}\theta^{3}-2\varepsilon^{2}q\theta^{2}+\varepsilon^{2}\theta+2\varepsilon q^{2}\theta^{4}+2\varepsilon q^{2}\theta^{3}\theta_{0}-2\varepsilon q\theta^{3}+2\varepsilon q\theta\theta_{0}^{2}-2\varepsilon\theta\theta_{0}-2\varepsilon\theta_{0}^{2}+2q\theta^{4}+8q\theta^{3}\theta_{0}+12q\theta^{2}\theta_{0}^{2}+8q\theta\theta_{0}^{3}+2q\theta_{0}^{4}\right)e^{\frac{\varepsilon}{\theta+\theta_{0}}}}{\left(\theta+\theta_{0}\right)^{4}\left(q\theta-1\right)^{3}}.$}
+
 
 	\begin{equation*}
 		m\coloneqq
@@ -1348,6 +1350,14 @@
 		\theta_{0}\coloneqq \frac{T_{\text{res}}}{T^{\ast}},\qquad
 		q\coloneqq \frac{a_{1}b_{3}}{b_{1}\left(c-a_{3}\right)}.
 	\end{equation*}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=.75\paperwidth]{plots/epsilonmayorquedostheta}
+	\caption{For $q>0$.}
+\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -1861,12 +1871,12 @@
 	\end{figure}
 \end{frame}
 
-% \begin{frame}
-% 	\begin{figure}[ht!]
-% 		\centering
-% 		\includegraphics[width=.75\paperwidth]{plots/deltapositivepositived}
-% 	\end{figure}
-% \end{frame}
+\begin{frame}
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.75\paperwidth]{plots/deltapositivepositived}
+	\end{figure}
+\end{frame}
 
 \begin{frame}
 	\begin{figure}[ht!]
@@ -2019,6 +2029,203 @@
 	\end{figure}
 \end{frame}
 
+\begin{frame}
+	For
+	\begin{math}
+		q>0\iff
+		q\varepsilon>0\iff
+		1+q\varepsilon>1>0\iff
+		0<\frac{1}{1+q\varepsilon}<1
+	\end{math}.
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.28\paperwidth]{plots/Deltanegative}
+		\includegraphics[width=.28\paperwidth]{plots/Deltazero}
+		\includegraphics[width=.28\paperwidth]{plots/Deltapositive}
+	\end{figure}
+
+	\begin{description}
+		\item[Case I]
+		      \begin{math}
+			      \Delta<0\iff
+			      \varepsilon^{2}-\left(4\theta_{0}+4q\theta^{2}_{0}\right)\varepsilon<0\iff
+			      \varepsilon<4\theta_{0}+4q\theta^{2}_{0}
+		      \end{math}.
+		      We know that
+		      $q>0\iff q\varepsilon>0\iff 1+q\varepsilon>1$.
+		      Furthermore, $\diff{f\left(\theta\right)}{\theta}>0$ and $1-q\theta\neq 0$.
+		      In other hand, $S^{+}_{\text{o}}$ is strictly decreasing and
+		      $S^{-}_{\text{o}}$ is strictly increasing.
+
+		      If $\frac{\left(S^{\text{R}}_{\text{o}}\right)^{2}}{4}>-\frac{m}{q}\implies\exists\theta_{\text{M}}$
+		      such that $4f\left(\theta_{\text{M}}\right)=\left(S^{\text{R}}_{\text{o}}\right)^{2}$.
+
+		\item[Case II]
+
+		      From $\Delta=0\iff\theta^{\text{c}}=\frac{\varepsilon-2\theta_{\text{o}}}{2\left(1+q\varepsilon\right)}$.
+		      Now,
+		      \begin{align*}
+			      \varepsilon-2\theta_{\text{o}}>0 & \implies
+			      \theta^{\text{c}}=\frac{\varepsilon-2\theta_{\text{o}}}{2\left(1+q\varepsilon\right)}>0. \\
+			      \varepsilon-2\theta_{\text{o}}<0 & \implies
+			      \theta^{\text{c}}=\frac{\varepsilon-2\theta_{\text{o}}}{2\left(1+q\varepsilon\right)}<0.
+		      \end{align*}
+	\end{description}
+\end{frame}
+
+\begin{frame}
+	\begin{description}
+		\item[Case III]
+
+		      From $\Delta>0$, if $\varepsilon-2\theta_{0}>0\implies\theta^{\text{c}}_{+}=\frac{\varepsilon-2\theta_{0}+\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}>0$.
+		      \begin{equation*}
+			      \theta^{\text{c}}_{-}=
+			      \frac{\varepsilon-2\theta_{0}-\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}=
+			      \begin{cases}
+				      \theta^{\text{c}}_{+}>0, & \text{si }\varepsilon-2\theta_{0}>\sqrt{\Delta}.     \\
+				      \theta^{\text{c}}_{-}<0, & \text{si }\varepsilon-2\theta_{0}<\sqrt{\Delta}. \\
+			      \end{cases}
+		      \end{equation*}
+	\end{description}
+
+	If $\varepsilon-2\theta<0$, then
+	\begin{math}
+		\theta^{\text{c}}_{+}=\frac{\varepsilon-2\theta_{\text{o}}+\sqrt{\Delta}}{2\left(1+q\varepsilon\right)}=
+		\begin{cases}
+			\theta^{\text{c}}_{+}>0, & \text{si }\left|\varepsilon-2\theta_{\text{o}}\right|<\sqrt{\Delta}. \\
+			\theta^{\text{c}}_{-}<0, & \text{si }\left|\varepsilon-2\theta_{\text{o}}\right|>\sqrt{\Delta}. \\
+		\end{cases}
+	\end{math}
+\end{frame}
+
+\begin{frame}
+	\begin{theorem}
+		If $\Delta=0$, $q>0$ y $\varepsilon-2\theta_{\text{o}}>0$, then
+		$0<\theta^{\text{c}}<\frac{\varepsilon-2\theta_{\text{o}}}{2}$.
+	\end{theorem}
+
+	\begin{proof}
+		\begin{align*}
+			q>0 & \implies
+			1+q\varepsilon>1\iff
+			0<\frac{1}{1+q\varepsilon}<1.                                                                                                     \\
+			    & \iff
+			0<\frac{1}{2\left(1+q\varepsilon\right)}<\frac{1}{2}.                                                                             \\
+			    & \iff
+			0<\frac{\varepsilon-2\theta_{\text{o}}}{2\left(1+q\varepsilon\right)}<\frac{\varepsilon-2\theta_{\text{o}}}{2}.                   \\
+			    & \iff
+			0<\theta^{\text{c}}=\frac{\varepsilon-2\theta_{\text{o}}}{2\left(1+q\varepsilon\right)}<\frac{\varepsilon-2\theta_{\text{o}}}{2}. \\
+		\end{align*}
+	\end{proof}
+
+	\begin{theorem}
+		If $\Delta=0$, $q>0$ y $\varepsilon-2\theta_{\text{o}}<0$, then
+		$\frac{\varepsilon-2\theta_{\text{o}}}{2}<\theta^{\text{c}}<0$.
+	\end{theorem}
+
+	\begin{proof}
+		Using
+		\begin{math}
+			0<\frac{1}{2\left(1+q\varepsilon\right)}<
+			\frac{1}{2}\iff
+			0>\frac{\varepsilon-2\theta_{\text{o}}}{2\left(1+q\varepsilon\right)}>
+			\frac{\varepsilon-2\theta_{\text{o}}}{2}\iff
+			\frac{\varepsilon-2\theta_{\text{o}}}{2}<\theta^{\text{c}}<0
+		\end{math}.
+	\end{proof}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolution4}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolution10}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolution30}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolutionI}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolutionII}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolutionIII}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolutionIV}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolutionV}
+		\caption{}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{plots/odesolutionVI}
+		\caption{}
+	\end{figure}
+\end{frame}
+
 \begin{frame}[fragile]
 	\frametitle{\secname}
 
@@ -2062,14 +2269,14 @@
 \begin{frame}
 	\begin{figure}[ht!]
 		\centering
-		\includegraphics[width=.7\paperwidth]{1}
+		\includegraphics[width=.7\paperwidth]{plots/1}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
 	\begin{figure}[ht!]
 		\centering
-		\includegraphics[width=.7\paperwidth]{2}
+		\includegraphics[width=.7\paperwidth]{plots/2}
 	\end{figure}
 \end{frame}
 

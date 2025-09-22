@@ -6,7 +6,6 @@
 	intlimits,
 	leqno,
 	handout,
-	xcolor=svgnames,
 	% noamsthm,
 	c
 ]{beamer}
@@ -29,7 +28,7 @@
 	\vfill
 	\begin{adjustwidth}{15pt}{-40pt}
 		\begin{tabular}[t]{p{0.66\textwidth}@{\hspace{1cm}}p{0.37\textwidth}}
-			{\Large\inserttitle} \\\\
+			{\usebeamercolor[fg]{structure}\Large\inserttitle} \\\\
 			{\small\insertsubtitle}
 			 &
 			\raisebox{0pt}[0pt][0pt]{\includegraphics[width=.12\paperwidth]{logo}}
@@ -42,24 +41,26 @@
 	\begin{adjustwidth}{15pt}{0pt}
 		\Minipage{.45}{
 			\begin{tabular}{rl}
-				{\bfseries\small Alumno:}
+				{\usebeamercolor[fg]{structure}\bfseries\small Alumno:}
 				\small\insertauthor
 			\end{tabular}
 			\\[5pt]
-			\begin{tabular}{rl}{\bfseries\small Fecha:} &
-               \small Lunes,~\insertdate
+			\begin{tabular}{rl}
+				{\usebeamercolor[fg]{structure}\bfseries\small Fecha:} &
+				\small Lunes,~\insertdate
 			\end{tabular}
 		}{.45}{
 			\begin{tabular}{rl}
-				{\bfseries\small Asesor:} &
+				{\usebeamercolor[fg]{structure}\bfseries\small Asesor:} &
 				\small Prof. Fidel Jara Huanca \href{https://orcid.org/0009-0000-1884-1949}{\textcolor{orcidcolor}{\aiOrcid}}
 			\end{tabular}
 			\\[5pt]
-			\begin{tabular}{rl}{\bfseries\small Jurado:} &
-               \begin{minipage}[t]{.5\textwidth}
-				               \small Prof. Dimas Abanto\\
-				               Prof. Andrés Chulluncuy
-			               \end{minipage}
+			\begin{tabular}{rl}
+				{\usebeamercolor[fg]{structure}\bfseries\small Jurado:} &
+				\begin{minipage}[t]{.5\textwidth}
+					\small Prof. Dimas Abanto\\
+					Prof. Andrés Chulluncuy
+				\end{minipage}
 			\end{tabular}
 		}
 	\end{adjustwidth}}
@@ -75,7 +76,10 @@
 \usefonttheme[onlymath]{serif}
 \setbeamercolor{structure}{fg=DarkBlue}
 \setbeamercovered{dynamic} % transparent
+\setbeamerfont{block title}{size={\centering\normalsize}}
 \setbeamerfont{normal text}{size=\small}
+\setbeamerfont{section in toc}{size=\normalsize,series=\bfseries}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
 \setbeamersize{text margin left=5pt,text margin right=5pt}
 \setbeamertemplate{footline}[frame number]{}
 \setbeamertemplate{frametitle}[default][center]
