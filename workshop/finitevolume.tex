@@ -1,0 +1,35 @@
+\chapter{Esquemas de volúmenes finitos}
+
+Considere el problema de Cauchy~\eqref{eq:cauchysystemofconservationlaw}
+donde~\eqref{eq:systemofconservationlaw} es hiperbólico.
+Consideremos $C_{j}=\left[x_{j-\frac{1}{2}},x_{j+\frac{1}{2}}\right]\subset\mathbb{R}$
+\begin{equation*}
+	\symbf{v}^{n}_{j}\approx
+	\frac{1}{\left|C_{j}\right|}
+	\int_{C_{j}}
+	\symbf{u}\left(x,t_{n}\right)\dl{\symbf{x}}.
+\end{equation*}
+\begin{equation*}
+	\diff{}{t}
+	\int_{C_{j}}
+	\symbf{u}\left(x,t\right)\dl x+
+	f\left(u\left(x_{j+\frac{1}{2}},t\right)\right)-
+	f\left(u\left(x_{j-\frac{1}{2}},t\right)\right)=
+	\symbf{0}.
+\end{equation*}
+\begin{equation*}
+	\symbf{v}^{n+1}_{j}=
+	\symbf{H}\left(\symbf{v}^{n}_{j-k},\dotsc,\symbf{v}^{n}_{j+k}\right).
+\end{equation*}
+
+\section{Método de Godunov}
+
+\begin{equation*}
+	\symbf{w}\left(x,t\right)=
+	\symbf{w}_{R}
+	\left(\frac{x}{t};\symbf{u}_{L},\symbf{u}_{R}\right)
+\end{equation*}
+
+\section{Método de Roe}
+
+\section{Método de Rusanov}

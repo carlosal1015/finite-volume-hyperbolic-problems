@@ -26,7 +26,7 @@ jobs:
           git config --global user.name github-actions
           git clone -q --filter=blob:none --no-checkout --depth=1  --sparse $REPO .
           git sparse-checkout init --cone
-          git sparse-checkout set exercises quizes report slides snapshots syllabus template monograph
+          git sparse-checkout set exercises quizes report slides snapshots syllabus template monograph workshop
           git checkout
 
       - uses: addnab/docker-run-action@v3
@@ -68,6 +68,9 @@ jobs:
             pushd /work/monograph
             arara book
             popd
+            pushd /work/workshop
+            arara thesis
+            popd
             mkdir -p /work/public
             mv /work/exercises/exercises.pdf /work/public
             mv /work/quizes/entrance*.pdf /work/public
@@ -76,12 +79,13 @@ jobs:
             mv /work/syllabus/syllabus.pdf /work/public
             mv /work/template/amsart-template.pdf /work/public
             mv /work/monograph/book.pdf /work/public
+            mv /work/workshop/thesis.pdf /work/public
 
       - name: "Tar files"
         run: |
           sudo chown runner:docker -R .
           tar --zstd -cf PDF.tar.zst public/*.pdf
-  
+
       - uses: actions/upload-artifact@v4
         with:
           name: PDF-artifact

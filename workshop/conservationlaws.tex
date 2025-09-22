@@ -1,0 +1,390 @@
+\chapter{Sistema de leyes de conservación}
+
+Presentamos un sistema de leyes de conservación en una dimensión
+espacial, así como los ejemplos más destacados en la física de los
+medios continuos.
+
+\begin{definition}
+	Sea $\Omega\subset\mathbb{R}^{p}$ un conjunto abierto.
+	Un \textcolor{DarkBlue}{\bfseries sistema de leyes de conservación}
+	es
+	\begin{equation}\label{eq:systemofconservationlaw}
+		\diffp{\symbf{u}}{t}+
+		\diffp{}{x}
+		\symbf{f}\left(\symbf{u}\right)=
+		\symbf{0}.
+	\end{equation}
+	Donde $\Omega$ es el conjunto de estados,
+	$\symbf{f}\in C^{1}\left(\Omega,\mathbb{R}^{p}\right)$ es la
+	función flujo y $\symbf{u}\in C^{1}\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)$.
+	\begin{align*}
+		\symbf{f}\colon\Omega
+		                & \longrightarrow\mathbb{R}^{p} &
+		\symbf{u}\colon\mathbb{R}\times\left[0,\infty\right[
+		                & \longrightarrow\Omega           \\
+		\begin{bmatrix}
+			u_{1}  \\
+			\vdots \\
+			u_{p}
+		\end{bmatrix}
+		                & \longmapsto
+		\begin{bmatrix}
+			f_{1}  \\
+			\vdots \\
+			f_{p}
+		\end{bmatrix}, &
+		\left(x,t\right)
+		                & \longmapsto
+		\begin{bmatrix}
+			u_{1}\left(x,t\right) \\
+			\vdots                \\
+			u_{p}\left(x,t\right)
+		\end{bmatrix}=
+		\begin{bmatrix}
+			u_{1}  \\
+			\vdots \\
+			u_{p}
+		\end{bmatrix}.
+	\end{align*}
+\end{definition}
+Si $I=\left[x_{l},x_{r}\right]\subset\mathbb{R}$, entonces
+de~\eqref{eq:systemofconservationlaw} se obtiene la ecuación de
+balance que expresa que la variación del tiempo de la cantidad en el
+medio es igual a las pérdidas a través de la interface.
+\begin{equation*}
+	\diff{}{t}
+	\int^{x_{r}}_{x_{l}}\symbf{u}\dl x+
+	\symbf{f}\left(\symbf{u}\right)\Big|^{x_{r}}_{x_{l}}=
+	\symbf{0}.
+\end{equation*}
+
+\begin{definition}
+	Un sistema de leyes de
+	conservación~\eqref{eq:systemofconservationlaw} es
+	\textcolor{DarkBlue}{\bfseries hiperbólico} si y solo si
+	\begin{equation}
+		\forall\symbf{u}\in\Omega\!:
+		\forall\omega\in\mathbb{R}\setminus\left\{0\right\}\!:
+		\exists\left\{\left(\lambda_{k},\symbf{r}_{k}\right)\right\}^{p}_{k=1}\subset
+		\mathbb{R}\times\mathbb{R}^{p}
+		\text{ tal que }
+		\symbf{A}\left(\symbf{u},\omega\right)
+		\symbf{r}_{k}=
+		\lambda_{k}
+		\symbf{r}_{k}.
+	\end{equation}
+	Donde
+	\begin{math}
+		\symbf{A}\left(\symbf{u},\omega\right)\coloneqq
+		\omega
+		{
+			\begin{bmatrix}
+				\diffp{f_{i}}{u_{k}}
+				\left(\symbf{u}\right)
+			\end{bmatrix}}_{\substack{1\leq i\leq p\\1\leq k\leq p}}
+	\end{math}
+	es un múltiplo de la matriz jacobiana de $\mathbf{f}$.
+\end{definition}
+
+\begin{definition}
+	El \textcolor{DarkBlue}{\bfseries problema de Cauchy} asociado
+	a~\eqref{eq:systemofconservationlaw} es
+	\begin{equation}\label{eq:cauchysystemofconservationlaw}
+		\begin{cases}
+			\diffp{\symbf{u}}{t}+
+			\diffp{}{x}
+			\symbf{f}\left(\symbf{u}\right)=
+			\symbf{0}               &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			\symbf{u}=\symbf{u}_{0} &
+			\text{en }\mathbb{R}\times\left\{t=0\right\}.
+		\end{cases}
+	\end{equation}
+\end{definition}
+Sean los estados $\symbf{u}_{l},\symbf{u}_{r}\in\Omega$.
+Un \textcolor{DarkBlue}{\bfseries problema de Riemann} es un problema
+de Cauchy donde
+\begin{equation*}
+	\symbf{u}_{0}\left(x\right)=
+	\begin{cases}
+		\symbf{u}_{l}, & x<0. \\
+		\symbf{u}_{r}, & x>0.
+	\end{cases}
+\end{equation*}
+
+\begin{example}[La ecuación de Burgers]
+	\begin{equation*}
+		\diffp{u}{t}+
+		u\diffp{u}{x}-
+		\nu\diffp[2]{u}{x}=
+		0.
+	\end{equation*}
+	\begin{equation*}
+		\diffp{u}{t}+
+		\diffp{}{x}
+		\left(\frac{u^{2}}{2}\right)=
+		0.
+	\end{equation*}
+\end{example}
+
+\begin{example}[Ecuación de Buckley-Leverett]
+	\begin{equation*}
+		f\left(s\right)=
+		\frac{\frac{\kappa_{\text{rel,water}}\left(s\right)}{\mu_{\text{water}}}}{
+			\frac{\kappa_{\text{rel,water}}\left(s\right)}{\mu_{\text{water}}}+
+			\frac{\kappa_{\text{rel,oil}}\left(s\right)}{\mu_{\text{oil}}}
+		}.
+	\end{equation*}
+\end{example}
+
+\begin{example}[$p$-sistema]
+	\begin{equation*}
+		\begin{cases}
+			\diffp{v}{t}-\diffp{u}{x}=0               &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			\diffp{u}{t}+\diffp{}{x}p\left(v\right)=0 &
+			\text{en }\mathbb{R}\times\left(0,\infty\right).
+		\end{cases}
+	\end{equation*}
+\end{example}
+
+\begin{example}[Ecuaciones de la dinámica de gases]
+	\begin{equation*}
+		\begin{dcases}
+			\diffp{\rho}{t}+
+			\sum_{j=1}^{3}
+			\diffp{}{x_{j}}
+			\left(\rho u_{j}\right)=0                   &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			\forall i\in\left\{1,2,3\right\}:
+			\diffp{}{t}
+			\left(\rho u_{i}\right)+
+			\sum_{j=1}^{3}
+			\diffp{}{x_{j}}
+			\left(\rho u_{i}u_{j}+p\delta_{ij}\right)=0 &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			\diffp{}{t}
+			\left(\rho e\right)+
+			\sum_{j=1}^{3}
+			\diffp{}{x_{j}}
+			\left(\left(\rho e+p\right)u_{j}\right)=0   &
+			\text{en }\mathbb{R}\times\left(0,\infty\right).
+		\end{dcases}
+	\end{equation*}
+\end{example}
+
+\section{Soluciones débiles}
+
+\begin{definition}
+	Sea
+	\begin{math}
+		\symbf{u}_{0}\in
+		{\symbf{L}^{\infty}_{\text{loc}}\left(\mathbb{R}\right)}^{p}
+	\end{math}.
+	\begin{math}
+		\symbf{u}\in
+		{\symbf{L}^{\infty}_{\text{loc}}\left(\mathbb{R}\times\left[0,\infty\right[\right)}^{p}
+	\end{math}
+	es una \textcolor{DarkBlue}{\bfseries solución débil}
+	de~\eqref{eq:cauchysystemofconservationlaw} si y solo si
+	$\symbf{u}\left(x,t\right)\in\Omega$ casi en todas partes y
+	\begin{equation*}
+		\forall\symbf{\varphi}\in
+		{\symbf{C}^{1}_{0}\left(\mathbb{R}\times\left[0,\infty\right[\right)}^{p}\!:
+		\int_{0}^{\infty}
+		\int_{\mathbb{-\infty}}^{\infty}
+		\left[
+			\symbf{u}\cdot
+			\diffp{\symbf{\varphi}}{t}+
+			\symbf{f}\left(\symbf{u}\right)\cdot
+			\diffp{\symbf{\varphi}}{x}
+			\right]
+		\dl x
+		\dl t+
+		\int_{-\infty}^{\infty}
+		\symbf{u}_{0}\left(x\right)\cdot
+		\symbf{\varphi}\left(x,0\right)
+		\dl x=
+		0.
+	\end{equation*}
+\end{definition}
+
+% \begin{align*}
+%   -\int_{0}^{\infty}
+%   \int_{\mathbb{-\infty}}^{\infty}
+%   \left[
+%     \diffp{\symbf{u}}{t}+
+%     \diffp{}{x}\symbf{f}\left(\symbf{u}\right)
+%   \right]\cdot\symbf{\varphi}
+%   \dl x
+%   \dl t.
+% \end{align*}
+
+\begin{definition}
+	\begin{math}
+		\symbf{u}\in
+		C^{1}_{\text{piec}}
+		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
+	\end{math}
+	si y solo si
+	cualquier curva de discontinuidad $\Sigma$ tiene una
+	parametrización de la forma $\left(t,\xi\left(t\right)\right)$,
+	donde $\xi\in C^{1}\left(I,\mathbb{R}\right)$.
+	\begin{equation*}
+		\symbf{u}_{\pm}\left(\xi\left(t\right),t\right)=
+		\lim_{\substack{\varepsilon\to0\\\varepsilon>0}}
+		\symbf{u}\left(\xi\left(t\right)\pm\varepsilon,t\right).
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	Si
+	\begin{math}
+		\symbf{u}\in
+		C^{1}_{\text{piec}}
+		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
+	\end{math},
+	entonces
+	\begin{enumerate}%[(i)]
+		\item
+
+		      $\symbf{u}$ es una solución clásica
+		      de~\eqref{eq:systemofconservationlaw}.
+
+		\item
+
+		      $\symbf{u}$ satisface la condición de salto de
+		      Rankine-Hugoniot
+		      \begin{equation*}
+			      \left(\symbf{u}_{+}-\symbf{u}_{-}\right)
+			      n_{t}+
+			      \left[
+				      \symbf{f}\left(\symbf{u}_{+}\right)-
+				      \symbf{f}\left(\symbf{u}_{-}\right)
+				      \right]
+			      n_{x}=
+			      \symbf{0}.
+		      \end{equation*}
+		      Donde
+		      $\left[\symbf{u}\right]=\symbf{u}_{+}-\symbf{u}_{-}$ y
+		      $\left[\symbf{f}\left(\symbf{u}\right)\right]=\symbf{f}\left(\symbf{u}_{+}\right)-\symbf{f}\left(\symbf{u}_{-}\right)$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}[]
+	Sea.
+	\begin{equation*}
+		\left\{
+		\begin{aligned}
+			\diffp{u}{t}+
+			\diffp{}{x}
+			\frac{u^{2}}{2} & =
+			0.                  \\
+			u_{0}\left(x\right)=
+			\begin{cases}
+				u_{l}, & x<0. \\
+				u_{r}, & x>0.
+			\end{cases}
+		\end{aligned}
+		\right.
+	\end{equation*}
+\end{example}
+
+\begin{equation*}
+	\diffp{}{t}
+	U\left(\symbf{u}\right)+
+	\diffp{}{x}
+	F\left(\symbf{u}\right)=
+	0.
+\end{equation*}
+
+\section{Soluciones de entropía}
+
+\begin{definition}
+	Sea $\Omega\subset\mathbb{R}^{p}$ un conjunto convexo.
+	$U\in C^{1}\left(\Omega,\mathbb{R}\right)$ es una
+	\textcolor{DarkBlue}{\bfseries entropía}
+	de~\eqref{eq:systemofconservationlaw} si y solo si
+	$\exists F\in C^{1}\left(\Omega,\mathbb{R}\right)$ tal que
+	\begin{equation*}
+		{\begin{bmatrix}
+				\diffp{U}{u_{k}}
+			\end{bmatrix}}_{1\leq k\leq p}
+		{\begin{bmatrix}
+				\diffp{f_{i}}{u_{k}}
+			\end{bmatrix}}_{\substack{1\leq i\leq p\\1\leq k\leq p}}
+		\left(\symbf{u}\right)=
+		{\begin{bmatrix}
+			\diffp{F}{u_{k}}
+		\end{bmatrix}}_{1\leq k\leq p}.
+	\end{equation*}
+	% \begin{equation*}
+	%   \diffp{}{t}
+	%   U\left(\symbf{u}\right)+
+	%   \sum_{j=1}^{d}
+	%   \diffp{}{x_{j}}
+	%   F_{j}\left(\symbf{u}\right)=0.
+	% \end{equation*}
+\end{definition}
+
+\begin{example}[$p$-sistema]
+	.
+\end{example}
+
+\section{Método de viscosidad}
+
+Dado $\varepsilon>0$, asociamos
+con~\eqref{eq:systemofconservationlaw} el sistema parabólico
+\begin{equation}\label{eq:parabolicsystemofconservationlaw}
+	\diffp{\symbf{u}_{\varepsilon}}{t}+
+	\diffp{}{x}
+	\symbf{f}
+	\left(\symbf{u}_{\varepsilon}\right)-
+	\varepsilon
+	\Delta\symbf{u}_{\varepsilon}=
+	\symbf{0},
+\end{equation}
+donde $-\varepsilon\Delta\symbf{u}_{\varepsilon}$ puede ser visto
+como un término de viscosidad.
+
+\begin{theorem}
+	Sea
+	\begin{math}
+		\left\{\symbf{u}_{\varepsilon}\right\}_{\varepsilon}
+	\end{math}
+	una sucesión de soluciones suaves
+	de~\eqref{eq:parabolicsystemofconservationlaw}.
+	Si~\eqref{eq:systemofconservationlaw} admite una entropía
+	$U$ con flujo entropía $F$, $\exists C>0$ tal que
+	\begin{math}
+		{\left\|\symbf{u}_{\varepsilon}\right\|}_{
+			{\symbf{L}^{\infty}\left(\mathbb{R}\times\left[0,\infty\right[\right)}^{p}
+		}\leq C
+	\end{math}
+	y $\lim\limits_{\varepsilon\to0}\symbf{u}_{\varepsilon}=\symbf{u}$
+	casi en todas partes en $\mathbb{R}\times\left[0,\infty\right[$.
+	Entonces, $\symbf{u}$ es una solución débil
+	de~\eqref{eq:systemofconservationlaw} y
+	\begin{equation*}
+		\forall\varphi\in
+		C^{\infty}_{0}\left(\mathbb{R}\times\left]0,\infty\right[\right),
+		\varphi\geq 0:
+		\int_{0}^{\infty}
+		\int_{-\infty}^{\infty}
+		\left[
+			U\left(\symbf{u}\right)
+			\diffp{\varphi}{t}+
+			F\left(\symbf{u}\right)
+			\diffp{\varphi}{x}
+			\right]
+		\dl x
+		\dl t\geq 0.
+	\end{equation*}
+	% \begin{equation*}
+	% 	\diffp{}{t}
+	% 	U\left(\symbf{u}\right)+
+	% 	\diffp{}{x}
+	% 	F\left(\symbf{u}\right)\leq
+	% 	0
+	% \end{equation*}
+\end{theorem}

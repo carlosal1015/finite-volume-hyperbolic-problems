@@ -1,0 +1,65 @@
+\documentclass[
+  a4,
+  final,
+  fontsize=12pt,
+	intlimits,
+  leqno,
+  DIV=18
+]{scrreprt}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage{multicol}
+% \usepackage{fontspec}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{unicode-math}
+\usepackage{amsthm}
+\usepackage{diffcoeff}
+\usepackage[citestyle=numeric,backend=biber,style=ieee]{biblatex}
+\usepackage[
+	colorlinks=true,
+	urlcolor=DarkBlue,
+	linkcolor=DarkBlue,
+	anchorcolor=black,
+	citecolor=black
+]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{\color{DarkBlue}Definición}
+\newtheorem{example}[definition]{\color{DarkBlue}Ejemplo}
+\newtheorem{theorem}[definition]{\color{DarkBlue}Teorema}
+
+\title{\color{DarkBlue}Simulación Numérica de Sistemas Hiperbólicos
+de Leyes de Conservación mediante el Método de Volúmenes Finitos}
+\author{\sffamily\color{DarkBlue}Carlos Aznarán Laos\\
+	\href{mailto:caznaranl@uni.pe}{\texttt{caznaranl\MVAt uni.pe}}\and
+	\sffamily\color{DarkBlue}Fidel Jara Huanca\\
+	\href{mailto:fjarah@uni.edu.pe}{\texttt{fjarah\MVAt uni.edu.pe}}}
+\publishers{\sffamily\color{DarkBlue} Universidad Nacional de Ingeniería\\ Lima, Perú}
+\date{\color{DarkBlue}\sffamily\today}
+
+% \setmainfont{Latin Modern Roman}
+% \setmathfont{Latin Modern Math}
+\setkomafont{disposition}{\color{DarkBlue!50!black}\bfseries\sffamily}
+\setkomafont{part}{\Huge\sffamily\color{DarkBlue}}
+\setkomafont{chapter}{\huge\sffamily\color{DarkBlue}}
+\setkomafont{section}{\LARGE\sffamily\color{DarkBlue}}
+\setkomafont{subsection}{\large\sffamily\color{DarkBlue}}
+
+\graphicspath{{./images/}}
+
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall \, }
+\let\oldexist\exists
+\renewcommand{\exists}{\oldexist \: }
+\newcommand\existu{\oldexist! \: }
+
+\newcommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
+\renewcommand{\theequation}{\color{DarkBlue}\arabic{chapter}.\arabic{equation}}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\removenolimits{\int}
+
+\addbibresource{bibliography.bib}
