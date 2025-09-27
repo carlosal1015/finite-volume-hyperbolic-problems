@@ -1,0 +1,433 @@
+\question
+
+Sea $I=\left[a,b\right]\subset\mathbb{R}$.
+Si $f\colon I\to I$ es continua, derivable en
+$\operatorname{Int}\left(I\right)$ y $\exists q\in\left[0,1\right)$
+tal que $\forall\xi\in\operatorname{Int}\left(I\right)$:
+$\left|f^{\prime}\left(\xi\right)\right|\leq q$, entonces
+$\left|\operatorname{Fix}\left(f\right)\right|=1$.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sea $q\in\left[0,1\right)$.
+Se define $\forall t\in\left(0,\infty\right)$: $f\left(t\right)=qt$.
+Demuestre que $\operatorname{Fix}\left(f\right)\neq\emptyset$.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sea
+\begin{math}
+  B_{r}=
+  \left\{x\in\mathbb{R}^{n}\mid{\left\|x\right\|}_{2}<r\right\}
+\end{math}.
+Si $g\colon\overline{B}_{r}\to\mathbb{R}^{n}$ es una función tal que
+$\forall x\in\partial B_{r}$:
+${\left\langle g\left(x\right),x\right\rangle}_{2}\geq 0$, entonces
+$\operatorname{Fix}\left(g\right)\neq\emptyset$.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach,
+$C\subset E$ un conjunto abierto y convexo con $0\in C$.
+Demuestre que $\forall x\in E\setminus C$:
+$\exists!q\in\left(0,1\right]$ tal que $qx\in\partial C$.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach,
+$K\subset X$ un conjunto compacto y $f\colon K\to E$ es una función.
+Si $\forall n\in\mathbb{N}$: $f_{n}\colon K\to E$ son funciones
+continuas y
+\begin{math}
+  \lim\limits_{n\to\infty}
+  \sup\limits_{x\in K}
+  \left\|f_{n}\left(x\right)-f\left(x\right)\right\|=
+  0
+\end{math},
+entonces $f$ es continua.
+Además, si $\forall n\in\mathbb{N}$:
+$\operatorname{Fix}\left(f_{n}\right)\neq\emptyset$, entonces
+$\operatorname{Fix}\left(f\right)\neq\emptyset$.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sea
+\begin{math}
+  \left(
+    C\left(\left[0,1\right]\right),
+    {\left\|\cdot\right\|}_{\text{unif}}
+  \right)
+\end{math}
+un espacio de Banach.
+Defina la función no lineal
+\begin{equation*}
+  \forall x\in C\left(\left[0,1\right]\right):
+  \forall t\in[0,1]:
+  G\left(x\right)\left(t\right)\coloneqq
+  \int_{0}^{1}
+  \kappa\left(t,s\right)
+  \alpha\left(s,x\left(s\right)\right)\dl s,
+\end{equation*}
+donde $k\in C\left(\left[0,1\right]\times\left[0,1\right]\right)$ y
+$\alpha\in C\left(\left[0,1\right]\times\mathbb{R}\right)$.
+Demuestre que si cumplen las desigualdades con $L>0$
+\begin{align*}
+  \forall s\in\left[0,1\right]:
+  \forall u,v\in\mathbb{R}:
+  \left|f\left(s,u\right)-f\left(s,v\right)\right|&\leq
+  L\left|u-v\right|.\\
+  \max_{t\in\left[0,1\right]}
+  \int_{0}^{1}
+  \left|\kappa\left(t,s\right)\right|\dl s&<
+  \frac{1}{L}.
+\end{align*}
+Entonces
+\begin{math}
+  G\colon C\left(\left[0,1\right]\right)\to
+  C\left(\left[0,1\right]\right)
+\end{math}
+es una contracción.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach,
+$K\subset X$ un conjunto compacto y $f\colon K\to K$ es contractiva,
+es decir,
+\begin{equation*}
+  \forall x,y\in K\text{ distintos}:
+  \left\|f\left(x\right)-f\left(y\right)\right\|<
+  \left\|x-y\right\|.
+\end{equation*}
+Demuestre que $\left|\operatorname{Fix}\left(f\right)\right|=1$.
+Además, demuestre que la función
+$x\longmapsto\left\|x-f\left(x\right)\right\|$ es monótona
+decreciente sobre los puntos generados por la sucesión convergente
+dada por
+\begin{equation*}
+  \left\{
+    \begin{aligned}
+      x^{\left(k+1\right)}=f\left(x^{\left(k\right)}\right).\\
+      x^{\left(0\right)}=x\in E.
+    \end{aligned}
+    \right.
+  \end{equation*}
+
+  \begin{solutionordottedlines}
+  \end{solutionordottedlines}
+
+  \question
+
+  Si $\left(X,d\right)X$ es un espacio métrico compacto, entonces $X$
+  es separable y también es completo.
+
+  \begin{solutionordottedlines}
+  \end{solutionordottedlines}
+
+  \question
+
+  Sea
+  \begin{math}
+    \left(
+      C\left(\left[a,b\right]\right),
+      \left\|\cdot\right\|_{\max}
+    \right)
+  \end{math}.
+  Demuestre que $C\left(\left[a,b\right]\right)$ es separable, pero
+  no es compacto.
+
+  \begin{solutionordottedlines}
+  \end{solutionordottedlines}
+
+  \question
+
+  Encuentre una reformulación como una ecuación de punto fijo en
+  $\mathbb{R}^{2}$ y resuelva el sistema de ecuaciones no lineales
+  por el teorema de punto fijo de Brouwer.
+  \begin{equation*}
+    \left\{
+      \begin{aligned}
+        2x^{2}_{1}-x^{2}_{2}-8x_{1}&=0.\\
+        x^{2}_{1}+x_{1}x_{2}-4x_{2}+1&=0.
+      \end{aligned}
+      \right.
+    \end{equation*}
+
+    \begin{solutionordottedlines}
+    \end{solutionordottedlines}
+
+    \question
+
+    Considere la siguiente función no lineal
+    \begin{align*}
+      f\colon\mathbb{R}^{2}&\longrightarrow\mathbb{R}^{2}\\
+      \left(x_{1},x_{2}\right)&\longmapsto
+      \frac{1}{6}
+      \left(
+        x_{1}e^{-x^{2}_{2}}+x_{1}x_{2}+3,
+        \ln\left(1+x_{1}^{2}+
+        x^{2}_{2}\right)-1
+      \right)
+    \end{align*}
+
+    Considere la norma
+    \begin{math}
+      {\left\|\left(x_{1},x_{2}\right)\right\|}_{\infty}=
+      \max\left\{\left|x_{1}\right|,\left|x_{2}\right|\right\}
+    \end{math}
+    y demuestre cada una de las siguientes proposiciones.
+
+    \begin{parts}
+      \part
+
+      $f$ es Lipschitz continua en
+      $\left[0,1\right]\times\left[0,1\right]$ con constante de
+      Lipschitz $L=\frac{5}{6}$.
+
+      \part
+
+      $\left|\operatorname{Fix}\left(f\right)\right|=1$.
+
+      \part
+
+      ¿Cuántos pasos iterativos $k\in\mathbb{N}$ se necesita para
+      obtener una precisión de al menos $10^{-3}$ usando la iteración
+      de punto fijo
+      \begin{math}
+        x^{\left(k+1\right)}\coloneqq
+        f\left(x^{\left(k\right)}\right)
+      \end{math}
+      iniciando con $x^{\left(0\right)}\coloneqq\left(0,0\right)$?
+    \end{parts}
+
+    \begin{solutionordottedlines}
+    \end{solutionordottedlines}
+
+    \question
+
+    Sea $I=\left[0,\infty\right)$.
+    Se define $\forall t\in I$:
+    $f\left(t\right)=\frac{t+\frac{1}{2}}{t+1}$ es una contracción.
+    Calcule el punto fijo de $f$ y una aproximación
+    $x^{\left(1\right)}$ usando el punto inicial
+    $x^{\left(0\right)}=1$ en la iteración de punto fijo.
+
+    \begin{solutionordottedlines}
+    \end{solutionordottedlines}
+
+    \question
+
+    Demuestre que el siguiente sistema de ecuaciones no lineales
+    tiene solución en $\mathbb{R}^{2}$.
+    \begin{equation*}
+      \left\{
+        \begin{aligned}
+          \sen\left(x_{1}+x_{2}\right)-x_{2}&=
+          0.\\
+          \cos\left(x_{1}+x_{2}\right)-x_{1}&=
+          0.
+        \end{aligned}
+        \right.
+      \end{equation*}
+
+      \begin{solutionordottedlines}
+      \end{solutionordottedlines}
+
+      \question
+
+      Sea $A=
+      \begin{bmatrix}a_{ij}
+      \end{bmatrix}\in\mathbb{R}^{n\times n}$ una matriz.
+      Si $\forall i,j\in\left\{1,\dotsc,n\right\}$: $a_{ij}\geq 0$,
+      entonces
+      \begin{math}
+        \exists\left(\lambda,v\right)\in
+        \left[0,\infty\right)\times\mathbb{R}^{n}
+      \end{math}
+      tal que $Av=\lambda v$ y
+      $\forall i\in\left\{1,\dotsc,n\right\}$: $v_{i}\geq 0$.
+
+      \begin{solutionordottedlines}
+      \end{solutionordottedlines}
+
+      \question
+
+      Sea $f\colon\mathbb{R}^{n}\to\mathbb{R}^{n}$ una función
+      continua y $\exists c>1$ tal que $\forall x,y\in\mathbb{R}^{n}$:
+      \begin{math}
+        \left\|f\left(x\right)-f\left(y\right)\right\|\geq
+        c\left\|x-y\right\|
+      \end{math}.
+      Demuestre que si $f$ es sobreyectiva, entonces
+      $\left|\operatorname{Fix}\left(f\right)\right|=1$.
+
+      \question
+
+      Sea
+      \begin{math}
+        \left(
+          C\left(\left[0,1\right]\right),
+          {\left\|\cdot\right\|}_{\infty}
+        \right)
+      \end{math}
+      y
+      \begin{math}
+        S\coloneqq
+        \left\{x\in C\left(\left[0,1\right]\right)\mid
+          0=x\left(0\right)\leq
+          x\left(t\right)\leq
+          x\left(1\right)=1
+        \right\}
+      \end{math}.
+      Defina la función
+      \begin{equation*}
+        \forall x\in C\left(\left[0,1\right]\right):
+        \forall t\in\left[0,1\right]:
+        T\left(x\right)\left(t\right)\coloneqq
+        tx\left(t\right).
+      \end{equation*}
+      Demuestre cada una de las siguientes proposiciones.
+      \begin{parts}
+        \part
+
+        $T$ es una función lineal no expansiva con
+        ${\left\|T\right\|}_{\infty}=1$.
+
+        \part
+
+        $\forall x\in S$: $T\left(x\right)\in S$.
+
+        \part
+
+        $S$ es un conjunto acotado, cerrado y convexo.
+
+        \part
+
+        Si
+        \begin{math}
+          \widetilde{T}=T\big|_{C\left(\left[0,1\right]\right)\setminus S}
+        \end{math},
+        entonces
+        \begin{math}
+          \left|\operatorname{Fix}\left(\widetilde{T}\right)\right|=
+          1
+        \end{math}.
+
+        \part
+
+        $\exists x_{t}\in S$ tal que
+        $x_{t}=tu+\left(1-t\right)T\left(x_{t}\right)$ donde $u\in S$,
+        $u\left(t\right)\coloneqq t$.
+
+        \part
+
+        \begin{math}
+          \inf\limits_{x\in S}
+          \left\|x-T\left(x\right)\right\|=
+          0
+        \end{math}.
+
+        \part
+
+        \begin{math}
+          \lim\limits_{n\to\infty}
+          {\left\|x^{\left(0\right)}-T^{\left(n\right)}\left(x^{\left(0\right)}\right)\right\|}_{\infty}=
+          \operatorname{diam}\left(S\right).
+        \end{math}
+      \end{parts}
+
+      \question
+
+      Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach,
+      $K\subset E$ un conjunto compacto y $f\colon E\to E$ una
+      función continua.
+      Demuestre que
+      \begin{equation*}
+        \inf_{x\in E}\left\|x-f\left(x\right)\right\|=
+        0\iff
+        \operatorname{Fix}\left(f\right)\neq\emptyset.
+      \end{equation*}
+
+      \question
+
+      Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach
+      y $K\subset E$ un conjunto compacto y convexo.
+      Si $f\colon E\to E$ es una función no expansiva, entonces
+      $\left|\operatorname{Fix}\left(f\right)\right|=1$.
+
+      \question
+
+      Se definen los siguientes conjuntos
+      \begin{align*}
+        C_{0}&\coloneqq
+        \left\{\left(x,y\right)\in\mathbb{R}^{2}\mid
+        x^{2}+y^{2}\leq 1\right\}&
+        C_{2}&\coloneqq
+        \left\{
+          \left(x,y\right)\in\mathbb{R}^{2}\mid
+          x\leq 0,
+          \left|y\right|\leq\left|x\right|
+        \right\}.\\
+        C_{1}&\coloneqq
+        \left\{
+          \left(x,y\right)\in\mathbb{R}^{2}\mid
+          x\geq 0,
+          \left|y\right|\leq x
+        \right\}&
+        C&\coloneqq
+        \left(C_{0}\cap C_{1}\right)\cup
+        \left(C_{0}\cap C_{2}\right).
+      \end{align*}
+      Demuestre que
+      \begin{math}
+        C\subset
+        \operatorname{co}
+        \left(
+          \left\{
+            P_{C}\left(x,y\right):
+            \left(x,y\right)\in
+            \mathbb{R}^{2}\setminus C
+          \right\}
+        \right)
+      \end{math}.
+
+      \question
+
+      Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach
+      y $U<E$ un subespacio cerrado.
+      Considere el espacio cociente
+      \begin{equation*}
+        E/U\coloneqq
+        \left\{\left[x\right]\mid x\in E\right\}
+        \text { donde }
+        \left[x\right]\coloneqq
+        \left\{x+u:u\in U\right\}.
+      \end{equation*}
+      Demuestre que $\forall x\in E$:
+      $\left\|\left[x\right]\right\|\coloneqq d\left(x,U\right)$
+      define una norma en $E/U$.
+
+      \question
+
+      Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach
+      y $U<E$ un subespacio propio cerrado.
+      Demuestre que $\forall\varepsilon>0$:
+      $\exists x\in\overline{B}_{1}$ tal que
+      $d\left(x,U\right)\geq 1-\varepsilon$.

@@ -1,0 +1,41 @@
+\documentclass[
+  8pt,
+  aspectratio=1610,
+  c,
+  handout,
+  intlimits,
+  leqno,
+  professionalfonts,
+  spanish,
+  xcolor=svgnames
+]{beamer}
+
+\usepackage[spanish]{babel}
+\usepackage{mathtools}
+\usepackage{diffcoeff}
+\usepackage{minted}
+
+\usepackage[
+  backend=biber,
+  style=numeric,
+  defernumbers=true,
+  sorting=ynt
+]{biblatex}
+
+\usefonttheme[onlymath]{serif}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamercovered{transparent}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{theorems}[ams style]
+\addtobeamertemplate{theorem begin}{\normalfont}{}
+\addbibresource{references.bib}
+
+\title{Una introducción al software Clawpack (Conservation Laws Package)}
+\subtitle{\url{https://www.clawpack.org}}
+\institute{Universidad Nacional de Ingeniería}
+\author{Carlos Aznarán}
+\date{Lima,~\today}

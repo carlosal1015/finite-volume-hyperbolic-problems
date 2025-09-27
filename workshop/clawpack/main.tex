@@ -1,0 +1,128 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'pdf', 'run.xml', 'snm', 'toc', 'vrb']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'run.xml', 'snm', 'toc', 'vrb']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+
+\frame{
+  \maketitle
+}
+
+\begin{frame}
+  \begin{columns}
+    \begin{column}{.6\paperwidth}
+      \begin{block}{¿Qué es Clawpack?}
+        \begin{quoting}
+          Clawpack significa ``Paquete de Leyes de Conservación'' y se
+          desarrolló inicialmente para sistemas hiperbólicos lineales y no
+          lineales de leyes de conservación, con el objetivo de implementar
+          métodos de tipo Godunov de alta resolución mediante limitadores
+          en un marco general aplicable a diversas aplicaciones.
+          Estos métodos de volumen finito requieren un ``solucionador de
+          Riemann'' para resolver la discontinuidad de salto en la interfaz
+          entre dos celdas de la malla en ondas que se propagan a las
+          celdas vecinas.
+          La formulación de Clawpack permite una fácil extensión a la
+          solución de problemas hiperbólicos que no están en forma de
+          conservación.
+        \end{quoting}
+      \end{block}
+    \end{column}
+    \begin{column}{.3\paperwidth}
+      \begin{figure}[ht!]
+        \centering
+        \includegraphics[width=.3\paperwidth]{ClawpackLogoTitleFrame}
+        \includegraphics[width=.3\paperwidth]{GeoClawLogoTitleFrame}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Partes de Clawpack}
+    \begin{description}
+      \item[ARMClaw]
+
+        Refinamiento de malla adaptativo.
+
+      \item[Classic]
+
+        Rutinas clásicas de Fortran de una sola malla.
+
+      \item[GeoClaw]
+
+        Flujos geofísicos.
+
+        \url{http://www.geoclaw.org}
+
+      \item[PyClaw]
+
+        Versión Python de los solucionadores de EDPs hiperbólicas
+        que permite resolver el problema en Python sin utilizar
+        explícitamente ningún código Fortran.
+
+        \url{https://www.clawpack.org/gallery/pyclaw/gallery/gallery_all.html}
+
+      \item[Riemann]
+
+        El solucionador de Riemann define la ecuación hiperbólica
+        que se está resolviendo y realiza la mayor parte del trabajo
+        computacional: se llama en cada interfaz de celda en cada
+        paso de tiempo y devuelve la información sobre las ondas
+        y las velocidades que se necesita para actualizar la
+        solución.
+
+      \item[VisClaw]
+
+        Utilidades para graficar usando Python.
+    \end{description}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Classic}
+  \inputminted[fontsize=\tiny,firstline=5,lastline=27]{bash}{script.sh}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{ARMClaw}
+  \inputminted[fontsize=\tiny,firstline=29,lastline=51]{bash}{script.sh}
+\end{frame}
+
+\section{Ejemplos del manual~\cite{Ancey2025}}
+
+\begin{frame}
+  \inputminted[fontsize=\tiny,firstline=1,lastline=27]{python}{chapter1.py}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Referencias}
+
+  \nocite{*}
+  \printbibliography[heading=none]
+\end{frame}
+\end{document}

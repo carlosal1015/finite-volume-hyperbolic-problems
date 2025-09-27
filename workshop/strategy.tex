@@ -30,7 +30,7 @@ Suponga que $\Omega\subset\mathbb{R}^{3}$ es un conjunto abierto.
 Encuentre
 \begin{math}
 	\symbf{u}\in
-	C^{1}\left(I\times\left[0,T\right],\Omega\right)
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
 \end{math}
 en el problema de valor inicial y de frontera~\eqref{eq:advectionsystem}
 \begin{equation}\label{eq:advectionsystem}
@@ -68,19 +68,19 @@ siendo $\symbf{a}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
 Encuentre
 \begin{math}
 	\symbf{u}\in
-	C^{1}\left(I\times\left[0,T\right],\Omega\right)
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
 \end{math}
 en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystem}
 \begin{equation}\label{eq:advectionreactionsystem}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)               =
-		-\symbf{b}\odot\symbf{u} &
+		\symbf{0}     &
 		\text{ en }I\times\left(0,T\right].   \\
 		\symbf{u}                                                                     =
-		\symbf{u}_{0}            &
+		\symbf{u}_{0} &
 		\text{ en }I\times\left\{t=0\right\}. \\
 		\symbf{u}                                                                     =
-		\symbf{0}                &
+		\symbf{0}     &
 		\text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
@@ -97,7 +97,8 @@ es conocida y
 es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
-	\symbf{a}\odot\symbf{u}
+	\symbf{a}\odot\symbf{u}+
+	\symbf{b}\odot\symbf{u}
 \end{math},
 siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
 
@@ -106,17 +107,17 @@ siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
 Encuentre
 \begin{math}
 	\symbf{u}\in
-	C^{1}\left(I\times\left[0,T\right],\Omega\right)
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
 \end{math}
 en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemquaslinear}
 \begin{equation}\label{eq:advectionreactionsystemquaslinear}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		-\symbf{b}\odot\symbf{u} & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{0}     & \text{ en }I\times\left(0,T\right].          \\
 		\symbf{u}                                                      =
-		\symbf{u}_{0}            & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}_{0} & \text{ en }I\times\left\{t=0\right\}.        \\
 		\symbf{u}                                                      =
-		\symbf{0}                & \text{ en }\partial I\times\left[0,T\right].
+		\symbf{0}     & \text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
 Donde
@@ -133,6 +134,7 @@ es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
 	\symbf{a}\odot\symbf{u}+
+	\symbf{b}\odot\symbf{u}+
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
 \end{math},
 siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
@@ -142,17 +144,17 @@ siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
 Encuentre
 \begin{math}
 	\symbf{u}\in
-	C^{1}\left(I\times\left[0,T\right],\Omega\right)
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
 \end{math}
 en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemquaslinearnonhomogeneous}
 \begin{equation}\label{eq:advectionreactionsystemquaslinearnonhomogeneous}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		-\symbf{b}\odot\symbf{u}-\symbf{h} & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
 		\symbf{u}                                                      =
-		\symbf{u}_{0}                      & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}_{0}                     & \text{ en }I\times\left\{t=0\right\}.        \\
 		\symbf{u}                                                       =
-		\symbf{0}                          & \text{ en }\partial I\times\left[0,T\right].
+		\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
 Donde
@@ -161,7 +163,7 @@ Donde
 	\mathbb{R}^{3}
 \end{math},
 \begin{math}
-	\symbf{h}\colon I\times\left[0,T\right]\to
+	\symbf{s}\colon \Omega\times I\to
 	\mathbb{R}^{3}
 \end{math}
 son conocidas y
@@ -173,6 +175,7 @@ es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
 	\symbf{a}\odot\symbf{u}+
+	\symbf{b}\odot\symbf{u}+
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
 \end{math},
 siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
@@ -182,25 +185,29 @@ siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
 Encuentre
 \begin{math}
 	\symbf{u}\in
-	C^{1}\left(I\times\left[0,T\right],\Omega\right)
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
 \end{math}
 en el problema de valor inicial y de frontera~\eqref{eq:complicatedsystem}
 \begin{equation}\label{eq:complicatedsystem}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		\symbf{g}\left(\symbf{u}\right) & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
 		\symbf{u}                                                      =
-		\symbf{u}_{0}                   & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}_{0}                     & \text{ en }I\times\left\{t=0\right\}.        \\
 		\symbf{u}                                                       =
-		\symbf{0}                       & \text{ en }\partial I\times\left[0,T\right].
+		\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
 Donde
 \begin{math}
 	\symbf{u}_{0}\colon I\to
 	\mathbb{R}^{3}
+\end{math},
+\begin{math}
+	\symbf{s}\colon \Omega\times I\to
+	\mathbb{R}^{3}
 \end{math}
-es conocida y
+son conocidas y
 \begin{math}
 	\symbf{f}\colon\Omega\to
 	\mathbb{R}^{3}
@@ -209,12 +216,13 @@ es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
 	\symbf{a}\odot\symbf{u}+
+	\symbf{b}\odot\symbf{u}+
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{3}-1\right)\symbf{e_{1}}}
 \end{math},
 \begin{math}
-	\symbf{g}\left(\symbf{u}\right)=
+	\symbf{s}\left(\symbf{u},x\right)=
 	\begin{bmatrix}
-		b_{1}u_{2}u_{3}\Phi-\beta u_{0} \\
+		b_{1}u_{2}u_{3}\Phi-\beta u_{1} \\
 		-b_{2}u_{2}u_{3}\Phi            \\
 		-b_{3}u_{2}u_{3}\Phi
 	\end{bmatrix}
