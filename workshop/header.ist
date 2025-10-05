@@ -1,0 +1,5 @@
+headings_flag 1
+
+heading_prefix "\\sffamily%"
+
+heading_suffix "\}"

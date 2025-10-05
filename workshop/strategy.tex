@@ -5,7 +5,8 @@ método de los volúmenes finitos de un
 \textcolor{DarkRed}{sistema EDP complicado}.
 Se trata de resolver un sistema EDP a la vez, de menor a mayor
 dificultad.
-Suponga que $\Omega\subset\mathbb{R}^{3}$ es un conjunto abierto.
+Suponga que $\Omega\subset\mathbb{R}^{3}$ es un conjunto abierto y
+$\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
 
 \section{Primera estrategia}
 
@@ -48,20 +49,19 @@ en el problema de valor inicial y de frontera~\eqref{eq:advectionsystem}
 \end{equation}
 Donde
 \begin{math}
-	\symbf{u}_{0}\colon I\to
-	\mathbb{R}^{3}
+	\symbf{u}_{0}\in
+	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
 \end{math}
 es conocida y
 \begin{math}
-	\symbf{f}\colon\Omega\to
-	\mathbb{R}^{3}
+	\symbf{f}\in
+	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
 \end{math}
 es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
 	\symbf{a}\odot\symbf{u}
-\end{math},
-siendo $\symbf{a}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
+\end{math}.
 
 \subsection*{Sistema EDP de advección reacción lineal homogéneo}
 
@@ -86,21 +86,21 @@ en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystem}
 \end{equation}
 Donde
 \begin{math}
-	\symbf{u}_{0}\colon I\to
-	\mathbb{R}^{3}
+	\symbf{u}_{0}\in
+	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
 \end{math}
 es conocida y
 \begin{math}
-	\symbf{f}\colon\Omega\to
-	\mathbb{R}^{3}
+	\symbf{f}\in
+	\symbf{C}^{1}
+	\left(\Omega,\mathbb{R}^{3}\right)
 \end{math}
 es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
-	\symbf{a}\odot\symbf{u}+
-	\symbf{b}\odot\symbf{u}
-\end{math},
-siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
+	\symbf{a}\odot\symbf{u}-
+	\int^{x}\symbf{b}\odot\symbf{u}\dl y
+\end{math}.
 
 \subsection*{Sistema EDP de advección reacción cuasilineal homogéneo}
 
@@ -122,24 +122,23 @@ en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemq
 \end{equation}
 Donde
 \begin{math}
-	\symbf{u}_{0}\colon I\to
-	\mathbb{R}^{3}
+	\symbf{u}_{0}\in
+	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
 \end{math}
 es conocida y
 \begin{math}
-	\symbf{f}\colon\Omega\to
-	\mathbb{R}^{3}
+	\symbf{f}\in
+	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
 \end{math}
 es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
-	\symbf{a}\odot\symbf{u}+
-	\symbf{b}\odot\symbf{u}+
+	\symbf{a}\odot\symbf{u}-
+	\int^{x}\symbf{b}\odot\symbf{u}\dl y+
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
-\end{math},
-siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
+\end{math}.
 
-\subsection*{Sistema EDP de advección reacción cuasilineal no homogéneo}
+\subsection*{Sistema EDP de advección reacción cuasilineal no homogéneo I}
 
 Encuentre
 \begin{math}
@@ -159,26 +158,81 @@ en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemq
 \end{equation}
 Donde
 \begin{math}
-	\symbf{u}_{0}\colon I\to
-	\mathbb{R}^{3}
+	\symbf{u}_{0}\in
+	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
 \end{math},
 \begin{math}
-	\symbf{s}\colon \Omega\times I\to
+	\symbf{s}\colon\Omega\times I\to
 	\mathbb{R}^{3}
 \end{math}
 son conocidas y
 \begin{math}
-	\symbf{f}\colon\Omega\to
-	\mathbb{R}^{3}
+	\symbf{f}\in
+	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
 \end{math}
 es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
 	\symbf{a}\odot\symbf{u}+
-	\symbf{b}\odot\symbf{u}+
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
 \end{math},
-siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
+\begin{math}
+	\symbf{s}\left(\symbf{u},x\right)=
+	u_{2}u_{3}\symbf{b}
+	% \begin{bmatrix}
+	% 	b_{1}u_{2}u_{3}  \\
+	% 	-b_{2}u_{2}u_{3} \\
+	% 	-b_{3}u_{2}u_{3}
+	% \end{bmatrix}
+\end{math}.
+
+\subsection*{Sistema EDP de advección reacción cuasilineal no homogéneo II}
+
+Encuentre
+\begin{math}
+	\symbf{u}\in
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
+\end{math}
+en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemquaslinearnonhomogeneous}
+\begin{equation}\label{eq:advectionreactionsystemquaslinearnonhomogeneous}
+	\begin{cases}
+		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+		\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{u}                                                      =
+		\symbf{u}_{0}                     & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}                                                       =
+		\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
+	\end{cases}
+\end{equation}
+Donde
+\begin{math}
+	\symbf{u}_{0}\in
+	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
+\end{math},
+\begin{math}
+	\symbf{s}\colon\Omega\times I\to
+	\mathbb{R}^{3}
+\end{math}
+son conocidas y
+\begin{math}
+	\symbf{f}\in
+	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
+\end{math}
+es dada por
+\begin{math}
+	\symbf{f}\left(\symbf{u}\right)=
+	\symbf{a}\odot\symbf{u}+
+	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
+\end{math},
+\begin{math}
+	\symbf{s}\left(\symbf{u},x\right)=
+	u_{2}u_{3}\symbf{b}-\beta u_{1}\symbf{e}_{1}
+	% \begin{bmatrix}
+	% 	b_{1}u_{2}u_{3}-\beta u_{1} \\
+	% 	-b_{2}u_{2}u_{3}            \\
+	% 	-b_{3}u_{2}u_{3}
+	% \end{bmatrix}
+\end{math}.
 
 \subsection*{\color{DarkRed}Sistema EDP complicado}
 
@@ -216,18 +270,17 @@ es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
 	\symbf{a}\odot\symbf{u}+
-	\symbf{b}\odot\symbf{u}+
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{3}-1\right)\symbf{e_{1}}}
 \end{math},
 \begin{math}
 	\symbf{s}\left(\symbf{u},x\right)=
-	\begin{bmatrix}
-		b_{1}u_{2}u_{3}\Phi-\beta u_{1} \\
-		-b_{2}u_{2}u_{3}\Phi            \\
-		-b_{3}u_{2}u_{3}\Phi
-	\end{bmatrix}
-\end{math}
-siendo $\symbf{a},\symbf{b}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
+	u_{2}u_{3}\Phi\symbf{b}-\beta u_{1}\symbf{e}_{1}
+	% \begin{bmatrix}
+	% 	b_{1}u_{2}u_{3}\Phi-\beta u_{1} \\
+	% 	-b_{2}u_{2}u_{3}\Phi            \\
+	% 	-b_{3}u_{2}u_{3}\Phi
+	% \end{bmatrix}
+\end{math}.
 
 \chapter{Resultados}
 

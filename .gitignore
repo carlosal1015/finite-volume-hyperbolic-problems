@@ -183,3 +183,6 @@ output*
 *.out
 *.run.xml
 *.toc
+*.idx
+*.ilg
+*.ind

@@ -1,6 +1,6 @@
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'pdf', 'run.xml', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'idx', 'ilg', 'ind', 'log', 'out', 'pdf', 'run.xml', 'toc']
 % arara: --> }
 % arara: lualatex: {
 % arara: --> shell: yes,
@@ -8,6 +8,7 @@
 % arara: --> interaction: batchmode
 % arara: --> }
 % arara: biber
+% arara: makeindex
 % arara: lualatex: {
 % arara: --> shell: yes,
 % arara: --> draft: no,
@@ -20,74 +21,25 @@
 % arara: --> }
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'run.xml', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'idx', 'ilg', 'ind', 'log', 'out', 'run.xml', 'toc']
 % arara: --> }
 \input{preamble}
 
 \begin{document}
-
 \maketitle
-
 \input{thanks}
 \input{abstract}
 \tableofcontents
-
 \part{Teoría}
-
 \input{conservationlaws}
+\input{weaksolution}
+\input{entropysolution}
 \input{finitevolume}
-% clawpack, fipy
-\part{Aplicaciones}
+\part{Aplicaciones} % clawpack, fipy
 \input{strategy}
-
 \appendix
-
-\chapter{Símbolos}
-
-% https://ntrs.nasa.gov/api/citations/19880008959/downloads/19880008959.pdf
-El producto de Hadamard se define como
-\begin{align*}
-	\odot\colon\mathbb{R}^{n}\times\mathbb{R}^{n} & \longrightarrow\mathbb{R}^{n} \\
-	\left(
-	\begin{bmatrix}
-			a_{1}  \\
-			\vdots \\
-			a_{n}
-		\end{bmatrix},
-	\begin{bmatrix}
-			b_{1}  \\
-			\vdots \\
-			b_{n}
-		\end{bmatrix}
-	\right)                                       & \longmapsto
-	\begin{bmatrix}
-		a_{1}b_{1} \\
-		\vdots     \\
-		a_{n}b_{n}
-	\end{bmatrix}.
-\end{align*}
-El producto exterior se define como
-\begin{align*}
-	\otimes\colon\mathbb{R}^{m}\times\mathbb{R}^{n} & \longrightarrow\mathbb{R}^{m\times n} \\
-	\left(
-	\begin{bmatrix}
-			a_{1}  \\
-			\vdots \\
-			a_{m}
-		\end{bmatrix},
-	\begin{bmatrix}
-			b_{1}  \\
-			\vdots \\
-			b_{n}
-		\end{bmatrix}
-	\right)                                         & \longmapsto
-	\begin{bmatrix}
-		a_{1}b_{1} & \cdots & a_{1}b_{n} \\
-		\vdots     & \ddots & \vdots     \\
-		a_{m}b_{1} & \cdots & a_{m}b_{n}
-	\end{bmatrix}.
-\end{align*}
+\input{symbols}
+\printindex
 \nocite{*}
 \printbibliography[title={Referencias},heading=bibintoc]
-
 \end{document}

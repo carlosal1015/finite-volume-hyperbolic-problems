@@ -1,10 +1,10 @@
 \documentclass[
-  a4,
-  final,
-  fontsize=12pt,
+	a4,
+	final,
+	fontsize=12pt,
 	intlimits,
-  leqno,
-  DIV=18
+	leqno,
+	DIV=18
 ]{scrreprt}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
@@ -17,6 +17,7 @@
 \usepackage{amsthm}
 \usepackage{diffcoeff}
 \usepackage[citestyle=numeric,backend=biber,style=ieee]{biblatex}
+\usepackage{imakeidx}
 \usepackage[
 	colorlinks=true,
 	urlcolor=DarkBlue,
@@ -31,13 +32,13 @@
 \newtheorem{theorem}[definition]{\color{DarkBlue}Teorema}
 
 \title{\color{DarkBlue}Simulación Numérica de Sistemas Hiperbólicos
-de Leyes de Conservación mediante el Método de Volúmenes Finitos}
+	de Leyes de Conservación mediante el Método de Volúmenes Finitos}
 \author{\sffamily\color{DarkBlue}Carlos Aznarán Laos\\
 	\href{mailto:caznaranl@uni.pe}{\texttt{caznaranl\MVAt uni.pe}}\and
 	\sffamily\color{DarkBlue}Fidel Jara Huanca\\
 	\href{mailto:fjarah@uni.edu.pe}{\texttt{fjarah\MVAt uni.edu.pe}}}
 \publishers{\sffamily\color{DarkBlue} Universidad Nacional de Ingeniería\\ Lima, Perú}
-\date{\color{DarkBlue}\sffamily\today}
+\date{\sffamily\color{DarkBlue}\today}
 
 % \setmainfont{Latin Modern Roman}
 % \setmathfont{Latin Modern Math}
@@ -62,4 +63,10 @@ de Leyes de Conservación mediante el Método de Volúmenes Finitos}
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 \removenolimits{\int}
 
+\makeindex[
+	columns=2,
+	title=Índice,
+	options=-s header.ist,
+	intoc
+]
 \addbibresource{bibliography.bib}

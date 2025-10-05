@@ -1,0 +1,111 @@
+\section{Soluciones débiles}
+
+\begin{definition}
+	Sea
+	\begin{math}
+		\symbf{u}_{0}\in
+		{
+		\symbf{L}^{\infty}_{\text{loc}}
+		\left(\mathbb{R}\right)
+		}^{p}
+	\end{math}.
+	\begin{math}
+		\symbf{u}\in
+		{
+		\symbf{L}^{\infty}_{\text{loc}}
+		\left(\mathbb{R}\times\left[0,\infty\right[\right)
+		}^{p}
+	\end{math}
+	es una \textcolor{DarkBlue}{\bfseries solución débil}
+	\index{solución débil} de~\eqref{eq:cauchysystemofconservationlaw}
+	si y solo si $\symbf{u}\left(x,t\right)\in\Omega$ casi en todas
+	partes y
+	\begin{equation*}
+		\forall\symbf{\varphi}\in
+		{
+			\symbf{C}^{1}_{0}
+			\left(\mathbb{R}\times\left[0,\infty\right[\right)
+		}^{p}\!:
+		\int_{0}^{\infty}
+		\int_{\mathbb{-\infty}}^{\infty}
+		\left[
+			\symbf{u}\cdot
+			\diffp{\symbf{\varphi}}{t}+
+			\symbf{f}\left(\symbf{u}\right)\cdot
+			\diffp{\symbf{\varphi}}{x}
+			\right]
+		\dl x\dl t+
+		\int_{-\infty}^{\infty}
+		\symbf{u}_{0}\left(x\right)\cdot
+		\symbf{\varphi}\left(x,0\right)
+		\dl x=
+		\int_{0}^{\infty}
+		\int_{\mathbb{-\infty}}^{\infty}
+		\symbf{s}\left(\symbf{u},x\right)\cdot
+		\symbf{\varphi}
+		\dl x\dl t.
+	\end{equation*}
+\end{definition}
+
+% \begin{align*}
+%   -\int_{0}^{\infty}
+%   \int_{\mathbb{-\infty}}^{\infty}
+%   \left[
+%     \diffp{\symbf{u}}{t}+
+%     \diffp{}{x}\symbf{f}\left(\symbf{u}\right)
+%   \right]\cdot\symbf{\varphi}
+%   \dl x
+%   \dl t.
+% \end{align*}
+
+\begin{definition}
+	\begin{math}
+		\symbf{u}\in
+		\symbf{C}^{1}_{\text{piec}}
+		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
+	\end{math}
+	si y solo si
+	cualquier curva de discontinuidad $\Sigma$ tiene una
+	parametrización de la forma $\left(t,\xi\left(t\right)\right)$,
+	donde $\xi\in\symbf{C}^{1}\left(I,\mathbb{R}\right)$.
+	\begin{equation*}
+		\symbf{u}_{\pm}\left(\xi\left(t\right),t\right)=
+		\lim_{\substack{\varepsilon\to0\\\varepsilon>0}}
+		\symbf{u}\left(\xi\left(t\right)\pm\varepsilon,t\right).
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	Si
+	\begin{math}
+		\symbf{u}\in
+		\symbf{C}^{1}_{\text{piec}}
+		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
+	\end{math},
+	entonces
+	\begin{enumerate}%[(i)]
+		\item
+
+		      $\symbf{u}$ es una solución clásica
+		      de~\eqref{eq:systemofconservationlaw}.
+
+		\item
+
+		      $\symbf{u}$ satisface la condición de salto de
+		      Rankine-Hugoniot
+		      \begin{equation*}
+			      n_{t}
+			      \left[\symbf{u}\right]+
+			      n_{x}
+			      \left[\symbf{f}\left(\symbf{u}\right)\right]=
+			      \symbf{0}.
+		      \end{equation*}
+		      Donde
+		      $\left[\symbf{u}\right]=\symbf{u}_{+}-\symbf{u}_{-}$ y
+		      \begin{math}
+			      \left[\symbf{f}\left(\symbf{u}\right)\right]=
+			      \symbf{f}\left(\symbf{u}_{+}\right)-
+			      \symbf{f}\left(\symbf{u}_{-}\right)
+		      \end{math}.
+	\end{enumerate}
+\end{theorem}

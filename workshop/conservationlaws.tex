@@ -7,7 +7,7 @@ medios continuos.
 \begin{definition}
 	Sea $\Omega\subset\mathbb{R}^{p}$ un conjunto abierto.
 	Un \textcolor{DarkBlue}{\bfseries sistema de leyes de conservación}
-	es
+	\index{sistema de leyes de conservación} es
 	\begin{equation}\label{eq:systemofconservationlaw}
 		\diffp{\symbf{u}}{t}+
 		\diffp{}{x}
@@ -83,9 +83,9 @@ más la contribución del término fuente.
 \end{equation*}
 
 \begin{definition}
-	Un sistema de leyes de
-	conservación~\eqref{eq:systemofconservationlaw} es
-	\textcolor{DarkBlue}{\bfseries hiperbólico} si y solo si
+	Un sistema~\eqref{eq:systemofconservationlaw} es
+	\textcolor{DarkBlue}{\bfseries hiperbólico}\index{hiperbólico} si y
+	solo si
 	\begin{equation}
 		\forall\symbf{u}\in\Omega\!:
 		\forall\omega\in\mathbb{R}\setminus\left\{0\right\}\!:
@@ -114,9 +114,9 @@ más la contribución del término fuente.
 \end{definition}
 
 \begin{definition}
-	Un \textcolor{DarkBlue}{\bfseries problema de Riemann} es un
-	problema de valor inicial asociado
-	a~\eqref{eq:systemofconservationlaw}
+	Un \textcolor{DarkBlue}{\bfseries problema de Riemann}
+	\index{problema de Riemann} es un problema de valor inicial
+	asociado a~\eqref{eq:systemofconservationlaw}
 	\begin{equation}\label{eq:cauchysystemofconservationlaw}
 		\begin{cases}
 			\diffp{\symbf{u}}{t}+
@@ -143,25 +143,28 @@ más la contribución del término fuente.
 	a~\eqref{eq:systemofconservationlaw} es
 	\begin{equation}
 		\begin{dcases}
-			\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-			\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
-			\symbf{u}                                                      =
-			\symbf{u}_{0}                     & \text{c.t.p. en }I\times\left\{t=0\right\}.  \\
-			\symbf{u}                                                       =
-			\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
+			\diffp{\symbf{u}}{t}+
+			\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+			\symbf{s}\left(\symbf{u},x\right) &
+			\text{ en }I\times\left(0,T\right].         \\
+			\symbf{u}=\symbf{u}_{0}           &
+			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
+			\symbf{u}=\symbf{g}               &
+			\text{ en }\partial I\times\left[0,T\right].
 		\end{dcases}
 	\end{equation}
 \end{definition}
 
-\begin{example}[La ecuación de Burgers no viscosa]
+\begin{example}[La ecuación de Bateman-Burgers no viscosa]\index{ecuación de Burgers}
 	\begin{equation}
 		\begin{dcases}
-			\diffp{u}{t}+\frac{1}{2}\diffp{u^{2}}{x}=
-			0     & \text{ en }I\times\left(0,T\right].          \\
-			u                                                      =
-			u_{0} & \text{c.t.p. en }I\times\left\{t=0\right\}.  \\
-			u                                                       =
-			g     & \text{ en }\partial I\times\left[0,T\right].
+			\diffp{u}{t}+
+			\frac{1}{2}\diffp{u^{2}}{x}=0 &
+			\text{ en }I\times\left(0,T\right].         \\
+			u=u_{0}                       &
+			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
+			u=g                           &
+			\text{ en }\partial I\times\left[0,T\right].
 		\end{dcases}
 	\end{equation}
 	% \begin{equation*}
@@ -172,7 +175,25 @@ más la contribución del término fuente.
 	% \end{equation*}
 \end{example}
 
-\begin{example}[Ecuación de Buckley-Leverett]
+\begin{example}%[Ecuación de Buckley-Leverett]
+	La ecuación clásica de
+	Buckley-Leverett\index{ecuación de Buckley-Leverett}
+	es un modelo simple para un flujo de fluido de dos fases en un medio
+	poroso.
+	Una aplicación es la recuperación secundaria mediante impulsión de
+	agua en la simulación de yacimientos de petróleo.
+	\begin{equation}
+		\begin{dcases}
+			\diffp{u}{t}+
+			\diffp{}{x}
+			f\left(u\right)=0 &
+			\text{ en }I\times\left(0,T\right].         \\
+			u=u_{0}                       &
+			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
+			u=g                           &
+			\text{ en }\partial I\times\left[0,T\right].
+		\end{dcases}
+	\end{equation}
 	\begin{equation*}
 		f\left(s\right)=
 		\frac{\frac{\kappa_{\text{rel,water}}\left(s\right)}{\mu_{\text{water}}}}{
@@ -182,7 +203,7 @@ más la contribución del término fuente.
 	\end{equation*}
 \end{example}
 
-\begin{example}[$p$-sistema]
+\begin{example}[$p$-sistema]\index{$p$-sistema}
 	\begin{equation*}
 		\begin{cases}
 			\diffp{v}{t}-\diffp{u}{x}=0               &
@@ -193,7 +214,9 @@ más la contribución del término fuente.
 	\end{equation*}
 \end{example}
 
-\begin{example}[Ecuaciones de la dinámica de gases]
+
+% Sistema de fluidos % de la dinámica de gases
+\begin{example}[Ecuaciones de Euler]\index{ecuaciones de Euler}
 	\begin{equation*}
 		\begin{dcases}
 			\diffp{\rho}{t}+
@@ -217,383 +240,3 @@ más la contribución del término fuente.
 		\end{dcases}
 	\end{equation*}
 \end{example}
-
-\section{Soluciones débiles}
-
-\begin{definition}
-	Sea
-	\begin{math}
-		\symbf{u}_{0}\in
-		{\symbf{L}^{\infty}_{\text{loc}}\left(\mathbb{R}\right)}^{p}
-	\end{math}.
-	\begin{math}
-		\symbf{u}\in
-		{\symbf{L}^{\infty}_{\text{loc}}\left(\mathbb{R}\times\left[0,\infty\right[\right)}^{p}
-	\end{math}
-	es una \textcolor{DarkBlue}{\bfseries solución débil}
-	de~\eqref{eq:cauchysystemofconservationlaw} si y solo si
-	$\symbf{u}\left(x,t\right)\in\Omega$ casi en todas partes y
-	\begin{equation*}
-		\forall\symbf{\varphi}\in
-		{\symbf{C}^{1}_{0}\left(\mathbb{R}\times\left[0,\infty\right[\right)}^{p}\!:
-		\int_{0}^{\infty}
-		\int_{\mathbb{-\infty}}^{\infty}
-		\left[
-			\symbf{u}\cdot
-			\diffp{\symbf{\varphi}}{t}+
-			\symbf{f}\left(\symbf{u}\right)\cdot
-			\diffp{\symbf{\varphi}}{x}
-			\right]
-		\dl x
-		\dl t+
-		\int_{-\infty}^{\infty}
-		\symbf{u}_{0}\left(x\right)\cdot
-		\symbf{\varphi}\left(x,0\right)
-		\dl x=
-		0.
-	\end{equation*}
-\end{definition}
-
-% \begin{align*}
-%   -\int_{0}^{\infty}
-%   \int_{\mathbb{-\infty}}^{\infty}
-%   \left[
-%     \diffp{\symbf{u}}{t}+
-%     \diffp{}{x}\symbf{f}\left(\symbf{u}\right)
-%   \right]\cdot\symbf{\varphi}
-%   \dl x
-%   \dl t.
-% \end{align*}
-
-\begin{definition}
-	\begin{math}
-		\symbf{u}\in
-		\symbf{C}^{1}_{\text{piec}}
-		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
-	\end{math}
-	si y solo si
-	cualquier curva de discontinuidad $\Sigma$ tiene una
-	parametrización de la forma $\left(t,\xi\left(t\right)\right)$,
-	donde $\xi\in\symbf{C}^{1}\left(I,\mathbb{R}\right)$.
-	\begin{equation*}
-		\symbf{u}_{\pm}\left(\xi\left(t\right),t\right)=
-		\lim_{\substack{\varepsilon\to0\\\varepsilon>0}}
-		\symbf{u}\left(\xi\left(t\right)\pm\varepsilon,t\right).
-	\end{equation*}
-\end{definition}
-
-\begin{theorem}
-	Si
-	\begin{math}
-		\symbf{u}\in
-		\symbf{C}^{1}_{\text{piec}}
-		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
-	\end{math},
-	entonces
-	\begin{enumerate}%[(i)]
-		\item
-
-		      $\symbf{u}$ es una solución clásica
-		      de~\eqref{eq:systemofconservationlaw}.
-
-		\item
-
-		      $\symbf{u}$ satisface la condición de salto de
-		      Rankine-Hugoniot
-		      \begin{equation*}
-			      n_{t}
-			      \left[\symbf{u}\right]+
-			      n_{x}
-			      \left[\symbf{f}\left(\symbf{u}\right)\right]=
-			      \symbf{0}.
-		      \end{equation*}
-		      Donde
-		      $\left[\symbf{u}\right]=\symbf{u}_{+}-\symbf{u}_{-}$ y
-		      \begin{math}
-			      \left[\symbf{f}\left(\symbf{u}\right)\right]=
-			      \symbf{f}\left(\symbf{u}_{+}\right)-
-			      \symbf{f}\left(\symbf{u}_{-}\right)
-		      \end{math}.
-	\end{enumerate}
-\end{theorem}
-
-\begin{example}[]
-	Sea.
-	\begin{equation*}
-		\left\{
-		\begin{aligned}
-			\diffp{u}{t}+
-			\diffp{}{x}
-			\frac{u^{2}}{2} & =
-			0.                  \\
-			u_{0}\left(x\right)=
-			\begin{cases}
-				u_{l}, & x<0. \\
-				u_{r}, & x>0.
-			\end{cases}
-		\end{aligned}
-		\right.
-	\end{equation*}
-\end{example}
-
-\begin{equation*}
-	\diffp{}{t}
-	U\left(\symbf{u}\right)+
-	\diffp{}{x}
-	F\left(\symbf{u}\right)=
-	0.
-\end{equation*}
-
-\section{Soluciones de entropía}
-
-\begin{definition}
-	Sea $\Omega\subset\mathbb{R}^{p}$ un conjunto convexo.
-	$U\in\symbf{C}^{1}\left(\Omega,\mathbb{R}\right)$ es una
-	\textcolor{DarkBlue}{\bfseries entropía}
-	de~\eqref{eq:systemofconservationlaw} si y solo si
-	$\exists F\in\symbf{C}^{1}\left(\Omega,\mathbb{R}\right)$ tal que
-	\begin{equation*}
-		{\begin{bmatrix}
-				\diffp{U}{u_{k}}
-			\end{bmatrix}}_{1\leq k\leq p}
-		{\begin{bmatrix}
-				\diffp{f_{i}}{u_{k}}
-			\end{bmatrix}}_{\substack{1\leq i\leq p\\1\leq k\leq p}}
-		\left(\symbf{u}\right)=
-		{\begin{bmatrix}
-			\diffp{F}{u_{k}}
-		\end{bmatrix}}_{1\leq k\leq p}.
-	\end{equation*}
-	% \begin{equation*}
-	%   \diffp{}{t}
-	%   U\left(\symbf{u}\right)+
-	%   \sum_{j=1}^{d}
-	%   \diffp{}{x_{j}}
-	%   F_{j}\left(\symbf{u}\right)=0.
-	% \end{equation*}
-\end{definition}
-
-\begin{example}[$p$-sistema]
-	.
-\end{example}
-
-\section{Método de viscosidad}
-
-Dado $\varepsilon>0$, asociamos
-con~\eqref{eq:systemofconservationlaw} el sistema parabólico
-\begin{equation}\label{eq:parabolicsystemofconservationlaw}
-	\diffp{\symbf{u}_{\varepsilon}}{t}+
-	\diffp{}{x}
-	\symbf{f}
-	\left(\symbf{u}_{\varepsilon}\right)-
-	\varepsilon
-	\Delta\symbf{u}_{\varepsilon}=
-	\symbf{0},
-\end{equation}
-donde $-\varepsilon\Delta\symbf{u}_{\varepsilon}$ puede ser visto
-como un término de viscosidad.
-
-\begin{theorem}
-	Sea
-	\begin{math}
-		\left\{\symbf{u}_{\varepsilon}\right\}_{\varepsilon}
-	\end{math}
-	una sucesión de soluciones suaves
-	de~\eqref{eq:parabolicsystemofconservationlaw}.
-	Si~\eqref{eq:systemofconservationlaw} admite una entropía
-	$U$ con flujo entropía $F$, $\exists C>0$ tal que
-	\begin{math}
-		{\left\|\symbf{u}_{\varepsilon}\right\|}_{
-			{\symbf{L}^{\infty}\left(\mathbb{R}\times\left[0,\infty\right[\right)}^{p}
-		}\leq C
-	\end{math}
-	y $\lim\limits_{\varepsilon\to0}\symbf{u}_{\varepsilon}=\symbf{u}$
-	casi en todas partes en $\mathbb{R}\times\left[0,\infty\right[$.
-	Entonces, $\symbf{u}$ es una solución débil
-	de~\eqref{eq:systemofconservationlaw} y
-	\begin{equation*}
-		\forall\varphi\in
-		\symbf{C}^{\infty}_{0}\left(\mathbb{R}\times\left]0,\infty\right[\right),
-		\varphi\geq 0:
-		\int_{0}^{\infty}
-		\int_{-\infty}^{\infty}
-		\left[
-			U\left(\symbf{u}\right)
-			\diffp{\varphi}{t}+
-			F\left(\symbf{u}\right)
-			\diffp{\varphi}{x}
-			\right]
-		\dl x
-		\dl t\geq 0.
-	\end{equation*}
-	% \begin{equation*}
-	% 	\diffp{}{t}
-	% 	U\left(\symbf{u}\right)+
-	% 	\diffp{}{x}
-	% 	F\left(\symbf{u}\right)\leq
-	% 	0
-	% \end{equation*}
-\end{theorem}
-
-\begin{definition}
-	$\symbf{u}$ es una \textcolor{DarkBlue}{\bfseries solución de entropía} si y solo si
-	\begin{equation*}
-		\forall U:
-		\forall\varphi\in\symbf{C}^{1}_{0}\left(\mathbb{R}\times\left[0,\infty\right[\right),\varphi\geq 0:
-		\int_{0}^{\infty}
-		\int_{-\infty}^{\infty}
-		\left[
-			U\left(\symbf{u}\right)
-			\diffp{\varphi}{t}+
-			F\left(\symbf{u}\right)
-			\diffp{\varphi}{x}
-			\right]
-		\dl x\dl t+
-		\int_{-\infty}^{\infty}
-		U\left(\symbf{u}_{0}\left(x\right)\right)
-		\varphi\left(x,0\right)\dl x\geq
-		0.
-	\end{equation*}
-\end{definition}
-
-\begin{equation*}
-	\left[F\left(\symbf{u}\right)\right]\leq
-	s\left[U\left(\symbf{u}\right)\right].
-\end{equation*}
-
-\begin{theorem}
-	Si $u_{0}\in\symbf{L}^{\infty}\left(\mathbb{R}\right)$, entonces
-	\begin{equation*}
-		{\left\|
-			u\left(\cdot, t\right)
-			\right\|}_{\symbf{L}^{\infty}\left(\mathbb{R}\right)}
-		\leq
-		{\left\|u_{0}\right\|}_{\symbf{L}^{\infty}\left(\mathbb{R}\right)}.
-	\end{equation*}
-	Si $u_{0}\in\symbf{L}^{\infty}\left(\mathbb{R}\right)\cap\symbf{BV}\left(\mathbb{R}\right)$,
-	entonces $u\left(\cdot, t\right)\in\symbf{BV}\left(\mathbb{R}\right)$ con
-	\begin{equation*}
-		\operatorname{TV}\left(u\left(\cdot, t\right)\right)\leq
-		\operatorname{TV}\left(u_{0}\right).
-	\end{equation*}
-\end{theorem}
-
-\begin{equation*}
-	\diffp{\symbf{u}}{t}+
-	\symbf{A}
-	\diffp{\symbf{u}}{t}=
-	\symbf{0}.
-\end{equation*}
-
-$\symbf{u}\in\mathbb{R}^{p}$, $\symbf{A}\in\mathbb{R}^{p\times p}$
-
-
-\begin{equation*}
-	\diffp{\symbf{u}}{t}+
-	\symbf{A}
-	\diffp{\symbf{u}}{x}=
-	\sum_{k=1}^{p}
-	\left(
-	\diffp{\alpha_{k}}{t}+
-	\lambda_{k}
-	\diffp{\alpha_{k}}{x}
-	\right)
-	\symbf{r}_{k}
-\end{equation*}
-
-\begin{equation*}
-	\symbf{T}^{-1}
-	\diffp{\symbf{u}}{t}+
-	\symbf{T}^{-1}
-	\symbf{A}
-	\diffp{\symbf{u}}{x}=
-	\diffp{\symbf{v}}{t}+
-	\symbf{\Lambda}\diffp{\symbf{v}}{x}=
-	\symbf{0}.
-\end{equation*}
-
-
-\begin{equation*}
-	\alpha_{k0}\left(x\right)=
-	\symbf{l}^{T}_{k}
-	\symbf{u}_{0}\left(x\right)
-\end{equation*}
-
-\begin{equation*}
-	\alpha_{k}\left(x,t\right)=
-	\alpha_{k0}\left(x-\lambda_{k}t\right)=
-	\symbf{l}^{T}_{k}\symbf{u}_{0}\left(x-\lambda_{k}t\right),
-\end{equation*}
-
-\begin{equation*}
-	\symbf{u}\left(x,t\right)=
-	\sum_{k=1}^{p}
-	\symbf{l}^{T}_{k}
-	\symbf{u}_{0}\left(x-\lambda_{k}t\right)
-	\symbf{r}_{k}.
-\end{equation*}
-
-\begin{equation*}
-	\symbf{w}_{R}\left(\frac{x}{t};\symbf{u}_{L},\symbf{u}_{R}\right)=
-	\begin{cases}
-		\symbf{w}_{0}=\symbf{u}_{L}, & \frac{x}{t}<\lambda_{1}.               \\
-		\symbf{w}_{1},               & \lambda_{1}<\frac{x}{t}<\lambda_{2}.   \\
-		\vdots,                      &                                        \\
-		\symbf{w}_{p-1},             & \lambda_{p-1}<\frac{x}{t}<\lambda_{p}. \\
-		\symbf{w}_{p}=\symbf{u}_{R}, & \frac{x}{t}>\lambda_{p}.               \\
-	\end{cases}
-\end{equation*}
-
-\begin{equation*}
-	\symbf{A}\left(\symbf{w}_{m}-\symbf{w}_{m-1}\right)=
-	\lambda_{m}\left(\symbf{w}_{m}-\symbf{w}_{m-1}\right).
-\end{equation*}
-
-\subsection{Ondas de choques y discontinuidades de contacto}
-
-\begin{equation*}
-	\sigma\left[\symbf{u}\right]=
-	\left[\symbf{f}\left(\symbf{u}\right)\right].
-\end{equation*}
-
-
-\begin{equation*}
-	\symbf{u}\left(x,t\right)=
-	\begin{cases}
-		\symbf{u}_{L}, & x<\sigma t. \\
-		\symbf{u}_{R}, & x>\sigma t.
-	\end{cases}
-\end{equation*}
-
-\begin{equation*}
-	\symbf{f}\left(\symbf{u}_{R}\right)-
-	\symbf{f}\left(\symbf{u}_{L}\right)=
-	\sigma
-	\left(\symbf{u}_{R}-\symbf{u}_{L}\right).
-\end{equation*}
-
-\begin{definition}
-	El conjunto de Rankine-Hugoniot de $\symbf{u}_{0}$ es
-	\begin{equation*}
-		\operatorname{R-K}\left(\symbf{u}_{0}\right)\coloneqq
-		\left\{
-		\symbf{u}\in\Omega\mid\exists\sigma\left(\symbf{u}_{0},\symbf{u}\right)\in\mathbb{R}\text{ tal que }
-		\sigma\left(\symbf{u}_{0},\symbf{u}\right)\left(\symbf{u}-\symbf{u}_{0}\right)=
-		\symbf{f}\left(\symbf{u}\right)-\symbf{f}\left(\symbf{u}_{0}\right)
-		\right\}.
-	\end{equation*}
-\end{definition}
-
-\begin{definition}
-	$\exists k\in\left\{1,\dotsc,p\right\}$ tal que
-	\begin{equation*}
-		\begin{cases}
-			\lambda_{k}\left(\symbf{u}_{+}\right)<\sigma<\lambda_{k+1}\left(\symbf{u}_{+}\right),
-			\lambda_{k-1}\left(\symbf{u}_{-}\right)<\sigma<\lambda_{k}\left(\symbf{u}_{-}\right).
-		\end{cases}
-	\end{equation*}
-
-	\begin{equation*}
-		\lambda_{k}\left(\symbf{u}_{-}\right)=\sigma=\lambda_{k}\left(\symbf{u}_{+}\right).
-	\end{equation*}
-\end{definition}
