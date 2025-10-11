@@ -1,0 +1,534 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'pdf', 'run.xml', 'snm', 'toc', 'vrb']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'run.xml', 'snm', 'toc', 'vrb']
+% arara: --> }
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[
+    8pt,
+    aspectratio=1610,
+    c,
+    intlimits,
+		handout,
+    leqno,
+    professionalfonts,
+]{beamer}
+
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{diffcoeff}
+\usepackage{minted}
+\usepackage{newunicodechar}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{beamer.bib}
+
+\addtobeamertemplate{theorem begin}{\normalfont}{}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{items}[ball]
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\title{Formulation as conservation law for a simple in situ combustion model}
+\subtitle{Seminario de Investigación I}
+\author{Angel Ramírez Gutiérrez\and Fidel Jara Huanca\and Andres Alcalde Sosa\and Carlos Aznarán Laos}
+\institute{\small Instituto de Matemática y Ciencias Afines}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Motivation}
+	\begin{block}{PDE system with initial and boundary
+			conditions~\cite{Quispe2020}}
+
+		Let $\theta\left(x,t\right)$ be the \alert{temperature},
+		$S_{y}\left(x,t\right)$ be the \alert{oxygen saturation} and
+		$S_{\text{o}}\left(x,t\right)$ be the \alert{oil saturation}.
+		\begin{align}
+			\diffp{\theta}{t}+
+			a_{1}
+			\diffp{
+				\big(
+				\theta
+				S_{\text{o}}
+				\big)
+			}{x}                    & =
+			b_{1}
+			S_{\text{o}}
+			S_{y}
+			\Phi-
+			\beta\theta.
+			\label{eq:6}                \\
+			\diffp{S_{y}}{t}+
+			a_{2}
+			\diffp{S_{y}}{x}        & =
+			-b_{2}
+			S_{\text{o}}
+			S_{y}
+			\Phi.
+			\label{eq:7}                \\
+			\diffp{S_{\text{o}}}{t}+
+			a_{3}
+			\diffp{S_{\text{o}}}{x} & =
+			-b_{3}
+			S_{\text{o}}
+			S_{y}
+			\Phi.
+			\label{eq:8}                \\
+			S_{\text{o}}
+			S_{y}
+			\Phi                    & =
+			0.                          \\
+			\big(
+			\theta^{L},
+			S^{L}_{y},
+			S^{L}_{\text{o}}
+			\big)                   & =
+			\big(
+			0,
+			S^{L}_{y},
+			0
+			\big).                      \\
+			\big(
+			\theta^{R},
+			S^{R}_{y},
+			S^{R}_{\text{o}}
+			\big)                   & =
+			\big(
+			0,
+			0,
+			S^{R}_{\text{o}}
+			\big).
+		\end{align}
+	\end{block}
+	% Existence and Uniqueness.
+\end{frame}
+
+\begin{frame}
+	\begin{definition}[\cite{Godlewski2021}]
+		Let be $\Omega\subset\mathbb{R}^{p}$ an open set.
+		A \textcolor{DarkBlue}{\bfseries conservation law system with source term}
+		is
+		\begin{equation}\label{eq:systemofconservationlaw}
+			\diffp{\symbf{u}}{t}+
+			\diffp{}{x}
+			\symbf{f}\left(\symbf{u}\right)=
+			\symbf{s}\left(\symbf{u}\right).
+		\end{equation}
+		Where $\Omega$ is the set of states,
+		\begin{math}
+			\symbf{f}\in
+			\symbf{C}^{1}
+			\left(\Omega,\mathbb{R}^{p}\right)
+		\end{math}
+		is a flux function,
+		\begin{math}
+			\symbf{s}\in
+			\symbf{C}^{1}
+			\left(\Omega,\mathbb{R}^{p}\right)
+		\end{math}
+		is a source function without derivative of $\symbf{u}$ terms and
+		\begin{math}
+			\symbf{u}\in
+			\symbf{C}^{1}\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
+		\end{math} is a solution of~\eqref{eq:systemofconservationlaw}.
+		\begin{align*}
+			\symbf{f}\colon\Omega
+			                               & \longrightarrow\mathbb{R}^{p} &
+			\symbf{s}\colon\Omega
+			                               & \longrightarrow\mathbb{R}^{p} &
+			\symbf{u}\colon\mathbb{R}\times\left[0,\infty\right[
+			                               & \longrightarrow\Omega           \\
+			\begin{bmatrix}
+				u_{1}  \\
+				\vdots \\
+				u_{p}
+			\end{bmatrix}                & \longmapsto
+			\begin{bmatrix}
+				f_{1}\left(\symbf{u}\right) \\
+				\vdots                      \\
+				f_{p}\left(\symbf{u}\right)
+			\end{bmatrix}, &
+			\begin{bmatrix}
+				u_{1}  \\
+				\vdots \\
+				u_{p}
+			\end{bmatrix}                & \longmapsto
+			\begin{bmatrix}
+				s_{1}\left(\symbf{u}\right) \\
+				\vdots                      \\
+				s_{p}\left(\symbf{u}\right)
+			\end{bmatrix}, &
+			\left(x,t\right)
+			                               & \longmapsto
+			\begin{bmatrix}
+				u_{1}\left(x,t\right) \\
+				\vdots                \\
+				u_{p}\left(x,t\right)
+			\end{bmatrix}=
+			\begin{bmatrix}
+				u_{1}  \\
+				\vdots \\
+				u_{p}
+			\end{bmatrix}.
+		\end{align*}
+	\end{definition}
+
+	\pause
+
+	\begin{definition}
+		A conservation law system~\eqref{eq:systemofconservationlaw} is
+		\textcolor{DarkBlue}{\bfseries hyperbolic} if and only if
+		\begin{equation}
+			\forall\symbf{u}\in\Omega\!:
+			\forall\omega\in\mathbb{R}\setminus\left\{0\right\}\!:
+			\exists\left\{\left(\lambda_{k},\symbf{r}_{k}\right)\right\}^{p}_{k=1}\subset
+			\mathbb{R}\times\mathbb{R}^{p}
+			\text{ such that }
+			\symbf{A}\left(\symbf{u},\omega\right)
+			\symbf{r}_{k}=
+			\lambda_{k}
+			\symbf{r}_{k}.
+		\end{equation}
+		Where
+		\begin{math}
+			\symbf{A}\left(\symbf{u},\omega\right)\coloneqq
+			\omega
+			{
+				\begin{bmatrix}
+					\diffp{f_{i}}{u_{k}}
+					\left(\symbf{u}\right)
+				\end{bmatrix}}_{\substack{1\leq i\leq p\\1\leq k\leq p}}
+		\end{math}
+		is a multiple of jacobian matrix of $\mathbf{f}$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}
+		The \textcolor{DarkBlue}{\bfseries Cauchy problem} associated
+		to~\eqref{eq:systemofconservationlaw} is
+		\begin{equation}\label{eq:cauchysystemofconservationlaw}
+			\begin{cases}
+				\diffp{\symbf{u}}{t}+
+				\diffp{}{x}
+				\symbf{f}\left(\symbf{u}\right)=
+				\symbf{s}\left(\symbf{u}\right) &
+				\text{in }\mathbb{R}\times\left(0,\infty\right). \\
+				\symbf{u}=\symbf{u}_{0}         &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.
+			\end{cases}
+		\end{equation}
+	\end{definition}
+	Let be the states $\symbf{u}_{l},\symbf{u}_{r}\in\Omega$.
+	A \textcolor{DarkBlue}{\bfseries Riemann problem} is a Cauchy problem where
+	\begin{equation*}
+		\symbf{u}_{0}\left(x\right)=
+		\begin{cases}
+			\symbf{u}_{l}, & x<0. \\
+			\symbf{u}_{r}, & x>0.
+		\end{cases}
+	\end{equation*}
+
+	\pause
+
+	\begin{example}[The system of gas dynamics with gravity and friction]
+		\begin{equation*}
+			\begin{dcases}
+				\diffp{\rho}{t}+
+				\diffp{}{x}
+				\left(\rho u\right)=0                                                            &
+				\text{in }\mathbb{R}\times\left(0,\infty\right).                                   \\
+				\diffp{}{t}
+				\left(\rho u\right)+
+				\diffp{}{x}
+				\left(\rho u^{2}+p\right)=\rho\left(g-\alpha\varphi\left(u\right)\right)         &
+				\text{in }\mathbb{R}\times\left(0,\infty\right).                                   \\
+				\diffp{}{t}
+				\left(\rho e\right)+
+				\diffp{}{x}
+				\left(\left(\rho e+p\right)u\right)=\rho\left(gu-\alpha\psi\left(u\right)\right) &
+				\text{in }\mathbb{R}\times\left(0,\infty\right).                                   \\
+				\rho=\rho_{0}                                                                    &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.                                      \\
+				\rho u={\left(\rho u\right)}_{0}                                                 &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.                                      \\
+				\rho e={\left(\rho e\right)}_{0}                                                 &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.
+			\end{dcases}
+		\end{equation*}
+		Where $g$ stands for the gravity force and $\alpha>0$ is a friction constant coefficient.
+	\end{example}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}
+		Let be $I\subset\mathbb{R}$ a domain.
+		The initial boundary value problem for a conservation law with source term is
+		\begin{equation}
+			\begin{dcases}
+				\diffp{\symbf{u}}{t}+
+				\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+				\symbf{s}\left(\symbf{u}\right) & \text{ in }I\times\left(0,T\right].          \\
+				\symbf{u}                                                      =
+				\symbf{u}_{0}                   & \text{a.e. on }I\times\left\{t=0\right\}.    \\
+				\symbf{u}                                                       =
+				\symbf{0}                       & \text{ on }\partial I\times\left[0,T\right].
+			\end{dcases}
+		\end{equation}
+	\end{definition}
+
+	\pause
+
+	\begin{block}{Formulation of PDE model}
+		Find
+		\begin{math}
+			\symbf{u}\in
+			\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
+		\end{math}
+		in the initial boundary value problem~\eqref{eq:complicatedsystem}
+		\begin{equation}\label{eq:complicatedsystem}
+			\begin{cases}
+				\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+				\symbf{s}\left(\symbf{u}\right) & \text{ in }I\times\left(0,T\right].          \\
+				\symbf{u}                                                      =
+				\symbf{u}_{0}                   & \text{ on }I\times\left\{t=0\right\}.        \\
+				\symbf{u}                                                       =
+				\symbf{0}                       & \text{ on }\partial I\times\left[0,T\right].
+			\end{cases}
+		\end{equation}
+		Where
+		\begin{math}
+			\symbf{u}_{0}\colon I\to
+			\mathbb{R}^{3}
+		\end{math},
+		\begin{math}
+			\symbf{s}\colon\Omega\to
+			\mathbb{R}^{3}
+		\end{math}
+		are known and
+		\begin{math}
+			\symbf{f}\colon\Omega\to
+			\mathbb{R}^{3}
+		\end{math}
+		is given by
+		\begin{math}
+			\symbf{f}\left(\symbf{u}\right)=
+			\symbf{a}\odot\symbf{u}+
+			\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{3}-1\right)\symbf{e_{1}}}
+		\end{math},
+		\begin{math}
+			\symbf{s}\left(\symbf{u}\right)=
+			\begin{bmatrix}
+				b_{1}u_{2}u_{3}\Phi\left(u_{1}\right)-\beta u_{1} \\
+				-b_{2}u_{2}u_{3}\Phi\left(u_{1}\right)            \\
+				-b_{3}u_{2}u_{3}\Phi\left(u_{1}\right)
+			\end{bmatrix}
+		\end{math}
+		being $\symbf{a}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}$.
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	We have the problem
+	\begin{equation*}
+		\diffp{\symbf{u}}{t}+
+		\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+		\symbf{s}\left(\symbf{u}\right)
+	\end{equation*}
+	where
+	\begin{equation*}
+		\symbf{u}=
+		\begin{bmatrix}
+			\theta       \\
+			S_{\text{y}} \\
+			S_{\text{o}}
+		\end{bmatrix},\qquad
+		\symbf{f}\left(\symbf{u}\right)=
+		\begin{bmatrix}
+			a_{1}\theta S_{\text{o}} \\
+			a_{2}S_{\text{y}}        \\
+			a_{3}S_{\text{o}}
+		\end{bmatrix},\qquad
+		\symbf{s}\left(\symbf{u}\right)=
+		\begin{bmatrix}
+			b_{1} \Phi S_{\text{y}}S_{\text{o}}-\beta\theta \\
+			-b_{2}\Phi S_{\text{y}}S_{\text{o}}             \\
+			-b_{3}\Phi S_{\text{y}}S_{\text{o}}
+		\end{bmatrix}.
+	\end{equation*}
+	Let's see if it's hyperbolic~\cite{Toro2024}.
+	We find the Jacobian of $f\left(\symbf{u}\right)$:
+	\begin{equation*}
+		J\symbf{f}\left(\symbf{u}\right)=
+		\begin{bmatrix}
+			a_{1}S_{\text{o}} & 0     & a_{1} \theta \\
+			0                 & a_{2} & 0            \\
+			0                 & 0     & a_{3}
+		\end{bmatrix}
+	\end{equation*}
+	and its eigenvalues are
+	\begin{equation*}
+		\det\left(J\symbf{f}\left(\symbf{u}\right)-\lambda I\right)=
+		0\iff
+		\left(a_{1}S_{\text{o}}-\lambda\right)
+		\left(c_{2}-\lambda\right)
+		\left(a_{3}-\lambda\right)=
+		0\iff
+		\lambda_{1}=
+		a_{1}S_{\text{o}}\wedge
+		\lambda_{2}=
+		a_{2}\wedge
+		\lambda_{3}=
+		a_{3}.
+	\end{equation*}
+	and its eigenvectors are
+	\begin{equation*}
+		\lambda_{1}=
+		a_{1}S_{\text{o}}:
+		\begin{bmatrix}
+			0 & 0                       & a_{1}                   \\
+			0 & a_{2}-a_{1}S_{\text{o}} & 0                       \\
+			0 & 0                       & a_{3}-a_{1}S_{\text{o}}
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			x_{3}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{1}=
+		\begin{bmatrix}
+			1 \\
+			0 \\
+			0
+		\end{bmatrix}.
+	\end{equation*}
+	Where $a_{1}\theta\neq 0$, $\left(a_{3}-a_{1}S_{\text{o}}\right)\neq 0$.
+	% $$
+	% 	a_{1} \theta x_{3}=0 ; \quad\left(a_{1}-a_{1}S_{\text{o}}\right) x_{2}=0 ; \quad\left(a_{3}-a_{1}S_{\text{o}}\right) x_{3}=0
+	% $$
+\end{frame}
+
+\begin{frame}
+	\begin{equation*}
+		\lambda_{2}=
+		a_{2}:
+		\begin{bmatrix}
+			a_{1}S_{\text{o}}-a_{2} & 0 & a_{1} \theta \\
+			0                       & 0 & 0            \\
+			0                       & 0 & a_{3}-a_{2}
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			x_{3}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{2}=
+		\begin{bmatrix}
+			0 \\
+			1 \\
+			0
+		\end{bmatrix}.
+	\end{equation*}
+	Where $a_{1}S_{\text{o}}-a_{2}\neq0$, $a_{1}\theta\neq 0$.
+	% $\left(d_{3}-d_{2}\right) \neq 0:\left(d_{3}-d_{2}\right) x_{3}=0 \quad \eta \quad \begin{gathered}=0 \\ x_{3}=0\end{gathered} \Rightarrow v_{2}=\left(\begin{array}{l}0 \\ 1 \\ 0\end{array}\right)$\\
+	% $\left(a_{1} S_{0}^{\prime}-d_{2} F x_{1}+a_{10} x_{3}=0\right.$\\
+	\begin{equation*}
+		\lambda_{3}=
+		a_{3}:
+		\begin{bmatrix}
+			a_{1} s_{0}-a_{3} & 0           & a_{1} \theta \\
+			0                 & a_{2}-a_{3} & 0            \\
+			0                 & 0           & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			x_{3}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{3}=
+		\begin{bmatrix}
+			v \\
+			0 \\
+			1
+		\end{bmatrix},v\in\mathbb{R}.
+	\end{equation*}
+	$\therefore\left\{v_{1},v_{2},v_{3}\right\}$ form a basis of $\mathbb{R}^{3}$.
+	% Where
+	% $$
+	% 	\begin{aligned}
+	% 		 & x_{1}=0 \\
+	% 		 & x_{3}=0 \\
+	% 		 & 1       \\
+	% 		 & 2       \\
+	% 		 & 3
+	% 	\end{aligned} \Rightarrow v_{2}=\left(\begin{array}{l}
+	% 			0 \\
+	% 			1 \\
+	% 			0
+	% 		\end{array}\right)=\left(\begin{array}{l}
+	% 			0 \\
+	% 			0 \\
+	% 			0
+	% 		\end{array}\right)
+	% $$
+
+	% $\left(a_{2}-a_{3}\right) \neq 0:\left(a_{2}-a_{3}\right) x_{2}=0 \rightarrow x_{2}=0$
+\end{frame}
+
+\begin{frame}
+	\frametitle{References}
+
+	\nocite{*}
+	\printbibliography[heading=none]
+\end{frame}
+
+\end{document}
