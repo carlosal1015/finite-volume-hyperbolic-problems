@@ -12,7 +12,7 @@ medios continuos.
 		\diffp{\symbf{u}}{t}+
 		\diffp{}{x}
 		\symbf{f}\left(\symbf{u}\right)=
-		\symbf{s}\left(\symbf{u},x\right).
+		\symbf{s}\left(\symbf{u}\right).
 	\end{equation}
 	Donde $\Omega$ es el conjunto de estados,
 	\begin{math}
@@ -22,8 +22,8 @@ medios continuos.
 	es la función flujo,
 	\begin{math}
 		\symbf{s}\in
-		\symbf{C}^{1}
-		\left(\Omega\times\mathbb{R},\mathbb{R}^{p}\right)
+		\symbf{C}
+		\left(\Omega,\mathbb{R}^{p}\right)
 	\end{math}
 	es la función fuente sin términos de derivadas de $\symbf{u}$ y
 	\begin{math}
@@ -34,7 +34,7 @@ medios continuos.
 	\begin{align*}
 		\symbf{f}\colon\Omega                                &
 		\longrightarrow\mathbb{R}^{p}                        &
-		\symbf{s}\colon\Omega\times\mathbb{R}                &
+		\symbf{s}\colon\Omega                                &
 		\longrightarrow\mathbb{R}^{p}                        &
 		\symbf{u}\colon\mathbb{R}\times\left[0,\infty\right[ &
 		\longrightarrow\Omega                                  \\
@@ -45,17 +45,21 @@ medios continuos.
 		\end{bmatrix}                                      &
 		\longmapsto
 		\begin{bmatrix}
-			f_{1}  \\
+			f_{1}\left(\symbf{u}\right) \\
+			\vdots                      \\
+			f_{p}\left(\symbf{u}\right)
+		\end{bmatrix},                       &
+		\begin{bmatrix}
+			u_{1}  \\
 			\vdots \\
-			f_{p}
-		\end{bmatrix},                                      &
-		\left(\symbf{u},x\right)                             &
+			u_{p}
+		\end{bmatrix}                                      &
 		\longmapsto
 		\begin{bmatrix}
-			s_{1}\left(\symbf{u},x\right) \\
-			\vdots                        \\
-			s_{p}\left(\symbf{u},x\right)
-		\end{bmatrix},                     &
+			s_{1}\left(\symbf{u}\right) \\
+			\vdots                      \\
+			s_{p}\left(\symbf{u}\right)
+		\end{bmatrix},                       &
 		\left(x,t\right)                                     &
 		\longmapsto
 		\begin{bmatrix}
@@ -77,9 +81,11 @@ total en el medio es igual al flujo neto a través de la interface
 más la contribución del término fuente.
 \begin{equation*}
 	\diff{}{t}
-	\int_{I}\symbf{u}\dl x+
-	{\symbf{f}\left(\symbf{u}\right)\Big|}_{\partial I}=
-	\int_{I}\symbf{s}\left(\symbf{u},x\right)\dl x.
+	\int_{I}
+	\symbf{u}\left(x,t\right)\dl x+
+	{\symbf{f}\left(\symbf{u}\left(x,t\right)\right)\Big|}_{\partial I}=
+	\int_{I}
+	\symbf{s}\left(\symbf{u}\left(x,t\right)\right)\dl x.
 \end{equation*}
 
 \begin{definition}
@@ -122,9 +128,9 @@ más la contribución del término fuente.
 			\diffp{\symbf{u}}{t}+
 			\diffp{}{x}
 			\symbf{f}\left(\symbf{u}\right)=
-			\symbf{s}\left(\symbf{u},x\right) &
+			\symbf{s}\left(\symbf{u}\right) &
 			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
-			\symbf{u}=\symbf{u}_{0}           &
+			\symbf{u}=\symbf{u}_{0}         &
 			\text{en }\mathbb{R}\times\left\{t=0\right\}.
 		\end{cases}
 	\end{equation}
@@ -145,11 +151,11 @@ más la contribución del término fuente.
 		\begin{dcases}
 			\diffp{\symbf{u}}{t}+
 			\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-			\symbf{s}\left(\symbf{u},x\right) &
+			\symbf{s}\left(\symbf{u}\right) &
 			\text{ en }I\times\left(0,T\right].         \\
-			\symbf{u}=\symbf{u}_{0}           &
+			\symbf{u}=\symbf{u}_{0}         &
 			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
-			\symbf{u}=\symbf{g}               &
+			\symbf{u}=\symbf{g}             &
 			\text{ en }\partial I\times\left[0,T\right].
 		\end{dcases}
 	\end{equation}
@@ -188,9 +194,9 @@ más la contribución del término fuente.
 			\diffp{}{x}
 			f\left(u\right)=0 &
 			\text{ en }I\times\left(0,T\right].         \\
-			u=u_{0}                       &
+			u=u_{0}           &
 			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
-			u=g                           &
+			u=g               &
 			\text{ en }\partial I\times\left[0,T\right].
 		\end{dcases}
 	\end{equation}
@@ -240,3 +246,18 @@ más la contribución del término fuente.
 		\end{dcases}
 	\end{equation*}
 \end{example}
+
+% TODO: Lema 4.1.7, pág 139 NUMERICAL SOLUTION OF HYPERBOLIC PARTIAL DIFFERENTIAL EQUATIONS JOHN A. TRANGENSTEIN
+% \begin{equation*}
+% 	\diffp{\symbf{u}}{t}+
+% 	\symbf{A}
+% 	\diffp{\symbf{u}}{x}=
+% 	0.\qquad
+% 	\symbf{u}\left(x,0\right)=
+% 	\symbf{u}_{0}\left(x\right)
+% \end{equation*}
+% $\symbf{A}$ es diagonalizable
+% \begin{equation*}
+% 	\symbf{u}\left(x,t\right)=
+% 	\sum_{j}Xe_{j}e^{T}_{j}X^{-1}\symbf{u}_{0}\left(x-\lambda_{j}t\right)
+% \end{equation*}

@@ -63,7 +63,7 @@ es dada por
 	\symbf{a}\odot\symbf{u}
 \end{math}.
 
-\subsection*{Sistema EDP de advección reacción lineal homogéneo}
+\subsection*{Sistema EDP de advección reacción lineal}
 
 Encuentre
 \begin{math}
@@ -73,14 +73,15 @@ Encuentre
 en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystem}
 \begin{equation}\label{eq:advectionreactionsystem}
 	\begin{cases}
-		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)               =
-		\symbf{0}     &
+		\diffp{\symbf{u}}{t}+
+		\diffp{}{x}\symbf{f}\left(\symbf{u}\right)               =
+		\symbf{s}\left(\symbf{u}\right) &
 		\text{ en }I\times\left(0,T\right].   \\
 		\symbf{u}                                                                     =
-		\symbf{u}_{0} &
+		\symbf{u}_{0}                   &
 		\text{ en }I\times\left\{t=0\right\}. \\
 		\symbf{u}                                                                     =
-		\symbf{0}     &
+		\symbf{0}                       &
 		\text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
@@ -88,21 +89,27 @@ Donde
 \begin{math}
 	\symbf{u}_{0}\in
 	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
+\end{math},
+\begin{math}
+	\symbf{s}\colon\Omega\to
+	\mathbb{R}^{3}
 \end{math}
-es conocida y
+son conocidas y
 \begin{math}
 	\symbf{f}\in
-	\symbf{C}^{1}
-	\left(\Omega,\mathbb{R}^{3}\right)
+	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
 \end{math}
 es dada por
 \begin{math}
 	\symbf{f}\left(\symbf{u}\right)=
-	\symbf{a}\odot\symbf{u}-
-	\int^{x}\symbf{b}\odot\symbf{u}\dl y
+	\symbf{a}\odot\symbf{u}
+\end{math},
+\begin{math}
+	\symbf{s}\left(\symbf{u}\right)=
+	\symbf{b}\odot\symbf{u}
 \end{math}.
 
-\subsection*{Sistema EDP de advección reacción cuasilineal homogéneo}
+\subsection*{Sistema EDP de advección reacción cuasilineal I}
 
 Encuentre
 \begin{math}
@@ -113,47 +120,11 @@ en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemq
 \begin{equation}\label{eq:advectionreactionsystemquaslinear}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		\symbf{0}     & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{s}\left(\symbf{u}\right) & \text{ en }I\times\left(0,T\right].          \\
 		\symbf{u}                                                      =
-		\symbf{u}_{0} & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}_{0}                   & \text{ en }I\times\left\{t=0\right\}.        \\
 		\symbf{u}                                                      =
-		\symbf{0}     & \text{ en }\partial I\times\left[0,T\right].
-	\end{cases}
-\end{equation}
-Donde
-\begin{math}
-	\symbf{u}_{0}\in
-	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
-\end{math}
-es conocida y
-\begin{math}
-	\symbf{f}\in
-	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
-\end{math}
-es dada por
-\begin{math}
-	\symbf{f}\left(\symbf{u}\right)=
-	\symbf{a}\odot\symbf{u}-
-	\int^{x}\symbf{b}\odot\symbf{u}\dl y+
-	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
-\end{math}.
-
-\subsection*{Sistema EDP de advección reacción cuasilineal no homogéneo I}
-
-Encuentre
-\begin{math}
-	\symbf{u}\in
-	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
-\end{math}
-en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemquaslinearnonhomogeneous}
-\begin{equation}\label{eq:advectionreactionsystemquaslinearnonhomogeneous}
-	\begin{cases}
-		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
-		\symbf{u}                                                      =
-		\symbf{u}_{0}                     & \text{ en }I\times\left\{t=0\right\}.        \\
-		\symbf{u}                                                       =
-		\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
+		\symbf{0}                       & \text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
 Donde
@@ -162,7 +133,7 @@ Donde
 	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
 \end{math},
 \begin{math}
-	\symbf{s}\colon\Omega\times I\to
+	\symbf{s}\colon\Omega\to
 	\mathbb{R}^{3}
 \end{math}
 son conocidas y
@@ -177,7 +148,51 @@ es dada por
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
 \end{math},
 \begin{math}
-	\symbf{s}\left(\symbf{u},x\right)=
+	\symbf{s}\left(\symbf{u}\right)=
+	\symbf{b}\odot\symbf{u}
+\end{math}.
+% -\int^{x}\symbf{b}\odot\symbf{u}\dl y
+
+\subsection*{Sistema EDP de advección reacción cuasilineal II}
+
+Encuentre
+\begin{math}
+	\symbf{u}\in
+	\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
+\end{math}
+en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemquaslinearnonhomogeneous}
+\begin{equation}\label{eq:advectionreactionsystemquaslinearnonhomogeneous}
+	\begin{cases}
+		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+		\symbf{s}\left(\symbf{u}\right) & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{u}                                                      =
+		\symbf{u}_{0}                   & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}                                                       =
+		\symbf{0}                       & \text{ en }\partial I\times\left[0,T\right].
+	\end{cases}
+\end{equation}
+Donde
+\begin{math}
+	\symbf{u}_{0}\in
+	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
+\end{math},
+\begin{math}
+	\symbf{s}\colon\Omega\to
+	\mathbb{R}^{3}
+\end{math}
+son conocidas y
+\begin{math}
+	\symbf{f}\in
+	\symbf{C}^{1}\left(\Omega,\mathbb{R}^{3}\right)
+\end{math}
+es dada por
+\begin{math}
+	\symbf{f}\left(\symbf{u}\right)=
+	\symbf{a}\odot\symbf{u}+
+	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
+\end{math},
+\begin{math}
+	\symbf{s}\left(\symbf{u}\right)=
 	u_{2}u_{3}\symbf{b}
 	% \begin{bmatrix}
 	% 	b_{1}u_{2}u_{3}  \\
@@ -186,7 +201,7 @@ es dada por
 	% \end{bmatrix}
 \end{math}.
 
-\subsection*{Sistema EDP de advección reacción cuasilineal no homogéneo II}
+\subsection*{Sistema EDP de advección reacción cuasilineal III}
 
 Encuentre
 \begin{math}
@@ -197,11 +212,11 @@ en el problema de valor inicial y de frontera~\eqref{eq:advectionreactionsystemq
 \begin{equation}\label{eq:advectionreactionsystemquaslinearnonhomogeneous}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{s}\left(\symbf{u}\right) & \text{ en }I\times\left(0,T\right].          \\
 		\symbf{u}                                                      =
-		\symbf{u}_{0}                     & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}_{0}                   & \text{ en }I\times\left\{t=0\right\}.        \\
 		\symbf{u}                                                       =
-		\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
+		\symbf{0}                       & \text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
 Donde
@@ -210,7 +225,7 @@ Donde
 	{\symbf{L}^{\infty}_{\text{loc}}\left(I\right)}^{3}
 \end{math},
 \begin{math}
-	\symbf{s}\colon\Omega\times I\to
+	\symbf{s}\colon\Omega\to
 	\mathbb{R}^{3}
 \end{math}
 son conocidas y
@@ -225,7 +240,7 @@ es dada por
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{2}-1\right)\symbf{e_{1}}}
 \end{math},
 \begin{math}
-	\symbf{s}\left(\symbf{u},x\right)=
+	\symbf{s}\left(\symbf{u}\right)=
 	u_{2}u_{3}\symbf{b}-\beta u_{1}\symbf{e}_{1}
 	% \begin{bmatrix}
 	% 	b_{1}u_{2}u_{3}-\beta u_{1} \\
@@ -245,11 +260,11 @@ en el problema de valor inicial y de frontera~\eqref{eq:complicatedsystem}
 \begin{equation}\label{eq:complicatedsystem}
 	\begin{cases}
 		\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
-		\symbf{s}\left(\symbf{u},x\right) & \text{ en }I\times\left(0,T\right].          \\
+		\symbf{s}\left(\symbf{u}\right) & \text{ en }I\times\left(0,T\right].          \\
 		\symbf{u}                                                      =
-		\symbf{u}_{0}                     & \text{ en }I\times\left\{t=0\right\}.        \\
+		\symbf{u}_{0}                   & \text{ en }I\times\left\{t=0\right\}.        \\
 		\symbf{u}                                                       =
-		\symbf{0}                         & \text{ en }\partial I\times\left[0,T\right].
+		\symbf{0}                       & \text{ en }\partial I\times\left[0,T\right].
 	\end{cases}
 \end{equation}
 Donde
@@ -258,7 +273,7 @@ Donde
 	\mathbb{R}^{3}
 \end{math},
 \begin{math}
-	\symbf{s}\colon \Omega\times I\to
+	\symbf{s}\colon\Omega\to
 	\mathbb{R}^{3}
 \end{math}
 son conocidas y
@@ -273,7 +288,7 @@ es dada por
 	\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{3}-1\right)\symbf{e_{1}}}
 \end{math},
 \begin{math}
-	\symbf{s}\left(\symbf{u},x\right)=
+	\symbf{s}\left(\symbf{u}\right)=
 	u_{2}u_{3}\Phi\symbf{b}-\beta u_{1}\symbf{e}_{1}
 	% \begin{bmatrix}
 	% 	b_{1}u_{2}u_{3}\Phi-\beta u_{1} \\
