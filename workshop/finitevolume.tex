@@ -1,5 +1,62 @@
 \chapter{Esquemas de volúmenes finitos}
 
+Considere un problema de valor inicial frontera para un sistema
+hiperbólico de leyes de conservación.
+\begin{equation*}
+	\diffp{\symbf{u}}{t}+
+	\diffp{}{x}
+	\symbf{f}\left(\symbf{u}\right)=
+	\symbf{s}\left(\symbf{u}\right).
+	\symbf{u}\left(x,0\right)
+	\symbf{u}\left(a,t\right)=
+	\symbf{u}\left(b,t\right).
+\end{equation*}
+La forma integral de las leyes de conservación es
+\begin{equation*}
+	\int_{x_{l}}^{x_{r}}
+	\symbf{u}\left(x,t_{2}\right)\dl x=
+	\int_{x_{l}}^{x_{r}}
+	\symbf{u}\left(x,t_{1}\right)\dl x+
+	\int_{t_{1}}^{t_{2}}
+	\symbf{f}\left(\symbf{u}\left(x_{l},t\right)\right)\dl t-
+	\int_{t_{1}}^{t_{2}}
+	\symbf{f}\left(\symbf{u}\left(x_{r},t\right)\right)\dl t+
+	\int_{t_{1}}^{t_{2}}
+	\int_{x_{l}}^{x_{r}}
+	\symbf{s}\left(\symbf{u}\left(x,t\right)\right)\dl x\dl t.
+\end{equation*}
+
+\begin{equation*}
+	V^{n}_{i}=
+	\left[x_{i-\frac{1}{2}},x_{i+\frac{1}{2}}\right]\times
+	\left[t_{n},t_{n+1}\right]
+\end{equation*}
+con $\Delta x=x_{i+\frac{1}{2}}-x_{i-\frac{1}{2}}$ y $\Delta t=t_{n+1}-t_{n}$.
+
+\begin{equation*}
+	\symbf{u}^{n+1}_{i}=
+	\symbf{u}^{n}_{i}-
+	\frac{\Delta t}{\Delta x}
+	\left(\symbf{f}_{i+\frac{1}{2}}-\symbf{f}_{i-\frac{1}{2}}\right)+
+	\Delta t\symbf{s}_{i}.
+\end{equation*}
+
+\begin{align*}
+	\symbf{u}^{n}_{i}             & =
+	\frac{1}{\Delta x}
+	\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+	\symbf{u}\left(x,t_{n}\right)\dl x.                                   \\
+	\symbf{f}^{n}_{i+\frac{1}{2}} & =
+	\frac{1}{\Delta t}
+	\int_{t_{n}}^{t_{n+1}}
+	\symbf{f}\left(\symbf{u}\left(x_{i+\frac{1}{2}},t\right)\right)\dl t. \\
+	\symbf{s}_{i}                 & =
+	\frac{1}{\Delta t\Delta x}
+	\int_{t_{n}}^{t_{n+1}}
+	\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+	\symbf{s}\left(\symbf{u}\left(x,t\right)\right)\dl x\dl t.            \\
+\end{align*}
+
 Considere el problema de Cauchy~\eqref{eq:cauchysystemofconservationlaw}
 donde~\eqref{eq:systemofconservationlaw} es hiperbólico.
 Consideremos $C_{j}=\left[x_{j-\frac{1}{2}},x_{j+\frac{1}{2}}\right]\subset\mathbb{R}$
@@ -23,10 +80,10 @@ Consideremos $C_{j}=\left[x_{j-\frac{1}{2}},x_{j+\frac{1}{2}}\right]\subset\math
 	\diff{}{t}\symbf{v}_{j}+
 	\frac{1}{\Delta x}
 	\left(
-		\symbf{g}_{j+\frac{1}{2}}\left(t\right)-
-		\symbf{g}_{j-\frac{1}{2}}\left(t\right)
-		\right)=
-		\symbf{0}.
+	\symbf{g}_{j+\frac{1}{2}}\left(t\right)-
+	\symbf{g}_{j-\frac{1}{2}}\left(t\right)
+	\right)=
+	\symbf{0}.
 \end{equation*}
 
 \begin{equation*}
