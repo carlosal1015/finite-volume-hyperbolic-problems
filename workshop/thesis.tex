@@ -1,6 +1,6 @@
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'idx', 'ilg', 'ind', 'log', 'out', 'pdf', 'run.xml', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'idx', 'ilg', 'ind', 'lof', 'log', 'lol', 'lot', 'out', 'pdf', 'run.xml', 'toc']
 % arara: --> }
 % arara: lualatex: {
 % arara: --> shell: yes,
@@ -21,22 +21,36 @@
 % arara: --> }
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'idx', 'ilg', 'ind', 'log', 'out', 'run.xml', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'idx', 'ilg', 'ind', 'log', 'lol', 'out', 'run.xml', 'toc']
 % arara: --> }
 \input{preamble}
 
 \begin{document}
 \maketitle
-\input{thanks}
+
+\frontmatter
+\sffamily
+% \input{thanks}
 \input{abstract}
 \tableofcontents
+% \listoftables
+% \listoffigures
+% \listoflistings
+
+\mainmatter
 \part{Teoría}
+\input{introduction}
 \input{conservationlaws}
 \input{weaksolution}
 \input{entropysolution}
 \input{finitevolume}
+
 \part{Aplicaciones} % clawpack, fipy
+\input{euler}
 \input{strategy}
+
+\chapter{Conclusiones}
+\backmatter
 \appendix
 \input{symbols}
 \printindex

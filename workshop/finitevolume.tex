@@ -1,11 +1,10 @@
-\chapter{Esquemas de volúmenes finitos}
+\chapter{Esquemas de volúmenes finitos para sistemas no lineales}
 
 Considere un problema de valor inicial frontera para un sistema
 hiperbólico de leyes de conservación.
 \begin{equation*}
 	\diffp{\symbf{u}}{t}+
-	\diffp{}{x}
-	\symbf{f}\left(\symbf{u}\right)=
+	\diffp*{\symbf{f}\left(\symbf{u}\right)}{x}=
 	\symbf{s}\left(\symbf{u}\right).
 	\symbf{u}\left(x,0\right)
 	\symbf{u}\left(a,t\right)=
@@ -57,6 +56,21 @@ con $\Delta x=x_{i+\frac{1}{2}}-x_{i-\frac{1}{2}}$ y $\Delta t=t_{n+1}-t_{n}$.
 	\symbf{s}\left(\symbf{u}\left(x,t\right)\right)\dl x\dl t.            \\
 \end{align*}
 
+\begin{equation*}
+	s_{i}=
+	\frac{1}{\Delta x\Delta t}
+	\int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}
+	\int_{0}^{\Delta t}
+	\beta
+	u\left(x,t\right)\dl x\dl t.
+\end{equation*}
+
+\begin{equation*}
+	s_{i}=
+	\frac{1}{2}
+	c\beta u^{n}
+\end{equation*}
+
 Considere el problema de Cauchy~\eqref{eq:cauchysystemofconservationlaw}
 donde~\eqref{eq:systemofconservationlaw} es hiperbólico.
 Consideremos $C_{j}=\left[x_{j-\frac{1}{2}},x_{j+\frac{1}{2}}\right]\subset\mathbb{R}$
@@ -93,17 +107,59 @@ Consideremos $C_{j}=\left[x_{j-\frac{1}{2}},x_{j+\frac{1}{2}}\right]\subset\math
 
 \begin{equation*}
 	\symbf{g}_{j+\frac{1}{2}}\left(t\right)=
-	\symbf{g}\left(\symbf{v}\right)
+	\symbf{g}\left(\symbf{v}\right).
 \end{equation*}
 
-\section{Método de Godunov}
+% \section{Método de Godunov}
 
-\begin{equation*}
-	\symbf{w}\left(x,t\right)=
-	\symbf{w}_{R}
-	\left(\frac{x}{t};\symbf{u}_{L},\symbf{u}_{R}\right)
-\end{equation*}
+% \begin{equation*}
+% 	\symbf{w}\left(x,t\right)=
+% 	\symbf{w}_{R}
+% 	\left(\frac{x}{t};\symbf{u}_{L},\symbf{u}_{R}\right).
+% \end{equation*}
 
-\section{Método de Roe}
+% \section{Método de Roe}
 
-\section{Método de Rusanov}
+% \section{Método de Rusanov}
+
+\section{Métodos de pasos fraccionarios}
+
+Para resolver un sistema de leyes de conservación con un término fuente empleamos el método del paso fraccionario~\cite{Leveque2002}
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\diffp{\symbf{u}}{t}+
+		\diffp*{f\left(\symbf{u}\right)}{x} & =
+		\symbf{0}.                              \\
+		\diff{\symbf{u}}{t}                 & =
+		\symbf{s}\left(\symbf{u}\right).
+	\end{aligned}
+	\right.
+\end{equation}
+
+\begin{description}
+	\item[\color{DarkBlue}Método Upwind]
+
+	      \begin{equation*}
+		      \frac{\symbf{u}^{n+1}_{i}-\symbf{u}^{n}_{i}}{\Delta t}=
+		      -\frac{\symbf{f}^{n}_{i}-\symbf{f}^{n}_{i-1}}{\Delta x}\implies
+		      \symbf{u}^{n+1}_{i}-\symbf{u}^{n}_{i}=
+		      -\frac{\Delta t}{\Delta x}
+					\left(\symbf{f}^{n}_{i}-\symbf{f}^{n}_{i-1}\right).
+	      \end{equation*}
+
+	      \begin{equation*}
+		      \boxed{
+			      \symbf{u}^{\ast}_{i}=
+			      \symbf{u}^{n}_{i}-\frac{\Delta t}{\Delta x}\left(\symbf{f}^{n}_{i}-\symbf{f}^{n}_{i-1}\right).
+		      }
+	      \end{equation*}
+	\item[\color{DarkBlue}Euler hacia adelante]
+
+	      \begin{equation*}
+		      \frac{\symbf{u}^{n+1}_{i}-\symbf{u}^{n}_{i}}{\Delta t}=
+		      \symbf{s}\left(\symbf{u}^{n+1}_{i}\right)\implies
+		      \symbf{u}^{n+1}_{i}=\symbf{u}^{\ast}_{i}+\Delta t
+		      \symbf{s}\left(\symbf{u}^{\ast}_{i}\right).
+	      \end{equation*}
+\end{description}

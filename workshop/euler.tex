@@ -1,0 +1,300 @@
+\section{El fluido fluye en una boquilla con sección transversal variable}
+
+El siguiente sistema describe la evolución de un flujo de fluido
+en una boquilla con sección transversal variable:
+
+\begin{equation}\label{eq:1}
+	\begin{aligned}
+		\diffp{}{t}
+		\left(a\rho\right)+
+		\diffp{}{x}
+		\left(a\rho u\right)                    & =
+		0.                                          \\
+		\diffp{}{t}
+		\left(a\rho u\right)+
+		\diffp{}{x}
+		\left(a\left(\rho u^{2}+p\right)\right) & =
+		p\diffp{a}{x}                               \\
+		\diffp{}{t}
+		\left(a\rho e\right)+
+		\diffp{}{x}
+		\left(au\left(\rho e+p\right)\right)    & =
+		0.
+	\end{aligned}
+\end{equation}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=.35\paperwidth]{noizzy}
+	\caption{.}
+\end{figure}
+Donde las notaciones $\rho$, $\varepsilon$, $T$, $S$ y $p$
+representan las variables termodinámicas: densidad, energía
+interna, temperatura absoluta, entropía y presión,
+respectivamente; $u$ es la velocidad y
+$e=\varepsilon+\frac{u^{2}}{2}$ es la energía total.
+La función $a=a\left(x\right)>0$, $x\in\mathbb{R}$ es el área de
+la sección transversal.
+
+Hiperbolicidad e hiperbolicidad no estricta
+
+Para investigar las propiedades básicas del sistema~\eqref{eq:1},
+podemos complementarlo con la ecuación trivial $\diffp{a}{t}=0$,
+para obtener el siguiente sistema de leyes equilibradas
+\begin{equation}\label{eq:2}
+	\begin{aligned}
+		\diffp{}{t}
+		\left(a\rho\right)+
+		\diffp{}{x}
+		\left(a\rho u\right)                 & =
+		0.                                       \\
+		\diffp{}{t}
+		\left(a\rho u\right)+
+		\diffp{}{x}
+		\left(a\left(\rho u^{2}+p\right)\right)
+		                                     & =
+		p\diffp{a}{x}.                           \\
+		\diffp{}{t}
+		\left(a\rho e\right)+
+		\diffp{}{x}
+		\left(au\left(\rho e+p\right)\right) & =
+		0.                                       \\
+		\diffp{a}{t}                         & =
+		0.
+	\end{aligned}
+\end{equation}
+Consideremos el par de variables termodinámicas independientes
+$\left(\rho, S\right)$.
+Las ecuaciones de estado tendrán entonces la forma
+\begin{equation*}
+	p=
+	p\left(\rho,S\right),\quad
+	\varepsilon=
+	\varepsilon\left(\rho, S\right),\quad
+	T=
+	T\left(\rho,S\right).
+\end{equation*}
+Por lo tanto, el sistema~\eqref{eq:2} puede expandirse para la
+función desconocida $U=\left(\rho,u,S,a\right)$ de la siguiente
+manera.
+Considérese la primera ecuación de~\eqref{eq:2}, que puede
+reescribirse como
+\begin{equation*}
+	\rho\diffp{a}{t}+
+	a\diffp{\rho}{t}+
+	a\diffp{}{x}\left(\rho u\right)+
+	\diffp{a}{x}\rho u=
+	0.
+\end{equation*}
+Usando la tercera ecuación en~\eqref{eq:2}, dividiendo la última
+ecuación por $a$, obtenemos
+\begin{equation}\label{eq:3}
+	\diffp{\rho}{t}+
+	u\diffp{\rho}{x}+
+	\rho\diffp{u}{x}+
+	\frac{\rho u}{a}\diffp{a}{x}=
+	0.
+\end{equation}
+
+La segunda ecuación en~\eqref{eq:2} se puede expandir mediante
+\begin{equation*}
+	u\diffp{}{t}\left(a\rho\right)+
+	a\rho\diffp{u}{t}+
+	a\rho u\diffp{u}{x}+
+	u\diffp{}{x}\left(a\rho u\right)+
+	p\diffp{a}{x}+
+	a\diffp{p}{x}=
+	p\diffp{a}{x}.
+\end{equation*}
+Simplificando y luego reordenando los términos de la última
+ecuación obtenemos
+\begin{equation*}
+	u\left[
+		\diffp{}{t}\left(a\rho\right)+
+		\diffp{}{x}\left(a\rho u\right)
+		\right]+
+	a\rho\left[
+		\diffp{u}{t}+
+		u\diffp{u}{x}+
+		\frac{1}{\rho}
+		\left(\diffp{p}{\rho}+\diffp{p}{S}\diffp{S}{x}\right)
+		\right]=
+	0.
+\end{equation*}
+Usando la primera ecuación en~\eqref{eq:2}, podemos ver que el
+primer término de la última ecuación se anula.
+Descartando el primer término de la última ecuación y luego
+dividiéndolo entre $a\rho$, obtenemos
+\begin{equation}\label{eq:4}
+	\diffp{u}{t}+
+	\frac{1}{\rho}\diffp{p}{\rho}\diffp{\rho}{x}+
+	u\diffp{u}{x}+
+	\frac{1}{p}
+	\diffp{p}{S}
+	\diffp{S}{x}=0.
+\end{equation}
+A continuación, la tercera ecuación en~\eqref{eq:2} se puede
+escribir como
+\begin{equation*}
+	a\rho\diffp{e}{t}+
+	e\diffp{}{t}\left(a\rho\right)+
+	a\rho u\diffp{e}{x}+
+	e\diffp{}{x}\left(a\rho u\right)+
+	\diffp{}{x}\left(aup\right)=
+	0.
+\end{equation*}
+El primer término de la última ecuación se anula, gracias a la
+primera ecuación en~\eqref{eq:2}.
+Dado que
+\begin{equation*}
+	e=\varepsilon+\frac{u^{2}}{2},
+\end{equation*}
+la última ecuación se convierte en
+\begin{equation*}
+	a\rho\left(\diffp{\varepsilon}{t}+u\diffp{\varepsilon}{x}\right)+
+	a\rho u\left(\diffp{u}{t}+u\diffp{u}{x}\right)+
+	\diffp{}{x}\left(aup\right)=0.
+\end{equation*}
+
+De~\eqref{eq:4}, encontramos
+\begin{equation*}
+	\diffp{u}{t}+
+	u\diffp{u}{x}=
+	-\frac{1}{p}
+	\diffp{p}{x}.
+\end{equation*}
+De las dos últimas ecuaciones, obtenemos
+\begin{math}
+	a\rho\left(\diffp{\varepsilon}{t}+u\diffp{\varepsilon}{x}\right)-
+	au\diffp{p}{x}+
+	\diffp{}{x}\left(aup\right)=
+	0
+\end{math}.
+Utilizando la identidad termodinámica
+\begin{equation*}
+	\dl\varepsilon=
+	T\dl S-p\dl v,\quad
+	v=
+	\frac{1}{\rho}
+\end{equation*}
+de modo que
+\begin{align*}
+	\diffp{\varepsilon}{t} & =
+	T\diffp{S}{t}-p\diffp{v}{t}. \\
+	\diffp{\varepsilon}{x} & =
+	T\diffp{S}{x}-p\diffp{v}{x}.
+\end{align*}
+Obtenemos de la última ecuación
+\begin{equation*}
+	a\rho T\left(\diffp{S}{t}+u\diffp{S}{x}\right)+
+	a\rho\frac{p}{\rho^{2}}
+	\left(\diffp{\rho}{t}+u\diffp{\rho}{x}\right)+
+	p\diffp{au}{x}=0,
+\end{equation*}
+Por otra parte, de~\eqref{eq:3} se sigue que
+\begin{equation*}
+	\diffp{\rho}{t}+
+	u\diffp{\rho}{x}=
+	-\left[\rho\diffp{u}{x}+\frac{\rho u}{a}\diffp{a}{x}\right],
+\end{equation*}
+que, al sustituir en la última ecuación, da
+\begin{equation*}
+	a\rho T
+	\left(\diffp{S}{t}+u\diffp{S}{x}\right)-
+	ap
+	\left(\diffp{u}{x}+\frac{u}{a}\diffp{a}{x}\right)+
+	p\left(\diffp{a}{x}u+u\diffp{a}{x}\right)=
+	0.
+\end{equation*}
+Es decir, tenemos
+\begin{equation*}
+	a\rho T\left(\diffp{S}{t}+u\diffp{S}{x}\right)-
+	ap\left(\diffp{u}{x}+\frac{u}{a}\diffp{a}{x}\right)+
+	p\left(\diffp{a}{x}u+u\diffp{a}{x}\right)=
+	0.
+\end{equation*}
+
+Simplificando la última ecuación obtenemos
+\begin{equation*}
+	a\rho T
+	\left(\diffp{S}{t}+u\diffp{S}{x}\right)=
+	0
+\end{equation*}
+Dividiendo ambos lados de la última ecuación por $a\rho T$,
+obtenemos $\diffp{S}{t}+u\diffp{S}{x}=0$.
+Así, el sistema~\eqref{eq:2} puede escribirse en forma matricial
+mediante
+\begin{equation*}
+	\diffp{U}{t}+
+	A\left(U\right)\diffp{U}{x}=
+	0,
+\end{equation*}
+donde
+\begin{equation}\label{eq:6}
+	U=\begin{bmatrix}
+		\rho \\
+		u    \\
+		S    \\
+		a
+	\end{bmatrix}\qquad
+	A\left(U\right)=
+	\begin{bmatrix}
+		u                                                & \rho & 0                                             & \frac{u\rho}{a} \\
+		\frac{1}{\rho}\diffp{p}{\rho}\left(\rho,S\right) & u    & \frac{1}{\rho}\diffp{p}{S}\left(\rho,S\right) & 0               \\
+		0                                                & 0    & u                                             & 0               \\
+		0                                                & 0    & 0                                             & 0
+	\end{bmatrix}.
+\end{equation}
+La ecuación característica asociada a la matriz $A\left(U\right)$
+en~\eqref{eq:6} está dada por
+\begin{equation*}
+	\lambda\left(\lambda-u\right)
+	\left(\left(u-\lambda\right)-\diffp{p}{\rho}\left(\rho,S\right)\right)=
+	0.
+\end{equation*}
+Siempre que $\diffp{p}{\rho}\left(\rho,S\right)>0$
+la matriz $A\left(U\right)$ admite cuatro valores propios reales,
+\begin{equation*}
+	\lambda_{1}\left(U\right)=u-c,\quad
+	\lambda_{2}\left(U\right)=u,\quad
+	\lambda_{3}\left(U\right)=u+c,\quad
+	\lambda_{4}\left(U\right)=0,
+\end{equation*}
+donde $c$ es la rapidez del sonido definido por
+$c\coloneqq\sqrt{\diffp{p}{\rho}\left(\rho, S\right)}$.
+
+% \begin{align}
+% 	\diffp{\theta}{t}+
+% 	a_{1}
+% 	\diffp{
+% 		\big(
+% 		\theta
+% 		S_{\text{o}}
+% 		\big)
+% 	}{x}                    & =
+% 	b_{1}
+% 	S_{\text{o}}
+% 	S_{y}
+% 	\Phi-
+% 	\beta\theta.
+% 	\label{eq:6}                \\
+% 	\diffp{S_{y}}{t}+
+% 	a_{2}
+% 	\diffp{S_{y}}{x}        & =
+% 	-b_{2}
+% 	S_{\text{o}}
+% 	S_{y}
+% 	\Phi.
+% 	\label{eq:7}                \\
+% 	\diffp{S_{\text{o}}}{t}+
+% 	a_{3}
+% 	\diffp{S_{\text{o}}}{x} & =
+% 	-b_{3}
+% 	S_{\text{o}}
+% 	S_{y}
+% 	\Phi.
+% 	\label{eq:8}
+% \end{align}
+
+\section{El fluido fluye de dos gases incompresibles}
+

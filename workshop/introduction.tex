@@ -1,0 +1,80 @@
+\chapter{Introducción}
+\section{Acerca de esta tesis}
+
+El ánimo de esta tesis es presentar resultados que mejoran y amplían
+la aplicabilidad del método de volúmenes finitos de diversas maneras.
+
+% Aproximadamente el primer tercio de esta tesis (capítulos 2 a 4) se
+% centra en los aspectos de implementación de la DG.
+% El capítulo 3 describe cómo implementar el método combinando los
+% objetivos, a menudo opuestos,
+% de utilizar prácticas de ingeniería de software consolidadas y
+% lograr un alto rendimiento.
+% El capítulo 5 explica cómo se puede aumentar el rendimiento
+% computacional en un orden de magnitud o más mediante el uso de
+% hardware computacional masivamente paralelo para el mercado de masas.
+% Para respaldar este último avance, se presentan algunas herramientas
+% de programación paralela creadas específicamente para ello, pero que
+% han encontrado un uso mucho más amplio en la comunidad científica
+% (capítulo 4).
+
+Los matemáticos aplicados realizan experimentos computacionales a
+gran escala a diario.
+Lamentablemente, la mayoría de estos experimentos son improvisados y
+se mantienen registros deficientes (o nulos) al respecto.
+Parte de este problema radica en que los físicos y químicos reciben
+formación rutinaria en la tarea de realizar experimentos exhaustivos,
+bien documentados y reproducibles, mientras que los matemáticos
+aplicados no.
+
+Me gustaría sugerir las siguientes pautas que he intentado seguir en
+mi trabajo en esta tesis:
+\begin{description}
+	\item[\color{DarkBlue}Disponibilidad en formato de código fuente]
+
+	\item[\color{DarkBlue}Legibilidad]
+
+	\item[\color{DarkBlue}Dependencias reducidas del software de pago]
+\end{description}
+
+\section{El método científico y el experimento computacional}
+
+En la segunda parte de esta tesis, se adquieren nuevos conocimientos
+mediante el examen del comportamiento de métodos recién introducidos
+en experimentos computacionales seleccionados a propósito.
+En matemáticas aplicadas, estos experimentos suelen ser criticados
+por su escasa especificación, su dificultad o imposibilidad de
+reproducirse y, por estas razones, su valor cuestionable.
+
+A diferencia de (por ejemplo) la física o la química, las matemáticas
+aplicadas no cuentan con una cultura madura de experimentación, y
+mucho menos con una rama experimental plenamente aceptada.
+Antes de la llegada de las computadoras, los experimentos matemáticos
+solían ser tediosos y poco prácticos, por lo que la cultura
+matemática se ha desarrollado principalmente en torno a resultados
+teóricos.
+Pero ahora que existe la posibilidad, en mi opinión, el campo haría
+bien en imitar a las demás ciencias y adoptar la experimentación como
+uno de sus métodos aceptados.
+Debería hacerlo con el fin de captar conocimiento que de otro modo no
+estaría disponible, pero también con cautela.
+
+\section{Reproducibilidad de los resultados de esta tesis}
+
+Para garantizar la reproducibilidad de mis resultados, utilizaré esta
+sección para especificar tanto el entorno computacional en el que he
+realizado mis experimentos como las versiones precisas del software
+que he utilizado.
+En primer lugar, la Tabla 1.1 ofrece un resumen completo de los
+componentes de terceros que realizaron las operaciones que condujeron
+a los resultados que se muestran en este trabajo.
+Si se indican varios números de versión de un componente, no se
+observaron cambios significativos en los resultados en todas las
+versiones especificadas.
+Además, como ya he indicado, todo mi código está disponible
+gratuitamente.
+Puede descargarse de mis repositorios de control de versiones en la
+dirección
+\begin{center}
+	\url{https://github.com/carlosal1015/finite-volume-methods}
+\end{center}

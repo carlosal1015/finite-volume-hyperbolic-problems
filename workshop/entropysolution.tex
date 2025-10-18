@@ -4,9 +4,8 @@
 		\left\{
 		\begin{aligned}
 			\diffp{u}{t}+
-			\diffp{}{x}
-			\frac{u^{2}}{2} & =
-			0.                  \\
+			\diffp*{\left(\frac{u^{2}}{2}\right)}{x} & =
+			0.                                           \\
 			u_{0}\left(x\right)=
 			\begin{cases}
 				u_{l}, & x<0. \\
@@ -18,15 +17,10 @@
 \end{example}
 
 \begin{equation*}
-	\diffp{}{t}
-	U\left(\symbf{u}\right)+
-	\diffp{}{x}
-	F\left(\symbf{u}\right)=
+	\diffp*{U\left(\symbf{u}\right)}{t}+
+	\diffp*{F\left(\symbf{u}\right)}{x}=
 	0.
 \end{equation*}
-
-
-\section{Soluciones de entropía}
 
 \begin{definition}
 	Sea $\Omega\subset\mathbb{R}^{p}$ un conjunto convexo.
@@ -55,19 +49,13 @@
 	% \end{equation*}
 \end{definition}
 
-\begin{example}[$p$-sistema]
-	.
-\end{example}
-
 \section{Método de viscosidad}
 
 Dado $\varepsilon>0$, asociamos
 con~\eqref{eq:systemofconservationlaw} el sistema parabólico
 \begin{equation}\label{eq:parabolicsystemofconservationlaw}
 	\diffp{\symbf{u}_{\varepsilon}}{t}+
-	\diffp{}{x}
-	\symbf{f}
-	\left(\symbf{u}_{\varepsilon}\right)-
+	\diffp*{\symbf{f}\left(\symbf{u}_{\varepsilon}\right)}{x}-
 	\varepsilon
 	\Delta\symbf{u}_{\varepsilon}=
 	\symbf{0},
@@ -181,6 +169,8 @@ como un término de viscosidad.
 	\end{equation*}
 \end{theorem}
 
+\subsection{Sistema de leyes de conservación lineal}
+
 \begin{equation*}
 	\diffp{\symbf{u}}{t}+
 	\symbf{A}
@@ -188,7 +178,7 @@ como un término de viscosidad.
 	\symbf{0}.
 \end{equation*}
 
-$\symbf{u}\in\mathbb{R}^{p}$, $\symbf{A}\in\mathbb{R}^{p\times p}$
+$\symbf{u}\in\mathbb{R}^{p}$, $\symbf{A}\in\mathbb{R}^{p\times p}$.
 
 \begin{equation*}
 	\diffp{\symbf{u}}{t}+

@@ -1,18 +1,29 @@
-\chapter{Sistema de leyes de conservación}
+\chapter{Preliminares}
+
+Para facilitar la comprensión de los capítulos posteriores y para
+definir la notación y la terminología, este capítulo resume algunos
+puntos preliminares que fundamentan el material posterior.
+Ningún contenido de este capítulo es original.
+Los lectores familiarizados con el tema pueden consultar los
+encabezados de las secciones y omitir el material que les resulte
+familiar, consultando el texto cuando necesiten aclarar alguna
+terminología o notación específica.
 
 Presentamos un sistema de leyes de conservación en una dimensión
 espacial, así como los ejemplos más destacados en la física de los
 medios continuos.
 
+\section{Sistema de leyes de conservación con un término fuente}
+
 \begin{definition}
 	Sea $\Omega\subset\mathbb{R}^{p}$ un conjunto abierto.
-	Un \textcolor{DarkBlue}{\bfseries sistema de leyes de conservación}
-	\index{sistema de leyes de conservación} es
+	Un \textcolor{DarkBlue}{\bfseries sistema de leyes de conservación
+		con un término fuente}\index{sistema de leyes de conservación} es
 	\begin{equation}\label{eq:systemofconservationlaw}
 		\diffp{\symbf{u}}{t}+
-		\diffp{}{x}
-		\symbf{f}\left(\symbf{u}\right)=
-		\symbf{s}\left(\symbf{u}\right).
+		\diffp*{\symbf{f}\left(\symbf{u}\right)}{x}=
+		\symbf{s}\left(\symbf{u}\right)
+		\text{ en }\mathbb{R}\times\left[0,\infty\right[.
 	\end{equation}
 	Donde $\Omega$ es el conjunto de estados,
 	\begin{math}
@@ -25,12 +36,13 @@ medios continuos.
 		\symbf{C}
 		\left(\Omega,\mathbb{R}^{p}\right)
 	\end{math}
-	es la función fuente sin términos de derivadas de $\symbf{u}$ y
+	es la función fuente sin términos de las derivadas de la
+	solución de~\eqref{eq:systemofconservationlaw},
 	\begin{math}
 		\symbf{u}\in
 		\symbf{C}^{1}
 		\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
-	\end{math} es la solución de~\eqref{eq:systemofconservationlaw}.
+	\end{math}.
 	\begin{align*}
 		\symbf{f}\colon\Omega                                &
 		\longrightarrow\mathbb{R}^{p}                        &
@@ -82,11 +94,98 @@ más la contribución del término fuente.
 \begin{equation*}
 	\diff{}{t}
 	\int_{I}
-	\symbf{u}\left(x,t\right)\dl x+
-	{\symbf{f}\left(\symbf{u}\left(x,t\right)\right)\Big|}_{\partial I}=
+	\symbf{u}
+	\left(x,t\right)
+	\dl x+
+	{\symbf{f}
+	\left(\symbf{u}\left(x,t\right)\right)
+	\Big|}_{\partial I}=
 	\int_{I}
-	\symbf{s}\left(\symbf{u}\left(x,t\right)\right)\dl x.
+	\symbf{s}
+	\left(\symbf{u}\left(x,t\right)\right)
+	\dl x.
 \end{equation*}
+A continuación, presentamos las leyes de conservación más conocidas
+cuando $p=1$.
+\begin{example}[Ecuación de Bateman-Burgers~\cite{Bateman1915,Burgers1948}]\index{ecuación de Burgers}
+	\begin{equation*}
+		\diffp{u}{t}+
+		\diffp*{\left(\frac{u^{2}}{2}-\nu\diffp{u}{x}\right)}{x}=
+		0
+		\text{ en }\mathbb{R}\times\left[0,\infty\right[.
+	\end{equation*}
+\end{example}
+
+\begin{example}[Ecuación de Buckley-Leverett~\cite{Buckley1942}]\index{ecuación de Buckley-Leverett}
+	Es un modelo simple para un flujo de fluido de dos fases en un
+	medio poroso.
+	Una aplicación es la recuperación secundaria mediante impulsión de
+	agua en la simulación de yacimientos de petróleo.
+	\begin{equation*}
+		\diffp{u}{t}+
+		\diffp*{\left[\frac{\frac{\kappa_{\text{rel,water}}\left(u\right)}{\mu_{\text{water}}}}{\frac{\kappa_{\text{rel,water}}\left(u\right)}{\mu_{\text{water}}}+\frac{\kappa_{\text{rel,oil}}\left(u\right)}{\mu_{\text{oil}}}}\right]}{x}=
+		0
+		\text{ en }\mathbb{R}\times\left[0,\infty\right[.
+	\end{equation*}
+\end{example}
+
+A continuación, presentamos las leyes de conservación más conocidas
+cuando $p\geq 2$.
+
+\begin{example}[$q$-sistema~\cite{Young2002}]\index{$q$-sistema}
+	Sea $q\in C^{1}\left(\mathbb{R},\mathbb{R}\right)$ tal que
+	$\forall v\in\mathbb{R}$: $\diffp{}{x}p\left(v\right)<0$,
+	$\lim\limits_{v\to0}q\left(v\right)=\infty$,
+	$\lim\limits_{v\to\infty}q\left(v\right)=0$.
+	\begin{equation*}
+		\diffp*{
+			\begin{bmatrix}
+				v \\
+				u
+			\end{bmatrix}
+		}{t}+
+		\begin{bmatrix}
+			0                          & -1 \\
+			\diffp{}{x}q\left(v\right) & 0
+		\end{bmatrix}
+		\diffp*{
+			\begin{bmatrix}
+				v \\
+				u
+			\end{bmatrix}
+		}{x}=
+		\begin{bmatrix}
+			0 \\
+			0
+		\end{bmatrix}
+		\text{ en }\mathbb{R}\times\left[0,\infty\right).
+	\end{equation*}
+\end{example}
+% Sistema de fluidos % de la dinámica de gases
+\begin{example}[Ecuaciones de Euler~\cite{Euler1757,Frisch2008}]\index{ecuaciones de Euler}
+	\begin{equation*}
+		\begin{dcases}
+			\diffp{\rho}{t}+
+			\sum_{j=1}^{3}
+			\diffp{}{x_{j}}
+			\left(\rho u_{j}\right)=0                   &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			\forall i\in\left\{1,2,3\right\}:
+			\diffp{}{t}
+			\left(\rho u_{i}\right)+
+			\sum_{j=1}^{3}
+			\diffp{}{x_{j}}
+			\left(\rho u_{i}u_{j}+p\delta_{ij}\right)=0 &
+			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
+			\diffp{}{t}
+			\left(\rho e\right)+
+			\sum_{j=1}^{3}
+			\diffp{}{x_{j}}
+			\left(\left(\rho e+p\right)u_{j}\right)=0   &
+			\text{en }\mathbb{R}\times\left(0,\infty\right).
+		\end{dcases}
+	\end{equation*}
+\end{example}
 
 \begin{definition}
 	Un sistema~\eqref{eq:systemofconservationlaw} es
@@ -126,8 +225,7 @@ más la contribución del término fuente.
 	\begin{equation}\label{eq:cauchysystemofconservationlaw}
 		\begin{cases}
 			\diffp{\symbf{u}}{t}+
-			\diffp{}{x}
-			\symbf{f}\left(\symbf{u}\right)=
+			\diffp*{\symbf{f}\left(\symbf{u}\right)}{x}=
 			\symbf{s}\left(\symbf{u}\right) &
 			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
 			\symbf{u}=\symbf{u}_{0}         &
@@ -150,7 +248,7 @@ más la contribución del término fuente.
 	\begin{equation}
 		\begin{dcases}
 			\diffp{\symbf{u}}{t}+
-			\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+			\diffp*{\symbf{f}\left(\symbf{u}\right)}{x}=
 			\symbf{s}\left(\symbf{u}\right) &
 			\text{ en }I\times\left(0,T\right].         \\
 			\symbf{u}=\symbf{u}_{0}         &
@@ -160,92 +258,6 @@ más la contribución del término fuente.
 		\end{dcases}
 	\end{equation}
 \end{definition}
-
-\begin{example}[La ecuación de Bateman-Burgers no viscosa]\index{ecuación de Burgers}
-	\begin{equation}
-		\begin{dcases}
-			\diffp{u}{t}+
-			\frac{1}{2}\diffp{u^{2}}{x}=0 &
-			\text{ en }I\times\left(0,T\right].         \\
-			u=u_{0}                       &
-			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
-			u=g                           &
-			\text{ en }\partial I\times\left[0,T\right].
-		\end{dcases}
-	\end{equation}
-	% \begin{equation*}
-	% 	\diffp{u}{t}+
-	% 	u\diffp{u}{x}-
-	% 	\nu\diffp[2]{u}{x}=
-	% 	0.
-	% \end{equation*}
-\end{example}
-
-\begin{example}%[Ecuación de Buckley-Leverett]
-	La ecuación clásica de
-	Buckley-Leverett\index{ecuación de Buckley-Leverett}
-	es un modelo simple para un flujo de fluido de dos fases en un medio
-	poroso.
-	Una aplicación es la recuperación secundaria mediante impulsión de
-	agua en la simulación de yacimientos de petróleo.
-	\begin{equation}
-		\begin{dcases}
-			\diffp{u}{t}+
-			\diffp{}{x}
-			f\left(u\right)=0 &
-			\text{ en }I\times\left(0,T\right].         \\
-			u=u_{0}           &
-			\text{c.t.p. en }I\times\left\{t=0\right\}. \\
-			u=g               &
-			\text{ en }\partial I\times\left[0,T\right].
-		\end{dcases}
-	\end{equation}
-	\begin{equation*}
-		f\left(s\right)=
-		\frac{\frac{\kappa_{\text{rel,water}}\left(s\right)}{\mu_{\text{water}}}}{
-			\frac{\kappa_{\text{rel,water}}\left(s\right)}{\mu_{\text{water}}}+
-			\frac{\kappa_{\text{rel,oil}}\left(s\right)}{\mu_{\text{oil}}}
-		}.
-	\end{equation*}
-\end{example}
-
-\begin{example}[$p$-sistema]\index{$p$-sistema}
-	\begin{equation*}
-		\begin{cases}
-			\diffp{v}{t}-\diffp{u}{x}=0               &
-			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
-			\diffp{u}{t}+\diffp{}{x}p\left(v\right)=0 &
-			\text{en }\mathbb{R}\times\left(0,\infty\right).
-		\end{cases}
-	\end{equation*}
-\end{example}
-
-
-% Sistema de fluidos % de la dinámica de gases
-\begin{example}[Ecuaciones de Euler]\index{ecuaciones de Euler}
-	\begin{equation*}
-		\begin{dcases}
-			\diffp{\rho}{t}+
-			\sum_{j=1}^{3}
-			\diffp{}{x_{j}}
-			\left(\rho u_{j}\right)=0                   &
-			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
-			\forall i\in\left\{1,2,3\right\}:
-			\diffp{}{t}
-			\left(\rho u_{i}\right)+
-			\sum_{j=1}^{3}
-			\diffp{}{x_{j}}
-			\left(\rho u_{i}u_{j}+p\delta_{ij}\right)=0 &
-			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
-			\diffp{}{t}
-			\left(\rho e\right)+
-			\sum_{j=1}^{3}
-			\diffp{}{x_{j}}
-			\left(\left(\rho e+p\right)u_{j}\right)=0   &
-			\text{en }\mathbb{R}\times\left(0,\infty\right).
-		\end{dcases}
-	\end{equation*}
-\end{example}
 
 % TODO: Lema 4.1.7, pág 139 NUMERICAL SOLUTION OF HYPERBOLIC PARTIAL DIFFERENTIAL EQUATIONS JOHN A. TRANGENSTEIN
 % \begin{equation*}

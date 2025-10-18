@@ -5,7 +5,7 @@
 	intlimits,
 	leqno,
 	DIV=18
-]{scrreprt}
+]{scrbook}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage[svgnames]{xcolor}
@@ -14,8 +14,9 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{unicode-math}
-\usepackage{amsthm}
+\usepackage{theorem}
 \usepackage{diffcoeff}
+\usepackage{minted}
 \usepackage[citestyle=numeric,backend=biber,style=ieee]{biblatex}
 \usepackage{imakeidx}
 \usepackage[
@@ -26,13 +27,14 @@
 	citecolor=black
 ]{hyperref}
 
-\theoremstyle{definition}
-\newtheorem{definition}{\color{DarkBlue}Definición}
-\newtheorem{example}[definition]{\color{DarkBlue}Ejemplo}
-\newtheorem{theorem}[definition]{\color{DarkBlue}Teorema}
+\theoremstyle{plain}
+{\theorembodyfont{\sffamily\upshape}\newtheorem{definition}{\sffamily\color{DarkBlue}Definición}}
+{\theorembodyfont{\sffamily\upshape}\newtheorem{example}[definition]{\sffamily\color{DarkBlue}Ejemplo}}
+{\theorembodyfont{\sffamily\upshape}\newtheorem{theorem}[definition]{\sffamily\color{DarkBlue}Teorema}}
 
-\title{\color{DarkBlue}Simulación Numérica de Sistemas Hiperbólicos
-	de Leyes de Conservación mediante el Método de Volúmenes Finitos}
+\title{\color{DarkBlue}Simulación Numérica de Sistemas de Leyes de
+	Conservación con un término fuente mediante el Método de Volúmenes
+	Finitos}
 \author{\sffamily\color{DarkBlue}Carlos Aznarán Laos\\
 	\href{mailto:caznaranl@uni.pe}{\texttt{caznaranl\MVAt uni.pe}}\and
 	\sffamily\color{DarkBlue}Fidel Jara Huanca\\
@@ -42,11 +44,17 @@
 
 % \setmainfont{Latin Modern Roman}
 % \setmathfont{Latin Modern Math}
+\AfterTOCHead[toc]{\sffamily}
 \setkomafont{disposition}{\color{DarkBlue!50!black}\bfseries\sffamily}
 \setkomafont{part}{\Huge\sffamily\color{DarkBlue}}
 \setkomafont{chapter}{\huge\sffamily\color{DarkBlue}}
 \setkomafont{section}{\LARGE\sffamily\color{DarkBlue}}
 \setkomafont{subsection}{\large\sffamily\color{DarkBlue}}
+
+\defcaptionname{\languagename}{\contentsname}{Contenido}
+\defcaptionname{\languagename}{\listfigurename}{Figuras}
+\defcaptionname{\languagename}{\listtablename}{Tablas}
+\defcaptionname{\languagename}{\listoflistingscaption}{Programas}
 
 \graphicspath{{./images/}}
 
