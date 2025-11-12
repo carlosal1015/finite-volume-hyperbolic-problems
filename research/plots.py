@@ -22,7 +22,7 @@ ax.plot(
     label=r"$f\left(\theta\right)$",
     linewidth=0.7,
 )
-ax.axhline(y=-m / q, color="r", linestyle="--", label=r"Asíntota $-\frac{m}{q}$")
+ax.axhline(y=1 / 4, color="r", linestyle="--", label=r"$-\frac{m}{q}$")
 ax.set_xlabel(xlabel=r"$\theta$")
 ax.set_ylabel(ylabel=r"$f\left(\theta\right)$")
 # ax.set_xlim(0, 10)
