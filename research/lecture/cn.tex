@@ -1,0 +1,267 @@
+\begin{frame}
+	\begin{columns}
+		\begin{column}{0.55\textwidth}
+			\begin{align}
+				\shortintertext{The Crank-Nicolson scheme uses a combination of two first-order in
+					time methods to produce a method that is second-order in time.}
+				\frac{\symbf{u}^{n+1}_{j}-\symbf{u}^{n}_{j}}{\Delta t}+
+				\frac{\symbf{f}^{n}_{j+1}-\symbf{f}^{n}_{j-1}}{2\Delta x}                                             & =
+				\symbf{s}^{n}_{j}.                                                \tag{FTCS}\label{eq:FTCS}                                                    \\
+				\frac{\symbf{u}^{n+1}_{j}-\symbf{u}^{n}_{j}}{\Delta t}+
+				\frac{\symbf{f}^{n+1}_{j+1}-\symbf{f}^{n+1}_{j-1}}{2\Delta x}                                         & =
+				\symbf{s}^{n+1}_{j}.                                                \tag{BTCS}\label{eq:BTCS}
+				\shortintertext{The Crank-Nicolson scheme uses the average of equations~\eqref{eq:FTCS} and~\eqref{eq:BTCS}.}
+				\frac{\symbf{u}^{n+1}_{j}-\symbf{u}^{n}_{j}}{\Delta t}+
+				\frac{\symbf{f}^{n}_{j+1}-\symbf{f}^{n}_{j-1}+\symbf{f}^{n+1}_{j+1}-\symbf{f}^{n+1}_{j-1}}{4\Delta x} & =
+				\frac{\symbf{s}^{n}_{j}+\symbf{s}^{n+1}_{j}}{2}.                                                                                        \notag \\
+				\symbf{u}^{n+1}_{j}-\symbf{u}^{n}_{j}+
+				\frac{\Delta t}{4\Delta x}
+				\left(\symbf{f}^{n}_{j+1}-\symbf{f}^{n}_{j-1}+\symbf{f}^{n+1}_{j+1}-\symbf{f}^{n+1}_{j-1}\right)      & =
+				\frac{\Delta t}{2}
+				\left(\symbf{s}^{n}_{j}+\symbf{s}^{n+1}_{j}\right).\notag
+			\end{align}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{figure}[ht!]
+				\centering
+				\includegraphics[width=.35\paperwidth]{stencilcranknicolson}
+				\caption{Molecular diagram of~\eqref{eq:CN} scheme.}
+			\end{figure}
+		\end{column}
+	\end{columns}
+
+	\
+
+	Let $r\coloneqq\frac{\Delta t}{4\Delta x}$, which is rearranged to
+	give
+	\begin{equation}
+		-r\symbf{f}^{n+1}_{j-1}+
+		\symbf{u}^{n+1}_{j}+
+		r\symbf{f}^{n+1}_{j+1}-
+		\frac{\Delta t}{2}\symbf{s}^{n+1}_{j}=
+		r\symbf{f}^{n}_{j-1}+
+		\symbf{u}^{n}_{j}-
+		r\symbf{f}^{n}_{j+1}+
+		\frac{\Delta t}{2}\symbf{s}^{n}_{j}.
+		\tag{CN}\label{eq:CN}
+	\end{equation}
+	In general, the left side of~\eqref{eq:CN} contains four unknown,
+	and the right side four known, pivotal values of $\symbf{u}^{n}$.
+\end{frame}
+
+% \begin{frame}
+% 	\begin{align*}
+% 		\begin{bmatrix}
+% 			1      & r      & 0      & \cdots & 0      \\
+% 			-r     & 1      & r      & \ddots & \vdots \\
+% 			0      & -r     & \ddots & \ddots & 0      \\
+% 			0      & \ddots & \ddots & r      & 0      \\
+% 			\vdots & \ddots & -r     & 1      & r      \\
+% 			0      & \cdots & 0      & -r     & 1
+% 		\end{bmatrix}
+% 		\begin{bmatrix}
+% 			u^{n+1}_{0}   \\
+% 			u^{n+1}_{1}   \\
+% 			\vdots        \\
+% 			\vdots        \\
+% 			u^{n+1}_{N-2} \\
+% 			u^{n+1}_{N-1}
+% 		\end{bmatrix} & =
+% 		\begin{bmatrix}
+% 			1      & r      & 0      & \cdots & 0      \\
+% 			r      & 1      & -r     & \ddots & \vdots \\
+% 			0      & r      & \ddots & \ddots & 0      \\
+% 			0      & \ddots & \ddots & -r     & 0      \\
+% 			\vdots & \ddots & r      & 1      & -r     \\
+% 			0      & \cdots & 0      & -r     & 1
+% 		\end{bmatrix}
+% 		\begin{bmatrix}
+% 			u^{n}_{0}   \\
+% 			u^{n}_{1}   \\
+% 			\vdots      \\
+% 			\vdots      \\
+% 			u^{n}_{N-2} \\
+% 			u^{n}_{N-1}
+% 		\end{bmatrix}.       \\
+% 		AU^{n+1}         & =
+% 		BU^{n}.
+% 	\end{align*}
+% \end{frame}
+
+\begin{frame}
+	\begin{equation}
+		\begin{aligned}
+			\frac{
+				\mathcolor{mygreen}{\theta}^{n+1}_{j}-
+				\mathcolor{mygreen}{\theta}^{n}_{j}
+			}{\Delta t}+
+			a_{1}
+			\frac{
+			\mathcolor{mygreen}{\theta}^{n}_{j+1}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j+1}-
+			\mathcolor{mygreen}{\theta}^{n}_{j-1}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j-1}
+			}{2\Delta x} & =
+			b_{1}
+			\Phi\left(\mathcolor{mygreen}{\theta}^{n}_{j}\right)
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}-
+			\beta
+			\mathcolor{mygreen}{\theta}^{n}_{j}.        \\
+			\frac{
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}-
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+			}{\Delta t}+
+			a_{2}
+			\frac{
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j+1}-
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j-1}
+			}{2\Delta x} & =
+			-b_{2}
+			\Phi\left(\mathcolor{mygreen}{\theta}^{n}_{j}\right)
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}. \\
+			\frac{
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}-
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+			}{\Delta t}+
+			a_{3}
+			\frac{
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j+1}-
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j-1}
+			}{2\Delta x} & =
+			-b_{3}
+			\Phi\left(\mathcolor{mygreen}{\theta}^{n}_{j}\right)
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}.
+		\end{aligned}\tag{FTCS}
+	\end{equation}
+
+	\begin{equation}
+		\begin{aligned}
+			\frac{
+				\mathcolor{mygreen}{\theta}^{n+1}_{j}-
+				\mathcolor{mygreen}{\theta}^{n}_{j}
+			}{\Delta t}+
+			a_{1}
+			\frac{
+			\mathcolor{mygreen}{\theta}^{n+1}_{j+1}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j+1}-
+			\mathcolor{mygreen}{\theta}^{n+1}_{j-1}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j-1}
+			}{2\Delta x} & =
+			b_{1}
+			\Phi\left(\mathcolor{mygreen}{\theta}^{n+1}_{j}\right)
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}-
+			\beta
+			\mathcolor{mygreen}{\theta}^{n+1}_{j}.        \\
+			\frac{
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}-
+			{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+			}{\Delta t}+
+			a_{2}
+			\frac{
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j+1}-
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j-1}
+			}{2\Delta x} & =
+			-b_{2}
+			\Phi\left(\mathcolor{mygreen}{\theta}^{n+1}_{j}\right)
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}. \\
+			\frac{
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}-
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+			}{\Delta t}+
+			a_{3}
+			\frac{
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j+1}-
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j-1}
+			}{2\Delta x} & =
+			-b_{3}
+			\Phi\left(\mathcolor{mygreen}{\theta}^{n+1}_{j}\right)
+			{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}
+			{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}.
+		\end{aligned}\tag{BTCS}
+	\end{equation}
+
+	% \begin{align*}
+	% 	-r
+	% 	a_{1}
+	% 	\mathcolor{mygreen}{\theta}^{n+1}_{j-1}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j-1}+
+	% 	\mathcolor{mygreen}{\theta}^{n+1}_{j}+
+	% 	r
+	% 	a_{1}
+	% 	\mathcolor{mygreen}{\theta}^{n+1}_{j+1}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j+1}-
+	% 	\frac{\Delta t}{2}
+	% 	\left[
+	% 		b_{1}
+	% 		\Phi\left(\mathcolor{mygreen}{\theta}^{n+1}_{j}\right)
+	% 		{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}
+	% 		{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}-
+	% 		\beta
+	% 		\mathcolor{mygreen}{\theta}^{n+1}_{j}
+	% 	\right]                                        & =
+	% 	r
+	% 	a_{1}
+	% 	\mathcolor{mygreen}{\theta}^{n}_{j-1}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j-1}+
+	% 	\mathcolor{mygreen}{\theta}^{n}_{j}-
+	% 	r
+	% 	a_{1}
+	% 	\mathcolor{mygreen}{\theta}^{n}_{j+1}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j+1}+
+	% 	\Delta t
+	% 	\left[
+	% 		b_{1}
+	% 		\Phi\left(\mathcolor{mygreen}{\theta}^{n}_{j}\right)
+	% 		{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+	% 		{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}-
+	% 		\beta\mathcolor{mygreen}{\theta}^{n}_{j}
+	% 	\right].                                           \\
+	% 	-r
+	% 	a_{2}
+	% 		{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j-1}+
+	% 	{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j}+
+	% 	r
+	% 	a_{2}
+	% 	{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j+1}  & =
+	% 	r
+	% 	a_{2}
+	% 		{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j-1}+
+	% 	{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}-
+	% 	r
+	% 	a_{2}
+	% 		{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j+1}+
+	% 	\Delta t
+	% 	\left[
+	% 	-b_{2}
+	% 	\Phi\left(\mathcolor{mygreen}{\theta}^{n}_{j}\right)
+	% 	{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+	% 	\right].                                           \\
+	% 	-r
+	% 	a_{3}
+	% 		{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j-1}+
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}+
+	% 	r
+	% 	a_{3}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j+1} & =
+	% 	r
+	% 	a_{3}
+	% 		{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j-1}+
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}-
+	% 	r
+	% 	a_{3}
+	% 		{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j+1}+
+	% 	\Delta t
+	% 	\left[
+	% 	-b_{3}
+	% 	\Phi\left(\mathcolor{mygreen}{\theta}^{n}_{j}\right)
+	% 	{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j}
+	% 	{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+	% 	\right].
+	% \end{align*}
+\end{frame}

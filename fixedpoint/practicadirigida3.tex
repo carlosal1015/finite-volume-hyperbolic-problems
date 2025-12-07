@@ -1,0 +1,65 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'pdf', 'run.xml']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'out', 'run.xml']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+
+\noindent\parbox[c]{.18\textwidth}{\includegraphics[width=2.8cm]{logouni}}\hfill
+\parbox[c]{1\textwidth}{\raggedright%
+	{\large\textbf{Universidad Nacional de Ingeniería} \par\smallskip}
+	{\large\textbf{Facultad de Ciencias} \par\smallskip}
+	{\large\textbf{Escuela Profesional de Matemática}\hfil\qquad\qquad\qquad\textbf{Ciclo 2025-II}}
+}
+
+\begin{center}\bfseries\large
+	Práctica Dirigida N$^{\circ}$3 de Teoría de Punto Fijo (CM 071)
+\end{center}
+
+\vspace{-0.5cm}
+
+\hrulefill
+\vspace{-2.5mm}
+
+\rule{16.5cm}{0.8mm}
+
+\input{questions3a}
+\input{questions3b}
+\input{questions3c}
+
+% \nocite{*}
+\printbibliography[title={Referencias},heading=bibintoc]
+
+\vfill
+\begin{flushright}\bfseries
+	Lima, 24 de octubre de 2025.
+\end{flushright}
+
+\clearpage
+
+\appendix
+
+\input{fixedpoint}
+\end{document}
+% https://web.mat.bham.ac.uk/galway17/talks/jon.pdf

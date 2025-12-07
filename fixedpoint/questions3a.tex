@@ -1,0 +1,424 @@
+\subsection*{Teoremas de punto fijo en espacios métricos completos}
+
+\begin{questions}
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación.
+	Si $\exists k\in\mathbb{N}$ tal que
+	$f^{\left(k\right)}\colon X\to X$ es contractiva, entonces
+	\begin{math}
+		\operatorname{Fix}\left(f\right)=
+		\left\{x^{\ast}\right\}
+	\end{math}
+	y $\forall x\in X$:
+	\begin{math}
+		f^{\left(n\right)}\left(x\right)
+		\xrightarrow[n\to\infty]{}
+		x^{\ast}
+	\end{math}.
+
+	\textbf{Sugerencia}:
+	Sean $X\neq\emptyset$ y $f\colon X\to X$.
+	Si $\exists k\in\mathbb{N}$ tal que
+	\begin{math}
+		\operatorname{Fix}\left(f^{\left(k\right)}\right)=
+		\left\{x^{\ast}\right\}
+	\end{math}, entonces
+	\begin{math}
+		\operatorname{Fix}\left(f\right)=
+		\left\{x^{\ast}\right\}
+	\end{math}.
+
+	\begin{solutionordottedlines}
+	\end{solutionordottedlines}
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico completo y
+	\begin{math}
+		\left\{
+		f_{n}
+		\right\}_{n\in\mathbb{N}}\subset
+		C\left(X\right)
+	\end{math}.
+	Suponga que $\forall n\in\mathbb{N}$:
+	$x_{n}\in\operatorname{Fix}\left(f_{n}\right)$.
+	\begin{parts}
+		\part
+
+		Sean ${\left\{x_{n}\right\}}_{n\in\mathbb{N}}\subset X$,
+		$x^{\ast}\in X$ y $f_{n}\rightrightarrows f$ convergente
+		uniformemente en $X$.
+		\begin{enumerate}[(i)]
+			\item
+
+			      Si $x_{n}\xrightarrow[n\to\infty]{}x^{\ast}$ o si
+			      \begin{math}
+				      f\left(x_{n}\right)\xrightarrow[n\to\infty]{}
+				      x^{\ast}
+			      \end{math},
+			      entonces
+			      $x^{\ast}\in\operatorname{Fix}\left(f\right)$.
+
+			\item
+
+			      Si $f\colon X\to X$ es contractiva y
+			      \begin{math}
+				      \operatorname{Fix}\left(f\right)=
+				      \left\{x^{\ast}\right\}
+			      \end{math},
+			      entonces
+			      $x_{n}\xrightarrow[n\to\infty]{}x^{\ast}$.
+		\end{enumerate}
+
+		\part
+
+		Sean $f_{n}\xrightarrow[n\to\infty]{}f$ una sucesión de funciones
+		lipschitzianas con $L\left(f_{n}\right)\leq M<\infty$ que
+		converge puntualmente en $X$.
+		\begin{enumerate}[(i)]
+			\item
+
+			      $f\colon X\to X$ es lipschitziana con
+			      $L\left(f\right)\leq M$.
+
+			\item
+
+			      Si $x_{n}\xrightarrow[n\to\infty]{}x^{\ast}$, entonces
+			      $x^{\ast}\in\operatorname{Fix}\left(f\right)$.
+
+			\item
+
+			      Si $M<1$, entonces
+			      $x_{n}\xrightarrow[n\to\infty]{}x^{\ast}$ y
+			      \begin{math}
+				      \operatorname{Fix}\left(f\right)=
+				      \left\{x^{\ast}\right\}
+			      \end{math}.
+		\end{enumerate}
+
+		\part
+
+		Si $\forall n\in\mathbb{N}$: $L\left(f_{n}\right)\leq M<1$ en
+		(b)~(\textsc{iii}) no puede ser relajado a
+		$L\left(f_{n}\right)<1$ incluso si $L\left(f\right)<1$.
+		Defina
+		\vspace*{-\baselineskip}\setlength\belowdisplayshortskip{0pt}
+		\begin{align*}
+			f_{n}\colon\ell^{2}                    & \longrightarrow\ell^{2} \\
+			\left(x_{1},\dotsc,x_{n},\dotsc\right) & \longmapsto
+			\left(
+			0,\dotsc,\left(1-\frac{1}{n}\right)x_{n}+\frac{1}{n},0,\dotsc
+			\right).
+		\end{align*}
+		Entonces, $\forall n\in\mathbb{N}$: $L\left(f_{n}\right)<1$,
+		\begin{math}
+			\left\|e_{n}\right\|=
+			1
+		\end{math}
+		y $f_{n}\xrightarrow[n\to\infty]{}0$ converge puntualmente a la
+		aplicación nula.
+	\end{parts}
+
+	\begin{solutionordottedlines}
+	\end{solutionordottedlines}
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico completo localmente
+	compacto y $f\colon X\to X$ una aplicación contractiva.
+	Si
+	\begin{math}
+		{\left\{f_{n}\right\}}_{n\in\mathbb{N}}\xrightarrow[n\to\infty]{}f
+	\end{math}
+	es una sucesión de aplicaciones contractivas convergente
+	puntualmente, $x^{\ast}\in\operatorname{Fix}\left(f\right)$ y
+	$\forall n\in\mathbb{N}$:
+	$x_{n}\in\operatorname{Fix}\left(f_{n}\right)$,
+	entonces $x_{n}\xrightarrow[n\to\infty]{}x^{\ast}$.
+	(\cite{Nadler1968}~\Citeauthor{Nadler1968},~\citeyear{Nadler1968}).
+
+	\question(Versión parametrizada del teorema de Banach).
+	Sea $\left(X,d\right)$ un espacio métrico completo.
+	$\left(\Lambda,\varrho\right)$ un espacio métrico y
+	${\left\{H_{\lambda}\right\}}_{\lambda\in\Lambda}$ una familia de
+	aplicaciones contractivas de $X$ en sí mismo.
+	Suponga que $H\colon X\times\Lambda\to X$ es continua en la segunda
+	variable y $\forall\lambda\in\Lambda$:
+	\begin{math}
+		\operatorname{Fix}\left(H_{\lambda}\right)=
+		\left\{x_{\lambda}\right\}
+	\end{math}.
+	\begin{parts}
+		\part
+
+		Si $\forall\lambda\in\Lambda$: $H_{\lambda}$ son
+		$\alpha$-contractiva con $0<\alpha<1$, entonces
+		$\lambda\longmapsto x_{\lambda}$ es continua.
+
+		\part
+
+		Si además, $\left(X,d\right)$ es un espacio métrico localmente
+		compacto, entonces $\lambda\longmapsto x_{\lambda}$ es continua.
+	\end{parts}
+	\textbf{Sugerencia}: Para (b), use la pregunta~3.
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico completo,
+	$f\colon X\to X$ una aplicación y
+	\begin{math}
+		{\left\{\alpha_{n}\right\}}_{n\in\mathbb{N}}\subset
+		\mathbb{R}_{\geq0}
+	\end{math}
+	con $\sum_{n=1}^{\infty}\alpha_{n}<\infty$.
+	Si $\forall n\in\mathbb{N}$:
+	$\forall x,y\in X$:
+	\begin{math}
+		d\left(
+		f^{\left(n\right)}\left(x\right),
+		f^{\left(n\right)}\left(y\right)
+		\right)\leq
+		\alpha_{n}d\left(x,y\right)
+	\end{math},
+	entonces
+	$\operatorname{Fix}\left(f\right)=\left\{x^{\ast}\right\}$ y
+	$\forall x\in X$:
+	$f^{\left(n\right)}\left(x\right)\xrightarrow[n\to\infty]{}x^{\ast}$
+	(\cite{Weissinger1952}~\Citeauthor{Weissinger1952},~\citeyear{Weissinger1952}).
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación.
+	Si $\forall S\subset X$ cerrado con\linebreak
+	$\operatorname{diam}\left(S\right)>0$:
+	$\exists q\in\left[0,1\right)$ tal que
+	\begin{math}
+		\operatorname{diam}\left(f\left(S\right)\right)\leq
+		q\operatorname{diam}\left(S\right)
+	\end{math},
+	entonces $\operatorname{Fix}\left(f\right)\neq\emptyset$
+	(\cite{Amann1982}~\Citeauthor{Amann1982},~\citeyear{Amann1982}).
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación tal que $\forall x,y\in X$ con $x\neq y$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)<
+		d\left(x,y\right)
+	\end{math}.
+	\begin{parts}
+		\part
+
+		Si $\exists x_{0}\in X$ tal que
+		\begin{math}
+			{\left\{f^{\left(n\right)}\left(x_{0}\right)\right\}}_{n\in\mathbb{N}}
+		\end{math}
+		posee una subsucesión convergente, entonces
+		$\left|\operatorname{Fix}\left(f\right)\right|=1$.
+
+		\part
+
+		Si $\overline{f\left(X\right)}$ es compacto, entonces
+		\begin{math}
+			\operatorname{Fix}\left(f\right)=
+			\left\{x^{\ast}\right\}
+		\end{math}
+		y $\forall x\in X$:
+		\begin{math}
+			f^{\left(n\right)}\left(x\right)\xrightarrow[n\to\infty]{}
+			x^{\ast}
+		\end{math}.
+
+		\part
+
+		Construya una aplicación $f\colon X\to X$ que satisface la
+		desigualdad de arriba excepto en los puntos fijos y tal que
+		$\exists x_{0},y_{0}\in X$, la sucesión
+		\begin{math}
+			d\left(
+			f^{\left(n\right)}\left(x_{0}\right),
+			f^{\left(n\right)}\left(y_{0}\right)\right)
+			\nrightarrow 0
+		\end{math}.
+
+		\textbf{Sugerencia}:
+		Considere la aplicación
+		$x\longmapsto\ln\left(1+\exp\left(x\right)\right)$ de $\mathbb{R}$
+		en sí mismo.
+	\end{parts}
+
+	\question
+
+	Sea $\left(Y,d\right)$ un espacio métrico completo.
+	$f\colon Y\to Y$ es expansivo si y solo si
+	$\exists\beta>1$ tal que $\forall x,y\in Y$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)\geq
+		\beta d\left(x,y\right)
+	\end{math}.
+	Suponga que $f\colon Y\to Y$ es sobreyectiva y expansiva.
+	\begin{parts}
+		\part
+
+		$f$ es biyectiva.
+
+		\part
+
+		\begin{math}
+			\operatorname{Fix}\left(f\right)=
+			\left\{x^{\ast}\right\}
+		\end{math}
+		y $\forall y\in Y$:
+		$f^{-n}\left(y\right)\xrightarrow[n\to\infty]{}x^{\ast}$.
+	\end{parts}
+
+	\question
+
+	Sean $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach y
+	$f\colon E\to E$ un operador lineal tal que
+	$\exists{\left(I-f\right)}^{-1}\colon E\to E$.
+
+	\begin{parts}
+		\part
+
+		Si $g\colon E\to E$ es lipschitziana con
+		$\left\|{\left(I-f\right)}^{-1}\right\|<\frac{1}{L\left(g\right)}$,
+		entonces $\left|\operatorname{Fix}\left(f+g\right)\right|=1$.
+
+		\part
+
+		Sean $r>0$, $q\in\left(0,1\right)$ y $K=K\left(0,r\right)$.
+		Suponga que $g\colon K\left(0,r\right)\to E$ es lipschitziana tal
+		que
+		\begin{math}
+			\left\|g\left(0\right)\right\|\leq
+			\frac{\left(1-q\right)r}{\left\|{\left(I-F\right)}^{-1}\right\|}
+		\end{math}.
+		Si
+		\begin{math}
+			\left\|\left(I-F\right)^{-1}\right\|<
+			\frac{q}{L\left(g\right)}
+		\end{math},
+		entonces $\left|\operatorname{Fix}\left(f+g\right)\right|=1$.
+	\end{parts}
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico completo,
+	$f\colon X\to X$ una aplicación $\alpha$-contractiva y
+	$x^{\ast}\in\operatorname{Fix}\left(f\right)$.
+	Si $\forall\varepsilon>0$: $\exists\beta>0$ con $\alpha+\beta<1$
+	tal que $\forall g\colon X\to X$ es
+	$\left(\alpha+\beta\right)$-contractiva, entonces $\forall x\in X$
+	con $d\left(f\left(x\right),g\left(x\right)\right)<\beta$:
+	\begin{math}
+		y_{0}=
+		g\left(x^{\ast}\right)\in
+		B\left(x^{\ast},\varepsilon\right)
+	\end{math}.
+
+	\question
+
+	Sean $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach,
+	$U\subset E$ un conjunto abierto y acotado tal que $0\in U$.
+	Si $f,g\colon\overline{U}\to E$ son dos aplicaciones contractivas
+	tales que $f\big|_{\partial U}=g\big|_{\partial U}$.
+	Entonces,
+	\begin{math}
+		\operatorname{Fix}(f)\neq\emptyset\iff
+		\operatorname{Fix}\left(g\right)\neq\emptyset
+	\end{math}.
+
+	\question
+
+	Sean $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach y
+	$U\subset E$ un conjunto abierto y acotado tal que $U=-U$ y
+	$V\subset U$ es una vecindad abierta del origen tal que
+	$\overline{V}\subset U$.
+	Si $f\colon\overline{U}\to E$ es una aplicación contractiva tal que
+	\begin{parts}
+		\part
+
+		$\forall x\in\partial U$:
+		$f\left(x\right)=-f\left(-x\right)$.
+
+		\part
+		$\exists x_{0}$ tal que $\forall x\in\partial V$:
+		$\forall\lambda\geq0$: $x\neq f\left(x\right)+\lambda x_{0}$.
+	\end{parts}
+	Entonces,
+	\begin{math}
+		\operatorname{Fix}\left(f\right)=
+		\left\{x^{\ast}\right\}\subset
+		\overline{U}-V
+	\end{math}.
+
+	\question
+
+	Sean $\left(E=A\oplus B,\left\|\cdot\right\|\right)$ un espacio de
+	Banach representado como una suma directa de dos subespacios
+	vectoriales cerrados $A$ y $B$ con proyecciones
+	$\Pi_{A}\colon E\to A$ y $\Pi_{B}\colon E\to B$,
+	$F\colon A\to E$ y $G\colon B\to E$ dos aplicaciones lipschitzianas
+	y $f\colon A\to E$, $g\colon B\to E$ dados por
+	$a\longmapsto a-F\left(a\right)$ y
+	$b\longmapsto b-G\left(b\right)$, respectivamente.
+	Si
+	\begin{math}
+		\left\|\Pi_{A}\right\|
+		L\left(F\right)+
+		\left\|\Pi_{B}\right\|
+		L\left(G\right)<1
+	\end{math},
+	entonces $\left|f\left(A\right)\cap g\left(B\right)\right|=1$.
+
+	\textbf{Sugerencia}:
+	Pruebe que si $H\colon E\to E$ es contractiva, entonces
+	$x\longmapsto x+H\left(x\right)$ es un homeomorfismo.
+
+	\question
+	(Teorema de Banach discreto).
+	Sea $Y\neq\emptyset$ un conjunto y
+	\begin{math}
+		\left\{R_{n}\right\}_{n\in\mathbb{N}\cup\left\{0\right\}}\subset
+		Y\times Y
+	\end{math}
+	una sucesión de relaciones de equivalencias tales que
+	\begin{parts}
+		\part
+
+		$\forall n\in\mathbb{N}\cup\left\{0\right\}$:
+		$R_{n+1}\subset R_{n}$, donde $R_{0}=Y\times Y$.
+
+		\part
+
+		\begin{math}
+			\bigcap_{n=0}^{\infty}R_{n}=
+			\left\{\left(y_{1},y_{2}\right)\in
+			Y\times Y\mid y_{1}=y_{2}\right\}
+		\end{math}.
+
+		\part
+
+		Si
+		\begin{math}
+			\forall{\left\{y_{n}\right\}}_{n\in\mathbb{N}\cup\left\{0\right\}}\subset
+			Y
+		\end{math}
+		tal que $\forall n\in\mathbb{N}\cup\left\{0\right\}$: $\left(y_{n},y_{n+1}\right)\in R_{n}$,
+		entonces $\exists y\in Y$ tal que $\forall n\in\mathbb{N}\cup\left\{0\right\}$:
+		$\left(y_{n},y\right)\in R_{n}$.
+	\end{parts}
+	Sea $f\colon Y\to Y$ una aplicación tal que
+	$\forall\left(x,y\right)\in R_{n}$:
+	$\left(f\left(x\right),f\left(y\right)\right)\in R_{n+1}$.
+	Entonces,
+	$\operatorname{Fix}\left(f\right)=\left\{x^{\ast}\right\}$ y
+	$\forall n\in\mathbb{N}$: $\forall y\in Y$:
+	$\left(f^{n}\left(y\right),x^{\ast}\right)\in R_{n}$.
+	(\cite{Eilenberg1946}~\Citeauthor{Eilenberg1946},~\citeyear{Eilenberg1946}).
+\end{questions}

@@ -1,0 +1,357 @@
+\subsection*{Extensiones del teorema de Banach}
+
+\begin{questions}
+	\question
+
+	Un espacio métrico $\left(X,d\right)$ es $\varepsilon$-encadenable
+	si y solo si $\forall x,y\in X$:
+	\begin{math}
+		\exists
+		\left\{
+		x=x_{0},
+		x_{1},
+		\ldots,
+		x_{n},
+		x_{n+1}=y
+		\right\}\subset
+		X
+	\end{math}
+	tal que $\forall i\in\left\{0,\dotsc,n\right\}$:
+	$d\left(x_{i},x_{i+1}\right)<\varepsilon$.
+	Sea $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación.
+	Si $\left(X,d\right)$ es $\varepsilon$-encadenable y
+	$\exists q\in\left[0,1\right)$ tal que
+	$d\left(x, y\right)<\varepsilon$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)\leq
+		qd\left(x,y\right)
+	\end{math},
+	entonces $\left|\operatorname{Fix}\left(f\right)\right|=1$
+	(\cite{Edelstein1961}~\Citeauthor{Edelstein1961},~\citeyear{Edelstein1961}).
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación tal que $\forall x,y\in X$:
+	$d\left(f\left(x\right),f\left(y\right)\right)\leq\varphi[d\left(x,y\right)]$
+	donde $\varphi\colon\mathbb{R}^{+}\to\mathbb{R}^{+}$ es
+	cualquier función tal que
+	\begin{parts}
+		\part
+
+		$\varphi$ es no decreciente.
+
+		\part
+
+		$\forall t>0$: $\varphi\left(t\right)<t$.
+
+		\part
+
+		$\varphi$ es continua por la derecha.
+	\end{parts}
+	Si
+	\begin{math}
+		\operatorname{Fix}\left(f\right)=
+		\left\{x^{\ast}\right\}
+	\end{math}
+	y $\forall x\in X$:
+	\begin{math}
+		f^{\left(n\right)}\left(x\right)
+		\xrightarrow[n\to\infty]{}
+		x^{\ast}
+	\end{math}.
+	(\cite{Browder1968}~\Citeauthor{Browder1968},~\citeyear{Browder1968}).
+
+	\textbf{Sugerencia}:
+	Aplique el Teorema~\ref{thm:1} mostrando que $\forall t>0$:
+	$\varphi^{\left(n\right)}\left(t\right)\xrightarrow[n\to\infty]{}0$.
+	\begin{theorem}\label{thm:1}
+		Sean $\left(X,d\right)$ un espacio métrico completo y
+		$f\colon X\to X$ una aplicación tal que $\forall x,y\in X$:
+		\begin{math}
+			d\left(f\left(x\right),f\left(y\right)\right)\leq
+			\varphi\left[d\left(x,y\right)\right]
+		\end{math},
+		donde $\varphi\colon\mathbb{R}^{+}\to\mathbb{R}^{+}$ es cualquier
+		función no decreciente tal que $\forall t>0$:
+		\begin{math}
+			\varphi^{\left(n\right)}\left(t\right)
+			\xrightarrow[n\to\infty]{}0
+		\end{math}.
+		Si
+		\begin{math}
+			\operatorname{Fix}\left(f\right)=
+			\left\{x^{\ast}\right\}
+		\end{math}
+		y $\forall x\in X$:
+		\begin{math}
+			f^{\left(n\right)}\left(x\right)
+			\xrightarrow[n\to\infty]{}
+			x^{\ast}
+		\end{math}.
+	\end{theorem}
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación continua.
+	Si $\exists q\in\left[0,1\right)$ tal que
+	$\forall x, y \in X$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)\leq
+		q
+		\max\left\{
+		d\left(x,y\right),
+		d\left(x,f\left(x\right)\right),
+		d\left(y,f\left(y\right)\right),
+		d\left(x,f\left(y\right)\right),
+		d\left(y,f\left(x\right)\right)
+		\right\}
+	\end{math},
+	entonces
+	\begin{math}
+		\operatorname{Fix}\left(f\right)=
+		\left\{x^{\ast}\right\}
+	\end{math}
+	y $\forall x\in X$:
+	\begin{math}
+		f^{\left(n\right)}\left(x\right)
+		\xrightarrow[n\to\infty]{}
+		x^{\ast}
+	\end{math}
+	(\cite{Ciric1971}~\Citeauthor{Ciric1971},~\citeyear{Ciric1971}).
+
+	\textbf{Sugerencia}:
+	Use
+	\begin{math}
+		\operatorname{diam}
+		\left(
+		\operatorname{orbit}
+		f^{n}\left(x\right)
+		\right)\leq
+		k
+		\operatorname{diam}
+		\left(
+		\operatorname{orbit}
+		f^{n-1}\left(x\right)
+		\right)
+	\end{math}.
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación continua.
+	Suponga que $\forall\varepsilon>0$: $\forall x,y\in X$:
+	$\exists n\in\mathbb{N}$ tal que
+	\begin{math}
+		d\left(
+		f^{\left(n\right)}\left(x\right),
+		f^{\left(n\right)}\left(y\right)
+		\right)<
+		\varepsilon
+	\end{math}.
+	Si $\varphi\colon X\to\mathbb{R}^{+}$ es una función definida por
+	\begin{math}
+		\varphi\left(x\right)\coloneqq
+		d\left(x,f\left(x\right)\right)
+	\end{math}
+	tal que
+	$\forall a>0$:
+	\begin{math}
+		\inf
+		\left\{
+		\varphi\left(x\right)+
+		\varphi\left(y\right)\mid
+		d\left(x,y\right)\geq a
+		\right\}>0
+	\end{math},
+	entonces $\operatorname{Fix}\left(f\right)\neq\emptyset$
+	(\cite{Bailey1966}~\Citeauthor{Bailey1966},~\citeyear{Bailey1966}).
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico completo y
+	$f\colon X\to X$ una aplicación continua.
+	Si $\exists n\in\mathbb{Z}$ y $q\in\left[0,1\right)$ tales que
+	$\forall x,y,z\in X$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)\leq
+		q
+		\left[
+			d\left(x,f^{\left(n\right)}\left(z\right)\right)+
+			d\left(y,f^{\left(n\right)}\left(z\right)\right)
+			\right]
+	\end{math},
+	entonces $\left|\operatorname{Fix}\left(f\right)\right|=1$
+	(\cite{Pittnauer1975}~\Citeauthor{Pittnauer1975},~\citeyear{Pittnauer1975}).
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico y $A\subset X$ un
+	conjunto compacto.
+	Si $\varphi\colon X\to\mathbb{R}^{+}$ es una función tal que
+	$\forall a>0$:
+	\begin{math}
+		\inf
+		\left\{
+		\varphi\left(x\right)\mid
+		d\left(x,A\right)\geq a
+		\right\}>0
+	\end{math},
+	entonces $\forall{\left\{x_{n}\right\}}_{n\in\mathbb{N}}\subset X$
+	con $\varphi\left(x_{n}\right)\xrightarrow[n\to\infty]{}0$
+	posee una subsucesión convergente hacia algún punto de $A$.
+
+	\question
+
+	Sea $\left(X,d\right)$ un espacio métrico y $f\colon X\to X$ una
+	aplicación tal que $\forall x,y\in X$, $x\neq y$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)<
+		d\left(x,y\right)
+	\end{math}.
+	Si $\exists z\in X$ tal que
+	\begin{math}
+		{
+			\left\{f^{\left(n\right)}\left(z\right)\right\}
+		}_{n\in\mathbb{N}}\subset X
+	\end{math}
+	posee una subsucesión convergente a $x^{\ast}\in X$,
+	entonces $x^{\ast}\in\operatorname{Fix}\left(f\right)$.
+
+	\textbf{Sugerencia}:
+	Use la pregunta 6 con
+	\begin{math}
+		\varphi\left(x\right)\coloneqq
+		d\left(x,f\left(x\right)\right)-
+		d\left(f\left(x\right),f^{\left(2\right)}\left(x\right)\right)+
+		d\left(x,u\right)
+	\end{math}.
+
+	\question
+
+	Sean $\left(X,d\right)$ es un espacio métrico y $f\colon X\to X$
+	una aplicación.
+	Denotamos el diámetro de la órbita
+	\begin{math}
+		\left\{
+		f^{\left(n\right)}\left(x\right)\mid
+		n\in\mathbb{N}\cup\left\{0\right\}
+		\right\}
+	\end{math}
+	de $x\in X$
+	por $\delta\left(x\right)$ y
+	decimos que $f$ contrae órbitas si y solo si
+	$\forall x\in X$ con $\delta\left(x\right)>0$:
+	$\exists n\in\mathbb{N}\cup\left\{0\right\}$ tal que
+	\begin{math}
+		\delta\left(
+		f^{\left(n\right)}\left(x\right)
+		\right)<
+		\delta\left(x\right)
+	\end{math}.
+
+	Suponga que $\left(X,d\right)$ un espacio métrico acotado y
+	$f\colon X\to X$ una aplicación tal que $\forall x,y\in X$:
+	\begin{math}
+		d\left(f\left(x\right),f\left(y\right)\right)\leq
+		d\left(x,y\right)
+	\end{math}.
+	Si $\exists z\in X$ tal que
+	\begin{math}
+		{
+			\left\{f^{\left(n\right)}\left(z\right)\right\}
+		}_{n\in\mathbb{N}}
+	\end{math}
+	posee una
+	subsucesión convergente a $x^{\ast}$ y $f$ contrae órbitas,
+	entonces $x^{\ast}\in\operatorname{Fix}\left(f\right)$.
+
+	\textbf{Sugerencia}:
+	Muestre que $x\longmapsto\delta\left(x\right)$ es continua en $X$,
+	entonces aplique la pregunta 6 usando $\forall s\geq 1$:
+	\begin{math}
+		\varphi\left(x\right)\coloneqq
+		\delta\left(x\right)-
+		\delta\left(f^{\left(s\right)}\left(x\right)\right)+
+		d\left(x,x^{\ast}\right)
+	\end{math}.
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico y $f\colon X\to X$ una
+	aplicación continua.
+	Si $\exists z\in X$ tal que
+	\begin{math}
+		{\left\{f^{\left(n\right)}\left(z\right)\right\}}_{n\in\mathbb{N}}
+	\end{math}
+	posee una subsucesión convergente
+	\begin{math}
+		\left\{f^{\left(n_{k}\right)}\left(z\right)\right\}_{k\in\mathbb{N}}
+	\end{math}
+	con
+	\begin{math}
+		d\left(
+		f^{\left(n_{k}\right)}\left(z\right),
+		f^{\left(1+n_{k}\right)}\left(z\right)
+		\right)
+		\xrightarrow[k\to\infty]{}0
+	\end{math},
+	entonces $\operatorname{Fix}\left(f\right)\neq\emptyset$.
+
+	\textbf{Sugerencia}:
+	Use la pregunta 6 con
+	\begin{math}
+		\varphi\left(x\right)\coloneqq
+		d\left(x,x^{\ast}\right)+
+		d\left(f\left(x\right),x^{\ast}\right)
+	\end{math},
+	donde
+	\begin{math}
+		x^{\ast}=
+		\lim_{k\to\infty}
+		f^{\left(n_{k}\right)}\left(x\right)
+	\end{math}.
+
+	\question
+
+	Sean $\left(X,d\right)$ un espacio métrico y $f\colon X\to X$ una
+	aplicación continua.
+	Suponga que $\exists V\colon X\times X\to\mathbb{R}^{+}$ una
+	función continua con
+	$V^{-1}\left(0\right)\subset\operatorname{graph}\left(f\right)$
+	tal que $\inf\left\{V\left(x,x\right)\mid x\in X\right\}=0$.
+	\begin{parts}
+		\part
+
+		Si $A\subset X$ es un conjunto compacto y
+		$\varphi\colon X\to\mathbb{R}^{+}$ es una función definida por
+		$\varphi\left(x\right)\coloneqq V\left(x,x\right)$ tal que
+		$\forall a>0$:
+		\begin{math}
+			\inf
+			\left\{
+			\varphi\left(x\right)\mid
+			d\left(x,A\right)\geq a
+			\right\}>0
+		\end{math},
+		entonces $\operatorname{Fix}\left(f\right)\neq\emptyset$.
+
+		\part
+
+		Si además $\left(X,d\right)$ es un espacio métrico completo y
+		$\varphi\colon X\to\mathbb{R}^{+}$ es una función definida por
+		$\varphi\left(x\right)\coloneqq V\left(x,x\right)$ tal que
+		$\forall a>0$:
+		\begin{math}
+			\inf
+			\left\{
+			\varphi\left(x\right)+
+			\varphi\left(y\right)\mid
+			d\left(x,y\right)\geq a
+			\right\}>0
+		\end{math},
+		entonces $\operatorname{Fix}\left(f\right)\neq\emptyset$.
+	\end{parts}
+\end{questions}

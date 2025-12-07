@@ -1,0 +1,804 @@
+\question
+
+Sean $X\subset\mathbb{R}$ un conjunto abierto y
+$f\colon X\to\mathbb{R}$ una función derivable hasta (al menos) el
+orden $n\in\mathbb{N}$.
+Dado $a\in X$, definimos el $n$-ésimo polinomio de Taylor de $f$
+alrededor de $a$ por
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	T_{n}\left(x\right)\coloneqq
+	\sum_{k=0}^{n}
+	\frac{f^{\left(k\right)}\left(a\right)}{k!}
+	\left(x-a\right)^{k},
+\end{equation*}
+donde $f^{\left(0\right)}=f$ y $f^{\left(k\right)}$ denota la
+$k$-ésima derivada de $f$.
+El $n$-ésimo resto de Taylor de $f$ alrededor de $a$ es
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	R_{n}\left(x\right)\coloneqq
+	f\left(x\right)-
+	T_{n}\left(x\right)\text{ tal que }
+	\frac{R_{n}\left(x\right)}{{\left(x-a\right)}^{k}}
+	\xrightarrow[x\to a]{}0
+\end{equation*}
+
+Pruebe que si $f$ es $n$-veces derivable en $a$, entonces
+$\forall k\in\left\{0,\dotsc,n\right\}$:
+\begin{math}
+	T^{\left(k\right)}_{n}\left(a\right)=
+	f^{\left(k\right)}\left(a\right).
+\end{math}
+
+\question
+
+Sea $I\subset\mathbb{R}$ un intervalo abierto tal que $a\in I$.
+Si $f\colon I\to\mathbb{R}$ es derivable,
+entonces $\forall x\in I\setminus\left\{a\right\}$,
+\begin{math}
+	\exists c\in
+	\left(
+	\min\left\{a,x\right\},
+	\max\left\{a,x\right\}
+	\right)
+\end{math}
+tal que
+\begin{math}
+	R_{0}\left(x\right)=
+	f^{\prime}\left(c\right)
+	\left(x-a\right)
+\end{math}.
+
+\question
+
+Use el Teorema~\ref{thm:taylor} y $T_{n}\left(x\right)$ de
+$\exp\left(x\right)$ alrededor de $0$ para probar que
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\forall x\in\mathbb{R}:
+	\exp\left(x\right)=
+	\sum_{k=0}^{\infty}\frac{x^{k}}{k!}=
+	\lim_{n\to\infty}\sum_{k=0}^{n}\frac{x^{k}}{k!}.
+\end{equation*}
+Además, pruebe que la constante de Euler
+$e\in\mathbb{R}\setminus\mathbb{Q}$, con ayuda del
+Teorema~\ref{thm:taylor}, es decir,
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\exists c_{n}\in
+	\left(0,1\right)\text{ tal que }
+	e=
+	\sum_{k=0}^{n}
+	\frac{1}{k!}+
+	\frac{e^{c_{n}}}{\left(n+1\right)!}.
+\end{equation*}
+
+\begin{theorem}[Teorema de Taylor\footnote{Brook Taylor (18 de agosto de 1685 - 29 de diciembre de 1731).}]\label{thm:taylor}
+	Sea $I\subset\mathbb{R}$ un intervalo abierto tal que $a,x\in I$
+	con $x\neq a$.
+	Si $f\colon I\to\mathbb{R}$ es $n$-veces derivable y
+	\begin{math}
+		\forall t\in
+		\left(
+		\min\left\{a,x\right\},
+		\max\left\{a,x\right\}
+		\right)
+	\end{math}:
+	$\exists f^{\left(n+1\right)}\left(t\right)\in\mathbb{R}$,
+	entonces
+	\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+	\begin{equation*}
+		\exists c\in I\text{ tal que }
+		R_{n}\left(x\right)=
+		\frac{f^{\left(n+1\right)}\left(c\right)}{\left(n+1\right)!}
+		{\left(x-a\right)}^{n+1}.
+	\end{equation*}
+\end{theorem}
+
+\question
+
+Encuentre los polinomios de Taylor
+$T_{2n}\left(x\right)$ y $T_{2n+1}\left(x\right)$
+de $f\left(x\right)=\cos\left(x\right)$ alrededor de $0$ y pruebe que
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\forall x\in\left(0,\pi\right):
+	1-\frac{x^{2}}{2!}+\frac{x^{4}}{4!}>
+	\cos\left(x\right)>
+	1-\frac{x^{2}}{2!}+\frac{x^{4}}{4!}-\frac{x^{6}}{6!}.
+\end{equation*}
+
+\question
+
+Use el Teorema~\ref{thm:taylor} para probar que
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{multicols}{2}
+	\begin{parts}
+		\part
+
+		\begin{math}
+			\forall x\in\mathbb{R}
+		\end{math}:
+		\begin{math}\displaystyle
+			\sen\left(x\right)=
+			\sum_{n=0}^{\infty}
+			\frac{{\left(-1\right)}^{n}x^{2n+1}}{\left(2n+1\right)!}
+		\end{math}.
+
+		\part
+
+		\begin{math}
+			\forall x\in\mathbb{R}
+		\end{math}:
+		\begin{math}\displaystyle
+			\cos\left(x\right)=
+			\sum_{n=0}^{\infty}
+			\frac{{\left(-1\right)}^{n}x^{2n}}{\left(2n\right)!}
+		\end{math}.
+
+
+		\part
+
+		\begin{math}
+			\forall x\in\left[1,2\right)
+		\end{math}:
+		\begin{math}\displaystyle
+			\ln\left(x\right)=
+			\sum_{n=1}^{\infty}
+			\frac{{\left(-1\right)}^{n-1}{\left(x-1\right)}^{n}}{n}
+		\end{math}.
+
+		\part
+
+		\begin{math}
+			\forall\left|x\right|\leq 1
+		\end{math}:
+		\begin{math}\displaystyle
+			\arctan\left(x\right)=
+			\sum_{n=1}^{\infty}
+			\frac{{\left(-1\right)}^{n}{x}^{2n+1}}{2n+1}
+		\end{math}.
+	\end{parts}
+\end{multicols}
+
+\question
+
+Sea $I\subset\mathbb{R}$ un intervalo abierto tal que $a\in I$.
+Si $f\colon I\to\mathbb{R}$ es $n$-veces derivable y $\exists M>0$
+tal que $\forall x\in I$:
+$\forall n\in\mathbb{N}$:
+$\left|f^{\left(n\right)}\left(x\right)\right|\leq M^{n}$,
+entonces
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\lim_{n\to\infty}
+	T_{n}\left(x\right)=
+	f\left(x\right)=
+	\sum_{n=0}^{\infty}
+	\frac{f^{\left(n\right)}\left(a\right)}{n!}{\left(x-a\right)}^{n}.
+\end{equation*}
+
+% \question
+
+% Sean $n\geq 2$, $a\in\mathbb{R}$ y $\varepsilon>0$.
+% Si $f\colon\left(a-\varepsilon,a+\varepsilon\right)\to\mathbb{R}$ es
+% $n$-veces derivable y $\forall k\in\left\{1,\dotsc,n-1\right\}$:
+% $f^{\left(k\right)}\left(a\right)=0$ y
+% $f^{\left(n\right)}\left(a\right)\neq 0$.
+% \begin{parts}
+% 	\part
+
+% 	Si $n$ es par y $f^{\left(n\right)}\left(a\right)>0$, entonces
+% 	$f$ tiene un mínimo local en $a$.
+
+% 	\part
+
+% 	Si $n$ es par y $f^{\left(n\right)}\left(a\right)<0$, entonces
+% 	$f$ tiene un máximo local en $a$.
+
+% 	\part
+
+% 	Si $n$ es impar, entonces $f$ no tiene ni mínimo ni máximo local
+% 	en $a$.
+% \end{parts}
+
+% \question
+
+% Suponga que $f,g,s,c\colon\mathbb{R}\to\mathbb{R}$ son funciones
+% derivables tales que
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{align*}
+% 	f^{\prime}      & =g.                 &
+% 	g^{\prime}      & =-f.                &
+% 	s^{\prime}      & =c.                   \\
+% 	c^{\prime}      & =-s.                &
+% 	f\left(0\right) & =s\left(0\right)=0. &
+% 	g\left(0\right) & =c\left(0\right)=1
+% \end{align*}
+% Use el Teorema~\ref{thm:taylor} para $\left(f-s\right)\left(x\right)$
+% y que $\forall n\in\mathbb{N}$: $\exists B>0$ tal que
+% \begin{math}
+% 	\left|\left(f-s\right)\left(x\right)\right|\leq
+% 	\frac{B\left|x^{n+1}\right|}{\left(n+1\right)!}
+% \end{math}
+% para probar que $f=s$ y $g=c$.
+
+% \question
+
+% Si $f,g\colon\left[a,b\right]\to\mathbb{R}$ son continuas y
+% derivables en $\left(a,b\right)$, entonces
+% $\exists c\in\left(a,b\right)$ tal que
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{equation*}
+% 	g^{\prime}\left(c\right)
+% 	\left[f\left(b\right)-f\left(a\right)\right]=
+% 	f^{\prime}\left(c\right)
+% 	\left[g\left(b\right)-g\left(a\right)\right].
+% \end{equation*}
+% \vspace*{-2\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{figure}[ht!]
+% 	\centering
+% 	\includegraphics[width=.55\paperwidth]{cauchy}
+% 	\caption{Geométricamente, esto significa que existe una recta tangente
+% 		a la gráfica de la curva
+% 		\begin{math}
+% 			\begin{aligned}
+% 				\left[a,b\right] & \longrightarrow\mathbb{R}^{2}                           \\
+% 				t                & \longmapsto\left(f\left(t\right),g\left(t\right)\right)
+% 			\end{aligned}
+% 		\end{math}
+% 		que es paralela a la recta definida por los puntos
+% 		$\left(f\left(a\right),g\left(a\right)\right)$ y
+% 		$\left(f\left(b\right),g\left(b\right)\right)$.
+% 	}
+% \end{figure}
+
+\question
+
+Sean $X\subset\mathbb{R}$ un conjunto abierto.
+Use el principio de inducción matemática para probar la regla de
+Leibniz\footnote{Gottfried Wilhelm Leibniz (1 de junio de 1646 - 14 de noviembre de 1716).}.
+$\forall n\in\mathbb{N}$: si $f$ y $g$ son $n$-veces derivables,
+entonces
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	{\left(fg\right)}^{\left(n\right)}\left(x\right)=
+	\sum_{k=0}^{n}
+	\binom{n}{k}
+	f^{\left(k\right)}\left(x\right)
+	g^{\left(n-k\right)}\left(x\right),
+\end{equation*}
+donde $f^{\left(k\right)}$ y $g^{\left(k\right)}$ denotan la
+$k$-ésima derivada de $f$ y $g$, $f^{\left(0\right)}=f$,
+$g^{\left(0\right)}=g$, y
+$\binom{n}{k}\coloneqq\frac{n!}{k!\left(n-k\right)!}$.
+
+% \question
+
+% Defina la función de Thomae
+% \begin{equation*}
+% 	T\left(x\right)=
+% 	\left\{
+% 	\begin{aligned}
+% 		 & \frac{1}{n}, & \text{ si }x=\frac{m}{n}\neq 0,\text{donde }m\in\mathbb{Z},n\in\mathbb{N}\text{ y }\operatorname{mcd}\left(m,n\right)=1 \\
+% 		 & 1,           & \text{ si }x=0                                                                                                          \\
+% 		 & 0,           & \text{ si }x\in\mathbb{R}\setminus\mathbb{Q}
+% 	\end{aligned}
+% 	\right\}
+% \end{equation*}
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{figure}[ht!]
+% 	\centering
+% 	\includegraphics[width=.7\paperwidth]{thomae}
+% \end{figure}
+
+% \begin{multicols}{2}
+% 	\begin{parts}
+% 		\part
+
+% 		$T$ es continua en $\mathbb{R}\setminus\mathbb{Q}$ y es
+% 		discontinua en $\mathbb{Q}$.
+
+% 		\part
+
+% 		$\forall x\in\mathbb{R}$:
+% 		$\lim_{y\to x}T\left(y\right)=0$.
+
+% 		\part
+
+% 		$T$ es integrable en intervalos compactos.
+
+% 		\part
+
+% 		$T$ no tiene primitiva en subintervalos de $\left[0,1\right]$.
+
+% 		\part
+
+% 		$\int_{0}^{x}T$ es derivable en $\left[0,1\right]$.
+
+% 		\part
+
+% 		$\forall x\in D\subset\left[0,1\right]$ denso:
+% 		\begin{math}
+% 			\left(\int_{0}^{x}T\right)^{\prime}\left(x\right)\neq
+% 			T\left(x\right)
+% 		\end{math}.
+% 	\end{parts}
+% \end{multicols}
+
+% \question
+
+% Encuentre un ejemplo de una función
+% $f\colon\mathbb{R}\to\mathbb{R}$ estrictamente creciente
+% y $\forall x\in\mathbb{R}$:
+% $f^{\prime}\left(x\right)>0$.
+
+% \question
+
+% Pruebe que no existe una función derivable $f$ definida en cualquier
+% intervalo abierto que contenga al cero tal que $\forall x\in I$:
+% \begin{math}
+% 	f^{\prime}\left(x\right)=
+% 	\left\{
+% 	\begin{aligned}
+% 		1, & \text{si }x\geq 0, \\
+% 		2, & \text{si }x<0
+% 	\end{aligned}
+% 	\right\}
+% \end{math}.
+
+% \question
+
+% Pruebe que si $f$ es derivable en un intervalo abierto $I$ y
+% $\forall x\in I$: $f^{\prime}\left(x\right)\neq 0$, entonces
+% $f^{\prime}\left(x\right)$ tiene el mismo signo a lo largo del
+% intervalo $I$.
+
+\question
+
+Suponga que $f$ es definida y acotada en $\left[a,b\right]$ y $L,M\in\mathbb{R}$.
+\begin{parts}
+	\part
+
+	Si $\exists\left\{\mathcal{P}_{n}\right\}_{n\in\mathbb{N}}$ una
+	sucesión de particiones de $\left[a,b\right]$ tal que
+	$\underline{S}\left(f,\mathcal{P}_{n}\right)\xrightarrow[n\to\infty]{}L$, entonces
+	$\overline{\int_{a}^{b}}f\geq L$.
+
+	\part
+	Si $\exists\left\{\mathcal{Q}_{n}\right\}_{n\in\mathbb{N}}$ una
+	sucesión de particiones de $\left[a,b\right]$ tal que
+	$\overline{S}\left(f,\mathcal{Q}_{n}\right)\xrightarrow[n\to\infty]{}M$, entonces
+	$\overline{\int_{a}^{b}}f\leq M$.
+
+	\part
+	Si $\exists\left\{\mathcal{P}_{n}\right\}_{n\in\mathbb{N}}$ y
+	$\left\{\mathcal{Q}_{n}\right\}_{n\in\mathbb{N}}$ sucesiones de particiones de $\left[a,b\right]$ tales que
+	$\underline{S}\left(f,\mathcal{P}_{n}\right)\xrightarrow[n\to\infty]{}L$ y\linebreak
+	$\overline{S}\left(f,\mathcal{Q}_{n}\right)\xrightarrow[n\to\infty]{}L$, entonces $f$ es integrable y $\int_{a}^{b}f=L$.
+\end{parts}
+
+\question
+
+Una función acotada $f\colon\left[a,b\right]\to\mathbb{R}$ es integrable en $\left[a,b\right]$ si y solo si
+$\exists K>0$ tal que $\forall\varepsilon>0$:
+$\exists$ una partición $\mathcal{P}$ de $\left[a,b\right]$ tal que
+$\overline{S}\left(f,\mathcal{P}\right)-\underline{S}\left(f,\mathcal{P}\right)<K\varepsilon$.
+
+\question
+
+Una función acotada $f\colon\left[a,b\right]\to\mathbb{R}$ es integrable en $\left[a,b\right]\iff\exists$ un número y solo un número $I\in\mathbb{R}$
+tal que $\forall$ particiones $\mathcal{P}$ de $\left[a,b\right]$:
+$\overline{S}\left(f,\mathcal{P}\right)\leq I\leq\underline{S}\left(f,\mathcal{P}\right)$.
+En este caso, $I=\int_{a}^{b}f\left(x\right)\dl x$.
+
+\question
+
+Si $f$ es monótona en $\left[a,b\right]$, entonces $f$ es integrable en $\left[a,b\right]$.
+
+\question
+
+Suponga que $f\colon\left[a,b\right]\to\mathbb{R}$ es acotada y no negativa en $\left[a,b\right]$.
+Pruebe que
+\begin{parts}
+	\part
+
+	$\int_{a}^{b}f\left(x\right)\dl x\geq 0$.
+
+	\part
+
+	Si $\exists x_{0}\in\left(a,b\right)$ tal que $f$ es continua y $f\left(x_{0}\right)>0$, entonces
+	$\underline{\int_{a}^{b}}f\left(x\right)\dl x>0$.
+
+	\part
+
+	Si $f$ es continua en $\left[a,b\right]$, entonces $\underline{\int_{a}^{b}}f\left(x\right)\dl x=0\iff\forall x\in\left[a,b\right]$: $f\left(x\right)=0$.
+
+\end{parts}
+
+% \question
+
+% Suponga que $f,g\colon\left[a,b\right]\to\mathbb{R}$ son acotadas en $\left[a,b\right]$ y $\forall x\in\left[a,b\right]$: $f\left(x\right)\leq g\left(x\right)$.
+% Pruebe que $\underline{\int_{a}^{b}}f\leq\underline{\int_{a}^{b}}g$ y $\overline{\int_{a}^{b}}f\leq\overline{\int_{a}^{b}}g$.
+
+
+% \question
+
+% Si $f$ es no negativa e integrable en $\left[a,b\right]$ y $\forall r\in\mathbb{Q}\cap\left[a,b\right]$: $f\left(r\right)=0$,
+% entonces $\int_{a}^{b}f=0$.
+
+\question
+
+Suponga que ${\left\{\mathcal{P}_{n}\right\}}_{n\in\mathbb{N}}$ es
+una sucesión de particiones de $\left[a,b\right]$, donde cada una de
+ellas es refinada por su sucesor, es decir, $\forall n\in\mathbb{N}$:
+$\mathcal{P}_{n}\subset\mathcal{P}_{n+1}$.
+Pruebe que para cualquier función acotada $f\colon\left[a,b\right]\to\mathbb{R}$,
+\begin{parts}
+	\part
+
+	ambas sucesiones ${\left\{\underline{S}\left(f,\mathcal{P}_{n}\right)\right\}}_{n\in\mathbb{N}}$ y
+	${\left\{\overline{S}\left(f,\mathcal{P}_{n}\right)\right\}}_{n\in\mathbb{N}}$ convergen y
+	$\lim_{n\to\infty}\underline{S}\left(f,\mathcal{P}_{n}\right)\leq\lim_{n\to\infty}\overline{S}\left(f,\mathcal{P}_{n}\right)$.
+
+	\part
+
+	Si $\lim_{n\to\infty}\underline{S}\left(f,\mathcal{P}_{n}\right)=\lim_{n\to\infty}\overline{S}\left(f,\mathcal{P}_{n}\right)=L$,
+	entonces $f$ es integrable en $\left[a,b\right]$ y $\int_{a}^{b}f\left(x\right)\dl x=L$.
+
+	\part
+
+	Muestre un contraejemplo donde la integrabilidad de $f$ en $\left[a,b\right]$ no garantiza que
+	$\lim_{n\to\infty}\underline{S}\left(f,\mathcal{P}_{n}\right)=\lim_{n\to\infty}\overline{S}\left(f,\mathcal{P}_{n}\right)$.
+\end{parts}
+
+% \question
+
+% La malla de una partición $\mathcal{P}$ de $\left[a,b\right]$ es la
+% longitud del subintervalo más largo $\left[x_{i-1},x_{i}\right]$
+% entre puntos consecutivos de la partición $\mathcal{P}$,
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{equation*}
+% 	\left\|\mathcal{P}\right\|=
+% 	\max\left\{x_{i}-x_{i-1}\mid 1\leq i\leq n\right\}.
+% \end{equation*}
+
+% Una función acotada $f\colon\left[a,b\right]\to\mathbb{R}$ es integrable en $\left[a,b\right]\iff\exists k>0$
+% tal que $\forall\varepsilon>0$: $\exists\delta>0$ tal que $\forall$ particiones $\mathcal{P}$ de $\left[a,b\right]$ con
+% $\left\|\mathcal{P}\right\|<\delta$: $\overline{S}\left(f,\mathcal{P}\right)-\underline{S}\left(f,\mathcal{P}\right)<k\varepsilon$.
+
+% \question
+
+% Una partición estrellada $\mathcal{P}^{\ast}$ de $\left[a,b\right]$ es una partición
+% $\mathcal{P}=\left\{x_{0},\dotsc,x_{n}\right\}$ de $\left[a,b\right]$ junto con un conjunto de puntos
+% $\forall i\in\left\{1,\dotsc,n\right\}$: $x^{\ast}_{i}\in\left[x_{i-1},x_{i}\right]$.
+% La suma $R\left(f,\mathcal{P}^{\ast}\right)=\sum_{i=1}^{n}f\left(x^{\ast}_{i}\right)\left[x_{i}-x_{i-1}\right]$
+% es la suma de Riemann de $f$ sobre $\mathcal{P}^{\ast}$.
+
+% Pruebe que para cualquier partición $\mathcal{P}$ de $\left[a,b\right]$ y cualquier conjunto
+% de puntos $\left\{x^{\ast}_{1},\dotsc,x^{\ast}_{n}\right\}$ en sus respectivos subintervalos
+% $\left[x_{i-1},x_{i}\right]$, se cumple que $\underline{S}\left(f,\mathcal{P}\right)\leq R\left(f,\mathcal{P}^{\ast}\right)\leq\overline{S}\left(f,\mathcal{P}\right)$.
+
+% Esto es, para una partición dada $\mathcal{P}$ de $\left[a,b\right]$, todas las sumas de Riemann para $f$ sobre $\mathcal{P}$
+% caen entre
+
+% \question
+
+% Para cualquier $f\colon\left[a,b\right]\to\mathbb{R}$, $f$ es integrable en $\left[a,b\right]$ y $\int_{a}^{b}f=I\iff$
+% $\exists k>0$ tal que $\forall\varepsilon>0$: $\exists\delta>0$ tal que $\forall\mathcal{P}^{\ast}$ de $\left[a,b\right]$ con $\left\|\mathcal{P}^{\ast}\right\|<\delta$:
+% $\left|R\left(f,\mathcal{P}^{\ast}\right)-I\right|<k\varepsilon$.
+
+% Así, si el límite existe y es independiente de los puntos $x^{\ast}_{i}$.
+% Escribimos
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{equation*}
+% 	\int_{a}^{b}f=
+% 	\lim_{\left\|\mathcal{P}^{\ast}\right\|\to0}
+% 	R\left(f,\mathcal{P}^{\ast}\right)=
+% 	\lim_{\left\|\mathcal{P}^{\ast}\right\|\to0}
+% 	\sum_{i=1}^{n}
+% 	f\left(x^{\ast}_{i}\right)
+% 	\left(x_{i}-x_{i-1}\right).
+% \end{equation*}
+
+\question
+
+Si $f$ es integrable en $\left[a,b\right]$ y ${\left\{\mathcal{P}_{n}\right\}}_{n\in\mathbb{N}}$
+es una sucesión de particiones de $\left[a,b\right]$ tal que $\left\|\mathcal{P}_{n}\right\|\to0$.
+Entonces,
+\begin{parts}
+	\part
+
+	$\underline{S}\left(f,\mathcal{P}_{n}\right)\to\int_{a}^{b}f$ y
+	$\overline{S}\left(f,\mathcal{P}_{n}\right)\to\int_{a}^{b}f$.
+
+	\part
+
+	$\forall\mathcal{P}^{\ast}$ partición de $\left[a,b\right]$:
+	$R\left(f,\mathcal{P}^{\ast}_{n}\right)\xrightarrow[n\to\infty]{}\int_{a}^{b}f$ sin importar
+	la elección de los puntos $x^{\ast}_{i}$s.
+\end{parts}
+
+\question
+
+Si $f$ es integrable en $\left[0,1\right]$, entonces
+$\lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^{n}f\left(\frac{k}{n}\right)=\int_{0}^{1}f\left(x\right)\dl x$.
+
+\question
+
+Si $f$ es integrable en $\left[a,b\right]$ y $\mathcal{Q}_{n}=\left\{x_{0},\dotsc,x_{n}\right\}$
+es una partición regular de $\left[a,b\right]$, es decir, $\left\|\mathcal{Q}_{n}\right\|=\frac{b-a}{n}$,
+así, $\forall i\in\left\{0,\dotsc,n\right\}$: $x_{i}=a+i\left\|\mathcal{Q}_{n}\right\|$.
+Entonces,
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\int_{a}^{b}f\left(x\right)\dl x=
+	\lim_{n\to\infty}
+	\frac{b-a}{2n}
+	\left[
+		f\left(x_{0}\right)+
+		2f\left(x_{1}\right)+
+		\cdots+
+		2f\left(x_{n-1}\right)+
+		f\left(x_{n}\right)
+		\right].
+\end{equation*}
+
+Note que la expresión entre corchetes es
+$2\left[f\left(x_{0}\right)+f\left(x_{1}\right)+\cdots+f\left(x_{n-1}\right)+f\left(x_{n}\right)\right]-\left[f\left(b\right)+f\left(a\right)\right]$.
+
+\question
+
+Si $f$ es integrable en $\left[a,b\right]$ y $\mathcal{Q}_{n}=\left\{x_{0},\dotsc,x_{n}\right\}$
+es una partición regular de $\left[a,b\right]$ en un número par de subintervalos.
+Entonces,
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\int_{a}^{b}f\left(x\right)\dl x=
+	\lim_{n\to\infty}
+	\frac{b-a}{3n}
+	\left[
+		f\left(x_{0}\right)+
+		4f\left(x_{1}\right)+
+		2f\left(x_{2}\right)+
+		4f\left(x_{3}\right)+
+		\cdots+
+		4f\left(x_{n-1}\right)+
+		f\left(x_{n}\right)
+		\right].
+\end{equation*}
+
+\question
+
+Si $f\colon\left[a,b\right]\to\mathbb{R}$ es acotada y $a<c<b$, entonces
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\overline{\int_{a}^{b}}f\left(x\right)\dl x=
+	\overline{\int_{a}^{c}}f\left(x\right)\dl x+
+	\overline{\int_{c}^{b}}f\left(x\right)\dl x
+	\quad\text{ y }\quad
+	\underline{\int_{a}^{b}}f\left(x\right)\dl x=
+	\underline{\int_{a}^{c}}f\left(x\right)\dl x+
+	\underline{\int_{c}^{b}}f\left(x\right)\dl x.
+\end{equation*}
+
+% \question
+
+% Si $f\colon\left[a,b\right]\to\mathbb{R}$ es integrable y $a<c<b$, entonces
+% $\forall c\in\left(a,b\right)$: $f$ es integrable en $\left[a,c\right]$ y $\left[c,b\right]$ y
+% $\int_{a}^{b}f=\int_{a}^{c}f+\int_{c}^{b}f$.
+
+% \question
+
+% Si $f$ es integrable en $\left[a,b\right]$ y $\mathcal{P}=\left\{x_{0},x_{1},\dotsc,x_{n}\right\}$
+% es cualquier partición de $\left[a,b\right]$, entonces $f$ es integrable en $\left[x_{0},x_{1}\right]$,
+% $\left[x_{1},x_{2}\right],\dotsc$, y $\left[x_{n-1},x_{n}\right]$ y
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{equation*}
+% 	\int_{a}^{b}f=
+% 	\sum_{i=1}^{n}
+% 	\int_{x_{i-1}}^{x_{i}}f.
+% \end{equation*}
+
+% \question
+
+% Si $f$ es integrable en $\left[a,b\right]$, entonces $f$ es integrable en cualquier subintervalo cerrado
+% $\left[c,d\right]\subset\left[a,b\right]$.
+
+% \question
+
+% Si $f$ es integrable en $\left[a,c\right]$ y $\left[c,b\right]$, donde $a<c<b$,
+% entonces $f$ es integrable en $\left[a,b\right]$ y $\int_{a}^{b}f=\int_{a}^{c}f+\int_{c}^{b}f$.
+
+% \question
+
+% Si $\mathcal{P}=\left\{x_{0},x_{1},\dotsc,x_{n}\right\}$
+% es cualquier partición de $\left[a,b\right]$ y $f$ es integrable
+% en cada subintervalo $\left[x_{i-1},x_{i}\right]$ creado por su partición, entonces
+% $f$ es integrable en $\left[a,b\right]$ y
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{equation*}
+% 	\int_{a}^{b}f=
+% 	\sum_{i=1}^{n}
+% 	\int_{x_{i-1}}^{x_{i}}f.
+% \end{equation*}
+
+% \question
+
+% Una función acotada $f\colon\left[a,b\right]\to\mathbb{R}$ se dice que es
+% continua por tramos si y solo si $\exists\mathcal{P}=\left\{x_{0},x_{1},\dotsc,x_{n}\right\}$ partición de $\left[a,b\right]$
+% tal que $\forall i\in\left\{1,\dotsc,n\right\}$: $f$ es continua en $\left(x_{i-1},x_{i}\right)$.
+% Similarmente, una función acotada $f\colon\left[a,b\right]\to\mathbb{R}$ se dice que es
+% monótona por tramos si y solo si $\exists\mathcal{P}=\left\{x_{0},x_{1},\dotsc,x_{n}\right\}$ partición de $\left[a,b\right]$
+% tal que $\forall i\in\left\{1,\dotsc,n\right\}$: $f$ es monótona en $\left(x_{i-1},x_{i}\right)$.
+
+% Una función $\tau\colon\left[a,b\right]\to\mathbb{R}$ se dice que es
+% una función paso si y solo si $\exists\mathcal{P}=\left\{x_{0},x_{1},\dotsc,x_{n}\right\}$ partición de $\left[a,b\right]$
+% y $\exists\left\{c_{1},\dotsc,c_{n}\right\}\subset\mathbb{R}$
+% tales que $\forall i\in\left\{1,\dotsc,n\right\}$: $\tau\left(x\right)=c_{i}$ si $x\in\left(x_{i-1},x_{i}\right)$.
+
+% Pruebe que todas las funciones continuas por tramos, monótonas por tramos y funciones paso relativos a una partición
+% $\mathcal{P}=\left\{x_{0},x_{1},\dotsc,x_{n}\right\}$ partición de $\left[a,b\right]$ son integrables en $\left[a,b\right]$
+% y
+% \vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+% \begin{equation*}
+% 	\int_{a}^{b}f=
+% 	\sum_{i=1}^{n}
+% 	\int_{x_{i-1}}^{x_{i}}f.
+% \end{equation*}
+
+\question
+
+Si $f\colon\left[a,b\right]\to\mathbb{R}$ es integrable en $\left[a,b\right]$,
+$f\left(\left[a,b\right]\right)\subset\left[c,d\right]$ y $g\colon\left[c,d\right]\to\mathbb{R}$
+es continua, entonces $g\circ f\colon\left[a,b\right]\to\mathbb{R}$ es integrable en $\left[a,b\right]$.
+
+\question
+
+Si $f$ es integrable en $\left[a,b\right]$, entonces $\left|f\right|$ es integrable.
+Más aún,
+\begin{math}
+	\left|
+	\int_{a}^{b}
+	f\left(x\right)\dl x
+	\right|\leq
+	\int_{a}^{b}
+	\left|
+	f\left(x\right)
+	\right|
+	\dl x\leq
+	M\left(b-a\right)
+\end{math}
+donde
+$M$ es cualquier cota superior para $\left|f\right|$ en $\left[a,b\right]$.
+
+% \question
+
+% Si $f$ y $g$ son integrables en $\left[a,b\right]$, entonces
+
+% \begin{parts}
+% 	\part $\forall n\in\mathbb{N}$: $f^{n}$ es integrable en $\left[a,b\right]$.
+% 	\part Si $f$ es positivo y acotado fuera de $0$ en $\left[a,b\right]$, entonces $\frac{1}{f}$ es integrable en $\left[a,b\right]$.
+% 	\part Sea $n\in\mathbb{N}$. Si $\forall x\in\left[a,b\right]$: $f^{\frac{1}{n}}$ existe, entonces $f^{\frac{1}{n}}$ es integrable en $\left[a,b\right]$.
+% 	\part $\sen\left(f\left(x\right)\right)$, $\cos\left(f\left(x\right)\right)$ y $\exp\left(f\left(x\right)\right)$ son integrables en $\left[a,b\right]$.
+% 	\part Si $f$ es positivo y acotado fuera de $0$ en $\left[a,b\right]$, entonces $\ln\left(f\left(x\right)\right)$ es integrable en $\left[a,b\right]$.
+% 	\part $fg$ es integrable en $\left[a,b\right]$.
+% 	\part $\max\left\{f,g\right\}$ y $\min\left\{f,g\right\}$ son integrables en $\left[a,b\right]$.
+% \end{parts}
+
+% \question
+
+% Si $f,g\colon\left[a,b\right]\to\mathbb{R}$ son acotadas en $\left[a,b\right]$, entonces
+% $\underline{\int_{a}^{b}}f+g\geq\underline{\int_{a}^{b}}f+\underline{\int_{a}^{b}}g$.
+
+\question
+
+Si $f_{1},\dotsc,f_{n}$ son integrables en $\left[a,b\right]$ y
+$\left\{c_{1},\dotsc,c_{n}\right\}\subset\mathbb{R}$, entonces
+$\sum_{i=1}^{n}c_{i}f_{i}$ es integrable en $\left[a,b\right]$ y
+\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+\begin{equation*}
+	\int_{a}^{b}
+	\sum_{i=1}^{n}
+	c_{i}f_{i}\left(x\right)\dl x=
+	\sum_{i=1}^{n}
+	c_{i}\int_{a}^{b}f_{i}\left(x\right)\dl x.
+\end{equation*}
+
+% \question
+
+% Encuentre una función $f\colon\left[0,1\right]\to\mathbb{R}$ tal que $f^{2}$ es integrable en $\left[0,1\right]$, pero $f$ no es integrable.
+
+% \question
+
+% Si $f,g\colon\left[a,b\right]\to\mathbb{R}$ son integrables en $\left[a,b\right]$ y $\forall x\in\left[a,b\right]$:
+% $f\left(x\right)\leq h\left(x\right)\leq g\left(x\right)$.
+% Pruebe que si $\int_{a}^{b}f=\int_{a}^{b}g$, entonces $h$ es integrable en $\left[a,b\right]$ y $\int_{a}^{b}h=\int_{a}^{b}f$.
+
+\question
+
+Si $f\colon\left[a,b\right]\to\mathbb{R}$ es integrable en $\left[a,b\right]$ y $k\in\mathbb{R}$.
+Defina $g\colon\left[a+k,b+k\right]\to\mathbb{R}$ por $g\left(x\right)=f\left(x-k\right)$.
+Pruebe que $g$ es integrable en $\left[a+k,b+k\right]$ y
+$\int_{a+k}^{b+k}g\left(x\right)\dl x=\int_{a}^{b}f\left(x\right)\dl x$.
+
+\question
+
+Si $f\colon\left[a,b\right]\to\mathbb{R}$ es continua en $\left[a,b\right]$, entonces
+$\exists c\in\left(a,b\right)$ tal que $\int_{a}^{b}f\left(x\right)\dl x=f\left(c\right)\left(b-a\right)$.
+
+\question
+
+Si $f,g\colon\left[a,b\right]\to\mathbb{R}$, $f$ es continua en $\left[a,b\right]$ y $g$ es integrable en $\left[a,b\right]$
+tal que no cambia de signo en $\left[a,b\right]$, entonces
+$\exists c\in\left(a,b\right)$ tal que $\int_{a}^{b}\left(fg\right)\left(x\right)\dl x=f\left(c\right)\int_{a}^{b}g\left(x\right)\dl x$.
+
+% \question
+
+% Pruebe que $\forall x\in\mathbb{R}$: $\int_{-1}^{x}\operatorname{sgn}\left(x\right)\dl x=\left|x\right|-1$.
+
+\question
+
+Si $f$ es integrable en $\left[a,b\right]$ y $f\left(x\right)\geq 0$ en $\left[a,b\right]$, entonces
+$F\left(x\right)=\int_{a}^{x}f\left(t\right)\dl t$ es monótona creciente.
+
+% \question
+
+% Si $f$ y $F$ son continuas en $\left[a,b\right]$ y $F\left(a\right)=0$, entonces
+% $F^{\prime}=f$ en $\left[a,b\right]$ es equivalente a $\forall x\in\left[a,b\right]$: $F\left(x\right)=\int_{a}^{x}f$.
+
+% \question
+
+% Suponga que $f$ es continua y $g,h$ son derivables.
+% Aplique el segundo teorema fundamental del cálculo y la regla de la cadena
+
+% \begin{multicols}{4}
+% 	\begin{parts}
+% 		\part
+
+% 		\begin{math}\displaystyle
+% 			\diff*{\int_{x}^{a}f}{x}
+% 		\end{math}.
+
+% 		\part
+
+% 		\begin{math}\displaystyle
+% 			\diff*{\int_{a}^{g\left(x\right)}f}{x}
+% 		\end{math}.
+
+% 		\part
+
+% 		\begin{math}\displaystyle
+% 			\diff*{\int_{g\left(x\right)}^{a}f}{x}
+% 		\end{math}.
+
+% 		\part
+
+% 		\begin{math}\displaystyle
+% 			\diff*{\int_{g\left(x\right)}^{h\left(x\right)}f}{x}
+% 		\end{math}.
+% 	\end{parts}
+% \end{multicols}
+
+% \question
+
+% La única función $F\colon\mathbb{R}\to\mathbb{R}$ tal que
+% \begin{align*}
+% 	\forall x\in\mathbb{R}: F^{\prime\prime}\left(x\right) & =-F\left(x\right), &
+% 	F\left(0\right)                                        & =0,                &
+% 	F^{\prime}\left(0\right)                               & =1,
+% \end{align*}
+% es la función $F\left(x\right)=\sen\left(x\right)$.
+
+% \question
+
+% La única función $F\colon\mathbb{R}\to\mathbb{R}$ tal que
+% \begin{align*}
+% 	\forall x\in\mathbb{R}: F^{\prime\prime}\left(x\right) & =-F\left(x\right), &
+% 	F\left(0\right)                                        & =1,                &
+% 	F^{\prime}\left(0\right)                               & =0,
+% \end{align*}
+% es la función $F\left(x\right)=\cos\left(x\right)$.
+
+% https://universitytime.home.blog/wp-content/uploads/2020/04/1.vector-cal-4.pdf

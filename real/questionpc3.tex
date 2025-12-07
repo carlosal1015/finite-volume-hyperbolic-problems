@@ -1,0 +1,140 @@
+\question
+
+Justifique la veracidad o falsedad de las siguientes proposiciones.
+
+\begin{parts}
+	\part[2]
+
+	Sea
+	\begin{math}
+		{\left\{F_{n}\right\}}_{n=1}^{\infty}\subset
+		\mathbb{R}
+	\end{math}
+	una familia de conjuntos cerrados.
+	Si
+	\begin{math}
+		A\subset
+		\bigcap_{n=1}^{\infty}
+		F_{n}
+	\end{math},
+	entonces
+	\begin{math}
+		\overline{A}\subset
+		\bigcap_{n=1}^{\infty}
+		F_{n}
+	\end{math}.
+
+	\part[1]
+
+	$\exists A,B,C\subset\mathbb{R}$ conexos no vacíos y distintos
+	entre sí tales que
+	\begin{math}
+		\overline{A\cap B\cap C}\neq
+		\overline{A}\cap\overline{B}\cap\overline{C}
+	\end{math}.
+
+	\part[2]
+
+	Si $X\subset\mathbb{R}$ es un conjunto tal que todo subconjunto
+	infinito de $X$ tiene un punto de acumulación en $X$, entonces $X$
+	es compacto.
+\end{parts}
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question[5]
+
+Decimos que $f\colon X\subset\mathbb{R}\to\mathbb{R}$ es
+uniformemente continua en $X$ si y solo si
+\begin{equation*}
+	\forall\varepsilon>0:
+	\exists\delta>0
+	\text{ tal que }
+	\forall x,y\in X:
+	\left|x-y\right|<
+	\delta\implies
+	\left|f\left(x\right)-f\left(y\right)\right|<
+	\varepsilon.
+\end{equation*}
+Demuestre que si $X\subset\mathbb{R}$ es un conjunto acotado,
+entonces la función $f\colon X\to\mathbb{R}$ es uniformemente
+continua en $X\iff$ para cualquier sucesión de Cauchy
+${\left\{x_{n}\right\}}_{n\in\mathbb{N}}\subset X$,
+\begin{math}
+	{\left\{f\left(x_{n}\right)\right\}}_{n\in\mathbb{N}}\subset
+	\mathbb{R}
+\end{math}
+es una sucesión de Cauchy.
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question[5]
+
+Sean $f\colon X\subset\mathbb{R}\to\mathbb{R}$ una función y
+$a\in\mathbb{R}$ es un punto de acumulación de
+$X\cap\left(-\infty,a\right)$.
+Demuestre que las siguientes afirmaciones son equivalentes:
+\begin{parts}
+	\part
+
+	\begin{math}
+		\lim_{x\to a^{-}}f\left(x\right)=
+		L\in\mathbb{R}
+	\end{math}.
+
+	\part
+
+	\begin{math}
+		\forall
+		{\left\{x_{n}\right\}}_{n\in\mathbb{N}}\subset X\text{ sucesión creciente}:
+		x_{n}\xrightarrow[n\to\infty]{}a\implies
+		f\left(x_{n}\right)\xrightarrow[n\to\infty]{}L
+	\end{math}.
+\end{parts}
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sean $A$, $B\subset\mathbb{R}$ dos conjuntos no vacíos.
+Definimos su distancia como
+\begin{equation*}
+	\operatorname{dist}\left(A,B\right)\coloneqq
+	\inf
+	\left\{
+	\left|x-y\right|\in\mathbb{R}\mid
+	\left(x,y\right)\in A\times B
+	\right\}.
+\end{equation*}
+
+\begin{parts}
+	\part[2]
+
+
+	Si $A$ es compacto, $B$ es cerrado y $A\cap B=\emptyset$,
+	entonces $\operatorname{dist}\left(A,B\right)>0$.
+
+	\part[2]
+
+	Si $A$ es compacto y $B$ es cerrado, entonces
+	$\exists\left(x_{0},y_{0}\right)\in A\times B$ tal que
+	\begin{math}
+		\operatorname{dist}
+		\left(A,B\right)=
+		\left|x_{0}-y_{0}\right|
+	\end{math}.
+
+	\part[1]
+
+	\begin{math}
+		\operatorname{dist}
+		\left(A,B\right)=
+		\operatorname{dist}
+		\left(\overline{A},\overline{B}\right)
+	\end{math}.
+\end{parts}
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}

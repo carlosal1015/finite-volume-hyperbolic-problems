@@ -1,0 +1,51 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out', 'pdf']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: no,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'out']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+
+\noindent\parbox[c]{.18\textwidth}{\includegraphics[width=2.8cm]{logouni}}\hfill
+\parbox[c]{1\textwidth}{\raggedright%
+	{\large\textbf{Universidad Nacional de Ingeniería} \par\smallskip}
+	{\large\textbf{Facultad de Ciencias} \par\smallskip}
+	{\large\textbf{Escuela Profesional de Matemática}\hfil\qquad\qquad\qquad\textbf{Ciclo 2025-II}}
+}
+
+\begin{center}\bfseries\large
+	Práctica Dirigida N$^{\circ}$4 de Análisis Real (CM 2A2)
+\end{center}
+
+\vspace{-0.5cm}
+
+\hrulefill
+\vspace{-2.5mm}
+
+\rule{16.5cm}{0.8mm}
+
+\begin{questions}
+	\input{questionpd4}
+\end{questions}
+
+\vfill
+\begin{flushright}\bfseries
+	Facultad de Ciencias\\[2mm]
+	Universidad Nacional de Ingeniería\\[2mm]
+	12 de noviembre de 2025
+\end{flushright}
+\end{document}

@@ -1,0 +1,316 @@
+\question
+
+Responda adecuadamente a los siguientes ítems (justificando su
+respuesta).
+
+\begin{parts}
+	\part Explique la diferencia entre un estadístico, un parámetro, un
+	estimador y una estimación.
+
+	\part
+
+	¿En qué consiste un estimador eficiente?
+
+	\part
+
+	¿En qué consiste un estimador asintóticamente insesgado?
+
+	\part
+
+	¿En qué consiste el método de momentos?
+\end{parts}
+
+\begin{solutionordottedlines}
+	\begin{parts}
+		\part
+
+		Un parámetro es una característica fija de la población, mientras
+		que un estadístico es una función de los datos de una muestra.
+		Un estimador es la regla o fórmula (estadístico) para aproximar
+		el parámetro, y la estimación es el valor concreto que produce el
+		estimador al aplicarlo a una muestra.
+
+		\part
+
+		Un estimador eficiente es aquel que, siendo insesgado, tiene la
+		varianza más pequeña posible entre todos los estimadores
+		insesgados para ese parámetro.
+		Esto significa que es el más preciso y con menor error de
+		muestreo.
+
+		\part
+
+		Un estimador es asintóticamente insesgado cuando su sesgo
+		(diferencia entre su valor esperado y el parámetro) tiende a cero
+		a medida que el tamaño de la muestra aumenta indefinidamente.
+		En muestras pequeñas puede tener sesgo, pero este desaparece
+		asintóticamente.
+
+		\part
+
+		El método de momentos consiste en igualar los momentos muestrales
+		(por ejemplo, la media muestral) con los correspondientes
+		momentos poblacionales, que son funciones del parámetro a
+		estimar.
+		Al resolver este sistema de ecuaciones, se obtienen las
+		estimaciones de los parámetros.
+	\end{parts}
+\end{solutionordottedlines}
+
+\question
+
+Suponga que una máquina dispensadora de bebidas gaseosas la cantidad
+que envasa es una variable aleatoria $X$ que tiene distribución
+normal con media $\mu=10$ onzas y desviación estándar de $\sigma=1$.
+Y nos proponemos hacer $25$ mediciones del líquido dispensado.
+
+\begin{parts}
+	\part
+
+	Exprese el significado de $\overline{X}$.
+
+	\part
+
+	¿Qué distribución tiene $\overline{X}$?
+
+	\part
+
+	¿Cuál es la probabilidad de que $\overline{X}$ sea por lo menos
+	$10.3$?
+\end{parts}
+
+\begin{solutionordottedlines}
+	\begin{parts}
+		\part
+
+		$\overline{X}$ es la cantidad promedio de gaseosas dispensada en
+		las $25$ mediciones.
+
+		\part
+
+		De acuerdo con el Teorema~\ref{thm:1}, $\overline{X}$ tiene una
+		distribución normal con media $\mu_{\overline{X}}=\mu=10$ y
+		varianza
+		$\sigma^{2}_{\overline{X}}=\frac{\sigma^{2}}{n}=\frac{1}{25}$.
+		\begin{math}
+			\therefore
+			\overline{X}\sim
+			\mathcal{N}\left(10,{\left(\frac{1}{5}\right)}^{2}\right)
+		\end{math}.
+		\begin{theorem}\label{thm:1}
+			Si $X_{1},\dotsc,X_{n}$ es una muestra aleatoria proveniente de
+			una población con distribución normal de media $\mu$ y varianza
+			$\sigma^{2}$.
+			Entonces, $\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}$ tiene
+			distribución normal con media $\mu$ y varianza
+			$\frac{\sigma^{2}}{\sqrt{n}}$.
+			Esto es,
+			\begin{math}
+				\overline{X}\sim
+				\mathcal{N}
+				\left(\mu,\frac{\sigma^{2}}{\sqrt{n}}\right)
+			\end{math}.
+			Es claro que si
+			\begin{math}
+				\overline{X}\sim
+				\mathcal{N}
+				\left(\mu,\frac{\sigma^{2}}{\sqrt{n}}\right)
+			\end{math},
+			entonces la variable
+			\begin{math}
+				Z=
+				\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}}=
+				\frac{\sqrt{n}\left(\overline{X}-\mu\right)}{\sigma}\sim
+				\mathcal{N}\left(0,1\right)
+			\end{math}.
+		\end{theorem}
+
+		\part
+
+		\vspace*{-\baselineskip}\setlength\belowdisplayshortskip{0pt}
+		\begin{equation*}
+			\mathbb{P}
+			\left[\overline{X}\geq 10.3\right]=
+			\mathbb{P}
+			\left[
+				\frac{\overline{X}-\mu}{\tfrac{1}{5}}\geq\frac{10.3-10}{\tfrac{1}{5}}
+				\right]=
+			\mathbb{P}\left[Z\geq 1.5\right]=
+			1-\mathbb{P}\left[Z\leq 1.5\right]=
+			1-0.933\approx
+			0.067.
+		\end{equation*}
+
+		\centering
+		\includegraphics[width=.57\paperwidth]{normal.pdf}
+	\end{parts}
+\end{solutionordottedlines}
+
+\question
+
+Se toma una muestra aleatoria de tamaño $n$ de una población con
+función de cuantía de probabilidad de Poisson con media $\lambda$.
+
+\begin{parts}
+	\part
+
+	Encuentre el estimador de máxima verosimilitud para $\lambda$.
+
+	\part
+
+	Encuentre el valor esperado y la varianza del estimador.
+	\part
+
+	¿Es un estimador consistente?
+\end{parts}
+
+\begin{solutionordottedlines}
+	\begin{parts}
+		\part
+
+		La función de densidad de probabilidad de una distribución de
+		Poisson está dada por
+		\begin{equation*}
+			\forall x\in\mathbb{N}\cup\left\{0\right\}:
+			\mathbb{P}\left(x,\lambda\right)=
+			\frac{e^{-\lambda}\lambda^{x}}{x!}.
+		\end{equation*}
+
+		\part
+
+		La función de verosimilitud está dada por
+		\begin{align*}
+			L\left(\lambda\right)                 & =
+			\prod_{i=1}^{n}
+			\frac{e^{-\lambda}\lambda^{x_{i}}}{x_{i}!}=
+			\left(e^{-\lambda}\right)^{n}
+			\frac{\lambda^{\sum_{i=1}^{n}x_{i}}}{\prod_{i=1}^{n}x_{i}!}. \\
+			\ln\left[L\left(\lambda\right)\right] & =
+			-n\lambda+
+			\ln\left(\lambda\right)
+			\sum_{i=1}^{n}x_{i}-
+			\ln\left(\prod_{i=1}^{n}x_{i}!\right).
+		\end{align*}
+		Derivando e igualando a cero
+		\begin{math}
+			\diffp*{\ln\left[L\left(\lambda\right)\right]}{\lambda}=
+			-n+\frac{1}{\lambda}\sum_{i=1}^{n}x_{i}=
+			0
+		\end{math},
+		encontramos el estimador de máxima
+		verosimilitud
+		\begin{align*}
+			n                 & =
+			\sum_{i=1}^{n}\frac{x_{i}}{\lambda}. \\
+			\widehat{\lambda} & =
+			\frac{1}{n}\sum_{i=1}^{n}x_{i}=
+			\overline{X}.
+			\therefore\widehat{\lambda}=\overline{X}.
+		\end{align*}
+
+		\part
+
+		Dado que $\widehat{\lambda}=\overline{X}$ y
+		$\mathbb{E}\left(X_{i}\right)=\lambda$, entonces
+		\begin{math}
+			\mathbb{E}\big(\widehat{\lambda}\big)=
+			\mathbb{E}\left(\overline{X}\right)=
+			\lambda
+		\end{math}
+		y
+		\begin{math}
+			V\left(\widehat{\lambda}\right)=
+			V\left(\overline{X}\right)=
+			\frac{\lambda}{n}
+		\end{math}.
+
+		\part
+
+		Sí, es consistente.
+		Como es insesgado $\mathbb{E}\big(\widehat{\lambda}\big)=\lambda$,
+		el error cuadrático medio es igual a su varianza,
+		$V\big(\widehat{\lambda}\big)=\frac{\lambda}{n}$.
+		Dado que
+		\begin{math}
+			\lim_{n\to\infty}
+			V
+			\big(\widehat{\lambda}\big)=
+			0
+		\end{math}, el estimador es consistente.
+	\end{parts}
+\end{solutionordottedlines}
+
+\question
+
+Las tensiones de ruptura de los cables fabricados por una empresa
+siguen una distribución normal con media desconocida y $\sigma=120$.
+A partir de una muestra de $70$ cables se ha obtenido una tensión
+media de ruptura de $2100$ kilos.
+
+\begin{parts}
+	\part
+
+	Hallar un intervalo de confianza del 95\% para la tensión media de
+	ruptura.
+
+	\part
+
+	¿Qué tamaño debe tener la muestra para obtener un intervalo de
+	confianza al 99\% con una amplitud igual a la anterior?
+\end{parts}
+
+\begin{solutionordottedlines}
+	\begin{parts}
+		\part
+
+		La media muestral es $\overline{x}=2100$.
+		Si $1-\alpha=0.95$, entonces $\frac{\alpha}{2}=0.025$.
+		$\therefore Z_{0.025}\approx 1.96$.
+
+		El intervalo de confianza al $95\%$ para la tensión de ruptura
+		media $\mu$ de los cables
+		$\operatorname{IC}_{0.95}\left(\mu\right)$ es
+		\begin{equation*}
+			\left(
+			\overline{x}-z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}},
+			\overline{x}+z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}
+			\right)=
+			\left(
+			2100-1.96\cdot\frac{120}{\sqrt{70}},
+			2100+1.96\cdot\frac{120}{\sqrt{70}}
+			\right)\approx
+			\left(2071.88,2128.11\right).
+		\end{equation*}
+
+		\part
+
+		Si para seleccionar una muestra de tamaño $n$, el nivel de
+		confianza se exige que sea del $99\%$.
+
+		Si $1-\alpha=0.99$, entonces $\frac{\alpha}{2}=0.005$.
+		$\therefore Z_{0.005}=2.575$.
+		Así,
+		\begin{math}
+			E=
+			z_{\frac{\alpha}{2}}
+			\frac{\sigma}{\sqrt{n}}=
+			1.96\cdot
+			\frac{120}{\sqrt{70}}\approx
+			28.112
+		\end{math}.
+		Por tanto, $n$ debe cumplir
+		\begin{equation*}
+			2.575\cdot
+			\frac{120}{\sqrt{n}}\leq
+			28.112\implies
+			n\geq
+			{\left(\frac{2.575\cdot 120}{28.112}\right)}^{2}
+			\approx 120.82\implies
+			\boxed{n=121}.
+		\end{equation*}
+
+		Es decir, debe tomarse una muestra de al menos $121$ cables para
+		estimar la resistencia media $\mu$ a la ruptura con las
+		condiciones propuestas.
+	\end{parts}
+\end{solutionordottedlines}

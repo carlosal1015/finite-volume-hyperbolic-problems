@@ -1,0 +1,401 @@
+\begin{frame}
+	\begin{definition}[\cite{Godlewski2021}]
+		Let be $\Omega\subset\mathbb{R}^{p}$ an open set.
+		A \alert{conservation law system with source term}
+		is
+		\begin{equation}\label{eq:systemofconservationlaw}
+			\diffp{\symbf{u}}{t}+
+			\diffp{}{x}
+			\symbf{f}\left(\symbf{u}\right)=
+			\symbf{s}\left(\symbf{u}\right).
+		\end{equation}
+		Where $\Omega$ is the set of states,
+		\begin{math}
+			\symbf{f}\in
+			\symbf{C}^{1}
+			\left(\Omega,\mathbb{R}^{p}\right)
+		\end{math}
+		is a flux function,
+		\begin{math}
+			\symbf{s}\in
+			\symbf{C}^{1}
+			\left(\Omega,\mathbb{R}^{p}\right)
+		\end{math}
+		is a source function without derivative of $\symbf{u}$ terms and
+		\begin{math}
+			\symbf{u}\in
+			\symbf{C}\left(\mathbb{R}\times\left[0,\infty\right[,\Omega\right)
+		\end{math} is a solution of~\eqref{eq:systemofconservationlaw}.
+		\begin{align*}
+			\symbf{f}\colon\Omega
+			                               & \longrightarrow\mathbb{R}^{p} &
+			\symbf{s}\colon\Omega
+			                               & \longrightarrow\mathbb{R}^{p} &
+			\symbf{u}\colon\mathbb{R}\times\left[0,\infty\right[
+			                               & \longrightarrow\Omega           \\
+			\begin{bmatrix}
+				u_{1}  \\
+				\vdots \\
+				u_{p}
+			\end{bmatrix}                & \longmapsto
+			\begin{bmatrix}
+				f_{1}\left(\symbf{u}\right) \\
+				\vdots                      \\
+				f_{p}\left(\symbf{u}\right)
+			\end{bmatrix}, &
+			\begin{bmatrix}
+				u_{1}  \\
+				\vdots \\
+				u_{p}
+			\end{bmatrix}                & \longmapsto
+			\begin{bmatrix}
+				s_{1}\left(\symbf{u}\right) \\
+				\vdots                      \\
+				s_{p}\left(\symbf{u}\right)
+			\end{bmatrix}, &
+			\left(x,t\right)
+			                               & \longmapsto
+			\begin{bmatrix}
+				u_{1}\left(x,t\right) \\
+				\vdots                \\
+				u_{p}\left(x,t\right)
+			\end{bmatrix}=
+			\begin{bmatrix}
+				u_{1}  \\
+				\vdots \\
+				u_{p}
+			\end{bmatrix}.
+		\end{align*}
+	\end{definition}
+
+	\pause
+
+	\begin{definition}
+		A conservation law system~\eqref{eq:systemofconservationlaw} is
+		\alert{hyperbolic} if and only if
+		\begin{equation}
+			\forall\symbf{u}\in\Omega\!:
+			\forall\omega\in\mathbb{R}\setminus\left\{0\right\}\!:
+			\exists\left\{\left(\lambda_{k},\symbf{r}_{k}\right)\right\}^{p}_{k=1}\subset
+			\mathbb{R}\times\mathbb{R}^{p}
+			\text{ such that }
+			\symbf{A}\left(\symbf{u},\omega\right)
+			\symbf{r}_{k}=
+			\lambda_{k}
+			\symbf{r}_{k}.
+		\end{equation}
+		Where
+		\begin{math}
+			\symbf{A}\left(\symbf{u},\omega\right)\coloneqq
+			\omega
+			{
+				\begin{bmatrix}
+					\diffp{f_{j}}{u_{k}}
+					\left(\symbf{u}\right)
+				\end{bmatrix}}_{\substack{1\leq i\leq p\\1\leq k\leq p}}
+		\end{math}
+		is a multiple of jacobian matrix of $\mathbf{f}$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}
+		The \alert{Cauchy problem} associated
+		to~\eqref{eq:systemofconservationlaw} is
+		\begin{equation}\label{eq:cauchysystemofconservationlaw}
+			\begin{cases}
+				\diffp{\symbf{u}}{t}+
+				\diffp{}{x}
+				\symbf{f}\left(\symbf{u}\right)=
+				\symbf{s}\left(\symbf{u}\right) &
+				\text{in }\mathbb{R}\times\left(0,\infty\right). \\
+				\symbf{u}=\symbf{u}_{0}         &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.
+			\end{cases}
+		\end{equation}
+	\end{definition}
+	Let be the states $\symbf{u}_{l},\symbf{u}_{r}\in\Omega$.
+	A \alert{Riemann problem} is a Cauchy problem where
+	\begin{equation*}
+		\symbf{u}_{0}\left(x\right)=
+		\begin{cases}
+			\symbf{u}_{l}, & x<0. \\
+			\symbf{u}_{r}, & x>0.
+		\end{cases}
+	\end{equation*}
+
+	\pause
+
+	\begin{example}[The system of gas dynamics with gravity and friction]
+		\begin{equation*}
+			\begin{dcases}
+				\diffp{\rho}{t}+
+				\diffp{}{x}
+				\left(\rho u\right)=
+				0                                              &
+				\text{in }\mathbb{R}\times\left(0,\infty\right). \\
+				\diffp{}{t}
+				\left(\rho u\right)+
+				\diffp{}{x}
+				\left(\rho u^{2}+p\right)=
+				\rho\left(g-\alpha\varphi\left(u\right)\right) &
+				\text{in }\mathbb{R}\times\left(0,\infty\right). \\
+				\diffp{}{t}
+				\left(\rho e\right)+
+				\diffp{}{x}
+				\left(\left(\rho e+p\right)u\right)=
+				\rho\left(gu-\alpha\psi\left(u\right)\right)   &
+				\text{in }\mathbb{R}\times\left(0,\infty\right). \\
+				\rho=\rho_{0}                                  &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.    \\
+				\rho u={\left(\rho u\right)}_{0}               &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.    \\
+				\rho e={\left(\rho e\right)}_{0}               &
+				\text{on }\mathbb{R}\times\left\{t=0\right\}.
+			\end{dcases}
+		\end{equation*}
+		Where $g$ stands for the gravity force and $\alpha>0$ is a friction constant coefficient.
+	\end{example}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}
+		Let be $I\subset\mathbb{R}$ a domain.
+		The initial boundary value problem for a conservation law with source term is
+		\begin{equation}
+			\begin{dcases}
+				\diffp{\symbf{u}}{t}+
+				\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+				\symbf{s}\left(\symbf{u}\right) & \text{ in }I\times\left(0,T\right].          \\
+				\symbf{u}                                                      =
+				\symbf{u}_{0}                   & \text{a.e. on }I\times\left\{t=0\right\}.    \\
+				\symbf{u}                                                       =
+				\symbf{g}                       & \text{ on }\partial I\times\left[0,T\right].
+			\end{dcases}
+		\end{equation}
+	\end{definition}
+
+	\pause
+
+	\begin{block}{Formulation of PDE model}
+		Find
+		\begin{math}
+			\symbf{u}\in
+			\symbf{C}^{1}\left(I\times\left[0,T\right],\Omega\right)
+		\end{math}
+		in the initial boundary value problem~\eqref{eq:complicatedsystem}
+		\begin{equation}\label{eq:complicatedsystem}
+			\begin{cases}
+				\diffp{\symbf{u}}{t}+\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+				\symbf{s}\left(\symbf{u}\right) & \text{ in }I\times\left(0,T\right].          \\
+				\symbf{u}                                                      =
+				\symbf{u}_{0}                   & \text{ on }I\times\left\{t=0\right\}.        \\
+				\symbf{u}                                                       =
+				\symbf{g}                       & \text{ on }\partial I\times\left[0,T\right].
+			\end{cases}
+		\end{equation}
+		Where
+		\begin{math}
+			\symbf{u}_{0}\colon I\to
+			\mathbb{R}^{3}
+		\end{math},
+		\begin{math}
+			\symbf{s}\colon\Omega\to
+			\mathbb{R}^{3}
+		\end{math},
+		\begin{math}
+			\symbf{f}\colon\Omega\to
+			\mathbb{R}^{3}
+		\end{math}
+		are known and given by
+		\begin{align*}
+			\symbf{f}\left(\symbf{u}\right) & =
+			\symbf{a}\odot\symbf{u}+
+			\mathcolor{DarkRed}{a_{1}u_{1}\left(u_{3}-1\right)\symbf{e_{1}}},\quad
+			\symbf{a}\in\mathbb{R}^{3}\setminus\left\{\symbf{0}\right\}. \\
+			\symbf{s}\left(\symbf{u}\right) & =
+			\begin{bmatrix}
+				b_{1}u_{2}u_{3}\Phi\left(u_{1}\right)-\beta u_{1} \\
+				-b_{2}u_{2}u_{3}\Phi\left(u_{1}\right)            \\
+				-b_{3}u_{2}u_{3}\Phi\left(u_{1}\right)
+			\end{bmatrix}.
+		\end{align*}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	We have the problem~\eqref{eq:complicatedsystem} written as
+	\begin{equation*}
+		\diffp{\symbf{u}}{t}+
+		\diffp{}{x}\symbf{f}\left(\symbf{u}\right)=
+		\symbf{s}\left(\symbf{u}\right)
+	\end{equation*}
+	where
+	\begin{equation*}
+		\symbf{u}=
+		\begin{bmatrix}
+			\mathcolor{mygreen}{\theta}     \\
+			\mathcolor{myred}{S_{\text{y}}} \\
+			\mathcolor{myblue}{S_{\text{o}}}
+		\end{bmatrix},\qquad
+		\symbf{f}\left(\symbf{u}\right)=
+		\begin{bmatrix}
+			a_{1}\mathcolor{mygreen}{\theta}\mathcolor{myblue}{S_{\text{o}}} \\
+			a_{2}\mathcolor{myred}{S_{\text{y}}}                             \\
+			a_{3}\mathcolor{myblue}{S_{\text{o}}}
+		\end{bmatrix},\qquad
+		\symbf{s}\left(\symbf{u}\right)=
+		\begin{bmatrix}
+			b_{1} \Phi \mathcolor{myred}{S_{\text{y}}}\mathcolor{myblue}{S_{\text{o}}}-\beta\mathcolor{mygreen}{\theta} \\
+			-b_{2}\Phi \mathcolor{myred}{S_{\text{y}}}\mathcolor{myblue}{S_{\text{o}}}                                  \\
+			-b_{3}\Phi \mathcolor{myred}{S_{\text{y}}}\mathcolor{myblue}{S_{\text{o}}}
+		\end{bmatrix}.
+	\end{equation*}
+	Let's see if it's hyperbolic~\cite{Toro2024}.
+	We find the Jacobian of $f\left(\symbf{u}\right)$:
+	\begin{equation*}
+		J\symbf{f}\left(\symbf{u}\right)=
+		\begin{bmatrix}
+			a_{1}\mathcolor{myblue}{S_{\text{o}}} & 0     & a_{1} \mathcolor{mygreen}{\theta} \\
+			0                                     & a_{2} & 0                                 \\
+			0                                     & 0     & a_{3}
+		\end{bmatrix}
+	\end{equation*}
+	and its eigenvalues are
+	\begin{equation*}
+		\det\left(J\symbf{f}\left(\symbf{u}\right)-\lambda I\right)=
+		0\iff
+		\left(a_{1}\mathcolor{myblue}{S_{\text{o}}}-\lambda\right)
+		\left(c_{2}-\lambda\right)
+		\left(a_{3}-\lambda\right)=
+		0\iff
+		\lambda_{1}=
+		a_{1}\mathcolor{myblue}{S_{\text{o}}}\vee
+		\lambda_{2}=
+		a_{2}\vee
+		\lambda_{3}=
+		a_{3}.
+	\end{equation*}
+	and its eigenvectors are
+	\begin{equation*}
+		\lambda_{1}=
+		a_{1}\mathcolor{myblue}{S_{\text{o}}}:
+		\begin{bmatrix}
+			0 & 0                                           & a_{1}                                       \\
+			0 & a_{2}-a_{1}\mathcolor{myblue}{S_{\text{o}}} & 0                                           \\
+			0 & 0                                           & a_{3}-a_{1}\mathcolor{myblue}{S_{\text{o}}}
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			x_{3}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{1}=
+		\begin{bmatrix}
+			1 \\
+			0 \\
+			0
+		\end{bmatrix}.
+	\end{equation*}
+	Where $a_{1}\mathcolor{mygreen}{\theta}\neq 0$,
+	$\left(a_{3}-a_{1}\mathcolor{myblue}{S_{\text{o}}}\right)\neq 0$.
+	% $$
+	% 	a_{1}\mathcolor{mygreen}{\theta}x_{3}=0;
+	% 	\left(a_{1}-a_{1}\mathcolor{myblue}{S_{\text{o}}}\right)x_{2}=0;
+	% 	\left(a_{3}-a_{1}\mathcolor{myblue}{S_{\text{o}}}\right)x_{3}=0.
+	% $$
+\end{frame}
+
+\begin{frame}
+	\begin{equation*}
+		\lambda_{2}=
+		a_{2}:
+		\begin{bmatrix}
+			a_{1}\mathcolor{myblue}{S_{\text{o}}}-a_{2} & 0 & a_{1}\mathcolor{mygreen}{\theta} \\
+			0                                           & 0 & 0                                \\
+			0                                           & 0 & a_{3}-a_{2}
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			x_{3}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{2}=
+		\begin{bmatrix}
+			0 \\
+			1 \\
+			0
+		\end{bmatrix}.
+	\end{equation*}
+	Where $a_{1}\mathcolor{myblue}{S_{\text{o}}}-a_{2}\neq0$,
+	$a_{1}\mathcolor{mygreen}{\theta}\neq 0$.
+	% $$
+	% 	\left(d_{3}-d_{2}\right)\neq 0:
+	% 	\left(d_{3}-d_{2}\right)x_{3}=0
+	% 	\eta=0
+	% 	x_{3}=0
+	% 	v_{2}=
+	% 	\left(\begin{array}{l}
+	% 			0 \\ 1 \\ 0
+	% 		\end{array}\right)
+	% $$
+	% $$
+	% 	a_{1}S_{0}^{\prime}-d_{2}Fx_{1}+a_{10} x_{3}=0
+	% $$
+	\begin{equation*}
+		\lambda_{3}=
+		a_{3}:
+		\begin{bmatrix}
+			a_{1}\mathcolor{myblue}{S_{\text{o}}}-a_{3} & 0           & a_{1}\mathcolor{mygreen}{\theta} \\
+			0                                           & a_{2}-a_{3} & 0                                \\
+			0                                           & 0           & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1} \\
+			x_{2} \\
+			x_{3}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0 \\
+			0 \\
+			0
+		\end{bmatrix}\implies
+		v_{3}=
+		\begin{bmatrix}
+			v \\
+			0 \\
+			1
+		\end{bmatrix},v\in\mathbb{R}.
+	\end{equation*}
+	$\therefore\left\{v_{1},v_{2},v_{3}\right\}$ form a basis of
+	$\mathbb{R}^{3}$.
+	% Where
+	% $$
+	% 	\begin{aligned}
+	% 		 & x_{1}=0 \\
+	% 		 & x_{3}=0 \\
+	% 		 & 1       \\
+	% 		 & 2       \\
+	% 		 & 3
+	% 	\end{aligned} \Rightarrow v_{2}=\left(\begin{array}{l}
+	% 			0 \\
+	% 			1 \\
+	% 			0
+	% 		\end{array}\right)=\left(\begin{array}{l}
+	% 			0 \\
+	% 			0 \\
+	% 			0
+	% 		\end{array}\right)
+	% $$
+	% $\left(a_{2}-a_{3}\right) \neq 0:\left(a_{2}-a_{3}\right) x_{2}=0 \rightarrow x_{2}=0$
+\end{frame}

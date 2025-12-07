@@ -1,0 +1,50 @@
+\PassOptionsToPackage{svgnames}{xcolor}
+\documentclass[
+	8pt,
+	aspectratio=1610,
+	c,
+	intlimits,
+	handout,
+	leqno,
+	professionalfonts,
+]{beamer}
+
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{diffcoeff}
+\usepackage{minted}
+\usepackage{newunicodechar}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{beamer.bib}
+
+\addtobeamertemplate{theorem begin}{\normalfont}{}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{items}[ball]
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\newunicodechar{α}{\makebox[\fontcharwd\font`a]{$\alpha$}}
+\newunicodechar{β}{\makebox[\fontcharwd\font`a]{$\beta$}}
+\newunicodechar{θ}{\makebox[\fontcharwd\font`a]{$\theta$}}
+\newunicodechar{ε}{\makebox[\fontcharwd\font`a]{$\varepsilon$}}
+\newunicodechar{ξ}{\makebox[\fontcharwd\font`a]{$\xi$}}
+\newunicodechar{φ}{\makebox[\fontcharwd\font`a]{$\varphi$}}
+\newunicodechar{ρ}{\makebox[\fontcharwd\font`a]{$\rho$}}
+
+\definecolor{mygreen}{RGB}{22,160,133}
+\definecolor{myred}{RGB}{254,23,29}
+\definecolor{myblue}{RGB}{34,131,187}
+
+\title{Formulation as conservation law for a simple in situ combustion model}
+\subtitle{Seminario de Investigación I}
+\author{Angel Ramírez Gutiérrez\and Fidel Jara Huanca\and Andres Alcalde Sosa\and Carlos Aznarán Laos}
+\institute{\small Instituto de Matemática y Ciencias Afines}
+\date{\today}

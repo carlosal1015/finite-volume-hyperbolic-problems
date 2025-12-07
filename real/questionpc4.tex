@@ -1,0 +1,160 @@
+\question
+
+Justifique la veracidad o falsedad de las siguientes proposiciones.
+
+\begin{parts}
+	\part[2]
+
+	Sea $f\colon\mathbb{R}\to\mathbb{R}$ una función definida por
+	$f\left(x\right)=\frac{x^{5}}{1+x^{6}}$.
+	Entonces $f^{\left(2003\right)}\left(0\right)=-2003!$
+
+	\part[2]
+
+	Sea $f\colon\left[a,b\right]\to\mathbb{R}$ una función integrable y
+	se define $F\colon\left[a,b\right]\to\mathbb{R}$ como
+	\begin{math}
+		F\left(x\right)=
+		\int_{a}^{x}f\left(t\right)\dl t
+	\end{math}.
+	¿Es $F$ Lipschitz?
+
+	\part[1]
+
+	Sea $f\colon\left[a,b\right]\to\mathbb{R}$ una función definida por
+	\begin{math}
+		f\left(x\right)=
+		\begin{cases}
+			x, & \text{si }x\in\mathbb{Q}.                    \\
+			0, & \text{si }x\in\mathbb{R}\setminus\mathbb{Q}.
+		\end{cases}
+	\end{math}
+	¿Es $f$ integrable?
+\end{parts}
+
+\question
+
+Sea
+\begin{math}
+	f\in
+	C^{\infty}
+	\left(
+	\left]-1,1\right[,\mathbb{R}
+	\right)
+\end{math}
+una función tal que
+$\forall n\in\mathbb{N}$:
+$\forall x\in\left(-1,1\right)$:
+$\left|f^{\left(n\right)}\left(x\right)\right|\leq 1$.
+
+\begin{parts}
+	\part[2\half]
+
+	Sea $T_{m}\left(x\right)$ el $m$-ésimo polinomio de Taylor de $f$ alrededor de $0$.
+	Demuestre que
+	\begin{equation*}
+		\left|f\left(x\right)-T_{m}\left(x\right)\right|=
+		\left|R_{m}\left(x\right)\right|
+		\leq\frac{1}{m!}.
+	\end{equation*}
+
+	\part[2\half]
+
+	Además, pruebe que $\forall x\in\left]-1,1\right[$:
+	\begin{math}\displaystyle
+		\lim_{m\to\infty}T_{m}\left(x\right)=f\left(x\right).
+	\end{math}
+\end{parts}
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question[5]
+
+Si $f,g\colon\left[a,c\right]\to\mathbb{R}$ son funciones acotadas, entonces
+\begin{equation*}
+	% \underline{\int_{a}^{c}}f\left(x\right)\dl x & =
+	% \underline{\int_{a}^{b}}f\left(x\right)\dl x+
+	% \underline{\int_{b}^{c}}f\left(x\right)\dl x.    \\
+	\forall b\in\left(a,c\right):
+	\overline{\int_{a}^{c}}f\left(x\right)\dl x=
+	\overline{\int_{a}^{b}}f\left(x\right)\dl x+
+	\overline{\int_{b}^{c}}f\left(x\right)\dl x.
+\end{equation*}
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question[5]
+
+Sea $f\colon\left[0,1\right]\to\mathbb{R}$ una función definida como
+\begin{equation*}
+	f\left(x\right)=
+	\begin{cases}
+		0,               & \text{si }x=0.                                                                                    \\
+		\frac{1}{2^{n}}, & \text{si }x\in\left(\frac{1}{2^{n+1}},\frac{1}{2^{n}}\right], n\in\mathbb{N}\cup\left\{0\right\}.
+	\end{cases}
+\end{equation*}
+Pruebe que $f$ es integrable y calcule $\int_{0}^{1}f\left(x\right)\dl x$.
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+% \bonusquestion
+
+% Justifique la veracidad o falsedad de las siguientes proposiciones.
+
+% \begin{parts}
+% 	\part[1]
+
+% 	Sea
+% 	\begin{math}
+% 		f\left(x\right)=
+% 		\begin{cases}
+% 			x^{2}\sen\left(\frac{1}{x}\right), & x\neq 0. \\
+% 			0,                                 & x=0.
+% 		\end{cases}
+% 	\end{math}
+% 	Entonces,
+% 	\begin{math}
+% 		f^{\prime}\left(x\right)=
+% 		\begin{cases}
+% 			2x\sen\left(\frac{1}{x}\right)-\cos\left(\frac{1}{x}\right), & x\neq 0, \\
+% 			0,                                                           & x=0,
+% 		\end{cases}
+% 	\end{math}
+% 	es discontinua en el origen.
+
+% 	\part[1]
+
+% 	Si
+% 	\begin{math}
+% 		f\left(x\right)=
+% 		\begin{cases}
+% 			x^{2}\sen\left(\frac{1}{x^{2}}\right), & x\neq 0. \\
+% 			0,                                     & x=0.
+% 		\end{cases}
+% 	\end{math}
+% 	Entonces,
+% 	\begin{math}
+% 		f^{\prime}\left(x\right)=
+% 		\begin{cases}
+% 			2x\sen\left(\frac{1}{x^{2}}\right)-\frac{1}{x^{2}}, & x\neq 0, \\
+% 			0,                                                  & x=0,
+% 		\end{cases}
+% 	\end{math}
+% 	es acotada en $\left[-1,1\right]$.
+
+% 	\part[2]
+
+% 	Si
+% 	\begin{math}
+% 		f\left(x\right)=
+% 		\begin{cases}
+% 			\exp\left(-\frac{1}{x^{2}{\left(1-x\right)}^{2}}\right), & x\in\left(0,1\right).                    \\
+% 			0,                                                       & x\in\mathbb{R}\setminus\left(0,1\right).
+% 		\end{cases}
+% 	\end{math}.
+% 	Entonces, $f$ es positiva e infinitamente diferenciable en $\left(0,1\right)$.
+% \end{parts}
+
+% \begin{solutionordottedlines}
+% \end{solutionordottedlines}

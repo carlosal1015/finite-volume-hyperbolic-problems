@@ -1,0 +1,148 @@
+\question
+
+Justifique la veracidad o falsedad de las siguientes proposiciones.
+
+\begin{parts}
+	\part[2]
+
+	Sea $K\subset\mathbb{R}$ un conjunto compacto.
+	Si $f\colon K\to\mathbb{R}$ es continua, entonces
+	$\forall\varepsilon>0$: $\exists c_{\varepsilon}>0$ tal que
+	\begin{math}
+		\left|y-x\right|\geq
+		\varepsilon\implies
+		\left|f\left(y\right)-f\left(x\right)\right|\leq
+		c_{\varepsilon}\left|y-x\right|
+	\end{math}.
+
+	\part[1\half]
+	Cualquier función $f\colon\mathbb{N}\to\mathbb{R}$ es uniformemente
+	continua.
+
+	\part[1\half]
+	Sea $K\subset\mathbb{R}$ un conjunto compacto.
+	Si $f\colon\mathbb{R}\to\mathbb{R}$ es derivable en $K$ y
+	$g\colon\mathbb{R}\to\mathbb{R}$ no es derivable en $K$,
+	entonces $f+g$ no es derivable en $K$.
+\end{parts}
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Sean las funciones $f,g\colon X\subset\mathbb{R}\to\mathbb{R}$
+uniformemente continuas.
+\begin{parts}
+	\part[2\half]
+
+	Si $f$ y $g$ son acotadas, entonces $fg$ es uniformemente
+	continua.
+
+	\part[2\half]
+
+	Si $X$ es acotado, entonces $fg$ es uniformemente continua.
+\end{parts}
+
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question[5]
+
+Sean $f\colon X\subset\mathbb{R}\to\mathbb{R}$ una función y
+$a\in\operatorname{int}\left(X\right)$.
+Si $f^{\prime}\left(a\right)$ existe y las sucesiones
+$x_{n}\xrightarrow[n\to\infty]{}a$ y
+$y_{n}\xrightarrow[n\to\infty]{}a$ son tales que
+$\forall n\in\mathbb{N}$: $a\in \left(x_{n},y_{n}\right)$, entonces
+\begin{math}
+	\frac{f\left(y_{n}\right)-f\left(x_{n}\right)}{y_{n}-x_{n}}\xrightarrow[n\to\infty]{}
+	f^{\prime}\left(a\right)
+\end{math}.
+\begin{solutionordottedlines}
+\end{solutionordottedlines}
+
+\question
+
+Una función $f$ definida en un intervalo abierto $I$ se dice que
+satisface la condición de Lipschitz de orden $\alpha$ en $I$ si y solo si
+$\exists M>0$ tal que $\forall x,y\in I$:
+\begin{math}
+	\left|f\left(x\right)-f\left(y\right)\right|\leq
+	M{\left|x-y\right|}^{\alpha}
+\end{math}.
+
+\begin{parts}
+	\part[2\half]
+
+	Pruebe que si $f$ satisface una condición Lipschitz de orden
+	$\alpha$ en $I$ para algún número real $\alpha>1$, entonces $f$ es
+	derivable en $I$ y $f^{\prime}\left(x\right)=0$ en $I$.
+
+	\part[2\half]
+
+	Encuentre un ejemplo de una función $f\colon I\to\mathbb{R}$ que
+	satisface la condición Lipschitz de orden $\alpha=1$ en $I$, pero
+	$f$ no es derivable en $I$.
+\end{parts}
+
+% \bonusquestion
+
+% Justifique la veracidad o falsedad de las siguientes proposiciones.
+
+% \begin{parts}
+% 	\part[1]
+
+% 	Sea
+% 	\begin{math}
+% 		f\left(x\right)=
+% 		\begin{cases}
+% 			x^{2}\sen\left(\frac{1}{x}\right), & x\neq 0. \\
+% 			0,                                 & x=0.
+% 		\end{cases}
+% 	\end{math}
+% 	Entonces,
+% 	\begin{math}
+% 		f^{\prime}\left(x\right)=
+% 		\begin{cases}
+% 			2x\sen\left(\frac{1}{x}\right)-\cos\left(\frac{1}{x}\right), & x\neq 0, \\
+% 			0,                                                           & x=0,
+% 		\end{cases}
+% 	\end{math}
+% 	es discontinua en el origen.
+
+% 	\part[1]
+
+% 	Si
+% 	\begin{math}
+% 		f\left(x\right)=
+% 		\begin{cases}
+% 			x^{2}\sen\left(\frac{1}{x^{2}}\right), & x\neq 0. \\
+% 			0,                                     & x=0.
+% 		\end{cases}
+% 	\end{math}
+% 	Entonces,
+% 	\begin{math}
+% 		f^{\prime}\left(x\right)=
+% 		\begin{cases}
+% 			2x\sen\left(\frac{1}{x^{2}}\right)-\frac{1}{x^{2}}, & x\neq 0, \\
+% 			0,                                                  & x=0,
+% 		\end{cases}
+% 	\end{math}
+% 	es acotada en $\left[-1,1\right]$.
+
+% 	\part[2]
+
+% 	Si
+% 	\begin{math}
+% 		f\left(x\right)=
+% 		\begin{cases}
+% 			\exp\left(-\frac{1}{x^{2}{\left(1-x\right)}^{2}}\right), & x\in\left(0,1\right).                    \\
+% 			0,                                                       & x\in\mathbb{R}\setminus\left(0,1\right).
+% 		\end{cases}
+% 	\end{math}.
+% 	Entonces, $f$ es positiva e infinitamente diferenciable en $\left(0,1\right)$.
+% \end{parts}
+
+% \begin{solutionordottedlines}
+% \end{solutionordottedlines}

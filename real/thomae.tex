@@ -1,0 +1,28 @@
+\documentclass[tikz,border=3.14mm]{standalone}
+\begin{document}
+\begin{tikzpicture}[scale=8]
+	\draw [-stealth] (-0.1,0) -- (1.1,0);
+	\draw [-stealth] (0,-0.1) -- (0,0.6);
+	\foreach \X in {1,...,7}
+		{\ifnum\X=1
+			\else
+				\draw (0.02,1/\X) -- (-0.02,1/\X) node[left,xshift={(-(1+pow(-1,\X)))*3pt}]{$\frac{1}{\X}$};
+			\fi
+		}
+	\foreach \X [evaluate=\X as \Ymax using {int(\X-1)}]in {25,24,...,2}
+	{\foreach \Y in {1,...,\Ymax}
+		{\ifnum\X<6
+				\draw (\Y/\X,0.02) -- (\Y/\X,-0.02) node[below,fill=white]{$\frac{\Y}{\X}$};
+			\else
+				\draw[ultra thin] (\Y/\X,0.01) -- (\Y/\X,-0.01);
+			\fi
+			\pgfmathtruncatemacro{\TST}{gcd(\X,\Y)}
+			\ifnum\TST=1
+				\fill ({\Y/\X},1/\X) circle(0.05pt);
+			\fi
+		}
+	}
+	\foreach \X in {0,1,...,80}
+		{\fill (\X/80,0) circle(0.05pt); }
+\end{tikzpicture}
+\end{document}

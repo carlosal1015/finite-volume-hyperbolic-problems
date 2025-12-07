@@ -1,0 +1,234 @@
+\begin{frame}
+	We attempt to solve~\eqref{eq:complicatedsystem} with the
+	fractional step method~\cite{Leveque2002}
+	\begin{equation}
+		\left\{
+		\begin{aligned}
+			\diffp{\symbf{u}}{t}+\diffp*{\symbf{f}\left(\symbf{u}\right)}{x} & =
+			\symbf{0}.                                                           \\
+			\diff{\symbf{u}}{t}                                              & =
+			\symbf{s}\left(\symbf{u}\right).
+		\end{aligned}
+		\right.
+	\end{equation}
+
+	\begin{columns}
+		\begin{column}{.4\paperwidth}
+			\begin{description}
+				\item[Upwind method]
+
+				      \begin{equation*}
+					      \frac{\symbf{u}^{n+1}_{j}-\symbf{u}^{n}_{j}}{\Delta t}+
+					      \frac{\symbf{f}^{n}_{j}-\symbf{f}^{n}_{j-1}}{\Delta x}=
+					      \symbf{0}.\implies
+					      \symbf{u}^{n+1}_{j}=
+					      \symbf{u}^{n}_{j}
+					      -\frac{\Delta t}{\Delta x}
+					      \left(\symbf{f}^{n}_{j}-\symbf{f}^{n}_{j-1}\right).
+				      \end{equation*}
+
+				\item[Forward Euler]
+
+				      \begin{equation*}
+					      \frac{\symbf{u}^{n+1}_{j}-\symbf{u}^{n}_{j}}{\Delta t}=
+					      \symbf{s}\left(\symbf{u}^{n}_{j}\right).\implies
+					      \symbf{u}^{n+1}_{j}=
+					      \symbf{u}^{n}_{j}+\Delta t
+					      \symbf{s}\left(\symbf{u}^{n}_{j}\right).
+				      \end{equation*}
+
+				\item[Fractional step]
+
+				      \begin{equation*}
+					      \left\{
+					      \begin{aligned}
+						      \symbf{u}^{n+1}_{j}          & =
+						      \alert{\symbf{u}^{\ast}_{j}}+
+						      \Delta t
+						      \symbf{s}\left(\alert{\symbf{u}^{\ast}_{j}}\right). \\
+						      \alert{\symbf{u}^{\ast}_{j}} & =
+						      \symbf{u}^{n}_{j}-
+						      \frac{\Delta t}{\Delta x}
+						      \left(\symbf{f}^{n}_{j}-\symbf{f}^{n}_{j-1}\right).
+					      \end{aligned}
+					      \right.
+				      \end{equation*}
+			\end{description}
+		\end{column}
+		\begin{column}{.4\paperwidth}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+% \begin{frame}
+% 	Let $\Omega_{x}\times\Omega_{t}=\left[0,50\right]\times\left[0,1\right]$.
+% 	\begin{equation*}
+% 		\left\{
+% 		\begin{aligned}
+% 			\diffp*{}{t}
+% 			\begin{bmatrix}
+% 				\mathcolor{mygreen}{\theta}     \\
+% 				\mathcolor{myred}{S_{\text{y}}} \\
+% 				\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix}+
+% 			\diffp*{}{x}
+% 			\begin{bmatrix}
+% 				a_{1}\mathcolor{mygreen}{\theta}\mathcolor{myblue}{S_{\text{o}}} \\
+% 				a_{2}\mathcolor{myred}{S_{\text{y}}}                             \\
+% 				a_{3}\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix} & =
+% 			\begin{bmatrix}
+% 				0 \\
+% 				0 \\
+% 				0
+% 			\end{bmatrix}\text{ in }\Omega_{x}\times\Omega_{t}.                                \\
+% 			\begin{bmatrix}
+% 				\mathcolor{mygreen}{\theta}     \\
+% 				\mathcolor{myred}{S_{\text{y}}} \\
+% 				\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix}                                  & =
+% 			\begin{bmatrix}
+% 				300 \\
+% 				0   \\
+% 				1
+% 			\end{bmatrix}
+% 			\text{ in }
+% 			\Omega_{x}\times\left\{t=0\right\}.                                                \\
+% 			\begin{bmatrix}
+% 				\mathcolor{mygreen}{\theta}     \\
+% 				\mathcolor{myred}{S_{\text{y}}} \\
+% 				\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix}                                  & =
+% 			\begin{bmatrix}
+% 				300 \\
+% 				1   \\
+% 				0
+% 			\end{bmatrix}
+% 			\text{ in }\partial\Omega_{x}\times\Omega_{t}.
+% 		\end{aligned}
+% 		\right.
+% 	\end{equation*}
+
+% 	\begin{equation*}
+% 		\left\{
+% 		\begin{aligned}
+% 			\diff*{}{t}
+% 			\begin{bmatrix}
+% 				\mathcolor{mygreen}{\theta}     \\
+% 				\mathcolor{myred}{S_{\text{y}}} \\
+% 				\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix} & =
+% 			\begin{bmatrix}
+% 				b_{1} \Phi \mathcolor{myred}{S_{\text{y}}}\mathcolor{myblue}{S_{\text{o}}}-\beta\mathcolor{mygreen}{\theta} \\
+% 				-b_{2}\Phi \mathcolor{myred}{S_{\text{y}}}\mathcolor{myblue}{S_{\text{o}}}                                  \\
+% 				-b_{3}\Phi \mathcolor{myred}{S_{\text{y}}}\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix}\text{ in }\Omega_{t} \\
+% 			\begin{bmatrix}
+% 				\mathcolor{mygreen}{\theta}     \\
+% 				\mathcolor{myred}{S_{\text{y}}} \\
+% 				\mathcolor{myblue}{S_{\text{o}}}
+% 			\end{bmatrix} & =
+% 			\begin{bmatrix}
+% 				300 \\
+% 				0   \\
+% 				1
+% 			\end{bmatrix}
+% 			\text{ in }
+% 			\Omega_{x}\times\left\{t=0\right\}.
+% 		\end{aligned}
+% 		\right.
+% 	\end{equation*}
+% \end{frame}
+
+\begin{frame}
+	\begin{block}{Direct Finite Volume}
+		\begin{equation*}
+			\symbf{u}^{n+1-}_{j}=
+			\symbf{u}^{n}_{j}-
+			\frac{\Delta t}{\Delta x}
+			\left(\symbf{g}^{n}_{j+\frac{1}{2}}-\symbf{g}^{n}_{j-\frac{1}{2}}\right).
+		\end{equation*}
+	\end{block}
+
+	\begin{block}{Implicit Euler}
+		\begin{equation*}
+			\symbf{u}^{n+1}_{j}=
+			\symbf{u}^{n+1-}_{j}+
+			\Delta t
+			\symbf{s}\left(\symbf{u}^{n+1}_{j}\right).
+		\end{equation*}
+	\end{block}
+
+	\begin{equation*}
+		\symbf{g}^{n}_{j+\frac{1}{2}}=
+		\symbf{g}\left(\symbf{u}^{n}_{j},\symbf{u}^{n}_{j+1}\right),\qquad
+		\symbf{u}^{0}_{j}=
+		\frac{1}{\Delta x}
+		\int_{C_{j}}
+		\symbf{u}_{0}\left(x\right)\dl x.
+	\end{equation*}
+
+	\begin{block}{Fractional Step Methods}
+		\begin{align*}
+			\symbf{u}^{n+1}_{j}                                             & =
+			\symbf{u}^{n}_{j}-
+			\frac{\Delta t}{\Delta x}
+			\left(
+			\symbf{g}^{n}_{j+\frac{1}{2}}-\symbf{g}^{n}_{j-\frac{1}{2}}
+			\right)+
+			\Delta t
+			\symbf{s}
+			\left(
+			\symbf{u}^{n+1}_{j}
+			\right).                                                            \\
+			\begin{bmatrix}
+				\mathcolor{mygreen}{\theta}^{n+1}_{j}       \\
+				{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j} \\
+				{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}
+			\end{bmatrix} & =
+			\begin{bmatrix}
+				\mathcolor{mygreen}{\theta}^{n}_{j}       \\
+				{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j} \\
+				{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+			\end{bmatrix}-
+			\frac{\Delta t}{\Delta x}
+			\left(
+			\symbf{g}\left(
+				\begin{bmatrix}
+						\mathcolor{mygreen}{\theta}^{n}_{j}       \\
+						{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j} \\
+						{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+					\end{bmatrix},
+				\begin{bmatrix}
+						\mathcolor{mygreen}{\theta}^{n}_{j+1}       \\
+						{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j+1} \\
+						{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j+1}
+					\end{bmatrix}\right)-
+			\symbf{g}
+			\left(
+				\begin{bmatrix}
+						\mathcolor{mygreen}{\theta}^{n}_{j-1}       \\
+						{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j-1} \\
+						{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j-1}
+					\end{bmatrix},
+				\begin{bmatrix}
+						\mathcolor{mygreen}{\theta}^{n}_{j}       \\
+						{\mathcolor{myred}{S_{\text{y}}}}^{n}_{j} \\
+						{\mathcolor{myblue}{S_{\text{o}}}}^{n}_{j}
+					\end{bmatrix}
+				\right)
+			\right)
+			+\Delta t
+			\symbf{s}
+			\left(
+			\begin{bmatrix}
+					\mathcolor{mygreen}{\theta}^{n+1}_{j}       \\
+					{\mathcolor{myred}{S_{\text{y}}}}^{n+1}_{j} \\
+					{\mathcolor{myblue}{S_{\text{o}}}}^{n+1}_{j}
+				\end{bmatrix}
+			\right).
+		\end{align*}
+	\end{block}
+
+	\href{https://carlosal1015.github.io/numerical-methods-pdes/reaction-diffusion-demo}{Enlace}
+\end{frame}

@@ -1,0 +1,67 @@
+\begin{frame}
+	\frametitle{Motivation}
+	\begin{block}{PDE system with initial and boundary
+			conditions~\cite{Quispe2020}}
+
+		Let $\theta\left(x,t\right)$ be the \alert{temperature},
+		$S_{y}\left(x,t\right)$ be the \alert{oxygen saturation} and
+		$S_{\text{o}}\left(x,t\right)$ be the \alert{oil saturation}.
+		\begin{align}
+			\diffp{\theta}{t}+
+			a_{1}
+			\diffp{
+				\big(
+				\theta
+				S_{\text{o}}
+				\big)
+			}{x}                    & =
+			b_{1}
+			S_{\text{o}}
+			S_{y}
+			\Phi-
+			\beta\theta.
+			\label{eq:6}                \\
+			\diffp{S_{y}}{t}+
+			a_{2}
+			\diffp{S_{y}}{x}        & =
+			-b_{2}
+			S_{\text{o}}
+			S_{y}
+			\Phi.
+			\label{eq:7}                \\
+			\diffp{S_{\text{o}}}{t}+
+			a_{3}
+			\diffp{S_{\text{o}}}{x} & =
+			-b_{3}
+			S_{\text{o}}
+			S_{y}
+			\Phi.
+			\label{eq:8}                \\
+			S_{\text{o}}
+			S_{y}
+			\Phi                    & =
+			0.                          \\
+			\big(
+			\theta^{L},
+			S^{L}_{y},
+			S^{L}_{\text{o}}
+			\big)                   & =
+			\big(
+			0,
+			S^{L}_{y},
+			0
+			\big).                      \\
+			\big(
+			\theta^{R},
+			S^{R}_{y},
+			S^{R}_{\text{o}}
+			\big)                   & =
+			\big(
+			0,
+			0,
+			S^{R}_{\text{o}}
+			\big).
+		\end{align}
+	\end{block}
+	% Existence and Uniqueness.
+\end{frame}

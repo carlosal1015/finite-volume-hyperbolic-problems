@@ -1,0 +1,345 @@
+\subsection*{Algunas aplicaciones del teorema de Banach}
+
+\begin{questions}
+	\question
+
+	Sean
+	\begin{math}
+		\left(
+		BC^{1}\left(\mathbb{R}^{n},\mathbb{R}^{n}\right),
+		{\left\|\cdot\right\|}_{1}
+		\right)
+	\end{math}
+	un espacio de Banach de las funciones
+	$C^{1}\left(\mathbb{R}^{n},\mathbb{R}^{n}\right)$ acotadas
+	y $f\in BC^{1}\left(\mathbb{R}^{n}\right)$.
+	Si $x^{\ast}\in\operatorname{Fix}\left(f\right)$ y
+	$1\notin\operatorname{EV}\left(Df_{x^{\ast}}\right)$, entonces
+	$\forall\varepsilon>0$: $\exists\delta>0$ tal que
+	$\forall g\in BC^{1}\left(\mathbb{R}^{n},\mathbb{R}^{n}\right)$ con
+	${\left\|f-g\right\|}_{1}\leq\delta$ donde
+	\begin{math}
+		\operatorname{Fix}\left(g\right)=
+		\left\{\widehat{x}\right\}
+	\end{math}
+	y $\left\|x^{\ast}-\widehat{x}\right\|\leq\varepsilon$.
+
+	\textbf{Sugerencia}:
+	Use el teorema de la función inversa en $\mathbb{R}^{n}$ y el
+	principio de contracción.
+
+	\question
+
+	(Raíces cuadradas en álgebras de Banach).
+	\begin{parts}
+		\part
+
+		Si $\left(E,\left\|\cdot\right\|\right)$ es un álgebra de Banach
+		y $z\in E$ tal que $\left\|z\right\|<1$, entonces
+		$\exists! x\in E$ tal que $\left\|x\right\|<1$ y $x^{2}-2x+z=0$.
+
+		\textbf{Sugerencia}:
+		Sea $E\left(z\right)$ una subálgebra de $E$ generada por $z$,
+		$d\in\mathbb{R}$ tal que $\left\|z\right\|<d<1$ y
+		$\widehat{K}=K\left(0,d\right)\cap E\left(z\right)$.
+		Pruebe que la aplicación $f\colon\widehat{K}\to\widehat{K}$
+		definido por $\forall x\in\widehat{K}$:
+		\begin{math}
+			f\left(x\right)\coloneqq
+			\frac{1}{2}
+			\left(x^{2}+z\right)
+		\end{math}
+		es contractivo y aplique el teorema de Banach usando el hecho de
+		que $E\left(z\right)$ es conmutativo.
+
+		\part
+
+		Suponga que $E$ tiene unidad $e$ (es decir, $\forall x\in E$:
+		$ex=xe=x$).
+		Si $\left\|e-z\right\|<1$, entonces
+		$\forall x\in E\left(z\right)$ con $\left\|x\right\|<1$ y
+		$y^{2}=z$: $\exists !y=e-x$.
+
+		\part
+
+		Sea $X\neq\emptyset$ un conjunto y
+		$\left(B\left(X\right),{\left\|\cdot\right\|}_{\infty}\right)$ un
+		álgebra de funciones reales acotadas en $X$ y el producto es la
+		multiplicación puntual.
+		Si $B\left(X\right)$ es completo y $1\in B\left(X\right)$, entonces
+		\begin{enumerate}[(i)]
+			\item
+
+			      $\forall f\in B\left(X\right)$ no negativa:
+			      $f^{\frac{1}{2}}\in B\left(X\right)$.
+
+			\item
+
+			      Si $f\in B\left(X\right)$, entonces
+			      \begin{math}
+				      \left|f\right|=
+				      {\left(f^{2}\right)}^{\frac{1}{2}}\in
+				      B\left(X\right)
+			      \end{math}.
+
+			\item
+
+			      Si $f,g\in B\left(X\right)$, entonces
+			      \begin{math}
+				      \min\left\{f,g\right\},
+				      \max\left\{f,g\right\}\in
+				      B\left(X\right)
+			      \end{math}.
+		\end{enumerate}
+
+		\part
+
+		$S\subset B\left(X\right)$ separa puntos de $X$ si y solo si
+		$\forall x, y\in X$, $x\neq y$: $\exists f\in S$ tal que
+		$f\left(x\right)\neq f\left(y\right)$.
+		Si $S$ es una subálgebra de $B\left(X\right)$ que separa puntos de
+		$X$ y contiene a las funciones constantes, entonces
+		$\forall\alpha,\beta\in\mathbb{R}$:
+		$\forall x, y\in X$, $x\neq y$:
+		$\exists g \in S$ tal que $g\left(x\right)=\alpha$ y
+		$g\left(y\right)=\beta$.
+		(Los resultados anteriores se deben a~\cite{Bonsall1972}~\Citeauthor{Bonsall1972},~\citeyear{Bonsall1972}
+		y~\cite{Zemánek1978}~\Citeauthor{Zemánek1978},~\citeyear{Zemánek1978}).
+	\end{parts}
+
+	\question
+	(Teorema de Stone-Weierstraß)
+	Sean $\left(X,d\right)$ un espacio métrico compacto y
+	$\left(C\left(X\right),\left\|\cdot\right\|\right)$ un álgebra de
+	Banach.
+	Si $S\subset C\left(X\right)$ es una subálgebra que separa puntos de
+	$C\left(X\right)$ y $1\in S$.
+	Entonces, $S$ es denso en $C\left(X\right)$.
+
+	\textbf{Sugerencia}:
+	Fije $f\in C\left(X\right)$ y $\varepsilon>0$ y proceda (usando la
+	pregunta 2~(c), (d) con $S=E, B\left(X\right)=\overline{E}$) en
+	tres pasos:
+	\begin{enumerate}
+		\item
+		      $\forall x,y\in X$: encuentre $g_{x,y}\in\overline{E}$ tal
+		      que $g_{x,y}\left(x\right)=f\left(x\right)$ y
+		      $g_{x,y}\left(y\right)=f\left(y\right)$.
+
+		\item
+
+		      $\forall y\in X$: escoja una vecindad $U_{y}$ de $y$ tal
+		      que $\forall z\in U_{y}$:
+		      $g_{x,y}\left(z\right)<f\left(z\right)+\varepsilon$.
+		      Suponga que
+		      \begin{math}
+			      \left\{
+			      U_{y_{j}}\mid
+			      j\in\left\{1,\dotsc,t\right\}
+			      \right\}
+		      \end{math}
+		      es un cubrimiento de $X$, defina $h_{x}\in\overline{E}$ como
+		      el mínimo de
+		      \begin{math}
+			      \left\{
+			      g_{x,y_{j}}\mid
+			      j\in\left\{1,\dotsc,t\right\}
+			      \right\}
+		      \end{math}
+		      y note que $\forall x\in X$:
+		      $h_{x}\left(x\right)=f\left(x\right)$ y $\forall z\in X$:
+		      $h_{x}\left(z\right)<f\left(z\right)+\varepsilon$.
+
+		\item
+
+		      $\forall x\in X$: escoja una vecindad $V_{x}$ de $x$ en el cual
+		      $h_{x}\left(z\right)>f\left(z\right)-\varepsilon$;
+		      haciendo que
+		      \begin{math}
+			      \left\{
+			      V_{x_{i}}\mid
+			      i\in\left\{1,\dotsc,s\right\}
+			      \right\}
+		      \end{math}
+		      sea un cubrimiento de $X$, defina $h\in\overline{E}$
+		      como el máximo de
+		      \begin{math}
+			      \left\{
+			      h_{x_i}\mid
+			      i\in\left\{1,\dotsc,s\right\}
+			      \right\}
+		      \end{math}
+		      y muestre que $\left\|f-h\right\|<\varepsilon$.
+	\end{enumerate}
+
+	\question
+
+	(Geometría de fractales).
+	Sea $\left(X,d\right)$ un espacio métrico y
+	$\left(\mathcal{C}\mathcal{B}\left(X\right), D\right)$ el espacio
+	de subconjuntos cerrados y acotados no vacíos de $X$ con la métrica
+	Hausdorff
+	\begin{math}
+		D\left(A,B\right)=
+		\max
+		\left\{
+		\sup_{a\in A}
+		d\left(a,B\right),
+		\sup_{b\in B}
+		d\left(b,A\right)
+		\right\}
+	\end{math}.
+	Denotamos por $\mathcal{K}\left(X\right)$ al subespacio de
+	$\mathcal{CB}\left(X\right)$ que consiste de los subconjuntos compactos de $X$.
+	Por un sistema de funciones iteradas entendemos un sistema
+	\begin{math}
+		\left(
+		\left(X,d\right);f_{1},\dotsc,f_{k}
+		\right)
+	\end{math}
+	consiste de un espacio métrico completo $\left(X,d\right)$ junto con
+	$\forall i\in\left\{1,\dotsc,k\right\}$: $f_{i}\colon X\to X$
+	$\alpha_{i}$-contracciones.
+	Dado tal sistema definimos
+	\begin{align*}
+		f\colon\mathcal{K}\left(X\right) & \longrightarrow\mathcal{K}\left(X\right)          \\
+		A                                & \longmapsto \bigcup_{i=1}^{k}f_{i}\left(A\right).
+	\end{align*}
+
+	\begin{parts}
+		\part
+
+		$f$ es una $\alpha$-contracción con
+		$\alpha=\max\left\{\alpha_{1},\dotsc,\alpha_{k}\right\}$.
+
+		\part
+
+		$\exists! B\in\mathcal{K}\left(X\right)$ atractor del sistema de
+		funciones iteradas tal que $B=\bigcup_{i=1}^{k}f_{i}\left(B\right)$.
+
+		\part
+
+		$\forall x\in X$: $f^{k}\left(x\right)$ converge a $B$ con la
+		métrica Hausdorff en $\mathcal{K}\left(X\right)$.
+	\end{parts}
+	\textbf{Sugerencia}:
+	Use el hecho que $\left(\mathcal{K}\left(X\right),D\right)$ es completo;
+	cf.~\cite{Kuratowski1966}~\Citeauthor{Kuratowski1966},~\citeyear{Kuratowski1966}.
+	(Los resultados anteriores se deben a~\cite{Hutchinson1981}~\Citeauthor{Hutchinson1981},~\citeyear{Hutchinson1981}.)
+
+	\question
+	(Estabilidad de atractores).
+	Sea $\left(\Lambda,\varrho\right)$ un espacio métrico y
+	\begin{math}
+		\left(
+		\left(X,d\right);f_{1,\lambda},\dotsc,f_{k,\lambda}
+		\right)
+	\end{math}
+	una familia de sistemas iterados de funciones sobre un parámetro
+	$\lambda\in\Lambda$.
+	Suponga que $\forall i\in\left\{1,\dotsc,k\right\}$:
+	\begin{parts}
+		\part
+
+		$\forall\lambda\in\Lambda$:
+		$f_{i,\lambda}\colon X\to X$ es $\alpha_{i}$-contractiva.
+
+		\part
+
+		$\forall x\in X$:
+		$\lambda\longmapsto f_{i,\lambda}\left(x\right)$ es continua.
+	\end{parts}
+	Entonces, el atractor del sistema de funciones iteradas
+	$B_{\lambda}$ depende continuamente de $\lambda$
+	(cf. \cite{Jachymski1961}~\Citeauthor{Jachymski1961},~\citeyear{Jachymski1961}).
+
+	\question
+
+	(Programación dinámica).
+	Sea $X$ un conjunto y
+	$\left(B\left(X\right),{\left\|\cdot\right\|}_{\infty}\right)$
+	un espacio de Banach y la relación de orden parcial natural
+	$f\leq g$.
+	Sea $E$ un subespacio vectorial de $B\left(X\right)$ que contiene a las funciones
+	constantes y $F\colon E\to E$ una aplicación tal que
+	\begin{parts}
+		\part
+
+		$f\leq g\implies\forall f,g\in E$: $F\left(f\right)\leq F\left(g\right)$.
+
+		\part
+
+		$\exists q\in\left(0,1\right)$ tal que $\forall x\mapsto c$
+		en $X$: $\forall f\in E$:
+		$F\left(f+c\right)\leq F\left(f\right)+qc$.
+
+	\end{parts}
+	Entonces, $\left|\operatorname{Fix}\left(F\right)\right|=1$
+	(\cite{Blackwell1965}~\Citeauthor{Blackwell1965},~\citeyear{Blackwell1965}).
+
+	\question
+	(Propiedad de sombreamiento).
+	Sea $\left(X,d\right)$ un espacio métrico y $f\colon X\to X$.
+	Una sucesión $\left\{x_{n}\right\}_{n\in\mathbb{Z}}$ es llamado una
+	órbita (respectivamente una $\delta$-órbita, con $\delta>0$) para
+	$f$ provisto $\forall n\in\mathbb{Z}$:
+	$f\left(x_{n}\right)=x_{n+1}$
+	(respectivamente $d\left(f\left(x_{n}\right),x_{n+1}\right)\leq\delta$).
+	Decimos que $f$ tiene la propiedad de sombreamiento si y solo si
+	$\forall\varepsilon>0$: $\exists\delta>0$ tal que
+	$\forall{\left\{x_{n}\right\}}_{n\in\mathbb{N}}$ $\delta$-órbita:
+	$\exists{\left\{y_{n}\right\}}_{n\in\mathbb{N}}$ tal que
+	$\forall n\in\mathbb{Z}$:
+	$d\left(x_{n},y_{n}\right)\leq\epsilon$.
+	\begin{parts}
+		\part
+
+		Si $\left(X,d\right)$ un espacio métrico completo y
+		$f\colon X\to X$ una aplicación $\alpha$-contractiva,
+		entonces $f$ tiene la propiedad de sombreamiento.
+
+		\textbf{Sugerencia}:
+		Dado $\varepsilon>0$, sea
+		${\left\{r_{n}\right\}}_{n\in\mathbb{N}}$ una $\delta$-órbita
+		de $f$ con $\delta=\varepsilon\left(1-\alpha\right)$.
+		Defina $\left(M,\varrho\right)$ por
+		\begin{math}
+			M=
+			\left\{
+			\left\{y_{n}\right\}_{n\in\mathbb{Z}}\mid
+			\forall n\in\mathbb{Z}:
+			d\left(x_{n},y_{n}\right)\leq
+			\epsilon
+			\right\}
+		\end{math},
+		\begin{math}
+			\varrho\left(y,z\right)=
+			\sup_{n\in\mathbb{Z}}
+			\left\{
+			d\left(y_{n},z_{n}\right)
+			\right\}
+		\end{math}
+		y aplique el principio de Banach a la aplicación $F\colon M\to M$
+		dado por
+		\begin{math}
+			y\mapsto
+			{\left\{
+				f\left(y_{n-1}\right)
+				\right\}}_{n\in\mathbb{Z}}
+		\end{math}.
+
+		\part
+		Sea $\left(E,\left\|\cdot\right\|\right)$ un espacio de Banach y
+		$L\in\operatorname{GL}\left(E\right)$ un isomorfismo lineal.
+		Decimos que $L$ es hiperbólico provisto por
+		$E=E_{1}\oplus E_{2}$ y $L=L_{1}\oplus L_{2}$,
+		donde $\forall i\in\left\{1,2\right\}$:
+		$L_{i}\in\operatorname{GL}\left(E_{i}\right)$ con
+		$\left\|L_{1}\right\|<1$ y $\left\|L^{-1}_{2}\right\|<1$.
+		Si $L\in\operatorname{GL}\left(E\right)$ es hiperbólico,
+		entonces $L$ tiene la propiedad de sombreamiento.
+		(Los resultados anteriores son debidos a
+		\cite{Ombach1993}~\Citeauthor{Ombach1993},~\citeyear{Ombach1993}).
+	\end{parts}
+\end{questions}
+
