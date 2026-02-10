@@ -62,7 +62,7 @@ class Solver:
             t_span=t_span,
             y0=X0,
             t_eval=t,
-            first_step=t[1] - t[0],  # Ensure the first step is positive
+            first_step=abs(t[1] - t[0]),  # Ensure the first step is positive
         )
         X = sol.y.T
 

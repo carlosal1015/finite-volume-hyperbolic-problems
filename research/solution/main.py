@@ -24,7 +24,7 @@ def main():
     """
     # --- 1. Initialization ---
     # Load physical parameters from the specified case file.
-    params = load_parameters("case1.toml")
+    params = load_parameters("angelbeta.toml")
     display_parameters_table(params)
 
     # Instantiate the model, solver, and plotter.
@@ -75,15 +75,23 @@ def main():
     plotter.plot_fprimeprime(
         x_range=(1, 100), filename="solution/fprimeprimea.pdf", position=(60, 0.6e-5)
     )
-    # Plot the solution to the traveling wave ODE system
+    # # Plot the solution to the traveling wave ODE system
     plotter.plot_ode_solution(
-        X0=[0.5, 0.5], t_span=(0, 1), filename="solution/ode_solution.pdf"
+        X0=[0.5, 0.5],
+        t_span=(0, 1),
+        filename="solution/ode_solution.pdf",
     )
-    # Plot the phase portrait
-    plotter.plot_phase_portrait(
-        so_range=(0, 1), theta_range=(0, 100), filename="solution/phaseportrait.pdf"
-    )
-    print("Plots saved in the 'solution' directory.")
+    # plotter.plot_ode_solution(
+    #     X0=[0.5, 0.5],
+    #     t_span=(0, 1),
+    #     filename="solution/ode_solution_all.pdf",
+    #     all_in_one=True,
+    # )
+    # # Plot the phase portrait
+    # plotter.plot_phase_portrait(
+    #     so_range=(0, 1), theta_range=(0, 100), filename="solution/phaseportrait.pdf"
+    # )
+    # print("Plots saved in the 'solution' directory.")
 
 
 if __name__ == "__main__":

@@ -22,26 +22,27 @@ class SpecificModel(HyperbolicProblem):
         super().__init__(**kwargs)
 
         # --- Intermediate Characteristic Scales ---
-        α = 1.0  # Assumed constant
-        w = 1  # Assumed constant
-        tast = 1 / self.kp  # Characteristic reaction time
-        xast = (self.ρg * self.u) / (self.ρres * self.kp)  # Characteristic length
+        self.tast = self.k̂ / self.kp  # Characteristic reaction time
+        self.xast = (
+            5e9 * (self.ρg * self.u) / (self.ρres * self.kp)
+        )  # Characteristic length
 
         # --- Derived Dimensionless Groups (Model Coefficients) ---
-        self.a1 = (tast * self.uo * self.co * self.ρo) / (self.Cm * xast)
-        self.a2 = (tast * self.ug) / (self.φ * xast)
-        self.a3 = (tast * self.uo) / (self.φ * xast)
+        self.a1 = (self.tast * self.uo * self.co * self.ρo) / (self.Cm * self.xast)
+        self.a2 = (self.tast * self.ug) / (self.φ * self.xast)
+        self.a3 = (self.tast * self.uo) / (self.φ * self.xast)
         self.b1 = (self.ρo * self.Qr) / (self.Cm * self.Tres)
-        self.b2 = (w * self.ρo) / self.ρg
+        self.b2 = (self.w * self.ρo) / self.ρg
         self.b3 = 1.0  # Assumed constant
-        self.β = (α * tast) / self.Cm
+
+        self.β = (self.α * self.tast) / self.Cm
         self.Tast = self.Tres  # Characteristic temperature
         self.c = (self.a2 * self.b3 * self.SyL + self.a3 * self.b2 * self.SoR) / (
             self.b2 * self.SoR + self.b3 * self.SyL
         )
 
         # --- Key Dimensionless Parameters for the Flux Function f(θ) ---
-        self.m = (self.β * self.SoR) / (self.b1 * self.SyL * tast * self.kp)
+        self.m = (self.β * self.SoR) / (self.b1 * self.SyL * self.tast * self.kp)
         self.ε = self.Er / (self.R * self.Tast)  # Dimensionless activation energy
         self.θ0 = self.Tres / self.Tast  # Dimensionless initial temperature
         self.q = (self.a1 * self.b3) / (self.b1 * (self.c - self.a3))

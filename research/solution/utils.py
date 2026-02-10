@@ -45,12 +45,14 @@ def display_parameters_table(params: Dict[str, float]):
     Displays physical parameters in a formatted table.
     """
     param_metadata = {
+        "k̂": ("Correction factor", "-"),
         "Tres": ("Initial reservoir Temperature", "K"),
         "Cm": ("Rock matrix heat capacity", "J/(m³K)"),
         "Qr": ("Enthalpy of the mobile fuel at Tres", "J/mol"),
         "Er": ("Activation Energy", "J/mol"),
         "kp": ("Frequency factor for the reaction", "1/s"),
         "R": ("Gas constant", "J/(mol·K)"),
+        "α": ("Heat loss constant", "-"),
         "φ": ("Porosity", "-"),
         "ρo": ("Average molar density of oil", "mol/m³"),
         "co": ("Molar heat capacity of oil", "J/(mol·K)"),
@@ -60,6 +62,7 @@ def display_parameters_table(params: Dict[str, float]):
         "ρg": ("Average molar density of gas", "mol/m³"),
         "ρres": ("Average initial molar density of oil", "mol/m³"),
         "Lres": ("Reservoir length", "m"),
+        "w": ("Unknown", "-"),
         "SoR": ("Oil saturation on the right", "-"),
         "SyL": ("Gas saturation on the left", "-"),
     }
@@ -88,6 +91,8 @@ def display_derived_parameters(model):
         "Tast": model.Tast,
         "c": model.c,
         "c/a1": model.c / model.a1,
+        "xast": model.xast,
+        "tast": model.tast,
     }
 
     table_data = [[symbol, f"{value:g}"] for symbol, value in derived_params.items()]

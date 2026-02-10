@@ -147,6 +147,7 @@ class Plotter:
         t_span: Tuple[float, float],
         filename: str,
         num_points: int = 100,
+        all_in_one: bool = False,
     ):
         """
         Plots the solution of the ODE system over a given interval.
@@ -160,56 +161,109 @@ class Plotter:
             X0=X0, t_span=(t_center, t_span[1]), num_points=num_points
         )
 
-        fig, (ax0, ax1, ax2) = plt.subplots(
-            nrows=3, constrained_layout=True, gridspec_kw={"hspace": 0.1}
-        )
-        fig.suptitle(
-            "ODE Solution with IC at "
-            + r"$\theta\left(\frac{1}{2}\right)=\frac{1}{2}$ and "
-            + r"$S^{\text{R}}_{\text{o}}\left(\frac{1}{2}\right)=\frac{1}{2}$."
-        )
+        if all_in_one:
+            fig, ax = plt.subplots(layout="constrained")
+            fig.suptitle("ODE Solution")
 
-        # Plot theta
-        ax0.plot(t_left, X_left[:, 0], "red", linewidth=0.7, label=r"$\theta$")
-        ax0.plot(t_right, X_right[:, 0], "red", linewidth=0.7)
-        ax0.set_ylabel(r"$\theta$")
+            # Plot theta
+            ax.plot(t_left, X_left[:, 0], color="red", linewidth=0.7, label=r"$\theta$")
+            ax.plot(t_right, X_right[:, 0], color="red", linewidth=0.7)
 
-        # Plot Sy
-        ax1.plot(t_left, X_left[:, 2], "blue", linewidth=0.7, label=r"$S_{\text{y}}$")
-        ax1.plot(t_right, X_right[:, 2], "blue", linewidth=0.7)
-        ax1.set_ylabel(r"$S_{\text{y}}$")
-        ax1.text(
-            0.72,
-            0.65,
-            r"$S_{\text{y}}=$"
-            + r"$\left(S^{\text{R}}_{\text{o}}-S_{\text{o}}\right)$"
-            + r"$\frac{S^{\text{L}}_{\text{y}}}{S^{\text{R}}_{\text{o}}}$",
-            transform=ax1.transAxes,
-            fontsize=10,
-        )
+            # Plot Sy
+            ax.plot(
+                t_left,
+                X_left[:, 2],
+                color="blue",
+                linewidth=0.7,
+                label=r"$S_{\text{y}}$",
+            )
+            ax.plot(t_right, X_right[:, 2], color="blue", linewidth=0.7)
 
-        # Plot So
-        ax2.plot(t_left, X_left[:, 1], "black", linewidth=0.7, label=r"$S_{\text{o}}$")
-        ax2.plot(t_right, X_right[:, 1], "black", linewidth=0.7)
-        ax2.set_ylabel(r"$S_{\text{o}}$")
+            # Plot So
+            ax.plot(
+                t_left,
+                X_left[:, 1],
+                color="black",
+                linewidth=0.7,
+                label=r"$S_{\text{o}}$",
+            )
+            ax.plot(t_right, X_right[:, 1], color="black", linewidth=0.7)
 
-        for ax in [ax0, ax1, ax2]:
             ax.set_xlabel(r"$\xi$")
+            ax.set_ylabel("Values")
             ax.set_xlim(t_left.min(), t_right.max())
             ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
             for spine in ax.spines.values():
                 spine.set_color("none")
 
-        fig.legend(
-            handles=[ax0.lines[0], ax2.lines[0], ax1.lines[0]],
-            bbox_to_anchor=(0.77, 0.85),
-            loc="lower center",
-            ncol=3,
-            shadow=True,
-            fontsize=12,
-        )
-        fig.savefig(filename, transparent=True, bbox_inches="tight")
-        plt.close(fig)
+            ax.legend(loc="best", shadow=True, fontsize=12)
+            fig.savefig(filename, transparent=True, bbox_inches="tight")
+            plt.close(fig)
+        else:
+            fig, (ax0, ax1, ax2) = plt.subplots(
+                nrows=3, constrained_layout=True, gridspec_kw={"hspace": 0.1}
+            )
+            fig.suptitle(
+                "ODE Solution with IC at "
+                + r"$\theta\left(\frac{1}{2}\right)=\frac{1}{2}$ and "
+                + r"$S^{\text{R}}_{\text{o}}\left(\frac{1}{2}\right)=\frac{1}{2}$."
+            )
+
+            # Plot theta
+            ax0.plot(
+                t_left, X_left[:, 0], color="red", linewidth=0.7, label=r"$\theta$"
+            )
+            ax0.plot(t_right, X_right[:, 0], color="red", linewidth=0.7)
+            ax0.set_ylabel(r"$\theta$")
+
+            # Plot Sy
+            ax1.plot(
+                t_left,
+                X_left[:, 2],
+                color="blue",
+                linewidth=0.7,
+                label=r"$S_{\text{y}}$",
+            )
+            ax1.plot(t_right, X_right[:, 2], color="blue", linewidth=0.7)
+            ax1.set_ylabel(r"$S_{\text{y}}$")
+            ax1.text(
+                0.72,
+                0.65,
+                r"$S_{\text{y}}=$"
+                + r"$\left(S^{\text{R}}_{\text{o}}-S_{\text{o}}\right)$"
+                + r"$\frac{S^{\text{L}}_{\text{y}}}{S^{\text{R}}_{\text{o}}}$",
+                transform=ax1.transAxes,
+                fontsize=10,
+            )
+
+            # Plot So
+            ax2.plot(
+                t_left,
+                X_left[:, 1],
+                color="black",
+                linewidth=0.7,
+                label=r"$S_{\text{o}}$",
+            )
+            ax2.plot(t_right, X_right[:, 1], color="black", linewidth=0.7)
+            ax2.set_ylabel(r"$S_{\text{o}}$")
+
+            for ax in [ax0, ax1, ax2]:
+                ax.set_xlabel(r"$\xi$")
+                ax.set_xlim(t_left.min(), t_right.max())
+                ax.grid(c="gray", linewidth=0.1, linestyle="dashed")
+                for spine in ax.spines.values():
+                    spine.set_color("none")
+
+            fig.legend(
+                handles=[ax0.lines[0], ax2.lines[0], ax1.lines[0]],
+                bbox_to_anchor=(0.77, 0.85),
+                loc="lower center",
+                ncol=3,
+                shadow=True,
+                fontsize=12,
+            )
+            fig.savefig(filename, transparent=True, bbox_inches="tight")
+            plt.close(fig)
 
         # a, b = 1, 3
         # t_center = 2
@@ -244,7 +298,7 @@ class Plotter:
         so_grid, theta_grid = np.meshgrid(so_values, theta_values)
 
         # Calculate f(θ) across the grid
-        f_values = self.model.f(theta_grid) * 1e8
+        f_values = self.model.f(theta_grid)  # * 1e8
 
         fig, ax = plt.subplots(constrained_layout=True)
         ax.set_xlabel(r"$S_{\text{o}}$")
@@ -270,7 +324,7 @@ class Plotter:
             color="red",
             label=r"$S_{\text{o}}\left(S^{\text{R}}_{\text{o}}-S_{\text{o}}\right)-10^{8}f\left(\theta\right)=0$",
             linewidth=0.1,
-            linestyle="-"
+            linestyle="-",
         )
         ax.legend(
             handles=[legend_patch],
@@ -278,7 +332,7 @@ class Plotter:
             loc="best",
             # title="Legend",
             fancybox=True,
-            fontsize=8
+            fontsize=8,
         )
         fig.savefig(filename, transparent=True, bbox_inches="tight")
         plt.close(fig)

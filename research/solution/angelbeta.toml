@@ -1,0 +1,24 @@
+[parameters]
+"k̂" = 1e10
+Tres = 300
+Cm = 2e6
+Qr = 4.4e5
+Er = 51247.0 # Er = E
+kp = 24556.0 # kp = par.kp
+R = 8.314
+"α" = 1.0
+"φ" = 0.3 # φ = varphi
+"ρo" = 1366.88
+co = 1097.4
+u = 2.03e-3
+ug = 2e-3
+uo = 1.86e-8
+"ρg" = 45
+"ρres" = 372
+Lres = 50
+w = 1.0
+T0 = 1.5
+SoR = 1
+SyL = 1
+"θini" = 0.0
+"Soini" = 0.0
