@@ -1,0 +1,221 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'pdf', 'run.xml', 'snm', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav',
+% arara: --> 'out', 'run.xml', 'snm', 'toc']
+% arara: --> }
+\documentclass[
+    8pt,
+    aspectratio=1610,
+    c,
+    spanish,
+    intlimits,
+    handout,
+    leqno,
+    % noamsthm,
+    professionalfonts,
+]{beamer}
+\usepackage[spanish]{babel}
+\usetheme[
+	language=spanish,
+	style=chalk,% academic, minimal, studio, modern, design, executive, sober, simple, editorial, lumiere
+	palette=copper,%chalk,dusk,horizon,imperial,lumiere,manuscript,midnight,mineral,nordic,obsidian,oxford,palatial,petrol,prestige,royal,sakura,sapphire,steel,terracotta,velours,velvet
+	unicolor,
+	% emphasis=accent,
+	% decoration=main,
+	% serifface=EB Garamond,
+	% seriffaceoptions={Scale=1.1},
+  % sansface=Montserrat,
+	% monoface=JetBrains Mono,
+	% semibold=false,
+	% light=false,
+	% mathface=pagella,
+	% mathfaceoptions={Scale=1.05},
+	% allserif,
+	% margin=1.5em,
+	% frametitle=leftbar,%elegant,cosmic,line,gradient,clean,subtle,plainrule
+	% titlealign=center,
+	% titlebackground=example-image,
+	% titlesize=Huge,
+  % frametitlesize=Large,
+  % sectiontitlesize=huge,
+	% footerstyle=info%prestige,cosmic,info,minimalist,badge,classic,fullbar,ruled,framed,boxed,boxedruled
+	% progressbar,
+	% shownavigation,
+	% compacttoc,
+	% twocoltoc
+]{Celestia}
+
+\usepackage{diffcoeff}
+\usepackage[
+    citestyle=numeric,
+    style=numeric,
+    backend=biber,
+]{biblatex}
+\addbibresource{references.bib}
+
+\setbeamertemplate{bibliography item}{%
+	\ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+		or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+		or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+	{\setbeamertemplate{bibliography item}[book]}
+	{\ifentrytype{online}
+		{\setbeamertemplate{bibliography item}[online]}
+		{\setbeamertemplate{bibliography item}[article]}}%
+	\usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+{\list{}
+	{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+		\setlength{\leftmargin}{\labelwidth}%
+		\setlength{\labelsep}{\biblabelsep}%
+		\addtolength{\leftmargin}{\labelsep}%
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}}}
+{\endlist}
+{\item}
+
+\title{Clase 1: Introducción a las EDPs}
+\subtitle{Métodos Numéricos para Ecuaciones Diferenciales Parciales~CM032}
+\institute{
+    Universidad Nacional de Ingeniería \\
+    Escuela Profesional de Matemática \\
+    Facultad de Ciencias
+}
+\author{Prof.~Fidel Jara Huanca}
+\date{\today}
+\titlegraphic{
+    \begin{picture}(0,0)
+        \put(20,10){\makebox(0,0)[rt]{\href{https://google.com}{\includegraphics[width=2.5cm]{example-image}}}}
+        % \put(200,80){\makebox(0,0)[rt]{\href{http://thomaswick.org}{\includegraphics[width=2.5cm]{wick}}}}
+    \end{picture}
+}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido del curso}
+
+	\begin{itemize}
+		\item
+
+		      Página web del curso: \url{https://cm032.github.io}
+
+		\item
+
+		      Incluye folleto con información detallada del curso: \url{https://cm032.github.io/syllabus.pdf}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	Sea $u\in C$
+	\begin{equation*}
+		\diffp{u}{t}=\alpha\diffp[2]{u}{x}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Título del bloque}
+		Contenido del bloque estándar (color del bloque)
+	\end{block}
+
+	\begin{exampleblock}{Ejemplo}
+		Contenido del bloque de ejemplo (color examplecolor)
+	\end{exampleblock}
+
+	\begin{alertblock}{Atención}
+		Contenido del bloque de alerta (color de la alerta)
+	\end{alertblock}
+
+	\begin{theorem}{Pitágoras}
+		En un triángulo rectángulo, $a^2 + b^2 = c^2$.
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	El método de diferencias finitas es un método numérico universalmente aplicable
+	para la solución de ecuaciones diferenciales.
+
+	La idea básica del método de diferencias finitas es aproximar los cocientes diferenciales por un cociente de diferencias apropiado,
+	por lo tanto, reducimos una ecuación diferencial a un sistema algebraico.
+\end{frame}
+
+\begin{frame}\transblindsvertical
+	\frametitle{References}
+
+	\only<1>{
+		\begin{itemize}
+			\item
+
+			      Libros
+
+			      \
+
+			      \nocite{*}
+			      \printbibliography[heading=none,keyword=book]
+		\end{itemize}
+	}
+
+	% \only<2>{
+	% 	\begin{itemize}
+	% 		\item
+
+	% 		      Artículos
+
+	% 		      \
+
+	% 		      \printbibliography[heading=none,keyword=paper]
+	% 	\end{itemize}
+	% }
+
+	% \only<3>{
+	% 	\begin{itemize}
+	% 		\item
+
+	% 		      Páginas web
+
+	% 		      \
+
+	% 		      \printbibliography[heading=none,keyword=online]
+	% 	\end{itemize}
+	% }
+\end{frame}
+
+
+\end{document}
+
+https://andreask.cs.illinois.edu/cs555-s22/notes.pdf
+https://andreask.cs.illinois.edu/cs555-s22/notes-folded.pdf
+https://lecture2go.uni-hamburg.de/l2go/-/get/v/69391?_OpenAccessVideos_objectId=69391&_OpenAccessVideos_objectType=v
+https://www.math.uni-hamburg.de/home/schmidt/lectures/PDE.pdf
+https://www.math.uni-hamburg.de/en/forschung/bereiche/am/geom-part-differentialgleichungen/dokumente/pde.pdf
+https://www.math.uni-hamburg.de/home/schmidt/lectures/CalcVar.pdf
+https://lecture2go.uni-hamburg.de/en/l2go/-/get/v/40045
+https://people.math.ethz.ch/~grsam/NUMPDEFL/NUMPDE.pdf
+https://people.math.ethz.ch/~grsam/NUMPDEFL/HOMEWORK/NPDEFL_Problems.pdf
+https://skim.math.msstate.edu/LectureNotes/NumerPDEs_Lecture.pdf
+https://books.google.com.pe/books?id=6UhTEQAAQBAJ&printsec=frontcover#v=onepage&q&f=false

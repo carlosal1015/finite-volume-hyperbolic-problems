@@ -1,0 +1,301 @@
+Considere el problema de Dirichlet para el operador de Laplace en el
+disco
+\begin{math}
+	D=
+	\left\{
+	\left(x,y\right)\in\mathbb{R}^{2}\mid
+	x^{2}+y^{2}<a^{2}
+	\right\}
+\end{math}
+por
+\begin{equation}\label{eq:dirichletproblemcartesian}
+	\begin{cases}
+		\difc.L.{u}{}=
+		0   &
+		\text{en }D. \\
+		u=g &
+		\text{en }\partial D.
+	\end{cases}
+\end{equation}
+
+\begin{parts}
+	\part[3]
+
+	Reescriba el operador
+	\begin{math}\displaystyle
+		\difc.L.{u}{}\coloneqq
+		\diffp[2]{u}{x}+
+		\diffp[2]{u}{y}=
+		\diffp[2]{u}{r}+
+		\frac{1}{r}
+		\diffp{u}{r}+
+		\frac{1}{r^{2}}
+		\diffp[2]{u}{\theta}
+	\end{math}
+	en coordenadas polares $\left(r,\theta\right)$.
+
+	\part[3]
+
+	Reformule el problema~\eqref{eq:dirichletproblemcartesian} en
+	coordenadas polares, teniendo en cuenta que
+	\begin{math}
+		\partial D=
+		\left\{r=a\right\}\times
+		\left[0,2\pi\right)
+	\end{math}.
+	Luego, resuelva~\eqref{eq:dirichletproblempolar} mediante el método
+	de separación de variables.
+	\begin{equation}\label{eq:dirichletproblempolar}
+		\begin{cases}
+			\difc.L.{u}{}=
+			0   &
+			\text{en }\left(0,a\right)\times\left[0,2\pi\right). \\
+			u=g &
+			\text{en }\left\{r=a\right\}\times\left[0,2\pi\right).
+		\end{cases}
+	\end{equation}
+\end{parts}
+
+\begin{solutionorgrid}
+	\begin{parts}
+		\part
+
+		\part
+
+		Buscamos soluciones separadas de la forma
+		\begin{math}
+			u\left(r,\theta\right)=
+			R\left(r\right)
+			\Theta\left(\theta\right)
+		\end{math}.
+		\begin{equation*}
+			R^{\prime\prime}
+			\Theta+
+			\frac{1}{r}
+			R^{\prime}
+			\Theta+
+			\frac{1}{r^{2}}
+			R
+			\Theta^{\prime\prime}=
+			0\iff
+			r^{2}\frac{R^{\prime\prime}}{R}+
+			r\frac{R^{\prime}}{R}=
+			-\frac{\Theta^{\prime\prime}}{\Theta}=\lambda.
+		\end{equation*}
+
+		\begin{equation*}
+			\boxed{
+			u\left(r,\theta\right)=
+			\frac{a^{2}-r^{2}}{2\pi}
+			\int_{0}^{2\pi}
+			\frac{g\left(\phi\right)}{a^{2}-2ar\cos\left(\theta-\phi\right)+r^{2}}\dl\phi.
+			}
+		\end{equation*}
+	\end{parts}
+\end{solutionorgrid}
+
+\begin{parts}
+	\part[2]
+
+	Demuestre que las siguientes desigualdades
+	$\forall x\in\mathbb{R}^{d}$:
+	\begin{math}
+		{\left\|x\right\|}_{1}\leq
+		\sqrt{d}{\left\|x\right\|}_{2}
+	\end{math}
+	y
+	\begin{math}
+		{\left\|x\right\|}_{2}\leq
+		\sqrt{d}{\left\|x\right\|}_{\infty}
+	\end{math}.
+	% Sugerencia: Use la desigualdad de Cauchy-Schwarz.
+
+	\part[2]
+
+	Sea el sistema $Ax=b$, donde $A\in\mathbb{R}^{d\times d}$ es
+	invertible y $b\in\mathbb{R}^{d}$.
+	Sean $x^{\ast}$ la solución exacta y $\widetilde{x}$ una
+	aproximación de $x^{\ast}$.
+	Demuestre que
+	\begin{math}\displaystyle
+		\frac{\left\|b-A\widetilde{x}\right\|}{\left\|A\right\|}\leq
+		\left\|x^{\ast}-\widetilde{x}\right\|\leq
+		\left\|A^{-1}\right\|
+		\left\|b-A\widetilde{x}\right\|
+	\end{math}.
+
+	\part[2]
+
+	Demuestre que
+	\begin{math}\displaystyle
+		\frac{{\left\|x^{\ast}-\widetilde{x}\right\|}_{2}}{{\left\|x^{\ast}\right\|}_{2}}\leq
+		\kappa_{2}\left(A\right)
+		\frac{{\left\|b-A\widetilde{x}\right\|}_{2}}{{\left\|b\right\|}_{2}}
+	\end{math},
+	donde
+	\begin{math}
+		\kappa_{2}
+		\left(A\right)\coloneqq
+		{\left\|A\right\|}_{2}
+			{\left\|A^{-1}\right\|}_{2}
+	\end{math}.
+\end{parts}
+
+\begin{solutionorbox}
+	\begin{parts}
+		\part
+
+		Sea $x=\left(x_{1},\dotsc,x_{d}\right)^{T}\in\mathbb{R}^{d}$.
+		Aplique la desigualdad de Cauchy-Schwarz a los vectores
+		$a=\left(\left|x_{1}\right|,\dotsc,\left|x_{d}\right|\right)^{T}$
+		y $b=\left(1,\dotsc,1\right)^{T}$.
+		\begin{align*}
+			{\left\|x\right\|}_{1}   & =
+			\left|
+			\sum_{k=1}^{d}
+			\left(
+			\left|x_{k}\right|\cdot 1
+			\right)
+			\right|=
+			\left|
+			\left\langle
+			a,b
+			\right\rangle
+			\right|\leq
+			{\left\|a\right\|}_{2}
+			{\left\|b\right\|}_{2}=
+			\sqrt{\sum_{k=1}^{d}{\left|x_{k}\right|}^{2}}
+			\sqrt{\sum_{k=1}^{d}1^{2}}=
+			{\left\|x\right\|}_{2}\sqrt{d}. \\
+			\left\|x\right\|^{2}_{2} & =
+			\sum_{k=1}^{d}
+				{\left|x_{k}\right|}^{2}\leq
+			\sum_{k=1}^{d}
+			{\left\|x\right\|}^{2}_{\infty}=
+			{\left\|x\right\|}^{2}_{\infty}
+			\sum_{k=1}^{d}
+			1=
+			{\left\|x\right\|}^{2}_{\infty}
+			d.\implies
+			{\left\|x\right\|}_{2}\leq
+			{\left\|x\right\|}_{\infty}
+			\sqrt{d}.
+		\end{align*}
+
+		\part
+
+		Defina $e\coloneqq x^{\ast}-\widetilde{x}$ y
+		$r\coloneqq b-A\widetilde{x}=Ae$.
+		\begin{align*}
+			\left\|r\right\| & =
+			\left\|Ae\right\|\leq
+			\left\|A\right\|
+			\left\|e\right\|\implies
+			\left\|e\right\|\geq
+			\frac{\left\|r\right\|}{\left\|A\right\|}.
+			\shortintertext{Pero, $e=A^{-1}r$.}
+			\left\|e\right\| & =
+			\left\|A^{-1}r\right\|\leq
+			\left\|A^{-1}\right\|
+			\left\|r\right\|.    \\
+			\frac{\left\|r\right\|}{\left\|A\right\|}\leq
+			\left\|e\right\|\leq
+			\left\|A^{-1}\right\|
+			\left\|r\right\|.
+		\end{align*}
+	\end{parts}
+\end{solutionorbox}
+
+Considere el problema de valor inicial / frontera que describe una
+onda viajera unidireccional con rapidez
+$c\in\mathbb{R}\setminus\left\{0\right\}$
+\begin{equation}\label{eq:advectionPDE}
+	\begin{cases}\displaystyle
+		\diffp{u}{t}+
+		c\diffp{u}{x}=
+		0                 &
+		\text{en }\left(a,b\right)\times\left(0,1\right).   \\
+		u=
+		u_{0}             &
+		\text{en }\left(a,b\right)\times\left\{t=0\right\}. \\
+		u\left(x,t\right)=
+		u\left(x,t\right) &
+		\text{en }\left\{a,b\right\}\times\left(0,1\right).
+	\end{cases}
+\end{equation}
+
+\begin{parts}
+	\part[2]
+
+	Aproxime en~\eqref{eq:advectionPDE} la derivada espacial de $u$ por
+	una diferencia finita centrada de segundo orden,
+	\begin{equation*}
+		\diffp.|.{u}{x}[j]^{\mkern-10mu n}=
+		\frac{
+			u^{n}_{j+1}-
+			u^{n}_{j-1}
+		}{2\Delta x}+
+		\mathcal{O}{{\left(\Delta x\right)}^{2}}.
+	\end{equation*}
+	Discretice el espacio utilizando una malla
+	\begin{math}
+		\Omega_{\Delta x}\coloneqq
+		\left\{
+		j\Delta x\in\left[a,b\right]\mid
+		j=1,\dotsc,m
+		\right\}
+	\end{math}
+	y considerando condiciones de frontera periódicas, de modo que
+	\begin{math}
+		u_{0}\left(t\right)\coloneqq
+		u_{m}\left(t\right)
+	\end{math}
+	y
+	\begin{math}
+		u_{m+1}\left(t\right)\coloneqq
+		u_{1}\left(t\right)
+	\end{math}.
+	Denotando
+	\begin{math}
+		u_{j}\left(t\right)\coloneqq
+		u\big(x_{j},t\big)
+	\end{math},
+	obtenga el siguiente sistema EDO en tiempo
+	\begin{equation}\label{eq:odesystem}
+		\diff*{
+			\begin{bmatrix}
+				u_{1}\left(t\right)   \\
+				u_{2}\left(t\right)   \\
+				\vdots                \\
+				u_{m-1}\left(t\right) \\
+				u_{m}\left(t\right)
+			\end{bmatrix}
+		}{t}=
+		\dfrac{c}{2\Delta x}
+		\begin{bmatrix}
+			0      & -1     & 0      & \cdots & 1      \\
+			1      & 0      & -1     & \ddots & \vdots \\
+			0      & \ddots & \ddots & \ddots & 0      \\
+			\vdots & \ddots & \ddots & 0      & -1     \\
+			-1     & 0      & \cdots & 1      & 0
+		\end{bmatrix}
+		\begin{bmatrix}
+			u_{1}\left(t\right)   \\
+			u_{2}\left(t\right)   \\
+			\vdots                \\
+			u_{m-1}\left(t\right) \\
+			u_{m}\left(t\right)
+		\end{bmatrix}.
+	\end{equation}
+
+	\part[3]
+
+	Demuestre que $\forall j=1,\dotsc,m$:
+	$\operatorname{Im}\left(\lambda_{j}\right)=0$, donde $\lambda_{j}$
+	es el $j$-ésimo autovalor de la matriz antisimétrica
+	circulante del sistema EDO.
+\end{parts}
+
+\begin{solutionorbox}
+	.
+\end{solutionorbox}

@@ -1,0 +1,100 @@
+%! arara: clean: {
+%! arara: --> extensions:
+%! arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav', 'out', 'pdf', 'run.xml', 'snm', 'toc']
+%! arara: --> }
+%! arara: lualatex: {
+%! arara: --> shell: yes,
+%! arara: --> draft: yes,
+%! arara: --> interaction: batchmode
+%! arara: --> }
+%! arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+%! arara: clean: {
+%! arara: --> extensions:
+%! arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'nav', 'out', 'run.xml', 'snm', 'toc']
+%! arara: --> }
+\documentclass[spanish,addpoints,answers,a4paper,8pt]{exam}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{libertine}
+\usepackage{geometry}
+\geometry{
+	left = 2cm,
+	right = 2cm,
+	top = 2cm,
+	bottom = 3cm
+}
+\usepackage[shortlabels]{enumitem}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{amsmath,amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\pagestyle{headandfoot}
+
+\usepackage{minted}
+\renewcommand{\solutiontitle}{\noindent\textbf{Solución}\par\noindent}
+\renewcommand\listingscaption{Listado}
+\newcommand{\unmarkedfntext}[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\pointpoints{Punto}{Puntos}
+\bracketedpoints
+\begin{document}
+\begin{center}
+    \sffamily\bfseries\Large
+    Métodos Numéricos para Ecuaciones Diferenciales Parciales\quad CM--032\\
+    Primera práctica calificada
+\end{center}
+
+\begin{center}
+    \fbox{\fbox{\parbox{5.5in}
+            {\centering
+                Responda las preguntas en los espacios provistos en las hojas de preguntas. Los argumentos y la claridad de las respuestas se considerarán en la puntuación final.
+            }}}
+\end{center}
+\vspace{0.1in}
+\makebox[\textwidth]{Nombres y apellidos:\enspace\hrulefill}
+\vspace{0.2in}
+\makebox[\textwidth]{Nombres y apellidos del profesor:\enspace MSc. Nombre.\hfill}
+
+\begin{questions}
+    \header{Math 115}{Second Exam}{July 4, 1776}
+    \question[5] Dibuje todos los grafos no isomorfos $3$-regulares de seis vértices.
+
+    \question Sea $G=(V,E)$ un grafo. Una \emph{orientación} de $G$ es cualquier grafo orientado $G^{\prime}=(V,E^{\prime})$ que se obtiene al reemplazar cada rama $\{u,v\}\in E$ por la rama dirigida $(u,v)$ o bien por la rama dirigida $(v,u)$.
+    \begin{parts}
+        \part[2\half] Pruebe que si todos los grados de $G$ son pares, entonces existe una orientación $H$ de $G$ con $\deg^{+}_{H}(v)=\deg^{-}_{H}(v)$ para todos los vértices $v\in V(G)$.
+        \part[2\half] Pruebe que un grafo dirigido $G$ que satisface $\deg^{+}_{H}(v)=\deg^{-}_{H}(v)$ para todo vértice $v$ es fuertemente conexo si y sólo si es débilmente conexo.
+    \end{parts}
+
+    \question[5] Pruebe que cualquier grafo $G=(V,E)$ que no tenga ciclos y que satisfaga $|V|=|E|+1$, es un árbol.
+
+    \begin{definition}{\em Árbol}
+
+        Un árbol $T$ es un grafo no dirigido que es conexo y no posee ciclos.
+    \end{definition}
+
+    \question[5] Encuentre dos árboles no isomorfos con igual secuencia de grados.
+\end{questions}
+\vfill
+\begin{flushright}\bfseries
+    Facultad de Ciencias\\[2mm]
+    Universidad Nacional de Ingeniería\\[2mm]
+    \today%\unmarkedfntext{Cada pregunta vale 5 puntos.}
+\end{flushright}
+\end{document}
+

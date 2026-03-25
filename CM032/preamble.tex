@@ -1,0 +1,53 @@
+\documentclass[
+	spanish,
+	addpoints,
+	noanswers,
+	a4paper,
+	8pt,
+	leqno
+]{exam}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{libertine}
+\usepackage{geometry}
+\geometry{
+    left = 2cm,
+    right = 2cm,
+    top = 2cm,
+    bottom = 3cm
+}
+\usepackage[intlimits]{mathtools}
+\usepackage{amssymb}
+\usepackage{diffcoeff}
+\usepackage{amsthm}
+\usepackage[svgnames]{xcolor}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{multicol}
+\usepackage{hyperref}
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}
+\pagestyle{headandfoot}
+
+\usepackage{minted}
+\renewcommand{\solutiontitle}{\noindent\textbf{Solución}\par\noindent}
+\renewcommand\listingscaption{Listado}
+\newcommand{\unmarkedfntext}[1]{%
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}%
+    \addtocounter{footnote}{-1}%
+    \endgroup
+}
+
+\difdef{c}{L}{op-symbol=\mathop{}\!\mathbin\bigtriangleup}
+
+\pointpoints{Punto}{Puntos}
+\bracketedpoints
+
+\difdef {f,fp,s,sp} {|}{
+    outer-Ldelim =\left.,
+    outer-Rdelim=\right|,
+    sub-nudge=0mu
+}
+\footer{}{Página \thepage\ de \numpages}{}
