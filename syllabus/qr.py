@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 
-from qrcode import make
+from qrcode import QRCode
+from qrcode.constants import ERROR_CORRECT_Q
+from qrcode.image.svg import SvgPathFillImage
+from qrcode.image.styles.moduledrawers.svg import SvgPathSquareDrawer
 
-make(data="https://www.wikipedia.org").save(
-    stream="qrcode.pdf", format="pdf"
+qr = QRCode(
+    version=1,
+    error_correction=ERROR_CORRECT_Q,
+    box_size=10,
+    border=1,
+    image_factory=SvgPathFillImage,
 )
-
-make(data="https://portal.uni.edu.pe").save(
-    stream="qrcodefuncionaliii.pdf", format="pdf"
+qr.add_data(
+    "https://maticus-7.github.io/lane-emden"
 )
+img = qr.make_image(module_drawer=SvgPathSquareDrawer())
+img.save(stream="qrcode.svg")

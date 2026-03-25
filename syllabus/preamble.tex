@@ -1,9 +1,15 @@
-\documentclass{scrletter}
-\usepackage{graphicx}
+\documentclass[12pt]{scrletter}
+\usepackage{svg}
 \usepackage[shortlabels]{enumitem}
 \usepackage{mathtools}
+\usepackage{amssymb}
 % \usepackage{plantuml}
-\usepackage{hyperref}
+\usepackage[
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=blue,
+	anchorcolor=black,
+	citecolor=black]{hyperref}
 
 \usepackage[
 	citestyle=numeric,
@@ -11,7 +17,7 @@
 	backend=biber,
 ]{biblatex}
 
-\addbibresource{referencesfuncionaliii.bib}
+\addbibresource{references.bib}
 
 \newcommand{\MVAt}{{\usefont{U}{mvs}{m}{n}\symbol{`@}}}
 \renewcommand{\thesection}{\Roman{section}}
