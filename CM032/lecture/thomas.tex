@@ -1,0 +1,285 @@
+\section{Algoritmo de Thomas}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	Considere un sistema lineal tridiagonal expresado en la forma $Ax=d$
+	\begin{equation}\label{eq:tridiagonal}
+		\begin{bmatrix}
+			b_{1}  & c_{1}  & 0      & \cdots  & 0       & 0       \\
+			a_{2}  & b_{2}  & c_{2}  & 0       & \cdots  & \vdots  \\
+			0      & a_{3}  & b_{3}  & c_{3}   & \ddots  & 0       \\
+			0      & 0      & \ddots & \ddots  & \ddots  & 0       \\
+			\vdots & \vdots & 0      & a_{n-1} & b_{n-1} & c_{n-1} \\
+			0      & \cdots & 0      & 0       & a_{n}   & b_{n}
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1}   \\
+			x_{2}   \\
+			x_{3}   \\
+			\vdots  \\
+			x_{n-1} \\
+			x_{n}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			d_{1}   \\
+			d_{2}   \\
+			d_{3}   \\
+			\vdots  \\
+			d_{n-1} \\
+			d_{n}
+		\end{bmatrix}.
+	\end{equation}
+	Este sistema lineal se convierte en forma triangular superior.
+	$Ux=d^{\prime}$ donde la diagonal principal solo contiene unos (1's).
+	Considere la fila 1 de la ecuación~\eqref{eq:tridiagonal}
+	\begin{equation*}
+		b_{1}x_{1}+
+		c_{1}x_{2}=
+		d_{1}.
+	\end{equation*}
+	Divida por $b_{1}$ para que la diagonal principal sea igual a $1$:
+	\begin{equation*}
+		x_{1}+
+		\frac{c_{1}}{b_{1}}x_{2}=
+		\frac{d_{1}}{b_{1}}.
+	\end{equation*}
+	Sea $c^{\prime}_{1}=\frac{c_{1}}{b_{1}}$ y
+	$d^{\prime}_{1}=\frac{d_{1}}{b_{1}}$, entonces
+	\begin{equation*}
+		x_{1}+
+		c^{\prime}_{1}x_{2}=
+		d^{\prime}_{1}.
+	\end{equation*}
+	Considere la fila 2 de la ecuación~\eqref{eq:tridiagonal}
+	\begin{equation*}
+		a_{2}x_{1}+
+		b_{2}x_{2}+
+		c_{2}x_{3}=
+		d_{2}.
+	\end{equation*}
+	Elimina $x_{1}$ usando $a_{2}$ multiplicado por la ecuación~\eqref{eq:tridiagonal}
+	\begin{align*}
+		a_{2}x_{1}+
+		b_{2}x_{2}+
+		c_{2}x_{3}-
+		a_{2}\left(x_{1}+c^{\prime}_{1}x_{2}\right)            & =
+		d_{2}-a_{2}d^{\prime}_{1}.                                 \\
+		\left(b_{2}-a_{2}c^{\prime}_{1}\right)x_{2}+c_{2}x_{3} & =
+		d_{2}-a_{2}d^{\prime}_{1}.
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	Divida por $b_{2}-a_{2}c^{\prime}_{1}$ para que la diagonal
+	principal elemento es igual a $1$
+	\begin{equation*}
+		x_{2}+
+		\frac{c_{2}}{b_{2}-a_{2}c^{\prime}_{1}}x_{3}=
+		\frac{d_{2}-a_{2}d^{\prime}_{1}}{b_{2}-a_{2}c^{\prime}_{1}}.
+	\end{equation*}
+	Sea $c^{\prime}_{2}=\dfrac{c_{2}}{b_{2}-a_{2}c^{\prime}_{1}}$ y
+	\begin{math}
+		d^{\prime}_{2}=
+		\dfrac{d_{2}-a_{2}d^{\prime}_{1}}{b_{2}-a_{2}c^{\prime}_{1}}
+	\end{math},
+	entonces
+	\begin{equation*}
+		x_{2}+
+		c^{\prime}_{2}x_{3}=
+		d^{\prime}_{2}.
+	\end{equation*}
+	Considere la fila 3 de la ecuación~\eqref{eq:tridiagonal}
+	\begin{equation*}
+		a_{3}x_{2}+
+		b_{3}x_{3}+
+		c_{3}x_{4}=
+		d_{3}.
+	\end{equation*}
+	Elimina $x_{2}$ usando $a_{3}$ multiplicado por la
+	ecuación~\eqref{eq:tridiagonal}
+	\begin{align*}
+		a_{3}x_{2}+
+		b_{3}x_{3}+
+		c_{3}x_{4}-
+		a_{3}\left(x_{2}+c^{\prime}_{2}x_{3}\right) & =
+		d_{3}-a_{3}d^{\prime}_{2}.                      \\
+		\left(b_{3}-a_{3}c^{\prime}_{2}\right)x_{3}+
+		c_{3}x_{4}                                  & =
+		d_{3}-a_{3}d^{\prime}_{2}.
+	\end{align*}
+	Divida por $b_{3}-a_{3}c^{\prime}_{2}$ para que la diagonal principal
+	elemento es igual a $1$
+	\begin{equation*}
+		x_{3}+
+		\frac{c_{3}}{b_{3}-a_{3}c^{\prime}_{2}}x_{4}=
+		\frac{d_{3}-a_{3}d^{\prime}_{2}}{b_{3}-a_{3}c^{\prime}_{2}}.
+	\end{equation*}
+	Sea $c^{\prime}_{3}=\dfrac{c_{3}}{b_{3}-a_{3}c^{\prime}_{2}}$ y
+	\begin{math}
+		d^{\prime}_{3}=
+		\dfrac{d_{3}-a_{3}d^{\prime}_{2}}{b_{3}-a_{3}c^{\prime}_{2}}
+	\end{math},
+	entonces
+	\begin{equation*}
+		x_{3}+c^{\prime}_{3}x_{4}=
+		d^{\prime}_{3}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	Considere la $i$-ésima fila de la ecuación~\eqref{eq:tridiagonal}.
+	Usando un método similar al que se muestra para las filas $2$ y $3$
+	arriba, la $i$-ésima fila se puede escribir como
+	\begin{equation}\label{eq:ith}
+		x_{i}+
+		c^{\prime}_{i}x_{i+1}=
+		d^{\prime}_{i}.
+	\end{equation}
+	Donde
+	\begin{align*}
+		c^{\prime}_{i} & =
+		\frac{c_{i}}{b_{i}-a_{i}c^{\prime}_{i-1}}. \\
+		d^{\prime}_{i} & =
+		\frac{d_{i}-a_{i}d^{\prime}_{i-1}}{b_{i}-a_{i}c^{\prime}_{i-1}}.
+	\end{align*}
+	Finalmente, considere la enésima fila de la ecuación~\eqref{eq:tridiagonal}
+	\begin{equation*}
+		a_{n}x_{n-1}+
+		b_{n}x_{n}=
+		d_{n}.
+	\end{equation*}
+	Elimina $x_{n-1}$ usando $a_{n}$ multiplicado por la ecuación~\eqref{eq:ith}.
+	\begin{align*}
+		a_{n}x_{n-1}+b_{n}x_{n}-a_{n}\left(x_{n-1}+c^{\prime}_{n-1}x_{n}\right) & =
+		d_{n}-a_{n}d^{\prime}_{n-1}.                                                \\
+		\left(b_{n}-a_{n}c^{\prime}_{n-1}\right)x_{n}                           & =
+		d_{n}-a_{n}d^{\prime}_{n-1}.
+	\end{align*}
+	Divida por $b_{n}-a_{n}c^{\prime}_{n-1}$ para que el elemento de la
+	diagonal principal sea igual a $1$.
+	\begin{equation*}
+		x_{n}=
+		\frac{d_{n}-a_{n}d^{\prime}_{n-1}}{b_{n}-a_{n}c^{\prime}_{n-1}}.
+	\end{equation*}
+	En resumen, el sistema lineal tridiagonal~\eqref{eq:tridiagonal} se
+	convierte en forma triangular superior $Ux=d^{\prime}$, donde $U$
+	es una matriz tridiagonal con $1$'s en la diagonal principal,
+	$c^{\prime}_{i}$'s en la diagonal superior y $0$'s en la diagonal
+	inferior.
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+	Los elementos de $U$ y $d^{\prime}$ se calculan usando las
+	siguientes fórmulas de recurrencia:
+	\begin{align*}
+		c^{\prime}_{1} & =
+		\frac{c_{1}}{b_{1}},\quad
+		d^{\prime}_{1}=
+		\frac{d_{1}}{b_{1}}, \\
+		c^{\prime}_{i} & =
+		\frac{c_{i}}{b_{i}-a_{i}c^{\prime}_{i-1}},\quad
+		d^{\prime}_{i}=
+		\frac{d_{i}-a_{i}d^{\prime}_{i-1}}{b_{i}-a_{i}c^{\prime}_{i-1}},\quad
+		i=2,3,\dotsc,n.
+	\end{align*}
+	Una vez que el sistema está en forma triangular superior, podemos
+	resolver $x$ usando sustitución hacia atrás:
+	\begin{align*}
+		x_{n} & =
+		d^{\prime}_{n}, \\
+		x_{i} & =
+		d^{\prime}_{i}-
+		c^{\prime}_{i}x_{i+1},\quad i=n-1,n-2,\dotsc,1.
+	\end{align*}
+	La ecuación matricial ahora se puede expresar en la forma
+	$Ux=d^{\prime}$.
+	\begin{equation}\label{eq:upperdiagonal}
+		\begin{bmatrix}
+			1      & c^{\prime}_{1} & 0              & \cdots         & 0      & 0                \\
+			0      & 1              & c^{\prime}_{2} & 0              & \cdots & \vdots           \\
+			0      & 0              & 1              & c^{\prime}_{3} & 0      & 0                \\
+			0      & 0              & \ddots         & \ddots         & \ddots & 0                \\
+			\vdots & \vdots         & 0              & 0              & 1      & c^{\prime}_{n-1} \\
+			0      & \cdots         & 0              & 0              & 0      & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_{1}   \\
+			x_{2}   \\
+			x_{3}   \\
+			\vdots  \\
+			x_{n-1} \\
+			x_{n}
+		\end{bmatrix}=
+		\begin{bmatrix}
+			d^{\prime}_{1}   \\
+			d^{\prime}_{2}   \\
+			d^{\prime}_{3}   \\
+			\vdots           \\
+			d^{\prime}_{n-1} \\
+			d^{\prime}_{n}
+		\end{bmatrix}.
+	\end{equation}
+	Una vez que el sistema está escrito en forma triangular superior,
+	la solución de $x$ se puede encontrar mediante sustitución hacia
+	atrás.
+	Comenzando con la $n$-ésima fila de la ecuación~\eqref{eq:upperdiagonal}
+	la solución para $x_{n}$ es $d^{\prime}_{n}$.
+	\begin{equation*}
+		x_{n}=d^{\prime}_{n}.
+	\end{equation*}
+	Considere la $i$-ésima fila de la ecuación~\eqref{eq:upperdiagonal}
+	cuando $i=n-1,n-2,\dotsc,1$:
+	\begin{equation*}
+		x_{i}=
+		d^{\prime}_{i}-
+		c^{\prime}_{i}x_{i+1}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	El algoritmo de Thomas se escribe de la siguiente manera.
+
+	\begin{itemize}
+		\item
+
+		      Calcule los coeficientes modificados $c^{\prime}$ y
+		      $d^{\prime}$ usando las fórmulas de recurrencia.
+		      \begin{equation*}
+			      \left\{
+			      \begin{aligned}
+				      c^{\prime}_{1} & =
+				      \frac{c_{1}}{b_{1}},\quad
+				      d^{\prime}_{1}=
+				      \frac{d_{1}}{b_{1}}, \\
+				      c^{\prime}_{i} & =
+				      \frac{c_{i}}{b_{i}-a_{i}c^{\prime}_{i-1}},\quad
+				      d^{\prime}_{i}=
+				      \frac{d_{i}-a_{i}d^{\prime}_{i-1}}{b_{i}-a_{i}c^{\prime}_{i-1}},\quad
+				      i=2,3,\dotsc,n.
+			      \end{aligned}
+			      \right.
+		      \end{equation*}
+
+		\item
+
+		      Calcule la solución $x$ usando sustitución hacia atrás.
+		      \begin{equation*}
+			      \left\{
+			      \begin{aligned}
+				      x_{n} & =
+				      d^{\prime}_{n}, \\
+				      x_{i} & =
+				      d^{\prime}_{i}-c^{\prime}_{i}x_{i+1},\quad i=n-1,n-2,\dotsc,1.
+			      \end{aligned}
+			      \right.
+		      \end{equation*}
+	\end{itemize}
+\end{frame}

@@ -1,0 +1,120 @@
+\section{Teorema de Equivalencia de Lax}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	We first introduce an abstract framework.
+	Let $\left(V,\left\|\cdot\right\|\right)$ be a Banach space,
+	$V_{0}\subset V$ a dense subspace of $V$.
+	Let $L\colon V_{0}\subset V\to V$ be a linear operator.
+	The operator $L$ is usually unbounded and can be thought of as a
+	differential operator.
+	Consider the initial value problem
+	\begin{equation}\label{eq:heatPDE}
+		\begin{cases}\displaystyle
+			\diffp{u}{t}=
+			Lu      &
+			\text{en }\left[0,T\right]. \\
+			u=u_{0} &
+			\text{en }\left\{t=0\right\}.
+		\end{cases}
+	\end{equation}
+	This problem also represents an initial-boundary value problem with
+	homogeneous boundary value conditions when they are included in
+	definitions of the space $V$ and the operator $L$.
+	The next definition gives the meaning of a solution of the problem
+	\begin{definition}
+		A function $u\colon\left[0,T\right]\to V$ is a solution of the
+		initial value problem (6.2.1) if and only if
+		\begin{equation*}
+			\forall t\in\left[0,T\right],
+			u\left(t\right)\in V_{0}:
+			\lim_{\Delta t\to 0}
+			\left\|
+			\frac{1}{\Delta t}
+			\left[u\left(t+\Delta t\right)-u\left(t\right)\right]-
+			Lu\left(t\right)
+			\right\|=
+			0\text{ y }
+			u\left(0\right)=u_{0}.
+		\end{equation*}
+		In the above definition, the limit in (6.2.2) is understood to be
+		the right limit at $t=0$ and the left limit at $t=T$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{definition}
+		The initial value problem (6.2.1) is well-posed if for any
+		$u_{0}\in V_{0}$, there is a unique solution $u=u\left(t\right)$
+		and the solution depends continuously on the initial value:
+		There exists a constant $c_{0}>0$ such that if $u\left(t\right)$
+		and $\overline{u}\left(t\right)$ are the solutions for the
+		initial values $u_{0}$, $u_{0}\in V_{0}$, then
+		\begin{equation*}
+			\sup_{t\in\left[0,T\right]}
+			{\left\|
+				u\left(t\right)-
+				\overline{u}\left(t\right)
+				\right\|}_{V}\leq
+			c_{0}
+				{\left\|
+					u_{0}-
+					\overline{u}_{0}
+					\right\|}_{V}.
+		\end{equation*}
+	\end{definition}
+
+	From now on, we assume the initial value problem (6.2.1) is well-posed.
+	We denote the solution as
+	\begin{equation*}
+		u\left(t\right)=
+		S\left(t\right)
+		u_{0},\quad u_{0}\in V_{0},\quad t\in\left[0,T\right]
+	\end{equation*}
+	Using the linearity of the operator $L$, it is easy to see that the
+	solution operator $S\left(t\right)$ is linear.
+	From the continuous dependence property (6.2.3), we have
+	\begin{align*}
+		\sup_{t\in\left[0,T\right]}
+		{\left\|
+			S\left(t\right)
+			\left[u_{0}-\overline{u}_{0}\right]
+		\right\|}_{V} & \leq
+		c_{0}
+			{\left\|
+				u_{0}-
+				\overline{u}_{0}
+		\right\|}_{V}.       \\
+		\forall u_{0}\in V_{0}:
+		\sup_{t\in\left[0,T\right]}
+		{\left\|
+			S\left(t\right)
+			u_{0}
+		\right\|}_{V} & \leq
+		c_{0}
+			{\left\|
+				u_{0}-
+				\right\|}_{V}.
+	\end{align*}
+	By Theorem 2.4.1, the operator
+	$S\left(t\right)\colon V_{0}\subset V\to V$ can be uniquely
+	extended to a linear continuous operator $S\left(t\right)\colon V\to V$ with
+	\begin{equation*}
+		\sup_{t\in\left[0,T\right]}
+		{\left\|
+			S\left(t\right)
+			\right\|}_{V} \leq
+		c_{0}.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{definition}
+		.
+	\end{definition}
+\end{frame}
