@@ -47,166 +47,86 @@
 \vspace{0.2in}
 \makebox[\textwidth]{Nombres y apellidos del profesor:\enspace Fidel Jara Huanca.\hfill}
 
+Estudie el material \textcolor{red}{\href{https://sbu-python-class.github.io/python-science}{Python for Scientific Computing}}
+y responda las siguientes preguntas.
+
 \begin{questions}
-	% \header{Math 115}{Second Exam}{July 4, 1776}
-	\question\label{question:1}
+	\question
 
-	Un enfoque para derivar fórmulas de diferencias para aproximar
-	derivadas es el método de coeficientes indeterminados.
-	Supongamos que $f$ es una función suave en $\mathbb{R}$.
-	Sea $h>0$.
-	Determine los coeficientes $a$, $b$ y $c$ de modo que
-	\begin{equation*}
-		af\left(x+h\right)+
-		bf\left(x\right)+
-		cf\left(x-h\right)
-	\end{equation*}
-	es una aproximación de $f^{\prime}\left(x\right)$ con un orden como
-	lo más alto posible; es decir, elija $a$, $b$ y $c$ tales que
-	\begin{equation*}
-		\left|
-		af\left(x+h\right)+bf\left(x\right)+
-		cf\left(x-h\right)-f^{\prime}\left(x\right)
-		\right|\leq
-		\mathcal{O}\left(h^{p}\right).
-	\end{equation*}
-	% https://www.colorado.edu/amath/sites/default/files/attached-files/mathcomp_88_fd_formulas.pdf
-	% https://www.phys.uconn.edu/~rozman/Courses/m3510_20f/downloads/fornberg.pdf
-	% https://www.colorado.edu/amath/sites/default/files/attached-files/sirev_cl.pdf
-	% https://www.phys.uconn.edu/~rozman/Courses/m3510_20f/downloads/hw08.pdf
-	% https://www.youtube.com/watch?v=M_ixanyL7IA
-	% https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods
+	Cuando hablamos de punto flotante, discutimos el
+	\textit{épsilon de la máquina}, $\epsilon$ -este es el número más
+	pequeño que cuando se suma a $1$ sigue siendo diferente de $1$.
+	Calcularemos $\epsilon$ aquí:
+	\begin{itemize}
+		\item Pick an initial guess for $\epsilon$ of \mintinline{python}|eps = 1|.
+		\item Create a loop that checks whether \mintinline{python}|1 + eps| is different from \mintinline{python}|1|.
+		\item Each loop iteration, cut the value of \mintinline{python}|eps| in half.
+	\end{itemize}
+	What value of $\epsilon$ do you find?
 
 	\question
 
-	Haz el mismo problema del Ejercicio~\ref{question:1} con
-	$f^{\prime}\left(x\right)$ reemplazado por
-	$f^{\prime\prime}\left(x\right)$.
+	To iterate over the tuples, where the \textit{i}th tuple contains
+	the \textit{i}-th elements of certain sequences, we can use
+	\mintinline{python}|zip(*sequences)| function.
+
+	We will iterate over two lists, \mintinline{python}|names| and
+	\mintinline{python}|age|, and print out the resulting tuples.
+
+	\begin{itemize}
+		\item
+
+		      Start by initializing lists
+		      \mintinline{python}|names = ["Mary", "John", "Sarah"]| and
+		      \mintinline{python}|age = [21, 56, 98]|.
+
+		\item
+
+		      Iterate over the tuples containing a name and an age, the
+		      \mintinline{python}|zip(list1, list2)| function might be
+		      useful here.
+
+		\item
+
+		      Print out formatted strings of the type
+		      \mintinline{text}|"*NAME is AGE years old*"|.
+	\end{itemize}
 
 	\question
 
-	¿Es posible utilizar
-	\begin{equation*}
-		af\left(x+h\right)+
-		bf\left(x\right)+
-		cf\left(x-h\right)
-	\end{equation*}
-	con coeficientes elegidos adecuadamente para aproximar
-	$f^{\prime\prime\prime}\left(x\right)$?
-	¿Cuántos valores de función se necesitan para aproximar
-	$f^{\prime\prime\prime}\left(x\right)$?
+	The function \mintinline{python}|enumerate(sequence)| returns
+	tuples containing indices of objects in the sequence, and the
+	objects.
 
-	% \begin{definition}{\em Árbol}
-	% Un árbol $T$.
-	% \end{definition}
+	The \mintinline{python}|random| module provides tools for working
+	with the random numbers.
+	In particular, \mintinline{python}|random.randint(start, end)|
+	generates a random number not smaller than
+	\mintinline{python}|start|, and not bigger than
+	\mintinline{python}|end|.
 
-	\question\label{question:4}
+	\begin{itemize}
+		\item
 
-	Para el problema del valor inicial de la ecuación de onda
-	unidireccional
-	\begin{equation}\label{eq:IVP-one-way-PDE}
-		\begin{cases}\displaystyle
-			\diffp{u}{t}=
-			a\diffp{u}{x}+
-			f   &
-			\text{en }\mathbb{R}\times\left(0,\infty\right). \\
-			u=f &
-			\text{en }\mathbb{R}\times\left\{t=0\right\}.
-		\end{cases}
-	\end{equation}
-	Donde $a\in\mathbb{R}$ es una constante, deriva alguna diferencia
-	esquemas basados en varias combinaciones de aproximaciones en
-	diferencias de la derivada temporal y la derivada espacial.
+		      Generate a list of $10$ random numbers from $0$ to $9$.
 
-	\question
+		\item
 
-	La idea del esquema de Lax-Wendroff para resolver el problema del
-	valor inicial~\eqref{eq:IVP-one-way-PDE} del
-	Ejercicio~\ref{question:4} es el siguiente.
-	Comience con la expansión de Taylor
-	\begin{equation}\label{eq:taylor}
-		u\left(x_{j},t_{m+1}\right)\approx
-		u\left(x_{j},t_{m}\right)+
-		h_{t}\diffp{u}{t}\left(x_{j},t_{m}\right)+
-		\frac{h^{2}_{t}}{2}
-		\diffp[2]{u}{t}\left(x_{j},t_{m}\right).
-	\end{equation}
-	De la ecuación diferencial tenemos
-	\begin{equation*}
-		\diffp{u}{t}=
-		-a\diffp{u}{x}+
-		f
-	\end{equation*}
-	y
-	\begin{equation*}
-		\diffp[2]{u}{t}=
-		a^{2}\diffp[2]{u}{x}-
-		a\diffp{f}{x}+
-		\diffp{f}{t}.
-	\end{equation*}
-	Utilice estas relaciones para reemplazar las derivadas del tiempo
-	en el lado derecho de~\eqref{eq:taylor}.
-	Luego reemplace la primera y segunda derivadas espaciales por
-	diferencias centrales.
-	Finalmente, reemplace $\diffp{f}{x}$ por una diferencia central y
-	$\diffp{f}{t}$ por una diferencia directa.
-	Siga las instrucciones anteriores para derivar el esquema de
-	Lax-Wendroff para resolver~\eqref{eq:IVP-one-way-PDE}.
+		      Using the \mintinline{python}|enumerate(random_list)|
+		      function, iterate over the tuples of random numbers and
+		      their indices, and print out
+		      \mintinline{text}|"Match: NUMBER and INDEX"| if the random
+		      number and its index in the list match.
+	\end{itemize}
+	% \inputminted[firstline=1,lastline=43,fontsize=\tiny,linenos,highlightlines={23-28}]{scilab}{main.sci}
+	\inputminted[fontsize=\tiny,linenos]{python}{q3.py}
 
-	\question
-
-	Dar esquemas hacia adelante, hacia atrás y Crank-Nicolson para el problema de valor inicial frontera
-	\begin{equation*}
-		\begin{cases}\displaystyle
-			\diffp{u}{t}=
-			\nu_{1}\diffp[2]{u}{x}+
-			\nu_{2}\diffp[2]{u}{y}+
-			f\left(x,y,t\right) &
-			\text{en }\left(0,a\right)\times\left(0,b\right)\times\left(0,T\right). \\
-			u=g_{l}             &
-			\text{en }\left\{0\right\}\times\left[0,b\right]\times\left[0,T\right]. \\
-			u=g_{r}             &
-			\text{en }\left\{a\right\}\times\left[0,b\right]\times\left[0,T\right]. \\
-			u=g_{b}             &
-			\text{en }\left[0,a\right]\times\left\{0\right\}\times\left[0,T\right]. \\
-			u=g_{t}             &
-			\text{en }\left[0,a\right]\times\left\{b\right\}\times\left[0,T\right]. \\
-			u=u_{0}             &
-			\text{en }\left[0,a\right]\times\left[0,b\right]\times\left\{t=0\right\}.
-		\end{cases}
-	\end{equation*}
-	Aquí, para los datos dados, $\nu_{1}$, $\nu_{2}$, $a$, $b$, $T$ son
-	números positivos, y $f$, $g_{l}$, $g_{r}$, $g_{b}$, $g_{t}$,
-	$u_{0}$ son funciones continuas de sus argumentos.
-
-	\question
-
-	Considere el problema del valor inicial frontera de una ecuación hiperbólica
-	\begin{equation*}
-		\begin{cases}\displaystyle
-			\diffp[2]{u}{t}=
-			\nu\diffp[2]{u}{x}+
-			f\left(x,t\right)  &
-			\text{en }\left(0,a\right)\times\left(0,T\right).   \\
-			u=g_{1}            &
-			\text{en }\left\{0\right\}\times\left[0,T\right].   \\
-			u=g_{2}            &
-			\text{en }\left\{a\right\}\times\left[0,T\right].   \\
-			u=u_{0}            &
-			\text{en }\left[0,a\right]\times\left\{t=0\right\}. \\
-			\diffp{u}{t}=v_{0} &
-			\text{en }\left[0,a\right]\times\left\{t=0\right\}.
-		\end{cases}
-	\end{equation*}
-	Aquí, para los datos dados, $\nu$, $a$, $T$ son números positivos y
-	$f$, $g_{1}$, $g_{2}$, $u_{0}$, $v_{0}$ son funciones continuas de sus argumentos.
-	Analice cómo formar un esquema de diferencias finitas razonable para resolver el problema.
 \end{questions}
 \vfill
 \begin{flushright}\bfseries
 	Facultad de Ciencias\\[2mm]
 	Universidad Nacional de Ingeniería\\[2mm]
-	\today%\unmarkedfntext{Cada pregunta vale 5 puntos.}
+	25 de marzo de 2026
 \end{flushright}
 \end{document}
 
