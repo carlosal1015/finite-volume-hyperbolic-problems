@@ -176,8 +176,8 @@
 \begin{frame}
 	\frametitle{\insertsection}
 
-	Further, approximate the second spatial derivative by the second
-	order centered difference:
+	Además, aproxima la segunda derivada espacial por la diferencia
+	centrada de segundo orden:
 	\begin{equation*}
 		\diffp[2]{u}{x}
 		\left(x_{j},t_{m-\frac{1}{2}}\right)\approx
@@ -187,7 +187,8 @@
 			u\left(x_{j},t_{m-1}\right)
 		}{h^{2}_{x}},
 	\end{equation*}
-	and then approximate the half time values by averages:
+	y luego aproximar los valores de mitades de tiempo medio por
+	promedios:
 	\begin{equation*}
 		u\left(x_{j},t_{m-\frac{1}{2}}\right)=
 		\frac{1}{2}
@@ -197,7 +198,7 @@
 			\right],
 	\end{equation*}
 	etc.
-	As a result we arrive at the Crank-Nicolson scheme:
+	Como resultado llegamos al esquema de Crank-Nicolson:
 	\begin{equation}\label{eq:heatPDECrankNicolson}
 		\begin{cases}\displaystyle
 			\frac{v^{m}_{j}-v^{m-1}_{j}}{h_{t}}=
@@ -214,9 +215,10 @@
 			0\leq j\leq N_{x}.
 		\end{cases}
 	\end{equation}
-	Here $f^{m-\frac{1}{2}}_{j}=f\left(x_{j},t_{m-\frac{1}{2}}\right)$,
-	which can be replaced by $\left(f^{m}_{j}+f^{m-1}_{j}\right)/2$.
-	The difference equation (6.1.16) can be rewritten as
+	Aquí $f^{m-\frac{1}{2}}_{j}=f\left(x_{j},t_{m-\frac{1}{2}}\right)$,
+	que puede ser reemplazado por $\left(f^{m}_{j}+f^{m-1}_{j}\right)/2$.
+	La ecuación en diferencias~\eqref{eq:heatPDECrankNicolson} se puede
+	reescribir como
 	\begin{equation*}
 		\left(1+r\right)v^{m}_{j}-
 		\frac{r}{2}\left(v^{m}_{j+1}+v^{m}_{j-1}\right)=
@@ -226,35 +228,34 @@
 		1\leq j\leq N_{x}-1,\quad
 		1\leq m\leq N_{t},
 	\end{equation*}
+	Vemos que el esquema de Crank-Nicolson también es un método
+	implícito y en cada paso de tiempo necesitamos resolver un sistema
+	lineal tridiagonal de orden $N_{x}-1$.
+	Los tres esquemas derivados todos arriba parecen aproximaciones razonables
+	para el problema de valor inicial frontera~\eqref{eq:heatPDE}.
 \end{frame}
 
-\begin{frame}
-	We see that the Crank-Nicolson scheme is also an implicit method and at
-	each time step we need to solve a tridiagonal linear system of order Nx-1.
-	The three schemes derived above all seem reasonable approximations
-	for the initial-boundary value problem (6.1.5)–(6.1.7).
-	Let us do some numerical experiments to see if these schemes indeed
-	produce useful results.
-	Let us use the forward scheme (6.1.8)–(6.1.10) and the backward scheme
-	(6.1.12)–(6.1.14) to solve the problem (6.1.5)–(6.1.7) with ν = 1,
-	f(x, t) = 0 and u0(x) = sin x.
-	It can be verified that the exact solution is u(x, t) = e−t sin x.
-	We consider numerical solution errors at t = 1.
-	Results from the Crank-Nicolson scheme are qualitatively similar to
-	those from the backward scheme but magnitudes of the error are
-	smaller, and are thus omitted.
-	We see that the Crank-Nicolson scheme is also an implicit method and at
-	each time step we need to solve a tridiagonal linear system of order Nx−1.
-	The three schemes derived above all seem reasonable approximations
-	for the initial-boundary value problem (6.1.5)–(6.1.7).
-	Let us do some numerical experiments to see if these schemes indeed
-	produce useful results.
-	Let us use the forward scheme (6.1.8)–(6.1.10) and the backward
-	scheme (6.1.12)–(6.1.14) to solve the problem (6.1.5)–(6.1.7) with ν = 1,
-	f(x, t) = 0 and u0(x) = sin x.
-	It can be verified that the exact solution is u(x, t) = e−t sin x.
-	We consider numerical solution errors at t = 1.
-	Results from the Crank-Nicolson scheme are qualitatively similar to
-	those from the backward scheme but magnitudes of the error are smaller,
-	and are thus omitted.
-\end{frame}
+% Let us do some numerical experiments to see if these schemes indeed
+% produce useful results.
+% Let us use the forward scheme (6.1.8)–(6.1.10) and the backward scheme
+% (6.1.12)–(6.1.14) to solve the problem (6.1.5)–(6.1.7) with ν = 1,
+% f(x, t) = 0 and u0(x) = sin x.
+% It can be verified that the exact solution is u(x, t) = e−t sin x.
+% We consider numerical solution errors at t = 1.
+% Results from the Crank-Nicolson scheme are qualitatively similar to
+% those from the backward scheme but magnitudes of the error are
+% smaller, and are thus omitted.
+% We see that the Crank-Nicolson scheme is also an implicit method and at
+% each time step we need to solve a tridiagonal linear system of order Nx−1.
+% The three schemes derived above all seem reasonable approximations
+% for the initial-boundary value problem (6.1.5)–(6.1.7).
+% Let us do some numerical experiments to see if these schemes indeed
+% produce useful results.
+% Let us use the forward scheme (6.1.8)–(6.1.10) and the backward
+% scheme (6.1.12)–(6.1.14) to solve the problem (6.1.5)–(6.1.7) with ν = 1,
+% f(x, t) = 0 and u0(x) = sin x.
+% It can be verified that the exact solution is u(x, t) = e−t sin x.
+% We consider numerical solution errors at t = 1.
+% Results from the Crank-Nicolson scheme are qualitatively similar to
+% those from the backward scheme but magnitudes of the error are smaller,
+% and are thus omitted.

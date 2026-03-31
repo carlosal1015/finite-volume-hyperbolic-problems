@@ -1,0 +1,170 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{}\label{section}
+
+\section{SÍLABO DOSIFICADO DE MÉTODOS NUMÉRICOS PARA ECUACIONES
+DIFERENCIALES PARCIALES
+(CM032)}\label{suxedlabo-dosificado-de-muxe9todos-numuxe9ricos-para-ecuaciones-diferenciales-parciales-cm032}
+
+Profesor: Fidel Jara Huanca.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+& & & & \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+SEM & \textbf{SESESIÓN 1 (2h Teoría)} & \textbf{SESESIÓN 2 (2h
+Laboratorio)} & SESIÓN 3 (2h Teoría) & \\
+1\textbf{} & Entrega del sílabo. Introducción al curso. Prueba de
+entrada. & Introducción al software Python. Esquema de diferencias
+finitas para un problema de valor de frontera. & Aproximación vía
+diferencias finitas hasta solución generalizada. {[}1{]} & \\
+2 & Consistencia, convergencia y estabilidad. Teorema de equivalencia de
+Lax. Orden de convergencia. {[}1{]} & Esquemas explícitos e implícitos
+para la ecuación de calor y ejercicios sugeridos. {[}1{]} & Operadores
+de dos niveles. Consistencia y estimación de error. Ejemplos. {[}1{]}
+& \\
+3 & Métodos de diferencias finitas para problemas elípticos. El problema
+de Poisson en una dimensión. Consistencia, estabilidad y convergencia.
+{[}2{]} & Practica Calificada 1. & Problema de Poisson en dos
+dimensiones. Consistencia, estabilidad y convergencia. {[}2{]} & \\
+4 & Método de Galerkín. Lema de Cea. Teorema de Lax Milgram. Base de
+Lagrange. {[}2{]} & Esquema de 5 puntos para la ecuación de Poisson
+unidimensional y Esquema de 9 puntos para la ecuación de Poisson
+bidimensional. Solución por métodos iterativos. {[}3{]} & Construcción
+de la matriz de rigidez y del vector de carga en el método de Galerkin.
+{[}2{]} & \\
+5\textbf{} & Motivación. Ecuación de transporte. Ondas acústicas. Flujo
+de tráfico. Aguas poco profundas. Ecuaciones de Euler. {[}4{]} &
+Practica Calificada 2 & Leyes de conservación del tipo hiperbólicos
+escalar y sistema de leyes de conservación. Solución clásica, débil y
+entrópica. Ondas de choque. {[}4{]} & \\
+6 & Condición Courant-Friedrichs-Lewy. Ecuación de Transporte. Ecuación
+de Burgers. Consistencia. Estabilidad de Von-Neumann
+
+Esquemas Upwind, FTCS, Lax-Friedrichs, Leapfrog. El problema de Riemman.
+{[}5{]} & Ejercicios sugeridos:
+
+Ejercicios 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8 {[}6{]} & Esquema
+BTCS, Lax-Wendroff, Crank-Nicolson, Du Fort-Frankel. {[}5{]} & \\
+7 & Ecuaciones de Agua Poco Profundas unidimensional. Problema de Dam
+Break.
+
+Esquema de Mac-Cormack. {[}3{]} & Ejercicios sugeridos:
+
+Detallar ejemplos de la sección 5.1 {[}7{]}
+
+Ejercicios del capitulo 29 {[}2{]} & Presentación del Proyecto. Parte 1
+& \\
+8 & & EXAMEN PARCIAL & & \\
+9 & Propiedad monótona de esquemas: Teorema de Godunov {[}6{]} &
+Tutorial de Clawpack & Método de Volúmenes Finitos.
+
+Problema de Dirichlet. Estimación de error. & \\
+10\textbf{} & Problemas parabólicos e hiperbólicos. {[}4{]} & Practica
+calificada 3 & Esquema numérico para el caso lineal y no lineal. {[}4{]}
+& \\
+11\textbf{} & Método de Gudonov y variantes {[}4{]} & Ejercicios
+sugeridos & El teorema de Lax Wendroff {[}6{]} & \\
+12 & Resolvente de Riemann {[}4{]} aproximado & Practica calificada 4 &
+Método de direcciones {[}6{]} alternadas & \\
+13 & Método de Weno y Eno {[}6{]} & Ejercicios sugeridos & Técnicas de
+descomposición de flujo & \\
+14\textbf{} & Esquema de variación total decreciente y consistente con
+entropía {[}6{]} & Ejercicios sugeridos & Métodos de volúmenes finitas
+en mallas no estructuradas & \\
+15\textbf{} & Aplicaciones {[}4{]} & Practica calificada 5 &
+Presentación del Proyecto. Parte II & \\
+16 & & & & \\
+17 & & & & \\
+\end{longtable}
+
+{[}1{]} Theoretical Numerical Analysis: A Functional Analysis Framework.
+Kendall Atkinson.
+
+{[}2{]} Classical Numerical Analysis: A Comprehensive Course. Abner J.
+Salgado.
+
+{[}3{]} Numerical Methods for Partial Differential Equations. Jon Shiach
+\href{https://jonshiach.github.io/teaching/PDEs}{\emph{\emph{https://jonshiach.github.io/teaching/PDEs}}}
+
+{[}4{]} Solving Hyperbolic Equations with Finite Volume Methods. María
+Elena Vázquez-Cendón.
+
+{[}5{]} El método de las diferencias finitas. Luis Lara Romero, Zenner
+Chávez Aliaga, José Castañeda Vergara.
+\href{https://static.upao.info/descargas/7785b78834b257ebc32c5fdbbbeb51844110d47e0c1b7621073297f7054588f8feabedcf65f22243e1c94da5fd1fdf63312e1c80f31ef101692d7a1e07e3ba49/el-mEtodo-de-diferencias-finitas.pdf}{\emph{\emph{https://static.upao.info/descargas/7785b78834b257ebc32c5fdbbbeb51844110d47e0c1b7621073297f7054588f8feabedcf65f22243e1c94da5fd1fdf63312e1c80f31ef101692d7a1e07e3ba49/el-mEtodo-de-diferencias-finitas.pdf}}}
+
+{[}6{]} Numerical Methods for Conservation Laws. Randall J. LeVeque
+
+{[}7{]} Numerical Methods for Conservation Laws. Jan S. Hesthaven
+
+\end{document}

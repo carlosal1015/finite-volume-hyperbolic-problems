@@ -1,0 +1,26 @@
+\frametitle{¿Por qué este curso?}
+
+	Muchos fenómenos en la naturaleza se describen mediante ecuaciones
+	diferenciales parciales (EDPs).
+
+	\begin{description}
+		\item[Propagación de ondas]
+
+		      tsunamis, terremotos, sonido.
+
+		\item[Difusión térmica]
+
+		      distribución de calor en materiales.
+
+		\item[Dinámica de fluidos]
+
+		      océanos, atmósfera, aire en tuberías.
+
+		\item[Reacciones químicas]
+
+		      combustión, ecosistemas.
+	\end{description}
+
+	La mayoría de EDPs no tienen soluciones analíticas.
+
+	¡Necesitamos métodos numéricos para resolverlas!

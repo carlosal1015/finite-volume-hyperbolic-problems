@@ -1,0 +1,225 @@
+\begin{frame}
+	\frametitle{¿Por qué este curso?}
+
+	Muchos fenómenos en la naturaleza se describen mediante ecuaciones
+	diferenciales parciales (EDPs).
+
+	\begin{columns}
+		\begin{column}{.5\paperwidth}
+			\begin{block}{Fenómenos físicos}
+				\begin{description}
+					\item[Propagación de ondas]
+
+					      tsunamis, terremotos, sonido.
+
+					\item[Difusión térmica]
+
+					      distribución de calor en materiales.
+
+					\item[Dinámica de fluidos]
+
+					      océanos, atmósfera, aire en tuberías.
+
+					\item[Reacciones químicas]
+
+					      combustión, ecosistemas.
+				\end{description}
+			\end{block}
+
+			La mayoría de EDPs no tienen soluciones analíticas.
+
+			\begin{center}\large
+				¡Necesitamos métodos numéricos para resolverlas!
+			\end{center}
+		\end{column}
+		\begin{column}{.4\paperwidth}
+			\begin{figure}[ht!]
+				\centering
+				\includegraphics[width=0.4\paperwidth]{geoclaw}
+				\caption{Simulación numérica de un tsunami (Fuente: \url{https://dlgeorge.github.io/project/geoclaw-project})}
+				\label{fig:tsunami}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Objetivos del curso}
+
+	\begin{columns}
+		\begin{column}{.45\paperwidth}
+			Al final de este curso, ustedes serán capaces de
+
+			\begin{enumerate}
+				\item \textbf{Comprender} la teoría detrás de los métodos numéricos.
+				      \begin{itemize}
+					      \item Consistencia, convergencia, estabilidad.
+					      \item Análisis de errores.
+				      \end{itemize}
+
+				\item \textbf{Implementar} esquemas numéricos en Python.
+				      \begin{itemize}
+					      \item Métodos de diferencias finitas (FDM).
+					      \item Métodos de elementos finitos (FEM).
+					      \item Métodos de volúmenes finitos (FVM).
+				      \end{itemize}
+
+				\item \textbf{Resolver} problemas prácticos.
+				      \begin{itemize}
+					      \item Ecuaciones parabólicas (calor).
+					      \item Ecuaciones elípticas (Poisson).
+					      \item Ecuaciones hiperbólicas (ondas, leyes de conservación).
+				      \end{itemize}
+			\end{enumerate}
+		\end{column}
+		\begin{column}{.35\paperwidth}
+			\begin{figure}[ht!]
+				\centering
+				\includegraphics[width=0.4\paperwidth]{githubclassroom}
+				\caption{Simulación numérica de la ecuación de calor (Fuente: Wikipedia)}
+				\label{fig:calor}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dinámica del curso}
+
+	\begin{block}{6 horas por semana durante 16 semanas}
+		\begin{table}[ht!]
+			\centering
+			\begin{tabular}{|l|l|}
+				\hline
+				\textbf{Teoría}      & 2h Lunes + 2h Miércoles      \\[0.1cm]
+				\hline
+				\textbf{Laboratorio} & 2h Martes (Python + Jupyter) \\[0.1cm]
+				\hline
+			\end{tabular}
+		\end{table}
+	\end{block}
+
+	\begin{block}{Evaluación continua}
+		\begin{itemize}
+			\item 5 prácticas calificadas (semanas 3, 5, 10, 12, 15).
+			\item 1 examen parcial (semana 8).
+			\item 1 proyecto con 2 presentaciones (semanas 7 y 15).
+			\item Trabajo de laboratorio regular.
+		\end{itemize}
+		\small Énfasis en argumentación clara y rigor matemático.
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GitHub Classroom (\url{https://classroom.github.com})}
+
+	\begin{columns}
+		\begin{column}{.45\paperwidth}
+			\begin{block}{Plataforma de trabajo colaborativo}
+				\begin{itemize}
+					\item \textbf{Repositorio público} para cada estudiante que permite mantener un historial completo de cambios y versiones.
+					\item \textbf{Control de versiones} con Git.
+					\item \textbf{Automatización} de retroalimentación.
+					\item Acceso a \textbf{recursos compartidos} de la clase.
+				\end{itemize}
+			\end{block}
+
+			\begin{block}{Ventajas}
+				\begin{itemize}
+					\item Aprenderán herramientas profesionales de desarrollo.
+					\item Tendrán registro completo de su trabajo.
+					\item Facilita la evaluación y retroalimentación.
+					\item Prepara para colaboración en proyectos reales.
+				\end{itemize}
+			\end{block}
+		\end{column}
+		\begin{column}{.35\paperwidth}
+			\begin{figure}[ht!]
+				\centering
+				\includegraphics[width=0.4\paperwidth]{githubdesktop}
+				\caption{Interfaz de GitHub Classroom (Fuente: GitHub)}
+				\label{fig:github}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido: Ruta de aprendizaje}
+
+	\begin{block}{Bloque 1: Fundamentos (Semanas 1-3)}
+		\begin{itemize}
+			\item Introducción al método de las diferencias finitas.
+			\item Consistencia, convergencia, estabilidad.
+			\item Método de Galerkin.
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Bloque 2: Ecuaciones hiperbólicas (Semanas 4-7)}
+		\begin{itemize}
+			\item Leyes de conservación y ondas de choque.
+			\item Esquemas clásicos (Upwind, Lax-Friedrichs, Lax-Wendroff).
+			\item Aplicación: ecuaciones de agua poco profundas.
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Bloque 3: Métodos sofisticados (Semanas 9-15)}
+		\begin{itemize}
+			\item Métodos de volúmenes finitos (FVM).
+			\item Métodos WENO/ENO.
+			\item Esquemas que preservan la variación total (TVD).
+			\item Aplicaciones a problemas reales.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Recursos del curso}
+
+	\begin{block}{Sitio web (\url{https://cm032.github.io})}
+		Encontrarás materiales y referencias como
+		\begin{itemize}
+			\item Diapositivas de clase.
+			\item Notas de laboratorio.
+			\item Ejercicios resueltos.
+			\item Lecturas complementarias.
+			\item Cronograma detallado del curso (fechas de entregas, temas, etc.):  \url{https://cm032.github.io/assets/misc/cronogram.pdf}
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Libros de referencia principales}
+		\begin{itemize}
+			\item LeVeque (2007) — Finite Difference Methods for ODEs and PDEs
+			\item Thomas (1995) — Numerical Partial Differential Equations
+			\item Vázquez-Cendón — Finite Volume Methods for Hyperbolic Problems
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Herramientas}
+		\begin{itemize}
+			\item Python 3, Jupyter Notebooks
+			\item Git y GitHub Classroom
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{¿Estamos listos?}
+
+	\centering
+	\vspace{1cm}
+
+	{\Large \textbf{Vamos a aprender juntos cómo}}
+
+	{\Large \textbf{capturar el comportamiento de la naturaleza}}
+
+	{\Large \textbf{mediante ecuaciones numéricas.}}
+
+	\vspace{1cm}
+
+	{\large Preguntas y dudas: No duden en preguntar en cualquier momento}
+
+	\vspace{1cm}
+
+	¡Bienvenidos al CM032!
+\end{frame}

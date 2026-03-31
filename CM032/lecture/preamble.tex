@@ -1,0 +1,85 @@
+\documentclass[
+    8pt,
+    aspectratio=1610,
+    c,
+    spanish,
+    intlimits,
+    handout,
+    leqno,
+    % noamsthm,
+    professionalfonts,
+]{beamer}
+\usepackage[spanish]{babel}
+\usetheme[
+	language=spanish,
+	style=modern,% academic, minimal, studio, design, executive, sober, simple, editorial, lumiere, chalk
+	palette=imperial,%chalk,dusk,horizon,lumiere,midnight,mineral,nordic,obsidian,oxford,palatial,petrol,prestige,royal,sakura,sapphire,steel,terracotta,velours,velvet,copper,manuscript,
+	% unicolor,
+	emphasis=accent,
+	decoration=main,
+	serifface=EB Garamond,
+	seriffaceoptions={Scale=1.1},
+  sansface=Montserrat,
+	monoface=JetBrains Mono,
+	semibold=false,
+	light=false,
+	mathface=pagella,
+	mathfaceoptions={Scale=1.05},
+	allserif,
+	% margin=1.5em,
+	% frametitle=leftbar,%elegant,cosmic,line,gradient,clean,subtle,plainrule
+	% titlealign=center,
+	% titlebackground=example-image,
+	% titlesize=Huge,
+  % frametitlesize=Large,
+  % sectiontitlesize=huge,
+	% footerstyle=info%prestige,cosmic,info,minimalist,badge,classic,fullbar,ruled,framed,boxed,boxedruled
+	% progressbar,
+	% shownavigation,
+	% compacttoc,
+	% twocoltoc
+]{Celestia}
+
+\usepackage{diffcoeff}
+\usepackage[
+    citestyle=numeric,
+    style=numeric,
+    backend=biber,
+]{biblatex}
+\addbibresource{references.bib}
+
+\setbeamertemplate{bibliography item}{%
+	\ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+		or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+		or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+	{\setbeamertemplate{bibliography item}[book]}
+	{\ifentrytype{online}
+		{\setbeamertemplate{bibliography item}[online]}
+		{\setbeamertemplate{bibliography item}[article]}}%
+	\usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+{\list{}
+	{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+		\setlength{\leftmargin}{\labelwidth}%
+		\setlength{\labelsep}{\biblabelsep}%
+		\addtolength{\leftmargin}{\labelsep}%
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}}}
+{\endlist}
+{\item}
+
+
+\subtitle{Métodos Numéricos para Ecuaciones Diferenciales Parciales~CM032}
+\institute{
+    Universidad Nacional de Ingeniería \\
+    Escuela Profesional de Matemática \\
+    Facultad de Ciencias
+}
+\author{Prof.~Fidel Jara Huanca}
+\titlegraphic{
+    \begin{picture}(0,0)
+        \put(20,10){\makebox(0,0)[rt]{\href{https://google.com}{\includegraphics[width=2.5cm]{example-image}}}}
+        % \put(200,80){\makebox(0,0)[rt]{\href{http://thomaswick.org}{\includegraphics[width=2.5cm]{wick}}}}
+    \end{picture}
+}
