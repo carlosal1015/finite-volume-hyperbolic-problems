@@ -3,13 +3,13 @@
 \begin{frame}
 	\frametitle{\insertsection}
 
-	We first introduce an abstract framework.
-	Let $\left(V,\left\|\cdot\right\|\right)$ be a Banach space,
-	$V_{0}\subset V$ a dense subspace of $V$.
-	Let $L\colon V_{0}\subset V\to V$ be a linear operator.
-	The operator $L$ is usually unbounded and can be thought of as a
-	differential operator.
-	Consider the initial value problem
+	Primero presentamos un marco abstracto.
+	Sea $\left(V,\left\|\cdot\right\|\right)$ un espacio de Banach,
+	$V_{0}\subset V$ un subespacio denso de $V$.
+	Sea $L\colon V_{0}\subset V\to V$ un operador lineal.
+	El operador $L$ suele ser no acotado y puede pensarse como un
+	operador diferencial.
+	Considere el problema del valor inicial
 	\begin{equation}\label{eq:heatPDE}
 		\begin{cases}\displaystyle
 			\diffp{u}{t}=
@@ -19,27 +19,31 @@
 			\text{en }\left\{t=0\right\}.
 		\end{cases}
 	\end{equation}
-	This problem also represents an initial-boundary value problem with
-	homogeneous boundary value conditions when they are included in
-	definitions of the space $V$ and the operator $L$.
-	The next definition gives the meaning of a solution of the problem
+	Este problema también representa un problema de valor inicial /
+	frontera con condiciones de valor de frontera homogéneo cuando ellas
+	se incluyen en las definiciones del espacio $V$ y el operador $L$.
+	La siguiente definición da el significado de solución del problema.
 	\begin{definition}
-		A function $u\colon\left[0,T\right]\to V$ is a solution of the
-		initial value problem (6.2.1) if and only if
+		Una función $u\colon\left[0,T\right]\to V$ es una solución del
+		problema de valor inicial (6.2.1) si y solo si
 		\begin{equation*}
 			\forall t\in\left[0,T\right],
 			u\left(t\right)\in V_{0}:
 			\lim_{\Delta t\to 0}
 			\left\|
 			\frac{1}{\Delta t}
-			\left[u\left(t+\Delta t\right)-u\left(t\right)\right]-
+			\left[
+				u\left(t+\Delta t\right)-
+				u\left(t\right)
+				\right]-
 			Lu\left(t\right)
 			\right\|=
 			0\text{ y }
-			u\left(0\right)=u_{0}.
+			u\left(0\right)=
+			u_{0}.
 		\end{equation*}
-		In the above definition, the limit in (6.2.2) is understood to be
-		the right limit at $t=0$ and the left limit at $t=T$.
+		En la definición anterior, se entiende que el límite en (6.2.2) es
+		el límite derecho en $t=0$ y el límite izquierdo en $t=T$.
 	\end{definition}
 \end{frame}
 
@@ -47,12 +51,12 @@
 	\frametitle{\insertsection}
 
 	\begin{definition}
-		The initial value problem (6.2.1) is well-posed if for any
-		$u_{0}\in V_{0}$, there is a unique solution $u=u\left(t\right)$
-		and the solution depends continuously on the initial value:
-		There exists a constant $c_{0}>0$ such that if $u\left(t\right)$
-		and $\overline{u}\left(t\right)$ are the solutions for the
-		initial values $u_{0}$, $u_{0}\in V_{0}$, then
+		El problema de valor inicial (6.2.1) es bien planteado si para cualquier
+		$u_{0}\in V_{0}$, existe una solución única $u=u\left(t\right)$
+		y la solución depende continuamente del valor inicial:
+		Existe una constante $c_{0}>0$ tal que si $u\left(t\right)$
+		y $\overline{u}\left(t\right)$ son las soluciones para los
+		valores iniciales $u_{0}$, $u_{0}\in V_{0}$, entonces
 		\begin{equation*}
 			\sup_{t\in\left[0,T\right]}
 			{\left\|
@@ -66,17 +70,16 @@
 					\right\|}_{V}.
 		\end{equation*}
 	\end{definition}
-
-	From now on, we assume the initial value problem (6.2.1) is well-posed.
-	We denote the solution as
+	De ahora en adelante, suponemos que el problema del valor inicial (6.2.1) está bien planteado.
+	Denotamos la solución como
 	\begin{equation*}
 		u\left(t\right)=
 		S\left(t\right)
 		u_{0},\quad u_{0}\in V_{0},\quad t\in\left[0,T\right]
 	\end{equation*}
-	Using the linearity of the operator $L$, it is easy to see that the
-	solution operator $S\left(t\right)$ is linear.
-	From the continuous dependence property (6.2.3), we have
+	Usando la linealidad del operador $L$, es fácil ver que
+	el operador solución $S\left(t\right)$ es lineal.
+	De la propiedad de dependencia continua (6.2.3), tenemos
 	\begin{align*}
 		\sup_{t\in\left[0,T\right]}
 		{\left\|
@@ -99,9 +102,10 @@
 				u_{0}-
 				\right\|}_{V}.
 	\end{align*}
-	By Theorem 2.4.1, the operator
-	$S\left(t\right)\colon V_{0}\subset V\to V$ can be uniquely
-	extended to a linear continuous operator $S\left(t\right)\colon V\to V$ with
+	Según el teorema 2.4.1, el operador
+	$S\left(t\right)\colon V_{0}\subset V\to V$ puede ser únicamente
+	extendido a un operador lineal continuo $S\left(t\right)\colon V\to V$
+	con
 	\begin{equation*}
 		\sup_{t\in\left[0,T\right]}
 		{\left\|
@@ -115,6 +119,284 @@
 	\frametitle{\insertsection}
 
 	\begin{definition}
-		.
+		For $u_{0}\in V\setminus V_{0}$, we call
+		$u\left(t\right)=S\left(t\right)u_{0}$ the generalized solution of the initial value problem
+		(6.2.1).
 	\end{definition}
+
+	\begin{example}
+		We use the following problem and its finite difference
+		approximations to illustrate the use of the abstract framework of
+		the section:
+		\begin{equation*}
+			\begin{cases}\displaystyle
+				\diffp{u}{t}=
+				\nu
+				\diffp[2]{u}{x} &
+				\text{en }\left[0,\pi\right]\times\left(0,T\right). \\
+				u=u_{0}         &
+				\text{en }\left[0,\pi\right]\times\left\{t=0\right\}.
+			\end{cases}
+		\end{equation*}
+		We take $V=C_{0}\left[0,\pi\right]=\left\{v\in C\left[0,\pi\right]\mid v\left(0\right)=v\left(\pi\right)=0\right\}$
+		with the norm $\left\|\cdot\right\|_{C\left[0,\pi\right]}$.
+		We choose
+		\begin{equation*}
+			V_{0}=
+			\left\{
+			v\mid
+			v\left(x\right)=
+			\sum_{j=1}^{n}a_{j}\sin\left(jx\right),
+			a_{j}\in\mathbb{R},
+			n\in\mathbb{N}
+			\right\}
+		\end{equation*}
+		The verification that $V_{0}$ is dense in $V$ is left as an exercise.
+	\end{example}
+	If $u_{0}\in V_{0}$, then for some integer $n\geq 1$ and $b_{1},\dotsc,b_{n}\in\mathbb{R}$,
+	\begin{equation*}
+		u_{0}\left(x\right)=
+		\sum_{j=1}^{n}
+		b_{j}\sin\left(jx\right).
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	For this $u_{0}$, it can be verified directly that the solution is
+	\begin{equation*}
+		u\left(x,t\right)=
+		\sum_{j=1}^{n}
+		b_{j}\exp\left(-\nu j^{2}t\right)
+		\sin\left(jx\right).
+	\end{equation*}
+	By using the maximum principle for the heat equation (see, e.g. [78] or
+	other textbooks on partial differential equations),
+	\begin{equation*}
+		\min\left\{0,\min_{x\in\left[0,\pi\right]}u_{0}\left(x\right)\right\}\leq
+		u\left(x,t\right)\leq
+		\max\left\{0,\max_{x\in\left[0,\pi\right]}u_{0}\left(x\right)\right\}
+	\end{equation*}
+	we see that
+	\begin{equation*}
+		\forall t\in\left[0,T\right]:
+		\max_{x\in\left[0,\pi\right]}
+		\left|u\left(x,t\right)\right|\leq
+		\max_{x\in\left[0,\pi\right]}
+		\left|u_{0}\left(x\right)\right|.
+	\end{equation*}
+	Thus the solution operator $S\left(t\right)\colon V_{0}\subset V\to V$ is bounded.
+	Then for a general $u_{0}\in V$, the problem (6.2.4) has a unique solution.
+	If $u_{0}\in V$ has a piecewise continuous derivative in $\left[0,\pi\right]$,
+	then from the theory of Fourier series,
+	\begin{equation*}
+		u_{0}\left(x\right)=
+		\sum_{j=1}^{\infty}
+		b_{j}\sin\left(jx\right),
+		\quad\text{where }b_{j}=\frac{2}{\pi}\int_{0}^{\pi}u_{0}\left(x\right)\sin\left(jx\right)dx.
+	\end{equation*}
+	and the solution $u\left(t\right)$ can be expressed as
+	\begin{equation*}
+		u\left(x,t\right)=
+		S\left(t\right)u_{0}\left(x\right)=
+		\sum_{j=1}^{\infty}
+		b_{j}\exp\left(-\nu j^{2}t\right)\sin\left(jx\right).
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	Return to the abstract problem (6.2.1).
+	We present two results, the first one is on the time continuity of the
+	generalized solution and the second one shows the solution operator
+	$S\left(t\right)$ forms a semigroup.
+
+	\begin{proposition}
+		For any $u_{0}\in V$, the generalized solution of the initial value problem (6.2.1) is continuous in $t$.
+	\end{proposition}
+	\begin{proof}
+		For any $u_{0}\in V$, there exists a sequence $\left\{u_{0n}\right\}\subset V_{0}$ such that
+		\begin{equation*}
+			\lim_{n\to\infty}
+			{\left\|
+				u_{0n}-
+				u_{0}
+				\right\|}_{V}=0.
+		\end{equation*}
+		Since for any $n\in\mathbb{N}$, $u_{n}\left(t\right)=S\left(t\right)u_{0n}$ is continuous in $t$,
+		the generalized solution $u\left(t\right)=S\left(t\right)u_{0}$ is also continuous in $t$.
+		The proof is complete.
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{proposition}
+		Assume the problem (6.2.1) is well-posed.
+		Then for all $t_{1},t_{0}\in\left[0,T\right]$ such that
+		$t_{1}+t_{0}\leq T$, we have $S\left(t_{1}+t_{0}\right)=S\left(t_{1}\right)S\left(t_{0}\right)$.
+	\end{proposition}
+
+	\begin{proof}
+		For any $u_{0}\in V_{0}$, we have
+		\begin{equation*}
+			S\left(t_{1}+t_{0}\right)u_{0}=
+			S\left(t_{1}\right)
+			\left[
+				S\left(t_{0}\right)u_{0}
+				\right].
+		\end{equation*}
+		Since $V_{0}$ is dense in $V$ and both $S\left(t_{1}+t_{0}\right)$ and $S\left(t_{1}\right)S\left(t_{0}\right)$ are continuous linear operators on $V$, we have
+		\begin{equation*}
+			S\left(t_{1}+t_{0}\right)=
+			S\left(t_{1}\right)
+			S\left(t_{0}\right).
+		\end{equation*}
+		The proof is complete.
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	Now we introduce a finite difference method defined by a one-parameter
+	family of uniformly bounded linear operators
+	\begin{equation*}
+		C\left(\Delta t\right)\colon V\to V,\quad 0<\Delta t\leq\Delta_{0}.
+	\end{equation*}
+	Here $\Delta_{0}>0$ is a fixed number.
+	The family $\left\{C\left(\Delta t\right)\right\}_{0<\Delta t\leq\Delta_{0}}$
+	is said to be uniformly bounded if there is a constant $c$ such that
+	\begin{equation*}
+		\forall\Delta t\in\left(0,\Delta_{0}\right]:
+		\left\|C\left(\Delta t\right)\right\|\leq c
+	\end{equation*}
+	The approximate solution is then defined by
+	\begin{equation*}
+		u_{\Delta t}\left(m\Delta t\right)=
+			{C\left(\Delta t\right)}^{m}u_{0},\quad m=0,1,\dotsc,\left\lfloor T/\Delta t\right\rfloor.
+	\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}
+		The difference method is consistent if there exists a dense subspace
+		$V_{c}$ of $V$ such that for all $u_{0}\in V_{c}$, for the
+		corresponding solution $u$ of the initial value problem (6.2.1), we have
+		\begin{equation*}
+			\lim_{\Delta t\to0}
+			\left\|
+			\frac{1}{\Delta t}
+			\left[
+				C\left(\Delta t\right)
+				u\left(t\right)-
+				u\left(t+\Delta t\right)
+				\right]
+			\right\|=0\text{ uniformly in }\left[0,T\right].
+		\end{equation*}
+	\end{definition}
+	Assume $V_{c}\cap V_{0}\neq\emptyset$.
+	For $u_{0}\in V_{c}\cap V_{0}$, we write
+	\begin{equation*}
+		\frac{1}{\Delta t}
+		\left[
+			C\left(\Delta t\right)u\left(t\right)-
+			u\left(t+\Delta t\right)-
+			u\left(t+\Delta t\right)
+			\right]=
+		\left[
+			\frac{C\left(\Delta t\right)-I}{\Delta t}-L
+			\right]u\left(t\right)-
+		\left[
+			\frac{u\left(t+\Delta t\right)-u\left(t\right)}{\Delta t}-
+			Lu\left(t\right)
+			\right].
+	\end{equation*}
+	Since
+	\begin{equation*}
+		\frac{u\left(t+\Delta t\right)-u\left(t\right)}{\Delta t}\to u'\left(t\right)\quad\text{as }\Delta t\to0,
+	\end{equation*}
+	we have
+	\begin{equation*}
+		\lim_{\Delta t\to0}
+		\left\|
+		\frac{1}{\Delta t}
+		\left[
+			C\left(\Delta t\right)
+			u\left(t\right)-
+			u\left(t+\Delta t\right)
+			\right]
+		\right\|=0.
+	\end{equation*}
+
+	\begin{example}
+		Let us now consider the forward method and the backward method from
+		Example 6.1.1 for the sample problem (6.2.4).
+		For the forward method, we define the operator $C\left(\Delta t\right)$
+		by the formula
+		\begin{equation*}
+			C\left(\Delta t\right)
+			v\left(x\right)=
+			\left(1-2r\right)v\left(x\right)+
+			r
+			\left[
+				v\left(x+\Delta x\right)+
+				v\left(x-\Delta x\right)
+				\right],
+		\end{equation*}
+		where $\Delta x=\sqrt{\frac{\nu\Delta t}{r}}$ and if $x\pm\Delta x\in\left[0,\pi\right]$,
+		then the function $v$ is extended by oddness with period $2\pi$.
+	\end{example}
+\end{frame}
+
+\begin{frame}
+	We identify $\Delta t$ with $h_{t}$ and $\Delta x$ with $h_{x}$.
+	Then $C\left(\Delta t\right)\colon V \to V$ is a linear operator and it can be shown
+	\begin{equation*}
+		\forall v\in V:
+		{\left\|C\left(\Delta t\right)\right\|}_{V}\leq
+		\left(\left|1-2r\right|+2r\right)
+		\left\|\right\|_{V}.
+	\end{equation*}
+	So
+	\begin{equation*}
+		\left\|C\left(\Delta t\right)\right\|\leq
+		\left|1-2r\right|+2r,
+	\end{equation*}
+	and the family $\left\{C\left(\Delta t\right)\right\}_{0<\Delta t\leq\Delta_{0}}$ is uniformly bounded.
+	The difference method is
+	\begin{equation*}
+		u_{}{\Delta t}\left(t_{m}\right)=
+		C\left(\Delta t\right)
+		u_{\Delta t}\left(t_{m-1}\right),\quad m=1,2,\dotsc,\left\lfloor T/\Delta t\right\rfloor
+	\end{equation*}
+	or
+	\begin{equation*}
+		u_{\Delta t}\left(\cdot,t_{m}\right)=
+			{C\left(\Delta t\right)}^m
+		u_{0}\left(\cdot\right).
+	\end{equation*}
+	Notice that in this form, the difference method generates an approximate
+	solution $u_{\Delta t}\left(x,t\right)$ that is defined for
+	$x\in\left[0,\pi\right]$ and $t=t_{m}$, $m=0,1,\dotsc,N_{t}$.
+	Since
+	\begin{equation*}
+		u_{\Delta t}\left(x_{j},t_{m+1}\right)=
+		\left(1-2r\right)u_{\Delta t}\left(x_{j},t_{m}\right)+
+		r\left[u_{\Delta t}\left(x_{j-1},t_{m}\right)+u_{\Delta t}\left(x_{j+1},t_{m}\right)\right],
+		1\leq j\leq N_{x}-1, 0\leq m\leq N_{t}-1,
+	\end{equation*}
+	we see that the relation between the approximate solution $u_{\Delta t}$ and the
+	solution $v$ defined by the ordinary difference scheme (6.1.8)–(6.1.10) (with
+	$f_m^j = 0$) is
+	\begin{equation*}
+		u_{\Delta t}
+		\left(x_{j},t_{m}\right)=v_{m}^{j},
+		\quad 0\leq j\leq N_{x}, 0\leq m\leq N_{t}.
+	\end{equation*}
+	As for the consistency, we take $V_{c}=V_{0}$.
+	For the initial value function (6.2.6), we have the formula (6.2.7)
+	for the solution which is obviously infinitely smooth.
+	Now using Taylor expansions at $\left(x,t\right)$, we have
 \end{frame}

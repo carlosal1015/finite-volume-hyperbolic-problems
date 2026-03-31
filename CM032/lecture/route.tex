@@ -1,0 +1,40 @@
+\section{Ruta de aprendizaje}
+
+ {
+  \usebackgroundtemplate{%
+	  \parbox[c][\paperheight][c]{\paperwidth}{\centering
+		  \includegraphics[width=\paperwidth]{learningpath}
+	  }
+  }
+  \begin{frame}[plain]
+  \end{frame}
+ }
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{block}{Bloque 1: Fundamentos (Semanas 1-3)}
+		\begin{itemize}
+			\item Introducción al método de las diferencias finitas.
+			\item Consistencia, convergencia, estabilidad.
+			\item Método de Galerkin.
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Bloque 2: Ecuaciones hiperbólicas (Semanas 4-7)}
+		\begin{itemize}
+			\item Leyes de conservación y ondas de choque.
+			\item Esquemas clásicos (Upwind, Lax-Friedrichs, Lax-Wendroff).
+			\item Aplicación: ecuaciones de agua poco profundas.
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Bloque 3: Métodos sofisticados (Semanas 9-15)}
+		\begin{itemize}
+			\item Métodos de volúmenes finitos (FVM).
+			\item Métodos WENO/ENO.
+			\item Esquemas que preservan la variación total (TVD).
+			\item Aplicaciones a problemas reales.
+		\end{itemize}
+	\end{block}
+\end{frame}
