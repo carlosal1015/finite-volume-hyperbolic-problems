@@ -1,4 +1,4 @@
-\section{Phase portrait analysis}
+\subsection{Phase portrait analysis}
 
 Being
 \[  q= \dfrac{a_1 b_3}{b_1 (c-a_3)}  \]
@@ -8,9 +8,81 @@ Considering
 \[  q>0   \equiv c-a_3>0 \equiv c > a_3 \]
 
 \[    f(\theta)  =  \dfrac{ m \theta }{1-q \theta } e^{ \varepsilon/ \theta + \theta_0 }  > 0     \]
+% TODO: Antes de la curva Gamma, colocar la EDO.
 
+\subsubsection{The curve $\Gamma$}
+% TODO: Agregar ima introducción a la curva Gamma, reescribiendo la EDO original Sy' y theta'. Usan f(theta) reescribiendo, se observa que para determinar el diagrama de fase es necesario conocer el comportamiento de f(theta)
+% Consideramos q>0 se obtiene el siguiente diagrama de fase. y se observa fuente y silla.
+\begin{equation*}
+	F\left(S_{\text{o}},\theta\right)=
+	\begin{bmatrix}
+		F_{1}\left(S_{\text{o}},\theta\right) \\
+		F_{2}\left(S_{\text{o}},\theta\right)
+	\end{bmatrix}=
+	\begin{bmatrix}\displaystyle
+		\frac{b_{3}S_{y}S_{\text{o}}}{c-a_{3}}
+		\Phi\left(\theta\right) \\
+		\displaystyle
+		\frac{
+			\beta\theta
+			\left(c-a_{3}\right)+
+			\left[
+				a_{1}
+				b_{3}
+				\theta-
+				b_{1}
+				\left(c-a_{3}\right)
+				\right]
+			S_{\text{o}}
+			S_{y}
+			\Phi\left(\theta\right)}{
+			\left(c-a_{1}S_{\text{o}}\right)
+			\left(c-a_{3}\right)
+		}
+	\end{bmatrix}.
+\end{equation*}
 
+Let be
+\begin{equation*}
+	\Gamma=
+	\left\{
+	\left(S_{\text{o}},\theta\right)\mid
+	S_{\text{o}}
+	\left(
+	S^{R}_{\text{o}}-
+	S_{\text{o}}
+	\right)=
+	f\left(\theta\right),\theta\geq0
+	\right\}.
+\end{equation*}
+where
+\begin{equation*}
+	f\left(\theta\right)=
+	\beta
+	\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
+	\frac{
+		\left(c-a_{3}\right)\theta}{
+		b_{1}
+		\left(c-a_{3}\right)-
+		a_{1}
+		b_{3}
+		\theta
+	}
+	\exp
+	\left(
+	\frac{E_{r}}{
+		R\left(T^{\ast}\theta+T_{\text{res}}\right)
+	}
+	\right).
+\end{equation*}
 
+\begin{equation*}
+	m\coloneqq
+	\frac{\beta S^{R}_{\text{o}}}{b_{1}S^{L}_{y}t^{\ast}k_{p}},\quad
+	\varepsilon\coloneqq \frac{E_{r}}{RT^{\ast}},\qquad
+	\theta_{0}\coloneqq \frac{T_{\text{res}}}{T^{\ast}},\qquad
+	q\coloneqq \frac{a_{1}b_{3}}{b_{1}\left(c-a_{3}\right)}.
+\end{equation*}
 %Beside
 %\[    f(\theta)  =  \dfrac{ m \theta }{1-q \theta } e^{ \varepsilon/ \theta + \theta_0 }  > 0     \]
 
@@ -294,7 +366,7 @@ We found two cases
 	      which coincides with the eigenvalue analysis.
 \end{itemize}
 
-\subsection*{Numerical analysis}
+\subsubsection{Numerical Results}
 In our case
 
 \begin{itemize}

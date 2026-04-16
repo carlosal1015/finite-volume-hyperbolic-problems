@@ -1,19 +1,21 @@
-\section{Travelling wave analysis}
+\section{Traveling wave analysis}
 \label{sec:traveling}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Motivated by laboratory experiments \cite{khoshnevis2014combustion, gargar2015recovery, gargar2014recovery, zheng2017numerical, anderson2022analysis, blackwell1959factors}, it is common to search for mathematical solutions to combustion models in the form of traveling waves \cite{ozbag2018traveling, da1999traveling, ghazaryan2013gasless, gordon2006travelling, ghazaryan2011stability}.
+Motivated by laboratory experiments~\cite{khoshnevis2014combustion, gargar2015recovery, gargar2014recovery, zheng2017numerical, anderson2022analysis, blackwell1959factors},
+it is common to search for mathematical solutions to combustion models in the form of traveling waves~\cite{ozbag2018traveling, da1999traveling, ghazaryan2013gasless, gordon2006travelling, ghazaryan2011stability}.
 Traveling wave solutions can be characterized as solutions invariant with respect to translation in space \cite{volpert1994traveling}.
 They are solutions of the underlying partial differential equation that preserve their shape while propagating with a certain velocity \cite{ghazaryan2022introduction}.
 
 \begin{definition}
 	\label{def:traveling}
-	The solution $(\hat\theta,\hat S_y,\hat S_\text{o})(\xi)=(\theta,S_y,S_\text{o})(x,t)$, depending on the traveling variable $\xi=x-ct$ with constant $c$, of \eqref{eq:14}-\eqref{eq:16} is called a traveling wave solution if it satisfies
+	The solution $\left(\hat\theta,\hat S_{\text{y}},\hat S_{\text{o}}\right)\left(\xi\right)=\left(\theta,S_{\text{y}},S_{\text{o}}\right)\left(x,t\right)$,
+	depending on the traveling variable $\xi=x-ct$ with constant $c$, of \eqref{eq:14}-\eqref{eq:16} is called a traveling wave solution if it satisfies
 	\begin{equation}
 		\label{eq:limits}
-		\lim_{\xi\to-\infty} (\hat\theta,\hat S_y,\hat S_\text{o}) = (\theta^L,S_y^L,S_\text{o}^L)
+		\lim_{\xi\to-\infty} (\hat\theta,\hat S_{\text{y}},\hat S_{\text{o}}) = (\theta^L,S_{\text{y}}^{\text{L}},S_{\text{o}}^L)
 		\quad \text{and} \quad
-		\lim_{\xi\to\infty} (\hat\theta,\hat S_y,\hat S_\text{o}) = (\theta^R,S_y^R,S_\text{o}^R),
+		\lim_{\xi\to\infty} (\hat\theta,\hat S_{\text{y}},\hat S_{\text{o}}) = (\theta^R,S_{\text{y}}^R,S_{\text{o}}^{\text{R}}),
 	\end{equation}
 	where the limits coincide with the Riemann problem conditions defined in \eqref{eq:Riemann_boundary}.
 \end{definition}
@@ -23,160 +25,194 @@ In what follows, we drop the hats in the notation for simplicity.
 When convenient, we refer to traveling waves as in Def. \ref{def:traveling} as combustion fronts as it is commonly done in combustion theory
 \cite{ghazaryan2022introduction}.
 
-\subsection{Existence and uniqueness of the traveling wave solution}
+\subsection{Traveling wave description}
 
-Changing the problem variables $(x,t)$ to the traveling ones $(\xi=x-ct,t)$ in \eqref{eq:14}-\eqref{eq:16} and assuming stationary solution ($\partial(\cdot)/\partial t = 0$), the original system is rewritten as follows:
+Changing the problem variables $\left(x,t\right)$ to the traveling
+ones $\left(\xi=x-ct,t\right)$ in \eqref{eq:14}-\eqref{eq:16},
+the original system is rewritten as follows:
 \begin{equation}\label{ec4b}
-	-c \displaystyle\frac{\partial \theta}{\partial \xi} + a_1 \displaystyle\frac{\partial (S_\text{o} \theta)}{\partial \xi} = b_1 S_y S_\text{o} \Phi - \textcolor{red}{\beta \theta},
+	-c\diff{\theta}{\xi}+
+	a_{1}\diff{\left(S_{\text{o}}\theta\right)}{\xi}=
+	b_{1}S_{\text{y}}S_{\text{o}}\Phi\left(\theta\right)-
+	\textcolor{red}{\beta\theta},
 \end{equation}
 
 \begin{equation}\label{ec5b}
-	-c \displaystyle\frac{\partial S_y}{\partial \xi} + a_2 \displaystyle\frac{\partial S_y}{\partial \xi} = - b_2 S_y S_\text{o} \Phi,
+	-c\diff{S_{\text{y}}}{\xi}+
+	a_{2}
+	\diff{S_{\text{y}}}{\xi}=
+	-b_{2}S_{\text{y}}S_{\text{o}}\Phi\left(\theta\right),
 \end{equation}
+
 \begin{equation}\label{ec6b}
-	-c \displaystyle\frac{\partial S_\text{o}}{\partial \xi} + a_3 \displaystyle\frac{\partial S_\text{o}}{\partial \xi} = - b_3 S_y S_\text{o} \Phi.
+	-c
+	\diff{S_{\text{o}}}{\xi}+
+	a_{3}
+	\diff{S_{\text{o}}}{\xi}=
+	-b_{3}S_{\text{y}}S_{\text{o}}\Phi\left(\theta\right).
 \end{equation}
 
-\subsection{The curve $\Gamma$}
-
-Let be
-\begin{equation*}
-	\Gamma=
-	\left\{
-	\left(S_{\text{o}},\theta\right)\mid
-	S_{\text{o}}
-	\left(
-	S^{R}_{\text{o}}-
-	S_{\text{o}}
-	\right)=
-	f\left(\theta\right),\theta\geq0
-	\right\}.
-\end{equation*}
-where
-\begin{equation*}
-	f\left(\theta\right)=
-	\beta
-	\frac{S^{R}_{\text{o}}}{S^{L}_{y}}
-	\frac{
-		\left(c-a_{3}\right)\theta}{
-		b_{1}
-		\left(c-a_{3}\right)-
-		a_{1}
-		b_{3}
-		\theta
-	}
+Therefore we obtain the following equations:
+\begin{equation}
+	\label{PHI}
+	\Phi\left(\theta\right)=
+	t^{\ast}k_{p}
 	\exp
 	\left(
-	\frac{E_{r}}{
-		R\left(T^{\ast}\theta+T_{\text{res}}\right)
-	}
+	-\frac{E_{\text{r}}}{R\left(T^{\ast}\theta+T_{\text{res}}\right)}
 	\right).
-\end{equation*}
+\end{equation}
 
-\begin{equation*}
-	m\coloneqq
-	\frac{\beta S^{R}_{\text{o}}}{b_{1}S^{L}_{y}t^{\ast}k_{p}},\quad
-	\varepsilon\coloneqq \frac{E_{r}}{RT^{\ast}},\qquad
-	\theta_{0}\coloneqq \frac{T_{\text{res}}}{T^{\ast}},\qquad
-	q\coloneqq \frac{a_{1}b_{3}}{b_{1}\left(c-a_{3}\right)}.
-\end{equation*}
+Considering
+\begin{equation}
+	\label{ec36c}
+	c=
+	\frac{a_{2}b_{3}S_{\text{y}}^{\text{L}} + a_{3} b_{2} S_{\text{o}}^{\text{R}}}{b_{2} S_{\text{o}}^{\text{R}} + b_{3} S_{\text{y}}^{\text{L}}}.
+\end{equation}
+and
+\begin{equation}
+	\label{SyL}
+	S_{\text{y}}^{\text{L}}=
+	-\frac{b_{2}}{b_{3}}
+	\frac{\left(c-a_{3}\right)}{\left(c-a_{2}\right)}S_{\text{o}}^{\text{R}}
+\end{equation}
+obtain
+\begin{equation}
+	\label{Sy}
+	S_{\text{y}}=
+	S_{\text{y}}^{\text{L}}+
+	\frac{b_{2}}{b_{3}}
+	\frac{\left(c - a_{3}\right)}{\left(c - a_{2}\right)}S_{\text{o}}=
+	\left(S_{\text{o}}^{\text{R}}-S_{\text{o}}\right)
+	\frac{S_{\text{y}}^{\text{L}}}{S_{\text{o}}^{\text{R}}}
+\end{equation}
+and the ODE system
+\begin{equation}
+	\label{ec38c}
+	\diff{S_{\text{o}}}{\xi}=
+	\frac{b_{3}S_{\text{y}}S_{\text{o}}}{c-a_{3}}
+	\Phi\left(\theta\right).
+\end{equation}
+
+\begin{equation}
+	\label{ec39c}
+	\diff{\theta}{\xi}=
+	\frac{\beta\theta\left(c-a_{3}\right)+\left(a_{1}b_{3}\theta-b_{1}\left(c-a_{3}\right)\right)S_{\text{y}}S_{\text{o}}\Phi\left(\theta\right)}{\left(c-a_{1}S_{\text{o}}\right)\left(c -a_{3}\right)}.
+\end{equation}
+Considering
+\begin{align*}
+	F_{1}\left(S_{\text{o}},\theta\right) & =
+	\frac{b_{3}S_{\text{y}}S_{\text{o}}}{c-a_{3}}
+	\Phi\left(\theta\right).
+	% b_{3}
+	% \frac{S^{L}_{y}}{S^{R}_{\text{o}}}
+	% \frac{\Phi\left(\theta\right)}{c-a_{3}}\left(S^{R}_{\text{o}}-S_{\text{o}}\right)S_{\text{o}}.
+	\\
+	F_{2}\left(S_{\text{o}},\theta\right) & =
+	\frac{\beta\theta\left(c-a_{3}\right)+\left(a_{1}b_{3}\theta-b_{1}\left(c-a_{3}\right)\right)S_{\text{y}}S_{\text{o}}\Phi\left(\theta\right)}{\left(c-a_{1}S_{\text{o}}\right)\left(c -a_{3}\right)}.
+	% b_{1}\frac{1-q\theta}{c-a_{1}S_{\text{o}}}
+	% S^{L}_{y}\Phi\left(\theta\right)
+	% \left[S^{2}_{\text{o}}-S^{R}_{\text{o}}S_{\text{o}}+f\left(\theta\right)\right].
+\end{align*}
+We can rewrite the ODE system as
+\begin{equation}\label{eq:system}
+	\left\{
+	\begin{aligned}
+		\diff{S_{\text{o}}}{\xi} & =
+		F_{1}\left(S_{\text{o}},\theta\right). \\
+		\diff{\theta}{\xi}       & =
+		F_{2}\left(S_{\text{o}},\theta\right).
+	\end{aligned}
+	\right.
+\end{equation}
+
+
+% TODO: Escribir de donde sale F_1 y F_2.
+% TODO: Agregar lemas  If c > a3 and c > a1SR o , then λ1 FC < 0 and λ2 FC > 0. (saddle point)
 
 \textcolor{blue}{
-	Considering
 	% Substituting \eqref{ec5b} into \eqref{ec6b} and integrating in $\xi$ results in
 	% \begin{equation}\label{ec9b}
-	% (a_2 - c) b_3 S_y - (a_3 - c)b_2 S_\text{o} = K_1,
+	% (a_{2} - c) b_{3} S_{\text{y}} - (a_{3} - c)b_{2} S_{\text{o}} = K_1,
 	% \end{equation}
 	% where $K_1 \in \mathbb{R}$ is constant.
 	% Applying the limits $\xi \to \pm \infty$ in \eqref{ec9c} and \eqref{ec9b}, yields
 	% Applying the limits $\xi \to \pm \infty$ in \eqref{ec9b}, yields
 	% \begin{equation}\label{ec10c}
-	% b_2 \theta^L ( c - a_1 S_\text{o}^L) + b_1 S_y^L(c - a_2) = b_2 \theta^R(c - a_1 S_\text{o}^R) + b_1 S_y^R(c - a_2)
+	% b_{2} \theta^L ( c - a_{1} S_{\text{o}}^L) + b_{1} S_{\text{y}}^{\text{L}}(c - a_{2}) = b_{2} \theta^R(c - a_{1} S_{\text{o}}^{\text{R}}) + b_{1} S_{\text{y}}^R(c - a_{2})
 	% \end{equation}
 	% and
 	% \begin{equation}\label{ec23c}
-	% (a_2 - c) b_3 S_y^L - ( a_3 - c )b_2 S_\text{o}^L = (a_2 - c) b_3 S_y^R - (a_3 - c)b_2 S_\text{o}^R.
+	% (a_{2} - c) b_{3} S_{\text{y}}^{\text{L}} - ( a_{3} - c )b_{2} S_{\text{o}}^L = (a_{2} - c) b_{3} S_{\text{y}}^R - (a_{3} - c)b_{2} S_{\text{o}}^{\text{R}}.
 	% \end{equation}
 	% Substituting boundary condition \eqref{eq:Riemann_boundary} into \eqref{ec10c} and \eqref{ec23c}, we obtain:
 	% Substituting boundary condition \eqref{eq:Riemann_boundary} into \eqref{ec23c}, we obtain:
 	% \begin{equation}
 	% \label{ec35c}
-	%        \theta^L  =  \theta^R \left(\displaystyle\frac{c - a_1 S_\text{o}^R}{c}\right) - \displaystyle\frac{(a_3 - a_2)b_1 S_\text{o}^R S_y^L}{ a_2 b_3 S_y^L +  a_3 b_2 S_\text{o}^R},
+	%        \theta^L  =  \theta^R \left(\displaystyle\frac{c - a_{1} S_{\text{o}}^{\text{R}}}{c}\right) - \displaystyle\frac{(a_{3} - a_{2})b_{1} S_{\text{o}}^{\text{R}} S_{\text{y}}^{\text{L}}}{ a_{2} b_{3} S_{\text{y}}^{\text{L}} +  a_{3} b_{2} S_{\text{o}}^{\text{R}}},
 	% \end{equation}
-	\begin{equation}
-		\label{ec36c}
-		c  =  \displaystyle\frac{a_2 b_3 S_y^L + a_3 b_2 S_\text{o}^R}{b_2 S_\text{o}^R + b_3 S_y^L}.
-	\end{equation}
 	% and
-	% \begin{equation}
-	% 	\label{SyL}
-	% 	S_y^L = -\displaystyle\frac{b_2}{b_3}\displaystyle\frac{(c - a_3)}{(c - a_2)}S_\text{o}^R
-	% \end{equation}
 	% From \eqref{ec9b} and $\xi \to -\infty$ results:
-	% \begin{equation}
-	% 	\label{Sy}
-	% 	S_y = S_y^L + \displaystyle\frac{b_2}{b_3}\displaystyle\frac{(c - a_3)}{(c - a_2)}S_\text{o}
-	% \end{equation}
 	% From \eqref{ec6b}, we obtain:
 	% \begin{equation}
 	% 	%\label{ec14}
 	% 	\label{Sop}
-	% 	S_\text{o}^{\prime}  =  -\displaystyle\frac{b_3 S_y S_\text{o}}{a_3 - c}\Phi.
+	% 	S_{\text{o}}^{\prime}  =  -\displaystyle\frac{b_{3} S_{\text{y}} S_{\text{o}}}{a_{3} - c}\Phi.
 	% \end{equation}
 }
 % Analogously, substituting \eqref{ec5b} into \eqref{ec4b} and integrating yields
 % \beq\label{ec8c}
-% \fa{\partial}{\partial \xi}\left[b_2 c \theta - b_2 a_1 S_\text{o} \theta + b_1 c S_y - b_1 a_2 S_y \right] = 0.
+% \fa{\partial}{\partial \xi}\left[b_{2} c \theta - b_{2} a_{1} S_{\text{o}} \theta + b_{1} c S_{\text{y}} - b_{1} a_{2} S_{\text{y}} \right] = 0.
 % \eeq
 % \textcolor{red}{
 % 	\begin{equation}\label{ec8c_moda}
-% 		\displaystyle\frac{\partial}{\partial \xi}\left[-b_2 c \theta + b_2 a_1 S_\text{o} \theta - b_1 c S_y + b_1 a_2 S_y \right] = \textcolor{red}{-\beta \theta b_2.}
+% 		\displaystyle\frac{\partial}{\partial \xi}\left[-b_{2} c \theta + b_{2} a_{1} S_{\text{o}} \theta - b_{1} c S_{\text{y}} + b_{1} a_{2} S_{\text{y}} \right] = \textcolor{red}{-\beta \theta b_{2}.}
 % 	\end{equation}
 % 	so:}
 % \textcolor{blue}{
 % 	\begin{equation}\label{ec8c_modb}
-% 		\displaystyle\frac{\partial}{\partial \xi}\left[b_2(a_1 S_\text{o} - c) \theta - b_1(c - a_2) S_y \right] = \textcolor{red}{-\beta \theta b_2.}
+% 		\displaystyle\frac{\partial}{\partial \xi}\left[b_{2}(a_{1} S_{\text{o}} - c) \theta - b_{1}(c - a_{2}) S_{\text{y}} \right] = \textcolor{red}{-\beta \theta b_{2}.}
 % 	\end{equation}
 % }
 
 % Substituting \eqref{ec6b} into \eqref{ec4b} and integrating yields
 % \textcolor{red}{
 % \begin{equation}\label{ec9c_moda}
-% \displaystyle\frac{\partial}{\partial \xi}\left[-b_3 c \theta + b_3 a_1 S_\text{o} \theta - b_1 c S_\text{o} + b_1 a_3 S_\text{o} \right] = \textcolor{red}{-\beta \theta b_3.}
+% \displaystyle\frac{\partial}{\partial \xi}\left[-b_{3} c \theta + b_{3} a_{1} S_{\text{o}} \theta - b_{1} c S_{\text{o}} + b_{1} a_{3} S_{\text{o}} \right] = \textcolor{red}{-\beta \theta b_{3}.}
 % \end{equation}
 % so:
 % }
 % \textcolor{blue}{
 % \begin{equation}\label{ec9c_modb}
-% \displaystyle\frac{\partial}{\partial \xi}\left[b_3(a_1 S_\text{o} - c) \theta - b_1(c - a_3) S_\text{o} \right] = \textcolor{red}{-\beta \theta b_3.}
+% \displaystyle\frac{\partial}{\partial \xi}\left[b_{3}(a_{1} S_{\text{o}} - c) \theta - b_{1}(c - a_{3}) S_{\text{o}} \right] = \textcolor{red}{-\beta \theta b_{3}.}
 % \end{equation}
 % }
 % \textcolor{red}{
 % From \eqref{ec8c_modb} and \eqref{ec9c_modb} results:
 % \begin{equation}
 %     \label{ec10}
-%     \displaystyle\frac{\partial}{\partial \xi}\left[(a_1 S_\text{o} - c) \theta - \displaystyle\frac{b_1}{b_2}(c - a_2) S_y \right] =  \displaystyle\frac{\partial}{\partial \xi}\left[(a_1 S_\text{o} - c) \theta - \displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o} \right]
+%     \displaystyle\frac{\partial}{\partial \xi}\left[(a_{1} S_{\text{o}} - c) \theta - \displaystyle\frac{b_{1}}{b_{2}}(c - a_{2}) S_{\text{y}} \right] =  \displaystyle\frac{\partial}{\partial \xi}\left[(a_{1} S_{\text{o}} - c) \theta - \displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}} \right]
 % \end{equation}
 % so:
 % \begin{equation}
 %     \label{ec11}
-%      \displaystyle\frac{\partial}{\partial \xi}\left[- \displaystyle\frac{b_1}{b_2}(c - a_2) S_y + \displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o} \right] = 0
+%      \displaystyle\frac{\partial}{\partial \xi}\left[- \displaystyle\frac{b_{1}}{b_{2}}(c - a_{2}) S_{\text{y}} + \displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}} \right] = 0
 % \end{equation}
 % Applying the limits $\xi \to \pm \infty$ in \eqref{ec11}, yields:
 % \begin{equation}
 %     \label{ec12}
-%     - \displaystyle\frac{b_1}{b_2}(c - a_2) S^L_y + \displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o}^L = - \displaystyle\frac{b_1}{b_2}(c - a_2) S_y^R + \displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o}^R
+%     - \displaystyle\frac{b_{1}}{b_{2}}(c - a_{2}) S^L_y + \displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}}^L = - \displaystyle\frac{b_{1}}{b_{2}}(c - a_{2}) S_{\text{y}}^R + \displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}}^{\text{R}}
 % \end{equation}
 % }
 
 % \textcolor{red}{From \eqref{ec11} results
 % \begin{equation}
 %     \label{ec13}
-%     - \displaystyle\frac{b_1}{b_2}(c - a_2) S_y + \displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o} = - \displaystyle\frac{b_1}{b_2}(c - a_2) S_y^R + \displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o}^R
+%     - \displaystyle\frac{b_{1}}{b_{2}}(c - a_{2}) S_{\text{y}} + \displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}} = - \displaystyle\frac{b_{1}}{b_{2}}(c - a_{2}) S_{\text{y}}^R + \displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}}^{\text{R}}
 % \end{equation}
 % }
 % \begin{equation}\label{ec9c}
-% b_2  \theta(c - a_1 S_\text{o}) + b_1  S_y(c - a_2) = K,
+% b_{2}  \theta(c - a_{1} S_{\text{o}}) + b_{1}  S_{\text{y}}(c - a_{2}) = K,
 % \end{equation}
 % where $K \in \mathbb{R}$ is constant. \\
 
@@ -184,90 +220,98 @@ where
 	% From \eqref{ec8c_modb} results:
 	% $$
 	% 	\begin{array}{rcl}
-	% 		b_2 a_1 (S_\text{o}^{\prime} \theta + S_\text{o} \theta^{\prime}) - b_2 c \theta^{\prime} - b_1(c - a_2)S_y^{\prime} & = & - \beta \theta b_2                                                   \\
-	% 		(b_2 a_1 S_\text{o} - b_2 c) \theta^{\prime}                                                                  & = & (-\beta b_2 - b_2 a_1 S_\text{o}^{\prime})\theta + b_1(c - a_2)S_y^{\prime}
+	% 		b_{2} a_{1} (S_{\text{o}}^{\prime} \theta + S_{\text{o}} \theta^{\prime}) - b_{2} c \theta^{\prime} - b_{1}(c - a_{2})S_{\text{y}}^{\prime} & = & - \beta \theta b_{2}                                                   \\
+	% 		(b_{2} a_{1} S_{\text{o}} - b_{2} c) \theta^{\prime}                                                                  & = & (-\beta b_{2} - b_{2} a_{1} S_{\text{o}}^{\prime})\theta + b_{1}(c - a_{2})S_{\text{y}}^{\prime}
 	% 	\end{array}
 	% $$
 	% \begin{equation}
 	% 	\label{thetap}
-	% 	\theta^{\prime} =\displaystyle\frac{ (b_1 c - b_1a_2)S_y^{\prime} - b_2 a_1 S_\text{o}^{\prime}\theta - \beta b_2 \theta }{-b_2 c + b_2 a_1 S_\text{o}}
+	% 	\theta^{\prime} =\displaystyle\frac{ (b_{1} c - b_{1}a_{2})S_{\text{y}}^{\prime} - b_{2} a_{1} S_{\text{o}}^{\prime}\theta - \beta b_{2} \theta }{-b_{2} c + b_{2} a_{1} S_{\text{o}}}
 	% \end{equation}
-	% From \eqref{Sy} we can obtain $S_y^{\prime}$ and substituting into \eqref{thetap}, results:
+	% From \eqref{Sy} we can obtain $S_{\text{y}}^{\prime}$ and substituting into \eqref{thetap}, results:
 	% \begin{equation}
 	% 	\label{thetap1}
-	% 	\theta^{\prime} =\displaystyle\frac{ b_1(c - a_2) \textcolor{red}{\displaystyle\frac{b_2}{b_3}\displaystyle\frac{(c - a_3)}{(c - a_2)} S_\text{o}^{\prime} } - b_2 a_1 S_\text{o}^{\prime}\theta - \beta b_2 \theta }{-b_2 c + b_2 a_1 S_\text{o}}
+	% 	\theta^{\prime} =\displaystyle\frac{ b_{1}(c - a_{2}) \textcolor{red}{\displaystyle\frac{b_{2}}{b_{3}}\displaystyle\frac{(c - a_{3})}{(c - a_{2})} S_{\text{o}}^{\prime} } - b_{2} a_{1} S_{\text{o}}^{\prime}\theta - \beta b_{2} \theta }{-b_{2} c + b_{2} a_{1} S_{\text{o}}}
 	% \end{equation}
-	% If $c \neq a_2$ then:
+	% If $c \neq a_{2}$ then:
 	% \begin{equation}
 	% 	\label{thetap2}
-	% 	\theta^{\prime} =\displaystyle\frac{\textcolor{red}{\displaystyle\frac{b_1}{b_3}(c - a_3) S_\text{o}^{\prime} } - a_1 \theta S_\text{o}^{\prime} - \beta \theta }{a_1 S_\text{o} - c}
+	% 	\theta^{\prime} =\displaystyle\frac{\textcolor{red}{\displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) S_{\text{o}}^{\prime} } - a_{1} \theta S_{\text{o}}^{\prime} - \beta \theta }{a_{1} S_{\text{o}} - c}
 	% \end{equation}
 	% simplifying the above equation:
 	% \begin{equation}
 	% 	\label{thetap3}
-	% 	\theta^{\prime} =\displaystyle\frac{\textcolor{red}{\left(\displaystyle\frac{b_1}{b_3}(c - a_3) - a_1 \theta\right) S_\text{o}^{\prime}} - \beta \theta }{a_1 S_\text{o} - c}
+	% 	\theta^{\prime} =\displaystyle\frac{\textcolor{red}{\left(\displaystyle\frac{b_{1}}{b_{3}}(c - a_{3}) - a_{1} \theta\right) S_{\text{o}}^{\prime}} - \beta \theta }{a_{1} S_{\text{o}} - c}
 	% \end{equation}
 	% \begin{equation}
 	% 	\label{thetap4}
-	% 	\theta^{\prime} =\displaystyle\frac{\left(b_1 (c - a_3) - a_1 b_3\theta\right) S_\text{o}^{\prime} - b_3 \beta \theta  }{b_3(a_1 S_\text{o} - c)}
+	% 	\theta^{\prime} =\displaystyle\frac{\left(b_{1} (c - a_{3}) - a_{1} b_{3}\theta\right) S_{\text{o}}^{\prime} - b_{3} \beta \theta  }{b_{3}(a_{1} S_{\text{o}} - c)}
 	% \end{equation}
 	% \begin{equation}
 	% 	\label{thetap5}
-	% 	\theta^{\prime} =\displaystyle\frac{b_3 \beta \theta + \left(a_1 b_3\theta -  b_1 (c - a_3)\right) S_\text{o}^{\prime}  }{b_3(c - a_1 S_\text{o})}
+	% 	\theta^{\prime} =\displaystyle\frac{b_{3} \beta \theta + \left(a_{1} b_{3}\theta -  b_{1} (c - a_{3})\right) S_{\text{o}}^{\prime}  }{b_{3}(c - a_{1} S_{\text{o}})}
 	% \end{equation}
 	% Substituting \eqref{Sop} into \eqref{thetap5}, results:
 	% \begin{equation}
 	% 	\label{thetap6}
-	% 	\theta^{\prime} =\displaystyle\frac{b_3 \beta \theta + \left(a_1 b_3\theta -  b_1 (c - a_3)\right) \textcolor{red}{\displaystyle\frac{b_3 S_y S_\text{o}}{c - a_3} \Phi}  }{b_3(c - a_1 S_\text{o})}
+	% 	\theta^{\prime} =\displaystyle\frac{b_{3} \beta \theta + \left(a_{1} b_{3}\theta -  b_{1} (c - a_{3})\right) \textcolor{red}{\displaystyle\frac{b_{3} S_{\text{y}} S_{\text{o}}}{c - a_{3}} \Phi}  }{b_{3}(c - a_{1} S_{\text{o}})}
 	% \end{equation}
 	% \begin{equation}
 	% 	\label{thetap7}
-	% 	\theta^{\prime} =\displaystyle\frac{\beta \theta (c - a_3) + \left(a_1 b_3\theta -  b_1 (c - a_3)\right) \textcolor{red}{S_y S_\text{o} \Phi}  }{(c - a_1 S_\text{o})(c -a_3)}
+	% 	\theta^{\prime} =\displaystyle\frac{\beta \theta (c - a_{3}) + \left(a_{1} b_{3}\theta -  b_{1} (c - a_{3})\right) \textcolor{red}{S_{\text{y}} S_{\text{o}} \Phi}  }{(c - a_{1} S_{\text{o}})(c -a_{3})}
 	% \end{equation}
 }
 \textcolor{blue}{
-	Therefore we obtain the following equations:
-	\begin{equation}
-		\label{PHI}
-		\Phi\left(\theta\right)=
-		t^{\ast}k_{p}\exp\left(-\displaystyle\frac{E_r}{R(T^{*} \theta + T_{res} )} \right).
-	\end{equation}
-	\begin{equation}
-		\label{ec37c}
-		S_y = S_y^L + \displaystyle\frac{b_2}{b_3}\displaystyle\frac{(c - a_3)}{(c - a_2)}S_\text{o} = (S_\text{o}^R - S_\text{o})\displaystyle\frac{S_y^L}{S_\text{o}^R},
-	\end{equation}
-	\\
-	\begin{equation}
-		%\label{thetap8}
-		\label{ec38c}
-		\theta^{\prime}=
-		\displaystyle\frac{\beta \theta (c - a_3) + \left(a_1 b_3\theta -  b_1 (c - a_3)\right) S_y S_\text{o} \Phi }{(c - a_1 S_\text{o})(c -a_3)}.
-	\end{equation}
-	\\
-	\begin{equation}
-		\label{ec39c}
-		S_\text{o}^{\prime}=
-		-\displaystyle\frac{b_3 S_y S_\text{o}}{a_3 - c}\Phi.
-	\end{equation}
+	% \begin{equation}
+	% 	\label{ec37c}
+	% 	S_{\text{y}} = S_{\text{y}}^{\text{L}} + \displaystyle\frac{b_{2}}{b_{3}}\displaystyle\frac{(c - a_{3})}{(c - a_{2})}S_{\text{o}} = (S_{\text{o}}^{\text{R}} - S_{\text{o}})\displaystyle\frac{S_{\text{y}}^{\text{L}}}{S_{\text{o}}^{\text{R}}},
+	% \end{equation}
 }
+\subsection{Equilibrium points}
 
-\section{Equilibrium points}
+To find the traveling wave solution of the system~\eqref{Ec1a}-\eqref{Ec3a}
+is equivalent to finding the solution of the system composed of two ODEs~\eqref{ec38c}-\eqref{ec39c}
+and one algebraic equation~\eqref{Sy}.
+Notice that an equilibrium solution of the ODE corresponds to a solution with a derivative equal to
+zero~\cite{guckenheimer2013nonlinear,sotomayor1979liccoes}.
+In~\eqref{eq:system} equals to zero.
+The equation \eqref{ec39c} implies
+\begin{equation*}
+	F_{1}\left(S_{\text{o}},\theta\right)=0\implies
+	S_{y}=0\quad\vee\quad
+	S_{0}=0.
+\end{equation*}
+Consider the values $S_{\text{y}}$ and $S_{\text{o}}$, we obtain
+\begin{equation*}
+	F_{2}\left(S_{\text{o}},\theta\right)=0\implies
+	\theta=0.
+\end{equation*}
+% In any case, from \eqref{ec38c} we obtain
+% \begin{equation*}
+% 	\diff{\theta}{\xi}=
+% 	\frac{\beta\theta}{c-a_{1}S_{\text{o}}}=0,
+% \end{equation*}
+% therefore
+% \begin{equation*}
+% 	\theta=
+% 	0.
+% \end{equation*}
 
 In this paper we are interested in studying the combustion from and
 thus we assume that the reaction does not occur at the boundaries,
-i.e., the reaction rate $\Phi$ in~\eqref{eq:34} vanish when: there
+i.e., the reaction rate $\Phi$ in~\eqref{PHI} vanish when: there
 is no oxygen $(Y=0)$, which we call ``Oxygen Controlled'' case
 (OC); there is no fuel $(S_{\text{o}}=0)$, which we call
 ``Fuel Controlled'' case (FC).
 In order to approximate applications, we consider that the left
 injection end of the domain is FC, and the production right end of
 the domain is OC.
-The OC and FC equilibria are given by~\eqref{eq:13}, then:
+The OC and FC equilibria are given by~\eqref{eq:Riemann_boundary}, then:
 \begin{align*}
-	\text{OC: }
+	\text{OC}:
 	\big(S^{L}_{\text{o}},\theta^{L}\big) & =
 	\left(0,0\right).                         \\
-	\text{FC: }
+	\text{FC}:
 	\big(S^{R}_{\text{o}},\theta^{R}\big) & =
 	\big(S^{R}_{\text{o}},0\big).
 \end{align*}

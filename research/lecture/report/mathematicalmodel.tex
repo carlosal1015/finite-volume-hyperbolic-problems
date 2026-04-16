@@ -1,24 +1,31 @@
 \section{Mathematical model}
 
 The model with time coordinate $t$, space coordinate $x$ and
-main variables $T$ (temperature), $S_\text{o}$, $Y$ (oxygen fraction)
+main variables $T$ (temperature), $S_{\text{o}}$, $Y$ (oxygen fraction)
 is composed by the equations describing the heat balance~\eqref{Ec1a},
 molar balance for oxygen,~\eqref{Ec2a} and molar balance for
 oil~\eqref{Ec3a}:
 \begin{equation}
 	C_{m}\difcp{T}{t}+
-	\partial_x (c_o \rho_o S_\text{o} u_o (T - T_{\text{res}}))=
-	\rho_o Q_r Y S_\text{g} S_\text{o}  W_r  \textcolor{red}{- \alpha(T - T_{\text{res}})}.
+	\partial_x (c_o \rho_o S_{\text{o}} u_o (T - T_{\text{res}}))=
+	\rho_o Q_r Y S_\text{g} S_{\text{o}}  W_{\text{r}}
+	\textcolor{red}{-\alpha\left(T-T_{\text{res}}\right)}.
 	\label{Ec1a}
 \end{equation}
 \begin{equation}
-	\varphi \partial_t (Y S_\text{g} \rho_g) +  \partial_x (Y S_\text{g} \rho_g u_g)
-	=  -w \varphi \rho_o Y S_\text{g} S_\text{o}  W_r.
+	\varphi
+	\partial_{t}(Y S_\text{g}\rho_g)+
+	\partial_x (Y S_\text{g} \rho_g u_g)=
+	-w\varphi\rho_o Y S_\text{g} S_{\text{o}}  W_{\text{r}}.
 	\label{Ec2a}
 \end{equation}
 \begin{equation}
-	\varphi \partial_t (\rho_o S_\text{o}) + \partial_x (\rho_o  S_\text{o}  u_o)
-	= - \varphi \rho_o Y S_\text{g} S_\text{o} W_r.
+	\varphi
+	\partial_{t}
+	(\rho_o S_{\text{o}})+
+	\partial_{x}
+	(\rho_o  S_{\text{o}}  u_o)=
+	-\varphi\rho_{o} Y S_\text{g} S_{\text{o}} W_{\text{r}}.
 	\label{Ec3a}
 \end{equation}
 Where $C_m$ is the heat capacity of the matrix,
@@ -29,9 +36,9 @@ $T_{\text{res}}$ is the reservoir initial temperature,
 $Q_r$ is the oil reaction enthalpy,
 $\varphi$ is the porosity, and
 $\omega$ is a stochiometric coefficient for the oil-oxygen reaction.
-Following \cite{traveling,gargar2020combustion}, the reaction rate $W_r$ is given by Arrhenius law:
+Following \cite{traveling,gargar2020combustion}, the reaction rate $W_{\text{r}}$ is given by Arrhenius law:
 \begin{equation}
-	W_r = k_{p}\exp \Big(-\frac{E_\text{r}}{RT}\Big),
+	W_{\text{r}} = k_{p}\exp \Big(-\frac{E_\text{r}}{RT}\Big),
 	\label{Ec4a}
 \end{equation}
 where $E_\text{r}$ is the activation energy, $R$ is the gas constant, and $k_{p}$ is the pre-exponential coefficient.
@@ -53,7 +60,7 @@ In order to allow the mathematical analysis of the system \eqref{Ec1a}-\eqref{Ec
 	\;\;
 	T^{\ast} = T_{\text{res}},
 	\;\;
-	t^{\ast} = \frac{\hat{k}}{k_{p}},
+	t^{\ast} = \frac{10^{8}}{k_{p}},
 	\;\;
 	x^{\ast} = \frac{\rho_g}{\rho^{res}}\frac{u}{k_{p}},
 \end{equation}
@@ -62,18 +69,18 @@ where bars indicate the dimensionless variables and $t^{\ast}$, $x^{\ast}$ are r
 Using \eqref{eq5} and omitting the bars, the system given by \eqref{Ec1a}--\eqref{Ec3a} is written in dimensionless form as:
 \begin{equation}
 	\label{eq:14}
-	\displaystyle\frac{\partial \theta}{\partial t} + a_1 \displaystyle\frac{\partial }{\partial x}(S_\text{o} \theta) = b_1 S_\text{o} S_y \Phi - \textcolor{red}{\beta \theta},
+	\displaystyle\frac{\partial \theta}{\partial t} + a_1 \displaystyle\frac{\partial }{\partial x}(S_{\text{o}} \theta) = b_1 S_{\text{o}} S_{\text{y}} \Phi - \textcolor{red}{\beta \theta},
 \end{equation}
 \begin{equation}
 	\label{eq:15}
-	\displaystyle\frac{\partial S_y}{\partial t} + a_2 \displaystyle\frac{\partial S_y}{\partial x} = - b_2 S_\text{o} S_y \Phi,
+	\displaystyle\frac{\partial S_{\text{y}}}{\partial t} + a_2 \displaystyle\frac{\partial S_{\text{y}}}{\partial x} = - b_2 S_{\text{o}} S_{\text{y}} \Phi,
 \end{equation}
 \begin{equation}
 	\label{eq:16}
-	\displaystyle\frac{\partial S_\text{o}}{\partial t} + a_3 \displaystyle\frac{\partial S_\text{o}}{\partial  x} =
-	- b_3 S_\text{o} S_y \Phi,
+	\displaystyle\frac{\partial S_{\text{o}}}{\partial t} + a_3 \displaystyle\frac{\partial S_{\text{o}}}{\partial  x} =
+	- b_3 S_{\text{o}} S_{\text{y}} \Phi,
 \end{equation}
-where we introduced the variable $S_y=S_\text{g} Y$, $\Phi = t^{*} W_r$, and the constants are given by:
+where we introduced the variable $S_{\text{y}}=S_\text{g} Y$, $\Phi = t^{*} W_{\text{r}}$, and the constants are given by:
 \begin{equation}\label{eq:17}
 	a_1 = \displaystyle\frac{t^{*} u_o c_o \rho_o }{C_m x^{*}}, \;
 	a_2 = \displaystyle\frac{t^{\ast} u_g}{\varphi x^{\ast}}, \;
@@ -83,35 +90,41 @@ where we introduced the variable $S_y=S_\text{g} Y$, $\Phi = t^{*} W_r$, and the
 	b_3 = 1, \\
 	\textcolor{red}{\beta = \displaystyle\frac{\alpha t^{*}}{C_m}}
 \end{equation}
-
+% TODO: Citar a rosmery y explicar OC y FC
 \subsection{Initial and boundary conditions}
-To complete system \eqref{eq:14}-\eqref{eq:16}, we need initial and boundary conditions. Physically, there is no chemical reaction in the reservoir before the combustion and no reaction happening in the injection well. Mathematically, this means that the source terms in \eqref{eq:14}-\eqref{eq:16} are equal to zero ($S_y S_\text{o} \Phi = 0$), as the temperature is always positive, this equation yields $S_y = 0$ or $S_\text{o} = 0$. Thus, we can expect the following options for the limit states (initial and injection conditions).
+To complete system \eqref{eq:14}-\eqref{eq:16}, we need initial and boundary conditions. Physically, there is no chemical reaction in the reservoir before the combustion and no reaction happening in the injection well. Mathematically, this means that the source terms in \eqref{eq:14}-\eqref{eq:16} are equal to zero ($S_{\text{y}} S_{\text{o}} \Phi = 0$), as the temperature is always positive, this equation yields $S_{\text{y}} = 0$ or $S_{\text{o}} = 0$. Thus, we can expect the following options for the limit states (initial and injection conditions).
 \begin{enumerate}
-	\item If $S_y  = S_\text{g} Y = 0$ then  $Y = 0$ or $S_\text{g} = 0$, therefore:
+	\item If $S_{\text{y}}= S_\text{g} Y = 0$ then  $Y = 0$ or $S_\text{g} = 0$, therefore:
 	      \begin{enumerate}
-		      \item If $Y = 0$ then $S_y = 0$ and the limit state is:
+		      \item If $Y = 0$ then $S_{\text{y}} = 0$ and the limit state is:
 		            \begin{equation}\label{eq8c}
-			            (\theta,S_y,S_\text{o}) = (\theta,0,S_\text{o}).
+			            (\theta,S_{\text{y}},S_{\text{o}}) = (\theta,0,S_{\text{o}}).
 		            \end{equation}
-		      \item If $S_\text{g} = 0$ then $S_\text{o} = 1$, $S_y = 0$, and the limit state is:
+		      \item If $S_\text{g} = 0$ then $S_{\text{o}} = 1$, $S_{\text{y}} = 0$, and the limit state is:
 		            \begin{equation}\label{eq9c}
-			            (\theta,S_y,S_\text{o}) = (\theta,0,1).
+			            (\theta,S_{\text{y}},S_{\text{o}}) = (\theta,0,1).
 		            \end{equation}
 	      \end{enumerate}
-	\item If $S_\text{o} = 0$ then $S_\text{g}=1$, and the limit state is:
+	\item If $S_{\text{o}} = 0$ then $S_\text{g}=1$, and the limit state is:
 	      \begin{equation}\label{eq10c}
-		      (\theta,S_y,S_\text{o}) = (\theta,S_y,0).
+		      (\theta,S_{\text{y}},S_{\text{o}}) = (\theta,S_{\text{y}},0).
 	      \end{equation}
 \end{enumerate}
-In summary, we have two cases for boundary conditions: \eqref{eq8c} and \eqref{eq9c} with no oxygen, and \eqref{eq10c} without oil. Based on the physical problem we are interested in, we consider no oil in the injected fluid (left condition) and no oxygen in the initial (right) conditions.
+In summary, we have two cases for boundary conditions: \eqref{eq8c} and \eqref{eq9c} with no oxygen, and \eqref{eq10c} without oil.
+Based on the physical problem we are interested in, we consider no oil in the injected fluid (left condition) and no oxygen in the initial (right) conditions.
 
-In the present paper, we study the Riemann problem composed of equations \eqref{eq:14}-\eqref{eq:16} with initial conditions defined as a step function with no oil as the left condition ($x<0$) and no oxygen as the right condition ($x>0$):
+In the present paper, we study the Riemann problem composed of
+equations \eqref{eq:14}-\eqref{eq:16} with initial conditions defined
+as a step function with no oil as the left condition ($x<0$) and no
+oxygen as the right condition ($x>0$):
 \begin{equation}
 	\label{eq:Riemann_boundary}
-	(\theta^L,S_y^L,S_\text{o}^L) = (0,S_y^L,0)
-	\quad
-	\text{and}
-	\quad
-	(\theta^R,S_y^R,S_\text{o}^R) = (0,0,S_\text{o}^R),
+	(\theta^{\text{L}},S_{\text{y}}^{\text{L}},S_{\text{o}}^{\text{L}})=
+	\left(0,S_{\text{y}}^L,0\right)
+	\text{ and }
+	\left(\theta^{\text{R}},S_{\text{y}}^{\text{R}},S_{\text{o}}^{\text{R}}\right)=
+	\left(0,0,S_{\text{o}}^{\text{R}}\right),
 \end{equation}
-where it was assumed that the injected air was not heated. Thus, both initial and injection temperatures coincide with the reservoir temperature and are equal to zero following \eqref{eq5}.
+where it was assumed that the injected air was not heated.
+Thus, both initial and injection temperatures coincide with the reservoir temperature and are equal to zero following \eqref{eq5}.
+\cite{zavala2020classification}
