@@ -1,0 +1,518 @@
+\section{Phase portrait analysis}
+
+Being
+\[  q= \dfrac{a_1 b_3}{b_1 (c-a_3)}  \]
+
+Considering
+
+\[  q>0   \equiv c-a_3>0 \equiv c > a_3 \]
+
+\[    f(\theta)  =  \dfrac{ m \theta }{1-q \theta } e^{ \varepsilon/ \theta + \theta_0 }  > 0     \]
+
+
+
+%Beside
+%\[    f(\theta)  =  \dfrac{ m \theta }{1-q \theta } e^{ \varepsilon/ \theta + \theta_0 }  > 0     \]
+
+For $f(\theta)$ analysis we need $f'(\theta)$ and his discriminant $\Delta$
+
+
+%So the next cases, the most important fact is than
+%\[   S_o^* < -\dfrac{m}{q} \]
+
+
+The following graphs of $f(\theta)$
+
+\begin{figure}[htbp]
+	\centering
+	% fila 1
+	\begin{subfigure}[b]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{q_p_delt_neg_h_neg}
+		\caption{$q>0$, $\Delta<0$,  $\varepsilon<2 \theta_0$}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{q_p_delt_neg_h_neg}
+		\caption{$q>0$, $\Delta<0$,  $\varepsilon=2 \theta_0$}
+	\end{subfigure}
+
+	\vspace{0.5em}
+
+	% fila 2
+	\begin{subfigure}[b]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{q_p_delt_neg_h_neg}
+		\caption{$q>0$, $\Delta<0$,  $\varepsilon>2 \theta_0$}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{q_p_delt_zero_h_posit}
+		\caption{$q>0$, $\Delta=0$,  $\varepsilon>2 \theta_0$}
+	\end{subfigure}
+
+	\vspace{0.8em}
+
+	% fila 3 (imagen centrada ocupando ancho)
+	\begin{subfigure}[b]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{q_p_delt_posit_h_posit_1}
+		\caption{$q>0$, $\Delta>0$,  $\varepsilon>2 \theta_0$, $S_o^*  < f(\theta_2)  < f(\theta_1) $ }
+	\end{subfigure}
+
+	\caption{ $f(\theta)$ with the same $\theta$ vs $S_o$  representation  }
+	\label{fig:5en221}
+\end{figure}
+
+Have the next $ \theta $ vs $S_o$ representation
+
+\begin{center}
+
+	\begin{tikzpicture}[scale=0.75]
+		% Ejes
+		\draw[->] (-3,0) -- (6.5,0) node[anchor=north] {$S_o$};
+		\draw[->] (0,-2) -- (0,6) node[anchor=east] {$\theta$};
+
+		% Parábola hacia abajo: y = a*x*(S_o^R - x)
+		\draw[thick, blue, domain=-0.9:4.9, samples=100]
+		plot(\x,{0.5*\x*(4 - \x)}) node at (3,1.8) {$\Gamma$};
+
+
+		%hiperbolas
+		\draw[domain=-2.75:-1.25,smooth,variable=\x,blue,thick]
+		plot ({\x},{ -0.5/( \x +1)+3 });
+
+
+		\draw[domain=5.25:6.5,smooth,variable=\x,blue,thick]
+		plot ({\x},{ 0.5/( \x -5)+3 });
+		%plot ({\x},{(1.75)*(\x+2.75)^2 + 3});
+
+		%   \node at (3,1.8) {$\Gamma$};
+
+		% Etiquetas de los puntos
+		\node[below left] at (0,0) {$0$};
+		\node[below] at (4,0) {$S_o^R$};
+		%\node[below] at (2,0) {$\dfrac{S_o^R}{2}$};
+		\node[below] at (-0.25,2) {$\theta_M $};
+		%\node[below left] at (0,0) {$(0,0)$};
+		%\node[below] at (4,0) {$(S_o^R,0)$};
+
+		% Línea vertical punteada en x = -1 y 5
+		\draw[dashed] (5,-3.) -- (5,5);
+		\draw[dashed] (-1,-3) -- (-1,5);
+
+
+		% Línea horizontal punteada en y=3
+		\draw[blue, dashed] (-3,3) -- (6.25,3);
+		\node[below] at (-.25,3.5) {$1/q$};
+
+		\draw[red, thick] (4,-2.5) -- (4,4);
+		\draw[red, thick] (0,-2.5) -- (0,4);
+
+		%\draw[dashed] (2,0) -- (2,2);
+		%\draw[dashed] (0,2) -- (2,2);
+
+	\end{tikzpicture}
+\end{center}
+
+When $f(\theta)$ is
+
+\begin{figure}[h!] % [h!] indica aquí, puede ser t=top, b=bottom, p=page
+	\centering
+	\includegraphics[width=0.4\textwidth]{q_p_delt_posit_h_posit_2}
+	\caption{$q>0$, $\Delta>0$,  $\varepsilon>2 \theta_0$, $ f(\theta_2)  <  S_o^*  <  f(\theta_1) $}
+	%	\label{q_p_delt_posit_h_posit_2}
+\end{figure}
+
+
+The representation $\theta$ vs $S_o$  is
+
+
+
+\begin{center}
+
+	\begin{tikzpicture}[scale=0.75]
+		% Ejes
+		\draw[->] (-3,0) -- (6.5,0) node[anchor=north] {$S_o$};
+		\draw[->] (0,-2) -- (0,7.5) node[anchor=east] {$\theta$};
+
+		% Parábola hacia abajo: y = a*x*(S_o^R - x)
+		\draw[thick, blue, domain=-0.9:4.9, samples=100]
+		plot(\x,{0.5*\x*(4 - \x)}) node at (3,1.8) {$\Gamma$};
+
+		%elipse
+		\draw[thick,blue] (2,3) ellipse [x radius=1.5, y radius=0.6];
+
+		%hiperbolas
+		\draw[domain=-2.75:-1.25,smooth,variable=\x,blue,thick]
+		plot ({\x},{ -0.5/( \x +1)+4 });
+
+
+		\draw[domain=5.25:6.5,smooth,variable=\x,blue,thick]
+		plot ({\x},{ 0.5/( \x -5)+4 });
+		%plot ({\x},{(1.75)*(\x+2.75)^2 + 3});
+
+		%   \node at (3,1.8) {$\Gamma$};
+
+		% Etiquetas de los puntos
+		\node[below left] at (0,0) {$0$};
+		\node[below] at (4,0) {$S_o^R$};
+		%\node[below] at (2,0) {$\dfrac{S_o^R}{2}$};
+		\node[below] at (-0.25,2) {$\theta_M $};
+		%\node[below left] at (0,0) {$(0,0)$};
+		%\node[below] at (4,0) {$(S_o^R,0)$};
+
+		% Línea vertical punteada en x = -1 y 5
+		\draw[dashed] (5,-3.) -- (5,6);
+		\draw[dashed] (-1,-3) -- (-1,6);
+
+
+		% Línea horizontal punteada en y=4
+		\draw[blue, dashed] (-3,4) -- (6.25,4);
+		\node[below] at (-.25,4.5) {$1/q$};
+
+		\draw[red, thick] (4,-2.5) -- (4,5);
+		\draw[red, thick] (0,-2.5) -- (0,5);
+
+		%\draw[dashed] (2,0) -- (2,2);
+		%\draw[dashed] (0,2) -- (2,2);
+
+	\end{tikzpicture}
+\end{center}
+
+and the $f(\theta)$ graph
+\begin{figure}[h!] % [h!] indica aquí, puede ser t=top, b=bottom, p=page
+	\centering
+	\includegraphics[width=0.45\textwidth]{q_p_delt_posit_h_posit_3}
+	\caption{$q>0$, $\Delta>0$,  $\varepsilon>2 \theta_0$, $ f(\theta_2)    <  f(\theta_1)   <  S_o^* $}
+	\label{q_pos_delt_posit_varep_2theta_f}
+\end{figure}
+
+has the $\theta$ vs $S_o$ representation
+
+
+\begin{center}
+
+	\begin{tikzpicture}[scale=0.75]
+		% Ejes
+		\draw[->] (-3,0) -- (6.5,0) node[anchor=north] {$S_o$};
+		\draw[->] (0,-2) -- (0,7.5) node[anchor=east] {$\theta$};
+
+		% Parábola hacia abajo: y = a*x*(S_o^R - x)
+		\draw[thick, blue, domain=-1:1, samples=100]
+		plot(\x,{0.5*\x*(4 - \x)}) ;
+		\draw[thick, blue, domain=3:5, samples=100]
+		plot(\x,{0.5*\x*(4 - \x)}) node at (3,1.8) {$\Gamma$};
+
+		% Parte izquierda inferior
+		\draw[thick, blue, samples=50, domain=180:130.87]
+		plot ({2. + 1.5*cos(\x)}, {2.2 - 1*sin(\x)});
+		% Parte superior completa
+		\draw[thick, blue, samples=100, domain=0:180]
+		plot ({2. + 1.5*cos(\x)}, {2.2 + 1*sin(\x)});
+		% Parte derecha inferior
+		\draw[thick, blue, samples=50, domain=45.13:0]
+		plot ({2. + 1.5*cos(\x)}, {2.2 - 1*sin(\x)});
+
+		%hiperbolas
+		\draw[domain=-2.75:-1.25,smooth,variable=\x,blue,thick]
+		plot ({\x},{ -0.5/( \x +1)+4 });
+
+
+		\draw[domain=5.25:6.5,smooth,variable=\x,blue,thick]
+		plot ({\x},{ 0.5/( \x -5)+4 });
+		%plot ({\x},{(1.75)*(\x+2.75)^2 + 3});
+
+		%   \node at (3,1.8) {$\Gamma$};
+
+		% Etiquetas de los puntos
+		\node[below left] at (0,0) {$0$};
+		\node[below] at (4,0) {$S_o^R$};
+		%\node[below] at (2,0) {$\dfrac{S_o^R}{2}$};
+		\node[below] at (-0.25,1.7) {$\theta_1 $};
+		\node[below] at (-0.25,2.55) {$\theta_2 $};
+		\node[below] at (-0.25,3.4) {$\theta_M $};
+		%\node[below left] at (0,0) {$(0,0)$};
+		%\node[below] at (4,0) {$(S_o^R,0)$};
+
+		% Línea vertical punteada en x = -1 y 5
+		\draw[dashed] (5,-3.) -- (5,6);
+		\draw[dashed] (-1,-3) -- (-1,6);
+
+
+		% Línea horizontal punteada en y=4
+		\draw[blue, dashed] (-3,4) -- (6.25,4);
+		\node[below] at (-.25,4.5) {$1/q$};
+
+		\draw[red, thick] (4,-2.5) -- (4,5);
+		\draw[red, thick] (0,-2.5) -- (0,5);
+
+		%\draw[dashed] (2,0) -- (2,2);
+		%\draw[dashed] (0,2) -- (2,2);
+
+	\end{tikzpicture}
+\end{center}
+
+
+
+We determined the phase diagram of the system
+\[
+	\left\{
+	\begin{array}{ccc}
+		S_o '   & = & F_1(S_o,\theta) \\
+		\theta' & = & F_2(S_o,\theta)\end{array}
+	\right.
+\]
+
+for all the $f(\theta)$ graphs.
+
+Where
+
+\[   F_1(S_o, \theta ) = \dfrac{b_3 S_y^L \Phi (\theta)  (S_o^R-S_o) S_o   }{ S_o^R (c-a_3)  }   \]
+
+and
+\[ F_2(S_o,\theta) = \dfrac{   b_1     \left(  1  -    q \theta        \right) \Phi (\theta)     S_y^L      \left[   S_o^2 -   S_o^R  \,  S_o    + f(\theta)       \right] }{ (c - a_1 S_o)     S_o^R }   .   \]
+
+We found two cases
+
+\begin{itemize}
+	\item  If  $\dfrac{c}{a_1} < S_o^R$
+	      \begin{itemize}
+		      \item $OC : (0,0)  $ is a repulsor.
+		      \item   $FC : (S_o^R,0)  $ is an  atractor.
+	      \end{itemize}
+	      which coincides with the eigenvalue analysis.
+
+
+	\item If  $   S_o^R   < \dfrac{c}{a_1}$
+	      \begin{itemize}
+		      \item $OC : (0,0)  $ is a repulsor.
+		      \item   $FC : (S_o^R,0)  $ is a   saddle.
+	      \end{itemize}
+	      which coincides with the eigenvalue analysis.
+\end{itemize}
+
+\subsection*{Numerical analysis}
+In our case
+
+\begin{itemize}
+	\item $q= 6.54979 \times 10^{-5}  $
+	\item  $\Delta=298.866$
+	\item  $\varepsilon = 20.5465$
+	\item 	$\theta_0 =1.5 $
+	\item $S_o^R=1$
+	\item $  S_o^* = \dfrac{  ( S_o^R)^2 }{4}  = \dfrac{1}{4}=0.25$
+	\item $ f(\theta_1)= 0.000000157446 $
+	\item $ f(\theta_2)= 0.000000000210 $
+\end{itemize}
+So
+
+$q>0$, $\Delta>0$,  $\varepsilon>2 \theta_0$, $ f(\theta_2)    <  f(\theta_1)   <  S_o^* $
+
+this correspond to the case \ref{num_case}
+
+Besides
+\[  \dfrac{c}{a_1} = 15235.9  \]
+
+Then the flux diagram
+
+
+\begin{center}
+
+	\begin{tikzpicture}[scale=1.2]
+		% Ejes
+		\draw[->] (-3,0) -- (9,0) node[anchor=north] {$S_o$};
+		\draw[->] (0,-2) -- (0,7.5) node[anchor=east] {$\theta$};
+
+		% Parábola hacia abajo: y = a*x*(S_o^R - x)
+		\draw[thick, blue, domain=-1:1, samples=100]
+		plot(\x,{0.5*\x*(4 - \x)}) ;
+		\draw[thick, blue, domain=3:5, samples=100]
+		plot(\x,{0.5*\x*(4 - \x)}) node at (3,1.8) {$\Gamma$};
+
+		% Parte izquierda inferior
+		\draw[thick, blue, samples=50, domain=180:130.87]
+		plot ({2. + 1.5*cos(\x)}, {2.2 - 1*sin(\x)});
+		% Parte superior completa
+		\draw[thick, blue, samples=100, domain=0:180]
+		plot ({2. + 1.5*cos(\x)}, {2.2 + 1*sin(\x)});
+		% Parte derecha inferior
+		\draw[thick, blue, samples=50, domain=45.13:0]
+		plot ({2. + 1.5*cos(\x)}, {2.2 - 1*sin(\x)});
+
+		%hiperbolas
+		\draw[domain=-2.75:-1.25,smooth,variable=\x,blue,thick]
+		plot ({\x},{ -0.5/( \x +1)+4 });
+
+
+		\draw[domain=5.9:8.5,smooth,variable=\x,blue,thick]
+		plot ({\x},{ 0.5/( \x -5.7)+4 });
+		%plot ({\x},{(1.75)*(\x+2.75)^2 + 3});
+
+		%   \node at (3,1.8) {$\Gamma$};
+
+		% Etiquetas de los puntos
+		\node[below left] at (0,0) {$0$};
+		\node[below] at (4,0) {$S_o^R$};
+		%\node[below] at (2,0) {$\dfrac{S_o^R}{2}$};
+		\node[below] at (-0.25,1.7) {$\theta_1 $};
+		\node[below] at (-0.25,2.55) {$\theta_2 $};
+		\node[below] at (-0.25,3.4) {$\theta_M $};
+		%\node[below left] at (0,0) {$(0,0)$};
+		%\node[below] at (4,0) {$(S_o^R,0)$};
+
+		% Línea vertical punteada en x = -1 y 5.75
+		\draw[dashed] (5.75,-3.) -- (5.75,6.5);
+		\draw[dashed] (-1,-3) -- (-1,6.5);
+
+		% Línea vertical punteada en S_o=c/a_1
+		\draw[red, dashed] (6.85,-1.75) -- (6.85,6.25);
+		\node[below] at (6.85,-1.75) {$S_o=\dfrac{c}{a_1}$};
+
+
+		% Línea horizontal punteada en y=4
+		\draw[blue, dashed] (-3,4) -- (8.5,4);
+		\node[below] at (-.25,4.5) {$1/q$};
+
+		\draw[red, thick] (4,-2.5) -- (4,5);
+		\draw[red, thick] (0,-2.5) -- (0,5);
+
+		%\draw[dashed] (2,0) -- (2,2);
+		%\draw[dashed] (0,2) -- (2,2);
+
+
+
+		% Diagram arrows
+		%A_1
+		\draw[->,line width=2pt, shorten >=2pt](-0.3,0.25) -- (-0.9,0.25);
+		\draw[->,line width=2pt, shorten >=2pt] (-.3,0.25) -- (-0.3,0.85);
+
+		\draw[->,line width=2pt, shorten >=2pt] (-0.45,-0.75) -- (-0.45,-0.2);
+		\draw[->,line width=2pt, shorten >=2pt](-0.45,-0.75) -- (-0.95,-0.75);
+
+		%A_2
+		\draw[->,line width=2pt, shorten >=2pt](0.2,1.25) -- (0.7,1.25);
+		\draw[->,line width=2pt, shorten >=2pt] (0.2,1.25) -- (0.2,1.75);
+
+		%	\draw[->,line width=2pt, shorten >=2pt](2.5,2.25) -- (3,2.25);
+		%	\draw[->,line width=2pt, shorten >=2pt] (2.5,2.25) -- (2.5,2.75);
+
+		\draw[->,line width=2pt, shorten >=2pt](2.0,3.45) -- (2.5,3.45);
+		\draw[->,line width=2pt, shorten >=2pt] (2.0,3.45) -- (2.0,3.85);
+
+
+		\draw[->,line width=2pt, shorten >=2pt](3.45,1.35) -- (3.95,1.35);
+		\draw[->,line width=2pt, shorten >=2pt] (3.45,1.35) -- (3.45,1.85);
+
+
+
+		%A_3
+		\draw[->,line width=2pt, shorten >=2pt](4.55,0.7) -- (4.05,0.7);
+		\draw[->,line width=2pt, shorten >=2pt] (4.55,0.7) -- (4.55,1.5);
+
+		\draw[->,line width=2pt, shorten >=2pt](8.3 ,1.3) -- (7.8 ,1.3);
+		\draw[->,line width=2pt, shorten >=2pt] (8.3 ,1.3) -- (8.3 ,0.6);
+
+		\draw[->,line width=2pt, shorten >=2pt](8.3 ,-0.7) -- (7.8 ,-0.7);
+		\draw[->,line width=2pt, shorten >=2pt] (8.3 ,-0.7) -- (8.3 ,-1.5);
+
+
+		\draw[->,line width=2pt, shorten >=2pt](6.55,0.7) -- (6.05,0.7);
+		\draw[->,line width=2pt, shorten >=2pt] (6.55,0.7) -- (6.55,1.5);
+
+		\draw[->,line width=2pt, shorten >=2pt](6.55,-1.5) -- (6.05,-1.5);
+		\draw[->,line width=2pt, shorten >=2pt] (6.55,-1.5) -- (6.55,-0.7);
+
+
+
+
+
+		%U_1
+		\draw[->,line width=2pt, shorten >=2pt] (-0.15,-1.75) -- (-0.15,-2.35);
+		\draw[->,line width=2pt, shorten >=2pt](-0.15,-1.75) -- (-0.65,-1.75);
+
+
+
+		%U_2^l
+		\draw[->,line width=2pt, shorten >=2pt] (0.95,0.75) -- (0.95,0.2);
+		\draw[->,line width=2pt, shorten >=2pt](0.95,0.75) -- (1.45,0.75);
+
+		\draw[->,line width=2pt, shorten >=2pt] (0.95,-0.5) -- (0.95,-1.25);
+		\draw[->,line width=2pt, shorten >=2pt](0.95,-0.5) -- (1.45,-0.5);
+
+		%U_2^r
+		\draw[->,line width=2pt, shorten >=2pt](2.5,1.25) -- (3,1.25);
+		\draw[->,line width=2pt, shorten >=2pt] (2.5,1.25)
+		-- (2.5,0.5);
+
+		\draw[->,line width=2pt, shorten >=2pt](3.25,-0.35) -- (3.75,-0.35);
+		\draw[->,line width=2pt, shorten >=2pt] (3.25,-0.35)
+		-- (3.25,-1.05);
+
+
+		% U_3
+		\draw[->,line width=2pt, shorten >=2pt] (4.4,-1.15) -- (4.4,-1.65);
+		\draw[->,line width=2pt, shorten >=2pt](4.4,-1.15) -- (4.01,-1.15);
+
+
+
+		%over 1/q similar to U
+		\draw[->,line width=2pt, shorten >=2pt] (-0.15,4.95) -- (-0.15,4.45);
+		\draw[->,line width=2pt, shorten >=2pt](-0.15,4.95) -- (-0.65,4.95);
+
+
+		\draw[->,line width=2pt, shorten >=2pt] (0.95,4.95) -- (0.95,4.45);
+		\draw[->,line width=2pt, shorten >=2pt](0.95,4.95) -- (1.45,4.95);
+
+		\draw[->,line width=2pt, shorten >=2pt](2.5,4.95) -- (3,4.95);
+		\draw[->,line width=2pt, shorten >=2pt] (2.5,4.95) -- (2.5,4.45);
+
+		\draw[->,line width=2pt, shorten >=2pt] (4.8,4.95) -- (4.8,4.45);
+		\draw[->,line width=2pt, shorten >=2pt](4.8,4.95) -- (4.41,4.95);
+
+		\draw[->,line width=2pt, shorten >=2pt] (6.3,4.55) -- (6.3,4.05);
+		\draw[->,line width=2pt, shorten >=2pt](6.3,4.55) -- (5.81,4.55);
+
+
+
+		\draw[->,line width=2pt, shorten >=2pt] (6.5,5.45) -- (6.5,5.95);
+		\draw[->,line width=2pt, shorten >=2pt](6.5,5.45) -- (6.1,5.45);
+
+
+
+		\draw[->,line width=2pt, shorten >=2pt] (7.9,5.95) -- (7.9,5.45);
+		\draw[->,line width=2pt, shorten >=2pt](7.9,5.95) -- (7.51,5.95);
+
+
+		%ellipse  similar to under
+
+
+		\draw[->,line width=2pt, shorten >=2pt](1.75,2.75) -- (2.25,2.75);
+		\draw[->,line width=2pt, shorten >=2pt] (1.75,2.75) -- (1.75,2.25);
+
+
+
+
+
+	\end{tikzpicture}
+\end{center}
+
+According to the phase diagram we have
+\begin{itemize}
+	\item $OC : (0,0)  $ is a repulsor.
+	\item   $FC : (S_o^R,0)  $ is a saddle.
+\end{itemize}
+
+Let us analyze when system \eqref{ec35c}-\eqref{ec39c} possesses a solution satisfying limits \eqref{eq:limits} and \eqref{eq:Riemann_boundary}.
+\begin{theorem}
+	\label{teo4}
+	Assuming $c > a_1$ and $c > a_3$ then there exists a solution of system \eqref{ec35c}-\eqref{ec39c} satisfying the limits \eqref{eq:limits}, \eqref{eq:Riemann_boundary}.
+\end{theorem}
+
+\begin{theorem}
+	\label{t:domain}
+	Consider $c > a_1$, $c < a_2$, and $c > a_3$. The solution of system \eqref{ec35c}-\eqref{ec39c} satisfying the limits \eqref{eq:limits}, \eqref{eq:Riemann_boundary} with initial condition in the physical domain $S_o\in [0,1]$, $S_y\in [0,1]$, $\theta\in [0,\infty)$ stays inside this physical domain.
+\end{theorem}
+

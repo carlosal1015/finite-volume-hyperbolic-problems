@@ -1,0 +1,40 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'lol', 'out', 'pdf', 'run.xml', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'lol', 'out', 'run.xml', 'toc']
+% arara: --> }
+\input{preamble}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\input{introduction}
+\input{mathematicalmodel}
+\input{travellingwaveanalysis}
+\input{application}
+\input{discussions}
+% \appendix
+% \input{programs}
+% \input{references}
+\printbibliography
+\end{document}
