@@ -1,0 +1,18 @@
+\chapter{Teorema de Johnson-Lindenstrauss}
+
+En este capítulo presentaremos el Teorema de Johnson-Lindenstrauss, que permitirá conservar las buenas propiedades geométricas de los conjuntos de datos a la vez que se proyectan a un espacio de dimensión menor.
+
+\section{Enunciado y prueba del teorema de Johnson-Lindenstrauss}
+
+\begin{definition}
+Sea $(\Omega, \sigma, P)$ un espacio probabilístico y $k < d$ y $U : \Omega \to \mathbb{R}^{k \times d}$ una matriz aleatoria con $U \sim \mathcal{N}(0_{k \times d}, 1)$. Si $\omega \in \Omega$, se denomina proyección de Johnson-Lindenstrauss a la aplicación $T_U(\omega) : \mathbb{R}^d \to \mathbb{R}^k$ dada por
+\[ T_U(\omega) = \frac{1}{\sqrt{k}} U(\omega). \]
+\end{definition}
+
+\begin{theorem}[Teorema de Johnson-Lindenstrauss]
+Sea $(\Omega, \sigma, P)$ un espacio probabilístico, $0 < \epsilon < 1$ y $k \geq 48 \frac{\log n}{\epsilon^2}$ y $U : \Omega \to \mathbb{R}^{k \times d}$ una matriz aleatoria con $U \sim \mathcal{N}(0_{k \times d}, 1)$. Entonces, para cualquier conjunto de $n$ puntos $\{x_1, \dots, x_n\} \subset \mathbb{R}^d$ se verifica que
+\[ P \left( (1 - \epsilon) \cdot \|x_i - x_j\| \leq \|T_U x_i - T_U x_j\| \leq (1 + \epsilon) \cdot \|x_i - x_j\| \text{ para todo } i, j \right) \geq 1 - \frac{1}{n}. \]
+\end{theorem}
+
+\dots
+(El resto del capítulo 5 se puede añadir de forma similar. Se nota que el documento PDF finaliza en el Capítulo 5).

@@ -1,0 +1,39 @@
+Formato de trabajo Doctorado_Oswaldo
+1.Reducción de dimensionalidad y teorema de Johnson-Lindentrauss
+2.Una visión de la reducción de la dimensionalidad según Johnson-Lindentrauss
+3.Una propuesta de la reducción de la dimensión según Johnson-Lindentrauss
+4.El teorema de Johnson-Lindentrauss en el contexto de la dimensionalidad
+5.Disminución de la dimensionalidad a través de proyecciones aleatorias
+Autor: Fidel Jara Huanca
+1.Introducción
+2.Maldición de la dimensionalidad
+2.1Distribución normal multivariante: simulaciones y primeros resultados 
+2.2Distribución uniforme en hipercubos
+3.Distribución uniforme en la bola unidad en alta dimensión
+4.Distribución normal multivariante en alta dimensión
+5.Teorema de Johnson-Lindestrauss
+5.1El teorema de Johnson-Lindestrauss
+5.2Aplicaciones del teorema de Johnson-Lindestrauss
+6.Conclusiones
+A.Algunos resultados sobre la distribución normal
+B.Volumen de la unidad
+C.Programas
+Bibliografía
+
+1.Planteamiento del problema
+Describir, explicar el teorema de JL que se justifica en reducción de la dimensionalidad en el contexto de machine learning.
+2.Revisión bibliográfica
+Realizaremos un estudio acerca de
+2.1Maldición de la dimensionalidad
+2.2Distribución uniforme en la bola unidad en alta dimensión
+2.3Distrubición normal multivariante en alta dimensión
+usando el texto de curso.
+3.Desarrollo matemático
+3.1Teorema de la proyección aleatoria
+3.2Teorema de Johnson-Lindestrauss
+4.Experimentos numéricos en Python
+4.1Distorsión de las distancias proyectadas
+4.2Comprobación del teorema JL para distintos epsilon y k.
+4.3Efecto de la dimensionalidad en m-vecinos más próximos
+4.4Efecto de la dimensionalidad en m-medias.
+4.5Efectos de la dimensionalidad en LDA para separación y estimación paramétrica de distribuciones normales.

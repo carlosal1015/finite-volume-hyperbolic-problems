@@ -1,0 +1,3416 @@
+Capı́tulo 1
+Introducción
+Gran parte de los procedimientos clásicos en Análisis Multivariante de Datos (Peña
+2002; Izenman 2008) se basan en la hipótesis de normalidad multivariante. Estos procedimientos basados en normalidad son pioneros en Clasificación, tanto supervisada como
+no supervisada, y forman parte de pilares metodológicos sobre los que se asienta la Inteligencia Artificial, y en particular el Aprendizaje Automático o “Machine Learning”
+(Hastie, Tibshirani y Friedman 2009; Bishop 2006; James et al. 2014; Shalev-Shwartz
+y Ben-David 2014). Ası́, por ejemplo, el Análisis Discriminante Lineal (LDA por Linear
+Discriminant Analysis) supone que las observaciones a clasificar han sido generadas por
+distribuciones normales multivariantes con matrices de varianzas-covarianzas iguales. Este
+tipo de suposiciones permite clasificar nuevas observaciones mediante la estimación de los
+parámetros asociados a las distribuciones normales multivariantes que modelan estas clases. Si bien estos métodos gozan de buenas propiedades de optimalidad cuando se verifican
+esas hipótesis de normalidad, se ha comprobado que estos métodos se enfrentan a serias
+dificultades cuando la dimensión d, por ejemplo, el número de variables discriminantes,
+crece. En este punto, cabe notar que las situaciones de alta dimensionalidad son más bien
+la regla que la excepción en la Ciencia de Datos moderna, debido a la omnipresencia de
+este tipo de datos (registro de señales de todo tipo, monitorización de imágenes y vı́deo,
+datos no estructurados traducidos a formatos tabulares de alta dimensionalidad, . . . ).
+Una de las dificultades que aparece al trabajar con la distribución normal multivariante
+en altas dimensiones es el gran número de parámetros asociados a todas las covarianzas
+entre variables a estimar. Esto hace que la distancia de Mahalanobis, como forma de medir
+“proximidades”, naturalmente asociada a la distribución normal multivariante, deje de
+ser operativa a nivel práctico cuando la dimensión d sea elevada. Suponer igualdad de
+varianzas y que las correlaciones entre variables son nulas simplifica el uso de la distancia
+de Mahalanobis al uso de distancias euclı́deas. Ası́, medir proximidades usando la simple
+distancia euclı́dea subyace en muchos e importantes métodos básicos en Ciencia de Datos,
+especialmente en métodos que podemos considerar de carácter “no paramétrico”. Un
+ejemplo bien conocido es el método de los m-vecinos, que asigna observaciones a clases
+según la clase mayoritaria entre las m observaciones más cercanas a la que se desea
+clasificar, dentro del espacio euclı́deo.
+Desgraciadamente, incluso trabajando en el caso simplificado del uso de distancias
+euclı́deas, gran parte de los métodos habituales en Ciencia de Datos resultan afectados
+por un bien conocido fenómeno de “espacio vacı́o” que aparece al incrementarse la di7
+
+mensionalidad de los problemas tratados. Este fenómeno de espacio vacı́o suele conocerse
+como la “maldición de la dimensionalidad”, término introducido por Richard Bellman en
+Bellman (1958), y que, de forma simplificada, es atribuible al crecimiento exponencial del
+volumen del espacio en el que se representan los datos cuando se añaden dimensiones. En
+este trabajo se formulará detalladamente este fenómeno de espacio vacı́o y se verá cómo
+el mismo impacta muy negativamente en muchas de las intuiciones de “baja dimensión”
+que sustentan muchas técnicas de análisis de datos básicas. Por ejemplo, en trabajos como Aggarwal, Hinneburg y Keim (2001) se muestra cómo, para la clasificación mediante
+m-vecinos más próximos en espacios de muy alta dimensión, sucede que los datos son
+tan escasos a nivel “local” que la noción de cercanı́a o vecino más próximo pierde todo
+su significado. Adicionalmente, las técnicas basadas en suposiciones de normalidad, aun
+suponiendo estructuras simplificadas de varianzas-covarianzas, dejan de discriminar correctamente entre observaciones debido a un fenómeno de concentración de medida que
+se tratará también a lo largo de este trabajo.
+No obstante, a pesar de estas dificultades, en este trabajo se verá que, bajo ciertas
+condiciones bastante generales, la alta dimensión puede, en ocasiones, facilitar sorprendentemente algunos análisis de datos. Por ejemplo, en espacios de alta dimensión, los
+vectores aleatorios asociados al muestreo de distribuciones normales tienden a ser prácticamente ortogonales entre sı́, y sus normas euclı́deas se concentran notablemente en torno
+a sus valores esperados, situándose con alta probabilidad alrededor de dichos valores.
+Este fenómeno de concentración de medida en alta dimensionalidad, debidamente aprovechado, simplifica algunas tareas estadı́sticas como, por ejemplo, la separación de clases
+y permite el establecimiento del Teorema de Johnson-Lindenstrauss. Es por ello que en
+algunos contextos se hace referencia también al concepto de “blessing” (o bendición) de
+la dimensionalidad, en oposición a la maldición de la dimensionalidad.
+Un ejemplo de la aplicabilidad práctica de estos fenómenos de concentración de medida
+y la ortogonalidad en espacios de alta dimensión es el Teorema de Johnson-Lindenstrauss.
+Este teorema, formalizado por primera vez en Johnson y Lindenstrauss (1984), establece
+que cualquier conjunto de n puntos en un espacio Rd puede proyectarse a un espacio de
+dimensión mucho menor sin sacrificar demasiada información en términos de distancias
+euclı́deas. Esta proyección, realizada mediante una matriz aleatoria de tamaño k × d,
+preserva aproximadamente las distancias euclı́deas entre todos los pares de puntos del
+conjunto original. A lo largo de este trabajo se desarrollarán todos los resultados previos necesarios para llegar a probar ese Teorema de Johnson-Lindenstrauss. Este resultado justifica teóricamente el uso de técnicas de reducción de dimensionalidad que no
+requieren asumir ninguna estructura particular sobre los datos. En particular, resulta de
+gran ayuda en métodos como la búsqueda de m-vecinos más próximos y otros métodos
+intrı́nsecamente basados en distancias euclı́deas. En virtud de este teorema, al reducir la
+dimensionalidad mediante estas proyecciones aleatorias, se logra que las distancias entre
+las observaciones se conserven dentro de márgenes pequeños, lo cual permite, por ejemplo,
+buscar el vecino más cercano en un subespacio de dimensión menor. De esta forma, se
+mitiga parcialmente el problema de alta dimensionalidad en contextos de alta complejidad
+en los datos, donde otras técnicas tı́picas de reducción de la dimensionalidad, como por
+ejemplo las Componentes Principales, resultarı́an completamente inviables o muy costosas
+computacionalmente.
+La estructura de este trabajo es la siguiente. En el Capı́tulo 2 se presenta la maldi8
+
+ción de la dimensionalidad, comenzando con simulaciones sobre la distribución normal
+multivariante (Sección 2.1) y la distribución uniforme en hipercubos (Sección 2.2). En el
+Capı́tulo 3 se estudia la distribución uniforme en la bola unidad en alta dimensión. En
+el Capı́tulo 4 se analiza el comportamiento de la distribución normal multivariante en
+espacios de gran dimensión, profundizando en las ideas de concentración introducidas en
+el capı́tulo anterior. Finalmente, en la Sección 5.1 del Capı́tulo 5 se introduce el Teorema
+de Johnson-Lindenstrauss y en la Sección 5.2 se muestran algunas de sus aplicaciones,
+incluyendo su uso en algoritmos como los de m vecinos más próximos, m-medias y LDA
+para clasificación y estimación paramétrica en distribuciones normales.
+Los resultados que se presentan a lo largo de este trabajo están basados principalmente
+en Wegner (2024) a la vez que se han consultado otras fuentes y elaborado argumentos
+propios. Asimismo, se ha implementado código estadı́stico que permite justificar empı́ricamente varios de estos resultados y facilitar su comprensión y alcance.
+
+9
+
+Capı́tulo 2
+Maldición de la dimensionalidad
+El término “maldición de la dimensionalidad” fue acuñado por Richard Bellman en
+1961, en el contexto de la programación dinámica Bellman (1958), para describir cómo
+ciertos problemas se vuelven intratables a medida que aumenta el número de variables
+involucradas. En particular, Bellman observó que el volumen del espacio crece exponencialmente con la dimensión, lo que implica que la cantidad de datos necesaria para cubrirlo de manera significativa también crece de forma exponencial. Esto no solo dificulta
+los cálculos, sino que también debilita la capacidad de generalizar patrones o “aprender”
+de los datos a partir de conjuntos de entrenamiento finitos.
+En este capı́tulo se abordarán algunos fenómenos que emergen en espacios de alta
+dimensión y que resultan contraintuitivos respecto a la experiencia habitual cuando se
+trabaja en espacios de dimensión baja o moderada. Veremos cómo cambian las nociones
+de distancia, cercanı́a, ortogonalidad y concentración de la medida y cómo estos efectos
+motivan la necesidad de adaptar nuestras herramientas y modelos cuando nos enfrentamos
+a datos en espacios de alta dimensión.
+En este capı́tulo se trabajará sobre el espacio Rd dotado de la σ-álgebra de Borel denotada por β d , junto con la medida de Lebesgue en Rd que se denotará por ℓd . Igualmente,
+se denotará por 0d = (0, . . . , 0) ∈ Rd y por Id a la matriz identidad de tamaño d × d.
+
+2.1.
+
+Distribución normal multivariante: simulaciones
+y primeros resultados
+
+En Ciencia de Datos y en Análisis Multivariante de Datos, la distribución normal
+multivariante juega un papel clave. A continuación se define dicha distribución y la forma
+de su densidad, en los casos no degenerados.
+Definición 2.1. Sea (Ω, σ, P ) un espacio probabilı́stico. Un vector aleatorio X se dice
+que tiene una distribución Gaussiana o normal d-variante si para todo vector a ∈ Rd
+se tiene que la variable aleatoria real aT X : Ω → R sigue una distribución normal univariante (aT X serı́an todas las posibles combinaciones lineales de las coordenadas del
+vector aleatorio X). En particular, si asumimos un vector de medias µ ∈ Rd y una matriz de covarianzas Σ, siendo una matriz d × d y definida positiva, entonces diremos que
+11
+
+X ∼ N (µ, Σ) y se puede ver que
+Z
+
+ 1
+1
+⊤ −1
+(x
+−
+µ)
+Σ
+(x
+−
+µ)
+dx, para A ∈ β d .
+exp
+−
+P (X ∈ A) =
+(2π)1/2 |Σ|1/2 A
+2
+A la hora de analizar cómo afecta la dimensionalidad al comportamiento de la normal multivariante, comenzaremos con un pequeño estudio de algunas propiedades básicas
+que ayudan a comprender su comportamiento al aumentar la dimensión d. Para ello, el
+siguiente teorema revisa el valor esperado de la norma de X y la varianza de la misma, si
+X ∼ N (0d , Id ).
+Proposición 2.2. Si X ∼ N (0d , Id ) entonces, para todo d ∈ N, se verifica:
+(i) E(∥X∥2 ) = d y Var(∥X∥2 ) = 2d
+(ii) E(∥X∥ −
+
+√
+1
+d) ≤ √
+d
+
+(iii) Var(∥X∥) ≤ 2
+Demostración. Para probar (i) se usa la expresión de la norma euclı́dea de X = (X1 , . . . , Xd )⊤
+como ∥X∥2 = X12 + · · · + Xd2 , que junto a la linealidad de la esperanza, lleva a
+E(∥X∥2 ) = E(X12 + · · · + Xd2 ) = E(X12 ) + · · · + E(Xd2 ).
+Si X ∼ N (0d , Id ) entonces Xl ∼ N (0, 1) para l = 1, . . . , d (véase la Proposición A.8) y,
+por tanto
+E(∥X∥2 ) = E[(X1 − E(X1 ))2 ] + · · · + E[(Xd − E(Xd ))2 ] = Var(X1 ) + · · · + Var(Xd ) = d.
+(2.1)
+Por otro lado, la independencia de las variables Xl , l = 1, ..., d (recuérdese que Σ = Id y
+que la incorrelación es equivalente a la independencia para distribuciones normales), nos
+garantiza que
+
+
+Var(∥X∥2 ) = Var(X12 ) + · · · + Var(Xd2 ) = d Var(X12 ) = d E(X14 ) − E 2 (X12 ) .
+Siguiendo el argumento en (2.1) sabemos que E(X12 ) = 1. Por otro lado, el momento de
+orden cuatro de una distribución normal estándar es E(X14 ) = 3, ya que se sabe que la
+kurtosis de cualquier variable aleatoria distribuida según una normal univariante es igual
+a 3 y el simple uso de
+Kurtosis(X1 ) = 3 =
+
+E(X14 ) − 0
+E(X14 ) − E 4 (X1 )
+=
+.
+Var(X1 )2
+1
+
+En el Apéndice A.1 se demuestra que la Kurtosis de cualquier distribución normal univariante es 3. Por tanto, (i) queda probado dado que
+
+
+Var(∥X∥2 ) = d E(X14 ) − E 2 (X12 ) = d · (3 − 1) = 2d.
+12
+
+(2.2)
+
+Para probar (ii) debemos tener en cuenta lo probado en (i) y el siguiente desarrollo
+algebraico:
+√
+√
+√
+2∥X∥ d − 2d
+∥X∥2 − ∥X∥2 + 2∥X∥ d − 2d
+√
+√
+=
+=
+∥X∥ − d =
+2 d
+2 d
+√
+√
+∥X∥2 − d ∥X∥2 + 2∥X∥ d − d
+∥X∥2 − d (∥X∥ − d)2
+√
+√
+√
+√
+=
+−
+=
+−
+=
+2 d
+2 d
+2 d
+2 d
+√
+√
+∥X∥2 − d (∥X∥ − d)2 (∥X∥ + d)2
+∥X∥2 − d
+(∥X∥2 − d)2
+√
+√
+√
+√
+√
+=
+−
+·
+=
+− √
+2 d
+2 d
+(∥X∥ + d)2
+2 d
+2 d · (∥X∥ + d)2
+Si renombramos los términos como
+(∥X∥2 − d)2
+∥X∥2 − d
+√
+√
+√ ,
+y Bd =
+Ad =
+2 d
+2 d · (∥X∥ + d)2
+entonces
+|E(∥X∥ −
+
+√
+
+d)| = |E(Ad ) − E(Bd )|.
+
+Por lo probado en (2.1) se tiene que E(Ad ) = 0, para todo d ∈ N, y como Bd ≥ 0 para
+todo d ∈ N entonces
+
+
+√
+E (∥X∥2 − d)2
+Var(∥X∥2 )
+1
+0 ≤ E(∥X∥ − d) = E(Bd ) ≤
+=
+=√ ,
+3/2
+3/2
+2d
+2d
+d
+donde se ha usado (2.2).
+Finalmente, para probar (iii) se hace uso de (ii) y de las propiedades de la varianza,
+que dicen que Var(X + c) = Var(X) para cualquier constante c ∈ R. Por tanto,
+√
+√ 
+√
+
+Var(∥X∥) = Var(∥X∥ − d) ≤ E (∥X∥ − d)2 = 2 d · E(Bd ) ≤ 2,
+donde se ha usado (2.2) y parte de la prueba de (ii).
+Nota 2.3. Por lo demostrado en el apartado (ii) del teorema
+anterior, lo que podemos
+√
+deducir es que para d suficientemente
+grande,
+E(∥X∥
+−
+d)
+es
+prácticamente 0, luego
+√
+se deduce que E(∥X∥) ≈ d. Además, como la varianza de la norma de X al cuadrado
+está acotada, entonces podemos aplicar la desigualdad de Chebyshev para asegurar que la
+distribución de ∥X∥ se concentra alrededor de su media. Es decir, dado k > 0 se tiene que
+2
+Var(∥X∥)
+≤ 2.
+2
+k
+k
+Esto nos asegura que la probabilidad de que ∥X∥ se aleje de su media en k unidades está
+acotada por k22 .
+√
+√
+Por la Proposición 2.2 se sabe que |E(∥X∥ − d)|
+≤
+1/
+d y se desea proporcionar
+√
+una cota para la probabilidad de que ∥X∥ se aleje de d en más de ε > 0. Para ello, se
+puede escribir
+√
+√
+P (|∥X∥ − d| ≥ ε) = P (|∥X∥ − E(∥X∥) + E(∥X∥) − d| ≥ ε) ≤
+√
+≤ P (|∥X∥ − E(∥X∥)| + |E(∥X∥) − d| ≥ ε) ≤
+√
+≤ P (|∥X∥ − E(∥X∥)| ≥ ε − |E(∥X∥) − d|) ≤
+
+
+1
+≤ P |∥X∥ − E(∥X∥)| ≥ ε − √
+,
+d
+P (|∥X∥ − E(∥X∥)| ≥ k) ≤
+
+13
+
+√
+y para ε > 1/ d se tiene
+P
+
+
+
+∥X∥ −
+
+√
+
+
+d ≥ε ≤ 
+
+2
+1 2
+ε− √
+d
+
+2
+A medida que d crece, la cota anterior para la probabilidad se
+√ acerca cada vez más a 2/ε .
+Luego para ε fijo, la probabilidad de que ∥X∥ se aleje de d se mantiene acotada y no
+crece.
+Por tanto, para cualquier X es de esperar que los valores de ∥X∥ estén cerca de
+√
+d y esta aproximación mejora conforme se incrementa d.
+
+Para comprobar experimentalmente los resultados del Teorema 2.2 y las consecuencias
+de la Nota 2.3, podemos simular mediante R una muestra aleatoria simple de la distribución
+N (0d , Id ) para diferentes valores de d y ver si se cumplen los resultados teóricos que se
+han demostrado.
+Ası́, se han calculado resúmenes estadı́sticos de la norma euclı́dea de n realizaciones
+aleatorias de la distribución normal d-variante para distintos valores de la dimensión d.
+En concreto, se ha generado una muestra aleatoria simple de tamaño n = 8000 del vector
+aleatorio X ∼ N (0d , Id ), es decir, se han considerado X1 , . . . , X8000 variables aleatorias
+independientes con Xi = xi ∼ N (0d , Id ) para i = 1, . . . , 8000 y se han calculado las
+normas euclı́deas ∥x1 ∥, . . . , ∥x8000 ∥ de dichas observaciones. Los gráficos de la Figura 2.1
+muestran cómo la mayorı́a de realizaciones de la distribución
+√ N (0d , Id ) se sitúan muy
+próximas a la esfera en Rd centrada en el origen de radio d y, a su vez, en la Tabla
+2.1 se ve que la dispersión de las normas euclı́deas no parece aumentar a medida que
+se incrementa la dimensión d. Variando
+√ la dimensión d en este experimento, la hipótesis
+que confirmamos es que E(∥X∥) ≈ d y que Var(∥X∥) está acotada para todo d, si
+X ∼ N (0d , Id ). En la Tabla 2.1 se han recogido las medias y varianzas
+muestrales de las
+√
+normas de los individuos de la muestra, ası́ como el valor de d, para cada una de las
+dimensiones d. Es decir, se han calculado los valores:
+8000
+8000
+2
+1 X
+1 X
+2
+∥x8000 ∥ =
+∥xi ∥ y S8000 =
+∥xi ∥ − ∥x8000 ∥ ,
+8000 i=1
+8000 i=1
+2
+donde ∥x8000 ∥ denota la media muestral y S8000
+la varianza muestral de las normas de la
+muestra aleatoria simple.
+
+∥x
+√ 8000 ∥
+d
+2
+S8000
+
+d=1 d=10
+0.8024 3.0953
+1.0000 3.1623
+0.3524 0.4807
+
+d=100 d=500 d=1000 d=10000
+9.9717 22.3490 31.6176 100.0008
+10.0000 22.3607 31.6228 100.0000
+0.4889 0.4795
+0.4956
+0.5004
+
+Tabla 2.1: Resúmenes estadı́sticos de las normas de una muestra de tamaño n = 8000 de
+normales multivariantes Xi ∼ N (0d , Id ) dependiendo de la dimensión d.
+Estos resultados ilustran el comportamiento de la normal multivariante al aumentar
+la dimensión d, observando comportamientos no necesariamente demasiado “intuitivos”.
+Por ejemplo, se ha probado √
+que la distribución normal multivariante está concentrada
+en torno a la esfera de radio d, mientras que la distribución normal univariante estaba
+14
+
+concentrada en un entorno del cero de amplitud 1 con una probabilidad de 0.6826. No
+obstante, sı́ se observa que la varianza de las normas euclı́deas se mantiene acotada, como
+en el caso univariante, independiente de la dimensión d.
+
+Figura 2.1: Estimación de la función de densidad de ∥X∥ si X es una distribución N (0d , Id )
+para d = 1, 10, 100, 500, 1.000, 10.000.
+Siguiendo el mismo tipo de argumentos, tiene sentido establecer relaciones entre la
+15
+
+posición relativa de dos variables aleatorias independientes X e Y tales que X ∼ N (0d , Id )
+e Y ∼ N (0d , Id ) mediante ∥X − Y ∥. El resultado análogo a la proposición anterior es el
+siguiente:
+Proposición 2.4. Si X ∼ N (0d , Id ) e Y ∼ N (0d , Id ) son vectores aleatorios independientes, entonces se verifica:
+(i) E(∥X − Y ∥2 ) = 2d y Var(∥X − Y ∥2 ) = 8d
+(ii) |E(∥X − Y ∥ −
+
+√
+2
+2d)| ≤ √
+2d
+
+(iii) Var(∥X − Y ∥) ≤ 4
+Demostración. La demostración de (ii) y (ii) se realiza tal como se hizo en la prueba
+de la Proposición 2.2. En cuanto a (i), se puede presentar una demostración alternativa
+teniendo en cuenta que la distribución χ2k con k ∈ N grados de libertad se define como la
+suma del cuadrado de k variables con distribución Xl ∼ N1 (0, 1) independientes. Es decir,
+Z = X12 + · · · + Xk2 sigue una distribución chi-cuadrado, que denotamos como Z ∼ χ2k .
+Es conocido que el valor esperado de una distribución Z ∼ χ2k satisface E(Z) = k y que
+2
+2
+2
+Var(Z) = 2k. Teniendo
+√ en cuenta que ∥X − Y ∥ = (X1 − Y1 ) + · · · + (Xk − Yk ) y que
+Xl − Yl ∼ N (0 − 0, 12 + 12 ) (recordando las condiciones de independencia asumidas), se
+llega a
+Xl − Yl
+√
+∼ N1 (0, 1), para l = 1, . . . , d,
+2
+por lo que
+∥X − Y ∥2
+∼ χ2d ,
+2
+y, consecuentemente, E(∥X − Y ∥2 ) = 2d y Var(∥X − Y ∥2 ) = 8d, como se deseaba probar.
+√
+Nota 2.5. Siguiendo lo expuesto en la Nota√2.3, como E(∥X − Y ∥2 ) − 2d se acerca a 0
+para d grande, se tiene que E(∥X − Y ∥2 ) ≈ 2d. Además, como la varianza está acotada,
+se puede probar que ∥X − Y ∥√se concentra alrededor de su media y acotar la probabilidad
+de que ∥X − Y ∥ se aleje de 2d en más de ε por
+P
+
+
+
+∥X − Y ∥ −
+
+
+√
+2d ≥ ε ≤ 
+
+4
+2 2
+ε− √
+2d
+
+.
+
+Juntando las proposiciones 2.2 y 2.4, se garantiza que E(∥X∥2 ) = d y E(∥X − Y ∥2 ) =
+2d, luego cabe preguntarse si podemos esperar que X e Y sean vectores aleatorios ortogonales (independientes en el caso de normalidad) en virtud del argumento geométrico que
+proporciona el Teorema de Pitágoras en la Figura 2.2.
+16
+
+Figura 2.2: Interpretación geométrica usando el Teorema de Pitágoras
+Trabajando en la dirección del último comentario, se puede probar lo siguiente:
+Proposición 2.6. Si X ∼ N (0d , Id ) e Y ∼ N (0d , Id ) son independientes y x ∈ Rd
+entonces se cumple:
+
+
+(i) E ⟨X, Y ⟩ = 0 y Var ⟨X, Y ⟩ = d .
+
+
+(ii) E ⟨X, x⟩ = 0 y Var ⟨X, x⟩ = ∥x∥2 .
+Demostración. Para la demostración de (i), se usa la definición habitual del producto
+escalar en Rd como
+⟨X, Y ⟩ = X1 Y1 + · · · + Xd Yd ,
+se tiene que
+d
+d
+X
+ X
+E ⟨X, Y ⟩ =
+E(Xl Yl ) =
+E(Xl )E(Yl ) = 0,
+l=1
+
+l=1
+
+(por la independencia de Xl e Yl ). Aprovechando igualmente las propiedades de independencia tenemos para la varianza que,
+d
+ X
+
+Var ⟨X, Y ⟩ =
+Var(Xl Yl ) = d Var(X1 Y1 ) = d E(X12 )E(Y12 ) − E 2 (X1 )E 2 (Y1 )
+l=1
+
+= d E(X12 − E(X1 )) E(Y12 − E(Y1 )) = d Var(X1 )Var(Y1 ) = d
+Para probar
+(ii) podemos repetir el mismo razonamiento y demostrar fácilmente que
+
+E ⟨X, x⟩ = 0 y, para la varianza, basta recurrir de nuevo a la independencia obteniendo
+que
+d
+d
+d
+X
+X
+ X
+2
+Var ⟨X, x⟩ =
+Var(Xl xl ) =
+xl Var(Xl ) =
+x2l = ∥x∥2 .
+l=1
+
+l=1
+
+l=1
+
+
+Nota 2.7. Aunque se ha probado que E ⟨X, Y ⟩ = 0, a la hora de comprobar hasta qué
+punto X e Y son ortogonales para d suficientemente grande, tenemos problemas por el
+17
+
+
+hecho de que la varianza Var ⟨X, Y ⟩ no esté acotada, lo que nos hubiera permitido usar
+directamente la desigualdad de Chebyshev, como en las notas 2.3 y 2.5.
+Sin embargo,
+si consideramos un punto x ∈ Rd fijo, se ha obtenido en (ii) que
+
+Var ⟨X, x⟩ = ∥x∥2 , que sı́ es finita. Por tanto, usando el argumento de la desigualdad
+ de
+Chebyshev, se puede probar que ⟨X, x⟩ se concentra alrededor de su media E ⟨X, x⟩ = 0
+y, por tanto, cualquier observación es de esperar que sea ortogonal al punto prefijado
+d
+x ∈ R√
+. Esto nos sugiere que, como las observaciones
+de ∥X∥ están sobre una esfera de
+√
+radio d centrada en 0d , si elegimos x = ( d, 0, . . . , 0) ∈ Rd entonces que las coordenadas del vector
+aleatorio X estén situadas con alta probabilidad sobre el ecuador de la bola
+√
+de radio d. Es decir, la coordenada X1 de X es pequeña (y este argumento es simétrico
+para cualquier Xl con l = 1, . . . , d). Esta intuición será formalizada en el Capı́tulo 4.
+
+2.2.
+
+Distribución uniforme en hipercubos
+
+Definición 2.8. Sea (Ω, σ, P ) un espacio probabilı́stico. Decimos que X sigue una distribución uniforme en B ∈ β d si
+P (X ∈ A) =
+
+ℓd (A ∩ B)
+,
+ℓd (B)
+
+R
+donde ℓd (C) = C dx denota la medida de Lebesgue del conjunto C para C ∈ β d . Una
+variable con esta distribución será denotada por X ∼ U(B).
+Nótese que es importante que tanto el conjunto B sobre el que se define la distribución
+como los sucesos A que se utilizan sean medibles.
+En lo que sigue, se estudiará la distribución uniforme sobre algunos conjuntos especialmente interesantes, como son los hipercubos, y se verá que, al igual que con la distribución
+normal multivariante, se tienen algunas propiedades interesantes, y no necesariamente demasiado intuitivas, al incrementar la dimensión d.
+Definición 2.9. Se define el hipercubo d-dimensional centrado en 0d como el conjunto
+Hd = [−1, 1]d ⊂ Rd y la bola unidad centrada en 0d con radio unitario será denotada
+como B(0d , 1) ⊂ Rd . Estos conjuntos son claramente medibles para la σ-álgebra de Borel
+β d.
+Hay varias propiedades interesantes sobre los hipercubos que, en cierta medida, resultan sorprendentes. Por ejemplo, si se consideran los 2d vértices de la forma (v1 , ..., vd ), con
+vl tomando valores 1 y −1 para l = 1, . . . , d,√y se calcula
+la norma de cualquiera de estos
+√
+vértices se observa que todos tienen norma d con d → ∞. Es decir, cuanto más incremente la dimensión d, más alejados del origen 0d se encuentran los vértices del hipercubo.
+Sin embargo, este hecho no es suficiente como para garantizar que la esperanza de la norma de cualquier X ∼ U([−1, 1]d ) crezca con la dimensión d, como ocurrı́a en el caso de la
+distribución normal multivariante. De hecho, si se consideran los centros de las caras del
+hipercubo, es decir, los puntos el = (0, . . . , 0, 1, 0 . . . , 0) y −el (un 1 o −1 en la posición i
+y 0 en el resto de las posiciones)
+se tiene ∥el − (−el )∥ = 2, mientras que la distancia de el
+√
+a el′ (o a −el′ ) es igual a 2 si l ̸= l′ , luego algunas distancias se mantienen invariantes
+con la dimensión. Esto quiere decir que, conforme aumenta la dimensión d, se evidencia la
+presencia de picos sobre la superficie del hipercubo, mientras que los centros de las caras
+18
+
+se mantienen a distancia constante. En la Figura 2.3 se pueden ver estas propiedades en
+dimensión 2 y 3, donde se ha inscrito la bola de radio 1 en el hipercubo correspondiente,
+mientras que la última representación corresponde a una versión idealizada del hipercubo
+en dimensión d alta denominada “Equidnaedro”, que puede resultar de ayuda para intuir
+sus caracterı́sticas.
+
+Figura 2.3: Representación de un hipercubo en 2 y 3 dimensiones y de un “Equidnaedro”
+como una versión idealizada del hipercubo para un d elevado
+Puesto que estas distancias parecen no comportarse de manera intuitiva en alta dimensión, se puede esperar que el volumen de Hd , y por tanto, las zonas de alta probabilidad
+para la distribución uniforme, tampoco se comporten de una forma demasiado intuitiva.
+De hecho, según se incrementa la dimensión, se puede probar que hay una alta concentración del volumen del hipercubo (masa de probabilidad de la distribución uniforme
+asociada) cerca de sus caras. Denotando
+Fε,d = Hd \ (1 − ε)Hd = {x ∈ Hd } \ {(1 − ε) · x : x ∈ Hd },
+se tiene
+ℓd (Fε,d ) = ℓd (Hd ) − ℓd ((1 − ε)Hd ) = 2d − (2(1 − ε))d .
+Se probará un resultado más general que este en el Lema 3.2. En términos de proporciones,
+se tendrı́a que
+ℓd (Fε,d )
+d→∞
+= 1 − (1 − ε)d −−−→ 1,
+ℓd (Hd )
+para cualquier 0 < ε < 1. Lo que se acaba de probar es que, al incrementar la dimensión,
+se tiene la mayor concentración de masa de probabilidad en un entorno de la frontera del
+hipercubo. Este hecho contrasta con la baja probabilidad que se proporciona a una bola
+B(0d , 1) inscrita en el hipercubo, para la que se verifica
+d
+
+π2
+ℓd (B(0d , 1)) = d
+.
+Γ( 2 + 1)
+
+(2.3)
+
+Este resultado será probado en el Apéndice B. Usando órdenes de infinitud se obtiene
+fácilmente que
+lı́m ℓd (B(0d , 1)) = 0.
+d→∞
+
+Para evitar el hecho de que el volumen del hipercubo [−1, 1]d no esté acotado, es decir,
+que suceda que
+lı́m ℓd ([−1, 1]d ) = lı́m 2d = ∞,
+d→∞
+
+d→∞
+
+19
+
+se trabaja con el hipercubo [−1/2, 1/2]d , de tal forma que si X ∼ U ([−1/2, 1/2]d ) y
+C ⊂ [−1/2, 1/2]d entonces
+P (X ∈ C) = ℓd (C),
+y, consecuentemente,
+ d
+
+
+d
+1
+π2
+1
+= lı́m ℓd (B(0d , 1/2)) = lı́m
+lı́m P ∥X∥ ≤
+= 0.
+d
+d→∞
+d→∞ Γ( + 1)
+d→∞
+2
+2
+2
+
+(2.4)
+
+La Figura 2.3 hace una representación esquemática del aspecto del hipercubo de lado
+unidad y la esfera de radio 1/2 inscrita en él. También, se ha calculado mediante R el
+volumen de la d-hiperesfera B(0d , 12 ) al cambiar la dimensión d y se han recogido estos
+datos en la Tabla 2.2. Por otro lado, si se considera
+lı́m P (X ∈
+/ [−1/2 + ε, 1/2 − ε]d ) = lı́m 1 − (1 − 2ε)d = 1,
+
+d→∞
+
+d→∞
+
+concentrándose, de nuevo, la probabilidad en los bordes del hipercubo y no concentrándose
+para nada en las proximidades del 0d . Estos resultados muestran el tipo de comportamiento contraintuitivo que ya veı́amos para la distribución normal multivariante. Nótese que
+se entiende por “proximidades” a estar a una distancia menor a 1/2, lo que se traduce en
+el problema de “espacio vacı́o” descrito en el Capı́tulo 1 de Introducción.
+Hipercubo d-dimensional
+centrado de lado 1
+
+Figura 2.4: Sección de una bola de radio 1/2 inscrita en un hipercubo de lado unidad en
+dimensión d.
+En el caso genérico de un hipercubo centrado en el 0d de lado L, su volumen será Ld ,
+que coincide con el valor 1 si L = 1, tiende a infinito si L > 1 o decrece hacia 0 si L < 1.
+No obstante, los razonamientos anteriores son también válidos porque podemos escribir
+ℓd (B(0d , L2 ))
+Ld · ℓd (B(0d , 12 ))
+1
+=
+1 1 d = ℓd (B(0d , 2 )).
+L L d
+d
+L · ℓd ([− 2 , 2 ] )
+ℓd ([− 2 , 2 ] )
+
+(2.5)
+
+Luego, según se incrementa la dimensión, la probabilidad de que las observaciones de
+una distribución uniforme en el hipercubo se encuentren en un entorno del origen tiende
+a cero.
+20
+
+Dimensión Volumen
+1 1.000000
+2 0.785400
+3 0.523600
+4 0.308430
+5 0.164490
+6 0.080750
+7 0.036910
+8 0.015850
+9 0.006440
+10 0.002490
+11 0.000920
+12 0.000330
+13 0.000110
+14 0.000040
+15 0.000010
+Tabla 2.2: Volumen de la esfera de radio 1/2 al cambiar d.
+Estas ideas se pueden formalizar a resultados asintóticos. En los trabajos Anderssen
+y Bloomfield (1975) y Anderssen, Brent et al.p
+(1976) se demuestra que si X ∼ U([0, 1]d ),
+E(∥X∥) se comporta asintóticamente como d/3, aunque su expresión exacta solo se
+conoce para pequeños valores de d. Este comportamiento se asemeja al de la distribución
+normal multivariante (recuérdese el Teorema 2.2). Siguiendo el razonamiento anterior,
+para el hipercubo [−1/2, 1/2]d , se demuestra en Bailey, Borwein y Crandall (2007) que
+d
+E(∥Y ∥) = 1/2 E(∥X∥)
+p si Y ∼ U([−1/2, 1/2] ) y, entonces, E(∥Y ∥) se comporta asintóticamente como 1/2 d/3.
+Para justificar empı́ricamente estos comentarios se ha simulado en R n = 8000 realizaciones aleatorias de la distribución uniforme en [−1/2, 1/2]d para distintos valores de
+d. Los gráficos de la Figura 2.5 muestran
+cómo las observaciones de ∥Y ∥ se encuentran,
+p
+aproximadamente, a distancia 1/2· d/3 del origen y, a su vez, la dispersión de las mismas
+no aumenta conforme se incrementa la dimensión. La Tabla 2.3 recoge la media y varianza
+muestral de las observaciones ası́ como el valor esperado para E(∥Y ∥) y la diferencia entre
+este y la media muestral.
+d=1 d=10 d=100 d=500 d=1000 d=10000
+Media muestral
+0.2493 0.9018 2.8829 6.4536
+9.1288
+28.8669
+p
+1/2 · d/3 0.2887 0.9129 2.8868 6.4550
+9.1287
+28.8675
+Varianza muestral 0.0208 0.0173 0.0166 0.0166
+0.0165
+0.0169
+Tabla 2.3: Media y varianza muestral de la distribución uniforme en hipercubos para
+distintos valores de d
+Además, en los artı́culos Bailey, Borwein y Crandall (2007) y Robbins y Bolis (1978),
+se generaliza el resultado anterior para√∥X − Y ∥ si X,p
+Y ∼ U([−1/2, 1/2]d ), probando que
+E(∥X − Y ∥) está acotada entre
+√ 1/2 · d / 3 y 1/2 · d/6. Esto demuestra que E(∥X −
+Y ∥) tiende a infinito cuando d / 3 → ∞, extendiéndose el carácter contraintuitivo que
+21
+
+Figura 2.5: Aproximación a la función de densidad de ∥X∥ si X es una distribución
+U([−1/2, 1/2]d ) para d = 1, 10, 100, 500, 1.000, 10.000
+
+22
+
+ya se demostró para la distancia entre dos variables aleatorias independientes N (0d , Id )
+en el Teorema 2.4). Por último, las propiedades de independencia de X e Y y que sus
+coordenadas Xl , Yl tengan media 0 permiten demostrar que E(⟨X, Y ⟩) = 0 para X, Y ∼
+U([−1/2, 1/2]d ). De esta manera, se ve que el comportamiento de la distribución uniforme
+en hipercubos reproduce de alguna forma lo visto para la distribución normal para altas
+dimensiones.
+En esta sección hemos probado teóricamente y comprobado experimentalmente cómo
+dos de las distribuciones más importantes en Estadı́stica se ven afectadas al aumentar considerablemente la dimensión d. Los resultados obtenidos evidencian un comportamiento
+inusual en alta dimensión, donde las regiones de alta probabilidad cambian, las distancias aumentan y los vectores tienden a ser ortogonales. Todo esto lleva al bien conocido
+fenómeno de “espacio vacı́o”, que subyace en la “maldición de la dimensionalidad”, y hace
+que conceptos como utilizar “observaciones más próximas”, en problemas de aprendizaje
+supervisado y no supervisado sea, al menos, cuestionable.
+
+23
+
+Capı́tulo 3
+Distribución uniforme en la bola
+unidad en alta dimensión
+Como hemos demostrado en el Capı́tulo 2, a medida que se incrementa la dimensión
+del espacio, ciertos fenómenos geométricos y probabilı́sticos empiezan a manifestarse de
+manera sistemática, como se ha visto en los Teoremas 2.2, 2.4 y 2.6. Uno de los fenómenos
+que resultaará más relevante en el contexto del análisis de datos de alta dimensión será
+el fenómeno de concentración de la medida. Este fenómeno describe cómo, en espacios
+métricos de alta dimensión, la mayorı́a de las medidas de probabilidad se agrupan en torno
+a ciertas regiones especı́ficas del espacio. En este capı́tulo introduciremos formalmente
+este fenómeno a través del estudio de la distribución uniforme en la bola unidad de Rd ,
+que constituye una de las distribuciones más sencillas e importantes para observar esa
+concentración de medida.
+Previamente a presentar los resultados más importantes en este capı́tulo, empezaremos
+presentando un lema técnico que extiende uno de los resultados vistos para distribuciones
+uniformes en hipercubos.
+Definición 3.1. Se dice que un conjunto B ⊆ Rd es equilibrado si para todo z ∈ B se
+tiene que µz ∈ B cuando |µ| < 1. Es decir, µB ⊆ B donde µB = {µz : z ∈ B} y
+|µ| < 1. Por ejemplo, las bolas centradas en el origen o los hipercubos serı́an conjuntos
+equilibrados.
+Adicionalmente, dado un conjunto B ⊂ Rd medible y equilibrado, llamamos la εcáscara de B al conjunto
+B ε = B \ (1 − ε)B.
+De tal forma que B ε es la parte de B que dista menos que ε de su frontera.
+Lema 3.2 (Lema de concentración superficial de medida). Dado un conjunto E ⊂ Rd
+medible y equilibrado y ε > 0 fijo, se tiene
+ℓd (E ε )
+→ 1, cuando d → ∞.
+ℓd (E)
+Demostración. Dado que E es equilibrado, podemos considerar el conjunto (1 − ε)E =
+{(1 − ε) · x : x ∈ E}, contenido en E y también medible, por serlo E, para todo ε > 0.
+25
+
+Aplicando el cambio de variable dado por el difeomorfismo ϕ : (1 − ε)E → E mediante
+ϕ(yi ) = yi /(1 − ε) = xi cuyo jacobiano es | det(Jϕ )| = 1/(1 − ε)d , se cumple que
+Z
+Z
+
+ℓd (1 − ε)E =
+dy1 · · · dyd = (1 − ε)d dx1 · · · dxd = (1 − ε)d ℓd (E),
+(1−ε)E
+
+E
+
+y, consecuentemente,
+
+ℓd (E) − ℓd (1 − ε)E
+ℓd (E ε )
+=
+= 1 − (1 − ε)d .
+ℓd (E)
+ℓd (E)
+Si se usa la desigualdad 1 − x ≤ e−x , válida para todo x ∈ R, se llega a que
+ℓd (E ε )
+d→∞
+= 1 − (1 − ε)d ≥ 1 − e−εd −−−→ 1,
+ℓd (E)
+para todo ε > 0 fijo.
+En particular, con este lema, se ha probado que, para d suficientemente grande, una
+gran proporción de la masa de probabilidad de una distribución U(B(0d , 1)) se concentra
+cerca de la frontera de la B(0d , 1). Además, este efecto de concentración se acrecienta
+conforme se incrementa la dimensión d. Al aplicar el Lema 3.2 para ε = d1 se tiene que
+la d1 -cáscara de B(0d , 1) recoge una proporción de volumen del 1 − (1 − d1 )d . Además, tal
+y como vimos en (2.3), el volumen de la bola unidad tiende a cero conforme aumenta la
+dimensión d.
+Existen más propiedades de la distribución U(B(0d , 1)) interesantes. Se probará que,
+para d suficientemente grande, el volumen de B(0d , 1) está concentrado no solo en su εcáscara sino que también se concentra alrededor de su “ecuador”. Tal y como se demostró
+en la Nota 2.7, √
+si se elige como punto fijo de Rd el “polo norte” de una bola centrada
+en 0d de radio d y se generan observaciones aleatorias según la distribución normal
+multivariante en Rd , es de esperar que estos sean√ortogonales al punto fijo predefinido,
+luego estarı́an situados sobre el ecuador de B(0d , d).
+Para hacer riguroso el argumento previo habrı́a que probar que la mayorı́a del volumen
+de la bola unidad se concentra alrededor de su ecuador, es decir,
+√ en una banda de amplitud
+pequeña alrededor de su “ecuador”, por ejemplo, |x1 | ≤ 1/ d (como ası́ se obtendrı́a si se
+pudiese aplicar la desigualdad de Chebyshev desde la Nota 2.7). Esto será probado en el
+Lema 3.4 para la banda de B(0d , 1) comprendida entre los planos x1 = ±ε cuando d ≥ 3,
+para ε > 0 suficientemente pequeño. Previamente expondremos una desigualdad que será
+útil en la demostración.
+Lema 3.3 (Desigualdad de Bernoulli). Sea x ≤ 1 y r ≥ 1 o r ≤ 0, entonces se cumple
+(1 − x)r ≥ 1 − rx,
+La desigualdad de Bernoulli es un resultado bien conocido, basado en la convexidad
+de la función (1 − x)r y su desarrollo de Taylor de primer orden en torno al 0.
+Para el siguiente resultado es necesario definir previamente los conjuntos H = {x ∈
+d
+R : x1 ≥ 0} y Eε = {x ∈ Rd : |x1 | ≤ ε}, comúnmente denominados semiespacios.
+26
+
+Figura 3.1: Representación de la banda ecuatorial y los hemisferios de B(0d , 1)
+Lema 3.4 (Lema de concentración ecuatorial). Dado d ≥ 3 y ε > 0, si Eε ∩ B(0d , 1) es la
+región de B(0d , 1) comprendida entre los planos x1 = ε y x1 = −ε (véase la Figura 3.1)
+se cumple que
+
+
+ε2 (d−1)
+2
+−
+2
+ℓd (B(0d , 1))
+·e
+ℓd (Eε ∩ B(0d , 1)) ≥ 1 − √
+ε d−1
+Demostración. Lo primero que se comprobará es que para ε ≥ 1 el resultado es trivial.
+En ese caso, como Eε ∩ B(0d , 1) = {x ∈ B(0d , 1) ⊂ Rd : |x1 | ≤ ε} se tiene que B(0d , 1) ⊂
+Eε ∩ B(0d , 1) y usando la monotonı́a de la integral se cumple que ℓd (Eε ∩ B(0d , 1)) ≥
+ℓd (B(0d , 1)). Luego basta probar que la constante de la desigualdad del enunciado es
+positiva y menor o igual que 1. Por otro lado, como ε ≥ 1 y d ≥ 3 y la función e−x es
+decreciente y positiva, se tiene
+0 ≤ e−
+
+ε2 (d−1)
+2
+
+≤ e−1 ,
+
+y, también, se puede considerar la acotación
+√
+2
+0≤ √
+≤ 2.
+ε d−1
+Por tanto,
+√
+ε2 (d−1)
+2
+1≥c=1− √
+· e− 2 ≥ 1 − 2 · e−1 ≥ 0,
+ε d−1
+llevando a
+ℓd (Eε ∩ B(0d , 1)) ≥ c · ℓd (B(0d , 1)).
+
+(3.1)
+
+Luego, finalmente, basta probarlo para 0 < ε < 1. Por simetrı́a (véase la Figura 3.1),
+se observa que ℓd (Eε ∩ B(0d , 1)) = 2 ℓd (H ∩ Eε ∩ B(0d , 1)).
+Por tanto, se puede deducir que
+ℓd (Eε ∩ B(0d , 1)) 2 ℓd (H ∩ Eε ∩ B(0d , 1))
+=
+=
+ℓd (B(0d , 1))
+2 ℓd (H ∩ B(0d , 1))
+ℓd (H ∩ B(0d , 1)) − ℓd (H ∩ Eε ∩ B(0d , 1))
+=
+=
+ℓd (H ∩ B(0d , 1))
+ℓd (H ∩ Eε ∩ B(0d , 1))
+=1 −
+ℓd (H ∩ B(0d , 1))
+27
+
+.
+
+(3.2)
+
+Con este razonamiento, se ve que bastarı́a demostrar que al menos una c fracción (para
+c en 3.1) del volumen del hemisferio superior satisface que x1 ≤ ε. Para ello se probará
+que la proporción del volumen de H ∩ Eε ∩ B(0d , 1) sobre el volumen de H ∩ B(0d , 1)
+tiende a cero calculando una cota superior del volumen de ℓd (H ∩ Eε ∩ B(0d , 1)) y una
+cota inferior para el volumen de ℓd (H ∩ B(0d , 1)).
+En el cálculo del volumen de H ∩ Eε ∩ B(0d , 1) se usará el principio de Cavalieri, de
+tal forma que, para cada x1 ∈ [ε, 1], la x1 -sección de H ∩ Eε ∩ B(0d , 1), p
+que se denotará
+por Dx1 , será una bola centrada en cero en dimensión d − 1 y de radio 1 − x21 puesto
+que
+Dx1 ={(x2 , . . . , xd ) ∈ Rd−1 : (x1 , . . . , xd ) ∈ H ∩ Eε ∩ B(0d , 1)} =
+={(x2 , . . . , xd ) ∈ Rd−1 : ∥(x1 , . . . , xd )∥ ≤ 1} =
+q
+
+
+={y ∈ Rd−1 : x21 + ∥y∥2 ≤ 1} = B 0d−1 , 1 − x21 ⊂ Rd−1 .
+Luego,
+Z 1
+ℓd (H ∩ Eε ∩ B(0d , 1)) =
+
+Z 1
+ℓd−1 (Dx1 ) dx1 =
+
+Zε 1
+=
+
+q
+
+
+ℓd−1 B 0d−1 , 1 − x21 dx1 =
+
+ε
+
+q
+
+ℓd−1
+1 − x21 · B(0d−1 , 1) dx1 =
+
+Zε 1
+
+
+d−1
+(1 − x21 ) 2 · ℓd−1 B(0d−1 , 1) dx1 =
+ε
+Z 1
+
+d−1
+= ℓd−1 B(0d−1 , 1) ·
+(1 − x21 ) 2 dx1 .
+
+=
+
+(3.3)
+
+ε
+
+Para encontrar una cota superior se usa que 1 − x ≤ e−x , luego:
+Z 1
+
+d−1
+(1 − x21 ) 2 dx1 ≤
+
+ε
+
+Z 1
+
+2
+
+d−1
+
+(e−x1 ) 2 dx1
+
+ε
+
+y ahora como x1 ≥ ε entonces xε1 ≥ 1 luego se puede multiplicar la integral anterior por
+esta cantidad manteniendo la desigualdad y, entonces:
+Z 1
+(e
+ε
+
+−x21
+
+)
+
+d−1
+2
+
+Z 1
+−1
+2 d−1
+(e ) x1 dx1 =
+−(d − 1) · x1 · (e−x1 ) 2 dx1 =
+ε(d − 1) ε
+ε
+h 2 d−1 iε
+ε2 (d−1)
+−1 h −x2 ( d−1 ) i1
+1
+1
+2
+=
+e
+=
+e−x ( 2 ) ≤
+e− 2
+ε(d − 1)
+ε(d − 1)
+ε(d − 1)
+ε
+1
+(3.4)
+
+x1
+1
+dx1 =
+ε
+ε
+
+Z 1
+
+−x21
+
+d−1
+2
+
+Por tanto, juntando (3.3) y (3.4) obtenemos que:
+ℓd (H ∩ Eε ∩ B(0d , 1)) ≤
+
+
+ε2 (d−1)
+1
+e− 2 · ℓd−1 B(0d−1 , 1) .
+ε(d − 1)
+
+(3.5)
+
+Ahora falta acotar inferiormente el volumen en dicho hemisferio. En realidad, el volumen de la región del hemisferio por debajo de cualquier plano x1 = a para 0 < a < 1 ya
+28
+
+1
+es una cota inferior de todo el volumen. En particular, si se considera a = √d−1
+se tiene
+que:
+Z 1
+q
+
+
+2
+ℓd−1 B 0d−1 , 1 − x1 dx1 ≥
+ℓd (H ∩ B(0d , 1)) =
+0
+
+
+≥ℓd−1 B(0d−1 , 1)
+
+Z √1
+
+d−1
+
+d−1
+
+(1 − x21 ) 2 dx1 ,
+
+(3.6)
+
+0
+1
+1
+y si x1 ≤ √d−1
+entonces x21 ≤ d−1
+. Por lo cual, se puede seguir acotando inferiormente la
+última integral de (3.6) como
+
+Z √1
+
+d−1
+
+d−1
+(1 − x21 ) 2 dx1 ≥
+
+0
+
+Z √1
+
+d−1
+
+0
+
+(1 −
+
+1 d−1
+1
+1 d−1
+) 2 dx1 = (1 −
+) 2 ·√
+,
+d−1
+d−1
+d−1
+
+donde se puede usar la desigualdad de Bernoulli (Lema 3.3) ya que d−1
+≥ 1 si d ≥ 3.
+2
+Entonces se tiene
+(1 −
+
+1
+d−1
+1
+1
+1
+1 d−1
+) 2 ·√
+≥ (1 −
+·
+)· √
+= √
+.
+d−1
+2
+d−1
+d−1
+d−1
+2 d−1
+
+(3.7)
+
+Juntando (3.6) y (3.7) se ha obtenido una cota inferior para el volumen del hemisferio
+que está relacionada con el volumen de la bola unidad centrada en 0d−1 como se conseguı́a
+con la cota superior del volumen de H ∩ Eε ∩ B(0d , 1) de forma que:
+
+1
+ℓd (H ∩ B(0d , 1)) ≥ √
+· ℓd−1 B(0d−1 , 1) .
+2 d−1
+
+(3.8)
+
+Finalmente, con (3.5) y (3.8) se puede obtener una cota para la proporción de volumen
+de H ∩ B(0d , 1) que está recogida en H ∩ Eε ∩ B(0d , 1):
+
+ε2 (d−1)
+1
+−
+2
+e
+·
+ℓ
+B(0
+,
+1)
+d−1
+d−1
+ε2 (d−1)
+ℓd (H ∩ Eε ∩ B(0d , 1))
+2
+ε(d−1)
+−
+2
+
+√
+≤
+=
+·
+e
+√1
+ℓd (H ∩ B(0d , 1))
+·
+ℓ
+B(0
+,
+1)
+ε
+d
+−
+1
+d−1
+d−1
+2 d−1
+
+(3.9)
+
+Esto prueba que el volumen de H ∩ Eε ∩ B(0d , 1) tiende a cero para ε > 0 fijo cuando
+d → ∞ y juntando la desigualdad que se acaba de obtener con la relación obtenida en
+(3.2) se tiene que:
+ε2 (d−1)
+2
+ℓd (Eε ∩ B(0d , 1))
+≥1− √
+· e− 2 ,
+ℓd (B(0d , 1))
+ε d−1
+que es lo que se querı́a probar.
+Pese a que el resultado que se acaba de probar es muy poderoso en algunas situaciones,
+se debe tener cuidado con su correcta aplicación.
+Nota 3.5. Denotando la constante que aparece en (3.1) el Lema 3.4 por
+ε2 (d−1)
+2
+Cε,d = 1 − √
+· e− 2 ∈ (−∞, 1),
+ε d−1
+
+29
+
+d→∞
+
+se tiene que para ε > 0 fijo se ha visto que Cε,d −−−→ 1 y esta es la forma en la que el
+teorema debe interpretarse. Sin embargo, no es posible interpretar el Lema 3.4 fijando la
+ε→0
+dimensión d ya que, en ese caso, se cumple que Cε,d −−→ −∞. Si se considera ε > 0
+y la dimensión d fija, entonces la cota que se ha obtenido del Lema 3.4 solo es útil si
+Cε,d > 0 puesto que en cualquier otro caso se estarı́a acotando inferiormente el volumen
+de la banda Eε ∩ B(0d , 1) por una cantidad negativa, lo cual es trivial para la medida de
+√
+x2
+Lebesgue. De hecho, si se considera x = ε d − 1, la función f (x) = 1 − x2 e− 2 tiene una
+raı́z x0 en el intervalo (1, 2) por el Teorema de Bolzano. Por lo tanto, si x > x0 entonces
+0
+y se tiene que Cε,d > 0. Lo que se acaba de ver es que, fijada la dimensión
+ε > √xd−1
+d, siempre se va a poder encontrar una banda de amplitud ε > 0 que verifique el Lema
+3.4. Por sı́ solo, esto no resulta útil a no ser que se pueda considerar ε arbitrariamente
+pequeño y, como se ha visto, esto solo sucede en una dimensión d suficientemente grande.
+Nótese que al aplicar el Lema 3.2 a B(0d , 1) se obtiene una cota para la proporción de
+volumen que recoge la ε-cáscara de B(0d , 1), y la constante 1 − e−εd , que es dependiente
+de ε y d pero siempre positiva. A su vez, la utilidad de este lema residı́a justo en que
+la mayor parte del volumen de la bola se encuentra recogido cerca de su frontera para
+dimensiones altas, lo cual está fundamentado en que la constante 1 − e−εd esté cerca de
+1 y, por tanto, para d grande es necesario que ε sea lo suficientemente pequeño como
+para que e−εd sea prácticamente 0 mientras que la distancia ε a la frontera de la bola
+se mantenga pequeña. Esta consideración, unida a la Nota 3.5, remarca la posibilidad
+de elegir ε lo suficientemente pequeño en casos en los que la dimensión d sea muy alta,
+proporcionando, de forma conjunta entre ambos lemas, resultados útiles en casos de alta
+dimensionalidad. Sin embargo, para dimensiones bajas los resultados que se obtienen al
+aplicar ambos lemas pueden no ser los deseados.
+El Lema 3.2, Si X es una variable aleatoria tal que X ∼ U(B(0d , 1)), prueba que
+P [ ∥X∥ ≥ 1 − ε ] =
+
+ℓd (B(0d , 1) \ B(0d , 1 − ε))
+≥ 1 − e−εd ,
+ℓd (B(0d , 1))
+
+(3.10)
+
+para cualquier ε > 0. El siguiente resultado extiende este tipo de afirmación a muestras
+aleatorias simples (m.a.s.) (variables aleatorias independientes e igualmente distribuidas)
+generadas desde X ∼ U(B(0d , 1)).
+Teorema 3.6. Dado un espacio probabilı́stico (Ω, σ, P ). Se considera, para n ≥ 2, una
+m.a.s. X1 , . . . , Xn con Xi : Ω → Rd para d ≥ 3 y tal que Xi ∼ U(B(0d , 1)). Entonces se
+cumple que
+h
+i
+2 log n
+1
+P ∥Xi ∥ ≥ 1 −
+para todo i = 1, . . . , n ≥ 1 − .
+d
+n
+n
+Demostración. El resultado es consecuencia del Lema 3.2 eligiendo ε = 2 log
+> 0, para
+d
+obtener
+2 log n
+ℓd (B(0d , 1 − ε))
+1
+P [∥Xi ∥ < 1 − ε ] =
+≤ e−εd = e− d ·d = 2 .
+ℓd (B(0d , 1))
+n
+
+El resultado final se deduce de la acotación
+"n 
+
+
+#
+[
+2 log n
+2 log n
+para todo i = 1, . . . , n = 1 − P
+∥Xi ∥ < 1 −
+P ∥Xi ∥ ≥ 1 −
+d
+d
+i=1
+30
+
+n
+X
+
+
+
+n
+X
+2 log n
+1
+1
+≥1−
+≥1−
+P ∥Xi ∥ < 1 −
+=1− .
+2
+d
+n
+n
+i=1
+i=1
+
+La importancia de este último teorema reside en comprobar que el resultado de una
+muestra aleatoria de tamaño n de una distribución uniforme en B(0d , 1) se sitúa con alta
+probabilidad cerca de la frontera de la bola, extendiendo lo que se habı́a probado para
+una única observación. De hecho, el resultado proporciona una cota para la probabilidad
+n
+de la
+de que todas las observaciones de la muestra se alejen más que la distancia 2 log
+d
+superficie de B(0d , 1). Y, puesto que esta distancia es variable según la dimensión d y
+el tamaño de la muestra n, es necesario hacer algunas consideraciones adicionales para
+poder aplicar correctamente el resultado.
+Nota 3.7. Las condiciones del Teorema 3.6 sobre d y n son necesarias, pues si d = 1
+entonces se calcuları́a P [∥Xi ∥ < 1−2 log n] lo cual es evidentemente igual a 1 (con n = 1)
+o igual a 0 (para n > 1) si Xi ∼ U((−1, 1)). En el caso de d = 2 entonces log 2 < 1 y
+n
+sea positiva. Puesto que este
+necesitarı́amos que n > 2 para que la cantidad 1 − 2 log
+d
+caso no es muy interesante al ser una dimensión lo suficientemente baja como para que
+otras técnicas estadı́sticas nos proporcionen resultados más precisos, nos podemos limitar
+al caso d ≥ 3 con n ≥ 2.
+n
+disminuye con la dimensión d si n es fijo, luego, para el mismo
+La cantidad 2 log
+d
+tamaño de muestra, cuanto mayor sea la dimensión sobre la que se esté trabajando, menor
+puede ser la distancia a la superficie que se considere para obtener la misma probabilidad.
+Sin embargo, la distancia aumenta logarı́tmicamente conforme aumenta el tamaño de
+la muestra n y si log n > d2 entonces el Teorema 3.6 carece de sentido, ya que ∥X∥
+es trivialmente siempre mayor o igual que 0. A su vez, para d fijo, la probabilidad es
+dependiente de 1/n luego esta mejorará conforme aumente el tamaño de la muestra n más
+n
+que estamos considerando.
+rápido de lo que empeorará la distancia a la superficie 2 log
+d
+En vista de estas consideraciones, es evidente que el Teorema 3.6 proporciona resultados valiosos cuando d sea grande y el tamaño muestral n sea moderadamente grande en
+n
+y 1 − n1 sean aproximadacomparación con d, de tal manera que las cantidades 1 − 2 log
+d
+mente 1.
+Teniendo ahora en cuenta el Teorema 3.4, nos interesa estudiar bajo qué condiciones
+cabe esperar que todo par de observaciones {Xi , Xi′ } extraı́das de una m.a.s. X1 , ..., Xn
+generada por una distribución con Xi ∼ U(B(0, 1)) sean aproximadamente ortogonales.
+Nótese que este resultado también mantiene conexiones con lo visto en la Proposición 2.6
+(y en la Nota 2.7) para el caso de distribuciones normales en alta dimensionalidad. El caso
+de una m.a.s. de la distribución uniforme en la bola unidad se presentará en el Teorema
+3.8.
+Teorema 3.8. Dado un espacio probabilı́stico (Ω, σ, P ). Se considera, para n ≥ 2, una
+m.a.s. X1 , . . . , Xn con Xi : Ω → Rd donde d ≥ 3 y tal que Xi ∼ U(B(0, 1)). Entonces se
+cumple que
+√
+
+
+6 log n
+1
+′
+′
+P |⟨Xi , Xi′ ⟩| ≤ √
+para todo par {i, i } con i ̸= i ≥ 1 − .
+(3.11)
+n
+d−1
+31
+
+Demostración.
+Sean X, Y ∼ U(B(0d , 1)) variables aleatorias independientes y se fija
+√
+6·log n
+√
+ε =
+. Sea ω ∈ Ω tal que X(ω) = x ̸= 0d . Se puede construir una base ord−1
+x
+, siguiendo el proceso de
+tonormal {u1 , . . . , ud } del espacio vectorial Rd con u1 = ∥x∥
+ortogonalización de Gram-Schmidt iniciado en u1 . Entonces, existirá una única aplicación
+lineal ortonormal f : Rd → Rd que convierte la base {u1 , . . . , ud } en la base estándar
+{e1 , . . . , ed } con el = (0, . . . , 1, . . . , 0) ∈ Rd , con un 1 en la posición l. Es decir, f (ul ) = el
+para l = 1, . . . , d. Como f es una aplicaciónlineal ortogonal
+que conserva productos es
+calares, se tiene |⟨X(ω), Y (ω)⟩| = |⟨f X(ω) , f Y (ω) ⟩| y, como X(ω) = x = ∥x∥ · u1 ,
+entonces
+
+
+
+|⟨X(ω), Y (ω)⟩| =|⟨f X(ω) , f Y (ω) ⟩| = |⟨∥x∥ · f (u1 ), f Y (ω) ⟩| =
+
+
+=∥x∥ · |⟨e1 , f Y (ω) ⟩| = ∥X(ω)∥ · |⟨e1 , f Y (ω) ⟩|.
+Dado que la esfera es invariante por transformaciones ortogonales, se tiene
+
+ ℓd ({y ∈ B(0d , 1) : |⟨e1 , f (y)⟩| > ε})
+=
+P |⟨e1 , f (Y )⟩| > ε =
+ℓd (B(0d , 1))
+ℓd ({f −1 (z) ∈ B(0d , 1) : |⟨e1 , z⟩| > ε})
+=
+=
+ℓd (B(0d , 1))
+ℓd ({(z1 , . . . , zd ) ∈ B(0d , 1) : |z1 | > ε})
+=
+,
+ℓd (B(0d , 1))
+y se puede usar ahora el Lema 3.4 para acotar esta probabilidad de la forma
+ε2 (d−1)
+
+ ℓd ({(z1 , . . . , zd ) ∈ B(0, 1) : |z1 | > ε})
+2
+· e− 2 ,
+P |⟨e1 , f (Y )⟩| > ε =
+≤ √
+ℓd (B(0, 1))
+ε d−1
+
+donde, si
+
+√
+6 · log n
+2
+ε= √
+y √
+≤ 1,
+6 · log n
+d−1
+
+se llega a
+ε2 (d−1)
+6·log n
+
+
+2
+2
+P |⟨e1 , f (Y )⟩| > ε ≤ √
+· e− 2 = √
+· e− 2 ≤ n−3 .
+6 · log n
+ε d−1
+
+(3.12)
+
+En realidad, la elección de la aplicación lineal ortonormal f depende de la elección
+inicial de ω ∈ Ω puesto que se necesita X(ω) ̸= 0. Para eliminar esta dependencia, se
+puede escribir
+
+
+P |⟨X, Y ⟩| > ε =P ({ω ∈ Ω : |⟨X(ω), Y (ω)⟩| > ε}) =
+
+= P ({ω ∈ Ω : ∥X(ω)∥ · |⟨e1 , f Y (ω) ⟩| > ε}) ≤
+
+1
+≤ P ({ω ∈ Ω : |⟨e1 , f Y (ω) ⟩| > ε}) ≤ 3 ,
+(3.13)
+n
+donde se ha usado la cota en (3.12) y que si X(ω) ∈ B(0d , 1) entonces ∥X(ω)∥ ≤ 1.
+Se está ahora en condiciones de repetir un razonamiento similar al de prueba
+del
+
+n
+Teorema 3.6, teniendo en cuenta que para una m.a.s. de tamaño n hay 2 pares de
+32
+
+productos escalares ⟨Xi , Xi′ ⟩, y que
+′
+
+P [ |⟨Xi , Xi′ ⟩| ≤ ε para todo i ̸= i ] =1 − P
+
+[
+
+
+
+
+|⟨Xi , Xi′ ⟩| > ε
+
+≥
+
+i̸=i′
+
+ 
+n 1
+n2 − n
+1
+≥1−
+≥
+1
+−
+≥1− .
+3
+3
+n
+n
+2 n
+
+Nota 3.9. El Teorema 3.8 depende, como es obvio, del tamaño de la muestra n y de
+la dimensión d, lo que produce cambios en la cota asociada de que la probabilidad de que
+⟨Xi , Xi′ ⟩ esté alejada de 0. Ese tipo de consideraciones son análogas a las formuladas en la
+Nota 3.7 para el Teorema 3.6. Si n = 2, el Teorema 3.8 acota inferiormente la probabilidad
+de que el producto escalar entre dos variables aleatorias ⟨X, Y ⟩ sea menor o igual que una
+constante con probabilidad 1/2, por lo que no parece que el resultado ası́ formulado tenga
+excesiva relevancia. No obstante, en la demostración del teorema, se prueba también que
+ε2 (d−1)
+2
+· e− 2 ,
+P [|⟨X, Y ⟩| ≤ ε ] ≥ 1 − √
+ε d−1
+
+para cualquier ε > 0. Por lo tanto, incluso para tamaños muestrales n reducidos, se puede
+mejorar la cota si d es fijo y hacer la acotación relevante, como fue ya explicado en la
+Nota 3.5.
+Combinando los teoremas 3.10 y 3.8, se deduce que para cualquier m.a.s X1 , ..., Xn , generada por una distribución con Xi ∼ U(B(0d , 1)), todas las observaciones se encuentran
+con gran probabilidad sobre la superficie de B(0d , 1) y son prácticamente ortogonales, ya
+X
+Xi
+, i′ ⟩ también verifican el Teorema 3.12. En
+que las parejas de productos escalares ⟨ ∥X
+i ∥ ∥Xi′ ∥
+vista de estas consideraciones, argumentos como los expuestos en la Nota 2.5 prueban
+intuitivamente que la distancia entre cualquier
+par de observaciones X, Y ∼ U(B(0d , 1))
+√
+dada por ∥X − Y ∥ debe ser próxima a 2. Este es el resultado que se presenta a continuación.
+Teorema 3.10. Dado un espacio probabilı́stico (Ω, σ, P ), si consideramos X, Y : Ω → Rd
+tal que X, Y ∼ U(B(0d , 1)), se cumple:
+P [ ∥X − Y ∥ −
+
+√
+ε2 (d−1)
+9
+2 ≤ ε ] ≥ 1 − 2d−εd/5 − √
+e− 36 ,
+ε d−1
+
+si 0 < ε < 1 y d ≥ 3.
+√
+√
+√
+Demostración.
+Se
+tiene
+que
+V
+=
+∥X
+−
+Y
+∥
++
+2
+≥
+2
+y
+que
+U
+V
+≥
+2 U si √
+U =
+√
+√
+√
+∥X − Y ∥ − 2 . Por tanto, U > ε si y solo si 2 U > 2 ε, implicando que U V > 2 ε.
+Entonces se tiene la siguiente contención de sucesos:
+
+
+
+√
+√
+√ 
+( ∥X − Y ∥ − 2 > ε) ⊂
+∥X − Y ∥ − 2 · ∥X − Y ∥ + 2 > ε ,
+y, la propiedad de monotonı́a de la probabilidad, garantiza
+
+
+√
+√  √ 
+√
+P ( ∥X − Y ∥ − 2 > ε) ≤ P
+∥X − Y ∥ − 2 · ∥X − Y ∥ + 2 > 2 ε . (3.14)
+33
+
+Ahora, escribiendo la probabilidad que aparece en el enunciado en términos de su suceso
+complementario y usando (3.14) se obtiene
+√
+√
+P [ ∥X − Y ∥ − 2 ≤ ε ] = 1 − P [ ∥X − Y ∥ − 2 > ε ] ≥
+√
+√ 
+√
+≥ 1 − P ∥X − Y ∥ − 2 · (∥X − Y ∥ + 2) > 2 ε =
+√ 
+= 1 − P ∥X − Y ∥2 − 2 > 2 ε =
+√
+√
+= P (− 2 ε < ∥X − Y ∥2 − 2 < 2 ε ) =
+√
+√
+= P (− 2 ε < ∥X∥2 + ∥Y ∥2 − 2 ⟨X, Y ⟩ − 2 < 2 ε ), (3.15)
+Y aquı́ es donde intervienen los Teoremas 3.2 y 3.8 al aparecer ∥X∥2 , ∥Y ∥2 y ⟨X, Y ⟩ en
+3.15.
+En primer lugar, se agrupan ∥X∥2 + ∥Y ∥2 − 2 ⟨X, Y ⟩ − 2 como (∥X∥2 − 1) + (∥Y ∥2 −
+1)
+√ − 2 ⟨X, Y ⟩ y se desea que esta suma de tres términos sea en valor absoluto menor que
+2ε luego se definen
+√ 
+A = (∥X∥2 − 1) + (∥Y ∥2 − 1) − 2 ⟨X, Y ⟩ < 2ε
+y
+√
+
+((
+B=
+
+∥X∥2 − 1 <
+
+2ε
+3
+
+)
+
+√
+
+(
+\
+
+∥Y ∥2 − 1 <
+
+2ε
+3
+
+)
+
+√
+
+(
+\
+
+⟨X, Y ⟩ <
+
+2ε
+6
+
+))
+,
+
+y se tiene A ⊂ B y, consecuentemente,
+P (A) ≤ P (B).
+
+(3.16)
+
+Los sucesos que constituyen B son independientes y se pueden usar los resultados previos
+para su acotación.
+En primer lugar, para poder usar el Teorema 3.2 debemos aplicar la desigualdad de
+Bernoulli (ver Lema 3.3) y ası́ conseguir una expresión como la de (3.10). De esta forma,
+se puede escribir
+√ i
+√ i
+h
+h
+2ε
+2ε
+2
+2
+=P 1 − ∥X∥ <
+=
+P ∥X∥ − 1 <
+3
+3
+√
+h
+2ε i
+=P ∥X∥2 ≥ 1 −
+=
+3
+√
+h
+2 ε 1/2 i
+=P ∥X∥ ≥ 1 −
+≥
+3√
+h
+1
+2 ε i
+≥P ∥X∥ ≥ 1 − ·
+≥
+2
+3
+√
+2ε
+(3.17)
+≥1 − e− 6 d ,
+donde directamente se ha aplicado√(3.10) del Lema 3.2. La desigualdad de Bernoulli es
+aplicable ya que 0 < 1/2 < 1 y 2ε/3 < 1 si 0 < ε < 1. Como Y está igualmente
+distribuido que X y son independientes, también se tiene
+√ i
+√ i
+h
+h
+2ε
+2ε
+2
+2
+P ∥X∥ − 1 <
+= P ∥Y ∥ − 1 <
+3
+3
+34
+
+Y, por último, para la última de las probabilidades se hace uso del Teorema 3.8 y entonces
+√
+√ i
+h
+ε2 (d−1)
+2ε
+6 2
+≥1− √
+· e− 36 .
+P ⟨X, Y ⟩ <
+(3.18)
+6
+ε d−1
+Ahora, juntando los resultados de (3.15), (3.16), (3.17) y (3.18) se obtiene que
+√ i
+√ i
+i
+h
+h
+h
+√
+2ε 2
+2ε
+2
+· P ⟨X, Y ⟩ <
+≥
+P ∥X − Y ∥ − 2 ≤ ε ≥ P ∥X∥ − 1 ≤
+3 √
+6
+√
+ε2 (d−1) 
+2 ε 2
+6 2
+≥ 1 − e− 6 d · 1 − √
+· e− 36
+≥
+ε d−1
+√
+√
+ε2 (d−1)
+6 2
+− 62 ε d
+· e− 36 ,
+≥1 − 2e
+− √
+(3.19)
+ε d−1
+√
+√
+y el resultado buscado se consigue tras aplicar las desigualdades 62 ≥ 15 y 6 2 ≤ 9.
+De nuevo, la cota que se proporciona en el Teorema 3.10 depende de manera conjunta
+de ε y d de manera análoga a cómo sucedı́a en las notas 3.7 y 3.9. Luego, para d fijo, se
+puede conseguir una acotación relevante haciendo ε lo suficientemente pequeño.
+En conclusión, en esta sección se han obtenido resultados relevantes para distribuciones
+uniformes en B(0d , 1) en alta dimensión y se ha demostrado cómo cambian las regiones de
+alta probabilidad asociadas, cómo se comportan las distancias entre observaciones y cómo
+los vectores son prácticamente ortogonales. Estos resultados generalizan las intuiciones
+de la Sección 2.2 y demuestran que para√distribuciones uniformes X e Y en B(0d , 1) se
+tiene que E(∥X∥) ≈ 1, E(∥X − Y ∥ ≈ 2) y que E(⟨X, Y ⟩) ≈ 0. Estas caracterı́sticas
+tienen paralelismo en gran medida con los resultados obtenidos en la Sección 2.1 para
+distribuciones normales multivariantes.
+
+35
+
+Capı́tulo 4
+Distribución normal multivariante en
+alta dimensión
+En este capı́tulo, el objetivo será completar las pruebas realizadas en la Sección 2.1 para los teoremas 2.2, 2.4 y 2.6 dando resultados que nos aseguren que los valores obtenidos
+para las esperanzas de ∥X∥, ∥X − Y ∥, e ⟨X, Y ⟩, si X, Y ∼ N (0d , Id ) e independientes, son
+también aplicables a muestras aleatorias de estas distribuciones. Se proporcionarán resultados similares a los que fueron obtenidos en el Capı́tulo 3 para la distribución uniforme
+en B(0d , 1).
+√
+El Teorema 2.2 establecı́a que |E(∥X∥) − d| ≤ √1d y que Var(∥X∥) ≤ 2 con lo que
+se probó, mediante la desigualdad de Chebyshev, en la Nota 2.3 que
+P (|∥X∥ −
+
+√
+
+d| ≥ ε) ≤ 
+
+2
+
+.
+1 2
+ε− √
+d
+Lo cual, junto a las simulaciones, nos permite pensar que, para m.a.s. X1 , ..., Xn de Xi ∼
+N (0d , Id ) para i = 1, . . . , n, las observaciones muestrales Xi √
+se encuentran localizadas
+en torno a la superficie de una esfera de centro 0d y radio d. Y, como vimos en el
+Capı́tulo 2, sabemos que el volumen de cualquier bola centrada en 0d se concentra en
+las coronas esféricas más próximas a su superficie en virtud de lo probado en (3.10). Sin
+embargo, esa primera desigualdad de concentración es mejorable con el uso de técnicas
+más avanzadas. Para ello, mejoraremos esa cota mediante el uso del denominado Teorema
+del Anillo Gaussiano, para lo cual es necesario demostrar una serie de resultados previos.
+Lema 4.1 (Desigualdad de Bernstein). Sea (Ω, σ, P ) un espacio probabilı́stico y X1 , . . . , Xd :
+Ω → R variables aleatorias independientes dos a dos con E(Xl ) = 0 y momentos de orden
+k acotados por |E(Xlk )| ≤ k!2 para todo l = 1, . . . , d y k ≥ 2. En estas condiciones, para
+todo ε > 0, se tiene que:
+1
+
+ε2
+
+P [ |X1 + · · · + Xd | ≥ ε ] ≤ 2e− 4 mı́n( d ,ε)
+Demostración. Se toma X = X1 + · · · + Xd y se considera 0 < t ≤ 1/2. Usando el
+crecimiento estricto de la función ex en todo x ∈ R, se tiene que tX ≥ tε si y solo si
+etX ≥ etε , luego
+P (X ≥ ε) = P (etX ≥ etε ),
+(4.1)
+37
+
+donde se puede usar ahora la desigualdad de Markov para probar
+d
+Y
+E(etX )
+−tε
+t(X1 +···+Xd )
+−tε
+P (e ≥ e ) ≤
+= e E(e
+)=e
+E(etXl ),
+tε
+e
+l=1
+X
+
+ε
+
+(4.2)
+
+ya que las Xi son independientes dos a dos. Entonces, usando el desarrollo en serie de
+Taylor de la exponencial se tiene
+tXl
+
+E(e
+
+
+
+) = E 1 + tXl +
+
+∞
+X
+(tXl )k 
+
+≤1+
+
+k!
+
+k=2
+
+∞ k
+X
+t E(Xl )k
+k=2
+
+k!
+
+,
+
+y como hipótesis se ha asumido que |E(Ylk )| ≤ k!2 , luego podemos continuar acotando la
+función generadora de momentos E(etXl ) como
+E(etXl ) ≤ 1 +
+
+∞ k
+X
+t E(Xl )k
+
+k!
+
+k=2
+
+≤1+
+
+∞ k
+X
+t
+k=2
+
+2
+
+=1−
+
+∞
+
+X
+1
+1+t−
+tk =
+2
+k=0
+
+1
+1
+1 
+1 t2
+2
+≤ 1 + 2t2 = 1 + t2 ≤ et ,
+=1 −
+1+t−
+=1+
+2
+1−t
+21−t
+2
+
+(4.3)
+
+donde se ha usado la fórmula de sumación de una serie geométrica con razón 0 < t ≤ 1/2
+y desigualdades elementales basadas en que 0 < t ≤ 1/2. Tomando el inferior en (4.1) con
+0 < t ≤ 1/2 y juntándolo con lo obtenido en (4.2) y (4.3) se llega a
+P (X ≥ ε) ≤
+
+ı́nf
+
+e
+
+−tε
+
+0<t≤1/2
+
+d
+Y
+
+E(e
+
+tXl
+
+)≤
+
+ı́nf
+
+−tε
+
+e
+
+0<t≤1/2
+
+l=1
+
+d
+Y
+l=1
+
+2
+
+et =
+
+ı́nf
+
+2
+
+e−tε+dt
+
+(4.4)
+
+0<t≤1/2
+
+De hecho, esta cota se alcanza para algún t ∈ (0, 21 ]. Si consideramos la función f (x) =
+2
+e−εx+dx (en C ∞ (R)) que alcanza sus extremos relativos en sus puntos crı́ticos:
+d −εx+dx2
+ε
+2
+(e
+) = (−ε + 2dx) · e−εx+dx = 0 si y solo si x = .
+dx
+2d
+Como f (x) → ∞ para d → ±∞, entonces este es el único extremo relativo de la función
+ε
+f y, además, es un mı́nimo absoluto. Por tanto, si x0 = 2d
+≤ 12 entonces la restricción
+de f al intervalo (0, 21 ] encuentra el mı́nimo en x0 . En cambio, si x0 > 12 entonces f debe
+ser decreciente en (0, 21 ] y, por tanto, el mı́nimo se encuentra en x = 12 . Para encontrarse
+en el primer caso es necesario que ε > d mientras que cualquier otra situación lleva al
+segundo caso. En definitiva, se tiene que si ε > d entonces el valor mı́nimo de f en (0, 21 ]
+ε
+1
+1 2
+ε
+2
+es e−εx0 +dx0 = e− 4d , y si ε ≤ d entonces el valor mı́nimo f en (0, 12 ] es e−ε 2 +d( 2 ) < e− 4 .
+Añadiendo esta información a (4.4) se obtiene
+P (X ≥ ε) ≤ ı́nf
+
+2
+
+2
+
+0<t≤1/2
+2
+− máx( ε4d , 4ε )
+
+=e
+
+2
+
+e−tε+dt = mı́n e−tε+dt = e−tε+dt
+0<t≤1/2
+2
+− mı́n( ε4d , 4ε )
+
+≤e
+
+ε2
+
+ε
+
+≤ emı́n(− 4d ,− 4 ) =
+ε 1
+
+t=mı́n( 2d , 2 )
+
+.
+
+(4.5)
+
+Entonces se acaba de demostrar que
+1
+
+ε2
+
+P (X ≥ ε) ≤ e− 4 mı́n( d ,ε) .
+38
+
+Para probar el resultado pedido, bastarı́a reemplazar X con −X y seguir el mismo razonamiento para probar que
+1
+ε2
+P (−X ≥ ε) ≤ e− 4 mı́n( d ,ε)
+De donde se obtiene la desigualdad del enunciado
+1
+
+ε2
+
+P [ |X1 + · · · + Xd | ≥ ε ] ≤ 2e− 4 mı́n( d ,ε)
+√
+Por lo visto en el Teorema 2.2 se sabe que E(∥X∥) ≈ d para d suficientemente grande,
+si X ∼ N (0d , Id ). Lo que se pretenderá demostrar en el Teorema del Anillo Gaussiano,
+que se formulará en el Teorema 4.2, es que las observaciones√de una muestra de esta
+distribución N
+√(0d , Id ) deben estar concentradas alrededor de d con alta probabilidad.
+A este valor, d, se le conoce como “radio” de la distribución normal multivariante (ver
+Figura 4.1).
+
+√
+Figura 4.1: Representación del “anillo” alrededor de B(0d , d)
+Para probar este resultado es necesario hacer uso de la desigualdad para las colas de
+la suma de variables aleatorias independientes con momentos acotados que fue obtenida
+en el Lema 4.1.
+Teorema 4.2 (Teorema del Anillo Gaussiano). Sean (Ω, σ, P ) un espacio
+√ probabilı́stico,
+d
+X : Ω → R una variable aleatoria con distribución N (0d , Id ) y 0 ≤ ε ≤ d. Entonces se
+cumple que
+i
+h
+√
+−ε2
+P ∥X∥ − d ≤ ε ≥ 1 − 2e 16 .
+√
+√
+Demostración.
+Puesto
+que
+∥X∥+
+d
+≥
+d entonces√
+multiplicando√por
+∥X∥−
+√
+√
+√
+ la cantidad
+d se tiene que ∥X∥ − d ≥ ε si y solo si ∥X∥ − d · ∥X∥ + d ≥ ε d. Por tanto,
+se tiene
+h
+i
+h
+√
+√
+√ i
+√
+P ∥X∥ − d ≥ ε ≤ P ∥X∥ − d · (∥X∥ + d) ≥ ε d =
+h
+√ i
+= P X12 + · · · + Xd2 − d ≥ ε d =
+h
+√ i
+2
+2
+= P (X1 − 1) + · · · + (Xd − 1) ≥ ε d =
+"
+√ #
+1 2
+1 2
+ε d
+(X − 1) + · · · + (Xd − 1) ≥
+(4.6)
+=P
+2 1
+2
+2
+39
+
+De esta manera, se ha transformado la probabilidad original en una probabilidad
+basada en sumas de variables aleatorias Yl = 12 (Xl2 − 1) para l = 1, . . . , d a las cuales se
+les puede aplicar la desigualdad de Bernstein del Lema 4.1. Para ello, hay que comprobar
+que verifican todas las hipótesis. En primer lugar, si X ∼ N (0d , Id ) y X = (X1 , . . . , Xd )
+entonces Xl ∼ N (0, 1) con l = 1, . . . , d e independientes entre sı́ (véase la Proposición
+A.8). Por tanto, las variables aleatorias Yl serán independientes por pares, por serlo las
+Xl , y cumplen que E(Yl ) = 0, ya que E(Xl2 ) = Var(Xl ) = 1. Consecuentemente, bastarı́a
+con demostrar que los momentos orden k ≥ 2 de las Yl están acotados por k!2 . Como las
+Yl están igualmente distribuidas, para todo l = 1, . . . , d, basta comprobarlo para una de
+ellas. Es decir, se necesita probar que
+k
+ 2
+Xl − 1
+k!
+E
+≤ .
+2
+2
+Se puede reescribir el término de la izquierda como
+1
+E(|Xl2 − 1|k ),
+2k
+y, para acotar esta última esperanza, se puede usar la desigualdad |x2 − 1|k ≤ 1 + x2k ,
+que se cumple para todo x ∈ R porque si |x| ≤ 1 entonces |x2 − 1|k ≤ 1 y si |x| ≥ 1 se
+tiene |x2 − 1|k ≤ x2k y, en ningún caso, estas cantidades exceden la cota proporcionada.
+Aplicando esta desigualdad y la definición de esperanza se tiene
+Z
+ X 2 − 1 k
+x2
+1
+1
+1
+1
+l
+2
+2k
+k
+E
+= k E(|Xl − 1| ) ≤ k E(1 + Xl ) = k (1 + x2k ) √ e− 2 dx =
+2
+2
+2
+2 R
+2π
+
+
+
+
+Z
+2
+1
+1
+(2k)!
+2k 1
+− x2
+=
+= k 1 + x √ e dx = k 1 + k
+2
+2
+2 k!
+2π
+R
+
+
+1
+(2k) · (2k − 1) · · · 2 · 1
+= k 1+ k
+=
+2
+2 · k · (k − 1) · · · 2 · 1
+
+
+1
+= k 1 + (2k − 1) · (2k − 3) · · · 3 · 1
+(4.7)
+2
+En el Apéndice A.1 se proporciona la expresión para los momentos de una distribución
+normal estándar que se ha usado. Falta solo comprobar que
+
+
+k · (k − 1) · · · 2 · 1
+1
+1
++
+(2k
+−
+1)
+·
+(2k
+−
+3)
+·
+·
+·
+3
+·
+1
+≤
+,
+2k
+2
+lo cual puede demostrarse por inducción. Esta desigualdad puede escribirse, de una forma
+más sencilla, como
+
+1 + (2k − 1) · (2k − 3) · · · 3 · 1 ≤ 2k−1 · k · (k − 1) · · · 2 · 1 = (2k) · (2k − 2) · · · 4 · 2,
+y, por tanto, lo que debemos probar es que el producto de los k primeros números pares
+es mayor que el producto de los k primeros impares más 1. Para k = 2 se tiene que
+1 + (4 − 1) · 1 = 4 ≤ 8 = (2 · 2) · 2 luego se cumple la desigualdad. Para k = n se supone
+la “hipótesis de inducción”
+
+1 + (2n − 1) · (2n − 3) · · · 3 · 1 ≤ (2n) · (2n − 2) · · · 4 · 2,
+(4.8)
+40
+
+y, para completar la inducción, se debe probar que para k = n + 1 se tiene
+
+1 + (2n + 1) · (2n − 1) · · · 3 · 1 ≤ (2n + 2) · (2n) · · · 4 · 2.
+Sacando factor común al término (2n + 1) en el lado izquierdo de la desigualdad se ve que
+
+
+
+
+1
++ (2n − 1) · (2n − 3) · · · 3 · 1 ≤(2n + 1) 1 + (2n − 1) · (2n − 3) · · · 3 · 1
+(2n + 1)
+2n + 1
+≤(2n + 1) · (2n) · (2n − 2) · · · 4 · 2
+≤(2n + 2) · (2n) · (2n − 2) · · · 4 · 2,
+1
+que es justo lo que se querı́a probar. En el proceso se ha usado que 2n+1
+≤ 1, que
+2n + 1 ≤ 2n + 2, y la hipótesis de inducción de (4.8).
+Por lo tanto, ya se ha probado que
+ 2
+k
+Xl − 1
+k!
+k
+E(Yl ) = E
+≤ ,
+2
+2
+
+para todo k ≥ 2, y se está en condiciones de acotar (4.6) con el uso de la desigualdad de
+Bernstein del Lema 4.1, de tal forma que
+"
+√ #
+√
+1 2
+ε d
+1 2
+(X − 1) + · · · + (Xd − 1) ≥
+P [ ∥X∥ − d ≥ ε ] ≤ P
+2 1
+2
+2
+− 14 mı́n(
+
+≤2e
+
+√
+√
+(ε d/2)2 ε d
+, 2 )
+d
+
+2 2
+− 14 mı́n( ε4 , ε2 )
+
+≤
+1
+
+2
+
+= 2 e− 16 ε ,
+√
+√
+2
+donde se usa que ε 2 d ≥ ε2 para todo d y para todo ε ≤ d.
+≤2 e
+
+(4.9)
+
+Una de las cuestiones a tener en cuenta para aplicar el Teorema 4.2 es que la cantidad
+ε considerada. El teorema es trivial si la cota
+√ proporcionada a la derecha es menor o igual
+1 2
+que 0. Este caso se alcanza cuando ε = 4 · log 2 ≈ 3.3, mientras que la cota 1 − 2 e− 16 ε
+se encuentra entre 0 y 1 si ε es mayor que esta cantidad, que es justo cuando tiene interés
+el Teorema 4.2. Esto √
+remarca la concentración de la distribución normal multivariante
+alrededor de su radio d y esta concentración se hace especialmente interesante cuando
+d es muy grande en comparación con ε, ya que el teorema
+proporciona una cota para
+√
+la probabilidad de que ∥X∥ se aleje de su esperanza d más que ε. El hecho de que no
+se pueda elegir ε convenientemente para cada dimensión d significa que la anchura del
+anillo gaussiano en la Figura 4.1 es constante en contraposición a lo que sucedı́a en el
+Capı́tulo 3, donde se podı́a elegir ε convenientemente con la dimensión, de manera que
+los resultados que daban los teoremas mejoraban cuando d aumentaba, disminuyendo ε
+lo suficiente. El siguiente corolario es un breve resultado que se demuestra con el Teorema
+4.2 y será necesario en posteriores demostraciones.
+Corolario 4.3. Sean (Ω, σ, P ) un espacio probabilı́stico, X : Ω → Rd una variable aleatoria con distribución N (0d , Id ) y 0 ≤ ε ≤ d. Entonces se cumple que:
+1
+
+ε2
+
+P [ ∥X∥2 − d ≤ ε ] ≥ 1 − 2 e− 8 mı́n( 2d ,ε)
+41
+
+Demostración. La demostración es análoga a la del Teorema 4.2 ya que se puede escribir
+
+
+
+
+1 2
+ε
+1 2
+2
+P ∥X∥ − d ≥ ε = P
+(X − 1) + · · · + (Xd − 1) ≥
+2 1
+2
+2
+y, como se probó en la demostración del Teorema 4.2, las variables aleatorias Yi = 12 (Xi2 −1)
+cumplen las hipótesis del Lema 4.1 y, consecuentemente, se tiene
+
+
+
+
+1 2
+ε
+1 2
+2
+(X − 1) + · · · + (Xd − 1) ≥
+≤
+P ∥X∥ − d ≥ ε = P
+2 1
+2
+2
+1
+
+ε2 ε
+
+1
+
+ε2
+
+≤ 2 e− 4 mı́n( 4d , 2 ) = 2 e− 8 mı́n( 2d .ε)
+
+Siguiendo el mismo desarrollo realizado en el Capı́tulo 3, a continuación, se considerará
+el ángulo entre dos variables aleatorias independientes, ambas, con distribución N (0d , Id ).
+Recuérdese que, en virtud de lo probado en el Teorema 2.6, dos variables aleatorias independientes distribuidas normalmente en Rd satisfacen que E(⟨X, Y ⟩) = 0. El objetivo
+de los siguientes resultados será demostrar que ⟨X, Y ⟩ está también próximo a 0 con alta
+probabilidad.
+Teorema 4.4 (Teorema de Ortogonalidad Gaussiana). Sean (Ω, σ, P ) un espacio probabilı́stico, y X, Y : Ω → Rd variables aleatorias con X, Y ∼ N (0d , Id ) y ε > 0. Entonces se
+cumple que:
+
+ D
+Y E
+2/ε + 7
+X
+,
+≤ε ≥1− √
+P
+∥X∥ ∥Y ∥
+d
+(en esta formulación, se trabaja condicionalmente a que ∥X∥ e ∥Y ∥ son distintos de
+0, evento que sucede con probabilidad 1 por tratar con la distribución continua normal
+multivariante).
+Demostración. Como se ha comentado, se puede considerar directamente que X e Y no
+toman el valor 0. Además, usando la Ley de Probabilidad Total sobre la variable aleatoria
+Y se tiene que
+
+
+
+
+ D
+
+Y E
+Y
+X
+X
+,
+≤ ε = EY PX
+,
+≤ε Y =y
+.
+(4.10)
+P
+∥X∥ ∥Y ∥
+∥X∥ ∥Y ∥
+Se puede ver que la probabilidad condicionada es la misma para todos los puntos y ∈ Rd
+con y ̸= 0d , de tal manera que entonces la esperanza de la probabilidad condicionada de
+y
+(4.10) será simplemente la probabilidad condicionada en un punto u = ∥y∥
+∈ Rd . Para
+ello, dado cualquier otro vector unitario v ∈ Rd se sabe que, por la estructura de espacio
+vectorial de Rd , existe una matriz R ortogonal de rotación de tamaño d×d tal que Rv = u
+y
+
+ 
+ 
+
+X
+X
+⊤ X
+,u =
+, Rv = R
+,v .
+(4.11)
+∥X∥
+∥X∥
+∥X∥
+Pero la distribución normal multivariante es invariante por rotaciones (véase la ProposiX
+X
+ción A.9). Entonces R⊤ X ∼ X, y R⊤ ∥X∥
+tiene la misma distribución que ∥X∥
+. Por tanto,
+usando (4.11) se tiene
+
+
+
+
+
+
+X
+X
+PX
+, u ≤ ε = PX
+,v ≤ ε
+(4.12)
+∥X∥
+∥X∥
+42
+
+para cualesquiera vectores u y v unitarios. Como la probabilidad condicionada es la
+misma para cualquier y ̸= 0d , el promedio sobre todos los posibles valores es igual a la
+probabilidad para un solo vector unitario v fijo, luego
+P
+
+ D
+
+
+
+
+
+
+X
+X
+Y E
+Y
+,
+,
+≤ ε = EY PX
+≤ε Y =y
+=
+∥X∥ ∥Y ∥
+∥X∥ ∥Y ∥
+
+
+
+y
+X
+,
+≤ε .
+= PX
+∥X∥ ∥y∥
+
+(4.13)
+
+yl
+, para l = 1, . . . , d, se tiene que λ21 + · · · + λ2d = 1, y se puede definir una nueva
+Si λl = ∥y∥
+variable aleatoria U : Ω → R dada por
+
+
+U=
+
+y
+X,
+∥y∥
+
+
+
+d
+d
+X
+X
+yl
+=
+Xl =
+λl Xl .
+∥y∥
+l=1
+l=l
+
+Como las variables Xl ∼ N (0, 1) entonces λl Xl ∼ N (0, λ2l ) y U ∼ N (0, λ21 + · · · + λ2d ) ∼
+N (0, 1) (véase el Corolario A.4). Para calcular la probabilidad de (4.13), vamos a usar
+esta nueva
+variable aleatoria junto con la Ley de Probabilidad Total, usando el suceso
+√
+d
+∥X∥ ≤ 2 y su complementario, y sabiendo que ese suceso ocurre con baja probabilidad
+por el Teorema 4.2. Se tiene
+
+PX
+
+y
+X
+,
+∥X∥ ∥y∥
+
+
+
+
+≤ε
+
+√ !
+√ !
+d
+d
+≤ ε ∥X∥ ≤
+· PX ∥X∥ ≤
++
+2
+2
+√ !
+√ !
+
+
+y
+X
+d
+d
+,
+≤ ε ∥X∥ ≥
+· PX ∥X∥ ≥
+∥X∥ ∥y∥
+2
+2
+!
+√ !
+√
+√
+d
+d
+· PX ∥X∥ − d ≥
+|U | ≤ ε · ∥X∥ ∥X∥ ≥
+2
+2
+!
+√
+
+
+d
+d
+|U | ≤ ε ·
+· 1 − e− 4·16 ,
+(4.14)
+2
+
+
+= PX
++ PX
+≥ PX
+≥ PX
+
+X
+y
+,
+∥X∥ ∥y∥
+
+
+
+√
+donde el último término es la cota proporcionado por el Teorema 4.2 con ε = d/2. Para
+completar la demostración se debe tratar la última probabilidad que aparece en (4.14).
+Como U ∼ N (0, 1), se tiene
+
+PX
+
+√ !
+Z ε√d
+Z ∞
+2
+d
+1
+2
+1
+−t2 /2
+=√
+dt ≥ 1 − √
+dt
+|U | ≤ ε ·
+√ e
+√
+2
+2π − ε 2 d
+2π − ε 2 d t2
+
+
+2
+1 ∞
+2
+√
+=1 − √ · −
+≥1− √ ,
+ε d
+t − 2
+2π
+ε d
+
+(4.15)
+
+donde se ha usado que ex ≥ 1 + x1 y que √22π ≤ 1 con el fin de acotar inferiormente
+esa integral y, después, mejorar la cota tomando un lı́mite de integración mayor para la
+integral que se está restando.
+43
+
+Finalmente, juntando (4.13), (4.14) y (4.15) se tiene
+
+P
+
+ D
+
+ 
+ 
+d
+
+d
+d
+X
+Y E
+2
+4e− 64
+2
+− 4·16
+− 4·16
+√
+√
+√
+,
+· 1−e
+=1−
+−e
++
+≥
+≤ε ≥ 1−
+∥X∥ ∥Y ∥
+ε d
+ε d
+ε d
+7
+2
+≥1 − √ − √ ,
+ε d
+d
+
+que coincide con lo que se deseaba probar.
+
+Como consideración adicional, el Teorema 4.4 de Ortogonalidad Gaussiana demuestra que, con alta probabilidad, dos variables aleatorias independientes con distribución
+N (0d , Id ) son prácticamente ortogonales en alta dimensión mediante una cota inferior
+X
+, ∥YY ∥ ⟩ se aleje en más de ε de 0, y esa acotación es depenpara la probabilidad de que ⟨ ∥X∥
+√
+diente tanto de d como de ε. Esta cota es diferente a la que obtenı́amos en el Teorema
+4.2 del Anillo Gaussiano, de tal manera que aquı́ sı́ que es posible elegir un ε más pequeño
+conforme se aumente la dimensión d y el teorema aún proporciona resultados útiles, lo
+cual remarca la hipótesis de que cualquier par de vectores unitarios generados desde una
+distribución normal multivariante son esencialmente ortogonales en dimensiones altas.
+Este resultado extiende lo ya visto al tratar el valor esperado del producto escalar en la
+Proposición 2.6.
+Por último, se considera la distancia entre dos variables aleatorias independientes
+con distribución N (0d , Id ). Intuitivamente, por
+√ en los teoremas 4.2 y 4.4,
+√ lo probado
+se sabe que, con alta probabilidad, ∥X∥ ≈ d, ∥Y ∥ ≈ d y los vectores X e Y son
+prácticamente ortogonales.
+Por tanto, usando el Teorema de Pitágoras, se puede esperar
+√
+que ∥X − Y ∥ ≈ 2d, tal y como se ilustra en la Figura 2.2.
+Otra consecuencia de estos resultados es el proporcionado en el Teorema 4.5 relativo
+a ∥X − Y ∥
+
+d
+Teorema 4.5. Sean (Ω, σ, P ) un espacio probabilı́stico,
+√ X, Y : Ω → R variables aleatorias independientes con X, Y ∼ N (0d , Id ) y 0 ≤ ε ≤ d. Entonces se cumple que:
+
+P
+
+h
+
+∥X − Y ∥ −
+
+√
+
+i
+
+2d ≤ ε ≥ 1 − 4e
+
+−ε2 /72
+
+√
+6 2
+7
+−
+−√ .
+εd
+d
+
+Demostración. Para probar este resultado se siguen las ideas de las demostraciones del
+√
+√
+Teorema 4.2 y del Teorema 3.10. Como ∥X − Y ∥ + 2d ≥ 2d, se tiene que ∥X − Y ∥2 −
+44
+
+√
+√
+2d ≥ ε 2d si ∥X − Y ∥ − 2d ≥ ε. Por tanto,
+P
+
+h
+
+∥X − Y ∥ −
+
+√
+
+i
+h
+i
+√
+2d ≤ ε = 1 − P ∥X − Y ∥ − 2d ≥ ε =
+h
+√
+√ 
+√ i
+= 1 − P ∥X − Y ∥ − 2d · ∥X − Y ∥ + 2d ≥ ε 2d =
+h
+√ i
+= 1 − P ∥X − Y ∥2 − 2d ≥ ε 2d =
+h √
+√ i
+2
+= P −ε 2d ≤ ∥X − Y ∥ − 2d ≤ ε 2d =
+h √
+√ i
+= P −ε 2d ≤ ∥X∥2 + ∥Y ∥2 − 2⟨X, Y ⟩ − 2d ≤ ε 2d ≥
+"
+√ #2 "
+√ #
+ε 2d
+ε 2d
+≥P
+.
+∥X∥2 − d ≤
+P
+⟨X, Y ⟩ ≤
+3
+6
+(4.16)
+
+Para la primera probabilidad en el último término, se puede usar el Corolario 4.3 que
+permite la acotación
+"
+√ #
+√
+ε2 ε 2d
+1
+ε
+2d
+2
+(4.17)
+∥X∥2 − d ≤
+≥ 1 − 2e− 8 mı́n( 9 , 3 ) ≥ 1 − 2e−ε /72 ,
+P
+3
+y, por el Teorema 4.4, se tiene también la acotación
+"
+√ #
+√
+12
+√
++7
+ε 2d
+6 2
+7
+ε 2d
+⟨X, Y ⟩ ≤
+P
+≥1− √
+=1−
+−√ .
+6
+εd
+d
+d
+
+(4.18)
+
+Juntando (4.16), (4.17) y (4.18) se llega a
+"
+√ #2 "
+√ #
+h
+i
+√
+ε 2d
+ε 2d
+P ∥X − Y ∥ − 2d ≤ ε ≥ P
+∥X∥2 − d ≤
+P
+⟨X, Y ⟩ ≤
+≥
+3
+6
+!
+√
+
+2
+−ε2
+6 2
+7
+≥ 1 − 2e 72
+1−
+−√
+=
+εd
+d
+!
+√
+
+
+−ε2
+−ε2
+6 2
+7
+−√
+≥
+= 1 + 4e 36 − 4e 72 · 1 −
+εd
+d
+!
+√
+−ε2
+−ε2
+6 2
+7
+≥ 1 − 4e 36 ·
++√
+− 4e 72
+εd
+d
+√
+−ε2
+6 2
+7
+≥1 −
+− √ − 4e 72 ,
+εd
+d
+−ε2
+
+ya que los términos positivos se pueden acotar inferormente por 0 mientras que 4e 36 ≥
+1.
+La interacción de los Teoremas del Anillo Gaussiano y de la Ortogonalidad Gaussiana
+(teoremas 4.2 y 4.4) en la demostración del Teorema 4.5 provoca que la cota obtenida tenga
+45
+
+Capı́tulo 5
+Teorema de Johnson-Lindestrauss
+5.1.
+
+Enunciado y prueba del teorema de JohnsonLindestrauss
+
+En los capı́tulos anteriores se han presentado algunas caracterı́sticas no directamente
+esperables de las distribuciones más importantes en Estadı́stica cuando se trabaja en
+espacios de alta dimensión. Sin embargo, algunos fenómenos, como la concentración de
+medida o la ortogonalidad de vectores, pueden resultar de utilidad en Análisis de Datos. En
+este capı́tulo presentaremos el Teorema de Johnson-Lindestrauss, que permitirá conservar
+las buenas propiedades geométricas de los conjuntos de datos a la vez que se proyectan a
+un espacio de dimensión menor donde las técnicas de Análisis de Datos clásicas se vuelven
+más fiables. A su vez, se analizarán algunas aplicaciones prácticas de este resultado y se
+proporcionarán simulaciones que apoyen las conclusiones obtenidas.
+En primer lugar, se introducirá el concepto de proyecciones aleatorias. Sea (Ω, σ, P )
+un espacio probabilı́stico, en este capı́tulo se considerarán matrices aleatorias del tipo
+
+
+U11 · · · U1d
+
+..  ,
+U : Ω → Rk×d , U =  ...
+. 
+Uk1 · · · Ukd
+con Uij ∼ N (0, 1), i = 1, . . . , k y j = 1, . . . , d, variables aleatorias normales unidimensionales independientes. Esta matriz aleatoria la será denotada por U ∼ N (0k×d , 1).
+Algunas propiedades que se pueden extraer de esta matriz aleatoria están basadas en
+el comportamiento de sus filas como vectores normales multivariantes. Si se denotan las
+filas de U como Ui = [Ui1 , . . . , Uid ]T , para i = 1, . . . , k, entonces todas ellas son vectores
+aleatorios independientes con distribución N (0d , Id ) (ver Proposición A.8) y se pueden
+explotar las propiedades vistas en la Sección 2.1 del Capı́tulo 2 y, a su vez, los resultados
+del Capı́tulo 4, cuando d sea elevado. Por ejemplo, si usamos el Teorema 4.4 de Ortogonalidad Gaussiana, se tiene que las filas de la matriz U normalizadas son “aproximadamente”
+ortogonales unas a otras. Entonces, normalizando la matriz aleatoria U , se obtendrı́a una
+matriz aleatoria V tal que V V ⊤ ≈ Ik . Esta propiedad recuerda a la propiedad de ortogonalidad en las matrices de proyección usadas en Álgebra Lineal. Una de las aplicaciones
+más conocidas de las proyecciones es que permiten transformar conjuntos de datos en Rd
+en el subespacio de Rk generado por las k filas de la matriz ortogonal de proyección. Se
+47
+
+debe tener en cuenta que si k < d entonces la proyección es una aplicación lineal, que
+cuenta con esta buena propiedad de ortonormalidad que evita la “duplicidad” de información en los datos proyectados, pero que no necesariamente conservará las distancias entre
+puntos del espacio original Rd . Esta conservación de las distancias originales serı́a una
+propiedad muy útil en contextos de clasificación, tanto supervisada como no supervisada,
+por ejemplo, en métodos como los m vecinos más próximos. El objetivo de este capı́tulo
+será probar que las proyecciones basadas en matrices aleatorias del tipo U ∼ N (0k×d , 1),
+además de tener la caracterı́stica de la ortonormalidad, de forma aproximada, mantienen
+también, de forma aproximada, las distancias entre datos en el espacio original.
+Teorema 5.1 (Teorema de la Proyección aleatoria). Sea (Ω, σ, P ) un espacio probabilı́stico
+y k < d. Se considera U : Ω → Rk×d una matriz aleatoria con U ∼ N (0k×d , 1). Entonces,
+para todo x ∈ Rd \ {0d } y 0 < ε ≤ 1 se tiene
+i
+h
+√
+√
+2
+P ∥U x∥ − k∥x∥ ≤ ε k∥x∥ ≥ 1 − 2e−kε /16 .
+Demostración. En primer lugar, se debe tener en cuenta que el producto matriz por vector
+de U por x ∈ Rd da como resultado un vector en Rk que contiene los productos escalares
+entre cada vector fila de la matriz U , denotados por Ui , con el vector x. Es decir,
+U x = [⟨U1 , x⟩, . . . , ⟨Uk , x⟩]T .
+x
+, cuya coordenada
+Ahora, fijado x ∈ Rd \ {0d }, se puede considerar el vector U ∥x∥
+i-ésima es
+
+
+d
+D
+xi
+x
+x E X
+=
+Uij
+.
+U
+= Ui ,
+∥x∥ i
+∥x∥
+∥x∥
+j=1
+
+
+x
+∼ N (0, 1) (ver ProUsando que Uij ∼ N (0, 1) para todo (i, j), se tiene que U ∥x∥
+i
+
+x
+posición A.4 luego, junto a la independencia de los Uij , se tiene U ∥x∥
+∼ N (0d , Id ) (ver
+Proposición A.8). Se puede utilizar ahora el Teorema 4.2 del Anillo Gaussiano para tener
+
+
+h
+i
+√
+√
+√
+√
+x
+2
+P ∥U x∥ − k∥x∥ ≤ ε k · ∥x∥ = P
+U
+− k ≤ ε k ≥ 1 − 2eε k/16 .
+∥x∥
+√
+k. Nótese que se
+En esta acotación se ha √
+aplicado
+dicho
+teorema
+con
+d
+=
+k
+y
+ε
+=
+ε
+√
+cumple la hipótesis 0 < ε k ≤ k dado que 0 < ε ≤ 1.
+
+√
+Puesto que k es fijo a lo largo de todo la prueba del Teorema 5.1, una reformulación
+más habitual de este resultado es
+
+
+1
+x
+2
+√ U
+P
+− 1 ≤ ε ≥ 1 − 2 eε k/16 .
+(5.1)
+k ∥x∥
+Definición 5.2. Sea (Ω, σ, P ) un espacio probabilı́stico y k < d y U : Ω → Rk×d una
+matriz aleatoria con U ∼ N (0k×d , 1). Si ω ∈ Ω, se denomina proyección de JohnsonLindestrauss a la aplicación TU (ω) : Rd → Rk dada por
+1
+TU (ω) = √ U (ω).
+k
+48
+
+Estrictamente hablando, no puede hablarse de TU (ω) como una “proyección” en el
+sentido de Álgebra Lineal porque no necesariamente son matrices ortonormales. Con esta
+notación, otra reformulación del Teorema 5.1 es que para todo x ∈ Rd \{0d }, si 0 < ε ≤ 1
+y U ∼ N (0k×d , 1), se tiene que
+
+
+2
+P ∥TU x∥ − ∥x∥ ≤ ε∥x∥ ≥ 1 − 2eε k/16 ,
+(5.2)
+o, dicho de otra forma, se tiene que con alta probabilidad
+∥TU x∥
+≈ 1.
+∥x∥
+Es decir, en cierta manera, la proyección de Jonhson-Lindestrauss mantiene prácticamente
+invariante la norma de cada x ∈ Rp .
+El siguiente resultado, el Teorema de Johnson-Lindestrauss, finalmente establece que
+es lo que sucede cuando consideramos las distancias entre pares de puntos tras usar la
+proyección TU .
+Teorema 5.3 (Teorema de Johnson-Lindestrauss). Sea (Ω, σ, P ) un espacio probabilı́stico,
+log n y U : Ω → Rk×d una matriz aleatoria con U ∼ N (0k×d , 1).
+0 < ε < 1 y k ≥ 48
+ε2
+Entonces, para cada cualquier conjunto de n puntos {x1 , . . . , xn } ⊂ Rd se verifica que
+h
+i
+1
+′
+′
+′
+P (1 − ε) · ∥xi − xi ∥ ≤ ∥TU xi − TU xi ∥ ≤ (1 + ε) · ∥xi − xj ∥ para todo i, i ≥ 1 − .
+n
+Demostración. Para cada i ̸= i′ se define x = xi − xi′ y se aplica el Teorema 5.1 para
+acotar
+h
+i
+Pi,i′ = P (1 − ε) · ∥xi − xi′ ∥ ≤ ∥TU xi − TU xi′ ∥ ≤ (1 + ε) · ∥xi − xi′ ∥
+h
+i
+= P (1 − ε) · ∥x∥ ≤ ∥TU x∥ ≤ (1 + ε) · ∥x∥
+h
+i
+= P ∥TU x∥ − ∥x∥ ≤ ε · ∥x∥
+2
+
+≥ 1 − 2eε k/16 .
+
+(5.3)
+
+
+2
+Puesto que hay n puntos en el conjunto {x1 , ..., xn }, existen n2 ≤ n2 pares distintos
+de puntos, y se puede desarrollar la probabilidad a acotar en función de las Pi,i′ (acotadas
+en 5.3) de la forma
+h
+i
+′
+P (1 − ε) · ∥xi − xi′ ∥ ≤ ∥TU xi − TU xi′ ∥ ≤ (1 + ε) · ∥xi − xi′ ∥ para todo i, i =
+h[n
+oi
+∥TU xi − TU xi′ ∥ − ∥xi − xi′ ∥ > ε · ∥xi − xi′ ∥
+=
+=1−P
+i,i′
+
+X
+X
+n2
+2
+2
+2e−kε /16 ≥ 1 − 2e−kε /16 ≥
+(1 − Pi,i′ ) ≥ 1 −
+2
+i̸=i′
+i̸=i′
+
+48
+2
+1
+−3
+≥ 1 − n2 · e− ε2 log n ε /16 ≥ 1 − n2 · elog(n ) = 1 − .
+n
+=1−
+
+49
+
+(5.4)
+
+Nota 5.4. Para aplicar el Teorema 5.3 (de Johnson-Lindestrauss) correctamente se debe
+interpretar la relación que existe entre las distintas constantes que aparecen en el enunciado: n tamaño de la muestra en consideración, d dimensión original del conjunto de puntos
+log n luego
+y k dimensión a la que se pretende proyectar los puntos. En particular, k ≥ 48
+ε2
+crece de forma logarı́tmica con respecto a n e inversamente proporcional al cuadrado de
+ε, lo cual quiere decir que conforme más grande sea el tamaño muestral n y más pequeño
+sea ε más grande será la dimensión k a la que se debe proyectar. La interacción entre n
+y ε en el k necesario es inversamente proporcional y, además, k crece más rápidamente
+con una disminución de ε que con el aumento del tamaño muestral n.
+La clave está en que la dimensión proyectada k no depende de la dimensión original
+d, sino solo de n y ε. El Teorema de Johnson–Lindenstrauss garantiza que, al proyectar
+un conjunto de n puntos desde un espacio de alta dimensión a un subespacio euclı́deo de
+log n, es posible conservar las distancias entre todos los pares de puntos
+dimensión k ≥ 48
+ε2
+con un error de a lo sumo ε, y esto implica que la estructura geométrica del conjunto se
+preserva casi idénticamente por la proyección de Johnson-Lindestrauss TU . Nótese que si d
+es muy pequeña en comparación a n y ε es lo suficientemente pequeño, se puede conseguir
+una dimensión k de proyección que sea superior a la dimensión d original lo carecerı́a
+de interés a nivel práctico. El Teorema 5.3 proporciona resultados relevantes en el caso
+de que d sea de una dimensión moderadamente grande en comparación con k que es del
+orden de log n. Esto nos permite incluso considerar conjuntos de puntos más grandes que
+la dimensión del espacio d que se podrán proyectar a un espacio de dimensión menor sin
+perder su geometrı́a.
+Además, los resultados del Teorema 5.3 son totalmente independientes del conjunto
+original de puntos {x1 , . . . , xn } ⊂ Rd o de la distribución que los generó (si la tuviesen).
+De hecho, únicamente son dependientes del tamaño del conjunto sobre el que se quieran
+aplicar. Por ejemplo, considerando un conjunto de 10 puntos en dimensión d = 106 ,
+entonces, por el Teorema 5.3 (de Johnson-Lindestrauss) se puede proyectar los datos
+a un espacio de dimensión k menor tal que las distancias entre los proyectados y las
+distancias entre los puntos originales difieren en menos de ε = 0.15 con una probabilidad
+mayor que 1 − 1/10 = 0.99. La dimensión del espacio de proyección deberı́a ser mayor a
+48
+log 10 = 4912.182, es decir, bastarı́a elegir k = 4913, lo cual supondrı́a una reducción
+(0.15)2
+del espacio original a otro de dimensión unas 203 veces más pequeña, conservando las
+distancias con fidelidad. La dimensión de este nuevo espacio de proyección, pese a seguir
+siendo alta, se reduce considerablemente haciendo más manejable el conjunto de datos
+original.
+Nota 5.5. El enunciado propuesto en el Teorema 5.3 es una versión reducida de la formulación original del teorema propuesta en Johnson y Lindenstrauss (1984) y se puede
+generalizar cuando la matriz U del Teorema 5.3 tiene entradas que son variables aleatorias independientes, isotrópicas (los vectores fila de U , Ui , cumplen que su matriz de
+covarianzas E(Ui Ui⊤ ) es Id ) y subgaussianas: las colas de las variables Uij decrecen tan
+2
+rápido como las colas de la distribución normal, es decir, cumplen P (|Uij | > t) ≤ Ce−ct
+para ciertas constantes C, c y para todo t > 0. Algunas distribuciones con estas propiedades son la normal, la uniforme en un intervalo centrado o las variables con distribución
+de Rademacher que toman los valores {1, −1} con probabilidad 1/2. Esta demostración se
+puede encontrar en Vershynin (2018) y se basa en versiones más generales de la desigualdad de Bernstein para distribuciones subgaussianas.
+50
+
+Pese a que la proyección al espacio de dimensión k en el ejemplo traslada los datos a
+una dimensión considerablemente inferior, esta aún se puede mejorar. Es por ello que en
+trabajos como Dasgupta y Gupta (2003), se consigue mejorar la acotación inferior de k
+demostrando que basta elegir
+4 log n
+,
+(5.5)
+k≥ 2
+ε /2 − ε3 /3
+para que se cumpla el Teorema 5.3. Volviendo al ejemplo anterior y, usando esta nueva
+acotación de k, bastarı́a elegir k mayor o igual que 909.66 lo cual consigue reducir la
+dimensión de forma aún más considerable.
+Para comprobar experimentalmente los resultados del Teorema 5.3 se ha simulado en R
+una muestra de tamaño n = 150 de la distribución X ∼ U([0, 1]d ) con d = 100.000. Se ha
+querido comprobar la distorsión promedio entre las distancias proyectadas y las originales
+para una muestra de 500 pares distintos de observaciones. Para ello se ha escogido ε = 0.1
+y k = 4295 según (5.5) y se ha generado una matriz aleatoria de tamaño k×d con entradas
+gaussianas. Lo que se representa en la Figura 5.1 es el ratio entre los 500 pares de distancias
+proyectadas y originales que se puede comprobar que es aproximadamente igual a 1, como
+establece el Teorema 5.3. Además, el Teorema de Johnson-Lindestrauss proporciona una
+cota inferior para esta probabilidad de 1 − 1/n ≈ 0.99. Esto se ve representado en la
+Figura 5.1 mediante las lı́neas discontinuas horizontales y = 1 ± ε que encierran la región
+donde se encuentran los pares de individuos que cumplen el Teorema 5.3.
+
+Figura 5.1: Distorsión de 500 pares de puntos de una muestra de 150 observaciones de la
+distribución uniforme en [0, 1]d con d = 100.000
+Para generalizar esta idea, se ha calculado el promedio de observaciones de esa misma
+muestra que cumplen el Teorema 5.3 escogiendo una muestra representativa de pares de
+observaciones. Además, se ha variado ε y se ha considerado el k dado por el Teorema 5.3 y
+el dado en (5.5) para probar con diferentes situaciones. Estos resultados se han recogido en
+51
+
+la Tabla 5.1 donde se puede observar cómo en todos los casos la estimación promedio del
+porcentaje de pares de puntos cuya distorsión está próxima a 1 con una tolerancia de ε es
+del 100 % lo cual confirma los resultados teóricos del Teorema 5.3 de forma experimental.
+Se ha considerado la k dada por el Teorema 5.3 para apreciar la diferencia en la dimensión
+de proyección de los datos entre esta y la dada en (5.5) y se ha considerado un ε mayor
+para no sobreexceder el lı́mite de memoria al construir las matrices de proyección.
+ε k (con Teorema 5.3)
+% k (con cota de (5.5))
+%
+0.20
+6013 100
+1157 100
+0.17
+8323 100
+1565 100
+0.15
+10690 100
+1980 100
+Tabla 5.1: Comprobación del Teorema de Johnson-Lindestrauss para distintos ε y k
+Resumiendo, en esta sección se ha presentado el Teorema de Johnson-Lindestrauss y
+sus conclusiones que son de gran interés en Ciencia de Datos. El resultado está basado
+en el comportamiento de las matrices aleatorias como método de proyección de un conjunto de puntos a una dimensión menor conservando de forma aproximada las normas y
+las distancia entre los puntos. La dimensión del espacio de proyección es del orden del
+tamaño del conjunto de puntos e independiente de la dimensión original. Estas buenas
+caracterı́sticas han hecho del Teorema de Johnson-Lindenstrauss una herramienta fundamental en técnicas de reducción de la dimensión, especialmente en contextos donde se
+manejan grandes volúmenes de datos. Su aplicación permite, en muchas ocasiones, mejorar la eficiencia computacional sin perder información geométrica relevante, lo que lo
+convierte en un pilar teórico clave en algoritmos de aprendizaje automático, recuperación
+de información y análisis de datos de alta dimensión.
+
+5.2.
+
+Aplicaciones Teorema de Jonhson-Lindestrauss
+
+En esta sección presentaremos algunas de las principales aplicaciones del Teorema de
+Jonhson-Lindestrauss que se aprovechan de las consideraciones anteriores para proporcionar mejores resultados en contextos de alta dimensionalidad.
+
+5.2.1.
+
+Efecto de la dimensionalidad en m-vecinos más próximos
+
+Uno de los problemas más extendidos en clasificación supervisada es la obtención de
+reglas que, basadas en un conjunto de datos de entrenamiento X = {x1 , . . . , xn } ⊂ Rd
+donde cada punto xi = (xi1 , . . . , xid )⊤ , con xi1 , . . . , xid los valores que cada observación
+toma en d variables predictivas, tiene asignada una etiqueta yi ∈ Y, sean capaces de, dado
+un nuevo individuo x ∈ Rd , precedir su etiqueta. El método de clasificación supervisada
+más sencillo es la clasificación mediante los m-vecinos más próximos o m-NN (nearest
+neighbors). Este método asigna a x la etiqueta mayoritaria entre los m individuos en X
+más cercanos a x con la norma euclı́dea. Este método es ampliamente utilizado por su
+simplicidad y por su capacidad de adaptarse a caracterı́sticas locales de los datos, siendo
+especialmente efectivo en problemas de clasificación supervisada donde no se presupone
+una estructura global o distribución generadora en los datos.
+52
+
+A pesar de su utilidad, el método m-NN se ve severamente afectado en espacios de
+alta dimensión. Por ejemplo, consideremos un conjunto de datos X ⊂ [0, 1]d con n puntos
+elegidos uniformemente en [0, 1]d (es decir, observaciones generadas por una distribución
+U([0, 1]d ), y sea x ∈ [0, 1]d un nuevo punto también elegido aleatoriamente. Como demostramos en la Sección 2.2, la distancia esperada al vecino más cercano tiende a aumentar
+con d. Este fenómeno tiene efectos prácticos devastadores puesto que los vecinos “más
+cercanos” dejan de ser informativos, lo que degrada el rendimiento de los clasificadores
+basados en distancias, como m-NN. Además, los algoritmos exactos de búsqueda requieren
+O(nd) operaciones, lo cual resulta prohibitivo cuando tanto n como d son suficientemente
+elevados.
+El Teorema 5.3 puede ser de utilidad en este problema. Por ejemplo, en el artı́culo
+Ailon y Chazelle (2009) se propone una solución eficiente a este problema que usa como
+argumento principal el Teorema de Johnson-Lindestrauss. Al proyectar los datos a un
+espacio de dimensión reducida Rk con k = O(ε−2 log n), se puede realizar la búsqueda
+de vecinos con un coste mucho menor, manteniendo un control probabilı́stico sobre la
+distorsión en las distancias. Esto permite implementar algoritmos de búsqueda de vecinos
+más cercanos aproximados con garantı́as teóricas de precisión y un coste computacional
+muy inferior. Bastará encontrar la etiqueta de la proyección del punto deseado x sobre el
+espacio Rk y, con alta probabilidad, esta será la etiqueta que le corresponderá a x en el
+espacio original.
+
+5.2.2.
+
+Efecto de la dimensionalidad en m-medias
+
+Dado un conjunto de puntos X = {x1 , . . . , xn } ∈ Rd , el objetivo del algoritmo de
+k-medias es encontrar una partición {C1 , . . . , Cm } de X (es decir, C1 ∪ · · · ∪ Cm =
+{x1 , . . . , xn } y Cj ∩ Cj ′ = ∅ para j ̸= j ′ ) que minimice la función objetivo
+mı́n
+
+{C1 ,...,Cm }
+
+m X
+X
+
+∥xi − µj ∥2 ,
+
+j=1 xi ∈Cj
+
+donde µj es el centroide del clúster Cj tal que
+µj =
+
+1 X
+xi ,
+#Cj x ∈C
+i
+
+j
+
+con #Cj el cardinal del conjunto Cj . El algoritmo de m-medias es un algoritmo ampliamente utilizado en clasificación no supervisada o Análisis Clúster (Everitt et al. 2011)
+que pretende subdividir el conjunto original X en m subgrupos o clúster de observaciones
+con valores “similares” en las d variables analizadas (las d variables numéricas analizadas
+se represetan en el vector d-dimensional xi = (xi1 , . . . , xid )⊤ ). La formulación teórica y
+el algoritmo tı́picamente utilizado para implementar m-medias se basa en el cálculo de
+las distancias euclı́deas entre las observaciones y los centroides de los grupos que, en alta
+dimensión, ya sabemos que puede incurrir en problemas. Además, la alta dimensionalidad
+dificulta la interpretación de los clústeres dado que las distancias entre puntos pierden el
+carácter discriminatorio entre subgrupos, y que el costo computacional se vuelve prohibitivo.
+53
+
+En trabajos como Boutsidis, Zouzias y Drineas (2010) se demuestra cómo, con una
+combinación entre proyecciones con matrices aleatorias de entradas con distribución de
+Rademacher, se puede reducir la dimensión original d de los datos a una dimensión k =
+2
+O(k ε ) para calcular las distancias ∥xi −µj ∥2 , preservando el coste óptimo y disminuyendo
+el coste computacional, mientras que el error que se comete en las aproximaciones es del
+orden de ε con alta probabilidad.
+
+5.2.3.
+
+Efecto de la dimensionalidad en LDA para separación y
+estimación paramétrica de distribuciones normales
+
+Los ejemplos anteriores presentan problemas basados en la “maldición” de la dimensionalidad debida al cálculo de distancias entre puntos cuando d es muy grande. Sin embargo, este no es el único enfoque de aplicación del Teorema de Johnson-Lindenstrauss.
+Por ejemplo, el Teorema 5.3 puede ayudar en situaciones como el LDA.
+Si se considera un nuevo problema de clasificación supervisada con m clases (y un total
+de n observaciones) donde se supone que las clases están generadas según una distribución
+normal multivariante:
+X | Y = j ∼ N (µj , Σj ), para todo j = 1, . . . , m,
+con Y una variable aleatoria de etiquetas que toma valores en {1, . . . , m} y donde, en
+principio, los valores µj y Σj son desconocidos. La técnica de clasificación más sencilla en
+este caso es el LDA (Linear Discriminant Analysis) que asume Σj = Σ común a todas las
+clases, y busca asignar un nuevo individuo x a la clase que maximiza la probabilidad a
+posteriori (también se supone la presencia de unas probabilidades “a priori” πj conocidas
+o estimables). Lo que se consigue es separar los conjuntos de datos originales por medio
+de hiperplanos basados en la regla de Bayes y la distancia de Mahalanobis, maximizando
+la dispersión entre grupos y minimizando la dispersión en cada clase. Para ello es necesario calcular (y posteriormente invertir) la matriz de covarianzas estimador común, Σ̂,
+mediante una estimación “plug-in” que se basa en sustituir los parámetros desconocidos
+de cada grupo por sus estimaciones muestrales. Estas técnicas son muy eficaces en baja
+dimensión, pero en escenarios donde n y d son muy elevados, la matriz de covarianzas
+estimada Σ̂ suele ser singular, lo cual impide el cálculo de su inversa a la vez que eleva el
+coste computacional de su obtención. Bajo estas condiciones el modelo suele sobreajustar
+en la mayorı́a de los casos, produciendo errores de clasificación altos que imposibilitan la
+aplicación de esta técnica en contextos de alta dimensión.
+En trabajos como Cannings y Samworth (2017) se propone un enfoque del problema
+utilizando proyecciones aleatorias de dimensión k con entradas subgaussianas, a la vez que
+se estima la matriz combinada Σ̂ en el espacio proyectado, evitando conseguir una matriz
+no invertible. Los autores también demuestran cómo la tasa de mala clasificación debida
+a la clasificación en el espacio proyectado se aproxima a la tasa de mala clasificación de la
+regla de Bayes para un LDA clásico. Este enfoque mejora considerablemente la eficiencia y
+el coste computacional cuando la dimensión d y el número de observaciones n son elevadas.
+Se puede ampliar el enfoque de este problema a la estimación de las matrices de dispersión Σj distintas. En artı́culos como Marzetta, Tucci y Simon (2010) se demuestra que las
+proyecciones mediante matrices aleatorias con entradas gaussianas ayudan a estimar los
+parámetros en un espacio reducido donde la estimación es más estable. Variando la matriz
+54
+
+aleatoria de proyección, se puede obtener una estimación promediada de los parámetros
+desconocidos en el espacio proyectado que se puede usar para reconstruir la estimación
+en el espacio original con las garantı́as de concentración similares a las expuestas en este
+trabajo. Estos métodos permiten reconstruir la distribución gaussiana original que ha generado los datos, evitando la singularidad de las matrices de covarianzas y mejorando las
+estimaciones “plug-in” para recuperar los parámetros poblacionales en contextos donde
+la dimensión d impide el uso de técnicas convencionales.
+
+55
+
+

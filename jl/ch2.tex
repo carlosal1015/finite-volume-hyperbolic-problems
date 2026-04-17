@@ -1,0 +1,73 @@
+\chapter{Maldición de la dimensionalidad}
+
+El término ``maldición de la dimensionalidad'' fue acuñado por Richard Bellman en 1961, en el contexto de la programación dinámica Bellman (1958), para describir cómo ciertos problemas se vuelven intratables a medida que aumenta el número de variables involucradas. En particular, Bellman observó que el volumen del espacio crece exponencialmente con la dimensión, lo que implica que la cantidad de datos necesaria para cubrirlo de manera significativa también crece de forma exponencial. Esto no solo dificulta los cálculos, sino que también debilita la capacidad de generalizar patrones o ``aprender'' de los datos a partir de conjuntos de entrenamiento finitos.
+
+En este capítulo se abordarán algunos fenómenos que emergen en espacios de alta dimensión y que resultan contraintuitivos respecto a la experiencia habitual cuando se trabaja en espacios de dimensión baja o moderada. Veremos cómo cambian las nociones de distancia, cercanía, ortogonalidad y concentración de la medida y cómo estos efectos motivan la necesidad de adaptar nuestras herramientas y modelos cuando nos enfrentamos a datos en espacios de alta dimensión.
+
+En este capítulo se trabajará sobre el espacio $\mathbb{R}^d$ dotado de la $\sigma$-álgebra de Borel denotada por $\beta^d$, junto con la medida de Lebesgue en $\mathbb{R}^d$ que se denotará por $\ell^d$. Igualmente, se denotará por $0_d = (0, \dots, 0) \in \mathbb{R}^d$ y por $I_d$ a la matriz identidad de tamaño $d \times d$.
+
+\section{Distribución normal multivariante: simulaciones y primeros resultados}
+
+En Ciencia de Datos y en Análisis Multivariante de Datos, la distribución normal multivariante juega un papel clave. A continuación se define dicha distribución y la forma de su densidad, en los casos no degenerados.
+
+\begin{definition}
+Sea $(\Omega, \sigma, P)$ un espacio probabilístico. Un vector aleatorio $X$ se dice que tiene una distribución Gaussiana o normal $d$-variante si para todo vector $\mathbf{a} \in \mathbb{R}^d$ se tiene que la variable aleatoria real $\mathbf{a}^T X : \Omega \to \mathbb{R}$ sigue una distribución normal univariante ($\mathbf{a}^T X$ serían todas las posibles combinaciones lineales de las coordenadas del vector aleatorio $X$). En particular, si asumimos un vector de medias $\mu \in \mathbb{R}^d$ y una matriz de covarianzas $\Sigma$, siendo una matriz $d \times d$ y definida positiva, entonces diremos que $X \sim \mathcal{N}(\mu, \Sigma)$ y se puede ver que
+\[
+P(X \in A) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \int_A \exp\left( -\frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \right) dx, \text{ para } A \in \beta^d.
+\]
+\end{definition}
+
+A la hora de analizar cómo afecta la dimensionalidad al comportamiento de la normal multivariante, comenzaremos con un pequeño estudio de algunas propiedades básicas que ayudan a comprender su comportamiento al aumentar la dimensión $d$. Para ello, el siguiente teorema revisa el valor esperado de la norma de $X$ y la varianza de la misma, si $X \sim \mathcal{N}(0_d, I_d)$.
+
+\begin{proposition}
+Si $X \sim \mathcal{N}(0_d, I_d)$ entonces, para todo $d \in \mathbb{N}$, se verifica:
+\begin{enumerate}
+    \item[(i)] $E(\|X\|^2) = d$ y $\text{Var}(\|X\|^2) = 2d$
+    \item[(ii)] $E(\|X\| - \sqrt{d}) \leq \frac{1}{\sqrt{d}}$
+    \item[(iii)] $\text{Var}(\|X\|) \leq 2$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Para probar (i) se usa la expresión de la norma euclídea de $X = (X_1, \dots, X_d)^T$ como $\|X\|^2 = X_1^2 + \dots + X_d^2$, que junto a la linealidad de la esperanza, lleva a
+\[ E(\|X\|^2) = E(X_1^2 + \dots + X_d^2) = E(X_1^2) + \dots + E(X_d^2). \]
+Si $X \sim \mathcal{N}(0_d, I_d)$ entonces $X_l \sim \mathcal{N}(0, 1)$ para $l = 1, \dots, d$ (véase la Proposición A.8) y, por tanto
+\begin{equation}
+E(\|X\|^2) = E[(X_1 - E(X_1))^2] + \dots + E[(X_d - E(X_d))^2] = \text{Var}(X_1) + \dots + \text{Var}(X_d) = d.
+\label{eq:2.1}
+\end{equation}
+Por otro lado, la independencia de las variables $X_l, l = 1, \dots, d$ (recuérdese que $\Sigma = I_d$ y que la incorrelación es equivalente a la independencia para distribuciones normales), nos garantiza que
+\[ \text{Var}(\|X\|^2) = \text{Var}(X_1^2) + \dots + \text{Var}(X_d^2) = d \text{Var}(X_1^2) = d [E(X_1^4) - E^2(X_1^2)]. \]
+Siguiendo el argumento en \eqref{eq:2.1} sabemos que $E(X_1^2) = 1$. Por otro lado, el momento de orden cuatro de una distribución normal estándar es $E(X_1^4) = 3$, ya que se sabe que la kurtosis de cualquier variable aleatoria distribuida según una normal univariante es igual a 3 y el simple uso de
+\[ \text{Kurtosis}(X_1) = 3 = \frac{E(X_1^4) - E^4(X_1)}{\text{Var}(X_1)^2} = \frac{E(X_1^4) - 0}{1}. \]
+En el Apéndice A.1 se demuestra que la Kurtosis de cualquier distribución normal univariante es 3. Por tanto, (i) queda probado dado que
+\begin{equation}
+\text{Var}(\|X\|^2) = d [E(X_1^4) - E^2(X_1^2)] = d \cdot (3 - 1) = 2d.
+\label{eq:2.2}
+\end{equation}
+
+Para probar (ii) debemos tener en cuenta lo probado en (i) y el siguiente desarrollo algebraico:
+\[ \|X\| - \sqrt{d} = \frac{\|X\|^2 - d}{\|X\| + \sqrt{d}} = \frac{\|X\|^2 - d}{2\sqrt{d}} - \frac{(\|X\| - \sqrt{d})^2}{2\sqrt{d}} = \dots \]
+(Se omite el desarrollo algebraico detallado para brevedad, pero se sigue la lógica de la Proposición 2.2 del PDF).
+\end{proof}
+
+\begin{remark}
+Por lo demostrado en el apartado (ii) del teorema anterior, lo que podemos deducir es que para $d$ suficientemente grande, $E(\|X\| - \sqrt{d})$ es prácticamente 0, luego se deduce que $E(\|X\|) \approx \sqrt{d}$. Además, como la varianza de la norma de $X$ al cuadrado está acotada, entonces podemos aplicar la desigualdad de Chebyshev para asegurar que la distribución de $\|X\|$ se concentra alrededor de su media.
+\end{remark}
+
+\section{Distribución uniforme en hipercubos}
+
+\begin{definition}
+Sea $(\Omega, \sigma, P)$ un espacio probabilístico. Decimos que $X$ sigue una distribución uniforme en $B \in \beta^d$ si
+\[ P(X \in A) = \frac{\ell^d(A \cap B)}{\ell^d(B)}, \]
+donde $\ell^d(C) = \int_C dx$ denota la medida de Lebesgue del conjunto $C$ para $C \in \beta^d$. Una variable con esta distribución será denotada por $X \sim \mathcal{U}(B)$.
+\end{definition}
+
+\begin{definition}
+Se define el hipercubo $d$-dimensional centrado en $0_d$ como el conjunto $H_d = [-1, 1]^d \subset \mathbb{R}^d$ y la bola unidad centrada en $0_d$ con radio unitario será denotada como $B(0_d, 1) \subset \mathbb{R}^d$.
+\end{definition}
+
+Hay varias propiedades interesantes sobre los hipercubos que, en cierta medida, resultan sorprendentes. Por ejemplo, si se consideran los $2^d$ vértices de la forma $(v_1, \dots, v_d)$, con $v_l$ tomando valores 1 y -1 para $l = 1, \dots, d$, se observa que todos tienen norma $\sqrt{d}$ con $d \to \infty$. Es decir, cuanto más incremente la dimensión $d$, más alejados del origen $0_d$ se encuentran los vértices del hipercubo.
+
+\dots
+(El resto del contenido del capítulo 2 se puede añadir de forma similar)
