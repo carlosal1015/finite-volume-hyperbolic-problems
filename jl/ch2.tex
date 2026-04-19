@@ -11,7 +11,7 @@ En este capítulo se trabajará sobre el espacio $\mathbb{R}^d$ dotado de la $\s
 En Ciencia de Datos y en Análisis Multivariante de Datos, la distribución normal multivariante juega un papel clave. A continuación se define dicha distribución y la forma de su densidad, en los casos no degenerados.
 
 \begin{definition}
-Sea $(\Omega, \sigma, P)$ un espacio probabilístico. Un vector aleatorio $X$ se dice que tiene una distribución Gaussiana o normal $d$-variante si para todo vector $\mathbf{a} \in \mathbb{R}^d$ se tiene que la variable aleatoria real $\mathbf{a}^T X : \Omega \to \mathbb{R}$ sigue una distribución normal univariante ($\mathbf{a}^T X$ serían todas las posibles combinaciones lineales de las coordenadas del vector aleatorio $X$). En particular, si asumimos un vector de medias $\mu \in \mathbb{R}^d$ y una matriz de covarianzas $\Sigma$, siendo una matriz $d \times d$ y definida positiva, entonces diremos que $X \sim \mathcal{N}(\mu, \Sigma)$ y se puede ver que
+Sea $\left(\Omega,\sigma,\mathbb{P}\right)$ un espacio probabilístico. Un vector aleatorio $X$ se dice que tiene una distribución Gaussiana o normal $d$-variante si para todo vector $\mathbf{a} \in \mathbb{R}^d$ se tiene que la variable aleatoria real $\mathbf{a}^T X : \Omega \to \mathbb{R}$ sigue una distribución normal univariante ($\mathbf{a}^T X$ serían todas las posibles combinaciones lineales de las coordenadas del vector aleatorio $X$). En particular, si asumimos un vector de medias $\mu \in \mathbb{R}^d$ y una matriz de covarianzas $\Sigma$, siendo una matriz $d \times d$ y definida positiva, entonces diremos que $X \sim \mathcal{N}(\mu, \Sigma)$ y se puede ver que
 \[
 P(X \in A) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \int_A \exp\left( -\frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \right) dx, \text{ para } A \in \beta^d.
 \]
@@ -58,7 +58,7 @@ Por lo demostrado en el apartado (ii) del teorema anterior, lo que podemos deduc
 \section{Distribución uniforme en hipercubos}
 
 \begin{definition}
-Sea $(\Omega, \sigma, P)$ un espacio probabilístico. Decimos que $X$ sigue una distribución uniforme en $B \in \beta^d$ si
+Sea $\left(\Omega,\sigma,\mathbb{P}\right)$ un espacio probabilístico. Decimos que $X$ sigue una distribución uniforme en $B \in \beta^d$ si
 \[ P(X \in A) = \frac{\ell^d(A \cap B)}{\ell^d(B)}, \]
 donde $\ell^d(C) = \int_C dx$ denota la medida de Lebesgue del conjunto $C$ para $C \in \beta^d$. Una variable con esta distribución será denotada por $X \sim \mathcal{U}(B)$.
 \end{definition}

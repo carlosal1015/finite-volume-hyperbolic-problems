@@ -1,0 +1,180 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out',
+% arara: --> 'pdf', 'snm', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out',
+% arara: --> 'snm', 'toc']
+% arara: --> }
+\documentclass[
+    12pt,
+    aspectratio=1610,
+    c,
+    spanish,
+    intlimits,
+    handout,
+    leqno,
+    % noamsthm,
+    professionalfonts,
+]{beamer}
+\usepackage[spanish]{babel}
+\usetheme[
+	style=academic,
+	palette=oxford,
+	titlealign=center,
+	mathface=pagella,
+	allserif]{Celestia}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{references.bib}
+
+\setbeamertemplate{bibliography item}{%
+	\ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+		or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+		or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+	{\setbeamertemplate{bibliography item}[book]}
+	{\ifentrytype{online}
+		{\setbeamertemplate{bibliography item}[online]}
+		{\setbeamertemplate{bibliography item}[article]}}%
+	\usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+{\list{}
+	{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+		\setlength{\leftmargin}{\labelwidth}%
+		\setlength{\labelsep}{\biblabelsep}%
+		\addtolength{\leftmargin}{\labelsep}%
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}}}
+{\endlist}
+{\item}
+
+\title{Disminución de la dimensionalidad a través de proyecciones aleatorias}
+\subtitle{Machine Learning para Matemáticos}
+\author{Fidel Jara Huanca}
+\institute{Instituto de Matemática y Ciencias Afines}
+\date{23 de abril de 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\begin{frame}[label=toc]\transblindsvertical
+	\frametitle{\contentsname}
+
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Planteamiento del problema}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{alertblock}{}
+		Describir, explicar el teorema de Johnson-Lindenstrauss que se
+		justifica en reducción de la dimensionalidad en el contexto de
+		machine learning.
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[width=.65\paperwidth]{jl}
+		\end{figure}
+	\end{alertblock}
+\end{frame}
+
+\section{Revisión bibliográfica}
+
+\begin{frame}
+	\frametitle{\insertsection}
+	Realizaremos un estudio acerca de
+	\begin{itemize}
+		\item
+
+		      Maldición de la dimensionalidad.
+
+		\item
+
+		      Distribución uniforme en la bola unidad en alta dimensión.
+
+		\item
+
+		      Distribución normal multivariante en alta dimensión.
+	\end{itemize}
+	usando el texto de curso~\cite{Wegner2024}.
+	\begin{refsection}
+		\nocite{Wegner2024}
+		\nocite{Johnson1984}
+		\nocite{Dasgupta2003}
+		\printbibliography[heading=none]
+	\end{refsection}
+\end{frame}
+
+\section{Desarrollo matemático}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{itemize}
+		\item
+
+		      Teorema de la proyección aleatoria.
+
+		\item
+
+		      Teorema de Johnson-Lindenstrauss.
+	\end{itemize}
+
+\end{frame}
+
+\section{Experimentos numéricos en Python}
+
+\begin{frame}
+	\frametitle{\insertsection}
+
+	\begin{itemize}
+		\item
+
+		      Distorsión de las distancias proyectadas.
+
+		\item
+
+		      Comprobación del teorema Johnson-Lindenstrauss para distintos $\varepsilon$ y $k$.
+
+		\item
+
+		      Efecto de la dimensionalidad en $m$-vecinos más próximos.
+
+		\item
+
+		      Efecto de la dimensionalidad en $m$-medias.
+
+		\item
+
+		      Efectos de la dimensionalidad en análisis discriminatorio lineal (LDA) para separación y estimación paramétrica de distribuciones normales.
+
+	\end{itemize}
+\end{frame}
+
+\end{document}
