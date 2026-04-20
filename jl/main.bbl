@@ -1,0 +1,117 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{Bellman1958}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=7bb51e859e70aaedef4ed1f3bb67779b}{%
+           family={Bellman},
+           familyi={B\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{fullhash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{fullhashraw}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{bibnamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authorbibnamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authornamehash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authorfullhash}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \strng{authorfullhashraw}{7bb51e859e70aaedef4ed1f3bb67779b}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dynamic programming}
+      \field{year}{1958}
+    \endentry
+    \entry{Gut2013}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=0a158dec58d0843364ab135af046a928}{%
+           family={Gut},
+           familyi={G\bibinitperiod},
+           given={Allan},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Springer New York}%
+      }
+      \strng{namehash}{0a158dec58d0843364ab135af046a928}
+      \strng{fullhash}{0a158dec58d0843364ab135af046a928}
+      \strng{fullhashraw}{0a158dec58d0843364ab135af046a928}
+      \strng{bibnamehash}{0a158dec58d0843364ab135af046a928}
+      \strng{authorbibnamehash}{0a158dec58d0843364ab135af046a928}
+      \strng{authornamehash}{0a158dec58d0843364ab135af046a928}
+      \strng{authorfullhash}{0a158dec58d0843364ab135af046a928}
+      \strng{authorfullhashraw}{0a158dec58d0843364ab135af046a928}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-4614-4708-5}
+      \field{title}{Probability: A Graduate Course: A Graduate Course}
+      \field{year}{2013}
+      \verb{doi}
+      \verb 10.1007/978-1-4614-4708-5
+      \endverb
+    \endentry
+    \entry{Wegner2024}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=0286d7beba0c71b32c651768da64a5f1}{%
+           family={Wegner},
+           familyi={W\bibinitperiod},
+           given={Sven\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{fullhash}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{fullhashraw}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{bibnamehash}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{authorbibnamehash}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{authornamehash}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{authorfullhash}{0286d7beba0c71b32c651768da64a5f1}
+      \strng{authorfullhashraw}{0286d7beba0c71b32c651768da64a5f1}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-662-69426-8}
+      \field{title}{Mathematical Introduction to Data Science}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.1007/978-3-662-69426-8
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

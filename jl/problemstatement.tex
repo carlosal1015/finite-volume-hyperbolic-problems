@@ -1,15 +1,50 @@
 \chapter{Planteamiento del problema}
 
-Considerando un espacio de probabilidad
-$\left(\Omega,\Sigma,\mathbb{P}\right)$,
-donde $\Omega$ es un espacio muestral, $\Sigma$ es una
-$\sigma$-álgebra y $\mathbb{P}$ es una medida de probabilidad.
+En el ámbito de la matemática computacional y el análisis de datos
+masivos, el estudio de conjuntos de puntos en espacios de alta
+dimensión, $\mathbb{R}^d$ con $d$ elevado, presenta desafíos teóricos
+y prácticos significativos.
+Gran parte de la metodología clásica en Análisis Multivariante se
+fundamenta en la hipótesis de normalidad y en el uso de métricas
+euclídeas para la clasificación y el aprendizaje automático
+(\textit{Machine Learning}).
+Sin embargo, la eficacia de estos métodos se ve comprometida por la
+denominada \textit{maldición de la dimensionalidad}~\cite{Bellman1958},
+fenómeno que describe cómo el crecimiento exponencial del volumen del
+espacio diluye la noción de cercanía, afectando la operatividad de
+algoritmos basados en distancias, como los $m$-vecinos más próximos o
+el Análisis Discriminante Lineal (LDA).
 
-$U$ es la matriz aleatoria de orden $k\times d$, donde cada elemento
-de dicha matriz sigue una distribución normal
-$\mathcal{N}\left(0,1\right)$.
-$\symbf{x}_{1},\dotsc,\symbf{x}_{n}$ son $n$ puntos que están en el
-espacio $\mathbb{R}^{d}$.
+Como respuesta a estas limitaciones, surge el Teorema de
+Johnson-Lindenstrauss como una herramienta fundamental para la
+reducción de la dimensionalidad.
+Este resultado garantiza que es posible proyectar un conjunto finito
+de puntos a un espacio de dimensión mucho menor preservando, casi de
+manera isométrica, las distancias relativas entre ellos.
+
+\section{Marco formal y objetivos}
+
+Para el desarrollo de este trabajo, se fija un espacio de
+probabilidad $\left(\Omega,\Sigma,\mathbb{P}\right)$ y se considera
+un conjunto $\mathcal{X}=\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\}$
+compuesto por $n$ puntos en el espacio euclídeo $\mathbb{R}^{d}$.
+
+Definimos una matriz aleatoria $U\in\mathbb{R}^{k\times d}$ de orden
+$k \times d$, donde cada entrada $u_{ij}$ es una variable aleatoria
+independiente e idénticamente distribuida que sigue una distribución normal estándar,
+$u_{ij}\sim\mathcal{N}\left(0,1\right)$.
+El objetivo central de este trabajo es describir y demostrar la validez del Teorema de
+Johnson-Lindenstrauss, el cual establece que para cualquier conjunto de $n$ puntos,
+existe una proyección lineal hacia un espacio de dimensión $k\approx\mathcal{O}(\varepsilon^{-2}\log n)$
+que preserva las distancias euclídeas dentro de un factor de distorsión $(1\pm\varepsilon)$.
+% Considerando un espacio de probabilidad, donde $\Omega$ es un espacio muestral, $\Sigma$ es una
+% $\sigma$-álgebra y $\mathbb{P}$ es una medida de probabilidad.
+
+% $U$ es la matriz aleatoria de orden $k\times d$, donde cada elemento
+% de dicha matriz sigue una distribución normal
+% $\mathcal{N}\left(0,1\right)$.
+% $\symbf{x}_{1},\dotsc,\symbf{x}_{n}$ son $n$ puntos que están en el
+% espacio $\mathbb{R}^{d}$.
 Nuestro objetivo es describir y explicar la utilidad del teorema de
 Johnson-Lindenstrauss en el contexto de tratamiento de datos de alta
 dimensión.
@@ -17,8 +52,26 @@ dimensión.
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=.65\paperwidth]{jl.png}
-	\caption{}
+	\caption{Esquema de la proyección aleatoria de Johnson-Lindenstrauss: reducción de la dimensionalidad preservando la estructura métrica de los datos.}
 \end{figure}
+
+\section{Estructura del trabajo}
+
+Partiendo de los fundamentos de concentración de medida discutidos
+previamente en el curso, este trabajo se estructura de la siguiente
+manera:
+
+\begin{itemize}
+	\item El \textbf{Capítulo 2} analiza la maldición de la dimensionalidad, ilustrando mediante simulaciones numéricas cómo impacta en la distribución normal multivariante y
+	      en la dispersión de los datos.
+	\item El \textbf{Capítulo 3} se dedica íntegramente al \textbf{Teorema de Johnson-Lindenstrauss}, abordando su enunciado formal, su demostración mediante proyecciones
+	      gaussianas y el análisis de las cotas de error.
+	\item El \textbf{Capítulo 4} explora las aplicaciones prácticas del teorema en algoritmos de clasificación y reducción de costos computacionales en problemas de alta
+	      complejidad.
+\end{itemize}
+
+Finalmente, se presentan los resultados obtenidos mediante implementaciones en lenguaje estadístico, basadas en la literatura de referencia~\cite{Wegner2024}, que permiten
+validar empíricamente la robustez de las proyecciones aleatorias en el tratamiento de datos de alta dimensión.
 
 % Gran parte de los procedimientos clásicos en Análisis Multivariante
 % de Datos (Peña 2002; Izenman 2008) se basan en la hipótesis de

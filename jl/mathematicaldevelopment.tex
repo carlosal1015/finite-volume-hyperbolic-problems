@@ -3,10 +3,12 @@
 \section{Algunos resultados a tener en cuenta}
 
 En los capítulos 8, 9, y 10 del libro de texto~\cite{Wegner2024}
-se presentan algunas características no directamente esperables de las
-distribuciones más importantes en Estadística cuando se trabaja en espacios de alta dimensión.
-Sin embargo, algunos fenómenos, como la concentración de medida o la ortogonalidad de vectores, pueden resultar
-de utilidad en Análisis de Datos.
+se presentan algunas características no directamente esperables de
+las distribuciones más importantes en Estadística cuando se trabaja
+en espacios de alta dimensión.
+Sin embargo, algunos fenómenos, como la concentración de medida o la
+ortogonalidad de vectores, pueden resultar de utilidad en Análisis de
+Datos.
 
 \section{Proyecciones aleatorias}
 
@@ -17,18 +19,23 @@ en esta sección se introducen matrices aleatorias del tipo
 	U\colon\Omega\to\mathbb{R}^{k\times d},\quad
 	U=
 	\begin{bmatrix}
-		U_{11} & \cdots & U_{1d} \\
+		u_{11} & \cdots & u_{1d} \\
 		\vdots & \ddots & \vdots \\
-		U_{k1} & \cdots & U_{kd}
+		u_{k1} & \cdots & u_{kd}
 	\end{bmatrix},
 \end{equation*}
-con $U_{ij}\sim\mathcal{N}\left(0,1\right)$, $i=1,\dotsc, k$ y $j=1,\dotsc,d$,
-variables aleatorias normales unidimensionales independientes.
-Esta matriz aleatoria será denotada por $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
-Algunas propiedades que tiene la matriz aleatoria están basadas en el comportamiento de sus filas como vectores normales multivariantes.
-Si se denotan las filas de $U$ como $U_{i}=\left[U_{i1},\dotsc,U_{id}\right]^{T}$, para $i=1,\dotsc,k$,
-entonces todas ellas son vectores aleatorios independientes con distribución $\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$
-(ver Proposición A.8) y se pueden explotar los teoremas  8.2, 8.3 y 8.4 del Capítulo 8 del libro de texto y,
+con $u_{ij}\sim\mathcal{N}\left(0,1\right)$, $i=1,\dotsc, k$ y
+$j=1,\dotsc,d$, variables aleatorias normales unidimensionales
+independientes.
+Esta matriz aleatoria será denotada por
+$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+Algunas propiedades que tiene la matriz aleatoria están basadas en el
+comportamiento de sus filas como vectores normales multivariantes.
+Si se denotan las filas de $U$ como
+$U_{i}=\left[U_{i1},\dotsc,U_{id}\right]^{T}$, para $i=1,\dotsc,k$,
+entonces todas ellas son vectores aleatorios independientes con
+distribución $\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ (ver Proposición~\ref{prop:independence})
+y se pueden explotar los teoremas  8.2, 8.3 y 8.4 del Capítulo 8 del libro de texto y,
 a su vez, los resultados del Capítulo 10, cuando $d$ sea elevado.
 Por ejemplo, si usamos el Teorema 10.7 de Ortogonalidad Gaussiana, se tiene que las filas de la matriz $U$ normalizadas son ``aproximadamente''
 ortogonales unas a otras.
@@ -46,7 +53,7 @@ $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$, además que ella tiene l
 ortonormalidad, de forma aproximada, se mantienen también, de forma
 aproximada, las distancias entre datos en el espacio original.
 
-\begin{theorem}[Teorema de la Proyección aleatoria]
+\begin{theorem}[Teorema de la Proyección aleatoria]\label{thm:projection}
 	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
 	probabilidad y, para $k<d$ sea $U\colon\Omega\to\mathbb{R}^{k\times d}$
 	una matriz aleatoria con $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
@@ -74,32 +81,46 @@ aproximada, las distancias entre datos en el espacio original.
 
 \begin{proof}
 	En primer lugar, se debe tener en cuenta que el producto matriz por
-	vector de $U$ por $\mathbf{x} \in \mathbb{R}^d$ da como resultado un
+	vector de $U$ por $\symbf{x} \in \mathbb{R}^d$ da como resultado un
 	vector en $\mathbb{R}^k$ que contiene los productos escalares entre
-	cada vector fila de la matriz $U$, denotados por $U_i$, con el vector $\mathbf{x}$. Es decir,
+	cada vector fila de la matriz $U$, denotados por $U_i$, con el vector $\symbf{x}$. Es decir,
 	$$
-		U \mathbf{x}=\left[\left\langle U_1, \mathbf{x}\right\rangle, \ldots,\left\langle U_k, \mathbf{x}\right\rangle\right]^T .
+		U \symbf{x}=\left[\left\langle U_1, \symbf{x}\right\rangle, \ldots,\left\langle U_k, \symbf{x}\right\rangle\right]^T .
 	$$
 
-	Ahora, fijado $\mathbf{x} \in \mathbb{R}^d \backslash\left\{\mathbf{0}_d\right\}$, se puede considerar el vector
-	$U\frac{\mathbf{x}}{\|\mathbf{x}\|}$, cuya coordenada $i$-ésima es
+	Ahora, fijado $\symbf{x} \in \mathbb{R}^{d}\backslash\left\{\symbf{0}_d\right\}$, se puede considerar el vector
+	$U\frac{\symbf{x}}{\|\symbf{x}\|}$, cuya coordenada $i$-ésima es
 	$$
-		\left(U\frac{\mathbf{x}}{\|\mathbf{x}\|}\right)_i=\left\langle U_i, \frac{\mathbf{x}}{\|\mathbf{x}\|}\right\rangle=\sum_{j=1}^d U_{i j} \frac{x_i}{\|\mathbf{x}\|}
+		{\left(
+				U\frac{\symbf{x}}{\|\symbf{x}\|}
+				\right)}_{i}=
+		\left\langle
+		U_i,
+		\frac{\symbf{x}}{\|\symbf{x}\|}
+		\right\rangle=
+		\sum_{j=1}^{d}
+		u_{ij}
+		\frac{x_i}{\|\symbf{x}\|}
 	$$
-	Usando que $U_{i j} \sim \mathcal{N}(0,1)$ para todo $(i, j)$, se tiene que
-	$\left(U\frac{\mathbf{x}}{\|\mathbf{x}\|}\right)_i \sim \mathcal{N}(0,1)$ (ver Proposición A. 4 luego, junto a la independencia de los $U_{i j}$, se tiene $U\frac{\mathbf{x}}{\|\mathbf{x}\|} \sim \mathcal{N}\left(\mathbf{0}_d, I_d\right)$ (ver Proposición A.8). Se puede utilizar ahora el Teorema 10.4 del libro de texto (Anillo Gaussiano) para obtener
+	Usando que $u_{ij}\sim\mathcal{N}\left(0,1\right)$ para todo $\left(i,j\right)$, se tiene que
+	$\left(U\frac{\symbf{x}}{\|\symbf{x}\|}\right)_i \sim \mathcal{N}(0,1)$
+	(ver Proposición~\ref{prop:linearcombination} luego, junto a la independencia de los $u_{i j}$, se tiene $U\frac{\symbf{x}}{\|\symbf{x}\|} \sim \mathcal{N}\left(\symbf{0}_d, I_d\right)$ (ver Proposición~\ref{prop:independence}).
+	Por tanto, usando el Teorema 10.4 del libro de texto (Anillo Gaussiano) se obtiene
 	$$
-		P[|\|U \mathbf{x}\|-\sqrt{k}\|\mathbf{x}\|| \leq \varepsilon \sqrt{k} \cdot\|\mathbf{x}\|]=P\left[\left|\left\|U \frac{\mathbf{x}}{\|\mathbf{x}\|}\right\|-\sqrt{k}\right| \leq \varepsilon \sqrt{k}\right] \geq 1-2\exp\left(k\frac{\varepsilon^{2}}{16}\right)
+		P[|\|U \symbf{x}\|-\sqrt{k}\|\symbf{x}\|| \leq
+				\varepsilon\sqrt{k} \cdot\|\symbf{x}\|]=P\left[\left|\left\|U \frac{\symbf{x}}{\|\symbf{x}\|}\right\|-\sqrt{k}\right| \leq \varepsilon \sqrt{k}\right] \geq 1-2\exp\left(-k\frac{\varepsilon^{2}}{16}\right)
 	$$
 	En esta acotación se ha aplicado dicho teorema con $d=k$ y $\varepsilon=\varepsilon \sqrt{k}$.
 	Nótese que se cumple la hipótesis $0<\varepsilon \sqrt{k} \leq \sqrt{k}$ dado que $0<\varepsilon \leq 1$.
 \end{proof}
-Puesto que $\sqrt{k}$ es fijo a lo largo de toda la prueba del Teorema 2.2.1, una reformulación más habitual de este resultado es
-\begin{equation*}
-	P[|\|\frac{1}{\sqrt{k}}U\frac{\mathbf{x}}{\|\mathbf{x}\|}\|-1| \leq \varepsilon]
+Puesto que $\sqrt{k}$ es fijo a lo largo de toda la prueba del Teorema~\ref{thm:projection}, una reformulación más habitual de este resultado es
+\begin{equation}
+	\mathbb{P}[|\|\frac{1}{\sqrt{k}}U\frac{\symbf{x}}{\|\symbf{x}\|}\|-1| \leq \varepsilon]
 	\geq 1-
-	2\exp\left(-k\frac{\varepsilon^{2}}{16}\right)
-\end{equation*}
+	2\exp
+	\left(-k\frac{\varepsilon^{2}}{16}\right).
+\end{equation}
+
 \begin{definition}
 	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
 	probabilidad y, para $k<d$, sea
@@ -118,22 +139,23 @@ Puesto que $\sqrt{k}$ es fijo a lo largo de toda la prueba del Teorema 2.2.1, un
 \end{definition}
 Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es una proyección en el sentido del
 álgebra lineal, pues no necesariamente son matrices ortonormales.
-Con esta notación, se puede reformular la conclusión del Teorema 2.3.1 como sigue:
-\begin{equation*}
+Con esta notación, se puede reformular la conclusión del Teorema~\ref{thm:projection}
+como sigue:
+\begin{equation}
 	\begin{split}
 		\forall\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}
 		\text{ con }
 		0<\varepsilon\leq 1
 		\text{ y }
 		U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right): \\
-		P[\left|\|T_{U\left(\omega\right)}\left(\mathbf{x}\right)\|-\|\mathbf{x}\|\right|\leq\varepsilon\|\mathbf{x}\|]
+		P[\left|\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\|-\|\symbf{x}\|\right|\leq\varepsilon\|\symbf{x}\|]
 		\geq 1-
 		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right)
 	\end{split},
-\end{equation*}
+\end{equation}
 se observa que con alta probabilidad
 \begin{equation*}
-	\frac{\left\|T_{U\left(\omega\right)}\left(\mathbf{x}\right)\right\|}{\left\|x\right\|}\approx 1.
+	\frac{\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|}{\left\|x\right\|}\approx 1.
 \end{equation*}
 Por tanto, de cierta forma, la proyección de Johnson-Lindenstrauss mantiene prácticamente invariante la norma de cada $\symbf{x}\in\mathbb{R}^{d}$.
 
@@ -142,7 +164,7 @@ Por tanto, de cierta forma, la proyección de Johnson-Lindenstrauss mantiene pr�
 El siguiente teorema de Johnson-Lindenstrauss en el contexto probabilístico establece lo que sucede cuando consideramos
 las distancias entre pares de puntos tras usar la proyección de Johnson-Lindenstrauss.
 
-\begin{theorem}[Teorema de Johnson-Lindenstrauss]
+\begin{theorem}[Teorema de Johnson-Lindenstrauss~\cite{Wegner2024}]\label{thm:johnson-lindenstrauss}
 	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
 	probabilidad y sea además $0<\varepsilon<1$, $n\geq 1$ y
 	$k\geq\frac{48}{\varepsilon^2}\log n$.
@@ -176,104 +198,363 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 
 
 \begin{proof}
-	Para cada $i\neq j$ se define $\mathbf{x}=\mathbf{x}_i-\mathbf{x}_{j}$ y se aplica el Teorema 2.2.1 para acotar
-	$\mathbb{P}_{i,j}$ como sigue:
-	\begin{align*}
+	Para cada $i\neq j$ se define
+	$\symbf{x}\coloneqq\symbf{x}_i-\symbf{x}_{j}$ y se aplica el
+	Teorema~\ref{thm:projection} para acotar $\mathbb{P}_{i,j}$ como sigue:
+	\begin{align}
 		\mathbb{P}_{i,j} & =
 		\mathbb{P}
-		\left[(1-\varepsilon)
+		\left[
+			\left(1-\varepsilon\right)
 			\left\|
-			\mathbf{x}_{i}-
-			\mathbf{x}_{j}
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
 			\right\|\leq
 			\left\|
-			T_{U\left(\omega\right)}\left(\mathbf{x}_{i}\right)-
-			T_{U\left(\omega\right)}\left(\mathbf{x}_{j}\right)\right\|
+			T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)\right\|
 			\leq
 			\left(1+\varepsilon\right)
 			\left\|
-			\mathbf{x}_{i}-
-			\mathbf{x}_{j}
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
 			\right\|
-		\right]                                                                                                                                \\
+		\right]        \notag                  \\
 		                 & =
 		\mathbb{P}
 		\left[
 			\left(1-\varepsilon\right)
-			\left\|\mathbf{x}\right\|\leq
-			\left\|T_{U\left(\omega\right)}\left(\mathbf{x}\right)\right\|\leq
+			\left\|\symbf{x}\right\|\leq
+			\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|\leq
 			\left(1+\varepsilon\right)
-			\left\|\mathbf{x}\right\|
-		\right]                                                                                                                                \\
+			\left\|\symbf{x}\right\|
+		\right]           \notag               \\
 		                 & =
 		\mathbb{P}
 		\left[
-		\left|\left\|T_{U\left(\omega\right)}\left(\mathbf{x}\right)\right\|-\|\mathbf{x}\|\right| \leq \varepsilon \cdot\|\mathbf{x}\|\right] \\
+			\left|\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|-\|\symbf{x}\|\right| \leq
+		\varepsilon\|\symbf{x}\|\right] \notag \\
 		                 & \geq
 		1-
-		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).
-		\tag{2.3}
-	\end{align*}
-	Puesto que hay $n$ puntos en el conjunto $\left\{\mathbf{x}_1, \ldots, \mathbf{x}_n\right\}$, existen $\binom{n}{2} \leq \frac{n^2}{2}$ pares distintos de puntos,
-	por tanto, se puede acotar la probabilidad $\mathbb{P}$ teniendo en cuenta 2.3 como sigue:
+		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).\label{eq:inequality}
+	\end{align}
+	Puesto que hay $n$ puntos en el conjunto
+	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}$, existen
+	$\binom{n}{2}\leq\frac{n^{2}}{2}$ pares distintos de puntos, por
+	tanto, se puede acotar la probabilidad $\mathbb{P}$ teniendo en
+	cuenta~\eqref{eq:inequality} como sigue:
 	\begin{align*}
 		 &
 		\mathbb{P}
 		\left[
 			\left(1-\varepsilon\right)
 			\left\|
-			\mathbf{x}_{i}-
-			\mathbf{x}_{j}
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
 			\right\|\leq
 			\left\|
-			T_{U\left(\omega\right)}\left(\mathbf{x}_{i}\right)-
-			T_{U\left(\omega\right)}\left(\mathbf{x}_{j}\right)
+			T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
 			\right\|\leq
 			\left(1+\varepsilon\right)
-			\left\|\mathbf{x}_{i}-\mathbf{x}_{j}\right\|
-		\text { para todo } i,j\right]=                                                                                                                                                                                   \\
+			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|
+		\text { para todo } i,j\right]=               \\
 		 & =
 		1-\mathbb{P}
-		\left[\bigcup_{i, j}\left\{\left|\left\|T_U \mathbf{x}_i-T_U \mathbf{x}_{j}\right\|-\left\|\mathbf{x}_i-\mathbf{x}_{j}\right\|\right|>\varepsilon \cdot\left\|\mathbf{x}_i-\mathbf{x}_{j}\right\|\right\}\right]= \\
-		 & =1-\sum_{i \neq j}\left(1-P_{i, j}\right) \geq 1-\sum_{i \neq j} 2 e^{-k \varepsilon^2 / 16} \geq 1-\frac{n^2}{2} 2 e^{-k \varepsilon^2 / 16} \geq                                                             \\
-		 & \geq 1-n^2 \cdot e^{-\left(\frac{48}{\varepsilon^2} \log n\right) \varepsilon^2 / 16} \geq 1-n^2 \cdot e^{\log \left(n^{-3}\right)}=1-\frac{1}{n} \tag{5.4}
+		\left[
+			\bigcup_{i,j}
+			\left\{
+			\left|
+			\left\|
+			T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+			\right\|-
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|
+			\right|>
+			\varepsilon
+			\left\|
+			\symbf{x}_{i}-\symbf{x}_{j}
+			\right\|
+			\right\}
+		\right].                                      \\
+		 & =
+		1-
+		\sum_{i\neq j}
+		\left(1-\mathbb{P}_{i,j}\right)\geq
+		1-\sum_{i\neq j}
+		2\exp\left(-k\frac{\varepsilon^2}{16}\right)\geq
+		1-\frac{n^2}{2}
+		2\exp\left(-k\frac{\varepsilon^2}{16}\right). \\
+		 & \geq
+		1-n^{2}
+		\exp
+		\left(
+		-\left(\frac{48}{\varepsilon^2}\log n\right)
+		\frac{\varepsilon^2}{16}
+		\right)\geq
+		1-
+		n^{2}\exp\left(\log\left(n^{-3}\right)\right)=
+		1-\frac{1}{n}.
 	\end{align*}
 \end{proof}
 
 \begin{remark}
-	Para aplicar el Teorema 2.3.1 (de Johnson-Lindestrauss) correctamente se debe interpretar la relación
-	que existe entre las distintas constantes que aparecen en el enunciado:
-	$n$ tamaño de la muestra en consideración, $d$ dimensión original del conjunto de puntos y
-	$k$ dimensión a la que se pretende proyectar los puntos.
-	En particular, $k\geq\frac{48}{\varepsilon^{2}}\log n$ crece de forma logarítmica con respecto a $n$
-	e inversamente proporcional al cuadrado de $\varepsilon$, lo cual quiere decir que conforme más grande sea el tamaño muestral $n$ y más pequeño
-	sea $\varepsilon$ más grande será la dimensión $k$ a la que se debe proyectar.
+	Para aplicar el Teorema~\ref{thm:johnson-lindenstrauss}
+	correctamente se debe interpretar la relación que existe entre las
+	distintas constantes que aparecen en el enunciado:
+	$n$ tamaño de la muestra en consideración, $d$ dimensión original
+	del conjunto de puntos y $k$ dimensión a la que se pretende
+	proyectar los puntos.
+	En particular, $k\geq\frac{48}{\varepsilon^{2}}\log n$ crece de
+	forma logarítmica con respecto a $n$ e inversamente proporcional al
+	cuadrado de $\varepsilon$, lo cual quiere decir que conforme más
+	grande sea el tamaño muestral $n$ y más pequeño sea $\varepsilon$
+	más grande será la dimensión $k$ a la que se debe proyectar.
 \end{remark}
 
 \begin{remark}
-	La clave está en que la dimensión proyectada $k$ no depende de la dimensión original $d$, solo depende de $n$ y $\varepsilon$.
-	El teorema de Johnson-Lindestrauss garantiza que, al proyectar un conjunto de $n$ puntos desde un espacio de
-	alta dimensión a un subespacio euclídeo de dimensión $k\geq\frac{48}{\varepsilon^{2}}\log n$, es posible conservar las distancias entre todos los pares de puntos
-	con un error de a lo sumo $\varepsilon$, y esto implica que la estructura geométrica del conjunto se
-	preserva casi idénticamente por la proyección de Johnson-Lindestrauss $T_{U\left(\omega\right)}$.
+	La clave está en que la dimensión proyectada $k$ no depende de la
+	dimensión original $d$, solo depende de $n$ y $\varepsilon$.
+	El Teorema~\ref{thm:johnson-lindenstrauss} garantiza que, al
+	proyectar un conjunto de $n$ puntos desde un espacio de alta
+	dimensión a un subespacio euclídeo de dimensión
+	$k\geq\frac{48}{\varepsilon^{2}}\log n$, es posible conservar las
+	distancias entre todos los pares de puntos con un error de a lo
+	sumo $\varepsilon$, y esto implica que la estructura geométrica del
+	conjunto se preserva casi idénticamente por la proyección de
+	Johnson-Lindestrauss $T_{U\left(\omega\right)}$.
 \end{remark}
 
 \begin{remark}
-	El Teorema 2.3.1 proporciona resultados relevantes en el caso de que $d$ sea de una dimensión
-	moderadamente grande en comparación con $k$ que es del orden de $\log n$.
-	Esto nos permite incluso considerar conjuntos de puntos más grandes que la dimensión
-	del espacio $d$ que se podrán proyectar a un espacio de dimensión menor sin perder su geometría.
+	El Teorema~\ref{thm:johnson-lindenstrauss} proporciona resultados
+	relevantes en el caso de que $d$ sea de una dimensión moderadamente
+	grande en comparación con $k$ que es del orden de $\log n$.
+	Esto nos permite incluso considerar conjuntos de puntos más grandes
+	que la dimensión del espacio $d$ que se podrán proyectar a un
+	espacio de dimensión menor sin perder su geometría.
 \end{remark}
 
 \begin{remark}
-	Además, los resultados del Teorema 2.3.1 son totalmente independientes del conjunto original de puntos
+	Además, los resultados del Teorema~\ref{thm:johnson-lindenstrauss}
+	son totalmente independientes del conjunto original de puntos
 	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$
 	o de la distribución que los generó (si la tuviesen).
-	De hecho, únicamente son dependientes del tamaño del conjunto sobre el que se quieran aplicar.
+	De hecho, únicamente son dependientes del tamaño del conjunto sobre
+	el que se quieran aplicar.
 \end{remark}
 
-En este capítulo presentaremos el Teorema de Johnson-Lindenstrauss, que permitirá conservar
-las buenas propiedades geométricas de los conjuntos de datos a la vez que se proyectan a un espacio de dimensión menor
-donde las técnicas de Análisis de Datos clásicas se vuelven más fiables.
+% En este capítulo presentaremos el Teorema de Johnson-Lindenstrauss,
+% que permitirá conservar las buenas propiedades geométricas de los
+% conjuntos de datos a la vez que se proyectan a un espacio de
+% dimensión menor donde las técnicas de Análisis de Datos clásicas se
+% vuelven más fiables.
 
-\chapter{Experimentos}
+\chapter{Ejercicios y experimentos numéricos}
+
+\section{Enunciado de los ejercicios}
+
+\begin{enumerate}
+	\item
+
+	      Sean $\forall l=1,\dotsc,d:X_{l}\sim\mathcal{N}\left(0,1\right)$ son i.i.d.
+	      Defina la variable aleatoria $X\coloneqq\sum\limits_{l=1}^{d}X^{2}_{l}$.
+
+	      \begin{enumerate}
+		      \item
+
+		            Muestre que
+		            \begin{math}
+			            \forall t\in\left(0,\frac{1}{2}\right):
+			            \mathbb{E}\left[\exp\left(tX\right)\right]=
+			            \dfrac{1}{{\left(\sqrt{1-2t}\right)}^{d}}
+		            \end{math}.
+
+		      \item
+
+		            Muestre que
+		            \begin{math}
+			            \forall a\in\left(0,\infty\right):
+			            \mathbb{P}\left[X\geq a\right]\leq
+			            \inf\limits_{0<t<\frac{1}{2}}
+			            \dfrac{\exp\left(-ta\right)}{{\left(\sqrt{1-2t}\right)}^{d}}
+		            \end{math}.
+	      \end{enumerate}
+
+	\item
+
+	      Use la pregunta anterior para dar una demostración alternativa del teorema
+	      de Johnson-Lindenstrauss, donde no se requiere del teorema del anillo
+	      gaussiano.
+\end{enumerate}
+
+\section{Solución de los ejercicios}
+
+\begin{enumerate}
+	\item
+
+	      \begin{align*}
+		      \shortintertext{Sea $t\in\left(0,\frac{1}{2}\right)$ fijo. La esperanza es}
+		      \mathbb{E}
+		      \left[
+			      \exp
+			      \left(tX\right)
+		      \right] & =
+		      \mathbb{E}
+		      \left[
+			      \exp
+			      \left(
+			      t\sum_{l=1}^{d}X^{2}_{l}
+			      \right)
+			      \right]=
+		      \prod_{l=1}^{d}
+		      \mathbb{E}
+		      \left[\exp\left(tX^{2}_{l}\right)\right].  \\
+		              & \stackrel{\operatorname{def}}{=}
+		      \prod_{l=1}^{d}
+		      \int_{\mathbb{R}}
+		      \frac{1}{\sqrt{2\pi}}
+		      \exp
+		      \left(t\tau^{2}\right)
+		      \exp
+		      \Big(-\frac{\tau^{2}}{2}\Big)
+		      \dl\tau.                                   \\
+		              & =
+		      \prod_{l=1}^{d}
+		      \int_{\mathbb{R}}
+		      \frac{1}{\sqrt{2\pi}}
+		      \exp
+		      \left[-\frac{\tau^{2}}{2}\left(1-2t\right)\right]
+		      \dl\tau.
+		      \shortintertext{Realice la $u$-sustitución: $u=\tau\sqrt{1-2t}$.}
+		      \mathbb{E}
+		      \left[
+			      \exp
+			      \left(tX\right)
+		      \right] & =
+		      \prod_{l=1}^{d}
+		      \frac{1}{\sqrt{1-2t}}
+		      \left[
+			      \int_{-\infty}^{\infty}
+			      \frac{1}{\sqrt{2\pi}}
+			      \exp\left(-\frac{u^{2}}{2}\right)
+			      \dl u
+		      \right].                                   \\
+		              & =
+		      \prod_{l=1}^{d}
+		      \frac{1}{\sqrt{1-2t}}=
+		      \frac{1}{{\left(\sqrt{1-2t}\right)}^{d}}.
+	      \end{align*}
+	\item
+
+	      Sea $a\in\left(0,\infty\right)$ fijo y $t\in\left(0,\frac{1}{2}\right)$.
+	      \begin{align*}
+		      \mathbb{P}\left[X\geq a\right] & =
+		      \mathbb{P}\left[tX\geq ta\right]=
+		      \mathbb{P}\left[\exp\left(tX\right)\geq\exp\left(ta\right)\right].
+		      \shortintertext{Por la desigualdad de Markov: $\mathbb{P}\left[X\geq a\right]\leq\frac{1}{a}\mathbb{E}\left[X\right]$.}
+		      \mathbb{P}\left[X\geq a\right] & \leq
+		      \exp\left(-ta\right)
+		      \mathbb{E}\left[\exp\left(tX\right)\right].
+		      \shortintertext{Pero, en el ítem anterior se calculó la esperanza.}
+		      \mathbb{P}\left[X\geq a\right] & \leq
+		      \frac{\exp\left(-ta\right)}{{\left(\sqrt{1-2t}\right)}^{d}}.
+		      \shortintertext{Finalmente, al tomar el ínfimo en $\left(0,\frac{1}{2}\right)$.}
+		      \mathbb{P}\left[X\geq a\right] & \leq
+		      \inf_{0<t<\frac{1}{2}}
+		      \frac{\exp\left(-ta\right)}{{\left(\sqrt{1-2t}\right)}^{d}}.
+	      \end{align*}
+
+	\item
+
+	      Sea $\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$.
+	      $\forall i\neq j$:
+	      \begin{align*}
+		      {\left\|
+			      T_{U\left(w\right)}\left(\symbf{x}_{i}\right)-
+			      T_{U\left(w\right)}\left(\symbf{x}_{j}\right)
+		      \right\|}^{2} & =
+		      {\left\|
+		      \frac{1}{\sqrt{k}}
+		      U\left(\symbf{x}_{i}-\symbf{x}_{j}\right)
+		      \right\|}^{2}=
+		      \frac{1}{k}
+		      {\left\|U\right\|}^{2}
+			      {\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|}^{2}
+		      \shortintertext{De la pregunta anterior, $d=k$ y $a=k\left(1+\varepsilon\right)$.}
+		      \mathbb{P}
+		      \left[
+			      X\geq k\left(1+\varepsilon\right)
+		      \right]       & \leq
+		      \inf_{0<t<\frac{1}{2}}
+		      \frac{\exp\left[-tk\left(1+\varepsilon\right)\right]}{{\left(\sqrt{1-2t}\right)}^{k}}.
+		      \shortintertext{
+			      Pero,
+			      \begin{math}
+				      \argmin\limits_{0<t<\frac{1}{2}}
+				      \dfrac{\exp\left[-tk\left(1+\varepsilon\right)\right]}{{\left(\sqrt{1-2t}\right)}^{k}}=
+				      \left\{\dfrac{\varepsilon}{2\left(1+\varepsilon\right)}\right\}
+			      \end{math}.
+		      }
+		      \mathbb{P}
+		      \left[
+			      X\geq k\left(1+\varepsilon\right)
+		      \right]       & \leq
+		      {\left(\sqrt{1+\varepsilon}\right)}^{k}
+		      \exp\left(-\frac{k\varepsilon}{2}\right).
+		      \shortintertext{Pero,
+			      \begin{math}
+				      \forall x\in\mathbb{R}:
+				      \ln\left(1+x\right)=
+				      \sum\limits_{l\in\mathbb{N}}
+				      {\left(-1\right)}^{l+1}
+				      \dfrac{x^{l}}{l}
+			      \end{math}.
+		      }
+		      \mathbb{P}
+		      \left[
+			      X\geq k\left(1+\varepsilon\right)
+		      \right]       & \leq
+		      \exp\left(-\frac{k\varepsilon^{2}}{4}\right).
+	      \end{align*}
+
+	      \begin{align*}
+		      \mathbb{P}\left[X\leq a\right] & =
+		      \mathbb{P}\left[-X\geq -a\right]\leq
+		      \frac{1}{\exp\left(ta\right)}
+		      \mathbb{E}\left[\exp\left(tX\right)\right].
+		      \shortintertext{Pero,
+			      \begin{math}
+				      \forall x\in\mathbb{R}:
+				      \ln\left(1-x\right)=
+				      -\sum\limits_{l\in\mathbb{N}}
+				      \dfrac{x^{l}}{l}
+			      \end{math}.
+		      }
+		      \mathbb{P}
+		      \left[
+			      X\geq k\left(1-\varepsilon\right)
+		      \right]                        & \leq
+		      {\left(\sqrt{1-\varepsilon}\right)}^{k}
+		      \exp\left(\frac{k\varepsilon}{2}\right)\leq
+		      \exp\left(-\frac{k\varepsilon^{2}}{4}\right).
+	      \end{align*}
+\end{enumerate}
+
+\section{Comprobación del teorema de Johnson-Lindenstrauss}
+
+Comprobamos experimentalmente los resultados del Teorema 2.3.1 simulando en Python con una
+muestra de tamaño $n=150$ teniendo en cuenta la distribución uniforme
+$X\sim\operatorname{Unif}\left(\left[0,1\right],d\right)$ con $d=100000$.
+Se comprueba la distorsión promedio entre las distancias proyectadas y las originales
+para una muestra de $500$ pares distintos de observaciones.
+Para ello se ha escogido $\varepsilon=0.1$ y $k=4295$ según la desigualdad
+(5.5) y se ha generado una matriz aleatoria de tamaño $k\times d$ con entradas
+gaussianas.
+% Lo que se representa en la Figura 5.1 es el ratio entre los $500$ pares de distancias proyectadas
+% y originales que se puede comprobar que es aproximadamente igual a $1$, como establece el Teorema 5.3.
+% Además, el Teorema de Johnson-Lindestrauss proporciona una cota inferior para esta probabilidad de $1-\frac{1}{n}\approx 0.99$.
+% Esto se ve representado en la Figura 5.1 mediante las líneas discontinuas horizontales
+% y=1\pm\varepsilon que encierran la región donde se encuentran los pares de individuos que cumplen el Teorema 5.3.

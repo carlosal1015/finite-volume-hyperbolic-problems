@@ -31,14 +31,23 @@
 	paper=portrait,
 	a4,
 	DIV=calc,
-	headsepline,
-	footsepline,
+	% headsepline,
+	% footsepline,
 	abstract=true,
 	bibliography=totoc,
 	sfdefaults=false,
 	nosumlimits,
-	intlimits
+	intlimits,
+	titlepage=firstiscover,
+	twoside,
+	headings=big,
+  chapterprefix=true
 ]{scrreprt}
+\usepackage[
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+]{geometry}
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
 \usepackage{diffcoeff}
@@ -46,7 +55,13 @@
 \usepackage{amsthm}
 \usepackage{unicode-math}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=red,
+	anchorcolor=pink,
+	citecolor=green
+]{hyperref}
 
 \theoremstyle{definition}
 \newtheorem{theorem}{Teorema}[section]
@@ -64,13 +79,16 @@
 ]{biblatex}
 \addbibresource{references.bib}
 
+\titlehead{Instituto de Matemática y Ciencias Afines}
+\subject{Trabajo Final de Curso}
 \title{Disminución de la dimensionalidad a través de proyecciones aleatorias}
-\subtitle{text}
-\author{Fidel Jara Huanca}
+\subtitle{Matemática para Machine Learning}
+\author{\scshape Fidel Jara Huanca}
 \date{23 de abril de 2026}
 
 \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\providecommand{\argmin}{\mathop\mathrm{arg min}}
 
 \begin{document}
 
@@ -100,5 +118,6 @@
 
 \include{problemstatement.tex}
 \include{mathematicaldevelopment.tex}
+\printbibliography[title={Referencias},heading=bibintoc]
 \include{appendix.tex}
 \end{document}

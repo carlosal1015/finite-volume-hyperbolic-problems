@@ -13,174 +13,225 @@ proporcionadas en este trabajo de fin de grado.
 	normal univariante de media $\mu$ y varianza $\sigma^{2}$ si y solo
 	si verifica
 	\begin{equation*}
+		\forall A\in\mathcal{B}:
 		\mathbb{P}
 		\left(X\in A\right)=
 		\frac{1}{\sigma\sqrt{2\pi}}
 		\int_{A}
 		\exp
-		\left(
+		\bigg(
 		-\frac{\left(x-\mu\right)^2}{2\sigma^{2}}
-		\right) \dl x,\text{ para }A\in\mathcal{B},
+		\bigg)
+		\dl x
 	\end{equation*}
 	y se denota como $X\sim\mathcal{N}\left(\mu,\sigma^{2}\right)$.
 \end{definition}
 
 \begin{proposition}
-	Si $X \sim \mathcal{N}(\mu, \sigma^2)$ y $a, b \in \mathbb{R}$ entonces $aX + b \sim \mathcal{N}(a\mu + b, a^2\sigma^2)$.
+	Si $a,b\in\mathbb{R}$ y
+	$X\sim\mathcal{N}\left(\mu,\sigma^{2}\right)$, entonces
+	$aX+b\sim\mathcal{N}\left(a\mu+b,a^{2}\sigma^2\right)$.
 \end{proposition}
 
 \begin{proposition}
-	Si $X \sim \mathcal{N}(\mu_X, \sigma_X^2)$, $Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)$ son variables aleatorias independientes, entonces $X + Y \sim \mathcal{N}(\mu_X + \mu_Y, \sigma_X^2 + \sigma_Y^2)$ y $X - Y \sim \mathcal{N}(\mu_X - \mu_Y, \sigma_X^2 + \sigma_Y^2)$.
+	Si $X\sim\mathcal{N}\left(\mu_{X},\sigma_{X}^2\right)$ e
+	$Y\sim\mathcal{N}\left(\mu_{Y},\sigma_{Y}^{2}\right)$ son variables
+	aleatorias independientes, entonces
+	$X\pm Y\sim\mathcal{N}(\mu_X\pm \mu_Y, \sigma_X^2 + \sigma_Y^2)$.
 \end{proposition}
 
-\begin{corollary}
-	Dadas $X_1, \dots, X_d$ variables aleatorias mutuamente independientes tales que $X_l \sim \mathcal{N}(\mu_l, \sigma_l^2)$ para $l = 1, \dots, d$. Entonces, toda combinación lineal $\lambda_1X_1 + \dots + \lambda_lX_l$ es una variable aleatoria con distribución normal de media $\lambda_1\mu_1 + \dots + \lambda_l\mu_l$ y varianza $\lambda_1^2\sigma_1^2 + \dots + \lambda_l^2\sigma_l^2$.
-\end{corollary}
-
-\begin{proposition}
-	El momento de orden $k$ de una variable aleatoria $X$ de media $\mu$ se define como $E[(X - \mu)^k]$, y si $X \sim \mathcal{N}(0, 1)$ se cumple que
-	\[
-		E(X^k) =
-		\begin{cases}
-			0                    & \text{si } k \text{ es impar} \\
-			\frac{(2n)!}{2^n n!} & \text{si } k = 2n
-		\end{cases}
-	\]
+\begin{proposition}\label{prop:linearcombination}
+	Dadas $X_{1},\dotsc,X_{n}$ variables aleatorias mutuamente
+	independientes tales que $X_{l}\sim\mathcal{N}(\mu_{l},\sigma_{l}^2)$ para $l=1,\dotsc,n$.
+	Entonces, toda combinación lineal $\sum_{l=1}^{n}\lambda_{l}X_{l}\sim\mathcal{N}\left(\sum_{l=1}^{n}\lambda_{l},\sum_{l=1}^{n}\lambda_{l}^2\sigma_{l}^2\right)$.
 \end{proposition}
 
-\begin{proof}
-	Usando la densidad de $X$ se tiene que:
-	\[
-		E[X^k] = \int_{-\infty}^{\infty} x^k \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl x.
-	\]
-	En primer lugar, si $k$ es impar, se observa que $x^k$ es una función impar mientras que $\frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ es par luego su producto es una función impar. Como la integral de una función impar sobre un intervalo simétrico respecto del origen es cero, se tiene
-	\[
-		E[X^{2n+1}] = \int_{-\infty}^{\infty} x^{2n+1} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl x = 0
-	\]
-	para $k = 2n + 1$.
+% \begin{proposition}
+% 	El momento de orden $k$ de una variable aleatoria $X$ de media $\mu$ se define como $E[(X - \mu)^k]$, y si $X \sim \mathcal{N}(0, 1)$ se cumple que
+% 	\[
+% 		E(X^k) =
+% 		\begin{cases}
+% 			0                    & \text{si } k \text{ es impar} \\
+% 			\frac{(2n)!}{2^n n!} & \text{si } k = 2n
+% 		\end{cases}
+% 	\]
+% \end{proposition}
 
-	En el caso de que $k$ sea par con $k = 2n$, usando integración por partes, se demuestra que:
-	\[
-		E[Z^{2n}] = (2n - 1)E[Z^{2n-2}].
-	\]
-	Para probar esto último, sea
-	\[
-		I_n = \int_{-\infty}^{\infty} x^{2n} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl x,
-	\]
-	e integramos por partes con $u = x^{2n-1}$ y $\dl v = x \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl z$, para tener, $\dl u = (2n - 1)x^{2n-2}\dl x$ y $v = - \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ con lo que se prueba
-	\[
-		I_n = (2n - 1)I_{n-1}.
-	\]
-	Por la fórmula de recurrencia tenemos que:
-	\[
-		E[Z^{2n}] = (2n - 1)(2n - 3) \cdots 3 \cdot 1 = \frac{(2n)(2n - 1) \cdots 2 \cdot 1}{(2n)(2n - 2) \cdots 4 \cdot 2} = \frac{(2n)!}{2^n n!}.
-	\]
-\end{proof}
+% \begin{proof}
+% 	Usando la densidad de $X$ se tiene que:
+% 	\[
+% 		E[X^k] = \int_{-\infty}^{\infty} x^k \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl x.
+% 	\]
+% 	En primer lugar, si $k$ es impar, se observa que $x^k$ es una función impar mientras que $\frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ es par luego su producto es una función impar. Como la integral de una función impar sobre un intervalo simétrico respecto del origen es cero, se tiene
+% 	\[
+% 		E[X^{2n+1}] = \int_{-\infty}^{\infty} x^{2n+1} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl x = 0
+% 	\]
+% 	para $k = 2n + 1$.
 
-\begin{proposition}
-	La Kurtosis de una variable aleatoria $X$ se define como
-	\[
-		\text{Kurtosis}(X) = \frac{E[(X - \mu)^4]}{(E[(X - \mu)^2])^2},
-	\]
-	y si $X \sim \mathcal{N}(\mu, \sigma^2)$ se cumple que $\text{Kurtosis}(X) = 3$.
-\end{proposition}
+% 	En el caso de que $k$ sea par con $k = 2n$, usando integración por partes, se demuestra que:
+% 	\[
+% 		E[Z^{2n}] = (2n - 1)E[Z^{2n-2}].
+% 	\]
+% 	Para probar esto último, sea
+% 	\[
+% 		I_n = \int_{-\infty}^{\infty} x^{2n} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl x,
+% 	\]
+% 	e integramos por partes con $u = x^{2n-1}$ y $\dl v = x \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \dl z$, para tener, $\dl u = (2n - 1)x^{2n-2}\dl x$ y $v = - \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ con lo que se prueba
+% 	\[
+% 		I_n = (2n - 1)I_{n-1}.
+% 	\]
+% 	Por la fórmula de recurrencia tenemos que:
+% 	\[
+% 		E[Z^{2n}] = (2n - 1)(2n - 3) \cdots 3 \cdot 1 = \frac{(2n)(2n - 1) \cdots 2 \cdot 1}{(2n)(2n - 2) \cdots 4 \cdot 2} = \frac{(2n)!}{2^n n!}.
+% 	\]
+% \end{proof}
 
-\begin{proof}
-	En primer lugar se considera $Z \sim \mathcal{N}(0, 1)$, de tal forma que $E(Z) = 0$ y $E(Z^2) = 1$. Para una distribución normal estándar se sabe que $E(Z^4) = 3$ (por la Proposición A.5) luego:
-	\[
-		\text{Kurtosis}(Z) = \frac{E(Z^4)}{[E(Z^2)]^2} = 3.
-	\]
-	En el caso general $X \sim \mathcal{N}(\mu, \sigma^2)$ se define la variable tipificada $Z = \frac{X-\mu}{\sigma} \sim \mathcal{N}(0, 1)$ y entonces se tiene
-	\[
-		E[(X - \mu)^4] = E[(\sigma Z)^4] = \sigma^4 E[Z^4] = 3\sigma^4,
-	\]
-	y, además,
-	\[
-		E[(X - \mu)^2] = \sigma^2.
-	\]
-	Por lo tanto,
-	\[
-		\text{Kurtosis}(X) = \frac{E[(X - \mu)^4]}{(E[(X - \mu)^2])^2} = \frac{3\sigma^4}{(\sigma^2)^2} = 3.
-	\]
-\end{proof}
+% \begin{proposition}
+% 	La Kurtosis de una variable aleatoria $X$ se define como
+% 	\[
+% 		\text{Kurtosis}(X) = \frac{E[(X - \mu)^4]}{(E[(X - \mu)^2])^2},
+% 	\]
+% 	y si $X \sim \mathcal{N}(\mu, \sigma^2)$ se cumple que $\text{Kurtosis}(X) = 3$.
+% \end{proposition}
+
+% \begin{proof}
+% 	En primer lugar se considera $Z \sim \mathcal{N}(0, 1)$, de tal forma que $E(Z) = 0$ y $E(Z^2) = 1$. Para una distribución normal estándar se sabe que $E(Z^4) = 3$ (por la Proposición A.5) luego:
+% 	\[
+% 		\text{Kurtosis}(Z) = \frac{E(Z^4)}{[E(Z^2)]^2} = 3.
+% 	\]
+% 	En el caso general $X \sim \mathcal{N}(\mu, \sigma^2)$ se define la variable tipificada $Z = \frac{X-\mu}{\sigma} \sim \mathcal{N}(0, 1)$ y entonces se tiene
+% 	\[
+% 		E[(X - \mu)^4] = E[(\sigma Z)^4] = \sigma^4 E[Z^4] = 3\sigma^4,
+% 	\]
+% 	y, además,
+% 	\[
+% 		E[(X - \mu)^2] = \sigma^2.
+% 	\]
+% 	Por lo tanto,
+% 	\[
+% 		\text{Kurtosis}(X) = \frac{E[(X - \mu)^4]}{(E[(X - \mu)^2])^2} = \frac{3\sigma^4}{(\sigma^2)^2} = 3.
+% 	\]
+% \end{proof}
 
 \section{Distribución normal multivariante}
 
 Se proporcionan a continuación algunos resultados relativos a distribuciones normales multivariantes que han sido también usados en el desarrollo de este trabajo.
 
-Recordamos aquí la definición de distribución normal multivariante, totalmente análoga a la expuesta en la Definición 2.1.
+% Recordamos aquí la definición de distribución normal multivariante, totalmente análoga a la expuesta en la Definición 2.1.
 
 \begin{definition}
-	Sea $(\Omega, \sigma, P)$ un espacio probabilístico. Un vector aleatorio $X : \Omega \to \mathbb{R}^d$ se dice que tiene una distribución Gaussiana o normal $d$-variante si para todo vector $a \in \mathbb{R}^d$ se tiene que la variable aleatoria real $a^T X : \Omega \to \mathbb{R}$ sigue una distribución normal univariante ($a^T X$ serían todas las posibles combinaciones lineales de las coordenadas del vector aleatorio $X$). En particular, si asumimos un vector de medias $\mu \in \mathbb{R}^d$ y una matriz de covarianzas $\Sigma$ de tamaño $d \times d$ definida positiva, entonces se dice que $X \sim \mathcal{N}(\mu, \Sigma)$ y admite la densidad
-	\begin{equation}
-		P(X \in A) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \int_A \exp \left( -\frac{1}{2}(x - \mu)^\top \Sigma^{-1} (x - \mu) \right) \dl x, \text{ para } A \in \mathcal{B}^d.
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de probabilidad.
+	Un vector aleatorio $X\colon\Omega\to\mathbb{R}^{d}$ se dice que
+	tiene una distribución Gaussiana o normal $d$-variante si para todo vector
+	$\symbf{a}\in\mathbb{R}^{d}$ se tiene que la variable aleatoria real
+	$\symbf{a}^{T}X\colon\Omega\to\mathbb{R}$ sigue una distribución normal univariante
+	($\symbf{a}^TX$ serían todas las posibles combinaciones lineales de las coordenadas del vector aleatorio $X$).
+	En particular, si asumimos un vector de medias $\symbf{\mu}\in\mathbb{R}^{d}$ y una matriz de covarianzas
+	$\symbf{\Sigma}$ de tamaño $d \times d$ definida positiva, entonces se dice que $X\sim\mathcal{N}(\symbf{\mu},\symbf{\Sigma})$ y admite la densidad
+	\begin{equation}\label{eq:gaussian-multivariate}
+		\forall A\in\mathcal{B}^{d}:
+		\mathbb{P}\left(X\in A\right)=
+		\frac{1}{(2\pi)^{d/2}
+			\left|\symbf{\Sigma}\right|^{1/2}}
+		\int_{A}
+		\exp
+		\left(
+		-\frac{1}{2}(\symbf{x}-\symbf{\mu})^\top\symbf{\Sigma}^{-1}
+		\left(\symbf{x}-\symbf{\mu}\right)
+		\right)
+		\dl{\symbf{x}}.
 	\end{equation}
 \end{definition}
 
-Se podría ver que $X \sim \mathcal{N}(\mu, \Sigma)$ si y solo si $\Sigma^{-1/2}(X - \mu) \sim \mathcal{N}(\mathbf{0}_d, I_d)$. La densidad de $X \sim \mathcal{N}(\mu, \Sigma)$ en la expresión A.7 surge del correspondiente cambio de variable y de la densidad de $\mathcal{N}(\mathbf{0}_d, I_d)$ que (usando la bien conocida densidad de la normal estándar y la factorización de la densidad conjunta que proporciona la independencia de sus componentes) es
+Se podría ver que $X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$ si y solo si
+$\symbf{\Sigma}^{-1/2}\left(X-\symbf{\mu}\right)\sim \mathcal{N}(\symbf{0}_{d},I_{d})$.
+La densidad de $X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$
+en la expresión~\eqref{eq:gaussian-multivariate} surge del correspondiente cambio de variable
+y de la densidad de $\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ que
+(usando la bien conocida densidad de la normal estándar y la factorización de la densidad
+conjunta que proporciona la independencia de sus componentes) es
 \[
-	f(x_1, \dots, x_d) = \prod_{l=1}^d \frac{1}{\sqrt{2\pi}} e^{-x_l^2/2} \text{ para todo } (x_1, \dots, x_n)^\top \in \mathbb{R}^d.
+	\forall{\left(x_{1},\dotsc,x_{d}\right)}^{\top}\in\mathbb{R}^{d}:
+	f\left(x_{1},\dotsc,x_{d}\right)=
+	\prod_{l=1}^{d}
+	\frac{1}{\sqrt{2\pi}}
+	\exp\left(-\frac{x_{l}^{2}}{2}\right).
 \]
 
-\begin{proposition}
-	Sea $(\Omega, \sigma, P)$ un espacio probabilístico y $X : \Omega \to \mathbb{R}^d$ un vector aleatorio de componentes $X_1, \dots, X_d$. Se tiene que, $X \sim \mathcal{N}(\mathbf{0}_d, I_d)$ si y solo si $X_l \sim \mathcal{N}(0, 1)$ para $l = 1, \dots, d$ y $X_1, \dots, X_d$ son independientes.
+\begin{proposition}\label{prop:independence}
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio
+	probabilístico y $X\colon\Omega\to\mathbb{R}^{d}$ un vector
+	aleatorio de componentes $X_{1},\dotsc,X_{d}$.
+	Se tiene que, $X\sim\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ si y solo si
+	$X_{l}\sim\mathcal{N}\left(0,1\right)$ para $l=1,\dotsc,d$ y $X_{1},\dotsc,X_{d}$
+	son independientes.
 \end{proposition}
 
-La demostración de este resultado se basa, entre otros aspectos, en que la incorrelación es equivalente a la independencia para distribuciones normales. Una prueba rigurosa se puede encontrar en Gut (2005).
+La demostración de este resultado se basa, entre otros aspectos,
+en que la incorrelación es equivalente a la independencia para
+distribuciones normales.
+Una prueba rigurosa se puede encontrar en~\cite{Gut2013}.
 
 \begin{proposition}
-	Sea $(\Omega, \sigma, P)$ un espacio probabilístico, $X : \Omega \to \mathbb{R}^d$ un vector aleatorio tal que $X \sim \mathcal{N}(\mathbf{0}_d, I_d)$ y $f : \mathbb{R}^d \to \mathbb{R}^d$ una rotación. Entonces, el vector aleatorio $f(X)$ sigue una distribución $X \sim \mathcal{N}(\mathbf{0}_d, I_d)$. Es decir, las distribuciones $\mathcal{N}(\mathbf{0}_d, I_d)$ son invariantes bajo rotaciones.
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio probabilístico,
+	$X\colon\Omega\to\mathbb{R}^{d}$ un vector aleatorio tal que $X \sim \mathcal{N}(\symbf{0}_d, I_d)$ y $f : \mathbb{R}^d \to \mathbb{R}^d$ una rotación. Entonces, el vector aleatorio $f(X)$ sigue una distribución $X \sim \mathcal{N}(\symbf{0}_d, I_d)$. Es decir, las distribuciones $\mathcal{N}(\symbf{0}_d, I_d)$ son invariantes bajo rotaciones.
 \end{proposition}
 
 \begin{proof}
-	Si $f$ es una rotación de $\mathbb{R}^d$ entonces existe una matriz ortogonal $R \in \mathbb{R}^{d \times d}$ tal que $f(X) = RX$, donde $RX$ es el vector: $RX = (\langle R_1, X \rangle, \dots, \langle R_d, X \rangle)$ y $R_l$ es la fila $l$ de la matriz $R$ para $l = 1 \dots, d$. Entonces $RX$ es un vector de combinaciones lineales de las variables aleatorias $X_1, \dots, X_d$ que cumplen que $X_l \sim \mathcal{N}(0, 1)$ luego es un vector aleatorio cuyas componentes $\langle R_l, X \rangle$ son variables aleatorias con distribución normal.
+	Si $f$ es una rotación de $\mathbb{R}^d$ entonces existe una matriz ortogonal
+	$R \in \mathbb{R}^{d \times d}$ tal que $f(X) = RX$, donde $RX$ es el vector:
+	$RX = (\langle R_1, X \rangle, \dots, \langle R_d, X \rangle)$ y $R_l$ es la
+	fila $l$ de la matriz $R$ para $l=1,\dotsc,d$.
+	Entonces $RX$ es un vector de combinaciones lineales de las variables aleatorias $X_1, \dots, X_d$ que cumplen que $X_l \sim \mathcal{N}(0, 1)$ luego es un vector aleatorio cuyas componentes $\langle R_l, X \rangle$ son variables aleatorias con distribución normal.
 
-	Además, como $R$ es una matriz ortogonal, cumple que $R^\top R = I_d$ luego $E(f(X)) = E(RX) = R E(X) = R \mathbf{0}_d = \mathbf{0}_d$ y, a su vez, $\text{Var}(f(X)) = \text{Var}(RX) = R^\top \text{Var}(X) R = R^\top I_d R = I_d$.
+	Además, como $R$ es una matriz ortogonal, cumple que $R^\top R = I_d$ luego $E(f(X)) = E(RX) = R E(X) = R \symbf{0}_d = \symbf{0}_d$ y, a su vez, $\text{Var}(f(X)) = \text{Var}(RX) = R^\top \text{Var}(X) R = R^\top I_d R = I_d$.
 \end{proof}
 
-\chapter{Volumen de la bola unidad}
+% \chapter{Volumen de la bola unidad}
 
-El siguiente anexo presenta el desarrollo para el cálculo del volumen de la bola unitaria $B(\mathbf{0}_d, 1)$, para una dimensión $d$ genérica.
+% El siguiente anexo presenta el desarrollo para el cálculo del volumen de la bola unitaria $B(\symbf{0}_d, 1)$, para una dimensión $d$ genérica.
 
-Para calcular el volumen $\ell_d(B(\mathbf{0}_d, 1))$ en $\mathbb{R}^d$, se puede integrar en coordenadas cartesianas o esféricas generalizadas. En este caso es más sencillo integrar usando coordenadas esféricas. El volumen viene dado por:
-\[
-	\ell_d(B(\mathbf{0}_d, 1)) = \int_{\mathbb{S}^{d-1}} \int_{r=0}^1 r^{d-1} \dl r \dl\Omega_d,
-\]
-donde $\mathbb{S}^{d-1}$ es la esfera en dimensión $d$ y $\dl\Omega_d$ el diferencial de superficie. Como esta es una integral de variables separadas,
-\[
-	\ell_d(B(\mathbf{0}_d, 1)) = \int_{\mathbb{S}^{d-1}} \dl\Omega_d \int_0^1 r^{d-1} \dl r = \frac{1}{d} \int_{\mathbb{S}^{d-1}} \dl\Omega_d = \frac{\ell_{d-1}(\mathbb{S}^{d-1})}{d}
-\]
-Para calcular el volumen de $\ell_{d-1}(\mathbb{S}^{d-1})$ se parte de la integral
-\[
-	I(d) = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} \exp (-(x_1^2 + x_2^2 + \dots + x_d^2)) \dl x_1 \cdots \dl x_d.
-\]
-Esta integral $I(d)$ puede calcularse integrando tanto en coordenadas cartesianas como esféricas generalizadas. En coordenadas cartesianas, la integral se puede escribir como el producto de $d$ integrales unidimensionales:
-\begin{equation}
-	I(d) = \left( \int_{-\infty}^{\infty} e^{-x^2} \dl x \right)^d = (\sqrt{\pi})^d = \pi^{d/2},
-\end{equation}
-ya que la integral $\int_{-\infty}^{\infty} e^{-x^2} \dl x = \sqrt{\pi}$. Por otro lado, en coordenadas esféricas, la integral $I(d)$ se convierte en
-\[
-	I(d) = \int_{\mathbb{S}^{d-1}} \dl\Omega_d \int_0^{\infty} e^{-r^2} r^{d-1} \dl r.
-\]
-donde la integral de $\mathbb{S}^{d-1}$ sobre $\Omega_d$ da el área superficial $\ell_{d-1}(\mathbb{S}^{d-1})$, mientras que la integral sobre $r$ se puede calcular mediante el cambio de variable $u = r^2$, $\dl u = 2r \dl r$ obteniendo
-\begin{equation}
-	\int_0^{\infty} e^{-r^2} r^{d-1} \dl r = \frac{1}{2} \int_0^{\infty} e^{-u} u^{(d/2)-1} \dl u = \frac{1}{2} \Gamma \left( \frac{d}{2} \right).
-\end{equation}
+% Para calcular el volumen $\ell_d(B(\symbf{0}_d, 1))$ en $\mathbb{R}^d$, se puede integrar en coordenadas cartesianas o esféricas generalizadas. En este caso es más sencillo integrar usando coordenadas esféricas. El volumen viene dado por:
+% \[
+% 	\ell_d(B(\symbf{0}_d, 1)) = \int_{\mathbb{S}^{d-1}} \int_{r=0}^1 r^{d-1} \dl r \dl\Omega_d,
+% \]
+% donde $\mathbb{S}^{d-1}$ es la esfera en dimensión $d$ y $\dl\Omega_d$ el diferencial de superficie. Como esta es una integral de variables separadas,
+% \[
+% 	\ell_d(B(\symbf{0}_d, 1)) = \int_{\mathbb{S}^{d-1}} \dl\Omega_d \int_0^1 r^{d-1} \dl r = \frac{1}{d} \int_{\mathbb{S}^{d-1}} \dl\Omega_d = \frac{\ell_{d-1}(\mathbb{S}^{d-1})}{d}
+% \]
+% Para calcular el volumen de $\ell_{d-1}(\mathbb{S}^{d-1})$ se parte de la integral
+% \[
+% 	I(d) = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} \exp (-(x_1^2 + x_2^2 + \dots + x_d^2)) \dl x_1 \cdots \dl x_d.
+% \]
+% Esta integral $I(d)$ puede calcularse integrando tanto en coordenadas cartesianas como esféricas generalizadas. En coordenadas cartesianas, la integral se puede escribir como el producto de $d$ integrales unidimensionales:
+% \begin{equation}
+% 	I(d) = \left( \int_{-\infty}^{\infty} e^{-x^2} \dl x \right)^d = (\sqrt{\pi})^d = \pi^{d/2},
+% \end{equation}
+% ya que la integral $\int_{-\infty}^{\infty} e^{-x^2} \dl x = \sqrt{\pi}$. Por otro lado, en coordenadas esféricas, la integral $I(d)$ se convierte en
+% \[
+% 	I(d) = \int_{\mathbb{S}^{d-1}} \dl\Omega_d \int_0^{\infty} e^{-r^2} r^{d-1} \dl r.
+% \]
+% donde la integral de $\mathbb{S}^{d-1}$ sobre $\Omega_d$ da el área superficial $\ell_{d-1}(\mathbb{S}^{d-1})$, mientras que la integral sobre $r$ se puede calcular mediante el cambio de variable $u = r^2$, $\dl u = 2r \dl r$ obteniendo
+% \begin{equation}
+% 	\int_0^{\infty} e^{-r^2} r^{d-1} \dl r = \frac{1}{2} \int_0^{\infty} e^{-u} u^{(d/2)-1} \dl u = \frac{1}{2} \Gamma \left( \frac{d}{2} \right).
+% \end{equation}
 
-Por lo tanto, si igualamos (B.1) y (B.2) se tiene
-\[
-	\pi^{d/2} = \ell_{d-1}(\mathbb{S}^{d-1}) \cdot \frac{1}{2} \Gamma \left( \frac{d}{2} \right)
-\]
-Despejando el área de la esfera de dimensión $d$, se llega a
-\[
-	\ell_{d-1}(\mathbb{S}^{d-1}) = \frac{2\pi^{d/2}}{\Gamma(\frac{d}{2})}.
-\]
-Finalmente, se tiene
-\[
-	\ell_d(B(\mathbf{0}_d, 1)) = \frac{\ell_{d-1}(\mathbb{S}^{d-1})}{d},
-\]
-y, consecuentemente,
-\[
-	\ell_d(B(\mathbf{0}_d, 1)) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)},
-\]
-donde también se ha usado la propiedad de la función Gamma $\Gamma(z + 1) = z \Gamma(z)$ para todo $z$ real.
+% Por lo tanto, si igualamos (B.1) y (B.2) se tiene
+% \[
+% 	\pi^{d/2} = \ell_{d-1}(\mathbb{S}^{d-1}) \cdot \frac{1}{2} \Gamma \left( \frac{d}{2} \right)
+% \]
+% Despejando el área de la esfera de dimensión $d$, se llega a
+% \[
+% 	\ell_{d-1}(\mathbb{S}^{d-1}) = \frac{2\pi^{d/2}}{\Gamma(\frac{d}{2})}.
+% \]
+% Finalmente, se tiene
+% \[
+% 	\ell_d(B(\symbf{0}_d, 1)) = \frac{\ell_{d-1}(\mathbb{S}^{d-1})}{d},
+% \]
+% y, consecuentemente,
+% \[
+% 	\ell_d(B(\symbf{0}_d, 1)) = \frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)},
+% \]
+% donde también se ha usado la propiedad de la función Gamma $\Gamma(z + 1) = z \Gamma(z)$ para todo $z$ real.
+
+\chapter{Programas}
