@@ -3,13 +3,13 @@
 En este capítulo, el objetivo será completar las pruebas realizadas en la Sección 2.1 para los teoremas 2.2, 2.4 y 2.6 dando resultados que nos aseguren que los valores obtenidos para las esperanzas de $\|X\|$, $\|X - Y\|$, e $\langle X, Y \rangle$, si $X, Y \sim \mathcal{N}(0_d, I_d)$ e independientes, son también aplicables a muestras aleatorias de estas distribuciones.
 
 \begin{lemma}[Desigualdad de Bernstein]
-Sea $\left(\Omega,\sigma,\mathbb{P}\right)$ un espacio probabilístico y $X_1, \dots, X_d : \Omega \to \mathbb{R}$ variables aleatorias independientes dos a dos con $E(X_l) = 0$ y momentos de orden $k$ acotados por $|E(X_l^k)| \leq \frac{k!}{2}$ para todo $l = 1, \dots, d$ y $k \geq 2$. En estas condiciones, para todo $\epsilon > 0$, se tiene que:
-\[ P [ |X_1 + \dots + X_d| \geq \epsilon ] \leq 2e^{-\frac{1}{4} \min(\frac{\epsilon^2}{d}, \epsilon)}. \]
+Sea $\left(\Omega,\sigma,\mathbb{P}\right)$ un espacio probabilístico y $X_1, \dots, X_d : \Omega \to \mathbb{R}$ variables aleatorias independientes dos a dos con $E(X_l) = 0$ y momentos de orden $k$ acotados por $|E(X_l^k)| \leq \frac{k!}{2}$ para todo $l = 1, \dots, d$ y $k \geq 2$. En estas condiciones, para todo $\varepsilon > 0$, se tiene que:
+\[ P [ |X_1 + \dots + X_d| \geq \varepsilon ] \leq 2e^{-\frac{1}{4} \min(\frac{\varepsilon^2}{d}, \varepsilon)}. \]
 \end{lemma}
 
 \begin{theorem}[Teorema del Anillo Gaussiano]
-Sean $\left(\Omega,\sigma,\mathbb{P}\right)$ un espacio probabilístico, $X : \Omega \to \mathbb{R}^d$ una variable aleatoria con distribución $\mathcal{N}(0_d, I_d)$ y $0 \leq \epsilon \leq \sqrt{d}$. Entonces se cumple que
-\[ P [ \|X\| - \sqrt{d} \leq \epsilon ] \geq 1 - 2e^{-\epsilon^2/16}. \]
+Sean $\left(\Omega,\sigma,\mathbb{P}\right)$ un espacio probabilístico, $X : \Omega \to \mathbb{R}^d$ una variable aleatoria con distribución $\mathcal{N}(0_d, I_d)$ y $0 \leq \varepsilon \leq \sqrt{d}$. Entonces se cumple que
+\[ P [ \|X\| - \sqrt{d} \leq \varepsilon ] \geq 1 - 2e^{-\varepsilon^2/16}. \]
 \end{theorem}
 
 (El resto del capítulo 4 se puede añadir de forma similar)

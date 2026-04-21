@@ -1,7 +1,7 @@
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'log', 'nav', 'out',
-% arara: --> 'pdf', 'snm', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log', 'pdf',
+% arara: --> 'run.xml', 'out', 'toc']
 % arara: --> }
 % arara: lualatex: {
 % arara: --> shell: yes,
@@ -21,103 +21,16 @@
 % arara: --> }
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'log', 'nav', 'out',
-% arara: --> 'snm', 'toc']
+% arara: --> ['aux', 'bbl', 'bcf', 'blg', 'log',
+% arara: --> 'run.xml', 'out', 'toc']
 % arara: --> }
-\documentclass[
-	abstract=true,
-	fontsize=12pt,
-	pagesize,
-	paper=portrait,
-	a4,
-	DIV=calc,
-	% headsepline,
-	% footsepline,
-	abstract=true,
-	bibliography=totoc,
-	sfdefaults=false,
-	nosumlimits,
-	intlimits,
-	titlepage=firstiscover,
-	twoside,
-	headings=big,
-  chapterprefix=true
-]{scrreprt}
-\usepackage[
-	total={170mm,257mm},
-	left=20mm,
-	top=20mm,
-]{geometry}
-\usepackage[spanish]{babel}
-\usepackage{mathtools}
-\usepackage{diffcoeff}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{unicode-math}
-\usepackage{graphicx}
-\usepackage[
-	colorlinks=true,
-	urlcolor=blue,
-	linkcolor=red,
-	anchorcolor=pink,
-	citecolor=green
-]{hyperref}
-
-\theoremstyle{definition}
-\newtheorem{theorem}{Teorema}[section]
-\newtheorem{proposition}[theorem]{Proposición}
-\newtheorem{lemma}[theorem]{Lema}
-\newtheorem{corollary}[theorem]{Corolario}
-\newtheorem{definition}[theorem]{Definición}
-\newtheorem{remark}[theorem]{Nota}
-\newtheorem{example}[theorem]{Ejemplo}
-
-\usepackage[
-	citestyle=numeric,
-	style=numeric,
-	backend=biber,
-]{biblatex}
-\addbibresource{references.bib}
-
-\titlehead{Instituto de Matemática y Ciencias Afines}
-\subject{Trabajo Final de Curso}
-\title{Disminución de la dimensionalidad a través de proyecciones aleatorias}
-\subtitle{Matemática para Machine Learning}
-\author{\scshape Fidel Jara Huanca}
-\date{23 de abril de 2026}
-
-\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
-\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
-\providecommand{\argmin}{\mathop\mathrm{arg min}}
-
+\input{preamble}
 \begin{document}
-
 \maketitle
 \tableofcontents
-
-\begin{abstract}
-	En el contexto de Análisis de Datos y de Machine Learning,
-	donde el manejo de datos de alta dimensión es cada vez más
-	frecuente, la reducción de dimensionalidad es una técnica clave
-	para mejorar la eficiencia computacional y por ende reducir los
-	dañinos efectos de la conocida ``maldición de la dimensionalidad''.
-	El teorema de \emph{Johnson-Lindenstrauss} es un resultado
-	fundamental, que establece que un conjunto de datos en un espacio
-	de alta dimensión puede ser proyectado en un espacio de menor
-	dimensión con una distorsión mínima de las distancias euclídeas.
-	Estas proyecciones permiten preservar relaciones geométricas
-	esenciales, justificando el uso de técnicas de Análisis de Datos en
-	un espacio de dimensión significativamente menor.
-	Este trabajo final de curso explora las peculiaridades que el
-	tratamiento de datos de alta dimensión introduce, junto con las
-	desigualdades de concentración útiles para conseguir probar el
-	Teorema de Johnson-Lindenstrauss en su versión probabilística.
-	También se analizarán, mediante simulaciones, estas peculiaridades
-	y las implicaciones prácticas de este resultado.
-\end{abstract}
-
-\include{problemstatement.tex}
-\include{mathematicaldevelopment.tex}
+\input{abstract}
+\include{problemstatement}
+\include{mathematicaldevelopment}
 \printbibliography[title={Referencias},heading=bibintoc]
-\include{appendix.tex}
+\include{appendix}
 \end{document}

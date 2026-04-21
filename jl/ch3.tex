@@ -3,22 +3,22 @@
 Como hemos demostrado en el Capítulo 2, a medida que se incrementa la dimensión del espacio, ciertos fenómenos geométricos y probabilísticos empiezan a manifestarse de manera sistemática. Uno de los fenómenos que resultará más relevante en el contexto del análisis de datos de alta dimensión será el fenómeno de concentración de la medida. En este capítulo introduciremos formalmente este fenómeno a través del estudio de la distribución uniforme en la bola unidad de $\mathbb{R}^d$.
 
 \begin{definition}
-Se dice que un conjunto $B \subseteq \mathbb{R}^d$ es equilibrado si para todo $z \in B$ se tiene que $\mu z \in B$ cuando $|\mu| < 1$. Adicionalmente, dado un conjunto $B \subset \mathbb{R}^d$ medible y equilibrado, llamamos la $\epsilon$-cáscara de $B$ al conjunto
-\[ B^\epsilon = B \setminus (1 - \epsilon)B. \]
+Se dice que un conjunto $B \subseteq \mathbb{R}^d$ es equilibrado si para todo $z \in B$ se tiene que $\mu z \in B$ cuando $|\mu| < 1$. Adicionalmente, dado un conjunto $B \subset \mathbb{R}^d$ medible y equilibrado, llamamos la $\varepsilon$-cáscara de $B$ al conjunto
+\[ B^\varepsilon = B \setminus (1 - \varepsilon)B. \]
 \end{definition}
 
 \begin{lemma}[Lema de concentración superficial de medida]
-Dado un conjunto $E \subset \mathbb{R}^d$ medible y equilibrado y $\epsilon > 0$ fijo, se tiene
-\[ \frac{\ell^d(E^\epsilon)}{\ell^d(E)} \to 1, \text{ cuando } d \to \infty. \]
+Dado un conjunto $E \subset \mathbb{R}^d$ medible y equilibrado y $\varepsilon > 0$ fijo, se tiene
+\[ \frac{\ell^d(E^\varepsilon)}{\ell^d(E)} \to 1, \text{ cuando } d \to \infty. \]
 \end{lemma}
 
 \begin{proof}
-Dado que $E$ es equilibrado, podemos considerar el conjunto $(1 - \epsilon)E = \{(1 - \epsilon) \cdot x : x \in E\}$, contenido en $E$ y también medible. Aplicando el cambio de variable dado por el difeomorfismo $\phi : (1 - \epsilon)E \to E$ mediante $\phi(y_i) = y_i / (1 - \epsilon) = x_i$ cuyo jacobiano es $|\det(J_\phi)| = 1 / (1 - \epsilon)^d$, se cumple que
-\[ \ell^d((1 - \epsilon)E) = (1 - \epsilon)^d \ell^d(E), \]
+Dado que $E$ es equilibrado, podemos considerar el conjunto $(1 - \varepsilon)E = \{(1 - \varepsilon) \cdot x : x \in E\}$, contenido en $E$ y también medible. Aplicando el cambio de variable dado por el difeomorfismo $\phi : (1 - \varepsilon)E \to E$ mediante $\phi(y_i) = y_i / (1 - \varepsilon) = x_i$ cuyo jacobiano es $|\det(J_\phi)| = 1 / (1 - \varepsilon)^d$, se cumple que
+\[ \ell^d((1 - \varepsilon)E) = (1 - \varepsilon)^d \ell^d(E), \]
 y, consecuentemente,
-\[ \frac{\ell^d(E^\epsilon)}{\ell^d(E)} = \frac{\ell^d(E) - \ell^d((1 - \epsilon)E)}{\ell^d(E)} = 1 - (1 - \epsilon)^d. \]
+\[ \frac{\ell^d(E^\varepsilon)}{\ell^d(E)} = \frac{\ell^d(E) - \ell^d((1 - \varepsilon)E)}{\ell^d(E)} = 1 - (1 - \varepsilon)^d. \]
 Si se usa la desigualdad $1 - x \leq e^{-x}$, válida para todo $x \in \mathbb{R}$, se llega a que
-\[ \frac{\ell^d(E^\epsilon)}{\ell^d(E)} = 1 - (1 - \epsilon)^d \geq 1 - e^{-\epsilon d} \xrightarrow{d \to \infty} 1. \]
+\[ \frac{\ell^d(E^\varepsilon)}{\ell^d(E)} = 1 - (1 - \varepsilon)^d \geq 1 - e^{-\varepsilon d} \xrightarrow{d \to \infty} 1. \]
 \end{proof}
 
 (El resto del contenido del capítulo 3 se puede añadir de forma similar)

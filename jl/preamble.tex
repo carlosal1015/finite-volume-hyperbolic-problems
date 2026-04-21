@@ -1,0 +1,73 @@
+\documentclass[
+	abstract=true,
+	fontsize=12pt,
+	pagesize,
+	paper=portrait,
+	a4,
+	DIV=calc,
+	bibliography=totoc,
+	sfdefaults=false,
+	nosumlimits,
+	intlimits,
+	titlepage=firstiscover,
+	twoside,
+	headings=big,
+	chapterprefix=true
+]{scrreprt}
+\usepackage[
+	left=20mm,
+	top=20mm,
+]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[svgnames]{xcolor}
+\usepackage{mathtools}
+\usepackage{diffcoeff}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{unicode-math}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\usepackage{hyperref}
+\addbibresource{references.bib}
+
+\titlehead{Instituto de Matemática y Ciencias Afines}
+\subject{Trabajo Final de Curso}
+\title{Disminución de la dimensionalidad a través de proyecciones aleatorias}
+\subtitle{Matemática para Machine Learning}
+\author{\scshape Fidel Jara Huanca}
+\date{23 de abril de 2026}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\providecommand{\argmin}{\mathop\mathrm{arg min}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{definition}[theorem]{Definición}
+\newtheorem{remark}[theorem]{Nota}
+\newtheorem{example}[theorem]{Ejemplo}
+\renewcommand{\listingscaption}{Programa}
+
+\hypersetup{
+	pdfencoding=auto,
+	linktocpage=true,
+	anchorcolor=pink,
+	citecolor=green,
+	colorlinks=true,
+	linkcolor=DarkBlue,
+	urlcolor=magenta,
+	pdfpagelabels,
+	pdfauthor={Fidel Jara Huanca},
+	pdftitle={Disminución de la dimensionalidad a través de proyecciones aleatorias},
+	pdfsubject={Lecture},
+	pdfkeywords={ode, pde},
+	pdfproducer={LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)}
+}

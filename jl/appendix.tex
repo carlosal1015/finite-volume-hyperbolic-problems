@@ -11,7 +11,7 @@ proporcionadas en este trabajo de fin de grado.
 \begin{definition}
 	Una variable aleatoria $X$ se dice que tiene una distribución
 	normal univariante de media $\mu$ y varianza $\sigma^{2}$ si y solo
-	si verifica
+	si
 	\begin{equation*}
 		\forall A\in\mathcal{B}:
 		\mathbb{P}
@@ -34,16 +34,30 @@ proporcionadas en este trabajo de fin de grado.
 \end{proposition}
 
 \begin{proposition}
-	Si $X\sim\mathcal{N}\left(\mu_{X},\sigma_{X}^2\right)$ e
+	Si $X\sim\mathcal{N}\left(\mu_{X},\sigma_{X}^2\right)$ y
 	$Y\sim\mathcal{N}\left(\mu_{Y},\sigma_{Y}^{2}\right)$ son variables
 	aleatorias independientes, entonces
-	$X\pm Y\sim\mathcal{N}(\mu_X\pm \mu_Y, \sigma_X^2 + \sigma_Y^2)$.
+	\begin{math}
+		X\pm Y\sim
+		\mathcal{N}\left(\mu_{X}\pm\mu_{Y},\sigma_{X}^{2}+\sigma_{Y}^{2}\right)
+	\end{math}.
 \end{proposition}
 
 \begin{proposition}\label{prop:linearcombination}
 	Dadas $X_{1},\dotsc,X_{n}$ variables aleatorias mutuamente
-	independientes tales que $X_{l}\sim\mathcal{N}(\mu_{l},\sigma_{l}^2)$ para $l=1,\dotsc,n$.
-	Entonces, toda combinación lineal $\sum_{l=1}^{n}\lambda_{l}X_{l}\sim\mathcal{N}\left(\sum_{l=1}^{n}\lambda_{l},\sum_{l=1}^{n}\lambda_{l}^2\sigma_{l}^2\right)$.
+	independientes tales que para $l=1,\dotsc,n$:
+	$X_{l}\sim\mathcal{N}\left(\mu_{l},\sigma_{l}^{2}\right)$.
+	Entonces, toda combinación lineal
+	\begin{math}
+		\sum_{l=1}^{n}
+		\lambda_{l}
+		X_{l}\sim
+		\mathcal{N}
+		\left(
+		\sum_{l=1}^{n}\lambda_{l}\mu_{l},
+		\sum_{l=1}^{n}\lambda_{l}^{2}\sigma_{l}^{2}
+		\right)
+	\end{math}.
 \end{proposition}
 
 % \begin{proposition}
@@ -115,19 +129,28 @@ proporcionadas en este trabajo de fin de grado.
 
 \section{Distribución normal multivariante}
 
-Se proporcionan a continuación algunos resultados relativos a distribuciones normales multivariantes que han sido también usados en el desarrollo de este trabajo.
+Se proporcionan a continuación algunos resultados relativos a
+distribuciones normales multivariantes que han sido también usados en
+el desarrollo de este trabajo.
 
 % Recordamos aquí la definición de distribución normal multivariante, totalmente análoga a la expuesta en la Definición 2.1.
 
 \begin{definition}
-	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de probabilidad.
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+	probabilidad.
 	Un vector aleatorio $X\colon\Omega\to\mathbb{R}^{d}$ se dice que
-	tiene una distribución Gaussiana o normal $d$-variante si para todo vector
-	$\symbf{a}\in\mathbb{R}^{d}$ se tiene que la variable aleatoria real
-	$\symbf{a}^{T}X\colon\Omega\to\mathbb{R}$ sigue una distribución normal univariante
-	($\symbf{a}^TX$ serían todas las posibles combinaciones lineales de las coordenadas del vector aleatorio $X$).
-	En particular, si asumimos un vector de medias $\symbf{\mu}\in\mathbb{R}^{d}$ y una matriz de covarianzas
-	$\symbf{\Sigma}$ de tamaño $d \times d$ definida positiva, entonces se dice que $X\sim\mathcal{N}(\symbf{\mu},\symbf{\Sigma})$ y admite la densidad
+	tiene una distribución Gaussiana o normal $d$-variante si para todo
+	vector $\symbf{a}\in\mathbb{R}^{d}$ se tiene que la variable
+	aleatoria real $\symbf{a}^{T}X\colon\Omega\to\mathbb{R}$ sigue una
+	distribución normal univariante ($\symbf{a}^{\top}X$ serían todas
+	las posibles combinaciones lineales de las coordenadas del vector
+	aleatorio $X$).
+	En particular, si asumimos un vector de medias
+	$\symbf{\mu}\in\mathbb{R}^{d}$ y una matriz de covarianzas
+	$\symbf{\Sigma}$ de tamaño $d \times d$ definida positiva, entonces
+	se dice que
+	$X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$ y admite
+	la densidad
 	\begin{equation}\label{eq:gaussian-multivariate}
 		\forall A\in\mathcal{B}^{d}:
 		\mathbb{P}\left(X\in A\right)=
@@ -143,48 +166,95 @@ Se proporcionan a continuación algunos resultados relativos a distribuciones no
 	\end{equation}
 \end{definition}
 
-Se podría ver que $X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$ si y solo si
-$\symbf{\Sigma}^{-1/2}\left(X-\symbf{\mu}\right)\sim \mathcal{N}(\symbf{0}_{d},I_{d})$.
-La densidad de $X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$
-en la expresión~\eqref{eq:gaussian-multivariate} surge del correspondiente cambio de variable
-y de la densidad de $\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ que
-(usando la bien conocida densidad de la normal estándar y la factorización de la densidad
-conjunta que proporciona la independencia de sus componentes) es
-\[
+Se podría ver que
+$X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$ si y solo
+si
+\begin{math}
+	\symbf{\Sigma}^{-\frac{1}{2}}
+	\left(X-\symbf{\mu}\right)\sim
+	\mathcal{N}
+	\left(\symbf{0}_{d},I_{d}\right)
+\end{math}.
+La densidad de
+$X\sim\mathcal{N}\left(\symbf{\mu},\symbf{\Sigma}\right)$
+en la expresión~\eqref{eq:gaussian-multivariate} surge del
+correspondiente cambio de variable y de la densidad de
+$\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ que (usando la bien
+conocida densidad de la normal estándar y la factorización de la
+densidad conjunta que proporciona la independencia de sus
+componentes) es
+\begin{equation*}
 	\forall{\left(x_{1},\dotsc,x_{d}\right)}^{\top}\in\mathbb{R}^{d}:
 	f\left(x_{1},\dotsc,x_{d}\right)=
 	\prod_{l=1}^{d}
 	\frac{1}{\sqrt{2\pi}}
 	\exp\left(-\frac{x_{l}^{2}}{2}\right).
-\]
+\end{equation*}
 
 \begin{proposition}\label{prop:independence}
 	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio
 	probabilístico y $X\colon\Omega\to\mathbb{R}^{d}$ un vector
 	aleatorio de componentes $X_{1},\dotsc,X_{d}$.
-	Se tiene que, $X\sim\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ si y solo si
-	$X_{l}\sim\mathcal{N}\left(0,1\right)$ para $l=1,\dotsc,d$ y $X_{1},\dotsc,X_{d}$
-	son independientes.
+	Se tiene que, $X\sim\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ si
+	y solo si para todo $l=1,\dotsc,d$:
+	$X_{l}\sim\mathcal{N}\left(0,1\right)$ e independientes.
 \end{proposition}
 
 La demostración de este resultado se basa, entre otros aspectos,
-en que la incorrelación es equivalente a la independencia para
+en que la correlación es equivalente a la independencia para
 distribuciones normales.
 Una prueba rigurosa se puede encontrar en~\cite{Gut2013}.
 
 \begin{proposition}
-	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio probabilístico,
-	$X\colon\Omega\to\mathbb{R}^{d}$ un vector aleatorio tal que $X \sim \mathcal{N}(\symbf{0}_d, I_d)$ y $f : \mathbb{R}^d \to \mathbb{R}^d$ una rotación. Entonces, el vector aleatorio $f(X)$ sigue una distribución $X \sim \mathcal{N}(\symbf{0}_d, I_d)$. Es decir, las distribuciones $\mathcal{N}(\symbf{0}_d, I_d)$ son invariantes bajo rotaciones.
+	Sean $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+	probabilidad, $X\colon\Omega\to\mathbb{R}^{d}$ un vector aleatorio
+	tal que $X\sim\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ y
+	$f\colon\mathbb{R}^{d}\to\mathbb{R}^{d}$ una rotación.
+	Entonces, el vector aleatorio $f\left(X\right)$ sigue una
+	distribución $X\sim\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$.
+	Es decir, las distribuciones
+	$\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$ son invariantes bajo
+	rotaciones.
 \end{proposition}
 
 \begin{proof}
-	Si $f$ es una rotación de $\mathbb{R}^d$ entonces existe una matriz ortogonal
-	$R \in \mathbb{R}^{d \times d}$ tal que $f(X) = RX$, donde $RX$ es el vector:
-	$RX = (\langle R_1, X \rangle, \dots, \langle R_d, X \rangle)$ y $R_l$ es la
+	Si $f$ es una rotación de $\mathbb{R}^{d}$ entonces existe una
+	matriz ortogonal $R\in\mathbb{R}^{d\times d}$ tal que
+	$f\left(X\right)=RX$, donde $RX$ es el vector:
+	\begin{math}
+		RX=
+		\left(
+		\left\langle R_{1},X\right\rangle,
+		\dotsc,
+		\left\langle R_{d},X\right\rangle
+		\right)
+	\end{math}
+	y $R_l$ es la
 	fila $l$ de la matriz $R$ para $l=1,\dotsc,d$.
-	Entonces $RX$ es un vector de combinaciones lineales de las variables aleatorias $X_1, \dots, X_d$ que cumplen que $X_l \sim \mathcal{N}(0, 1)$ luego es un vector aleatorio cuyas componentes $\langle R_l, X \rangle$ son variables aleatorias con distribución normal.
-
-	Además, como $R$ es una matriz ortogonal, cumple que $R^\top R = I_d$ luego $E(f(X)) = E(RX) = R E(X) = R \symbf{0}_d = \symbf{0}_d$ y, a su vez, $\text{Var}(f(X)) = \text{Var}(RX) = R^\top \text{Var}(X) R = R^\top I_d R = I_d$.
+	Entonces, $RX$ es un vector de combinaciones lineales de las
+	variables aleatorias $X_{1},\dotsc,X_{d}$ que cumplen que
+	$X_{l}\sim\mathcal{N}(0, 1)$ luego es un vector aleatorio cuyas
+	componentes son $\left\langle R_{l},X\right\rangle$ son variables
+	aleatorias con distribución normal.
+	Además, como $R$ es una matriz ortogonal, cumple que
+	$R^{\top}R=I_{d}$ luego
+	\begin{math}
+		\mathbb{E}\left(f\left(X\right)\right)=
+		\mathbb{E}\left(RX\right)=
+		R\mathbb{E}\left(X\right)=
+		R\symbf{0}_{d}=
+		\symbf{0}_{d}
+	\end{math}
+	y, a su vez,
+	\begin{math}
+		\operatorname{Var}\left(f\left(X\right)\right)=
+		\operatorname{Var}\left(RX\right)=
+		R^{\top}
+		\operatorname{Var}\left(X\right)R=
+		R^{\top}
+		I_{d}R=
+		I_{d}
+	\end{math}.
 \end{proof}
 
 % \chapter{Volumen de la bola unidad}
@@ -235,3 +305,36 @@ Una prueba rigurosa se puede encontrar en~\cite{Gut2013}.
 % donde también se ha usado la propiedad de la función Gamma $\Gamma(z + 1) = z \Gamma(z)$ para todo $z$ real.
 
 \chapter{Programas}
+
+\section{Código Python usado para la generación de la Figura~\ref{fig:distorsion}}
+
+\begin{listing}[ht!]
+	\tiny
+	\centering
+	\inputminted[frame=single,framesep=10pt,firstline=1,lastline=52,linenos]{python}{figura21.py}
+	\caption{Código Python para calcular la distorsión promedio de
+		$500$ pares de puntos de una distribución uniforme en $\left[0,1\right]^{d}$
+		al proyectarlos a un subespacio de dimensión $k=4295$ cuando $d=100000$.}
+\end{listing}
+
+\section{Código Python usado para la generación de la Tabla~\ref{tab:verification}}
+
+\begin{listing}[ht!]
+	\tiny
+	\centering
+	\inputminted[frame=single,framesep=10pt,linenos]{python}{tabla51.py}
+	\caption{Código Python para estimar la probabilidad del
+		Teorema~\ref{thm:johnson-lindenstrauss} para distintos valores de
+		$\varepsilon$ y dimensiones de proyección $k$.}
+\end{listing}
+
+\newpage
+
+\section{Código Python que implementa la proyección~\eqref{eq:projection}}\label{sec:projection}
+
+\begin{listing}[ht!]
+	\tiny
+	\centering
+	\inputminted[frame=single,framesep=10pt,linenos]{python}{johnson.py}
+	\caption{Código Python que implementa la proyección de Johnson-Lindenstrauss $T_{U\left(\omega\right)}$ para $d$ pequeño y $k$ en~\ref{lst:results3a}.}
+\end{listing}
