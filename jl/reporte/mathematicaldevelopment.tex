@@ -1,0 +1,423 @@
+\chapter{Desarrollo matemático}
+
+\section{Algunos resultados a tener en cuenta}
+
+En los capítulos 8, 9, y 10 del libro de texto~\cite{Wegner2024}
+se presentan algunas características no directamente esperables de
+las distribuciones más importantes en Estadística cuando se trabaja
+en espacios de alta dimensión.
+Sin embargo, algunos fenómenos, como la concentración de medida o la
+ortogonalidad de vectores, pueden resultar de utilidad en Análisis de
+Datos.
+
+\section{Proyecciones aleatorias}
+
+En esta sección introducimos el concepto de proyecciones aleatorias.
+Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+probabilidad, en esta sección se introducen matrices aleatorias del
+tipo
+\begin{equation*}
+	U\colon\Omega\to\mathbb{R}^{k\times d},\quad
+	U=
+	\begin{bmatrix}
+		u_{11} & \cdots & u_{1d} \\
+		\vdots & \ddots & \vdots \\
+		u_{k1} & \cdots & u_{kd}
+	\end{bmatrix},
+\end{equation*}
+con $u_{ij}\sim\mathcal{N}\left(0,1\right)$, $i=1,\dotsc, k$ y
+$j=1,\dotsc,d$, variables aleatorias normales unidimensionales
+independientes.
+Esta matriz aleatoria será denotada por
+$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+Algunas propiedades que tiene la matriz aleatoria están basadas en el
+comportamiento de sus filas como vectores normales multivariantes.
+Si se denotan para cada fila $i=1,\dotsc,k$ de $U$ como
+$U_{i}={\left[u_{i1},\dotsc,u_{id}\right]}^{T}$, entonces todas
+ellas son vectores aleatorios independientes con distribución
+$\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)$
+(ver Proposición~\ref{prop:independence}) y se pueden explotar los
+teoremas 8.2, 8.3 y 8.4 del capítulo 8 del libro de
+texto~\cite{Wegner2024} y, a su vez, los resultados del capítulo 10,
+cuando $d$ sea elevado.
+Por ejemplo, si usamos el Teorema 10.7 de ortogonalidad gaussiana, se
+tiene que las filas de la matriz $U$ normalizadas son
+``aproximadamente'' ortogonales unas a otras.
+Entonces, normalizando la matriz aleatoria $U$, se obtendrá una
+matriz aleatoria $V$ tal que $VV^{T}≈I_{k}$.
+Dicha propiedad nos recuerda a la propiedad de ortogonalidad en las
+matrices de proyección basadas en álgebra lineal.
+Una de las aplicaciones más conocidas de las proyecciones es que
+permiten transformar conjuntos de datos en $\mathbb{R}^{d}$ en el
+subespacio de $\mathbb{R}^{k}$ generado por las $k$ filas de la
+matriz ortogonal de proyección.
+Se debe tener en cuenta que si $k<d$ entonces la proyección es una
+transformación lineal, que cuenta con esta buena propiedad de
+ortonormalidad que evita la ``duplicidad'' de información en los
+datos proyectados, pero que no necesariamente conserva las distancias
+entre puntos del espacio original $\mathbb{R}^{d}$.
+Esta conservación de las distancias originales es una propiedad útil
+en contextos de clasificación, por tanto supervisada como no
+supervisada, por ejemplo, en métodos como los $m$-vecinos más
+próximos.
+El objetivo de este capítulo es probar que las proyecciones basadas
+en matrices aleatorias del tipo
+$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$, además que
+ella tiene la característica de la ortonormalidad, de forma
+aproximada, se mantienen también, de forma aproximada, las distancias
+entre datos en el espacio original.
+
+\begin{theorem}[Teorema de la Proyección aleatoria]\label{thm:projection}
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+	probabilidad y, para $k<d$ sea
+	$U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria con
+	$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+	Para
+	$\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}$ y
+	$0<\varepsilon\leq 1$ tenemos
+	\begin{equation*}
+		\mathbb{P}
+		\left[
+			\left|
+			\left\|
+			U\symbf{x}
+			\right\|-
+			\sqrt{k}
+			\left\|
+			\symbf{x}
+			\right\|
+			\right|\leq
+			\varepsilon\sqrt{k}
+			\left\|
+			\symbf{x}
+			\right\|
+			\right]\geq
+		1-2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	En primer lugar, se debe tener en cuenta que el producto matriz por
+	vector de $U$ por $\symbf{x} \in \mathbb{R}^d$ da como resultado un
+	vector en $\mathbb{R}^k$ que contiene los productos escalares entre
+	cada vector fila de la matriz $U$, denotados por $U_{i}$, con el
+	vector $\symbf{x}$.
+	Es decir,
+	\begin{equation*}
+		U\symbf{x}=
+		{\left[
+			\left\langle
+			U_{1},\symbf{x}
+			\right\rangle,
+			\dotsc,
+			\left\langle
+			U_{k},\symbf{x}
+			\right\rangle
+			\right]}^{\top}.
+	\end{equation*}
+	Ahora, fijado
+	$\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}$,
+	se puede considerar el vector
+	$U\dfrac{\symbf{x}}{\left\|\symbf{x}\right\|}$, cuya coordenada
+	$i$-ésima es
+	\begin{equation*}
+		{\left(
+			U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
+			\right)}_{i}=
+		\left\langle
+		U_{i},
+		\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
+		\right\rangle=
+		\sum_{j=1}^{d}
+		u_{ij}
+		\frac{x_{i}}{\left\|\symbf{x}\right\|}.
+	\end{equation*}
+	Usando que $u_{ij}\sim\mathcal{N}\left(0,1\right)$ para todo
+	$\left(i,j\right)$, se tiene que
+	\begin{math}
+		{\left(
+			U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
+			\right)}_{i}\sim
+		\mathcal{N}\left(0,1\right)
+	\end{math}
+	(ver Proposición~\ref{prop:linearcombination}) luego, junto a la
+	independencia de los $u_{i j}$, se tiene
+	\begin{math}
+		U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}\sim
+		\mathcal{N}\left(\symbf{0}_{d},I_{d}\right)
+	\end{math}
+	(ver Proposición~\ref{prop:independence}).
+	Por tanto, usando el Teorema 10.4 del libro de texto (anillo
+	Gaussiano) se obtiene
+	\begin{equation*}
+		\mathbb{P}
+		\left[
+			\left|
+			\left\|U\symbf{x}\right\|-
+			\sqrt{k}\left\|\symbf{x}\right\|
+			\right|\leq
+			\varepsilon\sqrt{k}
+			\left\|\symbf{x}\right\|
+			\right]=
+		\mathbb{P}
+		\left[
+			\left|
+			\big\|
+			U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
+			\big\|-
+			\sqrt{k}
+			\right|\leq\varepsilon\sqrt{k}
+			\right] \geq
+		1-2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).
+	\end{equation*}
+	En esta acotación se ha aplicado dicho teorema con $d=k$ y
+	$\varepsilon=\varepsilon \sqrt{k}$.
+	Nótese que se cumple la hipótesis
+	$0<\varepsilon\sqrt{k}\leq\sqrt{k}$ dado que $0<\varepsilon\leq1$.
+\end{proof}
+Puesto que $\sqrt{k}$ es fijo a lo largo de toda la prueba del
+Teorema~\ref{thm:projection}, una reformulación más habitual de este
+resultado es
+\begin{equation}
+	\mathbb{P}
+	\left[
+		\left|
+		\left\|
+		\frac{1}{\sqrt{k}}
+		U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
+		\right\|-1
+		\right|\leq
+		\varepsilon
+		\right]
+	\geq 1-
+	2\exp
+	\left(-k\frac{\varepsilon^{2}}{16}\right).
+\end{equation}
+
+\begin{definition}
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+	probabilidad y, para $k<d$, sea
+	$U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria con
+	$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+	Además, sea $\omega\in\Omega$.
+	Entonces, la aplicación
+	\begin{equation}\label{eq:projection}
+		\begin{aligned}
+			T_{U\left(\omega\right)}\colon\mathbb{R}^{d} & \longrightarrow
+			\mathbb{R}^{k}                                                 \\
+			\symbf{x}                                    & \longmapsto
+			\frac{1}{\sqrt{k}}
+			U\left(\omega\right)\symbf{x}
+		\end{aligned}
+	\end{equation}
+	se denomina proyección de Johnson-Lindenstrauss.
+\end{definition}
+Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es una proyección en el sentido del
+álgebra lineal, pues no necesariamente son matrices ortonormales.
+Con esta notación, se puede reformular la conclusión del Teorema~\ref{thm:projection}
+como sigue:
+\begin{equation}
+	\begin{split}
+		\forall\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}
+		\text{ con }
+		0<\varepsilon\leq 1
+		\text{ y }
+		U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right): \\
+		P[\left|\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\|-\|\symbf{x}\|\right|\leq\varepsilon\|\symbf{x}\|]
+		\geq 1-
+		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right)
+	\end{split},
+\end{equation}
+se observa que con alta probabilidad
+\begin{equation*}
+	\frac{\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|}{\left\|x\right\|}\approx 1.
+\end{equation*}
+Por tanto, de cierta forma, la proyección de Johnson-Lindenstrauss
+mantiene prácticamente invariante la norma de cada $\symbf{x}\in\mathbb{R}^{d}$.
+
+\section{El teorema de Johnson-Lindenstrauss}
+
+El siguiente teorema de Johnson-Lindenstrauss en el contexto probabilístico establece lo que sucede cuando consideramos
+las distancias entre pares de puntos tras usar la proyección de Johnson-Lindenstrauss.
+
+\begin{theorem}[Teorema de Johnson-Lindenstrauss~\cite{Wegner2024}]\label{thm:johnson-lindenstrauss}
+	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+	probabilidad y sea además $0<\varepsilon<1$, $n\geq 1$ y
+	$k\geq\frac{48}{\varepsilon^2}\log n$.
+	Sea $U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria
+	con $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+	Entonces, para cada
+	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$
+	se cumple la siguiente estimación:
+	\begin{equation*}
+		\mathbb{P}
+		\left[
+			\forall i,j:
+			\left(1-\varepsilon\right)
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|\leq
+			\left\|
+			T_{U\left(\omega\right)}\big(\symbf{x}_{i}\big)-
+			T_{U\left(\omega\right)}\big(\symbf{x}_{j}\big)
+			\right\|\leq
+			\left(1+\varepsilon\right)
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|
+			\right]\geq
+		1-\frac{1}{n}.
+	\end{equation*}
+\end{theorem}
+
+
+\begin{proof}
+	Para cada $i\neq j$ se define
+	$\symbf{x}\coloneqq\symbf{x}_i-\symbf{x}_{j}$ y se aplica el
+	Teorema~\ref{thm:projection} para acotar $\mathbb{P}_{i,j}$ como sigue:
+	\begin{align}
+		\mathbb{P}_{i,j} & =
+		\mathbb{P}
+		\left[
+			\left(1-\varepsilon\right)
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|\leq
+			\left\|
+			T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)\right\|
+			\leq
+			\left(1+\varepsilon\right)
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|
+		\right]        \notag                  \\
+		                 & =
+		\mathbb{P}
+		\left[
+			\left(1-\varepsilon\right)
+			\left\|\symbf{x}\right\|\leq
+			\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|\leq
+			\left(1+\varepsilon\right)
+			\left\|\symbf{x}\right\|
+		\right]           \notag               \\
+		                 & =
+		\mathbb{P}
+		\left[
+			\left|\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|-\|\symbf{x}\|\right| \leq
+		\varepsilon\|\symbf{x}\|\right] \notag \\
+		                 & \geq
+		1-
+		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).\label{eq:inequality}
+	\end{align}
+	Puesto que hay $n$ puntos en el conjunto
+	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}$, existen
+	$\binom{n}{2}\leq\frac{n^{2}}{2}$ pares distintos de puntos, por
+	tanto, se puede acotar la probabilidad $\mathbb{P}$ teniendo en
+	cuenta~\eqref{eq:inequality} como sigue:
+	\begin{align*}
+		 &
+		\mathbb{P}
+		\left[
+			\left(1-\varepsilon\right)
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|\leq
+			\left\|
+			T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+			\right\|\leq
+			\left(1+\varepsilon\right)
+			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|
+		\text { para todo } i,j\right]=               \\
+		 & =
+		1-\mathbb{P}
+		\left[
+			\bigcup_{i,j}
+			\left\{
+			\left|
+			\left\|
+			T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+			\right\|-
+			\left\|
+			\symbf{x}_{i}-
+			\symbf{x}_{j}
+			\right\|
+			\right|>
+			\varepsilon
+			\left\|
+			\symbf{x}_{i}-\symbf{x}_{j}
+			\right\|
+			\right\}
+		\right].                                      \\
+		 & =
+		1-
+		\sum_{i\neq j}
+		\left(1-\mathbb{P}_{i,j}\right)\geq
+		1-\sum_{i\neq j}
+		2\exp\left(-k\frac{\varepsilon^2}{16}\right)\geq
+		1-\frac{n^2}{2}
+		2\exp\left(-k\frac{\varepsilon^2}{16}\right). \\
+		 & \geq
+		1-n^{2}
+		\exp
+		\left(
+		-\left(\frac{48}{\varepsilon^2}\log n\right)
+		\frac{\varepsilon^2}{16}
+		\right)\geq
+		1-
+		n^{2}\exp\left(\log\left(n^{-3}\right)\right)=
+		1-\frac{1}{n}.
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	Para aplicar el Teorema~\ref{thm:johnson-lindenstrauss}
+	correctamente se debe interpretar la relación que existe entre las
+	distintas constantes que aparecen en el enunciado:
+	$n$ tamaño de la muestra en consideración, $d$ dimensión original
+	del conjunto de puntos y $k$ dimensión a la que se pretende
+	proyectar los puntos.
+	En particular, $k\geq\frac{48}{\varepsilon^{2}}\log n$ crece de
+	forma logarítmica con respecto a $n$ e inversamente proporcional al
+	cuadrado de $\varepsilon$, lo cual quiere decir que conforme más
+	grande sea el tamaño muestral $n$ y más pequeño sea $\varepsilon$
+	más grande será la dimensión $k$ a la que se debe proyectar.
+\end{remark}
+
+\begin{remark}
+	La clave está en que la dimensión proyectada $k$ no depende de la
+	dimensión original $d$, solo depende de $n$ y $\varepsilon$.
+	El Teorema~\ref{thm:johnson-lindenstrauss} garantiza que, al
+	proyectar un conjunto de $n$ puntos desde un espacio de alta
+	dimensión a un subespacio euclídeo de dimensión
+	$k\geq\frac{48}{\varepsilon^{2}}\log n$, es posible conservar las
+	distancias entre todos los pares de puntos con un error de a lo
+	sumo $\varepsilon$, y esto implica que la estructura geométrica del
+	conjunto se preserva casi idénticamente por la proyección de
+	Johnson-Lindenstrauss $T_{U\left(\omega\right)}$.
+\end{remark}
+
+\begin{remark}
+	El Teorema~\ref{thm:johnson-lindenstrauss} proporciona resultados
+	relevantes en el caso de que $d$ sea de una dimensión moderadamente
+	grande en comparación con $k$ que es del orden de $\log n$.
+	Esto nos permite incluso considerar conjuntos de puntos más grandes
+	que la dimensión del espacio $d$ que se podrán proyectar a un
+	espacio de dimensión menor sin perder su geometría.
+\end{remark}
+
+\begin{remark}
+	Además, los resultados del Teorema~\ref{thm:johnson-lindenstrauss}
+	son totalmente independientes del conjunto original de puntos
+	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$
+	o de la distribución que los generó (si la tuviesen).
+	De hecho, únicamente son dependientes del tamaño del conjunto sobre
+	el que se quieran aplicar.
+\end{remark}

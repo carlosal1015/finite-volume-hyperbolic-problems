@@ -1,0 +1,334 @@
+\chapter{Ejercicios y experimentos numéricos}
+
+\section{Enunciado de los ejercicios}
+
+\begin{enumerate}
+	\item
+
+	      Sean $\forall l=1,\dotsc,d:X_{l}\sim\mathcal{N}\left(0,1\right)$ son i.i.d.
+	      Defina la variable aleatoria $X\coloneqq\sum\limits_{l=1}^{d}X^{2}_{l}$.
+
+	      \begin{enumerate}
+		      \item
+
+		            Muestre que
+		            \begin{math}
+			            \forall t\in\left(0,\frac{1}{2}\right):
+			            \mathbb{E}\left[\exp\left(tX\right)\right]=
+			            \dfrac{1}{{\left(\sqrt{1-2t}\right)}^{d}}
+		            \end{math}.
+
+		      \item
+
+		            Muestre que
+		            \begin{math}
+			            \forall a\in\left(0,\infty\right):
+			            \mathbb{P}\left[X\geq a\right]\leq
+			            \inf\limits_{0<t<\frac{1}{2}}
+			            \dfrac{\exp\left(-ta\right)}{{\left(\sqrt{1-2t}\right)}^{d}}
+		            \end{math}.
+	      \end{enumerate}
+
+	\item
+
+	      Use la pregunta anterior para dar una demostración alternativa del teorema
+	      de Johnson-Lindenstrauss, donde no se requiere del teorema del anillo
+	      gaussiano.
+
+	\item
+
+	      En el siguiente ejercicio trataremos con datos generados aleatoriamente
+	      con la proyección~\eqref{eq:projection},
+	      calculamos el error actual de las distancias y comparamos esto con la cota
+	      del Teorema~\ref{thm:johnson-lindenstrauss}.
+	      Para $n=300$ muestras independientes que siguen
+	      $X\sim\mathcal{N}\left(0,1,\mathbb{R}^{1000}\right)$
+	      la siguiente gráfica emerge para el error multiplicativo actual
+	      (línea sólida) comparada a la cota $\varepsilon=\sqrt{\frac{48\log n}{k}}$
+	      (línea discontinua) provisto por Johnson-Lindenstrauss.
+	      \begin{figure}[ht!]
+		      \centering
+		      \includegraphics[width=.55\paperwidth]{ejercicio3}
+	      \end{figure}
+
+	      Sean $d>k$ dados.
+	      \begin{enumerate}
+		      \item
+
+		            Implemente la proyección~\eqref{eq:projection} y pruébelo para $d$ pequeño
+		            y $k$.
+
+		      \item
+
+		            Haga $d=1000$, genere $300$ puntos aleatorios en $\mathbb{R}^{d}$,
+		            de acuerdo a la distribución de su elección,
+		            proyecte estos vía $T_{U\left(\omega\right)}$ hacia $\mathbb{R}^{k}$
+		            y calcular para diferentes valores de $k$ el mayor cambio de distancia que se produce
+		            \begin{equation*}
+			            \varepsilon\coloneqq
+			            \max\left\{
+			            1-
+			            \min_{x\neq y}
+			            \frac{
+				            \left\|
+				            T_{U\left(\omega\right)}\left(x\right)-
+				            T_{U\left(\omega\right)}\left(y\right)
+				            \right\|
+			            }{
+				            \left\|
+				            x-y
+				            \right\|
+			            },
+			            \max_{x\neq y}
+			            \frac{
+				            \left\|
+				            T_{U\left(\omega\right)}\left(x\right)-
+				            T_{U\left(\omega\right)}\left(y\right)
+				            \right\|
+			            }{
+				            \left\|
+				            x-y
+				            \right\|
+			            }-
+			            1
+			            \right\}.
+		            \end{equation*}
+	      \end{enumerate}
+\end{enumerate}
+
+\section{Solución de los ejercicios}
+
+\begin{enumerate}
+	\item
+
+	      \begin{enumerate}
+		      \item
+
+		            \begin{align*}
+			            \shortintertext{Sea $t\in\left(0,\frac{1}{2}\right)$ fijo. La esperanza es}
+			            \mathbb{E}
+			            \left[
+				            \exp
+				            \left(tX\right)
+			            \right] & =
+			            \mathbb{E}
+			            \left[
+				            \exp
+				            \left(
+				            t\sum_{l=1}^{d}X^{2}_{l}
+				            \right)
+				            \right]=
+			            \prod_{l=1}^{d}
+			            \mathbb{E}
+			            \left[\exp\left(tX^{2}_{l}\right)\right].  \\
+			                    & \stackrel{\operatorname{def}}{=}
+			            \prod_{l=1}^{d}
+			            \int_{\mathbb{R}}
+			            \frac{1}{\sqrt{2\pi}}
+			            \exp
+			            \left(t\tau^{2}\right)
+			            \exp
+			            \Big(-\frac{\tau^{2}}{2}\Big)
+			            \dl\tau.                                   \\
+			                    & =
+			            \prod_{l=1}^{d}
+			            \int_{\mathbb{R}}
+			            \frac{1}{\sqrt{2\pi}}
+			            \exp
+			            \left[-\frac{\tau^{2}}{2}\left(1-2t\right)\right]
+			            \dl\tau.
+			            \shortintertext{Realice la $u$-sustitución: $u=\tau\sqrt{1-2t}$.}
+			            \mathbb{E}
+			            \left[
+				            \exp
+				            \left(tX\right)
+			            \right] & =
+			            \prod_{l=1}^{d}
+			            \frac{1}{\sqrt{1-2t}}
+			            \left[
+				            \int_{-\infty}^{\infty}
+				            \frac{1}{\sqrt{2\pi}}
+				            \exp\left(-\frac{u^{2}}{2}\right)
+				            \dl u
+			            \right].                                   \\
+			                    & =
+			            \prod_{l=1}^{d}
+			            \frac{1}{\sqrt{1-2t}}=
+			            \frac{1}{{\left(\sqrt{1-2t}\right)}^{d}}.
+		            \end{align*}
+
+		      \item
+
+		            Sea $a\in\left(0,\infty\right)$ fijo y $t\in\left(0,\frac{1}{2}\right)$.
+		            \begin{align*}
+			            \mathbb{P}\left[X\geq a\right] & =
+			            \mathbb{P}\left[tX\geq ta\right]=
+			            \mathbb{P}\left[\exp\left(tX\right)\geq\exp\left(ta\right)\right].
+			            \shortintertext{Por la desigualdad de Markov: $\mathbb{P}\left[X\geq a\right]\leq\frac{1}{a}\mathbb{E}\left[X\right]$.}
+			            \mathbb{P}\left[X\geq a\right] & \leq
+			            \exp\left(-ta\right)
+			            \mathbb{E}\left[\exp\left(tX\right)\right].
+			            \shortintertext{Pero, en el ítem anterior se calculó la esperanza.}
+			            \mathbb{P}\left[X\geq a\right] & \leq
+			            \frac{\exp\left(-ta\right)}{{\left(\sqrt{1-2t}\right)}^{d}}.
+			            \shortintertext{Finalmente, al tomar el ínfimo en $\left(0,\frac{1}{2}\right)$.}
+			            \mathbb{P}\left[X\geq a\right] & \leq
+			            \inf_{0<t<\frac{1}{2}}
+			            \frac{\exp\left(-ta\right)}{{\left(\sqrt{1-2t}\right)}^{d}}.
+		            \end{align*}
+	      \end{enumerate}
+
+	\item
+
+	      Sea $\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$.
+	      Para cada par $i\neq j$, definimos $\symbf{x} \coloneqq \symbf{x}_i - \symbf{x}_j$.
+	      La distancia proyectada al cuadrado es
+	      \begin{equation*}
+		      {\left\|
+			      T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+			      T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+			      \right\|}^{2} =
+		      \frac{1}{k} {\left\| U \symbf{x} \right\|}^2 =
+		      \frac{{\left\| \symbf{x} \right\|}^2}{k} \sum_{l=1}^k {\left\langle U_l, \frac{\symbf{x}}{\|\symbf{x}\|} \right\rangle}^2.
+	      \end{equation*}
+	      Puesto que $U_l \sim \mathcal{N}(\symbf{0}_d, I_d)$, se tiene que $Z_l \coloneqq \langle U_l, \frac{\symbf{x}}{\|\symbf{x}\|} \rangle \sim \mathcal{N}(0, 1)$ son i.i.d.
+	      Definiendo $X \coloneqq \sum_{l=1}^k Z_l^2$, tenemos $X \sim \chi^2_k$, que es la variable del ejercicio anterior.
+	      Usando los resultados de 1(b) con $a = k(1+\varepsilon)$ y $a = k(1-\varepsilon)$, y las aproximaciones de Taylor para el logaritmo $\ln(1+x) \approx x - x^2/2$, se obtiene:
+	      \begin{equation*}
+		      \mathbb{P} \left[ \frac{X}{k} \geq 1+\varepsilon \right] \leq \exp\left( - \frac{k\varepsilon^2}{4} \right) \quad \text{y} \quad \mathbb{P} \left[ \frac{X}{k} \leq 1-\varepsilon \right] \leq \exp\left( - \frac{k\varepsilon^2}{4} \right).
+	      \end{equation*}
+	      Así, para un par fijo $(i, j)$, la probabilidad de que la distorsión supere $\varepsilon$ es
+	      \begin{equation*}
+		      \mathbb{P} \left[ \left| \frac{{\| T_{U}(\symbf{x}_i) - T_{U}(\symbf{x}_j) \|}^2}{{\| \symbf{x}_i - \symbf{x}_j \|}^2} - 1 \right| \geq \varepsilon \right] \leq 2 \exp\left( - \frac{k\varepsilon^2}{4} \right).
+	      \end{equation*}
+	      Aplicando la cota de la unión sobre los $\binom{n}{2}$ pares de puntos:
+	      \begin{align*}
+		      \mathbb{P} \left[ \exists i,j : \left| \frac{{\| T_{U}(\symbf{x}_i) - T_{U}(\symbf{x}_j) \|}^2}{{\| \symbf{x}_i - \symbf{x}_j \|}^2} - 1 \right| \geq \varepsilon \right]
+		       & \leq \sum_{i<j} 2 \exp\left( - \frac{k\varepsilon^2}{4} \right) \\
+		       & \leq n^2 \exp\left( - \frac{k\varepsilon^2}{4} \right).
+	      \end{align*}
+	      Sustituyendo el valor de $k \geq \frac{48}{\varepsilon^2} \log n$ se obtiene:
+	      \begin{equation*}
+		      n^2 \exp\left( - \frac{k\varepsilon^2}{4} \right) \leq n^2 \exp\left( - \frac{48 \log n}{4} \right) = n^2 e^{-12 \log n} = n^{-10} \leq \frac{1}{n}.
+	      \end{equation*}
+	      Por lo tanto, la probabilidad de que todos los pares preserven sus distancias dentro de un factor $\left(1\pm\varepsilon\right)$ es al menos $1 - 1/n$.
+
+	\item
+
+	      \begin{enumerate}
+		      \item
+
+		            La implementación de la proyección $T_{U\left(\omega\right)}$ se muestra en el apéndice~\ref{sec:projection}.
+
+		      \item
+
+		            \begin{listing}[ht!]
+			            \tiny
+			            \centering
+			            \inputminted[frame=single,framesep=10pt]{text}{../python/johnson.txt}
+			            \caption{Comparación del error empírico y de la cota teórica de Johnson-Lindenstrauss para diferentes valores de $k$.}
+			            \label{lst:results3a}
+		            \end{listing}
+	      \end{enumerate}
+\end{enumerate}
+
+\section{Distorsión de las distancias proyectadas $\left(k=4295\right)$}
+
+Además, los resultados del Teorema~\ref{thm:johnson-lindenstrauss}
+son totalmente independientes del conjunto original de puntos
+$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$
+o de la distribución que los generó (si la tuviesen).
+De hecho, únicamente son dependientes del tamaño del conjunto sobre
+el que se quieran aplicar.
+Por ejemplo, considerando un conjunto de $10$ puntos en dimensión $d=10^{6}$,
+entonces, por el Teorema~\ref{thm:johnson-lindenstrauss} se puede
+proyectar los datos a un espacio de dimensión $k$ menor tal que las
+distancias entre los proyectados y las distancias entre los puntos
+originales difieren en menos de $\varepsilon=0.15$ con una probabilidad
+mayor que $1-\frac{1}{10}=0.99$.
+La dimensión del espacio de proyección debería ser mayor a
+$\frac{48}{\left(0.15\right)^{2}}\log 10=4912.182$, es decir,
+bastaría elegir $k=4913$, lo cual supondría una reducción del
+espacio original a otro de dimensión unas $203$ veces más pequeña,
+conservando las distancias con fidelidad.
+La dimensión de este nuevo espacio de proyección, pese a seguir
+siendo alta, se reduce considerablemente haciendo más manejable el
+conjunto de datos original.
+
+Pese a que la proyección al espacio de dimensión $k$ en el ejemplo anterior
+traslada los datos a una dimensión considerablemente inferior, esta aún se puede mejorar.
+Teniendo en cuenta el trabajo~\cite{Dasgupta2003}, se consigue mejorar la acotación inferior de $k$
+demostrando que basta elegir
+\begin{equation}\label{eq:dasguptaestimation}
+	k\geq
+	4
+	\Big(
+	\frac{\varepsilon^{2}}{2}-
+	\frac{\varepsilon^{3}}{3}
+	\Big)
+	\log n,
+\end{equation}
+para que se cumpla el Teorema~\ref{thm:johnson-lindenstrauss}.
+Volviendo al ejemplo anterior y, usando esta nueva acotación de $k$,
+bastaría elegir $k$ mayor o igual que $909.66$ lo cual consigue reducir la
+dimensión de forma aún más considerable.
+
+Para comprobar experimentalmente los resultados del
+Teorema~\ref{thm:johnson-lindenstrauss} se ha simulado en Python
+una muestra de tamaño $n=150$ de la distribución
+$X\sim\operatorname{Unif}\big({\left[0,1\right]}^{d}\big)$
+con $d=100000$.
+Se comprueba la distorsión promedio entre las distancias proyectadas
+y las originales para una muestra de $500$ pares distintos de observaciones.
+
+Para ello se ha escogido $\varepsilon=0.1$ y $k=4295$ según~\eqref{eq:dasguptaestimation}
+y se ha generado una matriz aleatoria de tamaño $k\times d$ con
+entradas gaussianas.
+
+Por tanto, se representa en la Figura~\ref{fig:distorsion} el cociente entre los $500$ pares de distancias
+proyectadas y las originales en el que se comprueba que dicho cociente es aproximadamente igual a $1$,
+como lo establece el Teorema~\ref{thm:johnson-lindenstrauss}.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=.75\paperwidth]{figura21_python}
+	\caption{Distorsión de $500$ pares de puntos de una muestra de
+		$150$ observaciones de la distribución uniforme en
+		${\left[0,1\right]}^{d}$ con $d=100000$.}
+	\label{fig:distorsion}
+\end{figure}
+
+\section[Comparación del Teorema para distintos epsilon y k]{Comparación del Teorema para distintos $\varepsilon$ y $k$}
+
+Para generalizar lo anteriormente realizado, se ha calculado el promedio de las observaciones de esa misma muestra
+que cumplen el Teorema~\ref{thm:johnson-lindenstrauss} escogiendo una muestra representativa de pares de observaciones.
+Además, se ha variado el $\varepsilon$ y se ha considerado el $k$ dado por el Teorema~\ref{thm:johnson-lindenstrauss}
+y el dado en la expresión~\eqref{eq:dasguptaestimation} con el fin de probar diferentes situaciones.
+
+Estos resultados se han recogido en la Tabla 5.1 donde se observa cómo en todos
+los casos la estimación promedio del porcentaje de pares de puntos cuya
+distorsión está próxima a $1$ con una tolerancia de $\varepsilon$ es del $100\%$,
+lo cual confirma los resultados teóricos del Teorema~\ref{thm:johnson-lindenstrauss}
+de forma experimental.
+Hemos considerado el $k$ en el Teorema~\ref{thm:johnson-lindenstrauss}
+para apreciar la diferencia en la dimensión de proyección de los datos
+entre esta y la que obtiene por la expresión~\eqref{eq:dasguptaestimation},
+teniendo en cuenta un $\varepsilon$ mayor para no sobreexceder el límite de memoria
+cuando se construye las matrices de proyección.
+
+\begin{table}[ht!]
+	\centering
+	\caption{Comprobación del Teorema~\ref{thm:johnson-lindenstrauss} para distintos $\varepsilon$ y $k$.}
+	\begin{tabular}{ccccc}
+		\hline
+		$\varepsilon$ & $k$ (con Teorema~\ref{thm:johnson-lindenstrauss}) & \%    & $k$ (con cota~\eqref{eq:dasguptaestimation}) & \%    \\
+		\hline
+		$0.20$        & $6013$                                            & $100$ & $1157$                                       & $100$ \\
+		\hline
+		$0.17$        & $8323$                                            & $100$ & $1565$                                       & $100$ \\
+		\hline
+		$0.15$        & $10690$                                           & $100$ & $1980$                                       & $100$ \\
+		\hline
+	\end{tabular}
+	\label{tab:verification}
+\end{table}
