@@ -31,9 +31,9 @@
 
 	\item
 
-	      Use la pregunta anterior para dar una demostración alternativa del teorema
-	      de Johnson-Lindenstrauss, donde no se requiere del teorema del anillo
-	      gaussiano.
+	      Use la pregunta anterior para dar una demostración
+	      alternativa del Teorema~\ref{thm:johnson-lindenstrauss},
+	      donde no se requiere del teorema del anillo gaussiano.
 
 	\item
 
@@ -60,12 +60,14 @@
 
 		      \item
 
-		            Haga $d=1000$, genere $300$ puntos aleatorios en $\mathbb{R}^{d}$,
-		            de acuerdo a la distribución de su elección,
-		            proyecte estos vía $T_{U\left(\omega\right)}$ hacia $\mathbb{R}^{k}$
-		            y calcular para diferentes valores de $k$ el mayor cambio de distancia que se produce
+		            Haga $d=1000$, genere $300$ puntos aleatorios en
+		            $\mathbb{R}^{d}$, de acuerdo a la distribución de su
+		            elección, proyecte estos vía
+		            $T_{U\left(\omega\right)}$ hacia
+		            $\mathbb{R}^{k}$ y calcular para diferentes valores
+		            de $k$ el mayor cambio de distancia que se produce
 		            \begin{equation*}
-			            \varepsilon\coloneqq
+			            \varepsilon\coloneqq%_{\text{JL}}
 			            \max\left\{
 			            1-
 			            \min_{x\neq y}
@@ -104,6 +106,7 @@
 	      \begin{enumerate}
 		      \item
 
+		            \phantom{m}\vspace*{-1.6\baselineskip}\setlength\belowdisplayshortskip{0pt}
 		            \begin{align*}
 			            \shortintertext{Sea $t\in\left(0,\frac{1}{2}\right)$ fijo. La esperanza es}
 			            \mathbb{E}
@@ -157,7 +160,7 @@
 			            \frac{1}{{\left(\sqrt{1-2t}\right)}^{d}}.
 		            \end{align*}
 
-		      \item
+		      \item\label{list:1b}
 
 		            Sea $a\in\left(0,\infty\right)$ fijo y $t\in\left(0,\frac{1}{2}\right)$.
 		            \begin{align*}
@@ -193,25 +196,74 @@
 	      \end{equation*}
 	      Puesto que $U_l \sim \mathcal{N}(\symbf{0}_d, I_d)$, se tiene que $Z_l \coloneqq \langle U_l, \frac{\symbf{x}}{\|\symbf{x}\|} \rangle \sim \mathcal{N}(0, 1)$ son i.i.d.
 	      Definiendo $X \coloneqq \sum_{l=1}^k Z_l^2$, tenemos $X \sim \chi^2_k$, que es la variable del ejercicio anterior.
-	      Usando los resultados de 1(b) con $a = k(1+\varepsilon)$ y $a = k(1-\varepsilon)$, y las aproximaciones de Taylor para el logaritmo $\ln(1+x) \approx x - x^2/2$, se obtiene:
+	      Usando los resultados de~\ref{list:1b} con
+	      $a=k\left(1+\varepsilon\right)$ y
+	      $a=k\left(1-\varepsilon\right)$, y las aproximaciones de
+	      Taylor para el logaritmo $\log\left(1+x\right)\approx x-\frac{x^{2}}{2}$, se obtiene:
 	      \begin{equation*}
-		      \mathbb{P} \left[ \frac{X}{k} \geq 1+\varepsilon \right] \leq \exp\left( - \frac{k\varepsilon^2}{4} \right) \quad \text{y} \quad \mathbb{P} \left[ \frac{X}{k} \leq 1-\varepsilon \right] \leq \exp\left( - \frac{k\varepsilon^2}{4} \right).
+		      \mathbb{P}
+		      \left[
+			      \frac{X}{k}\geq
+			      1+\varepsilon
+			      \right]\leq
+		      \exp\left(-k\frac{\varepsilon^{2}}{4}\right)\text{ y }
+		      \mathbb{P}
+		      \left[\frac{X}{k}\leq 1-\varepsilon\right]\leq
+		      \exp\left(-k\frac{\varepsilon^{2}}{4} \right).
 	      \end{equation*}
-	      Así, para un par fijo $(i, j)$, la probabilidad de que la distorsión supere $\varepsilon$ es
+	      Así, para un par fijo $\left(i,j\right)$, la probabilidad de
+	      que la distorsión supere $\varepsilon$ es
 	      \begin{equation*}
-		      \mathbb{P} \left[ \left| \frac{{\| T_{U}(\symbf{x}_i) - T_{U}(\symbf{x}_j) \|}^2}{{\| \symbf{x}_i - \symbf{x}_j \|}^2} - 1 \right| \geq \varepsilon \right] \leq 2 \exp\left( - \frac{k\varepsilon^2}{4} \right).
+		      \mathbb{P}
+		      \left[
+			      \left|
+			      \frac{
+				      {
+						      \left\|
+						      T_{U\left(\omega\right)}
+						      \left(\symbf{x}_{i}\right)-
+						      T_{U\left(\omega\right)}
+						      \left(\symbf{x}_j\right)
+						      \right\|}^{2}}{
+				      {\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|}^{2}
+			      }-1
+			      \right|\geq
+			      \varepsilon
+			      \right]\leq 2
+		      \exp\left(-k\frac{\varepsilon^2}{4}\right).
 	      \end{equation*}
 	      Aplicando la cota de la unión sobre los $\binom{n}{2}$ pares de puntos:
-	      \begin{align*}
-		      \mathbb{P} \left[ \exists i,j : \left| \frac{{\| T_{U}(\symbf{x}_i) - T_{U}(\symbf{x}_j) \|}^2}{{\| \symbf{x}_i - \symbf{x}_j \|}^2} - 1 \right| \geq \varepsilon \right]
-		       & \leq \sum_{i<j} 2 \exp\left( - \frac{k\varepsilon^2}{4} \right) \\
-		       & \leq n^2 \exp\left( - \frac{k\varepsilon^2}{4} \right).
-	      \end{align*}
-	      Sustituyendo el valor de $k \geq \frac{48}{\varepsilon^2} \log n$ se obtiene:
 	      \begin{equation*}
-		      n^2 \exp\left( - \frac{k\varepsilon^2}{4} \right) \leq n^2 \exp\left( - \frac{48 \log n}{4} \right) = n^2 e^{-12 \log n} = n^{-10} \leq \frac{1}{n}.
+		      \mathbb{P}
+		      \left[
+			      \exists i,j:
+			      \left|
+			      \frac{
+				      {\left\|T_{U}\left(\symbf{x}_{i}\right)-T_{U}\left(\symbf{x}_{j}\right)\right\|}^{2}
+			      }{
+				      {\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|}^{2}
+			      }-1
+			      \right|\geq
+			      \varepsilon
+			      \right]\leq
+		      \sum_{i<j}
+		      2\exp\left(-k\frac{\varepsilon^{2}}{4}\right)\leq
+		      n^{2}
+		      \exp\left(-k\frac{\varepsilon^2}{4}\right).
 	      \end{equation*}
-	      Por lo tanto, la probabilidad de que todos los pares preserven sus distancias dentro de un factor $\left(1\pm\varepsilon\right)$ es al menos $1 - 1/n$.
+	      Sustituyendo el valor de
+				$k\geq\frac{48}{\varepsilon^{2}}\log n$ se obtiene
+	      \begin{equation*}
+		      n^{2}
+		      \exp\left(-k\frac{\varepsilon^2}{4}\right)\leq
+		      n^{2}
+		      \exp\left(-\frac{48\log n}{4}\right)=
+		      n^{2}\exp\left(-12\log n\right)=n^{-10}\leq
+		      \frac{1}{n}.
+	      \end{equation*}
+	      Por lo tanto, la probabilidad de que todos los pares
+	      preserven sus distancias dentro de un factor
+	      $\left(1\pm\varepsilon\right)$ es al menos $1-\frac{1}{n}$.
 
 	\item
 
@@ -222,6 +274,7 @@
 
 		      \item
 
+		            Se ha realizado la siguiente tabla a partir del programa que se muestra en el apéndice~\ref{sec:projection}.
 		            \begin{listing}[ht!]
 			            \tiny
 			            \centering
@@ -305,7 +358,7 @@ que cumplen el Teorema~\ref{thm:johnson-lindenstrauss} escogiendo una muestra re
 Además, se ha variado el $\varepsilon$ y se ha considerado el $k$ dado por el Teorema~\ref{thm:johnson-lindenstrauss}
 y el dado en la expresión~\eqref{eq:dasguptaestimation} con el fin de probar diferentes situaciones.
 
-Estos resultados se han recogido en la Tabla 5.1 donde se observa cómo en todos
+Estos resultados se han recogido en la Tabla~\ref{tab:verification} donde se observa cómo en todos
 los casos la estimación promedio del porcentaje de pares de puntos cuya
 distorsión está próxima a $1$ con una tolerancia de $\varepsilon$ es del $100\%$,
 lo cual confirma los resultados teóricos del Teorema~\ref{thm:johnson-lindenstrauss}

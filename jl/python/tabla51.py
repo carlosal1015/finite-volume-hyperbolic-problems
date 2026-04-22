@@ -17,6 +17,7 @@ def run_experiment(epsilon):
     media_porcentaje_cumple = []
 
     for ki in k_vals:
+        ki = int(ki)
         phi = np.random.normal(0, 1 / np.sqrt(ki), (ki, d))
         Z = X @ phi.T
         porcentaje_cumple = []
@@ -49,24 +50,25 @@ def run_experiment(epsilon):
 
     return [
         epsilon,
-        k_vals[0],
+        int(k_vals[0]),
         media_porcentaje_cumple[0],
-        k_vals[1],
+        int(k_vals[1]),
         media_porcentaje_cumple[1],
     ]
 
 
-epsilon_vals = [0.2, 0.17, 0.15]
-print(f"Starting simulation using {max(1, cpu_count() - 1)} cores...")
+if __name__ == "__main__":
+    epsilon_vals = [0.2, 0.17, 0.15]
+    print(f"Starting simulation using {max(1, cpu_count() - 1)} cores...")
 
-with Pool(processes=max(1, cpu_count() - 1)) as pool:
-    results = pool.map(run_experiment, epsilon_vals)
+    with Pool(processes=max(1, cpu_count() - 1)) as pool:
+        results = pool.map(run_experiment, epsilon_vals)
 
-print(
-    f"{'epsilon':>8} | {'k1':>6} | {'cumplen_k1(%)':>15} | {'k2':>6} | {'cumplen_k2(%)':>15}"
-)
-print("-" * 65)
-for res in results:
     print(
-        f"{res[0]:8.2f} | {res[1]:6d} | {res[2]:14.3f}% | {res[3]:6d} | {res[4]:14.3f}%"
+        f"{'epsilon':>8} | {'k1':>6} | {'cumplen_k1(%)':>15} | {'k2':>6} | {'cumplen_k2(%)':>15}"
     )
+    print("-" * 65)
+    for res in results:
+        print(
+            f"{res[0]:8.2f} | {res[1]:6d} | {res[2]:14.3f}% | {res[3]:6d} | {res[4]:14.3f}%"
+        )

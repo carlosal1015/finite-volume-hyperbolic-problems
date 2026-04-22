@@ -16,18 +16,22 @@ En esta sección introducimos el concepto de proyecciones aleatorias.
 Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
 probabilidad, en esta sección se introducen matrices aleatorias del
 tipo
-\begin{equation*}
-	U\colon\Omega\to\mathbb{R}^{k\times d},\quad
-	U=
+\begin{align*}
+	U\colon\Omega & \longrightarrow\mathbb{R}^{k\times d} \\
+	\omega        & \longmapsto
 	\begin{bmatrix}
-		u_{11} & \cdots & u_{1d} \\
-		\vdots & \ddots & \vdots \\
-		u_{k1} & \cdots & u_{kd}
+		u_{11}\left(\omega\right) & \cdots & u_{1d}\left(\omega\right) \\
+		\vdots                    & \ddots & \vdots                    \\
+		u_{k1}\left(\omega\right) & \cdots & u_{kd}\left(\omega\right)
 	\end{bmatrix},
-\end{equation*}
-con $u_{ij}\sim\mathcal{N}\left(0,1\right)$, $i=1,\dotsc, k$ y
-$j=1,\dotsc,d$, variables aleatorias normales unidimensionales
-independientes.
+\end{align*}
+donde
+\begin{math}
+	\forall\left(i,j\right)\in
+	\left\{1,\dotsc,k\right\}\times\left\{1,\dotsc,d\right\}:
+	u_{ij}\sim\mathcal{N}\left(0,1\right)
+\end{math}
+son variables aleatorias normales unidimensionales e independientes.
 Esta matriz aleatoria será denotada por
 $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
 Algunas propiedades que tiene la matriz aleatoria están basadas en el
@@ -92,7 +96,8 @@ entre datos en el espacio original.
 			\symbf{x}
 			\right\|
 			\right]\geq
-		1-2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).
+		1-2\exp
+		\Big(-k\frac{\varepsilon^{2}}{16}\Big).
 	\end{equation*}
 \end{theorem}
 
@@ -117,9 +122,8 @@ entre datos en el espacio original.
 	\end{equation*}
 	Ahora, fijado
 	$\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}$,
-	se puede considerar el vector
-	$U\dfrac{\symbf{x}}{\left\|\symbf{x}\right\|}$, cuya coordenada
-	$i$-ésima es
+	considere la coordenada $i$-ésima del vector
+	$U\dfrac{\symbf{x}}{\left\|\symbf{x}\right\|}$:
 	\begin{equation*}
 		{\left(
 			U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
@@ -132,8 +136,12 @@ entre datos en el espacio original.
 		u_{ij}
 		\frac{x_{i}}{\left\|\symbf{x}\right\|}.
 	\end{equation*}
-	Usando que $u_{ij}\sim\mathcal{N}\left(0,1\right)$ para todo
-	$\left(i,j\right)$, se tiene que
+	Como
+	\begin{math}
+		\forall\left(i,j\right)\in
+		\left\{1,\dotsc,k\right\}\times\left\{1,\dotsc,d\right\}:
+		u_{ij}\sim\mathcal{N}\left(0,1\right)
+	\end{math}, se tiene que
 	\begin{math}
 		{\left(
 			U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
@@ -168,7 +176,7 @@ entre datos en el espacio original.
 			\sqrt{k}
 			\right|\leq\varepsilon\sqrt{k}
 			\right] \geq
-		1-2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).
+		1-2\exp\Big(-k\frac{\varepsilon^{2}}{16}\Big).
 	\end{equation*}
 	En esta acotación se ha aplicado dicho teorema con $d=k$ y
 	$\varepsilon=\varepsilon \sqrt{k}$.
@@ -182,16 +190,16 @@ resultado es
 	\mathbb{P}
 	\left[
 		\left|
-		\left\|
+		\big\|
 		\frac{1}{\sqrt{k}}
 		U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
-		\right\|-1
+		\big\|-1
 		\right|\leq
 		\varepsilon
 		\right]
 	\geq 1-
 	2\exp
-	\left(-k\frac{\varepsilon^{2}}{16}\right).
+	\Big(-k\frac{\varepsilon^{2}}{16}\Big).
 \end{equation}
 
 \begin{definition}
@@ -207,38 +215,55 @@ resultado es
 			\mathbb{R}^{k}                                                 \\
 			\symbf{x}                                    & \longmapsto
 			\frac{1}{\sqrt{k}}
-			U\left(\omega\right)\symbf{x}
+			U\left(\omega\right)\symbf{x},
 		\end{aligned}
 	\end{equation}
-	se denomina proyección de Johnson-Lindenstrauss.
+	se denomina \emph{proyección de Johnson-Lindenstrauss}.
 \end{definition}
-Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es una proyección en el sentido del
-álgebra lineal, pues no necesariamente son matrices ortonormales.
-Con esta notación, se puede reformular la conclusión del Teorema~\ref{thm:projection}
-como sigue:
+Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es una
+proyección en el sentido del álgebra lineal, pues no necesariamente
+son matrices ortonormales.
+Con esta notación, se puede reformular la conclusión del
+Teorema~\ref{thm:projection} como sigue:
+\begin{math}
+	\forall\symbf{x}\in\mathbb{R}^{d}\setminus
+	\left\{\symbf{0}_{d}\right\}
+\end{math}
+con $0<\varepsilon\leq 1$ y
+$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$:
 \begin{equation}
-	\begin{split}
-		\forall\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}
-		\text{ con }
-		0<\varepsilon\leq 1
-		\text{ y }
-		U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right): \\
-		P[\left|\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\|-\|\symbf{x}\|\right|\leq\varepsilon\|\symbf{x}\|]
-		\geq 1-
-		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right)
-	\end{split},
+	\mathbb{P}
+	\left[
+		\left|
+		\big\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\big\|-
+		\left\|\symbf{x}\right\|
+		\right|\leq
+		\varepsilon\left\|\symbf{x}\right\|
+		\right]
+	\geq 1-
+	2\exp
+	\Big(
+	-k\frac{\varepsilon^{2}}{16}
+	\Big),
 \end{equation}
 se observa que con alta probabilidad
 \begin{equation*}
-	\frac{\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|}{\left\|x\right\|}\approx 1.
+	\left\|
+	T_{U\left(\omega\right)}\left(\symbf{x}\right)
+	\right\|
+	\approx
+	\left\|x\right\|.
 \end{equation*}
 Por tanto, de cierta forma, la proyección de Johnson-Lindenstrauss
-mantiene prácticamente invariante la norma de cada $\symbf{x}\in\mathbb{R}^{d}$.
+mantiene prácticamente invariante la norma de cada
+$\symbf{x}\in\mathbb{R}^{d}$.
 
 \section{El teorema de Johnson-Lindenstrauss}
 
-El siguiente teorema de Johnson-Lindenstrauss en el contexto probabilístico establece lo que sucede cuando consideramos
-las distancias entre pares de puntos tras usar la proyección de Johnson-Lindenstrauss.
+El siguiente teorema de Johnson-Lindenstrauss en el contexto
+probabilístico establece lo que sucede cuando consideramos
+las distancias entre pares de puntos tras usar la proyección de
+Johnson-Lindenstrauss.
 
 \begin{theorem}[Teorema de Johnson-Lindenstrauss~\cite{Wegner2024}]\label{thm:johnson-lindenstrauss}
 	Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
@@ -247,7 +272,13 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 	Sea $U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria
 	con $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
 	Entonces, para cada
-	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$
+	\begin{math}
+		\left\{
+		\symbf{x}_{1},
+		\dotsc,
+		\symbf{x}_{n}
+		\right\}\subset\mathbb{R}^{d}
+	\end{math}
 	se cumple la siguiente estimación:
 	\begin{equation*}
 		\mathbb{P}
@@ -272,13 +303,13 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 	\end{equation*}
 \end{theorem}
 
-
 \begin{proof}
 	Para cada $i\neq j$ se define
 	$\symbf{x}\coloneqq\symbf{x}_i-\symbf{x}_{j}$ y se aplica el
-	Teorema~\ref{thm:projection} para acotar $\mathbb{P}_{i,j}$ como sigue:
+	Teorema~\ref{thm:projection} para acotar $\mathbb{P}_{i,j}$ como
+	sigue:
 	\begin{align}
-		\mathbb{P}_{i,j} & =
+		\mathbb{P}_{i,j} & \coloneqq
 		\mathbb{P}
 		\left[
 			\left(1-\varepsilon\right)
@@ -295,24 +326,37 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 			\symbf{x}_{i}-
 			\symbf{x}_{j}
 			\right\|
-		\right]        \notag                  \\
-		                 & =
+		\right].        \notag                  \\
+		\mathbb{P}_{i,j} & =
 		\mathbb{P}
 		\left[
 			\left(1-\varepsilon\right)
 			\left\|\symbf{x}\right\|\leq
-			\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|\leq
+			\left\|
+			T_{U\left(\omega\right)}\left(\symbf{x}\right)
+			\right\|\leq
 			\left(1+\varepsilon\right)
 			\left\|\symbf{x}\right\|
-		\right]           \notag               \\
-		                 & =
+		\right].           \notag               \\
+		\mathbb{P}_{i,j} & =
 		\mathbb{P}
 		\left[
-			\left|\left\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\right\|-\|\symbf{x}\|\right| \leq
-		\varepsilon\|\symbf{x}\|\right] \notag \\
-		                 & \geq
+			\left|
+			\big\|
+			T_{U\left(\omega\right)}
+			\left(\symbf{x}\right)
+			\big\|-
+			\left\|
+			\symbf{x}
+			\right\|
+			\right|\leq
+		\varepsilon\|\symbf{x}\|\right]. \notag \\
+		\mathbb{P}_{i,j} & \geq
 		1-
-		2\exp\left(-k\frac{\varepsilon^{2}}{16}\right).\label{eq:inequality}
+		2\exp
+		\Big(
+		-k\frac{\varepsilon^{2}}{16}
+		\Big).\label{eq:inequality}
 	\end{align}
 	Puesto que hay $n$ puntos en el conjunto
 	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}$, existen
@@ -323,6 +367,7 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 		 &
 		\mathbb{P}
 		\left[
+			\forall i,j:
 			\left(1-\varepsilon\right)
 			\left\|
 			\symbf{x}_{i}-
@@ -334,7 +379,7 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 			\right\|\leq
 			\left(1+\varepsilon\right)
 			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|
-		\text { para todo } i,j\right]=               \\
+		\right]                                    \\
 		 & =
 		1-\mathbb{P}
 		\left[
@@ -355,24 +400,26 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 			\symbf{x}_{i}-\symbf{x}_{j}
 			\right\|
 			\right\}
-		\right].                                      \\
-		 & =
+		\right].                                   \\
+		 & \geq
 		1-
 		\sum_{i\neq j}
 		\left(1-\mathbb{P}_{i,j}\right)\geq
 		1-\sum_{i\neq j}
-		2\exp\left(-k\frac{\varepsilon^2}{16}\right)\geq
+		2\exp\Big(-k\frac{\varepsilon^2}{16}\Big)\geq
 		1-\frac{n^2}{2}
-		2\exp\left(-k\frac{\varepsilon^2}{16}\right). \\
+		2\exp\Big(-k\frac{\varepsilon^2}{16}\Big). \\
 		 & \geq
 		1-n^{2}
 		\exp
-		\left(
-		-\left(\frac{48}{\varepsilon^2}\log n\right)
-		\frac{\varepsilon^2}{16}
-		\right)\geq
+		\left[
+			-\Big(\frac{48}{\varepsilon^2}\log n\Big)
+			\frac{\varepsilon^2}{16}
+			\right]\geq
 		1-
-		n^{2}\exp\left(\log\left(n^{-3}\right)\right)=
+		n^{2}
+		\exp
+		\left[\log\left(n^{-3}\right)\right]=
 		1-\frac{1}{n}.
 	\end{align*}
 \end{proof}
@@ -416,7 +463,10 @@ las distancias entre pares de puntos tras usar la proyección de Johnson-Lindens
 \begin{remark}
 	Además, los resultados del Teorema~\ref{thm:johnson-lindenstrauss}
 	son totalmente independientes del conjunto original de puntos
-	$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset\mathbb{R}^{d}$
+	\begin{math}
+		\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}\subset
+		\mathbb{R}^{d}
+	\end{math}
 	o de la distribución que los generó (si la tuviesen).
 	De hecho, únicamente son dependientes del tamaño del conjunto sobre
 	el que se quieran aplicar.
