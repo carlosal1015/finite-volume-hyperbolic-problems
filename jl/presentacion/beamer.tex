@@ -1,0 +1,687 @@
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out',
+% arara: --> 'pdf', 'snm', 'toc']
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: yes,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: biber
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: lualatex: {
+% arara: --> shell: yes,
+% arara: --> draft: no,
+% arara: --> interaction: batchmode
+% arara: --> }
+% arara: clean: {
+% arara: --> extensions:
+% arara: --> ['aux', 'log', 'nav', 'out',
+% arara: --> 'snm', 'toc']
+% arara: --> }
+\documentclass[
+    12pt,
+    aspectratio=1610,
+    c,
+    spanish,
+    intlimits,
+    % handout,
+    leqno,
+    % noamsthm,
+    professionalfonts,
+]{beamer}
+\usepackage[spanish]{babel}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+\usepackage{caption}
+\usepackage[
+	citestyle=numeric,
+	style=numeric,
+	backend=biber,
+]{biblatex}
+\addbibresource{../reporte/references.bib}
+
+% \usetheme[style=academic,palette=oxford,titlealign=center,mathface=pagella,allserif]{Celestia}
+\usetheme{Singapore}
+\useinnertheme{rounded}
+\usecolortheme{rose}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{caption}[numbered]
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{theorems}[ams style]
+\addtobeamertemplate{theorem begin}{\normalfont}{}
+\setbeamersize{text margin left=8pt,text margin right=8pt}
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{bibliography item}{%
+	\ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+		or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+		or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+	{\setbeamertemplate{bibliography item}[book]}
+	{\ifentrytype{online}
+		{\setbeamertemplate{bibliography item}[online]}
+		{\setbeamertemplate{bibliography item}[article]}}%
+	\usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+{\list{}
+	{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+		\setlength{\leftmargin}{\labelwidth}%
+		\setlength{\labelsep}{\biblabelsep}%
+		\addtolength{\leftmargin}{\labelsep}%
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}}}
+{\endlist}
+{\item}
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+{\usebeamertemplate{proof end}}
+\makeatother
+
+\title{Disminución de la dimensionalidad a través de proyecciones aleatorias}
+\subtitle{Machine Learning para Matemáticos}
+\author{\scshape Fidel Jara Huanca}
+\institute{Instituto de Matemática y Ciencias Afines}
+\date{23 de abril de 2026}
+
+\DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\begin{document}
+
+\frame{\maketitle}
+
+
+\begin{frame}[label=toc]\transblindsvertical
+	\frametitle{\contentsname}
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Motivación y Problema}
+
+ {
+  \usebackgroundtemplate{%
+	  \parbox[c][\paperheight][c]{\paperwidth}{\centering
+		  \includegraphics[width=\paperwidth]{../figuras/jl}
+	  }}
+  \begin{frame}[plain]
+  \end{frame}
+ }
+
+% \begin{frame}
+% 	\begin{columns}
+% 		\begin{column}{0.6\textwidth}
+% 			\begin{itemize}
+% 				\item La Maldición de la Dimensionalidad  Richard Bellman~\cite{Bellman1958}.
+
+% 				      \begin{refsection}
+% 					      \nocite{Bellman1958}
+% 					      % \nocite{Wegner2024}
+% 					      % \nocite{Johnson1984}
+% 					      % \nocite{Dasgupta2003}
+% 					      % \nocite{Beyer1999}
+% 					      \printbibliography[heading=none]
+% 				      \end{refsection}
+
+% 				\item \textbf{Fenómeno del espacio vacío:} El volumen crece exponencialmente con $d$, diluyendo la noción de cercanía.
+% 				\item \textbf{Impacto en Machine Learning:}
+% 				      \begin{itemize}
+% 					      \item Inoperatividad de métricas euclídeas tradicionales~\cite{Beyer1999}.
+% 					      \item Elevado número de parámetros en matrices de covarianza (LDA).
+% 					      \item Alto coste computacional en algoritmos basados en distancias ($k$-NN).
+% 				      \end{itemize}
+% 			\end{itemize}
+% 		\end{column}
+% 		\begin{column}{0.4\textwidth}
+% 			\begin{center}
+% 				\begin{tikzpicture}[scale=1.2]
+% 					% d=1
+% 					\draw[blue, thick] (0,0) -- (1,0);
+% 					\draw[fill=red!20] (0.1,0) rectangle (0.9,0.05);
+% 					\node at (0.5,-0.3) {\tiny $d=1$};
+
+% 					% d=2
+% 					\begin{scope}[xshift=1.5cm]
+% 						\draw[blue, thick] (0,0) rectangle (1,1);
+% 						\draw[fill=red!20] (0.1,0.1) rectangle (0.9,0.9);
+% 						\node at (0.5,0.5) {\tiny $0.8^2=0.64$};
+% 						\node at (0.5,-0.3) {\tiny $d=2$};
+% 					\end{scope}
+
+% 					% d=3
+% 					\begin{scope}[xshift=3cm, yshift=0.2cm, scale=0.8]
+% 						\draw[blue, thick] (0,0,0) -- (1,0,0) -- (1,1,0) -- (0,1,0) -- cycle;
+% 						\draw[blue, thick] (0,0,1) -- (1,0,1) -- (1,1,1) -- (0,1,1) -- cycle;
+% 						\draw[blue, thick] (0,0,0) -- (0,0,1);
+% 						\draw[blue, thick] (1,0,0) -- (1,0,1);
+% 						\draw[blue, thick] (1,1,0) -- (1,1,1);
+% 						\draw[blue, thick] (0,1,0) -- (0,1,1);
+% 						\node at (0.5,0.5,0.5) {\tiny $0.8^3=0.51$};
+% 						\node at (0.5,-0.5,0) {\tiny $d=3$};
+% 					\end{scope}
+% 				\end{tikzpicture}
+% 				\vfill
+% 				{\tiny Volumen del centro $0.8^d \xrightarrow{d\to\infty} 0$}
+% 			\end{center}
+% 		\end{column}
+% 	\end{columns}
+% \end{frame}
+
+% \begin{frame}{Concentración de la Medida}
+% 	En alta dimensión ($d \gg 1$), las distribuciones clásicas (Normal, Uniforme) exhiben comportamientos anti-intuitivos:
+% 	\vfill
+% 	\begin{columns}
+% 		\begin{column}{0.5\textwidth}
+% 			\begin{block}{Ortogonalidad Gaussiana}
+% 				Vectores aleatorios independientes $\mathcal{N}(\symbf{0}, I_d)$ tienden a ser casi ortogonales.
+% 				\vfill
+% 				{\scriptsize \textbf{Evidencia numérica ($d=10^4$):}}
+% 				\begin{itemize}
+% 					\item {\tiny Ángulo promedio: $89.99^\circ \pm 0.57^\circ$}
+% 					\item {\tiny Producto escalar: $0.0001 \pm 0.0099$}
+% 				\end{itemize}
+% 			\end{block}
+% 			\begin{block}{Anillo Gaussiano}
+% 				La norma de un vector $\symbf{x} \sim \mathcal{N}(\symbf{0}, I_d)$ se concentra fuertemente alrededor de $\sqrt{d}$.
+% 			\end{block}
+% 		\end{column}
+% 		\begin{column}{0.5\textwidth}
+% 			\centering
+% 			\includegraphics[width=\linewidth]{../figuras/concentration_measure}
+% 			\includegraphics[width=\linewidth]{../figuras/gaussian_ring}
+% 		\end{column}
+% 	\end{columns}
+% \end{frame}
+
+\section{Desarrollo Matemático}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{theorem}[Teorema del anillo gaussiano~\cite{Wegner2024}]
+		Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+		probabilidad, y sea $X\colon\Omega\to\mathbb{R}^{d}$ un vector aleatorio con
+		$X\sim\mathcal{N}\left(\symbf{0}_{d},1\right)$ y
+		$0<\varepsilon\leq\sqrt{d}$.
+		Entonces,
+		\begin{equation*}
+			\mathbb{P}
+			\left[
+				\left|
+				\left\|X\right\|-
+				\sqrt{d}
+				\right|\leq\varepsilon
+				\right]\geq
+			1-2\exp\left(-\frac{\varepsilon^{2}}{16}\right).
+		\end{equation*}
+	\end{theorem}
+
+	\
+
+	\begin{theorem}[Teorema de la Proyección aleatoria]\label{thm:projection}
+		Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+		probabilidad y, para $k<d$ sea
+		$U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria con
+		$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+		Para
+		$\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}$ y
+		$0<\varepsilon\leq 1$ tenemos
+		\begin{equation*}
+			\mathbb{P}
+			\left[
+				\left|
+				\left\|
+				U\symbf{x}
+				\right\|-
+				\sqrt{k}
+				\left\|
+				\symbf{x}
+				\right\|
+				\right|\leq
+				\varepsilon\sqrt{k}
+				\left\|
+				\symbf{x}
+				\right\|
+				\right]\geq
+			1-2\exp
+			\Big(-k\frac{\varepsilon^{2}}{16}\Big).
+		\end{equation*}
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{alertblock}{Observación}
+		Teniendo en cuenta la conclusión del teorema anterior y desde que
+		$\sqrt{k}$ es fijo a lo largo de toda la prueba del
+		Teorema~\ref{thm:projection}, una reformulación más habitual de este
+		resultado es
+		\begin{equation}
+			\mathbb{P}
+			\left[
+				\left|
+				\big\|
+				\frac{1}{\sqrt{k}}
+				U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
+				\big\|-1
+				\right|\leq
+				\varepsilon
+				\right]
+			\geq 1-
+			2\exp
+			\Big(-k\frac{\varepsilon^{2}}{16}\Big).
+		\end{equation}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{definition}[Proyección]
+		Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+		probabilidad y, para $k<d$, sea
+		$U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria con
+		$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+		Además, sea $\omega\in\Omega$.
+		Entonces, la aplicación
+		\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+		\begin{equation}\label{eq:projection}
+			\begin{aligned}
+				T_{U\left(\omega\right)}\colon\mathbb{R}^{d} & \longrightarrow
+				\mathbb{R}^{k}                                                 \\
+				\symbf{x}                                    & \longmapsto
+				\frac{1}{\sqrt{k}}
+				U\left(\omega\right)\symbf{x},
+			\end{aligned}
+		\end{equation}
+		se denomina \emph{proyección de Johnson-Lindenstrauss}, donde
+		\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
+		\begin{align*}
+			U\colon\Omega & \longrightarrow\mathbb{R}^{k\times d} \\
+			\omega        & \longmapsto
+			\begin{bmatrix}
+				u_{11}\left(\omega\right) & \cdots & u_{1d}\left(\omega\right) \\
+				\vdots                    & \ddots & \vdots                    \\
+				u_{k1}\left(\omega\right) & \cdots & u_{kd}\left(\omega\right)
+			\end{bmatrix},
+		\end{align*}
+		donde
+		\begin{math}
+			\forall\left(i,j\right)\in
+			\left\{1,\dotsc,k\right\}\times\left\{1,\dotsc,d\right\}:
+			u_{ij}\sim\mathcal{N}\left(0,1\right)
+		\end{math}
+		son i.i.d.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{alertblock}{Observación}
+		Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es una
+		proyección en el sentido del álgebra lineal, pues no necesariamente
+		son matrices ortonormales.
+		Pero, con esta notación, se puede reformular la conclusión del
+		Teorema~\ref{thm:projection} como sigue:
+		\begin{math}
+			\forall\symbf{x}\in\mathbb{R}^{d}\setminus
+			\left\{\symbf{0}_{d}\right\}
+		\end{math}
+		con $0<\varepsilon\leq 1$ y
+		$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$:
+		\begin{equation}
+			\mathbb{P}
+			\left[
+				\left|
+				\big\|T_{U\left(\omega\right)}\left(\symbf{x}\right)\big\|-
+				\left\|\symbf{x}\right\|
+				\right|\leq
+				\varepsilon\left\|\symbf{x}\right\|
+				\right]
+			\geq 1-
+			2\exp
+			\Big(
+			-k\frac{\varepsilon^{2}}{16}
+			\Big).
+		\end{equation}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{theorem}[Teorema de Johnson-Lindenstrauss~\cite{Johnson1984,Wegner2024}]\label{thm:johnson-lindenstrauss}
+		Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
+		probabilidad y sea además $0<\varepsilon<1$, $n\geq 1$ y
+		$k\geq\frac{48}{\varepsilon^2}\log n$.
+		Sea $U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria
+		con $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
+		Entonces, para cada
+		\begin{math}
+			\left\{
+			\symbf{x}_{1},
+			\dotsc,
+			\symbf{x}_{n}
+			\right\}\subset\mathbb{R}^{d}
+		\end{math}
+		se cumple la siguiente estimación:
+		\begin{equation*}
+			\mathbb{P}
+			\left[
+				\forall i,j:
+				\left(1-\varepsilon\right)
+				\left\|
+				\symbf{x}_{i}-
+				\symbf{x}_{j}
+				\right\|\leq
+				\left\|
+				T_{U\left(\omega\right)}\big(\symbf{x}_{i}\big)-
+				T_{U\left(\omega\right)}\big(\symbf{x}_{j}\big)
+				\right\|\leq
+				\left(1+\varepsilon\right)
+				\left\|
+				\symbf{x}_{i}-
+				\symbf{x}_{j}
+				\right\|
+				\right]\geq
+			1-\frac{1}{n}.
+		\end{equation*}
+	\end{theorem}
+
+	\pause
+
+	\begin{proofs}
+		Para cada $i\neq j$ se define $\mathbb{P}_{i,j}$ y usando el
+		Teorema~\ref{thm:projection} se demuestra que:
+		\begin{align}
+			\mathbb{P}_{i,j} & \coloneqq
+			\mathbb{P}
+			\left[
+				\left(1-\varepsilon\right)
+				\left\|
+				\symbf{x}_{i}-
+				\symbf{x}_{j}
+				\right\|\leq
+				\left\|
+				T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+				T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)\right\|
+				\leq
+				\left(1+\varepsilon\right)
+				\left\|
+				\symbf{x}_{i}-
+				\symbf{x}_{j}
+				\right\|
+			\right].        \notag       \\
+			\mathbb{P}_{i,j} & \geq
+			1-
+			2\exp
+			\Big(
+			-k\frac{\varepsilon^{2}}{16}
+			\Big).\label{eq:inequality}
+		\end{align}
+		% Sea $\symbf{x}\coloneqq\symbf{x}_{i}-\symbf{x}_{j}$.
+		% Por linealidad,
+		% $T_{U\left(\omega\right)}\left(\symbf{x}_i\right)-T_{U\left(\omega\right)}\left(\symbf{x}_j\right)=T_{U}\left(\symbf{v}\right)$.
+		% \begin{enumerate}
+		% 	\item \textbf{Distribución:} Las componentes de $U \frac{\symbf{v}}{\|\symbf{v}\|}$ son $\mathcal{N}(0, 1)$ independientes.
+		% 	\item \textbf{Lema de Proyección:} Usando el Teorema del Anillo Gaussiano (o cotas para $\chi^2_k$):
+		% 	      \[ \mathbb{P} [ |\|T_U\symbf{v}\| - \|\symbf{v}\|| > \varepsilon \|\symbf{v}\| ] \leq 2 e^{-k \varepsilon^2 / 16} \]
+		% 	\item \textbf{Cota de la Unión:} Para los $\binom{n}{2}$ pares:
+		% 	      \[ \mathbb{P}[\text{fallo}] \leq \frac{n^2}{2} \cdot 2 e^{-k \varepsilon^2 / 16} = n^2 e^{-k \varepsilon^2 / 16} \]
+		% 	\item \textbf{Conclusión:} Si $k \geq \frac{48}{\varepsilon^2} \log n$, entonces $\mathbb{P}[\text{fallo}] \leq n^2 e^{-3 \log n} = \frac{1}{n}$.
+		% \end{enumerate}
+		% Se puede abordar de dos maneras:
+		% \begin{description}
+		% 	\item[Vía Anillo Gaussiano]
+
+		% 	      Usando la concentración de la norma $\mathcal{N}\left(\symbf{0},I_{k}\right)$.
+
+		% 	\item[Vía Concentración $\chi^{2}$]
+
+		% 	      Usando cotas de Chernoff sobre la suma de normales al cuadrado.
+		% \end{description}
+	\end{proofs}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{proof}[\proofname\ (Cont.)]
+		Puesto que hay $n$ puntos en el conjunto
+		$\left\{\symbf{x}_{1},\dotsc,\symbf{x}_{n}\right\}$, existen
+		$\binom{n}{2}\leq\frac{n^{2}}{2}$ pares distintos de puntos, por
+		tanto, se puede acotar la probabilidad $\mathbb{P}$ teniendo en
+		cuenta~\eqref{eq:inequality} como sigue:
+		\begin{align*}
+			 &
+			\mathbb{P}
+			\left[
+				\forall i,j:
+				\left(1-\varepsilon\right)
+				\left\|
+				\symbf{x}_{i}-
+				\symbf{x}_{j}
+				\right\|\leq
+				\left\|
+				T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+				T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+				\right\|\leq
+				\left(1+\varepsilon\right)
+				\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|
+			\right]                                    \\
+			 & =
+			1-\mathbb{P}
+			\left[
+				\bigcup_{i,j}
+				\left\{
+				\left|
+				\left\|
+				T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
+				T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+				\right\|-
+				\left\|
+				\symbf{x}_{i}-
+				\symbf{x}_{j}
+				\right\|
+				\right|>
+				\varepsilon
+				\left\|
+				\symbf{x}_{i}-\symbf{x}_{j}
+				\right\|
+				\right\}
+			\right].                                   \\
+			 & \geq
+			1-
+			\sum_{i\neq j}
+			\left(1-\mathbb{P}_{i,j}\right)\geq
+			1-\sum_{i\neq j}
+			2\exp\Big(-k\frac{\varepsilon^2}{16}\Big)\geq
+			1-\frac{n^2}{2}
+			2\exp\Big(-k\frac{\varepsilon^2}{16}\Big). \\
+			 & \geq
+			1-n^{2}
+			\exp
+			\left[
+				-\Big(\frac{48}{\varepsilon^2}\log n\Big)
+				\frac{\varepsilon^2}{16}
+				\right]\geq
+			1-
+			n^{2}
+			\exp
+			\left[\log\left(n^{-3}\right)\right]=
+			1-\frac{1}{n}.
+		\end{align*}
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	A continuación, enunciamos un teorema que realiza una mejor
+	estimación para el valor de $k$, la cual será comparada con el
+	Teorema~\ref{thm:johnson-lindenstrauss}.
+	\begin{theorem}[\cite{Dasgupta2003}]\label{eq:dasguptaestimation}
+		Para cualquier $0<\varepsilon<1$ y cualquier $n\in\mathbb{Z}$, sea $k\in\mathbb{N}$ tal que
+		\begin{math}
+			k\geq
+			4
+			\Big(
+			\frac{\varepsilon^{2}}{2}-
+			\frac{\varepsilon^{3}}{3}
+			\Big)
+			\log n
+		\end{math}.
+		Entonces, para cualquier conjunto
+		\begin{math}
+			V=\left\{
+			\symbf{x}_{1},
+			\dotsc,
+			\symbf{x}_{n}
+			\right\}\subset\mathbb{R}^{d}
+		\end{math},
+		existe una aplicación $T\colon\mathbb{R}^{d}\to\mathbb{R}^{k}$ tal que
+		\begin{equation*}
+			\forall\symbf{x}_{i},\symbf{x}_{j}\in V:
+			\left(1-\epsilon\right)
+			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|^{2}\leq
+			\left\|T\left(\symbf{x}_{i}\right)-T\left(\symbf{x}_{i}\right)\right\|^{2}\leq
+			\left(1+\epsilon\right)
+			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|^{2} .
+		\end{equation*}
+		Además, este mapa se puede encontrar en tiempo polinomial aleatorio.
+	\end{theorem}
+\end{frame}
+
+\section{Experimentos Numéricos}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{figure}[ht!]
+		\centering
+		\includegraphics[width=.6\paperwidth]{../figuras/figura21_python}
+		\captionof{figure}{Distorsión de $500$ pares.
+			Los puntos están a un margen $1\pm 0.1$.
+			$n=150$, $d=10^5$.
+				{\footnotesize
+					\url{https://colab.research.google.com/drive/1LKBI2k5FN10nUVoR1dA3iUOXFd29cf-S}}}
+		% Ratio de distorsión:
+		% {\small $R = \frac{\|T_U\symbf{x}_i - T_U\symbf{x}_j\|}{\|\symbf{x}_i - \symbf{x}_j\|}$}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	Teniendo en cuenta las cotas de $k$ dadas por
+	Johnson-Lindenstrauss y Dasgupta-Gupta obtenemos
+	mediante una simulación en Python el siguiente cuadro:
+	% \begin{block}{Mejora en la dimensión $k$}
+	% 	Dasgupta y Gupta (2003) demostraron que basta con:
+	% 	\[ k^* \geq 4 \left( \frac{\varepsilon^2}{2} - \frac{\varepsilon^3}{3} \right)^{-1} \log n \]
+	% \end{block}
+	% \vfill
+	\begin{table}
+		\centering
+		\begin{tabular}{lcccc}
+			\hline
+			$\varepsilon$ & $k_{JL}$ (Teórico) & \% Éxito & $k^*$ (Dasgupta) & \% Éxito \\
+			\hline
+			$0.20$        & $6013$             & $100\%$  & $1157$           & $100\%$  \\
+			$0.17$        & $8323$             & $100\%$  & $1565$           & $100\%$  \\
+			$0.15$        & $10690$            & $100\%$  & $1980$           & $100\%$  \\
+			\hline
+		\end{tabular}
+		\caption{Refinamiento de la dimensión $k$. Comparativa de cotas para $n=150$ y $d=20000$.}
+	\end{table}
+
+	\
+
+	\begin{block}{Google Colab}
+		\centering\small
+		\url{https://colab.research.google.com/drive/1LKBI2k5FN10nUVoR1dA3iUOXFd29cf-S}
+	\end{block}
+\end{frame}
+
+% \section{Aplicaciones y Conclusiones}
+
+% \begin{frame}{Aplicaciones en Machine Learning}
+% 	\begin{itemize}
+% 		\item \textbf{Reducción de Dimensionalidad Agóstica:} A diferencia de PCA, J-L no requiere calcular autovectores ni asume estructura lineal previa.
+% 		\item \textbf{Eficiencia en Big Data:} Permite pre-procesar datos de millones de dimensiones a un espacio manejable conservando la métrica.
+% 		\item \textbf{Mejora de Algoritmos Basados en Distancias:}
+% 		      \begin{itemize}
+% 			      \item \textbf{$k$-NN y $k$-Means:} Aceleración computacional crítica ($\mathcal{O}(d) \to \mathcal{O}(k)$) sin pérdida de precisión geométrica.
+% 			      \item \textbf{SVM y Kernels:} Mantenimiento de la separabilidad de clases en espacios proyectados.
+% 		      \end{itemize}
+% 	\end{itemize}
+% \end{frame}
+
+\section{Conclusiones}
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{itemize}
+		\item
+
+		      Por todo lo investigado acerca del Teorema~\ref{thm:johnson-lindenstrauss}
+		      se ha comprobado que es de gran interés en Ciencia de Datos y Machine Learning.
+		      Los resultados están basados en el comportamiento de las matrices aleatorias como
+		      método de proyección de un conjunto de puntos a una dimensión menor conservando
+		      de forma aproximada las normas y las distancia entre los puntos.
+
+		      \
+
+		\item
+
+		      La dimensión del espacio de proyección es del orden del
+		      tamaño del conjunto de puntos e independiente de la dimensión original.
+	\end{itemize}
+	% \begin{itemize}
+	% 	\item \textbf{Independencia de la Dimensión Original:} La dimensión $k$ solo depende del número de puntos $n$ y la tolerancia $\varepsilon$.
+	% 	\item \textbf{Blessing of Dimensionality:} Los fenómenos de concentración de la medida en alta dimensión permiten proyecciones casi isométricas.
+	% 	\item \textbf{Herramienta Pilar:} Es fundamental para el análisis de datos masivos, permitiendo mejoras en eficiencia computacional sin comprometer la integridad estructural de los datos.
+	% 	\item \textbf{Preservación de Estructura:} Garantiza que las relaciones de cercanía se mantengan, lo cual es vital para tareas supervisadas y no supervisada.
+	% \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\secname}
+
+	\begin{itemize}
+		\item
+
+		      Estas buenas características han hecho del Teorema de Johnson-Lindenstrauss
+		      una herramienta fundamental en técnicas de reducción de la dimensión,
+		      especialmente en contextos donde se manejan grandes volúmenes de datos.
+
+		      \
+
+		\item
+
+		      Su aplicación permite, en muchas ocasiones, en las mejoras y la
+		      eficiencia computacional sin pérdida de información geométrica relevante,
+		      lo que lo convierte en un pilar teórico clave en algoritmos de aprendizaje
+		      automático, en la recuperación de información y en el análisis de datos
+		      de alta dimensión.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias}
+	\printbibliography[heading=none]
+\end{frame}
+
+\end{document}
