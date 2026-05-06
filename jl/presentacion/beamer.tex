@@ -1,7 +1,7 @@
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'log', 'nav', 'out',
-% arara: --> 'pdf', 'snm', 'toc']
+% arara: --> ['aux', 'bbl', 'blg', 'bcf', 'log', 'nav',
+% arara: --> 'out', 'pdf', 'run.xml', 'snm', 'toc']
 % arara: --> }
 % arara: lualatex: {
 % arara: --> shell: yes,
@@ -21,8 +21,8 @@
 % arara: --> }
 % arara: clean: {
 % arara: --> extensions:
-% arara: --> ['aux', 'log', 'nav', 'out',
-% arara: --> 'snm', 'toc']
+% arara: --> ['aux', 'bbl', 'blg', 'bcf', 'log', 'nav',
+% arara: --> 'out', 'run.xml', 'snm', 'toc']
 % arara: --> }
 \documentclass[
     12pt,
@@ -34,6 +34,13 @@
     leqno,
     % noamsthm,
     professionalfonts,
+		hyperref={
+			colorlinks=true,
+			linkcolor=blue,
+			urlcolor=blue,
+			anchorcolor=black,
+			citecolor=black,
+		}
 ]{beamer}
 \usepackage[spanish]{babel}
 \usepackage{mathtools}
@@ -101,7 +108,6 @@
 \begin{document}
 
 \frame{\maketitle}
-
 
 \begin{frame}[label=toc]\transblindsvertical
 	\frametitle{\contentsname}
@@ -211,8 +217,8 @@
 
 	\begin{theorem}[Teorema del anillo gaussiano~\cite{Wegner2024}]
 		Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
-		probabilidad, y sea $X\colon\Omega\to\mathbb{R}^{d}$ un vector aleatorio con
-		$X\sim\mathcal{N}\left(\symbf{0}_{d},1\right)$ y
+		probabilidad, y sea $X\colon\Omega\to\mathbb{R}^{d}$ un vector
+		aleatorio con $X\sim\mathcal{N}\left(\symbf{0}_{d},1\right)$ y
 		$0<\varepsilon\leq\sqrt{d}$.
 		Entonces,
 		\begin{equation*}
@@ -235,8 +241,8 @@
 		$U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria con
 		$U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
 		Para
-		$\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}$ y
-		$0<\varepsilon\leq 1$ tenemos
+		$\symbf{x}\in\mathbb{R}^{d}\setminus\left\{\symbf{0}_{d}\right\}$
+		y $0<\varepsilon\leq 1$ tenemos
 		\begin{equation*}
 			\mathbb{P}
 			\left[
@@ -266,14 +272,14 @@
 	\begin{alertblock}{Observación}
 		Teniendo en cuenta la conclusión del teorema anterior y desde que
 		$\sqrt{k}$ es fijo a lo largo de toda la prueba del
-		Teorema~\ref{thm:projection}, una reformulación más habitual de este
-		resultado es
+		Teorema~\ref{thm:projection}, una reformulación más habitual de
+		este resultado es
 		\begin{equation}
 			\mathbb{P}
 			\left[
 				\left|
 				\big\|
-				\frac{1}{\sqrt{k}}
+				\alert{\frac{1}{\sqrt{k}}}
 				U\frac{\symbf{x}}{\left\|\symbf{x}\right\|}
 				\big\|-1
 				\right|\leq
@@ -299,9 +305,11 @@
 		\vspace*{-.5\baselineskip}\setlength\belowdisplayshortskip{0pt}
 		\begin{equation}\label{eq:projection}
 			\begin{aligned}
-				T_{U\left(\omega\right)}\colon\mathbb{R}^{d} & \longrightarrow
-				\mathbb{R}^{k}                                                 \\
-				\symbf{x}                                    & \longmapsto
+				T_{U\left(\omega\right)}\colon\mathbb{R}^{d} &
+				\longrightarrow
+				\mathbb{R}^{k}                                 \\
+				\symbf{x}                                    &
+				\longmapsto
 				\frac{1}{\sqrt{k}}
 				U\left(\omega\right)\symbf{x},
 			\end{aligned}
@@ -331,9 +339,9 @@
 	\frametitle{\secname}
 
 	\begin{alertblock}{Observación}
-		Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es una
-		proyección en el sentido del álgebra lineal, pues no necesariamente
-		son matrices ortonormales.
+		Estrictamente, la transformación $T_{U\left(\omega\right)}$ no es
+		una proyección en el sentido del álgebra lineal, pues no
+		necesariamente son matrices ortonormales.
 		Pero, con esta notación, se puede reformular la conclusión del
 		Teorema~\ref{thm:projection} como sigue:
 		\begin{math}
@@ -366,7 +374,7 @@
 	\begin{theorem}[Teorema de Johnson-Lindenstrauss~\cite{Johnson1984,Wegner2024}]\label{thm:johnson-lindenstrauss}
 		Sea $\left(\Omega,\Sigma,\mathbb{P}\right)$ un espacio de
 		probabilidad y sea además $0<\varepsilon<1$, $n\geq 1$ y
-		$k\geq\frac{48}{\varepsilon^2}\log n$.
+		\alert{$k\geq\frac{48}{\varepsilon^2}\log n$}.
 		Sea $U\colon\Omega\to\mathbb{R}^{k\times d}$ una matriz aleatoria
 		con $U\sim\mathcal{N}\left(\symbf{0}_{k\times d},1\right)$.
 		Entonces, para cada
@@ -417,7 +425,8 @@
 				\right\|\leq
 				\left\|
 				T_{U\left(\omega\right)}\left(\symbf{x}_{i}\right)-
-				T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)\right\|
+				T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
+				\right\|
 				\leq
 				\left(1+\varepsilon\right)
 				\left\|
@@ -480,7 +489,9 @@
 				T_{U\left(\omega\right)}\left(\symbf{x}_{j}\right)
 				\right\|\leq
 				\left(1+\varepsilon\right)
-				\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|
+				\left\|
+				\symbf{x}_{i}-\symbf{x}_{j}
+				\right\|
 			\right]                                    \\
 			 & =
 			1-\mathbb{P}
@@ -534,7 +545,8 @@
 	estimación para el valor de $k$, la cual será comparada con el
 	Teorema~\ref{thm:johnson-lindenstrauss}.
 	\begin{theorem}[\cite{Dasgupta2003}]\label{eq:dasguptaestimation}
-		Para cualquier $0<\varepsilon<1$ y cualquier $n\in\mathbb{Z}$, sea $k\in\mathbb{N}$ tal que
+		Para cualquier $0<\varepsilon<1$ y cualquier $n\in\mathbb{Z}$,
+		sea $k\in\mathbb{N}$ tal que
 		\begin{math}
 			k\geq
 			4
@@ -552,16 +564,25 @@
 			\symbf{x}_{n}
 			\right\}\subset\mathbb{R}^{d}
 		\end{math},
-		existe una aplicación $T\colon\mathbb{R}^{d}\to\mathbb{R}^{k}$ tal que
+		existe una aplicación $T\colon\mathbb{R}^{d}\to\mathbb{R}^{k}$
+		tal que
 		\begin{equation*}
 			\forall\symbf{x}_{i},\symbf{x}_{j}\in V:
-			\left(1-\epsilon\right)
-			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|^{2}\leq
-			\left\|T\left(\symbf{x}_{i}\right)-T\left(\symbf{x}_{i}\right)\right\|^{2}\leq
-			\left(1+\epsilon\right)
-			\left\|\symbf{x}_{i}-\symbf{x}_{j}\right\|^{2} .
+			\left(1-\varepsilon\right)
+			{\left\|
+				\symbf{x}_{i}-\symbf{x}_{j}
+				\right\|}^{2}\leq
+			{\left\|
+				T\left(\symbf{x}_{i}\right)-
+				T\left(\symbf{x}_{i}\right)
+				\right\|}^{2}\leq
+			\left(1+\varepsilon\right)
+			{\left\|
+				\symbf{x}_{i}-\symbf{x}_{j}
+				\right\|}^{2} .
 		\end{equation*}
-		Además, este mapa se puede encontrar en tiempo polinomial aleatorio.
+		Además, este mapa se puede encontrar en tiempo polinomial
+		aleatorio.
 	\end{theorem}
 \end{frame}
 
@@ -572,14 +593,12 @@
 
 	\begin{figure}[ht!]
 		\centering
-		\includegraphics[width=.6\paperwidth]{../figuras/figura21_python}
+		\includegraphics[width=.58\paperwidth]{../figuras/figura21_python}
 		\captionof{figure}{Distorsión de $500$ pares.
 			Los puntos están a un margen $1\pm 0.1$.
 			$n=150$, $d=10^5$.
 				{\footnotesize
 					\url{https://colab.research.google.com/drive/1LKBI2k5FN10nUVoR1dA3iUOXFd29cf-S}}}
-		% Ratio de distorsión:
-		% {\small $R = \frac{\|T_U\symbf{x}_i - T_U\symbf{x}_j\|}{\|\symbf{x}_i - \symbf{x}_j\|}$}
 	\end{figure}
 \end{frame}
 
@@ -596,23 +615,24 @@
 	% \vfill
 	\begin{table}
 		\centering
-		\begin{tabular}{lcccc}
+		\begin{tabular}{ccccc}
 			\hline
-			$\varepsilon$ & $k_{JL}$ (Teórico) & \% Éxito & $k^*$ (Dasgupta) & \% Éxito \\
+			$\varepsilon$ & $k_{\text{JL}}$ & \% Éxito & $k_{\text{DG}}$ & \% Éxito \\
 			\hline
-			$0.20$        & $6013$             & $100\%$  & $1157$           & $100\%$  \\
-			$0.17$        & $8323$             & $100\%$  & $1565$           & $100\%$  \\
-			$0.15$        & $10690$            & $100\%$  & $1980$           & $100\%$  \\
+			$0.20$        & $6013$          & $100\%$  & \alert{$1157$}  & $100\%$  \\
+			$0.17$        & $8323$          & $100\%$  & $1565$          & $100\%$  \\
+			$0.15$        & $10690$         & $100\%$  & $1980$          & $100\%$  \\
 			\hline
 		\end{tabular}
-		\caption{Refinamiento de la dimensión $k$. Comparativa de cotas para $n=150$ y $d=20000$.}
+		\caption{Refinamiento de la dimensión $k$. Comparativa de cotas cuando $n=150$ y $d=20000$.}
 	\end{table}
 
 	\
 
 	\begin{block}{Google Colab}
-		\centering\small
-		\url{https://colab.research.google.com/drive/1LKBI2k5FN10nUVoR1dA3iUOXFd29cf-S}
+		Todos los programas en Python de este trabajo se pueden
+		reproducir en el siguiente cuaderno
+			{\centering\small \url{https://colab.research.google.com/drive/1LKBI2k5FN10nUVoR1dA3iUOXFd29cf-S}}
 	\end{block}
 \end{frame}
 
@@ -637,18 +657,22 @@
 	\begin{itemize}
 		\item
 
-		      Por todo lo investigado acerca del Teorema~\ref{thm:johnson-lindenstrauss}
-		      se ha comprobado que es de gran interés en Ciencia de Datos y Machine Learning.
-		      Los resultados están basados en el comportamiento de las matrices aleatorias como
-		      método de proyección de un conjunto de puntos a una dimensión menor conservando
-		      de forma aproximada las normas y las distancia entre los puntos.
+		      Por todo lo investigado acerca del
+		      Teorema~\ref{thm:johnson-lindenstrauss} se ha comprobado
+		      que es de gran interés en Ciencia de Datos y Machine Learning.
+		      Los resultados están basados en el comportamiento de las
+		      matrices aleatorias como método de proyección de un
+		      conjunto de puntos a una dimensión menor conservando de
+		      forma aproximada las normas y las distancia entre los
+		      puntos.
 
 		      \
 
 		\item
 
 		      La dimensión del espacio de proyección es del orden del
-		      tamaño del conjunto de puntos e independiente de la dimensión original.
+		      tamaño del conjunto de puntos e
+		      \alert{independiente de la dimensión original}.
 	\end{itemize}
 	% \begin{itemize}
 	% 	\item \textbf{Independencia de la Dimensión Original:} La dimensión $k$ solo depende del número de puntos $n$ y la tolerancia $\varepsilon$.
@@ -664,18 +688,20 @@
 	\begin{itemize}
 		\item
 
-		      Estas buenas características han hecho del Teorema de Johnson-Lindenstrauss
-		      una herramienta fundamental en técnicas de reducción de la dimensión,
-		      especialmente en contextos donde se manejan grandes volúmenes de datos.
+		      Estas buenas características han hecho del Teorema de
+		      Johnson-Lindenstrauss una herramienta fundamental en
+		      técnicas de reducción de la dimensión, especialmente en
+		      contextos donde se manejan grandes volúmenes de datos.
 
 		      \
 
 		\item
 
-		      Su aplicación permite, en muchas ocasiones, en las mejoras y la
-		      eficiencia computacional sin pérdida de información geométrica relevante,
-		      lo que lo convierte en un pilar teórico clave en algoritmos de aprendizaje
-		      automático, en la recuperación de información y en el análisis de datos
+		      Su aplicación permite, en muchas ocasiones, en las mejoras
+		      y la eficiencia computacional sin pérdida de información
+		      geométrica relevante, lo que lo convierte en un pilar
+		      teórico clave en algoritmos de aprendizaje automático, en
+		      la recuperación de información y en el análisis de datos
 		      de alta dimensión.
 	\end{itemize}
 \end{frame}

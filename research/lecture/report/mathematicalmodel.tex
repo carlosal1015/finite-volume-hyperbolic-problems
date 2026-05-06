@@ -1,47 +1,49 @@
 \section{Mathematical model}
 
 The model with time coordinate $t$, space coordinate $x$ and
-main variables $T$ (temperature), $S_{\text{o}}$, $Y$ (oxygen fraction)
-is composed by the equations describing the heat balance~\eqref{Ec1a},
-molar balance for oxygen,~\eqref{Ec2a} and molar balance for
-oil~\eqref{Ec3a}:
+main variables $T$ (temperature), $S_{\text{o}}$, $Y$ (oxygen
+fraction) is composed by the equations describing the heat
+balance~\eqref{Ec1a}, molar balance for oxygen,~\eqref{Ec2a} and
+molar balance for oil~\eqref{Ec3a}:
 \begin{equation}
-	C_{m}\difcp{T}{t}+
-	\partial_x (c_o \rho_o S_{\text{o}} u_o (T - T_{\text{res}}))=
-	\rho_o Q_r Y S_\text{g} S_{\text{o}}  W_{\text{r}}
+	C_{m}\diffp{T}{t}+
+	\diffp*{[c_{\text{o}}\rho_{\text{o}}S_{\text{o}}u_{\text{o}}\left(T-T_{\text{res}}\right)]}{x}=
+	\rho_{\text{o}}Q_{\text{r}}YS_\text{g}S_{\text{o}}W_{\text{r}}
 	\textcolor{red}{-\alpha\left(T-T_{\text{res}}\right)}.
 	\label{Ec1a}
 \end{equation}
 \begin{equation}
 	\varphi
-	\partial_{t}(Y S_\text{g}\rho_g)+
-	\partial_x (Y S_\text{g} \rho_g u_g)=
-	-w\varphi\rho_o Y S_\text{g} S_{\text{o}}  W_{\text{r}}.
+	\diffp*{\left(YS_\text{g}\rho_{\text{g}}\right)}{t}+
+	\diffp*{\left(YS_\text{g}\rho_{g}u_{\text{g}}\right)}{x}=
+	-w\varphi
+	\rho_{\text{o}}YS_\text{g}S_{\text{o}}W_{\text{r}}.
 	\label{Ec2a}
 \end{equation}
 \begin{equation}
 	\varphi
-	\partial_{t}
-	(\rho_o S_{\text{o}})+
-	\partial_{x}
-	(\rho_o  S_{\text{o}}  u_o)=
-	-\varphi\rho_{o} Y S_\text{g} S_{\text{o}} W_{\text{r}}.
+	\diffp*{\left(\rho_{\text{o}}S_{\text{o}}\right)}{t}+
+	\diffp*{\left(\rho_{\text{o}}S_{\text{o}}u_{\text{o}}\right)}{x}=
+	-\varphi\rho_{\text{o}}YS_\text{g}S_{\text{o}}W_{\text{r}}.
 	\label{Ec3a}
 \end{equation}
-Where $C_m$ is the heat capacity of the matrix,
-$c_o$ is the oil molar heat capacity,
-$\rho_o$/$\rho_g$ are oil/gas densities,
-$u_o$/$u_g$ are oil/gas velocities,
-$T_{\text{res}}$ is the reservoir initial temperature,
-$Q_r$ is the oil reaction enthalpy,
-$\varphi$ is the porosity, and
-$\omega$ is a stochiometric coefficient for the oil-oxygen reaction.
-Following \cite{traveling,gargar2020combustion}, the reaction rate $W_{\text{r}}$ is given by Arrhenius law:
+Where $C_{m}$ is the heat capacity of the matrix, $c_{\text{o}}$ is
+the oil molar heat capacity, $\frac{\rho_{\text{o}}}{\rho_{\text{g}}}$
+are oil/gas densities, $u_{\text{o}}$/$u_{\text{g}}$ are oil/gas
+velocities, $T_{\text{res}}$ is the reservoir initial temperature,
+$Q_{\text{r}}$ is the oil reaction enthalpy, $\varphi$ is the
+porosity, and $\omega$ is a stochiometric coefficient for the
+oil-oxygen reaction.
+Following \cite{traveling,gargar2020combustion}, the reaction rate
+$W_{\text{r}}$ is given by Arrhenius law:
 \begin{equation}
-	W_{\text{r}} = k_{p}\exp \Big(-\frac{E_\text{r}}{RT}\Big),
+	W_{\text{r}}=
+	k_{p}\exp
+	\Big(-\frac{E_\text{r}}{RT}\Big),
 	\label{Ec4a}
 \end{equation}
-where $E_\text{r}$ is the activation energy, $R$ is the gas constant, and $k_{p}$ is the pre-exponential coefficient.
+where $E_\text{r}$ is the activation energy, $R$ is the gas constant,
+and $k_{p}$ is the pre-exponential coefficient.
 
 In order to allow rigorous mathematical analysis, we follow
 \cite{traveling,chapiro2012asymptotic,chapiro2014combustion,zavala2020classification,chapiro2015combustion} and assume constant oil and gas partial velocities $u_o$ and $u_g$.
@@ -90,7 +92,22 @@ where we introduced the variable $S_{\text{y}}=S_\text{g} Y$, $\Phi = t^{*} W_{\
 	b_3 = 1, \\
 	\textcolor{red}{\beta = \displaystyle\frac{\alpha t^{*}}{C_m}}
 \end{equation}
-% TODO: Citar a rosmery y explicar OC y FC
+
+In this paper we study the combustion front and
+thus we assume that the reaction does not occur at the
+boundaries, i.e., the reaction rate in \eqref{eq:14}-\eqref{eq:16} vanishes when: there
+is no oxygen ($S_{\text{y}} = 0$), which we call ``Oxygen Controlled'' case (OC);
+there is no fuel ($S_{\text{o}} = 0$), which we call ``Fuel Controlled'' case (FC).
+
+In order to approximate applications, we consider that the left in-
+jection end of the domain is FC, and the production right end
+of the domain is OC. Because of the non-dimensionalization pre-
+sented above we have that $S_{\text{o}} = 1$ in OC state and $S_{\text{y}} = 1$ in FC state.
+
+Thus, the investigated domain corresponds to non-negative satura-
+tions $S_{\text{o}} \geq 0$ and $S_{\text{y}} \geq 0$ and is restricted to $0<x<\infty$, $t\geq 0$, with
+the (constant) boundary conditions:
+
 \subsection{Initial and boundary conditions}
 To complete system \eqref{eq:14}-\eqref{eq:16}, we need initial and boundary conditions. Physically, there is no chemical reaction in the reservoir before the combustion and no reaction happening in the injection well. Mathematically, this means that the source terms in \eqref{eq:14}-\eqref{eq:16} are equal to zero ($S_{\text{y}} S_{\text{o}} \Phi = 0$), as the temperature is always positive, this equation yields $S_{\text{y}} = 0$ or $S_{\text{o}} = 0$. Thus, we can expect the following options for the limit states (initial and injection conditions).
 \begin{enumerate}

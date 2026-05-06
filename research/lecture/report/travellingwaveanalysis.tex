@@ -127,7 +127,7 @@ We can rewrite the ODE system as
 \end{equation}
 
 
-% TODO: Escribir de donde sale F_1 y F_2.
+% TODO: Write where F_1 and F_2 come from.
 % TODO: Agregar lemas  If c > a3 and c > a1SR o , then λ1 FC < 0 and λ2 FC > 0. (saddle point)
 
 \textcolor{blue}{
@@ -278,8 +278,8 @@ In~\eqref{eq:system} equals to zero.
 The equation \eqref{ec39c} implies
 \begin{equation*}
 	F_{1}\left(S_{\text{o}},\theta\right)=0\implies
-	S_{y}=0\quad\vee\quad
-	S_{0}=0.
+	S_{\text{y}}=0\quad\vee\quad
+	S_{\text{o}}=0.
 \end{equation*}
 Consider the values $S_{\text{y}}$ and $S_{\text{o}}$, we obtain
 \begin{equation*}
@@ -346,10 +346,10 @@ At OC and FC equilibria, the matrix $JF$ has the forms:
 \end{equation}
 because from~\eqref{eq:35} we obtain:
 \begin{equation*}
-	S_{y}
+	S_{\text{y}}
 	\big(S^{R}_{\text{o}}\big)=0
 	\quad\text{ and }\quad
-	\diff{S_{y}}{S_{\text{o}}}=
+	\diff{S_{\text{y}}}{S_{\text{o}}}=
 	-\frac{S^{L}_{y}}{S^{R}_{\text{o}}}.
 \end{equation*}
 
@@ -481,17 +481,53 @@ For $\lambda^{2}_{\text{FC}}$:
 	\end{bmatrix}.
 \end{equation*}
 
-Analyzing the eigenvalues ​​yields the following
+Analyzing the eigenvalues yields the following lemmas
 
-For $JF_{\text{OC}}\left(0,0\right)$.
-\begin{itemize}
-	\item If $c>a_{3}$, then $\lambda^{1}_{\text{OC}}>0$ and $\lambda^{2}_{\text{OC}}>0$. (repulsor)
-	\item If $c<a_{3}$, then $\lambda^{1}_{\text{OC}}<0$ and $\lambda^{2}_{\text{OC}}>0$ (saddle point)
-\end{itemize}
-For $JF_{\text{FC}}\left(S^{R}_{\text{o}},0\right)$.
-\begin{itemize}
-	\item If $c>a_{3}$ and $c>a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}>0$. (saddle point)
-	\item If $c>a_{3}$ and $c<a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}<0$. (attractor)
-	\item If $c<a_{3}$ and $c>a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}>0$ and $\lambda^{2}_{\text{FC}}>0$. (repulsor)
-	\item If $c<a_{3}$ and $c<a_{1}S^{R}_{\text{o}}$, then $\lambda^{1}_{\text{FC}}>0$ and $\lambda^{2}_{\text{FC}}<0$. (saddle point)
-\end{itemize}
+\begin{lemma}
+	For $JF_{\text{OC}}\left(0,0\right)$:
+	\begin{itemize}
+		\item
+
+		      If $c>a_{3}$, then $\lambda^{1}_{\text{OC}}>0$ and
+		      $\lambda^{2}_{\text{OC}}>0$.
+		      Furthermore, $\left(0,0\right)$ is a repulsor point.
+		\item
+
+		      If $c<a_{3}$, then $\lambda^{1}_{\text{OC}}<0$ and
+		      $\lambda^{2}_{\text{OC}}>0$.
+		      Furthermore, $\left(0,0\right)$ is a saddle point.
+	\end{itemize}
+\end{lemma}
+
+\begin{lemma}
+	For $JF_{\text{FC}}\left(S^{R}_{\text{o}},0\right)$:
+	\begin{itemize}
+		\item
+
+		      If $c>a_{3}$ and $c>a_{1}S^{R}_{\text{o}}$, then
+		      $\lambda^{1}_{\text{FC}}<0$ and
+		      $\lambda^{2}_{\text{FC}}>0$.
+		      Furthermore, $\left(S^{R}_{\text{o}},0\right)$ is a saddle point.
+
+		\item
+
+		      If $c>a_{3}$ and $c<a_{1}S^{R}_{\text{o}}$, then
+		      $\lambda^{1}_{\text{FC}}<0$ and $\lambda^{2}_{\text{FC}}<0$.
+		      Furthermore, $\left(S^{R}_{\text{o}},0\right)$ is an
+		      attractor point.
+
+		\item
+
+		      If $c<a_{3}$ and $c>a_{1}S^{R}_{\text{o}}$, then
+		      $\lambda^{1}_{\text{FC}}>0$ and $\lambda^{2}_{\text{FC}}>0$.
+		      Furthermore, $\left(S^{R}_{\text{o}},0\right)$ is a
+		      repulsor point.
+
+		\item
+
+		      If $c<a_{3}$ and $c<a_{1}S^{R}_{\text{o}}$, then
+		      $\lambda^{1}_{\text{FC}}>0$ and $\lambda^{2}_{\text{FC}}<0$.
+		      Furthermore, $\left(S^{R}_{\text{o}},0\right)$ is a
+		      saddle point.
+	\end{itemize}
+\end{lemma}

@@ -25,6 +25,7 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{comment}
+\usepackage[ddmmyyyy,hhmmss]{datetime}
 \usepackage{subcaption}
 \usepackage{tikz}
 \usepackage[
@@ -42,15 +43,19 @@
 	\nametwo\and
 	\namethree
 }
-\date{\today}
+\settimeformat{ampmtime}
+\date{Last modified: \today{} at \currenttime.}
 
+\theoremstyle{definition}
 \newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
+\newtheorem{lemma}{Lemma}
 
 \providecommand{\namezero}{Angel Ramírez}
 \providecommand{\nameone}{Fidel Jara}
-\providecommand{\nametwo}{Jośe Alcalde}
+\providecommand{\nametwo}{José Alcalde}
 \providecommand{\namethree}{Carlos Aznarán}
 
 % \setcitestyle{authoryear,open={(},close={)},sorting=nyt}
